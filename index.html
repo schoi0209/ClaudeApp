@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Apps — schoi0209</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08090F;--card:#12141E;--border:rgba(255,215,0,0.15);--text:#E8EAF0;--muted:#6B7280;--gold:#FFD700;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:60px 20px;}
+h1{font-family:'Bebas Neue',cursive;font-size:clamp(40px,6vw,70px);letter-spacing:4px;background:linear-gradient(135deg,#FFD700,#FF2D4E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+.sub{color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:48px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;width:100%;max-width:900px;}
+.app-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;color:var(--text);transition:all .25s;display:block;}
+.app-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 8px 32px rgba(255,215,0,0.1);}
+.app-icon{font-size:36px;margin-bottom:12px;}
+.app-name{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
+.app-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+.bmc{margin-top:48px;}
+.bmc a{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#000;font-weight:700;font-size:13px;padding:10px 20px;border-radius:24px;text-decoration:none;box-shadow:0 2px 12px rgba(255,221,0,0.3);transition:all .25s;}
+.bmc a:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(255,221,0,0.5);}
+</style>
+</head>
+<body>
+<h1>Claude Apps</h1>
+<p class="sub">Built with AI · by schoi0209</p>
+<div class="grid">
+  <a class="app-card" href="./powerball-au.html">
+    <div class="app-icon">🎱</div>
+    <div class="app-name">Powerball Number Oracle</div>
+    <div class="app-desc">실제 호주 파워볼 공식 데이터 기반 번호 추천. Draw #1559까지 반영. Hot/Cold/Overdue/Quick Pick 전략 지원.</div>
+  </a>
+</div>
+<div class="bmc">
+  <a href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
+    <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" width="18" alt="">
+    Buy me a coffee
+  </a>
+</div>
+</body>
+</html>
