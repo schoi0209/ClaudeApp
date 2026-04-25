@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>사주팔자 — Four Pillars of Destiny</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#0d0d1a;color:#f0e6d3;font-family:'Noto Serif KR',Georgia,serif;padding:20px}
+.wrap{max-width:600px;margin:0 auto}
+.bmc{display:flex;justify-content:center;margin-bottom:18px}
+.bmc a{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#000;text-decoration:none;font-family:sans-serif;font-weight:700;font-size:13px;padding:9px 18px;border-radius:8px;transition:opacity .2s}
+.bmc a:hover{opacity:.85}
+header{text-align:center;margin-bottom:24px}
+header .icon{font-size:44px;margin-bottom:6px}
+header h1{font-size:26px;color:#d4a853;letter-spacing:4px}
+header p{color:#9b8ea0;margin-top:6px;font-size:13px}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;padding:10px;border-radius:8px;border:1px solid #3d2b4a;cursor:pointer;font-size:13px;font-weight:700;background:#1a1a2e;color:#9b8ea0;transition:.2s}
+.tab.active{background:linear-gradient(135deg,#d4a853,#b8860b);color:#0d0d1a}
+.card{background:#1a1a2e;border:1px solid #3d2b4a;border-radius:16px;padding:24px;margin-bottom:16px}
+label{font-size:12px;color:#9b8ea0;display:block;margin-bottom:6px}
+input,select{width:100%;background:#0d0d1a;border:1px solid #3d2b4a;border-radius:8px;padding:10px 12px;color:#f0e6d3;font-size:14px;font-family:inherit}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.field{margin-bottom:14px}
+.btn{width:100%;margin-top:16px;padding:13px;background:linear-gradient(135deg,#d4a853,#b8860b);border:none;border-radius:10px;color:#0d0d1a;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:2px;font-family:inherit}
+.btn:disabled{background:#3d2b4a;cursor:not-allowed;color:#6b5b7a}
+.back-btn{margin-bottom:14px;background:#1a1a2e;border:1px solid #3d2b4a;border-radius:8px;padding:8px 16px;color:#d4a853;cursor:pointer;font-size:13px;font-family:inherit}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.pillar{background:#0d0d1a;border-radius:10px;padding:12px 8px;border:1px solid #3d2b4a}
+.pillar-label{font-size:10px;color:#9b8ea0;margin-bottom:8px}
+.pillar-stem{font-size:22px;font-weight:700;margin-bottom:4px}
+.pillar-div{width:1px;height:16px;background:#3d2b4a;margin:0 auto 4px}
+.pillar-branch{font-size:22px;font-weight:700}
+.elements{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center}
+.el-label{font-size:13px;font-weight:700;margin-bottom:6px}
+.el-bar-wrap{height:60px;background:#0d0d1a;border-radius:6px;position:relative;overflow:hidden}
+.el-bar{position:absolute;bottom:0;width:100%;opacity:.7;transition:height .5s}
+.el-count{font-size:12px;color:#f0e6d3;margin-top:4px}
+.analysis{line-height:1.9;font-size:14px;color:#e8d5c4;white-space:pre-wrap}
+.loading-box{text-align:center;padding:40px 0;color:#9b8ea0}
+.loading-box .big{font-size:32px;margin-bottom:12px}
+.section-title{color:#d4a853;text-align:center;margin:0 0 16px;font-size:15px;letter-spacing:2px}
+.hist-item{background:#1a1a2e;border:1px solid #3d2b4a;border-radius:14px;padding:18px;margin-bottom:12px}
+.hist-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hist-name{font-weight:700;color:#d4a853;font-size:15px}
+.hist-info{font-size:12px;color:#9b8ea0;margin-top:3px}
+.hist-date{font-size:11px;color:#5a4a6a;margin-top:2px}
+.del-btn{background:none;border:1px solid #3d2b4a;border-radius:6px;color:#5a4a6a;cursor:pointer;padding:4px 8px;font-size:12px;font-family:inherit}
+.mini-pillars{display:flex;gap:6px;margin-bottom:12px}
+.mini-pillar{flex:1;background:#0d0d1a;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #3d2b4a}
+.mini-stem,.mini-branch{font-size:14px;font-weight:700}
+.mini-div{width:1px;height:10px;background:#3d2b4a;margin:3px auto}
+.view-btn{width:100%;padding:9px;background:linear-gradient(135deg,#d4a853,#b8860b);border:none;border-radius:8px;color:#0d0d1a;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.empty{text-align:center;padding:60px 20px;color:#5a4a6a}
+.empty .big{font-size:40px;margin-bottom:12px}
+.result-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.error{color:#f87171;font-size:13px;margin-top:8px}
+.hint{color:#5a4a6a}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Buy Me a Coffee -->
+  <div class="bmc">
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank">
+      ☕ Buy me a coffee
+    </a>
+  </div>
+
+  <header>
+    <div class="icon">🔮</div>
+    <h1>사주팔자</h1>
+    <p>생년월일시로 보는 나의 운명</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" id="tab-form" onclick="switchTab('form')">✏️ 새 사주</button>
+    <button class="tab" id="tab-history" onclick="switchTab('history')">📜 히스토리 (<span id="hist-count">0</span>)</button>
+  </div>
+
+  <div id="view-form">
+    <div class="card">
+      <div class="row2">
+        <div><label>이름 (선택)</label><input id="name" placeholder="홍길동"/></div>
+        <div><label>성별</label><select id="gender"><option>남</option><option>여</option></select></div>
+      </div>
+      <div class="row3">
+        <div><label>출생연도</label><input id="year" type="number" placeholder="1990"/></div>
+        <div><label>월</label><select id="month"><option value="">월</option></select></div>
+        <div><label>일</label><select id="day"><option value="">일</option></select></div>
+      </div>
+      <div class="field">
+        <label>탄생 시간</label>
+        <select id="hour"></select>
+      </div>
+      <div class="field">
+        <label>직업 <span class="hint">(선택 — 적성 분석에 활용)</span></label>
+        <input id="job" placeholder="예: 개발자, 디자이너, 교사..."/>
+      </div>
+      <div id="error" class="error" style="display:none"></div>
+      <button class="btn" id="submit-btn" onclick="handleSubmit()">✨ 사주 보기</button>
+    </div>
+  </div>
+
+  <div id="view-result" style="display:none">
+    <button class="back-btn" onclick="showForm()">← 새 사주 보기</button>
+    <div class="card">
+      <div class="result-meta">
+        <h3 class="section-title" style="margin:0">📋 사주팔자 원국</h3>
+        <span id="result-meta" style="font-size:12px;color:#5a4a6a"></span>
+      </div>
+      <div class="pillars" id="pillar-grid"></div>
+    </div>
+    <div class="card">
+      <h3 class="section-title">🌿 오행 분포</h3>
+      <div class="elements" id="element-grid"></div>
+    </div>
+    <div class="card">
+      <h3 class="section-title">🔮 사주 풀이</h3>
+      <div id="analysis-box"></div>
+    </div>
+  </div>
+
+  <div id="view-history" style="display:none">
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+<script>
+const STEMS = ["갑","을","병","정","무","기","경","신","임","계"];
+const BRANCHES = ["자","축","인","묘","진","사","오","미","신","유","술","해"];
+const STEM_EL = ["목","목","화","화","토","토","금","금","수","수"];
+const BRANCH_EL = ["수","토","목","목","토","화","화","토","금","금","토","수"];
+const EL_COLOR = {목:"#4ade80",화:"#f87171",토:"#fbbf24",금:"#e5e7eb",수:"#60a5fa"};
+const PILLAR_LABELS = ["연주(年柱)","월주(月柱)","일주(日柱)","시주(時柱)"];
+
+// Populate selects
+const monthSel = document.getElementById('month');
+for(let i=1;i<=12;i++){const o=document.createElement('option');o.value=i;o.textContent=i+'월';monthSel.appendChild(o);}
+const daySel = document.getElementById('day');
+for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i+'일';daySel.appendChild(o);}
+const hourSel = document.getElementById('hour');
+for(let i=0;i<24;i++){const o=document.createElement('option');o.value=i;o.textContent=i+'시 ('+String(i).padStart(2,'0')+':00)';if(i===12)o.selected=true;hourSel.appendChild(o);}
+
+let history = [];
+try{history=JSON.parse(localStorage.getItem('saju_history')||'[]');}catch(e){}
+updateHistCount();
+
+function updateHistCount(){document.getElementById('hist-count').textContent=history.length;}
+
+function switchTab(t){
+  document.getElementById('tab-form').classList.toggle('active',t==='form'||t==='result');
+  document.getElementById('tab-history').classList.toggle('active',t==='history');
+  document.getElementById('view-form').style.display=t==='form'?'':'none';
+  document.getElementById('view-result').style.display=t==='result'?'':'none';
+  document.getElementById('view-history').style.display=t==='history'?'':'none';
+  if(t==='history')renderHistory();
+}
+
+function showForm(){switchTab('form');}
+
+function getStem(year){return(year-4)%10;}
+function getBranch(year){return(year-4)%12;}
+function monthPillar(year,month){const si=((getStem(year)%5)*2+month-1)%10,bi=(month+1)%12;return{stem:STEMS[si],branch:BRANCHES[bi],stemEl:STEM_EL[si],branchEl:BRANCH_EL[bi]};}
+function dayPillar(year,month,day){
+  const a=Math.floor((14-month)/12),y=year-a,m=month+12*a-2;
+  const jd=day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;
+  const si=(jd+9)%10,bi=(jd+1)%12;
+  return{stem:STEMS[(si+10)%10],branch:BRANCHES[(bi+12)%12],stemEl:STEM_EL[(si+10)%10],branchEl:BRANCH_EL[(bi+12)%12]};
+}
+function hourPillar(dayStemIdx,hour){const bi=Math.floor((hour+1)/2)%12,si=((dayStemIdx%5)*2+bi)%10;return{stem:STEMS[si],branch:BRANCHES[bi],stemEl:STEM_EL[si],branchEl:BRANCH_EL[bi]};}
+function calcSaju(year,month,day,hour){
+  const ySi=(getStem(year)+10)%10,yBi=(getBranch(year)+12)%12;
+  const yp={stem:STEMS[ySi],branch:BRANCHES[yBi],stemEl:STEM_EL[ySi],branchEl:BRANCH_EL[yBi]};
+  const mp=monthPillar(year,month);
+  const dp=dayPillar(year,month,day);
+  const dsi=STEMS.indexOf(dp.stem);
+  const hp=hourPillar(dsi,hour);
+  return[yp,mp,dp,hp];
+}
+function elCounts(pillars){const c={목:0,화:0,토:0,금:0,수:0};pillars.forEach(p=>{c[p.stemEl]++;c[p.branchEl]++;});return c;}
+
+function renderPillars(pillars,container){
+  container.innerHTML='';
+  pillars.forEach((p,i)=>{
+    container.innerHTML+=`<div class="pillar"><div class="pillar-label">${PILLAR_LABELS[i]}</div><div class="pillar-stem" style="color:${EL_COLOR[p.stemEl]}">${p.stem}</div><div class="pillar-div"></div><div class="pillar-branch" style="color:${EL_COLOR[p.branchEl]}">${p.branch}</div></div>`;
+  });
+}
+function renderElements(counts,container){
+  container.innerHTML='';
+  Object.entries(counts).forEach(([el,cnt])=>{
+    container.innerHTML+=`<div><div class="el-label" style="color:${EL_COLOR[el]}">${el}</div><div class="el-bar-wrap"><div class="el-bar" style="background:${EL_COLOR[el]};height:${(cnt/8)*100}%"></div></div><div class="el-count">${cnt}</div></div>`;
+  });
+}
+
+async function handleSubmit(){
+  const name=document.getElementById('name').value.trim();
+  const year=parseInt(document.getElementById('year').value);
+  const month=parseInt(document.getElementById('month').value);
+  const day=parseInt(document.getElementById('day').value);
+  const hour=parseInt(document.getElementById('hour').value);
+  const gender=document.getElementById('gender').value;
+  const job=document.getElementById('job').value.trim();
+  const errEl=document.getElementById('error');
+  if(!year||!month||!day){errEl.style.display='';errEl.textContent='생년월일을 입력해주세요.';return;}
+  errEl.style.display='none';
+
+  const pillars=calcSaju(year,month,day,hour);
+  const counts=elCounts(pillars);
+
+  document.getElementById('result-meta').textContent=(name||'익명')+' · '+new Date().toLocaleDateString('ko-KR');
+  renderPillars(pillars,document.getElementById('pillar-grid'));
+  renderElements(counts,document.getElementById('element-grid'));
+  document.getElementById('analysis-box').innerHTML=`<div class="loading-box"><div class="big">✨</div><p>AI가 사주를 분석하고 있습니다...</p></div>`;
+  switchTab('result');
+
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='🔮 분석 중...';
+
+  const sajuText=`연주:${pillars[0].stem}${pillars[0].branch}, 월주:${pillars[1].stem}${pillars[1].branch}, 일주:${pillars[2].stem}${pillars[2].branch}, 시주:${pillars[3].stem}${pillars[3].branch}`;
+  const elemText=Object.entries(counts).map(([k,v])=>`${k}:${v}`).join(', ');
+  const jobSection=job?`\n8. 직업 적성 분석: "${job}" 직업이 이 사주와 얼마나 잘 맞는지 분석. 적합도(상/중/하), 잘할 수 있는 점, 주의할 점, 대안 직업 2~3가지 제안.`:'';
+  const prompt=`당신은 사주명리학 전문가입니다. 다음 사주를 한국어로 친근하고 상세하게 풀이해 주세요.\n이름:${name||'익명'}/성별:${gender}/생년월일시:${year}년${month}월${day}일${hour}시\n사주팔자:${sajuText}/오행:${elemText}\n\n다음 항목으로 나누어 풀이해주세요:\n1. 전체적인 사주 특징(2-3문장)\n2. 성격과 기질\n3. 직업/재물운\n4. 인간관계/연애운\n5. 건강운\n6. 올해(2025년) 운세\n7. 조언 및 주의사항${jobSection}\n\n각 항목은 이모지와 함께 제목을 붙이고, 구체적이고 긍정적인 톤으로 작성해주세요.`;
+
+  let analysisText='';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    analysisText=data.content?.map(c=>c.text||'').join('')||'분석 결과를 가져오지 못했습니다.';
+  }catch(e){analysisText='분석 중 오류가 발생했습니다.';}
+
+  document.getElementById('analysis-box').innerHTML=`<div class="analysis">${analysisText}</div>`;
+  btn.disabled=false;btn.textContent='✨ 사주 보기';
+
+  const entry={id:Date.now(),name,gender,year,month,day,hour,job,pillars,counts,analysis:analysisText,date:new Date().toLocaleDateString('ko-KR')};
+  history=[entry,...history].slice(0,20);
+  try{localStorage.setItem('saju_history',JSON.stringify(history));}catch(e){}
+  updateHistCount();
+}
+
+function renderHistory(){
+  const el=document.getElementById('hist-list');
+  if(!history.length){el.innerHTML=`<div class="empty"><div class="big">📜</div><p>아직 저장된 사주 기록이 없습니다.<br/>새 사주를 보면 자동으로 저장됩니다.</p></div>`;return;}
+  el.innerHTML=history.map(item=>`
+    <div class="hist-item">
+      <div class="hist-top">
+        <div>
+          <div class="hist-name">${item.name||'익명'} · ${item.gender}</div>
+          <div class="hist-info">${item.year}년 ${item.month}월 ${item.day}일 ${item.hour}시${item.job?' · '+item.job:''}</div>
+          <div class="hist-date">저장일: ${item.date}</div>
+        </div>
+        <button class="del-btn" onclick="deleteItem(${item.id})">삭제</button>
+      </div>
+      <div class="mini-pillars">${item.pillars.map(p=>`<div class="mini-pillar"><div class="mini-stem" style="color:${EL_COLOR[p.stemEl]}">${p.stem}</div><div class="mini-div"></div><div class="mini-branch" style="color:${EL_COLOR[p.branchEl]}">${p.branch}</div></div>`).join('')}</div>
+      <button class="view-btn" onclick="viewItem(${item.id})">🔮 풀이 다시 보기</button>
+    </div>
+  `).join('');
+}
+
+function deleteItem(id){
+  history=history.filter(h=>h.id!==id);
+  try{localStorage.setItem('saju_history',JSON.stringify(history));}catch(e){}
+  updateHistCount();renderHistory();
+}
+
+function viewItem(id){
+  const item=history.find(h=>h.id===id);if(!item)return;
+  document.getElementById('result-meta').textContent=(item.name||'익명')+' · '+item.date;
+  renderPillars(item.pillars,document.getElementById('pillar-grid'));
+  renderElements(item.counts,document.getElementById('element-grid'));
+  document.getElementById('analysis-box').innerHTML=`<div class="analysis">${item.analysis}</div>`;
+  switchTab('result');
+}
+</script>
+</body>
+</html>

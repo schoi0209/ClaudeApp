@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA — AI Fashion Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --charcoal: #1C1C1E;
+    --taupe: #9B8E82;
+    --gold: #C8A96E;
+    --gold-light: #E8D5B0;
+    --blush: #E8D5C4;
+    --sage: #8A9E8C;
+    --rust: #B5694A;
+    --deep: #2C2420;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  header {
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(155,142,130,0.2);
+    position: relative;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--charcoal);
+  }
+
+  .logo span {
+    color: var(--gold);
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    font-weight: 400;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px);
+  }
+
+  /* Left panel */
+  .upload-panel {
+    background: var(--cream);
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upload-panel::after {
+    content: 'STYLE';
+    position: absolute;
+    bottom: -2rem;
+    left: -1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem;
+    font-weight: 300;
+    color: rgba(200,169,110,0.07);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+    color: var(--taupe);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  /* Upload zone */
+  .upload-zone {
+    border: 1.5px dashed rgba(200,169,110,0.4);
+    border-radius: 2px;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--gold);
+    background: rgba(200,169,110,0.06);
+  }
+
+  .upload-zone input {
+    display: none;
+  }
+
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    opacity: 0.5;
+  }
+
+  .upload-zone p {
+    font-size: 0.85rem;
+    color: var(--taupe);
+    line-height: 1.8;
+  }
+
+  .upload-zone strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .preview-container {
+    position: relative;
+    display: none;
+  }
+
+  .preview-container.active { display: block; }
+
+  .preview-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .preview-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(28,28,30,0.7));
+    padding: 2rem 1.5rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .change-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s;
+  }
+
+  .change-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* Analyze button */
+  .analyze-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 1.1rem 2rem;
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    font-weight: 500;
+  }
+
+  .analyze-btn.visible { display: block; }
+
+  .analyze-btn::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    transition: left 0.4s ease;
+  }
+
+  .analyze-btn:hover::before { left: 0; }
+  .analyze-btn:hover { color: var(--deep); }
+  .analyze-btn span { position: relative; z-index: 1; }
+  .analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .analyze-btn:disabled::before { display: none; }
+
+  /* Right panel */
+  .result-panel {
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    opacity: 0.4;
+  }
+
+  .empty-state .big-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .empty-state p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--taupe);
+  }
+
+  /* Loading state */
+  .loading-state {
+    display: none;
+    text-align: center;
+  }
+
+  .loading-state.active { display: block; }
+
+  .loading-spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+
+  .loading-spinner::before, .loading-spinner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .loading-spinner::before {
+    inset: 0;
+    border: 1.5px solid var(--gold-light);
+    animation: spin 1.5s linear infinite;
+  }
+
+  .loading-spinner::after {
+    inset: 8px;
+    border: 1.5px solid transparent;
+    border-top-color: var(--gold);
+    animation: spin 1s linear infinite reverse;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--taupe);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  /* Results */
+  .results {
+    display: none;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .results.active { display: block; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(155,142,130,0.15);
+  }
+
+  .result-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .result-section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .result-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .result-text {
+    font-size: 0.88rem;
+    color: var(--taupe);
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  /* Color palette */
+  .color-palette {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .color-chip {
+    text-align: center;
+    flex: 1;
+    min-width: 60px;
+    max-width: 80px;
+  }
+
+  .color-swatch {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+  }
+
+  .color-swatch:hover { transform: scale(1.1); }
+
+  .color-name {
+    font-size: 0.65rem;
+    color: var(--taupe);
+    letter-spacing: 0.05em;
+    font-weight: 400;
+  }
+
+  /* Style tags */
+  .style-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .style-tag {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--charcoal);
+    background: rgba(200,169,110,0.06);
+    font-weight: 400;
+  }
+
+  /* Outfit cards */
+  .outfit-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .outfit-card {
+    background: var(--cream);
+    padding: 1.2rem 1.5rem;
+    border-left: 3px solid var(--gold);
+    transition: transform 0.2s;
+  }
+
+  .outfit-card:hover { transform: translateX(4px); }
+
+  .outfit-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    color: var(--charcoal);
+  }
+
+  .outfit-card-desc {
+    font-size: 0.8rem;
+    color: var(--taupe);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* Tips */
+  .tip-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .tip-list li {
+    padding: 0.6rem 0;
+    font-size: 0.85rem;
+    color: var(--taupe);
+    display: flex;
+    gap: 0.75rem;
+    line-height: 1.7;
+    font-weight: 300;
+    border-bottom: 1px solid rgba(155,142,130,0.1);
+  }
+
+  .tip-list li:last-child { border-bottom: none; }
+
+  .tip-list li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* Camera button */
+  .camera-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--gold-light);
+    background: transparent;
+    color: var(--taupe);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    margin-top: 1rem;
+  }
+
+  .camera-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .upload-panel { padding: 2.5rem 1.5rem; }
+    .result-panel { padding: 2.5rem 1.5rem; max-height: none; }
+    header { padding: 1.5rem; }
+    .section-title { font-size: 2.2rem; }
+    .upload-panel::after { font-size: 7rem; }
+  }
+
+  /* Error */
+  .error-msg {
+    background: rgba(181,105,74,0.1);
+    border-left: 3px solid var(--rust);
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--rust);
+    margin-top: 1rem;
+    display: none;
+    line-height: 1.7;
+  }
+
+  .error-msg.active { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">A<span>U</span>RA</div>
+  <div class="tagline">AI Fashion Intelligence</div>
+</header>
+
+<main class="hero">
+
+  <!-- LEFT: Upload -->
+  <section class="upload-panel">
+    <div class="section-label">Step 01 — Upload</div>
+    <h1 class="section-title">당신만의<br><em>스타일</em>을<br>발견하세요</h1>
+    <p class="section-desc">
+      사진을 업로드하면 AI가 당신의 피부톤, 체형, 분위기를 분석하여<br>
+      가장 잘 어울리는 패션과 컬러 팔레트를 추천해 드립니다.
+    </p>
+
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept="image/*">
+      <svg class="upload-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="20" r="8" stroke="#C8A96E" stroke-width="1.5"/>
+        <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M24 8V2M24 2l-4 4M24 2l4 4" stroke="#9B8E82" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <p>
+        <strong>클릭하여 사진을 선택</strong>하거나<br>
+        여기에 드래그 앤 드롭하세요<br>
+        <span style="font-size:0.75rem;opacity:0.7">JPG, PNG, WEBP 지원</span>
+      </p>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-container" id="previewContainer">
+      <img id="previewImg" src="" alt="Preview">
+      <div class="preview-overlay">
+        <span style="color:rgba(255,255,255,0.6);font-size:0.75rem;letter-spacing:0.1em;">업로드 완료</span>
+        <button class="change-btn" onclick="resetUpload()">다시 선택</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeImage()">
+      <span>✦ 패션 분석 시작하기</span>
+    </button>
+
+    <!-- Camera option for mobile -->
+    <button class="camera-btn" onclick="document.getElementById('cameraInput').click()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      카메라로 촬영하기
+    </button>
+    <input type="file" id="cameraInput" accept="image/*" capture="user" style="display:none">
+  </section>
+
+  <!-- RIGHT: Results -->
+  <section class="result-panel">
+
+    <div class="empty-state" id="emptyState">
+      <span class="big-icon">✦</span>
+      <p>사진을 업로드하면<br>당신만의 스타일 리포트가<br>여기에 나타납니다</p>
+    </div>
+
+    <div class="loading-state" id="loadingState">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">당신의 스타일을 분석 중입니다...</p>
+    </div>
+
+    <div class="results" id="results"></div>
+
+  </section>
+</main>
+
+<script>
+let uploadedImageBase64 = null;
+
+// File input
+document.getElementById('fileInput').addEventListener('change', handleFile);
+document.getElementById('cameraInput').addEventListener('change', handleFile);
+
+// Drag & drop
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('click', () => document.getElementById('fileInput').click());
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+});
+
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (file) processFile(file);
+}
+
+function processFile(file) {
+  if (!file.type.startsWith('image/')) {
+    showError('이미지 파일만 업로드 가능합니다.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const result = e.target.result;
+    uploadedImageBase64 = result.split(',')[1];
+    showPreview(result);
+  };
+  reader.readAsDataURL(file);
+}
+
+function showPreview(src) {
+  document.getElementById('uploadZone').style.display = 'none';
+  document.getElementById('previewContainer').classList.add('active');
+  document.getElementById('previewImg').src = src;
+  document.getElementById('analyzeBtn').classList.add('visible');
+  hideError();
+}
+
+function resetUpload() {
+  uploadedImageBase64 = null;
+  document.getElementById('uploadZone').style.display = 'block';
+  document.getElementById('previewContainer').classList.remove('active');
+  document.getElementById('analyzeBtn').classList.remove('visible');
+  document.getElementById('fileInput').value = '';
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('emptyState').style.display = 'block';
+  hideError();
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('active');
+}
+
+function hideError() {
+  document.getElementById('errorMsg').classList.remove('active');
+}
+
+async function analyzeImage() {
+  if (!uploadedImageBase64) return;
+
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = '분석 중...';
+
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('loadingState').classList.add('active');
+  document.getElementById('results').classList.remove('active');
+  hideError();
+
+  const prompt = `당신은 세계적인 패션 스타일리스트이자 컬러 분석 전문가입니다. 
+이 사진 속 인물을 분석하여 다음을 JSON 형식으로 응답해주세요. 반드시 유효한 JSON만 출력하고 마크다운 코드블록 없이 출력하세요.
+
+{
+  "overallVibe": "인물의 전반적인 분위기와 인상 (2-3문장)",
+  "skinTone": "피부톤 분석 (웜톤/쿨톤/뉴트럴 및 세부 설명)",
+  "bodyType": "체형 분석 및 특징",
+  "recommendedColors": [
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "추천 이유"},
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "추천 이유"},
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "추천 이유"},
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "추천 이유"},
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "추천 이유"}
+  ],
+  "avoidColors": [
+    {"name": "색상명", "hex": "#XXXXXX", "reason": "피해야 할 이유"}
+  ],
+  "stylePersonality": "이 인물에게 가장 잘 어울리는 스타일 퍼스낼리티 (예: 미니멀리스트, 클래식, 보헤미안 등)",
+  "styleKeywords": ["키워드1", "키워드2", "키워드3", "키워드4", "키워드5"],
+  "outfitRecommendations": [
+    {
+      "occasion": "캐주얼 데일리",
+      "outfit": "구체적인 코디 추천 (아이템, 색상 포함)"
+    },
+    {
+      "occasion": "비즈니스/오피스",
+      "outfit": "구체적인 코디 추천"
+    },
+    {
+      "occasion": "스페셜 이벤트",
+      "outfit": "구체적인 코디 추천"
+    }
+  ],
+  "keyTips": [
+    "핵심 스타일링 팁 1",
+    "핵심 스타일링 팁 2",
+    "핵심 스타일링 팁 3",
+    "핵심 스타일링 팁 4"
+  ],
+  "accessoryAdvice": "액세서리 추천 (소재, 스타일, 컬러 포함)"
+}`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: {
+                type: 'base64',
+                media_type: 'image/jpeg',
+                data: uploadedImageBase64
+              }
+            },
+            { type: 'text', text: prompt }
+          ]
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    renderResults(parsed);
+
+  } catch (err) {
+    console.error(err);
+    showError('분석 중 오류가 발생했습니다. 다시 시도해 주세요.\n사람의 얼굴이나 전신이 잘 보이는 사진을 사용해 주세요.');
+  } finally {
+    document.getElementById('loadingState').classList.remove('active');
+    btn.disabled = false;
+    btn.querySelector('span').textContent = '✦ 패션 분석 시작하기';
+  }
+}
+
+function renderResults(d) {
+  const avoidHTML = (d.avoidColors || []).map(c => `
+    <div class="color-chip">
+      <div class="color-swatch" style="background:${c.hex};opacity:0.5;position:relative;">
+        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:rgba(0,0,0,0.4)">✕</span>
+      </div>
+      <div class="color-name">${c.name}</div>
+    </div>
+  `).join('');
+
+  const html = `
+    <div class="result-section">
+      <div class="result-section-label">Analysis Result</div>
+      <div class="result-section-title">스타일 분석 리포트</div>
+      <p class="result-text">${d.overallVibe}</p>
+      <div class="style-tags">
+        ${(d.styleKeywords || []).map(k => `<span class="style-tag">${k}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-label">Color Palette</div>
+      <div class="result-section-title">퍼스널 컬러</div>
+      <p class="result-text"><strong style="color:var(--charcoal);font-weight:500">피부톤:</strong> ${d.skinTone}</p>
+      <div class="color-palette">
+        ${(d.recommendedColors || []).map(c => `
+          <div class="color-chip" title="${c.reason}">
+            <div class="color-swatch" style="background:${c.hex}"></div>
+            <div class="color-name">${c.name}</div>
+          </div>
+        `).join('')}
+      </div>
+      ${avoidHTML ? `
+        <p class="result-text" style="margin-top:1.5rem;margin-bottom:0.5rem"><strong style="color:var(--charcoal);font-weight:500">피해야 할 컬러</strong></p>
+        <div class="color-palette">${avoidHTML}</div>
+      ` : ''}
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-label">Style Identity</div>
+      <div class="result-section-title">${d.stylePersonality}</div>
+      <p class="result-text">체형: ${d.bodyType}</p>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-label">Outfit Recommendations</div>
+      <div class="result-section-title">추천 코디</div>
+      <div class="outfit-cards">
+        ${(d.outfitRecommendations || []).map(o => `
+          <div class="outfit-card">
+            <div class="outfit-card-title">${o.occasion}</div>
+            <div class="outfit-card-desc">${o.outfit}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-label">Styling Tips</div>
+      <div class="result-section-title">핵심 스타일링 팁</div>
+      <ul class="tip-list">
+        ${(d.keyTips || []).map(t => `<li>${t}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-label">Accessories</div>
+      <div class="result-section-title">액세서리 가이드</div>
+      <p class="result-text">${d.accessoryAdvice}</p>
+    </div>
+  `;
+
+  const resultsEl = document.getElementById('results');
+  resultsEl.innerHTML = html;
+  resultsEl.classList.add('active');
+}
+</script>
+
+</body>
+</html>

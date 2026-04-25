@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Four Pillars of Destiny — BaZi Reading</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#0d0d1a;color:#f0e6d3;font-family:Georgia,serif;padding:20px}
+.wrap{max-width:620px;margin:0 auto}
+.bmc{display:flex;justify-content:center;margin-bottom:18px}
+.bmc a{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#000;text-decoration:none;font-family:sans-serif;font-weight:700;font-size:13px;padding:9px 18px;border-radius:8px;transition:opacity .2s}
+.bmc a:hover{opacity:.85}
+header{text-align:center;margin-bottom:24px}
+header .icon{font-size:44px;margin-bottom:6px}
+header h1{font-size:24px;color:#d4a853;letter-spacing:3px}
+header p{color:#9b8ea0;margin-top:6px;font-size:12px}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;padding:10px;border-radius:8px;border:1px solid #3d2b4a;cursor:pointer;font-size:13px;font-weight:700;background:#1a1a2e;color:#9b8ea0;transition:.2s}
+.tab.active{background:linear-gradient(135deg,#d4a853,#b8860b);color:#0d0d1a}
+.card{background:#1a1a2e;border:1px solid #3d2b4a;border-radius:16px;padding:24px;margin-bottom:16px}
+label{font-size:12px;color:#9b8ea0;display:block;margin-bottom:6px}
+input,select{width:100%;background:#0d0d1a;border:1px solid #3d2b4a;border-radius:8px;padding:10px 12px;color:#f0e6d3;font-size:14px;font-family:inherit}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.field{margin-bottom:14px}
+.btn{width:100%;margin-top:16px;padding:13px;background:linear-gradient(135deg,#d4a853,#b8860b);border:none;border-radius:10px;color:#0d0d1a;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:2px;font-family:inherit}
+.btn:disabled{background:#3d2b4a;cursor:not-allowed;color:#6b5b7a}
+.back-btn{margin-bottom:14px;background:#1a1a2e;border:1px solid #3d2b4a;border-radius:8px;padding:8px 16px;color:#d4a853;cursor:pointer;font-size:13px;font-family:inherit}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.pillar{background:#0d0d1a;border-radius:10px;padding:12px 6px;border:1px solid #3d2b4a}
+.pillar-label{font-size:9px;color:#9b8ea0;margin-bottom:8px}
+.pillar-stem{font-size:13px;font-weight:700}
+.pillar-el{font-size:9px;opacity:.7;margin-bottom:4px}
+.pillar-div{width:1px;height:12px;background:#3d2b4a;margin:0 auto 4px}
+.pillar-branch{font-size:13px;font-weight:700}
+.pillar-animal{font-size:9px;color:#9b8ea0;margin-top:2px}
+.elements{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center}
+.el-label{font-size:11px;font-weight:700;margin-bottom:4px}
+.el-bar-wrap{height:60px;background:#0d0d1a;border-radius:6px;position:relative;overflow:hidden}
+.el-bar{position:absolute;bottom:0;width:100%;opacity:.7;transition:height .5s}
+.el-count{font-size:12px;color:#f0e6d3;margin-top:4px}
+.analysis{line-height:1.9;font-size:14px;color:#e8d5c4;white-space:pre-wrap}
+.loading-box{text-align:center;padding:40px 0;color:#9b8ea0}
+.loading-box .big{font-size:32px;margin-bottom:12px}
+.section-title{color:#d4a853;text-align:center;margin:0 0 16px;font-size:15px;letter-spacing:2px}
+.hist-item{background:#1a1a2e;border:1px solid #3d2b4a;border-radius:14px;padding:18px;margin-bottom:12px}
+.hist-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hist-name{font-weight:700;color:#d4a853;font-size:15px}
+.hist-info{font-size:12px;color:#9b8ea0;margin-top:3px}
+.hist-date{font-size:11px;color:#5a4a6a;margin-top:2px}
+.del-btn{background:none;border:1px solid #3d2b4a;border-radius:6px;color:#5a4a6a;cursor:pointer;padding:4px 8px;font-size:12px;font-family:inherit}
+.mini-pillars{display:flex;gap:6px;margin-bottom:12px}
+.mini-pillar{flex:1;background:#0d0d1a;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #3d2b4a}
+.mini-stem,.mini-branch{font-size:11px;font-weight:700}
+.mini-div{width:1px;height:8px;background:#3d2b4a;margin:3px auto}
+.mini-animal{font-size:9px;color:#9b8ea0;margin-top:2px}
+.view-btn{width:100%;padding:9px;background:linear-gradient(135deg,#d4a853,#b8860b);border:none;border-radius:8px;color:#0d0d1a;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.empty{text-align:center;padding:60px 20px;color:#5a4a6a}
+.empty .big{font-size:40px;margin-bottom:12px}
+.result-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.error{color:#f87171;font-size:13px;margin-top:8px}
+.hint{color:#5a4a6a}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Buy Me a Coffee -->
+  <div class="bmc">
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank">
+      ☕ Buy me a coffee
+    </a>
+  </div>
+
+  <header>
+    <div class="icon">🔮</div>
+    <h1>Four Pillars of Destiny</h1>
+    <p>Uncover your destiny through BaZi · 사주팔자</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" id="tab-form" onclick="switchTab('form')">✏️ New Reading</button>
+    <button class="tab" id="tab-history" onclick="switchTab('history')">📜 History (<span id="hist-count">0</span>)</button>
+  </div>
+
+  <div id="view-form">
+    <div class="card">
+      <div class="row2">
+        <div><label>Name (optional)</label><input id="name" placeholder="e.g. Alex"/></div>
+        <div><label>Gender</label><select id="gender"><option>Male</option><option>Female</option></select></div>
+      </div>
+      <div class="row3">
+        <div><label>Birth Year</label><input id="year" type="number" placeholder="1990"/></div>
+        <div><label>Month</label><select id="month"><option value="">Mo.</option></select></div>
+        <div><label>Day</label><select id="day"><option value="">Day</option></select></div>
+      </div>
+      <div class="field">
+        <label>Birth Hour</label>
+        <select id="hour"></select>
+      </div>
+      <div class="field">
+        <label>Occupation <span class="hint">(optional — for career fit analysis)</span></label>
+        <input id="job" placeholder="e.g. Software Engineer, Teacher, Designer..."/>
+      </div>
+      <div id="error" class="error" style="display:none"></div>
+      <button class="btn" id="submit-btn" onclick="handleSubmit()">✨ Reveal My Destiny</button>
+    </div>
+  </div>
+
+  <div id="view-result" style="display:none">
+    <button class="back-btn" onclick="showForm()">← New Reading</button>
+    <div class="card">
+      <div class="result-meta">
+        <h3 class="section-title" style="margin:0">📋 Your BaZi Chart</h3>
+        <span id="result-meta" style="font-size:12px;color:#5a4a6a"></span>
+      </div>
+      <div class="pillars" id="pillar-grid"></div>
+    </div>
+    <div class="card">
+      <h3 class="section-title">🌿 Five Elements Balance</h3>
+      <div class="elements" id="element-grid"></div>
+    </div>
+    <div class="card">
+      <h3 class="section-title">🔮 Your Destiny Reading</h3>
+      <div id="analysis-box"></div>
+    </div>
+  </div>
+
+  <div id="view-history" style="display:none">
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+<script>
+const STEMS_KR=["갑","을","병","정","무","기","경","신","임","계"];
+const STEMS_EN=["Jia","Yi","Bing","Ding","Wu","Ji","Geng","Xin","Ren","Gui"];
+const BRANCHES_EN=["Zi","Chou","Yin","Mao","Chen","Si","Wu","Wei","Shen","You","Xu","Hai"];
+const ANIMALS=["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"];
+const STEM_EL=["Wood","Wood","Fire","Fire","Earth","Earth","Metal","Metal","Water","Water"];
+const BRANCH_EL=["Water","Earth","Wood","Wood","Earth","Fire","Fire","Earth","Metal","Metal","Earth","Water"];
+const EL_COLOR={Wood:"#4ade80",Fire:"#f87171",Earth:"#fbbf24",Metal:"#e5e7eb",Water:"#60a5fa"};
+const EL_EMOJI={Wood:"🌿",Fire:"🔥",Earth:"🌍",Metal:"⚔️",Water:"💧"};
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const PILLAR_LABELS=["Year Pillar","Month Pillar","Day Pillar","Hour Pillar"];
+
+const monthSel=document.getElementById('month');
+MONTHS.forEach((m,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=m;monthSel.appendChild(o);});
+const daySel=document.getElementById('day');
+for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;daySel.appendChild(o);}
+const hourSel=document.getElementById('hour');
+for(let i=0;i<24;i++){const o=document.createElement('option');o.value=i;o.textContent=String(i).padStart(2,'0')+':00 — '+(i<12?'AM':'PM')+' '+(i%12||12)+':00';if(i===12)o.selected=true;hourSel.appendChild(o);}
+
+let history=[];
+try{history=JSON.parse(localStorage.getItem('bazi_history')||'[]');}catch(e){}
+updateHistCount();
+
+function updateHistCount(){document.getElementById('hist-count').textContent=history.length;}
+function switchTab(t){
+  document.getElementById('tab-form').classList.toggle('active',t==='form'||t==='result');
+  document.getElementById('tab-history').classList.toggle('active',t==='history');
+  document.getElementById('view-form').style.display=t==='form'?'':'none';
+  document.getElementById('view-result').style.display=t==='result'?'':'none';
+  document.getElementById('view-history').style.display=t==='history'?'':'none';
+  if(t==='history')renderHistory();
+}
+function showForm(){switchTab('form');}
+
+function getStem(year){return(year-4)%10;}
+function getBranch(year){return(year-4)%12;}
+function monthPillar(year,month){const si=((getStem(year)%5)*2+month-1)%10,bi=(month+1)%12;return{stem:STEMS_EN[si],branch:BRANCHES_EN[bi],animal:ANIMALS[bi],stemEl:STEM_EL[si],branchEl:BRANCH_EL[bi],stemKr:STEMS_KR[si]};}
+function dayPillar(year,month,day){
+  const a=Math.floor((14-month)/12),y=year-a,m=month+12*a-2;
+  const jd=day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;
+  const si=(jd+9)%10,bi=(jd+1)%12;
+  return{stem:STEMS_EN[(si+10)%10],branch:BRANCHES_EN[(bi+12)%12],animal:ANIMALS[(bi+12)%12],stemEl:STEM_EL[(si+10)%10],branchEl:BRANCH_EL[(bi+12)%12],stemKr:STEMS_KR[(si+10)%10]};
+}
+function hourPillar(dayStemKr,hour){
+  const dsi=STEMS_KR.indexOf(dayStemKr),bi=Math.floor((hour+1)/2)%12,si=((dsi%5)*2+bi)%10;
+  return{stem:STEMS_EN[si],branch:BRANCHES_EN[bi],animal:ANIMALS[bi],stemEl:STEM_EL[si],branchEl:BRANCH_EL[bi]};
+}
+function calcSaju(year,month,day,hour){
+  const ySi=(getStem(year)+10)%10,yBi=(getBranch(year)+12)%12;
+  const yp={stem:STEMS_EN[ySi],branch:BRANCHES_EN[yBi],animal:ANIMALS[yBi],stemEl:STEM_EL[ySi],branchEl:BRANCH_EL[yBi],stemKr:STEMS_KR[ySi]};
+  const mp=monthPillar(year,month);
+  const dp=dayPillar(year,month,day);
+  const hp=hourPillar(dp.stemKr,hour);
+  return[yp,mp,dp,hp];
+}
+function elCounts(pillars){const c={Wood:0,Fire:0,Earth:0,Metal:0,Water:0};pillars.forEach(p=>{c[p.stemEl]++;c[p.branchEl]++;});return c;}
+
+function renderPillars(pillars,container){
+  container.innerHTML='';
+  pillars.forEach((p,i)=>{
+    container.innerHTML+=`<div class="pillar"><div class="pillar-label">${PILLAR_LABELS[i]}</div><div class="pillar-stem" style="color:${EL_COLOR[p.stemEl]}">${p.stem}</div><div class="pillar-el" style="color:${EL_COLOR[p.stemEl]}">${p.stemEl}</div><div class="pillar-div"></div><div class="pillar-branch" style="color:${EL_COLOR[p.branchEl]}">${p.branch}</div><div class="pillar-animal">${p.animal}</div></div>`;
+  });
+}
+function renderElements(counts,container){
+  container.innerHTML='';
+  Object.entries(counts).forEach(([el,cnt])=>{
+    container.innerHTML+=`<div><div class="el-label" style="color:${EL_COLOR[el]}">${EL_EMOJI[el]}<br/>${el}</div><div class="el-bar-wrap"><div class="el-bar" style="background:${EL_COLOR[el]};height:${(cnt/8)*100}%"></div></div><div class="el-count">${cnt}</div></div>`;
+  });
+}
+
+async function handleSubmit(){
+  const name=document.getElementById('name').value.trim();
+  const year=parseInt(document.getElementById('year').value);
+  const month=parseInt(document.getElementById('month').value);
+  const day=parseInt(document.getElementById('day').value);
+  const hour=parseInt(document.getElementById('hour').value);
+  const gender=document.getElementById('gender').value;
+  const job=document.getElementById('job').value.trim();
+  const errEl=document.getElementById('error');
+  if(!year||!month||!day){errEl.style.display='';errEl.textContent='Please enter your date of birth.';return;}
+  errEl.style.display='none';
+
+  const pillars=calcSaju(year,month,day,hour);
+  const counts=elCounts(pillars);
+
+  document.getElementById('result-meta').textContent=(name||'Anonymous')+' · '+new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+  renderPillars(pillars,document.getElementById('pillar-grid'));
+  renderElements(counts,document.getElementById('element-grid'));
+  document.getElementById('analysis-box').innerHTML=`<div class="loading-box"><div class="big">✨</div><p>The stars are aligning for your reading...</p></div>`;
+  switchTab('result');
+
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='🔮 Reading your chart...';
+
+  const sajuText=`Year:${pillars[0].stem}-${pillars[0].branch}(${pillars[0].animal}),Month:${pillars[1].stem}-${pillars[1].branch}(${pillars[1].animal}),Day:${pillars[2].stem}-${pillars[2].branch}(${pillars[2].animal}),Hour:${pillars[3].stem}-${pillars[3].branch}(${pillars[3].animal})`;
+  const elemText=Object.entries(counts).map(([k,v])=>`${k}:${v}`).join(',');
+  const jobSection=job?`\n8. 💼 Career Fit Analysis: How well does "${job}" align with this chart? Rate compatibility (High/Medium/Low), explain strengths and challenges, suggest 2-3 alternative careers.`:'';
+  const prompt=`You are an expert in Four Pillars of Destiny (BaZi). Provide a detailed and friendly reading in English.\nName:${name||'Anonymous'}/Gender:${gender}/DOB:${year}/${month}/${day} ${hour}:00\nFour Pillars:${sajuText}/Five Elements:${elemText}\n\nAnalyze:\n1. 🌟 Overall Chart Overview (2-3 sentences)\n2. 🧠 Personality & Temperament\n3. 💰 Career & Wealth Fortune\n4. ❤️ Relationships & Romance\n5. 🌿 Health & Wellbeing\n6. 📅 Fortune for 2025\n7. 💡 Advice & Cautions${jobSection}\n\nUse emojis for section headers. Keep the tone warm, insightful, and empowering.`;
+
+  let analysisText='';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    analysisText=data.content?.map(c=>c.text||'').join('')||'Unable to retrieve analysis.';
+  }catch(e){analysisText='An error occurred during analysis.';}
+
+  document.getElementById('analysis-box').innerHTML=`<div class="analysis">${analysisText}</div>`;
+  btn.disabled=false;btn.textContent='✨ Reveal My Destiny';
+
+  const entry={id:Date.now(),name,gender,year,month,day,hour,job,pillars,counts,analysis:analysisText,date:new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})};
+  history=[entry,...history].slice(0,20);
+  try{localStorage.setItem('bazi_history',JSON.stringify(history));}catch(e){}
+  updateHistCount();
+}
+
+function renderHistory(){
+  const el=document.getElementById('hist-list');
+  if(!history.length){el.innerHTML=`<div class="empty"><div class="big">📜</div><p>No readings saved yet.<br/>Your readings will be saved automatically.</p></div>`;return;}
+  el.innerHTML=history.map(item=>`
+    <div class="hist-item">
+      <div class="hist-top">
+        <div>
+          <div class="hist-name">${item.name||'Anonymous'} · ${item.gender}</div>
+          <div class="hist-info">${item.year} / ${MONTHS[(item.month||1)-1]} / ${item.day} at ${String(item.hour||0).padStart(2,'0')}:00${item.job?' · '+item.job:''}</div>
+          <div class="hist-date">Saved: ${item.date}</div>
+        </div>
+        <button class="del-btn" onclick="deleteItem(${item.id})">Delete</button>
+      </div>
+      <div class="mini-pillars">${item.pillars.map(p=>`<div class="mini-pillar"><div class="mini-stem" style="color:${EL_COLOR[p.stemEl]}">${p.stem}</div><div class="mini-div"></div><div class="mini-branch" style="color:${EL_COLOR[p.branchEl]}">${p.branch}</div><div class="mini-animal">${p.animal}</div></div>`).join('')}</div>
+      <button class="view-btn" onclick="viewItem(${item.id})">🔮 View Reading</button>
+    </div>
+  `).join('');
+}
+
+function deleteItem(id){
+  history=history.filter(h=>h.id!==id);
+  try{localStorage.setItem('bazi_history',JSON.stringify(history));}catch(e){}
+  updateHistCount();renderHistory();
+}
+
+function viewItem(id){
+  const item=history.find(h=>h.id===id);if(!item)return;
+  document.getElementById('result-meta').textContent=(item.name||'Anonymous')+' · '+item.date;
+  renderPillars(item.pillars,document.getElementById('pillar-grid'));
+  renderElements(item.counts,document.getElementById('element-grid'));
+  document.getElementById('analysis-box').innerHTML=`<div class="analysis">${item.analysis}</div>`;
+  switchTab('result');
+}
+</script>
+</body>
+</html>

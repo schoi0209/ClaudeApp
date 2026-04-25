@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoul 6-Day Itinerary – April 16–21</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1118;
+    --petal: #f2a7bb;
+    --blossom: #f7cfd8;
+    --deep: #7b3f5e;
+    --gold: #c9974a;
+    --sage: #8aab8c;
+    --paper: #fdf6f0;
+    --paper2: #fef0e8;
+    --muted: #8a7a82;
+    --white: #ffffff;
+  }
+  [data-theme="dark"] {
+    --ink: #f0e8ef;
+    --petal: #d4607c;
+    --blossom: #4a2535;
+    --deep: #e8a0bb;
+    --gold: #d4a85a;
+    --sage: #6a9b6c;
+    --paper: #1a1020;
+    --paper2: #221428;
+    --muted: #9a8a92;
+    --white: #2a1a28;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); transition: background 0.3s, color 0.3s; min-height: 100vh; }
+  .theme-toggle { position: fixed; top: 1.2rem; right: 1.5rem; z-index: 999; background: var(--white); border: 1.5px solid var(--petal); border-radius: 2rem; padding: 0.35rem 0.9rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--deep); display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
+  .theme-toggle:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .hero { position: relative; padding: 5rem 2rem 4rem; text-align: center; overflow: hidden; background: linear-gradient(160deg, var(--blossom) 0%, var(--paper) 60%); }
+  .hero-tag { display: inline-block; background: var(--petal); color: #fff; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 2rem; margin-bottom: 1.2rem; }
+  .hero h1 { font-family: 'Nanum Myeongjo', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; color: var(--deep); line-height: 1.1; margin-bottom: 0.6rem; }
+  .hero h1 span { color: var(--petal); }
+  .hero-sub { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; font-style: italic; }
+  .hero-meta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .hero-pill { background: var(--white); border: 1px solid var(--blossom); border-radius: 2rem; padding: 0.4rem 1rem; font-size: 0.82rem; color: var(--deep); }
+  .tips-bar { background: var(--deep); color: #fff; padding: 1.2rem 2rem; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+  .tip { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; opacity: 0.92; }
+  .container { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  .day-card { margin-bottom: 2.5rem; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 3px 20px rgba(0,0,0,0.07); background: var(--white); transition: box-shadow 0.2s; }
+  .day-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.11); }
+  .day-header { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; background: var(--paper2); border-bottom: 1px solid var(--blossom); cursor: pointer; user-select: none; }
+  .day-number { font-family: 'Nanum Myeongjo', serif; font-size: 2rem; font-weight: 800; color: var(--petal); line-height: 1; min-width: 2.5rem; }
+  .day-info { flex: 1; }
+  .day-date { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.15rem; }
+  .day-title { font-family: 'Nanum Myeongjo', serif; font-size: 1.2rem; font-weight: 700; color: var(--deep); }
+  .day-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.3rem; }
+  .tag { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tag-nature { background: #e8f5e9; color: #4a8a4c; }
+  .tag-culture { background: #fce4ec; color: #c2185b; }
+  .tag-food { background: #fff8e1; color: #c78a00; }
+  .tag-adventure { background: #e8eaf6; color: #3949ab; }
+  [data-theme="dark"] .tag-nature { background: #1a3a1c; color: #8aba8c; }
+  [data-theme="dark"] .tag-culture { background: #3a1420; color: #e8829c; }
+  [data-theme="dark"] .tag-food { background: #3a2e00; color: #d4aa40; }
+  [data-theme="dark"] .tag-adventure { background: #1a1e3a; color: #8a9adb; }
+  .chevron { font-size: 1rem; color: var(--muted); transition: transform 0.3s; }
+  .day-card.open .chevron { transform: rotate(180deg); }
+  .day-body { display: none; padding: 1.5rem; }
+  .day-card.open .day-body { display: block; }
+  .stop { display: grid; grid-template-columns: 3rem 1fr; gap: 0 1rem; margin-bottom: 1.5rem; }
+  .stop:last-child { margin-bottom: 0; }
+  .stop-time-col { display: flex; flex-direction: column; align-items: center; }
+  .stop-time { font-size: 0.7rem; color: var(--muted); font-weight: 500; white-space: nowrap; text-align: center; line-height: 1.3; }
+  .stop-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--petal); margin: 0.3rem 0; flex-shrink: 0; }
+  .stop-line { width: 2px; flex: 1; background: var(--blossom); min-height: 2rem; }
+  .stop:last-child .stop-line { display: none; }
+  .stop-name { font-family: 'Nanum Myeongjo', serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+  .stop-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.4rem; }
+  .stop-tips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stop-tip { font-size: 0.73rem; padding: 0.18rem 0.6rem; border-radius: 2rem; border: 1px solid var(--blossom); color: var(--deep); background: var(--paper); }
+  .stop-tip.free { border-color: var(--sage); color: var(--sage); background: transparent; }
+  .stop-tip.budget { border-color: var(--gold); color: var(--gold); background: transparent; }
+  .daily-budget { margin-top: 1.5rem; padding: 0.8rem 1rem; background: var(--paper2); border-radius: 0.8rem; display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--muted); border-left: 3px solid var(--gold); }
+  .daily-budget strong { color: var(--gold); }
+  .scam-note { background: #fff8e1; border: 1px solid #ffe082; border-radius: 0.8rem; padding: 0.9rem 1.2rem; font-size: 0.8rem; color: #7a5c00; margin-top: 2rem; display: flex; gap: 0.6rem; }
+  [data-theme="dark"] .scam-note { background: #2a2000; border-color: #8a7000; color: #d4b040; }
+  .practical { background: var(--white); border-radius: 1.2rem; padding: 1.8rem; box-shadow: 0 3px 20px rgba(0,0,0,0.07); margin-top: 3rem; }
+  .practical h2 { font-family: 'Nanum Myeongjo', serif; font-size: 1.5rem; color: var(--deep); margin-bottom: 1.2rem; }
+  .practical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px) { .practical-grid { grid-template-columns: 1fr; } }
+  .prac-item { display: flex; gap: 0.7rem; align-items: flex-start; }
+  .prac-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .prac-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.15rem; }
+  .prac-val { font-size: 0.9rem; color: var(--ink); font-weight: 500; }
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">
+  <span id="theme-icon">🌙</span>
+  <span id="theme-label">Dark</span>
+</button>
+
+<div class="hero">
+  <div class="hero-tag">🌸 Spring 2026 · Father & Daughter</div>
+  <h1>6 Days in <span>Seoul</span></h1>
+  <p class="hero-sub">Near the Palace · Budget-Friendly · Cherry Blossom Season</p>
+  <div class="hero-meta">
+    <div class="hero-pill">📅 April 16–21, 2026</div>
+    <div class="hero-pill">👨‍👧 2 travellers</div>
+    <div class="hero-pill">🏯 Jongno / Palace Area</div>
+    <div class="hero-pill">🚇 Subway + Taxi + Walking</div>
+  </div>
+</div>
+
+<div class="tips-bar">
+  <div class="tip">🎴 Wear hanbok → free palace entry</div>
+  <div class="tip">🚇 Get a T-money card on arrival (~₩2,500/ride)</div>
+  <div class="tip">🌸 Cherry blossoms peak mid-April — perfect timing!</div>
+  <div class="tip">💰 Street food ₩3,000–8,000 · Meals ₩7,000–12,000</div>
+</div>
+
+<div class="container">
+
+  <!-- DAY 1 -->
+  <div class="day-card open" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-info">
+        <div class="day-date">Wednesday, April 16</div>
+        <div class="day-title">Palace Welcome & Hanbok Day</div>
+        <div class="day-tags"><span class="tag tag-culture">Culture</span><span class="tag tag-food">Food</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🏯 Gyeongbokgung Palace + Hanbok Rental</div>
+          <div class="stop-desc">Start your trip at Seoul's grandest palace. Rent hanbok from shops just outside the gates — your daughter becomes a princess, and you both get free entry! The Guard Changing Ceremony runs at 10am, 1pm & 3pm at Gwanghwamun Gate — arrive 15 mins early for a great spot.</div>
+          <div class="stop-tips"><span class="stop-tip free">Free entry with hanbok</span><span class="stop-tip budget">Hanbok rental ~₩15,000–25,000 for 2hrs+</span><span class="stop-tip">Open today ✓</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">12:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍜 Lunch near the Palace</div>
+          <div class="stop-desc">Head to streets around Gyeongbokgung for bibimbap or gimbap at a local spot. Kids love gimbap (Korean rice rolls) — cheap, filling and delicious.</div>
+          <div class="stop-tips"><span class="stop-tip budget">₩7,000–12,000 per person</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">2:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🏛️ National Folk Museum of Korea</div>
+          <div class="stop-desc">Located inside Gyeongbokgung's grounds. Free entry with a dedicated children's section — hands-on traditional games, costumes and interactive exhibits perfect for a 10-year-old. A great rainy-day backup too.</div>
+          <div class="stop-tips"><span class="stop-tip free">Free entry</span><span class="stop-tip">Kid-friendly interactive exhibits</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">4:30<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍢 Insadong Street Food & Crafts</div>
+          <div class="stop-desc">A 10-min walk from the palace. Browse art galleries, traditional craft shops, and snack on hotteok (sweet pancakes), tteokbokki and tornado potatoes. Great for affordable souvenirs too.</div>
+          <div class="stop-tips"><span class="stop-tip budget">Snacks ₩2,000–5,000 each</span><span class="stop-tip">Great for souvenirs</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩50,000–70,000 (~AUD $55–75)</div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-info">
+        <div class="day-date">Thursday, April 17</div>
+        <div class="day-title">Hidden Palaces & Village Lanes</div>
+        <div class="day-tags"><span class="tag tag-culture">Culture</span><span class="tag tag-nature">Nature</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🏘️ Bukchon Hanok Village (Morning)</div>
+          <div class="stop-desc">Go early — the narrow lanes of traditional hanok houses are magical and quiet before crowds arrive. Stunning viewpoints overlooking modern Seoul. Visit within the 10am–5pm tourist window and keep voices low (residents live here).</div>
+          <div class="stop-tips"><span class="stop-tip free">Free to explore</span><span class="stop-tip">Avoid Sundays (quiet zone)</span><span class="stop-tip">~15 min walk from palace</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">11:30<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍵 Hanok Café Break</div>
+          <div class="stop-desc">Stop at one of the beautiful traditional cafés in or near Bukchon for sikhye (sweet rice punch) or bingsu (shaved ice). Your daughter will love it.</div>
+          <div class="stop-tips"><span class="stop-tip budget">₩5,000–10,000 per drink/dessert</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">1:30<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🌿 Changdeokgung Palace + Secret Garden</div>
+          <div class="stop-desc">A UNESCO World Heritage Site and more serene than Gyeongbokgung. The highlight is the Huwon Secret Garden — a stunning 78-acre royal garden with ponds and forested paths. Book timed entry tickets in advance or arrive early.</div>
+          <div class="stop-tips"><span class="stop-tip free">Free with hanbok</span><span class="stop-tip budget">Otherwise ~₩3,000 adult / ₩1,500 child</span><span class="stop-tip">Closed Mondays — open today ✓</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">5:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍲 Dinner: Tosokchon Samgyetang</div>
+          <div class="stop-desc">Near the palace, this famous restaurant serves ginseng chicken soup (samgyetang) — a warming Korean classic. A genuine cultural food experience at a very reasonable price.</div>
+          <div class="stop-tips"><span class="stop-tip budget">~₩17,000 per bowl</span><span class="stop-tip">Iconic Seoul experience</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩60,000–80,000 (~AUD $65–85)</div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-info">
+        <div class="day-date">Friday, April 18</div>
+        <div class="day-title">Lotte World & N Seoul Tower 🎡</div>
+        <div class="day-tags"><span class="tag tag-adventure">Adventure</span><span class="tag tag-culture">Culture</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9:30<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🎢 Lotte World Theme Park</div>
+          <div class="stop-desc">The world's largest indoor theme park — a full day of thrills for you both! Rides, parades, and the iconic Lotte World Adventure Kingdom. Friday is a weekday so queues will be 30–50% shorter than weekends — you'll spend more time on rides and less time waiting. Take subway Line 2 to Jamsil Station.</div>
+          <div class="stop-tips"><span class="stop-tip budget">One-day pass ~₩62,000/person · Book online for discount</span><span class="stop-tip">✅ Weekday = short queues!</span><span class="stop-tip">Opens 9:30 AM — arrive early</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">1:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍽️ Lunch: Lotte World Food Court</div>
+          <div class="stop-desc">Refuel inside the park. The food court offers Korean staples like tteokbokki, kimbap, ramen, and Korean fried chicken at reasonable park prices. Grab a banana milk to keep the energy going!</div>
+          <div class="stop-tips"><span class="stop-tip budget">~₩10,000–15,000 per person inside park</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">2:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🎠 Afternoon Rides & Magic Island</div>
+          <div class="stop-desc">After lunch, hit the outdoor Magic Island section of Lotte World — a floating amusement park on Seokchon Lake. The views of the lake with spring cherry blossoms are stunning. Don't miss the Gyro Swing or the Giant Loop if she's feeling brave!</div>
+          <div class="stop-tips"><span class="stop-tip">Outdoor section — check weather</span><span class="stop-tip">Lake views with cherry blossoms 🌸</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">5:30<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🗼 N Seoul Tower at Sunset</div>
+          <div class="stop-desc">Head from Jamsil to Namsan for golden hour. Take the cable car up and watch the city turn amber from the tower observation deck. Add a love lock as a special father-daughter memory! The tower lights up beautifully after dark.</div>
+          <div class="stop-tips"><span class="stop-tip budget">Cable car ~₩9,500 return · Observatory ~₩16,000/person</span><span class="stop-tip">🔒 Father-daughter love lock!</span><span class="stop-tip">Book sunset slot — fills up fast</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">8:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍜 Dinner: Myeongdong Street Food</div>
+          <div class="stop-desc">Wind down the big day with an easy, fun street food dinner in nearby Myeongdong. Tornado potatoes, Korean corn dogs, tteokbokki, and mango bingsu for dessert. A perfect, low-effort end to the most adventurous day!</div>
+          <div class="stop-tips"><span class="stop-tip budget">Dinner ~₩10,000–15,000 per person</span><span class="stop-tip">5 min walk from Myeongdong Station</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩170,000–200,000 (~AUD $180–215) — the splurge day!</div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">04</div>
+      <div class="day-info">
+        <div class="day-date">Saturday, April 19</div>
+        <div class="day-title">Markets, Street Food & K-Culture</div>
+        <div class="day-tags"><span class="tag tag-food">Food</span><span class="tag tag-culture">Culture</span><span class="tag tag-adventure">Adventure</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9:30<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🛕 Jogyesa Temple</div>
+          <div class="stop-desc">Beautiful Buddhist temple 15–20 min walk from the palace. Colourful lanterns fill the courtyard and monks sometimes offer small gifts to visiting children. Peaceful and culturally meaningful start to the day.</div>
+          <div class="stop-tips"><span class="stop-tip free">Free to enter</span><span class="stop-tip">Be respectful &amp; quiet</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">11:00<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🥘 Gwangjang Market</div>
+          <div class="stop-desc">One of Seoul's oldest food markets. Try bindaetteok (mung bean pancakes), mayak gimbap, and hotteok. Way cheaper and more local than Myeongdong. Your daughter will love sampling everything!</div>
+          <div class="stop-tips"><span class="stop-tip budget">₩3,000–8,000 per dish</span><span class="stop-tip">More authentic than Myeongdong</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">2:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🎵 Hongdae – K-Pop & Street Art</div>
+          <div class="stop-desc">Subway to Hongdae for K-pop street performances, vibrant street art, quirky shops and bubble tea. Kids love the youthful energy here. Browse cute character stores and pick up K-pop merchandise.</div>
+          <div class="stop-tips"><span class="stop-tip">~20 mins by subway</span><span class="stop-tip budget">Bubble tea ₩4,000–7,000</span><span class="stop-tip">Free street performances on weekends</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">6:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🔥 Korean BBQ Dinner</div>
+          <div class="stop-desc">Find a local samgyeopsal (pork belly BBQ) spot for an interactive dinner — you cook at the table together! A quintessential Korean experience. Look for neighbourhood spots away from tourist areas for better prices.</div>
+          <div class="stop-tips"><span class="stop-tip budget">₩12,000–18,000 per person</span><span class="stop-tip">Kids love cooking at the table!</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩55,000–80,000 (~AUD $60–85)</div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">05</div>
+      <div class="day-info">
+        <div class="day-date">Sunday, April 20</div>
+        <div class="day-title">Cherry Blossoms at the Han River 🌸</div>
+        <div class="day-tags"><span class="tag tag-nature">Nature</span><span class="tag tag-food">Food</span><span class="tag tag-adventure">Adventure</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">10:00<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🌸 Yeouido Hangang Park – Blossom Picnic</div>
+          <div class="stop-desc">April 16–21 is right in peak blossom season! Over 1,800 cherry trees line the Han River at Yeouido. Grab snacks from a convenience store and have a picnic under the pink canopy — pure magic. Saturday means a lively festival atmosphere with locals out in full force enjoying the blooms.</div>
+          <div class="stop-tips"><span class="stop-tip free">Completely free</span><span class="stop-tip budget">Picnic snacks ₩10,000–15,000</span><span class="stop-tip">Subway Line 5 → Yeouinaru Station</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">1:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🚲 Bike the River Paths</div>
+          <div class="stop-desc">Rent bikes and cycle the cherry blossom-lined riverbank paths — flat, easy terrain perfect for a 10-year-old. Utterly gorgeous during blossom season. The whole family atmosphere on a Saturday makes it even more festive!</div>
+          <div class="stop-tips"><span class="stop-tip budget">~₩3,000–5,000 per hour per bike</span><span class="stop-tip">Flat &amp; kid-safe paths</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">4:30<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">⛴️ Han River Evening Cruise</div>
+          <div class="stop-desc">End the blossom day with a magical sunset cruise on the Han River. Glide past the Banpo Rainbow Bridge, spot city lights reflecting on the water, and feed seagulls from the deck. The E-Land cruise departs from Yeouido pier. Book well ahead — cherry blossom Saturday is the busiest night of the year!</div>
+          <div class="stop-tips"><span class="stop-tip budget">~₩18,000/person · Book online in advance</span><span class="stop-tip">Departs Yeouido Hangang Park pier</span><span class="stop-tip">💡 Book ASAP — sells out on Saturdays!</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩65,000–90,000 (~AUD $70–95)</div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" onclick="toggleDay(event,this)">
+    <div class="day-header">
+      <div class="day-number">06</div>
+      <div class="day-info">
+        <div class="day-date">Monday, April 21</div>
+        <div class="day-title">Streams, Museums & Farewell</div>
+        <div class="day-tags"><span class="tag tag-culture">Culture</span><span class="tag tag-nature">Nature</span><span class="tag tag-food">Food</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">9:00<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">💧 Cheonggyecheon Stream Walk</div>
+          <div class="stop-desc">A peaceful urban stream running through central Seoul — perfect for a Sunday morning stroll. Cool, shaded and beautiful in spring. Walk a section and spot the street art installations along the way.</div>
+          <div class="stop-tips"><span class="stop-tip free">Completely free</span><span class="stop-tip">Connects to multiple subway stations</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">11:30<br>AM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🏛️ National Museum of Korea</div>
+          <div class="stop-desc">One of the world's great museums — and it's free! Covering 5,000 years of Korean history with an excellent children's programme and hands-on interactive exhibits. Great rainy-day option too. Near Ichon Station (Line 4).</div>
+          <div class="stop-tips"><span class="stop-tip free">Free entry</span><span class="stop-tip">Dedicated kids' museum section</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">3:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🛍️ Myeongdong – Last Souvenirs</div>
+          <div class="stop-desc">Stroll Seoul's famous shopping street for last-minute gifts, K-beauty products and street snacks. Good for Korean snack packs to bring home. Compare prices before buying — some stalls are more expensive than markets.</div>
+          <div class="stop-tips"><span class="stop-tip budget">K-beauty face masks from ₩1,000 each</span></div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time-col"><div class="stop-time">6:00<br>PM</div><div class="stop-dot"></div><div class="stop-line"></div></div>
+        <div>
+          <div class="stop-name">🍜 Farewell Dinner: Myeongdong Kyoja</div>
+          <div class="stop-desc">End the trip with handmade knife-cut noodles and dumplings at this legendary Myeongdong institution. The kalguksu noodles are incredible and very budget-friendly — the perfect final meal.</div>
+          <div class="stop-tips"><span class="stop-tip budget">~₩9,000–12,000 per bowl</span><span class="stop-tip">May be cash only</span></div>
+        </div>
+      </div>
+      <div class="daily-budget">💰 <strong>Est. daily spend (2 people):</strong> ₩40,000–60,000 (~AUD $43–65)</div>
+    </div>
+  </div>
+
+  <div class="scam-note">
+    ⚠️ <div><strong>Good to know:</strong> In Insadong and Hongdae, be wary of strangers inviting you to a "traditional ceremony" — this can end in pressure for large "offering fees." Also, some Myeongdong stalls charge more than local markets like Gwangjang. Stick to prices clearly displayed.</div>
+  </div>
+
+  <div class="practical">
+    <h2>🗺️ Practical Info</h2>
+    <div class="practical-grid">
+      <div class="prac-item">
+        <div class="prac-icon">🚇</div>
+        <div>
+          <div class="prac-label">Getting Around</div>
+          <div class="prac-val">T-money card for subway &amp; bus (~₩2,500/ride). Taxi via Kakao T app.</div>
+        </div>
+      </div>
+      <div class="prac-item">
+        <div class="prac-icon">🏯</div>
+        <div>
+          <div class="prac-label">Palace Station</div>
+          <div class="prac-val">Gyeongbokgung Station (Line 3, Exit 5) — 3 min walk to palace.</div>
+        </div>
+      </div>
+      <div class="prac-item">
+        <div class="prac-icon">🌡️</div>
+        <div>
+          <div class="prac-label">April Weather</div>
+          <div class="prac-val">15–20°C days, cool mornings. Light jacket + layers. Light rain jacket handy.</div>
+        </div>
+      </div>
+      <div class="prac-item">
+        <div class="prac-icon">💳</div>
+        <div>
+          <div class="prac-label">Money Tips</div>
+          <div class="prac-val">Cards widely accepted. Carry ~₩50,000 cash for markets &amp; small shops.</div>
+        </div>
+      </div>
+      <div class="prac-item">
+        <div class="prac-icon">📱</div>
+        <div>
+          <div class="prac-label">Useful Apps</div>
+          <div class="prac-val">Naver Maps, Kakao T (taxi), Korail (trains), Papago (translation).</div>
+        </div>
+      </div>
+      <div class="prac-item">
+        <div class="prac-icon">🌸</div>
+        <div>
+          <div class="prac-label">Cherry Blossoms</div>
+          <div class="prac-val">Peak in Seoul is early–mid April. April 16–21 catches late blooms and falling petals.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Made with 🌸 for a Seoul father-daughter adventure · April 2026</footer>
+
+<script>
+  function toggleDay(e, card) {
+    if (e.target.closest('.day-body')) return;
+    card.classList.toggle('open');
+  }
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      document.getElementById('theme-icon').textContent = '🌙';
+      document.getElementById('theme-label').textContent = 'Dark';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('theme-icon').textContent = '☀️';
+      document.getElementById('theme-label').textContent = 'Light';
+    }
+  }
+</script>
+</body>
+</html>
