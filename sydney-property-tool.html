@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sydney Property Analyser</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2ed;
+  --surface: #ffffff;
+  --surface2: #f0ece4;
+  --border: #d4cfc7;
+  --text: #1a1714;
+  --text-muted: #6b6560;
+  --accent: #c8440a;
+  --accent2: #1a5c3a;
+  --accent-light: #fde8de;
+  --accent2-light: #d8f0e4;
+  --gold: #b5862a;
+  --gold-light: #fdf3d8;
+  --shadow: rgba(26,23,20,0.08);
+  --shadow-lg: rgba(26,23,20,0.15);
+}
+[data-theme="dark"] {
+  --bg: #111009;
+  --surface: #1c1a16;
+  --surface2: #252219;
+  --border: #383428;
+  --text: #f0ece4;
+  --text-muted: #8a8070;
+  --accent: #e86030;
+  --accent2: #3a9660;
+  --accent-light: #2a1a10;
+  --accent2-light: #0d2818;
+  --gold: #d4a040;
+  --gold-light: #1e1808;
+  --shadow: rgba(0,0,0,0.3);
+  --shadow-lg: rgba(0,0,0,0.5);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── HEADER ─── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.logo span { color: var(--text); font-size: 0.9rem; font-family: 'DM Mono', monospace; display: block; font-weight: 300; letter-spacing: 0; }
+.header-right { display: flex; align-items: center; gap: 1rem; }
+.bmc-btn {
+  background: var(--gold);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.bmc-btn:hover { opacity: 0.85; }
+.theme-toggle {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px; height: 40px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+
+/* ─── TABS ─── */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+  padding: 0 2rem;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-btn:hover:not(.active) { color: var(--text); }
+
+/* ─── MAIN ─── */
+main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ─── SECTION TITLE ─── */
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.03em;
+}
+.section-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* ─── SUBURB YIELD CALCULATOR ─── */
+.suburb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.input-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.input-field {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.input-field:focus { outline: none; border-color: var(--accent); }
+.input-field::placeholder { color: var(--text-muted); }
+select.input-field { cursor: pointer; }
+
+.calc-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 2rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  width: 100%;
+}
+.calc-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ─── RESULTS ─── */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.result-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.result-card.highlight { border-color: var(--accent); background: var(--accent-light); }
+.result-card.green { border-color: var(--accent2); background: var(--accent2-light); }
+.result-card.gold { border-color: var(--gold); background: var(--gold-light); }
+.result-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.result-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.result-value.accent { color: var(--accent); }
+.result-value.green { color: var(--accent2); }
+.result-value.gold { color: var(--gold); }
+.result-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+/* ─── YIELD METER ─── */
+.yield-meter-wrap { margin-top: 1.5rem; }
+.meter-label-row { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+.meter-bar {
+  height: 10px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #e86030, #b5862a, #3a9660);
+  transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1);
+  width: 0%;
+}
+.meter-ticks { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+/* ─── SUBURB DATA TABLE ─── */
+.suburb-table-wrap { margin-top: 2rem; overflow-x: auto; }
+.suburb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.suburb-table th {
+  background: var(--surface2);
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.suburb-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.suburb-table tr:hover td { background: var(--surface2); }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+.badge-green { background: var(--accent2-light); color: var(--accent2); }
+.badge-orange { background: var(--accent-light); color: var(--accent); }
+.badge-gold { background: var(--gold-light); color: var(--gold); }
+
+/* ─── COMPARISON TOOL ─── */
+.compare-add-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+.add-btn {
+  background: var(--accent2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.add-btn:hover { opacity: 0.85; }
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.prop-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.prop-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px var(--shadow-lg); }
+.prop-card-header {
+  background: var(--surface2);
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.prop-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+.prop-address { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.prop-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.prop-remove:hover { color: var(--accent); }
+.prop-card-body { padding: 1rem 1.2rem; }
+.prop-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+.prop-stat-row:last-child { border-bottom: none; }
+.prop-stat-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.prop-stat-value { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+.prop-stat-value.best { color: var(--accent2); font-weight: 700; }
+.prop-stat-value.worst { color: var(--accent); }
+
+.compare-summary {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+.compare-summary h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.winner-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.winner-card {
+  flex: 1;
+  min-width: 180px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.winner-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+.winner-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--accent2); margin-top: 0.2rem; }
+.winner-val { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+.empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.empty-state p { font-size: 0.85rem; }
+
+/* ─── SUBURB BENCHMARK ─── */
+.benchmark-bar-wrap { margin-top: 1.5rem; }
+.bench-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.bench-suburb { width: 120px; font-size: 0.78rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bench-bar-track { flex: 1; background: var(--border); border-radius: 99px; height: 8px; }
+.bench-bar-fill { height: 100%; border-radius: 99px; background: var(--accent2); transition: width 1s ease; }
+.bench-yield { width: 60px; text-align: right; font-size: 0.78rem; color: var(--accent2); font-weight: 500; }
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+@media (max-width: 700px) {
+  .suburb-grid, .results-grid, .compare-add-row { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: 1fr 1fr; }
+  main { padding: 1rem; }
+  .tabs { padding: 0 1rem; }
+  header { padding: 0 1rem; }
+}
+</style>
+</head>
+<body data-theme="light">
+
+<header>
+  <div class="logo">
+    Sydney Property
+    <span>ANALYSER — AU Market Tool</span>
+  </div>
+  <div class="header-right">
+    <a class="bmc-btn" href="https://buymeacoffee.com/schoi0209" target="_blank">☕ Buy Me a Coffee</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('yield')">📊 임대 수익률 계산기</button>
+  <button class="tab-btn" onclick="switchTab('compare')">⚖️ 매물 비교 도구</button>
+  <button class="tab-btn" onclick="switchTab('benchmark')">🏘️ Suburb 벤치마크</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════ TAB 1: YIELD CALCULATOR ══ -->
+<div class="tab-panel active" id="tab-yield">
+  <div class="section-title">임대 수익률 계산기</div>
+  <p class="section-sub">GROSS & NET YIELD · WEEKLY CASH FLOW · ROI ANALYSIS</p>
+
+  <div class="card">
+    <div class="suburb-grid">
+      <div class="input-group">
+        <label class="input-label">📍 Suburb</label>
+        <select class="input-field" id="ySuburb">
+          <option value="">-- Suburb 선택 --</option>
+          <optgroup label="Inner Sydney">
+            <option>Surry Hills</option><option>Newtown</option><option>Glebe</option>
+            <option>Redfern</option><option>Chippendale</option><option>Pyrmont</option>
+            <option>Ultimo</option><option>Haymarket</option>
+          </optgroup>
+          <optgroup label="Eastern Suburbs">
+            <option>Bondi</option><option>Bondi Beach</option><option>Coogee</option>
+            <option>Randwick</option><option>Maroubra</option><option>Kensington</option>
+            <option>Paddington</option><option>Woollahra</option><option>Edgecliff</option>
+            <option>Double Bay</option><option>Point Piper</option>
+          </optgroup>
+          <optgroup label="Lower North Shore">
+            <option>Neutral Bay</option><option>Cremorne</option><option>Mosman</option>
+            <option>Kirribilli</option><option>McMahons Point</option><option>North Sydney</option>
+            <option>Waverton</option>
+          </optgroup>
+          <optgroup label="Upper North Shore">
+            <option>Chatswood</option><option>Gordon</option><option>Killara</option>
+            <option>Lindfield</option><option>Pymble</option><option>Turramurra</option>
+            <option>St Ives</option>
+          </optgroup>
+          <optgroup label="Northern Beaches">
+            <option>Manly</option><option>Dee Why</option><option>Collaroy</option>
+            <option>Narrabeen</option><option>Avalon Beach</option><option>Palm Beach</option>
+            <option>Brookvale</option><option>Freshwater</option>
+          </optgroup>
+          <optgroup label="Inner West">
+            <option>Leichhardt</option><option>Balmain</option><option>Annandale</option>
+            <option>Rozelle</option><option>Dulwich Hill</option><option>Marrickville</option>
+            <option>Ashfield</option><option>Strathfield</option>
+            <option>Concord</option>
+          </optgroup>
+          <optgroup label="Rhodes / Ryde Corridor">
+            <option>Rhodes</option><option>Wentworth Point</option><option>Melrose Park</option>
+            <option>Carlingford</option>
+          </optgroup>
+          <optgroup label="South Sydney / St George">
+            <option>Hurstville</option><option>Kogarah</option><option>Rockdale</option>
+            <option>Brighton-Le-Sands</option><option>Ramsgate</option><option>Penshurst</option>
+          </optgroup>
+          <optgroup label="South Western Suburbs">
+            <option>Liverpool</option><option>Fairfield</option><option>Bankstown</option>
+            <option>Cabramatta</option><option>Canley Vale</option><option>Parramatta</option>
+            <option>Westmead</option><option>Blacktown</option><option>Penrith</option>
+          </optgroup>
+          <optgroup label="South East Suburbs">
+            <option>Cronulla</option><option>Sutherland</option><option>Miranda</option>
+            <option>Gymea</option><option>Engadine</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">🏠 부동산 유형</label>
+        <select class="input-field" id="yPropType">
+          <option value="house">House</option>
+          <option value="unit">Unit / Apartment</option>
+          <option value="townhouse">Townhouse</option>
+          <option value="studio">Studio</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">💰 매입가 (AUD $)</label>
+        <input type="number" class="input-field" id="yPurchase" placeholder="예: 900000" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">📅 주간 임대료 ($ / week)</label>
+        <input type="number" class="input-field" id="yRent" placeholder="예: 650" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🏦 대출금 (AUD $)</label>
+        <input type="number" class="input-field" id="yLoan" placeholder="예: 720000" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">📈 이자율 (% p.a.)</label>
+        <input type="number" class="input-field" id="yRate" placeholder="예: 6.20" step="0.01" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🔧 연간 유지비 ($ / year)</label>
+        <input type="number" class="input-field" id="yMaint" placeholder="예: 3000" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🏘️ Strata Levy ($ / quarter)</label>
+        <input type="number" class="input-field" id="yStrata" placeholder="예: 1200" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🏛️ Council Rates ($ / year)</label>
+        <input type="number" class="input-field" id="yCouncil" placeholder="예: 1800" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🛡️ 보험료 ($ / year)</label>
+        <input type="number" class="input-field" id="yInsurance" placeholder="예: 1200" min="0">
+      </div>
+      <div class="input-group">
+        <label class="input-label">📋 Property Management (%)</label>
+        <input type="number" class="input-field" id="yMgmt" placeholder="예: 8.5" step="0.1" min="0" max="20">
+      </div>
+      <div class="input-group">
+        <label class="input-label">🔖 공실율 (weeks / year)</label>
+        <input type="number" class="input-field" id="yVacancy" placeholder="예: 2" min="0" max="52">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculateYield()">📊 수익률 분석하기</button>
+  </div>
+
+  <div id="yResults" style="display:none;">
+    <div class="results-grid">
+      <div class="result-card highlight">
+        <div class="result-label">Gross Yield</div>
+        <div class="result-value accent" id="rGross">—</div>
+        <div class="result-sub">연간 임대료 / 매입가</div>
+      </div>
+      <div class="result-card green">
+        <div class="result-label">Net Yield</div>
+        <div class="result-value green" id="rNet">—</div>
+        <div class="result-sub">비용 차감 후</div>
+      </div>
+      <div class="result-card gold">
+        <div class="result-label">Cash on Cash ROI</div>
+        <div class="result-value gold" id="rCoc">—</div>
+        <div class="result-sub">자기자본 대비</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">연간 임대 수입</div>
+        <div class="result-value" id="rAnnualIncome">—</div>
+        <div class="result-sub">공실 반영</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">연간 총 지출</div>
+        <div class="result-value" id="rAnnualExp">—</div>
+        <div class="result-sub">이자 + 비용</div>
+      </div>
+      <div class="result-card" id="cashflowCard">
+        <div class="result-label">주간 Cash Flow</div>
+        <div class="result-value" id="rCashflow">—</div>
+        <div class="result-sub">수입 - 지출</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="yield-meter-wrap">
+        <div class="meter-label-row">
+          <span>수익률 평가</span>
+          <span id="yieldRating">—</span>
+        </div>
+        <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
+        <div class="meter-ticks">
+          <span>0%</span><span>2%</span><span>3.5%</span><span>5%</span><span>7%+</span>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:0.75rem;">상세 내역</div>
+        <div id="breakdownTable"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 2: COMPARISON ══ -->
+<div class="tab-panel" id="tab-compare">
+  <div class="section-title">매물 비교 도구</div>
+  <p class="section-sub">최대 6개 매물 비교 · 자동 최적 분석</p>
+
+  <div class="card">
+    <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:1rem;">매물 추가</div>
+    <div class="compare-add-row">
+      <div class="input-group">
+        <label class="input-label">주소 / 매물명</label>
+        <input type="text" class="input-field" id="cAddr" placeholder="예: 12 Park St, Newtown">
+      </div>
+      <div class="input-group">
+        <label class="input-label">매입가 ($)</label>
+        <input type="number" class="input-field" id="cPrice" placeholder="900000">
+      </div>
+      <div class="input-group">
+        <label class="input-label">주간 임대료 ($)</label>
+        <input type="number" class="input-field" id="cRentW" placeholder="650">
+      </div>
+      <button class="add-btn" onclick="addProperty()">+ 추가</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-top:0.75rem;">
+      <div class="input-group">
+        <label class="input-label">침실 수</label>
+        <select class="input-field" id="cBed">
+          <option value="1">1 Bed</option><option value="2" selected>2 Bed</option>
+          <option value="3">3 Bed</option><option value="4">4 Bed</option><option value="5">5+ Bed</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">욕실 수</label>
+        <select class="input-field" id="cBath">
+          <option value="1" selected>1 Bath</option><option value="2">2 Bath</option><option value="3">3 Bath</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">주차</label>
+        <select class="input-field" id="cPark">
+          <option value="0">없음</option><option value="1" selected>1대</option><option value="2">2대</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="cPropsGrid" class="properties-grid" style="margin-top:1.5rem;">
+    <div class="empty-state">
+      <div class="icon">🏠</div>
+      <p>위에서 매물을 추가하면<br>자동으로 비교 분석됩니다</p>
+    </div>
+  </div>
+
+  <div id="cSummary" style="display:none;" class="compare-summary">
+    <h3>🏆 최적 매물 분석</h3>
+    <div class="winner-row" id="winnerRow"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 3: BENCHMARK ══ -->
+<div class="tab-panel" id="tab-benchmark">
+  <div class="section-title">Suburb 벤치마크</div>
+  <p class="section-sub">시드니 주요 SUBURB · 임대 수익률 데이터 (2024-25 기준)</p>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div class="input-group">
+        <label class="input-label">부동산 유형 필터</label>
+        <select class="input-field" id="bFilterType" onchange="renderBenchmark()">
+          <option value="all">전체</option>
+          <option value="house">House</option>
+          <option value="unit">Unit</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="input-label">지역 필터</label>
+        <select class="input-field" id="bFilterArea" onchange="renderBenchmark()">
+          <option value="all">전체</option>
+          <option value="inner">Inner Sydney</option>
+          <option value="east">Eastern Suburbs</option>
+          <option value="north">North Shore</option>
+          <option value="beach">Northern Beaches</option>
+          <option value="west">Inner West</option>
+          <option value="sw">South West</option>
+          <option value="ryde">Rhodes / Ryde Corridor</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="suburb-table-wrap">
+      <table class="suburb-table">
+        <thead>
+          <tr>
+            <th>Suburb</th>
+            <th>지역</th>
+            <th>유형</th>
+            <th>중간 매입가</th>
+            <th>주간 임대료</th>
+            <th>Gross Yield</th>
+            <th>평가</th>
+          </tr>
+        </thead>
+        <tbody id="benchmarkBody"></tbody>
+      </table>
+    </div>
+    <div class="benchmark-bar-wrap" style="margin-top:2rem;">
+      <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:1rem;">Gross Yield 비교 (상위 Suburbs)</div>
+      <div id="benchmarkBars"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  ⚠️ 이 도구는 참고용이며, 실제 투자 결정 전 전문가 상담을 권장합니다.<br>
+  Data based on 2024–25 Sydney market estimates. Not financial advice.
+</footer>
+
+<script>
+// ─── THEME ───────────────────────────────────────────────────────
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+document.getElementById('themeBtn').textContent = prefersDark ? '☀️' : '🌙';
+
+function toggleTheme() {
+  const isDark = document.body.getAttribute('data-theme') === 'dark';
+  document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (name === 'benchmark') renderBenchmark();
+}
+
+// ─── YIELD CALCULATOR ────────────────────────────────────────────
+function calculateYield() {
+  const purchase = parseFloat(document.getElementById('yPurchase').value) || 0;
+  const rentWeek = parseFloat(document.getElementById('yRent').value) || 0;
+  const loan = parseFloat(document.getElementById('yLoan').value) || 0;
+  const rate = parseFloat(document.getElementById('yRate').value) || 0;
+  const maint = parseFloat(document.getElementById('yMaint').value) || 0;
+  const strata = parseFloat(document.getElementById('yStrata').value) * 4 || 0;
+  const council = parseFloat(document.getElementById('yCouncil').value) || 0;
+  const insurance = parseFloat(document.getElementById('yInsurance').value) || 0;
+  const mgmtPct = parseFloat(document.getElementById('yMgmt').value) || 0;
+  const vacancyWeeks = parseFloat(document.getElementById('yVacancy').value) || 0;
+
+  if (!purchase || !rentWeek) { alert('매입가와 임대료를 입력해주세요.'); return; }
+
+  const effectiveWeeks = 52 - vacancyWeeks;
+  const annualRent = rentWeek * effectiveWeeks;
+  const mgmtFee = annualRent * (mgmtPct / 100);
+  const interestAnnual = loan * (rate / 100);
+  const totalExpenses = interestAnnual + maint + strata + council + insurance + mgmtFee;
+  const netIncome = annualRent - totalExpenses;
+  const equity = purchase - loan;
+
+  const grossYield = (rentWeek * 52 / purchase) * 100;
+  const netYield = (netIncome / purchase) * 100;
+  const coc = equity > 0 ? (netIncome / equity) * 100 : 0;
+  const weeklyFlow = netIncome / 52;
+
+  document.getElementById('rGross').textContent = grossYield.toFixed(2) + '%';
+  document.getElementById('rNet').textContent = netYield.toFixed(2) + '%';
+  document.getElementById('rCoc').textContent = coc.toFixed(2) + '%';
+  document.getElementById('rAnnualIncome').textContent = '$' + Math.round(annualRent).toLocaleString();
+  document.getElementById('rAnnualExp').textContent = '$' + Math.round(totalExpenses).toLocaleString();
+  document.getElementById('rCashflow').textContent = (weeklyFlow >= 0 ? '+' : '') + '$' + Math.round(weeklyFlow).toLocaleString() + '/wk';
+
+  const cfCard = document.getElementById('cashflowCard');
+  cfCard.className = 'result-card ' + (weeklyFlow >= 0 ? 'green' : 'highlight');
+  document.getElementById('rCashflow').className = 'result-value ' + (weeklyFlow >= 0 ? 'green' : 'accent');
+
+  // Meter
+  const meterPct = Math.min((grossYield / 7) * 100, 100);
+  document.getElementById('meterFill').style.width = meterPct + '%';
+  let rating = '';
+  if (grossYield < 2) rating = '⚠️ 매우 낮음';
+  else if (grossYield < 3.5) rating = '📉 낮음';
+  else if (grossYield < 5) rating = '✅ 적정';
+  else if (grossYield < 7) rating = '💚 양호';
+  else rating = '🚀 우수';
+  document.getElementById('yieldRating').textContent = rating;
+
+  // Breakdown
+  const rows = [
+    ['연간 임대 수입 (공실 반영)', annualRent, true],
+    ['이자 비용', interestAnnual, false],
+    ['관리비 (PM Fee)', mgmtFee, false],
+    ['유지보수비', maint, false],
+    ['Strata Levy', strata, false],
+    ['Council Rates', council, false],
+    ['보험료', insurance, false],
+    ['순수익 (Net Income)', netIncome, null],
+  ];
+  let html = '';
+  rows.forEach(([label, val, isIncome]) => {
+    const color = isIncome === null ? (val >= 0 ? 'var(--accent2)' : 'var(--accent)') : (isIncome ? 'var(--accent2)' : 'var(--text)');
+    const sign = isIncome === null ? (val >= 0 ? '+' : '') : (isIncome ? '+' : '-');
+    const bold = isIncome === null ? 'font-weight:700;' : '';
+    html += `<div style="display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.82rem;${bold}">
+      <span style="color:var(--text-muted)">${label}</span>
+      <span style="color:${color}">${sign}$${Math.abs(Math.round(val)).toLocaleString()}</span>
+    </div>`;
+  });
+  document.getElementById('breakdownTable').innerHTML = html;
+  document.getElementById('yResults').style.display = 'block';
+}
+
+// ─── COMPARISON TOOL ─────────────────────────────────────────────
+let properties = [];
+let propCounter = 0;
+
+function addProperty() {
+  if (properties.length >= 6) { alert('최대 6개 매물까지 비교 가능합니다.'); return; }
+  const addr = document.getElementById('cAddr').value.trim();
+  const price = parseFloat(document.getElementById('cPrice').value) || 0;
+  const rentW = parseFloat(document.getElementById('cRentW').value) || 0;
+  const bed = document.getElementById('cBed').value;
+  const bath = document.getElementById('cBath').value;
+  const park = document.getElementById('cPark').value;
+
+  if (!addr || !price || !rentW) { alert('주소, 매입가, 임대료를 모두 입력해주세요.'); return; }
+
+  propCounter++;
+  const grossYield = (rentW * 52 / price) * 100;
+  const pricePerBed = price / parseInt(bed);
+  properties.push({ id: propCounter, addr, price, rentW, bed, bath, park, grossYield, pricePerBed });
+
+  document.getElementById('cAddr').value = '';
+  document.getElementById('cPrice').value = '';
+  document.getElementById('cRentW').value = '';
+  renderProperties();
+}
+
+function removeProperty(id) {
+  properties = properties.filter(p => p.id !== id);
+  renderProperties();
+}
+
+function renderProperties() {
+  const grid = document.getElementById('cPropsGrid');
+  if (properties.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><div class="icon">🏠</div><p>위에서 매물을 추가하면<br>자동으로 비교 분석됩니다</p></div>';
+    document.getElementById('cSummary').style.display = 'none';
+    return;
+  }
+
+  const bestYield = Math.max(...properties.map(p => p.grossYield));
+  const lowestPrice = Math.min(...properties.map(p => p.price));
+  const bestRent = Math.max(...properties.map(p => p.rentW));
+  const bestPPB = Math.min(...properties.map(p => p.pricePerBed));
+
+  grid.innerHTML = properties.map((p, i) => `
+    <div class="prop-card">
+      <div class="prop-card-header">
+        <div>
+          <div class="prop-number">#${i + 1}</div>
+          <div class="prop-address">${p.addr}</div>
+        </div>
+        <button class="prop-remove" onclick="removeProperty(${p.id})">✕</button>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-stat-row">
+          <span class="prop-stat-label">매입가</span>
+          <span class="prop-stat-value ${p.price === lowestPrice ? 'best' : ''}">$${p.price.toLocaleString()}</span>
+        </div>
+        <div class="prop-stat-row">
+          <span class="prop-stat-label">주간 임대료</span>
+          <span class="prop-stat-value ${p.rentW === bestRent ? 'best' : ''}">$${p.rentW}/wk</span>
+        </div>
+        <div class="prop-stat-row">
+          <span class="prop-stat-label">Gross Yield</span>
+          <span class="prop-stat-value ${p.grossYield === bestYield ? 'best' : ''}">${p.grossYield.toFixed(2)}%</span>
+        </div>
+        <div class="prop-stat-row">
+          <span class="prop-stat-label">침실/욕실/주차</span>
+          <span class="prop-stat-value">${p.bed}🛏 ${p.bath}🛁 ${p.park}🚗</span>
+        </div>
+        <div class="prop-stat-row">
+          <span class="prop-stat-label">침실당 가격</span>
+          <span class="prop-stat-value ${p.pricePerBed === bestPPB ? 'best' : ''}">$${Math.round(p.pricePerBed).toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Summary
+  const bestYieldProp = properties.reduce((a, b) => a.grossYield > b.grossYield ? a : b);
+  const lowestPriceProp = properties.reduce((a, b) => a.price < b.price ? a : b);
+  const bestRentProp = properties.reduce((a, b) => a.rentW > b.rentW ? a : b);
+
+  document.getElementById('winnerRow').innerHTML = `
+    <div class="winner-card">
+      <div class="winner-label">🏆 최고 수익률</div>
+      <div class="winner-name">${bestYieldProp.addr.split(',')[0]}</div>
+      <div class="winner-val">Gross Yield ${bestYieldProp.grossYield.toFixed(2)}%</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-label">💰 최저 매입가</div>
+      <div class="winner-name">${lowestPriceProp.addr.split(',')[0]}</div>
+      <div class="winner-val">$${lowestPriceProp.price.toLocaleString()}</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-label">📅 최고 임대료</div>
+      <div class="winner-name">${bestRentProp.addr.split(',')[0]}</div>
+      <div class="winner-val">$${bestRentProp.rentW}/wk</div>
+    </div>
+  `;
+  document.getElementById('cSummary').style.display = 'block';
+}
+
+// ─── BENCHMARK DATA ───────────────────────────────────────────────
+const benchmarkData = [
+  // inner
+  { suburb:'Surry Hills', area:'inner', type:'unit', medPrice:850000, rentW:620, yield:3.79 },
+  { suburb:'Newtown', area:'inner', type:'unit', medPrice:780000, rentW:580, yield:3.87 },
+  { suburb:'Redfern', area:'inner', type:'unit', medPrice:760000, rentW:570, yield:3.90 },
+  { suburb:'Glebe', area:'inner', type:'unit', medPrice:820000, rentW:600, yield:3.80 },
+  { suburb:'Pyrmont', area:'inner', type:'unit', medPrice:890000, rentW:650, yield:3.79 },
+  // east
+  { suburb:'Bondi Beach', area:'east', type:'unit', medPrice:1250000, rentW:850, yield:3.54 },
+  { suburb:'Coogee', area:'east', type:'unit', medPrice:1100000, rentW:760, yield:3.59 },
+  { suburb:'Randwick', area:'east', type:'unit', medPrice:920000, rentW:650, yield:3.67 },
+  { suburb:'Maroubra', area:'east', type:'unit', medPrice:850000, rentW:610, yield:3.73 },
+  { suburb:'Kensington', area:'east', type:'unit', medPrice:800000, rentW:590, yield:3.83 },
+  { suburb:'Bondi Beach', area:'east', type:'house', medPrice:3200000, rentW:1650, yield:2.68 },
+  { suburb:'Paddington', area:'east', type:'house', medPrice:2800000, rentW:1400, yield:2.60 },
+  // north
+  { suburb:'Neutral Bay', area:'north', type:'unit', medPrice:950000, rentW:680, yield:3.72 },
+  { suburb:'Cremorne', area:'north', type:'unit', medPrice:920000, rentW:660, yield:3.73 },
+  { suburb:'North Sydney', area:'north', type:'unit', medPrice:870000, rentW:630, yield:3.76 },
+  { suburb:'Mosman', area:'north', type:'house', medPrice:4200000, rentW:1900, yield:2.35 },
+  { suburb:'Chatswood', area:'north', type:'unit', medPrice:890000, rentW:650, yield:3.79 },
+  // beach
+  { suburb:'Manly', area:'beach', type:'unit', medPrice:1300000, rentW:890, yield:3.56 },
+  { suburb:'Dee Why', area:'beach', type:'unit', medPrice:820000, rentW:600, yield:3.80 },
+  { suburb:'Narrabeen', area:'beach', type:'house', medPrice:1800000, rentW:1100, yield:3.17 },
+  { suburb:'Freshwater', area:'beach', type:'house', medPrice:2100000, rentW:1250, yield:3.09 },
+  // west
+  { suburb:'Balmain', area:'west', type:'house', medPrice:2200000, rentW:1300, yield:3.07 },
+  { suburb:'Leichhardt', area:'west', type:'house', medPrice:1700000, rentW:1050, yield:3.21 },
+  { suburb:'Marrickville', area:'west', type:'unit', medPrice:750000, rentW:560, yield:3.88 },
+  { suburb:'Dulwich Hill', area:'west', type:'unit', medPrice:720000, rentW:540, yield:3.90 },
+  { suburb:'Strathfield', area:'west', type:'house', medPrice:2000000, rentW:1150, yield:2.99 },
+  // sw
+  { suburb:'Parramatta', area:'sw', type:'unit', medPrice:620000, rentW:500, yield:4.19 },
+  { suburb:'Westmead', area:'sw', type:'unit', medPrice:580000, rentW:470, yield:4.21 },
+  { suburb:'Liverpool', area:'sw', type:'house', medPrice:950000, rentW:620, yield:3.39 },
+  { suburb:'Blacktown', area:'sw', type:'house', medPrice:870000, rentW:590, yield:3.53 },
+  { suburb:'Penrith', area:'sw', type:'house', medPrice:820000, rentW:580, yield:3.67 },
+  { suburb:'Bankstown', area:'sw', type:'unit', medPrice:560000, rentW:460, yield:4.27 },
+  { suburb:'Hurstville', area:'sw', type:'unit', medPrice:650000, rentW:510, yield:4.08 },
+  // ryde corridor
+  { suburb:'Rhodes', area:'ryde', type:'unit', medPrice:780000, rentW:620, yield:4.14 },
+  { suburb:'Wentworth Point', area:'ryde', type:'unit', medPrice:730000, rentW:590, yield:4.20 },
+  { suburb:'Melrose Park', area:'ryde', type:'unit', medPrice:720000, rentW:580, yield:4.19 },
+  { suburb:'Carlingford', area:'ryde', type:'unit', medPrice:680000, rentW:530, yield:4.05 },
+  { suburb:'Carlingford', area:'ryde', type:'house', medPrice:1650000, rentW:1000, yield:3.15 },
+  // inner west addition
+  { suburb:'Concord', area:'west', type:'house', medPrice:2300000, rentW:1250, yield:2.82 },
+  { suburb:'Concord', area:'west', type:'unit', medPrice:820000, rentW:600, yield:3.80 },
+];
+
+const areaLabels = { inner:'Inner Sydney', east:'Eastern Suburbs', north:'North Shore', beach:'Northern Beaches', west:'Inner West', sw:'South West', ryde:'Rhodes / Ryde Corridor' };
+
+function renderBenchmark() {
+  const typeF = document.getElementById('bFilterType').value;
+  const areaF = document.getElementById('bFilterArea').value;
+  let data = benchmarkData;
+  if (typeF !== 'all') data = data.filter(d => d.type === typeF);
+  if (areaF !== 'all') data = data.filter(d => d.area === areaF);
+  data = [...data].sort((a, b) => b.yield - a.yield);
+
+  const tbody = document.getElementById('benchmarkBody');
+  tbody.innerHTML = data.map(d => {
+    let badge = d.yield >= 4 ? '<span class="badge badge-green">High</span>' : d.yield >= 3.5 ? '<span class="badge badge-gold">Moderate</span>' : '<span class="badge badge-orange">Low</span>';
+    return `<tr>
+      <td><strong>${d.suburb}</strong></td>
+      <td style="color:var(--text-muted)">${areaLabels[d.area]}</td>
+      <td style="color:var(--text-muted)">${d.type === 'house' ? '🏠 House' : '🏢 Unit'}</td>
+      <td>$${d.medPrice.toLocaleString()}</td>
+      <td>$${d.rentW}/wk</td>
+      <td style="color:var(--accent2);font-weight:600">${d.yield.toFixed(2)}%</td>
+      <td>${badge}</td>
+    </tr>`;
+  }).join('');
+
+  // Bar chart (top 10)
+  const top10 = data.slice(0, 10);
+  const maxY = Math.max(...top10.map(d => d.yield));
+  const barsDiv = document.getElementById('benchmarkBars');
+  barsDiv.innerHTML = top10.map(d => `
+    <div class="bench-row">
+      <div class="bench-suburb">${d.suburb}</div>
+      <div class="bench-bar-track">
+        <div class="bench-bar-fill" style="width:${(d.yield/maxY*100).toFixed(1)}%"></div>
+      </div>
+      <div class="bench-yield">${d.yield.toFixed(2)}%</div>
+    </div>
+  `).join('');
+}
+</script>
+</body>
+</html>
