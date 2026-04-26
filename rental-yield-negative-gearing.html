@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rental Yield & Negative Gearing Calculator — Australia 2025–26</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c10;
+  --bg2: #0e1318;
+  --bg3: #141b22;
+  --card: #111820;
+  --border: #1e2a35;
+  --border2: #2d3d4d;
+  --text: #e2eaf2;
+  --text2: #7a96a8;
+  --text3: #3d5568;
+  --green: #22d68c;
+  --green-dim: rgba(34,214,140,0.12);
+  --red: #f04060;
+  --red-dim: rgba(240,64,96,0.12);
+  --amber: #f0a820;
+  --amber-dim: rgba(240,168,32,0.1);
+  --blue: #4898f8;
+  --blue-dim: rgba(72,152,248,0.1);
+  --teal: #18d4c8;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+[data-theme="light"] {
+  --bg: #f0f4f8;
+  --bg2: #e4eaf2;
+  --bg3: #d8e2ec;
+  --card: #ffffff;
+  --border: #c8d6e4;
+  --border2: #a8bece;
+  --text: #0e1a24;
+  --text2: #4a6478;
+  --text3: #8aa0b0;
+  --green: #0ea860;
+  --green-dim: rgba(14,168,96,0.1);
+  --red: #d42840;
+  --red-dim: rgba(212,40,64,0.1);
+  --amber: #c07800;
+  --amber-dim: rgba(192,120,0,0.1);
+  --blue: #1a6ecc;
+  --blue-dim: rgba(26,110,204,0.1);
+  --teal: #0898a0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Subtle dot-grid bg */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity:0.5;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Accent glow top-right */
+body::after {
+  content:'';
+  position:fixed;
+  top:-200px; right:-200px;
+  width:600px; height:600px;
+  background: radial-gradient(circle, rgba(34,214,140,0.06) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap {
+  max-width:960px;
+  margin:0 auto;
+  padding:48px 20px 80px;
+  position:relative;
+  z-index:1;
+}
+
+/* ── HEADER ── */
+header {
+  margin-bottom:48px;
+}
+.header-row {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+}
+.tag {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--green-dim);
+  border:1px solid rgba(34,214,140,0.25);
+  color:var(--green);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:5px 12px;
+  border-radius:20px;
+  margin-bottom:16px;
+}
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(36px,6vw,60px);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-1px;
+  color:var(--text);
+  margin-bottom:14px;
+}
+h1 em {
+  font-style:italic;
+  color:var(--green);
+}
+.sub {
+  color:var(--text2);
+  font-size:14px;
+  font-weight:300;
+  line-height:1.7;
+  max-width:500px;
+}
+.theme-btn {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--text2);
+  padding:10px 16px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  font-size:16px;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.theme-btn:hover { border-color:var(--green); color:var(--green); }
+
+/* ── TABS ── */
+.tabs {
+  display:flex;
+  gap:4px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:5px;
+  margin-bottom:28px;
+}
+.tab {
+  flex:1;
+  padding:10px 16px;
+  background:none;
+  border:none;
+  color:var(--text2);
+  font-family:'Outfit', sans-serif;
+  font-size:13px;
+  font-weight:500;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:all .2s;
+  text-align:center;
+}
+.tab.active {
+  background:var(--card);
+  color:var(--text);
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+.tab:hover:not(.active) { color:var(--text); }
+
+/* ── LAYOUT ── */
+.grid2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-bottom:20px;
+}
+@media(max-width:640px){ .grid2{grid-template-columns:1fr;} }
+
+/* ── CARDS ── */
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+}
+.card-title {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text3);
+  margin-bottom:18px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+
+/* ── FIELDS ── */
+.field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.field:last-child { margin-bottom:0; }
+label {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.8px;
+  text-transform:uppercase;
+  color:var(--text3);
+}
+.inp-wrap { position:relative; display:flex; align-items:center; }
+.inp-pre, .inp-suf {
+  position:absolute;
+  font-family:'JetBrains Mono', monospace;
+  font-size:14px;
+  color:var(--text3);
+  pointer-events:none;
+}
+.inp-pre { left:14px; }
+.inp-suf { right:14px; }
+input[type=text], input[type=number], select {
+  width:100%;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-family:'JetBrains Mono', monospace;
+  font-size:15px;
+  font-weight:400;
+  padding:12px 14px 12px 32px;
+  border-radius:var(--radius-sm);
+  outline:none;
+  transition:border-color .2s, background .2s;
+  -webkit-appearance:none;
+}
+input.no-pre { padding-left:14px; }
+select { padding-left:14px; cursor:pointer; }
+input:focus, select:focus {
+  border-color:var(--green);
+  background:var(--bg3);
+}
+.hint {
+  font-size:11px;
+  color:var(--text3);
+  margin-top:2px;
+}
+
+/* Toggle group */
+.tgroup { display:flex; gap:6px; }
+.tbtn {
+  flex:1;
+  padding:11px 6px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  color:var(--text2);
+  font-size:12px;
+  font-weight:600;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:all .2s;
+  text-align:center;
+}
+.tbtn.on { background:var(--green); border-color:var(--green); color:#000; }
+.tbtn:hover:not(.on) { border-color:var(--border2); color:var(--text); }
+
+/* ── CALC BUTTON ── */
+.calc-btn {
+  width:100%;
+  background:linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+  color:#000;
+  border:none;
+  padding:18px;
+  font-family:'Playfair Display', serif;
+  font-size:20px;
+  font-weight:700;
+  font-style:italic;
+  letter-spacing:0.5px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:all .2s;
+  margin-top:8px;
+}
+.calc-btn:hover { opacity:.9; transform:translateY(-1px); box-shadow:0 8px 24px rgba(34,214,140,0.3); }
+
+/* ── RESULTS ── */
+#results { display:none; }
+#results.show { display:block; }
+
+/* Verdict hero */
+.verdict {
+  border-radius:var(--radius);
+  padding:28px 32px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid;
+}
+.verdict.negative {
+  background:linear-gradient(135deg, rgba(240,64,96,0.08) 0%, var(--card) 60%);
+  border-color:rgba(240,64,96,0.3);
+}
+.verdict.positive {
+  background:linear-gradient(135deg, rgba(34,214,140,0.08) 0%, var(--card) 60%);
+  border-color:rgba(34,214,140,0.3);
+}
+.verdict.neutral {
+  background:linear-gradient(135deg, rgba(240,168,32,0.08) 0%, var(--card) 60%);
+  border-color:rgba(240,168,32,0.3);
+}
+.verdict-label {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.verdict.negative .verdict-label { color:var(--red); }
+.verdict.positive .verdict-label { color:var(--green); }
+.verdict.neutral .verdict-label { color:var(--amber); }
+.verdict-title {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(28px,4vw,42px);
+  font-weight:900;
+  line-height:1.1;
+  margin-bottom:12px;
+}
+.verdict.negative .verdict-title { color:var(--red); }
+.verdict.positive .verdict-title { color:var(--green); }
+.verdict.neutral .verdict-title { color:var(--amber); }
+.verdict-desc {
+  font-size:14px;
+  color:var(--text2);
+  line-height:1.7;
+  max-width:520px;
+}
+
+/* KPI grid */
+.kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
+  gap:12px;
+  margin-bottom:24px;
+}
+.kpi {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:16px;
+  transition:border-color .2s;
+}
+.kpi:hover { border-color:var(--border2); }
+.kpi-name { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.kpi-val {
+  font-family:'JetBrains Mono', monospace;
+  font-size:20px;
+  font-weight:500;
+  line-height:1;
+  margin-bottom:4px;
+}
+.kpi-val.green { color:var(--green); }
+.kpi-val.red { color:var(--red); }
+.kpi-val.amber { color:var(--amber); }
+.kpi-val.blue { color:var(--blue); }
+.kpi-sub { font-size:11px; color:var(--text3); }
+
+/* Cash-flow bar */
+.flow-section {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:24px;
+}
+.flow-title {
+  font-size:13px;
+  font-weight:600;
+  color:var(--text2);
+  margin-bottom:20px;
+  letter-spacing:0.5px;
+}
+
+/* ── BREAKDOWN TABLE ── */
+.breakdown {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.brow {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  border-bottom:1px solid var(--border);
+  font-size:14px;
+  transition:background .15s;
+}
+.brow:last-child { border-bottom:none; }
+.brow:hover { background:var(--bg3); }
+.brow.section {
+  background:var(--bg2);
+  padding:8px 20px;
+  cursor:default;
+}
+.brow.section span { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); }
+.brow.total { background:var(--bg3); font-weight:600; font-size:15px; }
+.brow-label { color:var(--text2); }
+.brow-val { font-family:'JetBrains Mono', monospace; font-size:13px; }
+.brow-val.green { color:var(--green); }
+.brow-val.red { color:var(--red); }
+.brow-val.amber { color:var(--amber); }
+
+/* ── TAX VISUAL ── */
+.tax-visual {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:24px;
+}
+.tax-visual-title {
+  font-size:13px;
+  font-weight:600;
+  color:var(--text2);
+  margin-bottom:20px;
+}
+.tax-bar-wrap {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.tax-bar-label {
+  font-size:12px;
+  color:var(--text2);
+  width:160px;
+  flex-shrink:0;
+  font-weight:500;
+}
+.tax-bar-outer {
+  flex:1;
+  height:10px;
+  background:var(--bg2);
+  border-radius:5px;
+  overflow:hidden;
+}
+.tax-bar-inner {
+  height:100%;
+  border-radius:5px;
+  transition:width .6s ease;
+}
+.tax-bar-num {
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  color:var(--text);
+  width:80px;
+  text-align:right;
+  flex-shrink:0;
+}
+
+/* Marginal rate badges */
+.rate-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:8px;
+  margin-bottom:24px;
+}
+.rate-badge {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:12px;
+  text-align:center;
+  transition:all .2s;
+}
+.rate-badge.active {
+  background:var(--green-dim);
+  border-color:rgba(34,214,140,0.4);
+}
+.rate-income { font-size:10px; color:var(--text3); margin-bottom:4px; letter-spacing:0.5px; }
+.rate-pct {
+  font-family:'Playfair Display', serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--text);
+}
+.rate-badge.active .rate-pct { color:var(--green); }
+.rate-saving { font-size:11px; color:var(--text3); margin-top:3px; }
+.rate-badge.active .rate-saving { color:var(--green); }
+
+/* Weekly cost block */
+.weekly {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+@media(max-width:480px){ .weekly{grid-template-columns:1fr;} }
+.wk-block {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:16px;
+  text-align:center;
+}
+.wk-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+.wk-val {
+  font-family:'Playfair Display', serif;
+  font-size:28px;
+  font-weight:700;
+  line-height:1;
+  margin-bottom:4px;
+}
+.wk-sub { font-size:11px; color:var(--text3); }
+
+/* Benchmark */
+.benchmark {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin-bottom:24px;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.bm-item { text-align:center; }
+.bm-label { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.bm-val { font-family:'JetBrains Mono', monospace; font-size:18px; font-weight:500; }
+.bm-sep { color:var(--border2); font-size:24px; }
+.bm-note { font-size:12px; color:var(--text2); flex:1; min-width:200px; line-height:1.6; }
+
+/* Disclaimer */
+.disclaimer {
+  font-size:12px;
+  color:var(--text3);
+  line-height:1.7;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+
+/* ── CHARTS ── */
+.chart-wrap {
+  position:relative;
+  height:180px;
+  margin:12px 0;
+}
+canvas { width:100% !important; }
+
+/* ── PANEL TOGGLE ── */
+.panel { display:none; }
+.panel.show { display:block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.animate { animation:fadeUp .35s ease forwards; }
+</style>
+</head>
+<body>
+
+<!-- BUY ME A COFFEE -->
+<div style="text-align:center;padding:12px 20px 0;position:relative;z-index:10;">
+  <a href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener"
+    style="display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#000;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;padding:9px 18px;border-radius:8px;text-decoration:none;letter-spacing:0.3px;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:opacity .2s;"
+    onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+    ☕ Buy me a coffee
+  </a>
+</div>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="header-row">
+    <div>
+      <div class="tag">🇦🇺 ATO 2025–26 · RBA 4.10% · CPI 3.80%</div>
+      <h1>Rental Yield &<br><em>Negative Gearing</em><br>Calculator</h1>
+      <p class="sub">Model your investment property's real after-tax cash flow. See whether you're positively or negatively geared, your true weekly cost, and the tax benefit at your marginal rate.</p>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()">☀</button>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('basic')">📊 Basic Analysis</button>
+  <button class="tab" onclick="showPanel('advanced')">🧮 Advanced (Depreciation)</button>
+  <button class="tab" onclick="showPanel('compare')">📈 Rate Comparison</button>
+</div>
+
+<!-- PANEL: BASIC -->
+<div class="panel show" id="panel-basic">
+  <div class="grid2">
+    <!-- PROPERTY -->
+    <div class="card">
+      <div class="card-title">Property Details</div>
+      <div class="field">
+        <label>Purchase Price</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="price" value="750,000" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Weekly Rent</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="rent" value="550" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Vacancy Rate</label>
+        <div class="inp-wrap">
+          <input type="text" id="vacancy" value="3" oninput="fmtNum(this)" class="no-pre">
+          <span class="inp-suf">%</span>
+        </div>
+        <span class="hint">Typical: 2–5%</span>
+      </div>
+      <div class="field">
+        <label>Annual Capital Growth (for projection)</label>
+        <div class="inp-wrap">
+          <input type="text" id="growth" value="5" oninput="fmtNum(this)" class="no-pre">
+          <span class="inp-suf">%</span>
+        </div>
+        <span class="hint">ABS long-term avg ~6–7% p.a.</span>
+      </div>
+    </div>
+
+    <!-- LOAN & INCOME -->
+    <div class="card">
+      <div class="card-title">Loan & Your Income</div>
+      <div class="field">
+        <label>Loan Amount</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="loan" value="600,000" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Interest Rate</label>
+        <div class="inp-wrap">
+          <input type="text" id="interestRate" value="6.3" oninput="fmtNum(this)" class="no-pre">
+          <span class="inp-suf">% p.a.</span>
+        </div>
+        <span class="hint">RBA cash rate: 4.10%. Typical investor loan ~6–6.5%</span>
+      </div>
+      <div class="field">
+        <label>Loan Type</label>
+        <div class="tgroup" id="loanTypeGroup">
+          <button class="tbtn on" data-v="io" onclick="setToggle('loanTypeGroup',this,'loanType')">Interest Only</button>
+          <button class="tbtn" data-v="pi" onclick="setToggle('loanTypeGroup',this,'loanType')">P&amp;I</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Your Annual Salary / Other Income</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="salary" value="120,000" oninput="fmtNum(this)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPENSES -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title">Annual Expenses (Pre-filled with typical estimates)</div>
+    <div class="grid2">
+      <div class="field">
+        <label>Property Management Fees</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="mgmt" value="2,500" oninput="fmtNum(this)">
+        </div>
+        <span class="hint">Typical: 7–10% of gross rent</span>
+      </div>
+      <div class="field">
+        <label>Council Rates</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="council" value="1,400" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Water Rates</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="water" value="800" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Landlord Insurance</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="insurance" value="1,200" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Repairs &amp; Maintenance</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="repairs" value="1,500" oninput="fmtNum(this)">
+        </div>
+      </div>
+      <div class="field">
+        <label>Strata / Body Corporate</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="strata" value="0" oninput="fmtNum(this)">
+        </div>
+        <span class="hint">Leave $0 if house</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">Calculate My Property Returns →</button>
+</div>
+
+<!-- PANEL: ADVANCED -->
+<div class="panel" id="panel-advanced">
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title">Depreciation (Non-Cash Deductions)</div>
+    <p style="font-size:13px; color:var(--text2); margin-bottom:20px; line-height:1.7;">
+      Depreciation is a <strong style="color:var(--green)">non-cash deduction</strong> — you claim it without spending cash. 
+      A quantity surveyor's schedule ($500–$800) typically unlocks $5,000–$15,000+ in annual deductions, significantly amplifying your tax benefit.
+    </p>
+    <div class="grid2">
+      <div class="field">
+        <label>Div 43 — Capital Works (Building)</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="div43" value="4,000" oninput="fmtNum(this)">
+        </div>
+        <span class="hint">Typically 2.5% p.a. of construction cost (40yr)</span>
+      </div>
+      <div class="field">
+        <label>Div 40 — Plant &amp; Equipment</label>
+        <div class="inp-wrap">
+          <span class="inp-pre">$</span>
+          <input type="text" id="div40" value="2,500" oninput="fmtNum(this)">
+        </div>
+        <span class="hint">Fixtures, appliances, carpet, blinds etc.</span>
+      </div>
+    </div>
+  </div>
+  <button class="calc-btn" onclick="calculate()">Calculate with Depreciation →</button>
+</div>
+
+<!-- PANEL: COMPARE -->
+<div class="panel" id="panel-compare">
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title">Compare Across ATO 2025–26 Marginal Rates</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.7;">
+      Enter your property details in the Basic tab first, then see how the same rental loss affects investors at <em>every</em> marginal rate.
+    </p>
+    <div class="rate-grid" id="rateGrid">
+      <div style="grid-column:1/-1;color:var(--text3);font-size:13px;">Calculate first to see rate comparison.</div>
+    </div>
+  </div>
+  <button class="calc-btn" onclick="calculate()">Run Comparison →</button>
+</div>
+
+<!-- ── RESULTS ── -->
+<div id="results">
+
+  <!-- VERDICT -->
+  <div class="verdict" id="verdictBox">
+    <div class="verdict-label" id="verdictLabel"></div>
+    <div class="verdict-title" id="verdictTitle"></div>
+    <p class="verdict-desc" id="verdictDesc"></p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid" id="kpiGrid"></div>
+
+  <!-- WEEKLY COST -->
+  <div class="weekly" id="weeklyBlocks"></div>
+
+  <!-- BENCHMARK -->
+  <div class="benchmark">
+    <div class="bm-item">
+      <div class="bm-label">Gross Yield</div>
+      <div class="bm-val" id="bm-gross" style="color:var(--blue)">—</div>
+    </div>
+    <div class="bm-sep">·</div>
+    <div class="bm-item">
+      <div class="bm-label">Net Yield</div>
+      <div class="bm-val" id="bm-net" style="color:var(--teal)">—</div>
+    </div>
+    <div class="bm-sep">·</div>
+    <div class="bm-item">
+      <div class="bm-label">RBA Cash Rate</div>
+      <div class="bm-val" style="color:var(--amber)">4.10%</div>
+    </div>
+    <div class="bm-sep">·</div>
+    <div class="bm-item">
+      <div class="bm-label">CPI (Dec 2025)</div>
+      <div class="bm-val" style="color:var(--text2)">3.80%</div>
+    </div>
+    <div class="bm-note" id="benchmarkNote"></div>
+  </div>
+
+  <!-- TAX VISUALISATION -->
+  <div class="tax-visual">
+    <div class="tax-visual-title">🧾 Tax Benefit Visualisation — ATO 2025–26</div>
+    <div id="taxBars"></div>
+  </div>
+
+  <!-- BREAKDOWN -->
+  <div class="breakdown" id="breakdownTable"></div>
+
+  <!-- RATE GRID (compare tab result shown here too) -->
+  <div id="rateCompareResult" style="display:none; margin-bottom:24px;">
+    <div class="card">
+      <div class="card-title">Marginal Rate Comparison — Same Property, Different Incomes</div>
+      <div class="rate-grid" id="rateGridResult"></div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ Estimates only. Not financial or tax advice. Based on ATO 2025–26 rates (Stage 3 Tax Cuts effective 1 July 2024).
+    Medicare Levy (2%) included in marginal rate calculations. Does not account for HELP/HECS, Medicare Levy Surcharge, or other offsets.
+    Sources: ATO individual tax rates · ABS CPI December 2025 (3.80%) · RBA cash rate March 2026 (4.10%). Consult a qualified accountant or financial advisor before making investment decisions.
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+let loanType = 'io';
+
+// ── ATO 2025-26 TAX RATES (incl. 2% Medicare Levy) ────────────────────────
+// Stage 3 Tax Cuts: effective 1 July 2024
+// Brackets (taxable income): 0, 18200, 45000, 135001, 190001
+// Rates: 0%, 19%, 30% (was 32.5%), 37%, 45%
+// + 2% Medicare Levy on most incomes
+const TAX_BRACKETS = [
+  { up: 18200,  rate: 0,    base: 0 },
+  { up: 45000,  rate: 0.19, base: 0 },
+  { up: 135000, rate: 0.30, base: 5092 },      // Stage 3: 30% replaces 32.5%
+  { up: 190000, rate: 0.37, base: 31288 },
+  { up: Infinity, rate: 0.45, base: 51638 }
+];
+const MEDICARE = 0.02;
+
+// Low Income Tax Offset (LITO) — max $700, phases out $37,500–$66,667
+function lito(income) {
+  if (income <= 37500) return 700;
+  if (income <= 45000) return 700 - (income - 37500) * 0.05;
+  if (income <= 66667) return 325 - (income - 45000) * 0.015;
+  return 0;
+}
+
+function calcTax(income) {
+  if (income <= 0) return 0;
+  let tax = 0;
+  let prev = 0;
+  for (const b of TAX_BRACKETS) {
+    if (income <= prev) break;
+    const taxable = Math.min(income, b.up) - prev;
+    tax += taxable * b.rate;
+    prev = b.up;
+    if (income <= b.up) break;
+  }
+  // Remove LITO
+  tax = Math.max(0, tax - lito(income));
+  // Medicare Levy
+  if (income > 26000) tax += income * MEDICARE;
+  return tax;
+}
+
+function getMarginalRate(income) {
+  if (income <= 18200) return 0;
+  if (income <= 45000) return 0.19 + MEDICARE;
+  if (income <= 135000) return 0.30 + MEDICARE;
+  if (income <= 190000) return 0.37 + MEDICARE;
+  return 0.45 + MEDICARE;
+}
+
+function getMarginalLabel(income) {
+  if (income <= 18200) return '0%';
+  if (income <= 45000) return '21%';   // 19+2
+  if (income <= 135000) return '32%';  // 30+2
+  if (income <= 190000) return '39%';  // 37+2
+  return '47%';                        // 45+2
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fmt = n => n < 0 ? '-$' + Math.abs(Math.round(n)).toLocaleString('en-AU')
+                        : '$' + Math.round(n).toLocaleString('en-AU');
+const fmtPct = n => n.toFixed(2) + '%';
+const fmtW = n => fmt(n) + '/wk';
+
+function fmtNum(el) {
+  const raw = el.value.replace(/[^0-9.]/g, '');
+  const parts = raw.split('.');
+  const int = parts[0] ? parseInt(parts[0]).toLocaleString('en-AU') : '';
+  el.value = parts.length > 1 ? int + '.' + parts[1] : int;
+}
+
+function numVal(id) {
+  return parseFloat($(''+id).value.replace(/,/g,'')) || 0;
+}
+
+function setToggle(groupId, btn, varName) {
+  document.querySelectorAll(`#${groupId} .tbtn`).forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  window[varName] = btn.dataset.v;
+}
+
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  $(`panel-${name}`).classList.add('show');
+  event.target.classList.add('active');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = next;
+  localStorage.setItem('theme', next);
+  document.querySelector('.theme-btn').textContent = next === 'dark' ? '☀' : '🌙';
+}
+
+(function(){
+  const saved = localStorage.getItem('theme');
+  const pref = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.documentElement.dataset.theme = pref;
+  document.querySelector('.theme-btn').textContent = pref === 'dark' ? '☀' : '🌙';
+})();
+
+// ── MAIN CALC ─────────────────────────────────────────────────────────────
+function calculate() {
+  const price      = numVal('price');
+  const weeklyRent = numVal('rent');
+  const vacancyPct = numVal('vacancy') / 100;
+  const loanAmt    = numVal('loan');
+  const intRate    = numVal('interestRate') / 100;
+  const salary     = numVal('salary');
+  const growth     = numVal('growth') / 100;
+
+  // Expenses
+  const mgmt     = numVal('mgmt');
+  const council  = numVal('council');
+  const water    = numVal('water');
+  const insurance= numVal('insurance');
+  const repairs  = numVal('repairs');
+  const strata   = numVal('strata');
+
+  // Depreciation (advanced panel)
+  const div43 = numVal('div43') || 0;
+  const div40 = numVal('div40') || 0;
+  const totalDepr = div43 + div40;
+
+  // ── INCOME ──
+  const grossRent   = weeklyRent * 52;
+  const vacancyLoss = grossRent * vacancyPct;
+  const effectiveRent = grossRent - vacancyLoss;
+  const mgmtCalc    = effectiveRent * (mgmt === 0 ? 0 : mgmt / effectiveRent); // use entered value
+  const annualRent  = effectiveRent;
+
+  // ── DEDUCTIBLE EXPENSES ──
+  const annualInterest = loanAmt * intRate;
+  const operatingExp   = mgmt + council + water + insurance + repairs + strata;
+  const totalDeductExp = annualInterest + operatingExp + totalDepr;
+
+  // ── GEARING ──
+  const netRentalIncome = annualRent - totalDeductExp;
+  const isNegative      = netRentalIncome < 0;
+  const isPositive      = netRentalIncome > 500;
+  const rentalLoss      = isNegative ? Math.abs(netRentalIncome) : 0;
+  const rentalProfit    = isPositive ? netRentalIncome : 0;
+
+  // ── TAX ──
+  const taxWithout = calcTax(salary);
+  const taxWith    = calcTax(salary + netRentalIncome);
+  const taxBenefit = taxWithout - taxWith;  // positive = saving (negative gearing)
+  const taxIncrease= taxWith - taxWithout;  // positive = extra tax (positive gearing)
+
+  const marginalRate = getMarginalRate(salary + netRentalIncome);
+  const marginalLabel = getMarginalLabel(salary + netRentalIncome);
+
+  // ── CASH FLOW ──
+  // P&I: rough interest for year 1 (use full interest for IO)
+  const cashInterest    = annualInterest; // both IO and P&I interest deductible
+  const cashOperatingTotal = operatingExp; // cash expenses
+  const cashOut         = cashInterest + cashOperatingTotal + (loanType === 'pi' ? loanAmt * (intRate / 12) * 12 * 0.1 : 0);
+  // Real cash = rent - cash expenses - interest payment
+  const realCashFlow    = annualRent - annualInterest - operatingExp;
+  const realCashFlowAfterTax = realCashFlow + (isNegative ? taxBenefit : -taxIncrease);
+
+  // ── YIELDS ──
+  const grossYield = (grossRent / price) * 100;
+  const netYield   = ((annualRent - operatingExp) / price) * 100;
+  const afterTaxYield = ((annualRent - operatingExp + (isNegative ? taxBenefit : -taxIncrease)) / price) * 100;
+
+  // ── WEEKLY COST ──
+  const weeklyCashFlow        = realCashFlow / 52;
+  const weeklyAfterTaxCost    = realCashFlowAfterTax / 52;
+  const weeklyTaxBenefit      = taxBenefit / 52;
+
+  // ── RENDER ────────────────────────────────────────────────────────────────
+
+  // Verdict
+  const vbox = $('verdictBox');
+  vbox.className = 'verdict animate ' + (isNegative ? 'negative' : isPositive ? 'positive' : 'neutral');
+  $('verdictLabel').textContent = isNegative ? '⚠ Negatively Geared' : isPositive ? '✓ Positively Geared' : '⇄ Neutral Gearing';
+  $('verdictTitle').textContent = isNegative
+    ? fmt(-netRentalIncome) + ' annual rental loss'
+    : fmt(netRentalIncome) + ' annual rental profit';
+  $('verdictDesc').textContent = isNegative
+    ? `Your property expenses exceed rent by ${fmt(rentalLoss)} per year. At your marginal rate of ${marginalLabel}, the ATO contributes ${fmt(taxBenefit)} back as a tax saving — reducing your true out-of-pocket cost to ${fmt(rentalLoss - taxBenefit)} per year (${fmt((rentalLoss - taxBenefit)/52)}/week).`
+    : isPositive
+    ? `Your rental income exceeds expenses by ${fmt(rentalProfit)} per year. This adds to your taxable income at your ${marginalLabel} marginal rate, costing an extra ${fmt(taxIncrease)} in tax. Your net after-tax rental profit is ${fmt(rentalProfit - taxIncrease)}/year.`
+    : `Your property is approximately neutral — rental income roughly covers expenses. Minor changes in rent or interest rates can shift this either way.`;
+
+  // KPIs
+  $('kpiGrid').innerHTML = [
+    { name:'Gross Rental Yield', val:fmtPct(grossYield), cls:'blue', sub:'Before expenses' },
+    { name:'Net Rental Yield', val:fmtPct(netYield), cls: netYield >= 4 ? 'green' : 'amber', sub:'After operating costs' },
+    { name:'Annual Interest', val:fmt(annualInterest), cls:'red', sub:`${fmtPct(intRate*100)} on ${fmt(loanAmt)}` },
+    { name:'Tax Benefit / Cost', val: isNegative ? fmt(taxBenefit) : '-'+fmt(taxIncrease), cls: isNegative ? 'green' : 'red', sub: isNegative ? `${marginalLabel} marginal rate` : 'Extra tax payable' },
+    { name:'Real Cash Flow p.a.', val:fmt(realCashFlow), cls: realCashFlow>=0?'green':'red', sub:'Before tax effect' },
+    { name:'After-Tax Cash Flow', val:fmt(realCashFlowAfterTax), cls: realCashFlowAfterTax>=0?'green':'red', sub:'True holding cost' },
+    { name:'LVR', val:fmtPct((loanAmt/price)*100), cls:(loanAmt/price)<0.8?'green':'amber', sub:'Loan-to-Value Ratio' },
+    { name:'Equity', val:fmt(price - loanAmt), cls:'blue', sub:'At purchase' },
+  ].map(k=>`
+    <div class="kpi">
+      <div class="kpi-name">${k.name}</div>
+      <div class="kpi-val ${k.cls}">${k.val}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+
+  // Weekly blocks
+  $('weeklyBlocks').innerHTML = [
+    { label:'Weekly Cash Shortfall', val:fmt(Math.abs(weeklyCashFlow)/1), sub: weeklyCashFlow < 0 ? 'Out of pocket' : 'Cash surplus', color: weeklyCashFlow < 0 ? 'red' : 'green' },
+    { label:'Weekly Tax Saving', val:fmt(Math.abs(weeklyTaxBenefit)), sub: isNegative ? 'ATO rebate effect' : 'Extra tax cost', color: isNegative ? 'green' : 'red' },
+    { label:'True Weekly Cost', val:fmt(Math.abs(weeklyAfterTaxCost)), sub: weeklyAfterTaxCost < 0 ? 'Net out of pocket' : 'Net income', color: weeklyAfterTaxCost < 0 ? 'amber' : 'green' },
+  ].map(w=>`
+    <div class="wk-block">
+      <div class="wk-label">${w.label}</div>
+      <div class="wk-val" style="color:var(--${w.color})">${w.val}</div>
+      <div class="wk-sub">${w.sub}</div>
+    </div>
+  `).join('');
+
+  // Benchmark note
+  $('bm-gross').textContent = fmtPct(grossYield);
+  $('bm-net').textContent = fmtPct(netYield);
+  let bmNote = '';
+  if (netYield < 3.80) bmNote = `⚠ Your net yield (${fmtPct(netYield)}) is below CPI (3.80%) — the property is losing value in real terms before tax benefit.`;
+  else if (netYield < 4.10) bmNote = `Your net yield (${fmtPct(netYield)}) beats CPI but is below the RBA cash rate (4.10%). A savings account earns more risk-free.`;
+  else bmNote = `✓ Your net yield (${fmtPct(netYield)}) beats both CPI (3.80%) and the RBA cash rate (4.10%), indicating a real return before tax.`;
+  $('benchmarkNote').textContent = bmNote;
+
+  // Tax bars visualisation
+  const maxBar = Math.max(salary, salary + Math.abs(netRentalIncome));
+  const taxBars = [
+    { label:'Salary/Other Income', val:salary, color:'var(--blue)', pct:(salary/maxBar)*100 },
+    { label:'Total Deductible Expenses', val:totalDeductExp, color:'var(--red)', pct:(totalDeductExp/maxBar)*100 },
+    { label:'Gross Rental Income', val:annualRent, color:'var(--teal)', pct:(annualRent/maxBar)*100 },
+    { label: isNegative ? 'Rental Loss (deductible)' : 'Rental Profit (taxable)', val:Math.abs(netRentalIncome), color: isNegative ? 'var(--amber)' : 'var(--green)', pct:(Math.abs(netRentalIncome)/maxBar)*100 },
+    { label: isNegative ? 'Tax Saving @ '+marginalLabel : 'Extra Tax @ '+marginalLabel, val: isNegative ? taxBenefit : taxIncrease, color: isNegative ? 'var(--green)' : 'var(--red)', pct:(( isNegative ? taxBenefit : taxIncrease)/maxBar)*100 },
+  ];
+  $('taxBars').innerHTML = taxBars.map(b=>`
+    <div class="tax-bar-wrap">
+      <div class="tax-bar-label">${b.label}</div>
+      <div class="tax-bar-outer">
+        <div class="tax-bar-inner" style="width:${Math.min(b.pct,100)}%;background:${b.color}"></div>
+      </div>
+      <div class="tax-bar-num">${fmt(b.val)}</div>
+    </div>
+  `).join('');
+
+  // Breakdown table
+  const rows = [
+    { sec:'INCOME' },
+    { label:'Gross Annual Rent', val:fmt(grossRent) },
+    { label:`Vacancy Allowance (${numVal('vacancy')}%)`, val:'-'+fmt(vacancyLoss), cls:'red' },
+    { label:'Effective Annual Rent', val:fmt(annualRent), bold:true },
+    { sec:'DEDUCTIBLE EXPENSES' },
+    { label:'Loan Interest (deductible)', val:'-'+fmt(annualInterest), cls:'red' },
+    { label:'Property Management', val:'-'+fmt(mgmt), cls:'red' },
+    { label:'Council Rates', val:'-'+fmt(council), cls:'red' },
+    { label:'Water Rates', val:'-'+fmt(water), cls:'red' },
+    { label:'Landlord Insurance', val:'-'+fmt(insurance), cls:'red' },
+    { label:'Repairs & Maintenance', val:'-'+fmt(repairs), cls:'red' },
+    strata > 0 ? { label:'Strata / Body Corporate', val:'-'+fmt(strata), cls:'red' } : null,
+    totalDepr > 0 ? { label:`Depreciation (Div43: ${fmt(div43)} / Div40: ${fmt(div40)})`, val:'-'+fmt(totalDepr), cls:'amber' } : null,
+    { label:'Total Deductible Expenses', val:'-'+fmt(totalDeductExp), bold:true },
+    { sec:'TAX POSITION' },
+    { label:'Net Rental Income / (Loss)', val:fmt(netRentalIncome), cls: isNegative ? 'red' : 'green', bold:true },
+    { label:'Tax Without Rental Property', val:'-'+fmt(taxWithout), cls:'red' },
+    { label:'Tax With Rental Property', val:'-'+fmt(taxWith), cls:'red' },
+    { label: isNegative ? 'Tax Saving (ATO rebate effect)' : 'Extra Tax Payable', val: isNegative ? fmt(taxBenefit) : '-'+fmt(taxIncrease), cls: isNegative ? 'green' : 'red', bold:true },
+    { sec:'TRUE COST / RETURN' },
+    { label:'Real Cash Flow (before tax)', val:fmt(realCashFlow), cls: realCashFlow>=0?'green':'red' },
+    { label:'After-Tax Cash Flow (annual)', val:fmt(realCashFlowAfterTax), cls: realCashFlowAfterTax>=0?'green':'red', bold:true },
+    { label:'True Weekly Cost / Income', val:fmt(weeklyAfterTaxCost)+'/wk', cls: weeklyAfterTaxCost>=0?'green':'amber', bold:true },
+  ].filter(Boolean);
+
+  $('breakdownTable').innerHTML = rows.map(r => {
+    if (r.sec) return `<div class="brow section"><span>${r.sec}</span></div>`;
+    return `<div class="brow ${r.bold?'total':''}">
+      <span class="brow-label">${r.label}</span>
+      <span class="brow-val ${r.cls||''}">${r.val}</span>
+    </div>`;
+  }).join('');
+
+  // Rate comparison grid
+  const allRates = [
+    { label:'$0–$18,200', marginal:0.02, income:15000 },
+    { label:'$18k–$45k', marginal:0.21, income:35000 },
+    { label:'$45k–$135k', marginal:0.32, income:90000 },
+    { label:'$135k–$190k', marginal:0.39, income:160000 },
+    { label:'$190k+', marginal:0.47, income:220000 },
+  ];
+
+  const rateHtml = allRates.map(r => {
+    const saving = isNegative ? rentalLoss * r.marginal : 0;
+    const cost   = !isNegative ? rentalProfit * r.marginal : 0;
+    const isCurrentRate = Math.abs(getMarginalRate(salary + netRentalIncome) - r.marginal) < 0.02;
+    return `
+      <div class="rate-badge ${isCurrentRate ? 'active' : ''}">
+        <div class="rate-income">${r.label}</div>
+        <div class="rate-pct">${Math.round(r.marginal*100)}%</div>
+        <div class="rate-saving">${isNegative ? 'Save '+fmt(saving) : 'Pay '+fmt(cost)}</div>
+        ${isCurrentRate ? '<div class="rate-saving" style="margin-top:4px">← Your rate</div>' : ''}
+      </div>`;
+  }).join('');
+
+  $('rateGrid').innerHTML = rateHtml;
+  $('rateGridResult').innerHTML = rateHtml;
+  $('rateCompareResult').style.display = '';
+
+  // Show results
+  $('results').className = 'show animate';
+  $('results').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+// Enter key
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+</body>
+</html>
