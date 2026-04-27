@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YTMaker v2 — AI 유튜브 영상 제작기</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0b0f; --surface:#13131a; --surface2:#1c1c26; --border:#2a2a3a;
+  --accent:#ff3c00; --accent2:#ffb800; --accent3:#00d4ff;
+  --text:#f0f0f5; --text-dim:#555570; --text-mid:#9090a8;
+  --radius:12px; --tr:0.22s cubic-bezier(0.4,0,0.2,1);
+}
+.light { --bg:#f4f3ef; --surface:#fff; --surface2:#ebebea; --border:#d8d8d5; --text:#111118; --text-dim:#b0b0b8; --text-mid:#55555f; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background var(--tr),color var(--tr); }
+
+header { padding:14px 28px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; background:var(--bg); backdrop-filter:blur(16px); }
+.logo { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:3px; color:var(--accent); display:flex; align-items:center; gap:10px; }
+.logo span { color:var(--text); }
+.logo-v { font-size:12px; background:var(--accent); color:#fff; padding:2px 7px; border-radius:4px; font-family:'Noto Sans KR',sans-serif; font-weight:700; letter-spacing:0; margin-left:2px; }
+.pulse { width:7px; height:7px; background:var(--accent); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+.hdr-right { display:flex; align-items:center; gap:12px; }
+.bmc-btn { display:inline-flex; align-items:center; gap:7px; background:#FFDD00; color:#000; border:none; border-radius:20px; padding:7px 16px; font-size:12px; font-weight:700; cursor:pointer; text-decoration:none; transition:all var(--tr); white-space:nowrap; }
+.bmc-btn:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(255,221,0,.4); }
+.theme-btn { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 14px; color:var(--text); cursor:pointer; font-size:13px; font-family:inherit; display:flex; align-items:center; gap:6px; transition:all var(--tr); }
+.theme-btn:hover { border-color:var(--accent); }
+
+.container { max-width:1100px; margin:0 auto; padding:36px 20px 80px; }
+
+.steps { display:flex; position:relative; margin-bottom:44px; }
+.steps::before { content:''; position:absolute; top:17px; left:18px; right:18px; height:2px; background:var(--border); z-index:0; }
+.step { flex:1; text-align:center; position:relative; z-index:1; cursor:pointer; }
+.step-circle { width:34px; height:34px; border-radius:50%; border:2px solid var(--border); background:var(--bg); display:flex; align-items:center; justify-content:center; margin:0 auto 7px; font-size:12px; font-weight:700; color:var(--text-dim); transition:all var(--tr); }
+.step.active .step-circle { border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 4px rgba(255,60,0,.12); }
+.step.done .step-circle { background:var(--accent); border-color:var(--accent); color:#fff; }
+.step-label { font-size:10px; color:var(--text-dim); font-weight:500; letter-spacing:.5px; }
+.step.active .step-label,.step.done .step-label { color:var(--text); }
+
+.panel { display:none; animation:fadeUp .35s ease; }
+.panel.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+.panel-title { font-family:'Bebas Neue',sans-serif; font-size:34px; letter-spacing:1px; margin-bottom:4px; line-height:1; }
+.panel-sub { color:var(--text-mid); font-size:13px; margin-bottom:28px; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:16px; }
+.card label { display:block; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-mid); margin-bottom:8px; }
+.card input,.card textarea,.card select { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 14px; color:var(--text); font-family:inherit; font-size:14px; resize:vertical; outline:none; transition:border-color var(--tr); }
+.card input:focus,.card textarea:focus,.card select:focus { border-color:var(--accent); }
+.card textarea { min-height:110px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+.tag-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:6px; }
+.tag { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:5px 14px; font-size:12px; color:var(--text-mid); cursor:pointer; transition:all var(--tr); }
+.tag:hover,.tag.sel { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.btn-p { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:13px 26px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all var(--tr); display:inline-flex; align-items:center; gap:8px; }
+.btn-p:hover { background:#ff5520; transform:translateY(-1px); box-shadow:0 8px 24px rgba(255,60,0,.3); }
+.btn-p:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+.btn-s { background:var(--surface2); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:11px 22px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; transition:all var(--tr); display:inline-flex; align-items:center; gap:7px; }
+.btn-s:hover { border-color:var(--accent); color:var(--accent); }
+.btn-row { display:flex; gap:10px; align-items:center; margin-top:24px; flex-wrap:wrap; }
+
+.loading-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:40px; text-align:center; margin:16px 0; }
+.spinner { width:44px; height:44px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 18px; }
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-title { font-weight:700; font-size:15px; margin-bottom:6px; }
+.load-sub { color:var(--text-mid); font-size:13px; }
+
+.result-grid { display:grid; gap:16px; }
+.result-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.rc-header { padding:14px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.rc-title { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-mid); display:flex; align-items:center; gap:7px; }
+.rc-body { padding:18px; }
+.result-text { font-size:13px; line-height:1.8; color:var(--text); white-space:pre-wrap; }
+.copy-btn { background:none; border:1px solid var(--border); border-radius:6px; padding:4px 11px; color:var(--text-mid); font-family:inherit; font-size:11px; cursor:pointer; transition:all var(--tr); }
+.copy-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+.hook-item { background:var(--surface2); border-radius:8px; padding:13px 15px; margin-bottom:8px; border-left:3px solid var(--accent); font-size:13px; line-height:1.6; }
+.hook-num { font-size:10px; font-weight:700; color:var(--accent); margin-bottom:3px; letter-spacing:1px; }
+.tag-chip { display:inline-block; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:3px 11px; font-size:11px; color:var(--text-mid); margin:3px 2px; }
+.badge-r { background:var(--accent); color:#fff; border-radius:5px; padding:2px 9px; font-size:10px; font-weight:700; }
+.badge-y { background:var(--accent2); color:#000; border-radius:5px; padding:2px 9px; font-size:10px; font-weight:700; }
+.badge-b { background:var(--accent3); color:#000; border-radius:5px; padding:2px 9px; font-size:10px; font-weight:700; }
+
+.capcut-scene { border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:10px; }
+.scene-hdr { background:var(--surface2); padding:9px 14px; display:flex; align-items:center; gap:9px; font-size:12px; font-weight:700; }
+.scene-num { background:var(--accent); color:#fff; width:20px; height:20px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; }
+.scene-time { color:var(--text-mid); font-size:10px; margin-left:auto; }
+.scene-body { padding:12px 14px; }
+.scene-row { display:flex; gap:10px; margin-bottom:6px; font-size:12px; }
+.scene-key { color:var(--text-dim); min-width:56px; font-size:10px; font-weight:600; letter-spacing:.5px; padding-top:1px; }
+.scene-val { color:var(--text); line-height:1.5; }
+.meta-label { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-dim); margin-bottom:5px; }
+
+.info-chip { background:rgba(255,184,0,.1); border:1px solid rgba(255,184,0,.25); border-radius:8px; padding:12px 15px; font-size:13px; color:var(--text); margin-bottom:14px; display:flex; gap:10px; align-items:flex-start; }
+.info-chip .ic { font-size:15px; flex-shrink:0; margin-top:1px; }
+.error-chip { background:rgba(255,60,0,.08); border:1px solid rgba(255,60,0,.25); border-radius:8px; padding:16px; font-size:13px; color:var(--text); margin-bottom:14px; }
+
+.export-box { background:linear-gradient(135deg,rgba(255,60,0,.08),rgba(255,184,0,.05)); border:1px solid rgba(255,60,0,.2); border-radius:var(--radius); padding:28px; margin-top:20px; text-align:center; }
+.export-title { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--accent); margin-bottom:6px; }
+.export-sub { font-size:12px; color:var(--text-mid); margin-bottom:18px; }
+
+.fab { position:fixed; bottom:24px; right:24px; width:44px; height:44px; background:var(--accent); color:#fff; border:none; border-radius:50%; font-size:18px; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(255,60,0,.4); z-index:300; transition:all var(--tr); }
+.fab:hover { transform:translateY(-2px); }
+footer { border-top:1px solid var(--border); padding:20px 28px; text-align:center; color:var(--text-dim); font-size:11px; letter-spacing:.5px; }
+.prompt-box { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px; font-size:12px; color:var(--text-mid); line-height:1.7; margin-top:10px; }
+.prompt-label { font-size:9px; font-weight:700; letter-spacing:1.5px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.script-block { background:var(--surface2); border-radius:8px; padding:14px 16px; margin-bottom:10px; border-left:3px solid var(--accent3); }
+.script-sec { font-size:10px; font-weight:700; color:var(--accent3); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+.script-text { font-size:13px; line-height:1.85; color:var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="pulse"></div>
+    YT<span>MAKER</span>
+    <span class="logo-v">v2</span>
+  </div>
+  <div class="hdr-right">
+    <a class="bmc-btn" href="https://buymeacoffee.com/schoi0209" target="_blank">☕ Buy me a coffee</a>
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span>
+      <span id="themeLabel">라이트 모드</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="steps">
+    <div class="step active" id="step-1" onclick="goStep(1)"><div class="step-circle">1</div><div class="step-label">주제 입력</div></div>
+    <div class="step" id="step-2" onclick="goStep(2)"><div class="step-circle">2</div><div class="step-label">콘텐츠 설계</div></div>
+    <div class="step" id="step-3" onclick="goStep(3)"><div class="step-circle">3</div><div class="step-label">풀 스크립트</div></div>
+    <div class="step" id="step-4" onclick="goStep(4)"><div class="step-circle">4</div><div class="step-label">썸네일</div></div>
+    <div class="step" id="step-5" onclick="goStep(5)"><div class="step-circle">5</div><div class="step-label">편집 설계</div></div>
+    <div class="step" id="step-6" onclick="goStep(6)"><div class="step-circle">6</div><div class="step-label">메타데이터</div></div>
+  </div>
+
+  <!-- PANEL 1 -->
+  <div class="panel active" id="panel-1">
+    <div class="panel-title">주제 & 채널 설정</div>
+    <div class="panel-sub">영상 주제를 입력하면 AI가 전체 제작 패키지를 설계합니다.</div>
+    <div class="card">
+      <label>영상 주제 / 스토리 *</label>
+      <textarea id="topicInput" placeholder="예: 직장인이 6개월만에 월 500만원 부업 수익을 만든 실제 방법&#10;예: 시드니 부동산 지금 사야 할까? AI 분석&#10;예: 파이썬 완전 초보가 AI 챗봇 만들기"></textarea>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <label>채널 카테고리</label>
+        <select id="categoryInput">
+          <option value="AI/테크">AI / 테크</option>
+          <option value="정보/교육">정보 / 교육</option>
+          <option value="재테크/부동산">재테크 / 부동산</option>
+          <option value="브이로그">브이로그 / 일상</option>
+          <option value="뷰티/패션">뷰티 / 패션</option>
+          <option value="음식/쿠킹">음식 / 쿠킹</option>
+          <option value="여행">여행</option>
+          <option value="게임">게임</option>
+          <option value="엔터테인먼트">엔터테인먼트</option>
+        </select>
+      </div>
+      <div class="card">
+        <label>목표 영상 길이</label>
+        <select id="lengthInput">
+          <option value="쇼츠 (60초 이하)">쇼츠 (60초 이하)</option>
+          <option value="5~10분" selected>5~10분</option>
+          <option value="10~20분">10~20분</option>
+          <option value="20분 이상">20분 이상</option>
+        </select>
+      </div>
+    </div>
+    <div class="card">
+      <label>타겟 시청자</label>
+      <input type="text" id="targetInput" placeholder="예: 20~30대 직장인, 부업에 관심 있는 초보자">
+    </div>
+    <div class="card">
+      <label>채널 언어</label>
+      <div class="tag-row" id="langTags">
+        <div class="tag sel" onclick="toggleTag(this,'langTags',true)">🇰🇷 한국어</div>
+        <div class="tag" onclick="toggleTag(this,'langTags',true)">🇺🇸 English</div>
+        <div class="tag" onclick="toggleTag(this,'langTags',true)">🌏 한/영 혼용</div>
+      </div>
+    </div>
+    <div class="card">
+      <label>영상 톤 & 스타일</label>
+      <div class="tag-row" id="toneTags">
+        <div class="tag sel" onclick="toggleTag(this,'toneTags',false)">정보전달형</div>
+        <div class="tag" onclick="toggleTag(this,'toneTags',false)">유머/가벼움</div>
+        <div class="tag" onclick="toggleTag(this,'toneTags',false)">진지/심층</div>
+        <div class="tag" onclick="toggleTag(this,'toneTags',false)">감성/스토리텔링</div>
+        <div class="tag" onclick="toggleTag(this,'toneTags',false)">에너지/하이텐션</div>
+        <div class="tag" onclick="toggleTag(this,'toneTags',false)">ASMR/조용함</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="runStep1()">🔍 AI 콘텐츠 설계 시작</button>
+    </div>
+  </div>
+
+  <!-- PANEL 2 -->
+  <div class="panel" id="panel-2">
+    <div class="panel-title">콘텐츠 설계</div>
+    <div class="panel-sub">AI가 설계한 어그로 훅, 타임라인, 핵심 포인트입니다.</div>
+    <div id="contentResult"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="runStep3()">📝 풀 스크립트 생성 →</button>
+      <button class="btn-s" onclick="goStep(1)">← 처음으로</button>
+    </div>
+  </div>
+
+  <!-- PANEL 3 (NEW) -->
+  <div class="panel" id="panel-3">
+    <div class="panel-title">풀 스크립트</div>
+    <div class="panel-sub">AI가 작성한 완전한 영상 스크립트 — 바로 읽으면서 촬영할 수 있습니다.</div>
+    <div id="scriptResult"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="runStep4()">🖼 썸네일 생성 →</button>
+      <button class="btn-s" onclick="goStep(2)">← 콘텐츠 설계</button>
+    </div>
+  </div>
+
+  <!-- PANEL 4 -->
+  <div class="panel" id="panel-4">
+    <div class="panel-title">썸네일 생성</div>
+    <div class="panel-sub">Gemini AI로 실제 썸네일 이미지를 생성합니다.</div>
+    <div id="thumbnailResult"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="runStep5()">🎬 캡컷 편집 설계 →</button>
+      <button class="btn-s" onclick="goStep(3)">← 스크립트</button>
+    </div>
+  </div>
+
+  <!-- PANEL 5 -->
+  <div class="panel" id="panel-5">
+    <div class="panel-title">캡컷 편집 지시서</div>
+    <div class="panel-sub">씬별 컷 구성, 텍스트, 효과, BGM을 캡컷에서 바로 따라할 수 있도록 설계합니다.</div>
+    <div id="capcutResult"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="runStep6()">📊 메타데이터 생성 →</button>
+      <button class="btn-s" onclick="goStep(4)">← 썸네일</button>
+    </div>
+  </div>
+
+  <!-- PANEL 6 -->
+  <div class="panel" id="panel-6">
+    <div class="panel-title">유튜브 메타데이터</div>
+    <div class="panel-sub">SEO 최적화된 제목, 설명, 태그, 업로드 전략을 생성합니다.</div>
+    <div id="metadataResult"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="exportAll()">📦 전체 패키지 복사</button>
+      <button class="btn-s" onclick="goStep(1)">🔄 새 영상 만들기</button>
+    </div>
+  </div>
+</div>
+
+<button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made by SunnyApps. All rights reserved.</footer>
+
+<script>
+let isDark = true, currentStep = 1, maxReachedStep = 1;
+let generatedData = {};
+const GEMINI_KEY = 'AIzaSyBeR4wobWnAmVAZ7tKI-sZwlPWU_VTfzx0';
+
+// System theme
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  isDark = false; document.body.classList.add('light');
+  document.getElementById('themeIcon').textContent = '🌙';
+  document.getElementById('themeLabel').textContent = '다크 모드';
+}
+
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('light', !isDark);
+  document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('themeLabel').textContent = isDark ? '라이트 모드' : '다크 모드';
+}
+
+function toggleTag(el, groupId, exclusive) {
+  if (exclusive) {
+    document.querySelectorAll('#'+groupId+' .tag').forEach(t => t.classList.remove('sel'));
+    el.classList.add('sel');
+  } else {
+    el.classList.toggle('sel');
+  }
+}
+
+function getSelectedTags(groupId) {
+  return [...document.querySelectorAll('#'+groupId+' .tag.sel')].map(t => t.textContent.trim()).join(', ');
+}
+
+// BUG FIX: Allow re-visiting any reached step
+function goStep(n) { if (n > maxReachedStep) return; showStep(n); }
+function showStep(n) {
+  currentStep = n;
+  if (n > maxReachedStep) maxReachedStep = n;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  document.querySelectorAll('.step').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if (i+1 < n) s.classList.add('done');
+    else if (i+1 === n) s.classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('fab').style.display = n > 1 ? 'flex' : 'none';
+}
+
+// BUG FIX: max_tokens raised appropriately per call
+async function callClaude(prompt, maxTokens = 3000) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      messages:[{role:'user',content:prompt}]
+    })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.content?.[0]?.text || '';
+}
+
+function parseJSON(raw) {
+  return JSON.parse(raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim());
+}
+
+function showLoading(id, title, sub='AI가 분석 중입니다...') {
+  document.getElementById(id).innerHTML = `
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div class="load-title">${title}</div>
+      <div class="load-sub">${sub}</div>
+    </div>`;
+}
+
+// BUG FIX: pass btn element explicitly — no reliance on global event object
+function copyText(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText || el.textContent).then(() => {
+    if (btn) { const o = btn.textContent; btn.textContent = '✓ 복사됨'; setTimeout(()=>btn.textContent=o,1500); }
+  });
+}
+
+function mkCard(icon, title, badge, bodyHtml, copyId) {
+  const id = copyId || ('c_'+Math.random().toString(36).slice(2,8));
+  return `
+  <div class="result-card">
+    <div class="rc-header">
+      <div class="rc-title"><span>${icon}</span>${title}${badge?' '+badge:''}</div>
+      <button class="copy-btn" onclick="copyText('${id}',this)">복사</button>
+    </div>
+    <div class="rc-body" id="${id}">${bodyHtml}</div>
+  </div>`;
+}
+
+// ─── STEP 1: Content Design ───
+async function runStep1() {
+  const topic = document.getElementById('topicInput').value.trim();
+  if (!topic) { alert('주제를 입력해주세요!'); return; }
+  const category = document.getElementById('categoryInput').value;
+  const length = document.getElementById('lengthInput').value;
+  const target = document.getElementById('targetInput').value;
+  const tone = getSelectedTags('toneTags');
+  const lang = getSelectedTags('langTags');
+  generatedData = {topic, category, length, target, tone, lang};
+  showStep(2);
+  showLoading('contentResult','🔍 주제 분석 & 콘텐츠 설계 중...','훅, 타임라인, 핵심 포인트를 AI가 분석합니다');
+
+  const prompt = `유튜브 콘텐츠 전략가입니다.
+주제: ${topic}
+카테고리: ${category}
+영상 길이: ${length}
+타겟: ${target||'일반 시청자'}
+톤/스타일: ${tone}
+채널 언어: ${lang}
+
+순수 JSON만 반환 (다른 텍스트 절대 금지):
+{"hooks":["훅1","훅2","훅3","훅4","훅5"],"structure":[{"time":"00:00","section":"인트로","desc":"내용"}],"keyPoints":["포인트1","포인트2","포인트3","포인트4","포인트5"],"callToAction":"구독/좋아요 멘트","researchNotes":"핵심 인사이트 3줄"}`;
+
+  try {
+    const raw = await callClaude(prompt, 2000);
+    const json = parseJSON(raw);
+    generatedData.content = json;
+    renderContent(json);
+  } catch(e) {
+    document.getElementById('contentResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}<br><small>다시 시도해주세요.</small></div>`;
+  }
+}
+
+function renderContent(d) {
+  const hooksHtml = (d.hooks||[]).map((h,i)=>`<div class="hook-item"><div class="hook-num">훅 #${i+1}</div>${h}</div>`).join('');
+  const structHtml = (d.structure||[]).map(s=>`
+    <div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--accent);font-size:11px;font-weight:700;min-width:42px">${s.time}</span>
+      <span style="font-weight:600;min-width:80px;font-size:12px">${s.section}</span>
+      <span style="font-size:12px;color:var(--text-mid)">${s.desc}</span>
+    </div>`).join('');
+  const kpHtml = (d.keyPoints||[]).map(k=>`<div style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border)">✦ ${k}</div>`).join('');
+  document.getElementById('contentResult').innerHTML = `
+    <div class="result-grid">
+      ${mkCard('🎣','어그로 훅 (5개)','<span class="badge-r">TOP PICK</span>',`<div id="hooks_b">${hooksHtml}</div>`,'hooks_b')}
+      ${mkCard('📋','영상 구성 타임라인','',`<div id="struct_b">${structHtml}</div>`,'struct_b')}
+      ${mkCard('💡','핵심 포인트','',`<div id="kp_b">${kpHtml}</div>`,'kp_b')}
+      ${mkCard('📢','콜투액션','',`<div class="result-text" id="cta_b">${d.callToAction}</div>`,'cta_b')}
+      ${mkCard('🔬','리서치 인사이트','',`<div class="result-text" id="ri_b">${d.researchNotes}</div>`,'ri_b')}
+    </div>`;
+}
+
+// ─── STEP 3: Full Script (NEW) ───
+async function runStep3() {
+  showStep(3);
+  showLoading('scriptResult','📝 풀 스크립트 작성 중...','영상 전체 대사를 AI가 작성합니다 (약 20~40초)');
+  const {topic,category,length,target,tone,lang,content} = generatedData;
+  const prompt = `유튜브 스크립트 전문 작가입니다.
+주제: ${topic} | 카테고리: ${category} | 길이: ${length} | 타겟: ${target||'일반'} | 톤: ${tone} | 언어: ${lang}
+훅: ${content?.hooks?.[0]||topic}
+타임라인: ${JSON.stringify(content?.structure||[])}
+
+실제 영상에서 바로 읽을 수 있는 스크립트를 순수 JSON으로 반환:
+{"totalDuration":"예상시간","sections":[{"name":"섹션명","time":"00:00~01:00","script":"실제 대사 전체. 자연스러운 구어체로. 내용을 빠짐없이 작성.","direction":"화면 지시 또는 연출 메모"}]}`;
+  try {
+    const raw = await callClaude(prompt, 4000);
+    const json = parseJSON(raw);
+    generatedData.script = json;
+    renderScript(json);
+  } catch(e) {
+    document.getElementById('scriptResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}</div>`;
+  }
+}
+
+function renderScript(d) {
+  const secs = (d.sections||[]).map(s=>`
+    <div class="script-block">
+      <div class="script-sec">${s.name} · ${s.time}</div>
+      <div class="script-text">${s.script}</div>
+      ${s.direction?`<div style="margin-top:8px;font-size:11px;color:var(--accent2);padding:6px 10px;background:rgba(255,184,0,.08);border-radius:6px;">🎬 ${s.direction}</div>`:''}
+    </div>`).join('');
+  document.getElementById('scriptResult').innerHTML = `
+    <div class="info-chip"><span class="ic">💡</span>예상 영상 길이: <strong>${d.totalDuration||'미정'}</strong> — 구어체 스크립트입니다. 자연스럽게 읽으세요.</div>
+    ${mkCard('📝','풀 스크립트','<span class="badge-b">NEW</span>',`<div id="script_b">${secs}</div>`,'script_b')}`;
+}
+
+// ─── STEP 4: Thumbnail ───
+async function runStep4() {
+  showStep(4);
+  document.getElementById('thumbnailResult').innerHTML = `
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div class="load-title">🖼 썸네일 전략 + 이미지 생성 중...</div>
+      <div class="load-sub">① Claude 썸네일 전략 설계 → ② Gemini 이미지 생성 (약 20~40초)</div>
+    </div>`;
+  try {
+    const result = await generateThumbnail();
+    generatedData.thumbnail = result;
+    renderThumbnail(result);
+  } catch(e) {
+    console.error(e);
+    document.getElementById('thumbnailResult').innerHTML = `
+      <div class="error-chip"><strong>⚠️ 이미지 생성 오류:</strong> ${e.message}<br><small style="color:var(--text-mid);margin-top:4px;display:block">프롬프트를 직접 입력해서 재시도할 수 있습니다.</small></div>
+      <div class="card" style="margin-top:14px">
+        <label>이미지 프롬프트 직접 입력 (영어 권장)</label>
+        <textarea id="customPromptInput" style="min-height:90px" placeholder="YouTube thumbnail 16:9, bold text, dramatic lighting..."></textarea>
+      </div>
+      <div class="btn-row"><button class="btn-p" onclick="retryCustomPrompt()">🔄 재시도</button></div>`;
+  }
+}
+
+async function generateThumbnail(customPrompt) {
+  // Step 1: Claude strategy
+  const stratRaw = await callClaude(`유튜브 썸네일 전문 디자이너입니다.
+주제: ${generatedData.topic} | 카테고리: ${generatedData.category}
+훅: ${generatedData.content?.hooks?.[0]||generatedData.topic}
+순수 JSON만 반환:
+{"mainText":"썸네일 메인 텍스트 20자 이내","subText":"서브텍스트 또는 null","colorScheme":"색상 조합","composition":"구도","emotion":"표정/감정","imagePromptEn":"Detailed YouTube thumbnail prompt in English, 16:9, high contrast, bold typography, professional, eye-catching. Describe subject background lighting colors mood text placement. Max 150 words.","tipList":["팁1","팁2","팁3"]}`, 1500);
+  const strategy = parseJSON(stratRaw);
+  generatedData.thumbnailStrategy = strategy;
+
+  // Step 2: Gemini image generation
+  // BUG FIX: correct model name (was non-existent 'gemini-3.1-flash-image-preview')
+  const finalPrompt = customPrompt || strategy.imagePromptEn;
+  const gRes = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${GEMINI_KEY}`,
+    { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        contents:[{parts:[{text:finalPrompt}]}],
+        generationConfig:{responseModalities:['TEXT','IMAGE']}
+      }) }
+  );
+  const gData = await gRes.json();
+  if (gData.error) throw new Error(gData.error.message);
+  const parts = gData?.candidates?.[0]?.content?.parts||[];
+  const imgPart = parts.find(p=>p.inlineData);
+  if (!imgPart) throw new Error('이미지 파트 없음. Gemini API 응답을 확인하세요.');
+  return { strategy, imageBase64:imgPart.inlineData.data, mimeType:imgPart.inlineData.mimeType||'image/png', usedPrompt:finalPrompt };
+}
+
+async function retryCustomPrompt() {
+  const p = document.getElementById('customPromptInput')?.value?.trim();
+  if (!p) { alert('프롬프트를 입력하세요'); return; }
+  document.getElementById('thumbnailResult').innerHTML = `<div class="loading-box"><div class="spinner"></div><div class="load-title">🔄 재시도 중...</div></div>`;
+  try {
+    const result = await generateThumbnail(p);
+    generatedData.thumbnail = result;
+    renderThumbnail(result);
+  } catch(e) {
+    document.getElementById('thumbnailResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}</div>`;
+  }
+}
+
+function renderThumbnail(r) {
+  const {strategy:d, imageBase64, mimeType, usedPrompt} = r;
+  const imgSrc = `data:${mimeType};base64,${imageBase64}`;
+  document.getElementById('thumbnailResult').innerHTML = `
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="rc-header">
+          <div class="rc-title">🖼 생성된 썸네일 <span class="badge-r">Gemini AI</span></div>
+          <button class="copy-btn" onclick="downloadThumb()">⬇ 다운로드</button>
+        </div>
+        <div class="rc-body">
+          <img id="generatedThumb" src="${imgSrc}" style="width:100%;border-radius:8px;aspect-ratio:16/9;object-fit:cover;display:block" alt="썸네일">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12px;margin-top:14px">
+            <div><div class="meta-label">메인 텍스트</div>${d.mainText}</div>
+            <div><div class="meta-label">색상 조합</div>${d.colorScheme}</div>
+            <div><div class="meta-label">감정/표정</div>${d.emotion}</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="rc-header">
+          <div class="rc-title">📝 사용된 이미지 프롬프트</div>
+          <button class="copy-btn" onclick="copyText('used_prompt',this)">복사</button>
+        </div>
+        <div class="rc-body">
+          <div class="prompt-box">
+            <div class="prompt-label">Gemini Prompt</div>
+            <div id="used_prompt" style="font-size:12px;line-height:1.7">${usedPrompt}</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="rc-header"><div class="rc-title">🔄 다른 버전 생성</div></div>
+        <div class="rc-body">
+          <textarea id="regenPromptInput" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-family:inherit;font-size:12px;min-height:80px;outline:none;resize:vertical">${usedPrompt}</textarea>
+          <div style="margin-top:10px"><button class="btn-s" onclick="regenThumbnail()" style="width:100%;justify-content:center">🔄 새 버전 생성</button></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="rc-header"><div class="rc-title">✅ 썸네일 팁</div></div>
+        <div class="rc-body">${(d.tipList||[]).map(t=>`<div style="padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)">✦ ${t}</div>`).join('')}</div>
+      </div>
+    </div>`;
+}
+
+async function regenThumbnail() {
+  const p = document.getElementById('regenPromptInput')?.value?.trim();
+  if (!p) return;
+  const th = document.getElementById('generatedThumb');
+  if (th) th.style.opacity = '0.3';
+  try {
+    const result = await generateThumbnail(p);
+    generatedData.thumbnail = result;
+    renderThumbnail(result);
+  } catch(e) {
+    alert('오류: '+e.message);
+    const th2 = document.getElementById('generatedThumb');
+    if (th2) th2.style.opacity = '1';
+  }
+}
+
+function downloadThumb() {
+  const img = document.getElementById('generatedThumb');
+  if (!img) return;
+  const a = document.createElement('a'); a.href = img.src; a.download = 'thumbnail.png'; a.click();
+}
+
+// ─── STEP 5: CapCut ───
+async function runStep5() {
+  showStep(5);
+  showLoading('capcutResult','🎬 캡컷 편집 지시서 생성 중...','씬별 컷 구성, 효과, BGM을 설계합니다');
+  const {topic,length,content} = generatedData;
+  const prompt = `유튜브 영상 편집 전문가입니다.
+주제: ${topic} | 길이: ${length}
+타임라인: ${JSON.stringify(content?.structure||[])}
+순수 JSON만 반환:
+{"scenes":[{"num":1,"name":"씬명","duration":"00:00~00:15","footage":"소스 설명","text":"화면 텍스트","effect":"캡컷 효과/트랜지션","bgm":"BGM 분위기","note":"편집 팁"}],"globalSettings":{"aspectRatio":"화면비","textFont":"추천 폰트","colorGrade":"색보정","bgmStyle":"전체 BGM 스타일"}}`;
+  try {
+    const raw = await callClaude(prompt, 2500);
+    const json = parseJSON(raw);
+    generatedData.capcut = json;
+    renderCapcut(json);
+  } catch(e) {
+    document.getElementById('capcutResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}</div>`;
+  }
+}
+
+function renderCapcut(d) {
+  const gs = d.globalSettings||{};
+  const scenesHtml = (d.scenes||[]).map(s=>`
+    <div class="capcut-scene">
+      <div class="scene-hdr"><div class="scene-num">${s.num}</div>${s.name}<span class="scene-time">${s.duration}</span></div>
+      <div class="scene-body">
+        <div class="scene-row"><div class="scene-key">📹 소스</div><div class="scene-val">${s.footage}</div></div>
+        <div class="scene-row"><div class="scene-key">💬 텍스트</div><div class="scene-val">${s.text}</div></div>
+        <div class="scene-row"><div class="scene-key">✨ 효과</div><div class="scene-val">${s.effect}</div></div>
+        <div class="scene-row"><div class="scene-key">🎵 BGM</div><div class="scene-val">${s.bgm}</div></div>
+        ${s.note?`<div class="scene-row"><div class="scene-key">📝 팁</div><div class="scene-val" style="color:var(--accent2)">${s.note}</div></div>`:''}
+      </div>
+    </div>`).join('');
+  document.getElementById('capcutResult').innerHTML = `
+    <div class="info-chip"><span class="ic">🎬</span>캡컷 앱에서 새 프로젝트를 열고 아래 씬별 지시서를 따라 편집하세요.</div>
+    <div class="result-card" style="margin-bottom:16px">
+      <div class="rc-header"><div class="rc-title">⚙️ 전체 세팅</div></div>
+      <div class="rc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px">
+          <div><div class="meta-label">화면비</div>${gs.aspectRatio||'-'}</div>
+          <div><div class="meta-label">텍스트 폰트</div>${gs.textFont||'-'}</div>
+          <div><div class="meta-label">색보정</div>${gs.colorGrade||'-'}</div>
+          <div><div class="meta-label">BGM 스타일</div>${gs.bgmStyle||'-'}</div>
+        </div>
+      </div>
+    </div>
+    <div>${scenesHtml}</div>`;
+}
+
+// ─── STEP 6: Metadata ───
+async function runStep6() {
+  showStep(6);
+  showLoading('metadataResult','📊 유튜브 메타데이터 최적화 중...','SEO 제목, 설명, 태그, 업로드 전략을 생성합니다');
+  const {topic,category,target,content} = generatedData;
+  const prompt = `유튜브 SEO 전문가입니다.
+주제: ${topic} | 카테고리: ${category} | 타겟: ${target||'일반'}
+훅: ${(content?.hooks||[]).join(', ')}
+순수 JSON만 반환:
+{"titles":["제목1","제목2","제목3"],"description":"유튜브 설명란 전체 (타임스탬프 자리 포함, 해시태그 3개 포함, 300자 내외)","tags":["태그1","태그2","태그3","태그4","태그5","태그6","태그7","태그8","태그9","태그10"],"category":"유튜브 카테고리","cards":["카드1","카드2"],"endScreen":"엔드스크린 설정","uploadTip":"최적 업로드 시간대 및 전략"}`;
+  try {
+    const raw = await callClaude(prompt, 2000);
+    const json = parseJSON(raw);
+    generatedData.metadata = json;
+    renderMetadata(json);
+  } catch(e) {
+    document.getElementById('metadataResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}</div>`;
+  }
+}
+
+function renderMetadata(d) {
+  const titlesHtml = (d.titles||[]).map((t,i)=>`
+    <div class="hook-item">
+      <div class="hook-num">후보 #${i+1}${i===0?' <span class="badge-r" style="font-size:9px">추천</span>':''}</div>${t}
+    </div>`).join('');
+  const tagsHtml = (d.tags||[]).map(t=>`<span class="tag-chip">#${t}</span>`).join('');
+  document.getElementById('metadataResult').innerHTML = `
+    <div class="result-grid">
+      ${mkCard('📌','제목 후보 3개','',`<div id="titles_b">${titlesHtml}</div>`,'titles_b')}
+      ${mkCard('📝','영상 설명란','<span class="badge-y">SEO 최적화</span>',`<div class="result-text" id="desc_b">${d.description}</div>`,'desc_b')}
+      <div class="result-card">
+        <div class="rc-header"><div class="rc-title">🏷 태그 (10개)</div><button class="copy-btn" onclick="copyText('tags_b',this)">복사</button></div>
+        <div class="rc-body" id="tags_b">${tagsHtml}</div>
+      </div>
+      <div class="result-grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        ${mkCard('🎴','카드 설정','',`<div id="cards_b">${(d.cards||[]).map(c=>`<div style="padding:4px 0;font-size:12px;border-bottom:1px solid var(--border)">• ${c}</div>`).join('')}</div>`,'cards_b')}
+        ${mkCard('🎞','엔드스크린','',`<div class="result-text" id="end_b">${d.endScreen}</div>`,'end_b')}
+      </div>
+      ${mkCard('⏰','업로드 전략 팁','',`<div class="result-text" id="tip_b">${d.uploadTip}</div>`,'tip_b')}
+    </div>
+    <div class="export-box">
+      <div class="export-title">🎉 영상 제작 패키지 완성!</div>
+      <div class="export-sub">훅 · 풀 스크립트 · 썸네일 · 캡컷 지시서 · 메타데이터 완성</div>
+      <button class="btn-p" onclick="exportAll()">📦 전체 내용 복사</button>
+    </div>`;
+}
+
+// ─── EXPORT ───
+function exportAll() {
+  const d = generatedData;
+  // BUG FIX: use correct key 'usedPrompt' not 'nanobananaPrompt'
+  const thumbPrompt = d.thumbnail?.usedPrompt || d.thumbnailStrategy?.imagePromptEn || '';
+  const scriptText = (d.script?.sections||[]).map(s=>`[${s.name}]\n${s.script}`).join('\n\n');
+  const out = `============================
+🎬 YTMAKER v2 — 유튜브 영상 제작 패키지
+============================
+주제: ${d.topic}
+카테고리: ${d.category} | 길이: ${d.length} | 언어: ${d.lang}
+
+🎣 어그로 훅 TOP 5
+${(d.content?.hooks||[]).map((h,i)=>`${i+1}. ${h}`).join('\n')}
+
+📋 영상 타임라인
+${(d.content?.structure||[]).map(s=>`${s.time} - ${s.section}: ${s.desc}`).join('\n')}
+
+📝 풀 스크립트
+${scriptText}
+
+🖼 썸네일 이미지 프롬프트
+${thumbPrompt}
+
+📌 추천 제목
+${(d.metadata?.titles||[''])[0]}
+
+📝 영상 설명
+${d.metadata?.description||''}
+
+🏷 태그
+${(d.metadata?.tags||[]).map(t=>'#'+t).join(' ')}
+
+============================
+Made by SunnyApps. All rights reserved.
+============================`;
+  navigator.clipboard.writeText(out).then(()=>alert('✅ 전체 패키지가 클립보드에 복사됐습니다!'));
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('fab').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
+</body>
+</html>

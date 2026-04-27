@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YT AutoUpload — 유튜브 자동 업로드</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0c0c10; --surface:#141418; --surface2:#1e1e26; --border:#2c2c3c;
+  --accent:#ff0000; --accent2:#ffb800; --accent3:#00d4ff; --green:#00c97a;
+  --text:#f0f0f5; --text-dim:#505068; --text-mid:#8888a8;
+  --radius:12px; --tr:0.22s cubic-bezier(0.4,0,0.2,1);
+}
+.light { --bg:#f5f4f0; --surface:#fff; --surface2:#eeeeed; --border:#d5d5d2; --text:#111118; --text-dim:#b5b5b8; --text-mid:#55555f; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background var(--tr),color var(--tr); }
+
+/* HEADER */
+header { padding:14px 28px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; background:var(--bg); backdrop-filter:blur(16px); }
+.logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--accent); display:flex; align-items:center; gap:10px; }
+.logo span { color:var(--text); }
+.logo-sub { font-size:10px; color:var(--text-mid); font-family:'Noto Sans KR',sans-serif; font-weight:500; letter-spacing:.5px; margin-left:4px; }
+.live-dot { width:8px; height:8px; background:var(--green); border-radius:50%; animation:livepulse 1.5s infinite; }
+@keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,201,122,.4)} 50%{opacity:.7;box-shadow:0 0 0 6px rgba(0,201,122,0)} }
+.hdr-right { display:flex; align-items:center; gap:12px; }
+.bmc-btn { display:inline-flex; align-items:center; gap:7px; background:#FFDD00; color:#000; border:none; border-radius:20px; padding:7px 16px; font-size:12px; font-weight:700; cursor:pointer; text-decoration:none; transition:all var(--tr); white-space:nowrap; }
+.bmc-btn:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(255,221,0,.4); }
+.theme-btn { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 14px; color:var(--text); cursor:pointer; font-size:13px; font-family:inherit; display:flex; align-items:center; gap:6px; transition:all var(--tr); }
+.theme-btn:hover { border-color:var(--accent); }
+
+.container { max-width:960px; margin:0 auto; padding:36px 20px 80px; }
+
+/* SECTION TITLES */
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1px; margin-bottom:4px; }
+.sec-sub { color:var(--text-mid); font-size:13px; margin-bottom:20px; }
+
+/* CARDS */
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:16px; }
+.card-title { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-mid); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.card label { display:block; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-mid); margin-bottom:7px; }
+.card input,.card textarea,.card select {
+  width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:8px;
+  padding:11px 13px; color:var(--text); font-family:inherit; font-size:14px; outline:none;
+  transition:border-color var(--tr); resize:vertical;
+}
+.card input:focus,.card textarea:focus,.card select:focus { border-color:var(--accent); }
+.card textarea { min-height:90px; }
+.card input[type="file"] { padding:8px 13px; cursor:pointer; }
+.field { margin-bottom:14px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+@media(max-width:640px){ .grid2,.grid3 { grid-template-columns:1fr; } }
+
+/* BUTTONS */
+.btn-p { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:13px 26px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all var(--tr); display:inline-flex; align-items:center; gap:8px; }
+.btn-p:hover { background:#cc0000; transform:translateY(-1px); box-shadow:0 8px 24px rgba(255,0,0,.3); }
+.btn-p:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+.btn-g { background:var(--green); color:#000; border:none; border-radius:8px; padding:13px 26px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all var(--tr); display:inline-flex; align-items:center; gap:8px; }
+.btn-g:hover { background:#00e88a; transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,201,122,.3); }
+.btn-g:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+.btn-s { background:var(--surface2); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:11px 20px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; transition:all var(--tr); display:inline-flex; align-items:center; gap:7px; }
+.btn-s:hover { border-color:var(--accent); color:var(--accent); }
+.btn-row { display:flex; gap:10px; align-items:center; margin-top:16px; flex-wrap:wrap; }
+
+/* STATUS / PROGRESS */
+.status-box { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin:16px 0; }
+.status-label { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-mid); margin-bottom:8px; }
+.progress-bar-wrap { background:var(--border); border-radius:4px; height:6px; margin-bottom:12px; overflow:hidden; }
+.progress-bar { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:4px; transition:width .4s ease; }
+.log-list { font-size:12px; color:var(--text-mid); line-height:2; max-height:200px; overflow-y:auto; }
+.log-ok { color:var(--green); }
+.log-err { color:var(--accent); }
+.log-info { color:var(--accent3); }
+
+/* CHIPS */
+.chip { display:inline-flex; align-items:center; gap:5px; border-radius:5px; padding:2px 9px; font-size:10px; font-weight:700; }
+.chip-r { background:var(--accent); color:#fff; }
+.chip-g { background:var(--green); color:#000; }
+.chip-y { background:var(--accent2); color:#000; }
+.chip-b { background:var(--accent3); color:#000; }
+
+/* INFO */
+.info { background:rgba(255,184,0,.08); border:1px solid rgba(255,184,0,.2); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text); margin-bottom:14px; display:flex; gap:10px; align-items:flex-start; line-height:1.7; }
+.warn { background:rgba(255,60,0,.08); border:1px solid rgba(255,60,0,.2); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text); margin-bottom:14px; }
+.success-box { background:rgba(0,201,122,.08); border:1px solid rgba(0,201,122,.25); border-radius:var(--radius); padding:24px; text-align:center; }
+.success-title { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--green); margin-bottom:8px; }
+
+/* TOGGLE ROW */
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
+.toggle-row:last-child { border-bottom:none; }
+.toggle-label { font-size:13px; }
+.toggle-desc { font-size:11px; color:var(--text-mid); margin-top:2px; }
+.toggle { position:relative; width:42px; height:24px; flex-shrink:0; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; inset:0; background:var(--border); border-radius:24px; cursor:pointer; transition:all var(--tr); }
+.toggle-slider::before { content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:all var(--tr); }
+.toggle input:checked + .toggle-slider { background:var(--green); }
+.toggle input:checked + .toggle-slider::before { transform:translateX(18px); }
+
+/* DIVIDER */
+.divider { height:1px; background:var(--border); margin:28px 0; }
+
+/* QUOTA BOX */
+.quota-row { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.quota-row:last-child { border-bottom:none; }
+.quota-val { font-weight:700; color:var(--accent3); }
+
+/* VIDEO PREVIEW */
+.video-preview { background:var(--surface2); border:1px solid var(--border); border-radius:10px; overflow:hidden; display:flex; gap:0; }
+.video-thumb { width:160px; flex-shrink:0; aspect-ratio:16/9; object-fit:cover; }
+.video-thumb-placeholder { width:160px; flex-shrink:0; aspect-ratio:16/9; background:linear-gradient(135deg,#1a1a2e,#16213e); display:flex; align-items:center; justify-content:center; font-size:32px; }
+.video-info { padding:16px; flex:1; }
+.video-title-preview { font-size:14px; font-weight:700; line-height:1.5; margin-bottom:6px; }
+.video-desc-preview { font-size:11px; color:var(--text-mid); line-height:1.6; max-height:60px; overflow:hidden; }
+.video-meta-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+
+footer { border-top:1px solid var(--border); padding:20px 28px; text-align:center; color:var(--text-dim); font-size:11px; letter-spacing:.5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="live-dot"></div>
+    YT<span>UPLOAD</span>
+    <span class="logo-sub">Auto Upload</span>
+  </div>
+  <div class="hdr-right">
+    <a class="bmc-btn" href="https://buymeacoffee.com/schoi0209" target="_blank">☕ Buy me a coffee</a>
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span>
+      <span id="themeLabel">라이트 모드</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ── STEP 1: API KEY SETUP ── -->
+  <div id="section-auth">
+    <div class="sec-title">YouTube API 설정</div>
+    <div class="sec-sub">YouTube Data API v3를 사용해 영상을 자동 업로드합니다.</div>
+
+    <div class="info">
+      <span>⚙️</span>
+      <div>
+        <strong>설정 방법:</strong><br>
+        1. <a href="https://console.cloud.google.com" target="_blank" style="color:var(--accent3)">Google Cloud Console</a> → 프로젝트 생성 → YouTube Data API v3 활성화<br>
+        2. OAuth 2.0 클라이언트 ID 생성 (웹 애플리케이션 유형)<br>
+        3. 승인된 리디렉션 URI에 <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:11px">현재 페이지 URL</code> 추가<br>
+        4. 클라이언트 ID를 아래에 입력 후 Google 계정으로 로그인
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label>Google OAuth 클라이언트 ID</label>
+        <input type="text" id="clientId" placeholder="000000000000-xxxxxxxxxxxx.apps.googleusercontent.com" autocomplete="off">
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="initAuth()">🔑 Google 계정 연결</button>
+      </div>
+    </div>
+
+    <div id="authStatus" style="display:none"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STEP 2: VIDEO UPLOAD ── -->
+  <div id="section-upload">
+    <div class="sec-title">영상 업로드</div>
+    <div class="sec-sub">영상 파일과 메타데이터를 입력하면 유튜브에 자동 업로드됩니다.</div>
+
+    <!-- Video File -->
+    <div class="card">
+      <div class="card-title">📹 영상 파일</div>
+      <div class="field">
+        <label>영상 파일 선택 (MP4, MOV, AVI 등)</label>
+        <input type="file" id="videoFile" accept="video/*" onchange="onVideoSelect(this)">
+      </div>
+      <div id="fileInfo" style="font-size:12px;color:var(--text-mid);margin-top:6px"></div>
+    </div>
+
+    <!-- Thumbnail -->
+    <div class="card">
+      <div class="card-title">🖼 썸네일 (선택)</div>
+      <div class="field">
+        <label>썸네일 이미지 (JPG, PNG · 최대 2MB · 권장 1280x720)</label>
+        <input type="file" id="thumbFile" accept="image/*" onchange="onThumbSelect(this)">
+      </div>
+      <div id="thumbPreview"></div>
+    </div>
+
+    <!-- Metadata -->
+    <div class="card">
+      <div class="card-title">📝 영상 메타데이터</div>
+      <div class="field">
+        <label>영상 제목 *</label>
+        <input type="text" id="vidTitle" placeholder="클릭을 부르는 제목을 입력하세요" maxlength="100">
+        <div style="font-size:10px;color:var(--text-dim);margin-top:4px;text-align:right"><span id="titleCount">0</span>/100</div>
+      </div>
+      <div class="field">
+        <label>영상 설명</label>
+        <textarea id="vidDesc" placeholder="영상 설명, 타임스탬프, 링크, 해시태그 등을 입력하세요" rows="6" style="min-height:130px"></textarea>
+        <div style="font-size:10px;color:var(--text-dim);margin-top:4px;text-align:right"><span id="descCount">0</span>/5000</div>
+      </div>
+      <div class="field">
+        <label>태그 (쉼표로 구분)</label>
+        <input type="text" id="vidTags" placeholder="태그1, 태그2, 태그3, ...">
+      </div>
+      <div class="grid3">
+        <div class="field">
+          <label>카테고리</label>
+          <select id="vidCategory">
+            <option value="22">사람과 블로그</option>
+            <option value="28">과학 기술</option>
+            <option value="27">교육</option>
+            <option value="24">엔터테인먼트</option>
+            <option value="26">방법, 스타일</option>
+            <option value="25">뉴스, 정치</option>
+            <option value="10">음악</option>
+            <option value="20">게임</option>
+            <option value="17">스포츠</option>
+            <option value="19">여행, 이벤트</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>공개 설정</label>
+          <select id="vidPrivacy">
+            <option value="private">비공개 (나만 보기)</option>
+            <option value="unlisted">미등록 (링크 공유)</option>
+            <option value="public">공개</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>언어</label>
+          <select id="vidLang">
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="card">
+      <div class="card-title">⚙️ 고급 옵션</div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">자동 자막 생성 요청</div>
+          <div class="toggle-desc">유튜브 자동 자막 생성을 활성화합니다</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="optCaptions" checked><div class="toggle-slider"></div></label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">아동용 콘텐츠 아님</div>
+          <div class="toggle-desc">Made for Kids 설정 (법적 의무 사항)</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="optKids"><div class="toggle-slider"></div></label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">업로드 후 브라우저 알림</div>
+          <div class="toggle-desc">완료 시 브라우저 푸시 알림을 보냅니다</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="optNotif" checked><div class="toggle-slider"></div></label>
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="card" id="previewCard" style="display:none">
+      <div class="card-title">👀 업로드 미리보기</div>
+      <div class="video-preview" id="vidPreview"></div>
+    </div>
+
+    <!-- Upload Button -->
+    <div class="btn-row">
+      <button class="btn-g" id="uploadBtn" onclick="startUpload()">🚀 유튜브 업로드 시작</button>
+      <button class="btn-s" onclick="showPreview()">👀 미리보기</button>
+      <button class="btn-s" onclick="importFromYTMaker()">📥 YTMaker에서 가져오기</button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── UPLOAD PROGRESS ── -->
+  <div id="section-progress" style="display:none">
+    <div class="sec-title">업로드 진행 중</div>
+    <div class="status-box">
+      <div class="status-label">진행 상황</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+      <div class="log-list" id="logList"></div>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS ── -->
+  <div id="section-success" style="display:none">
+    <div class="success-box">
+      <div class="success-title">✅ 업로드 완료!</div>
+      <div id="successContent"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── QUOTA INFO ── -->
+  <div class="card">
+    <div class="card-title">📊 YouTube API 할당량 안내</div>
+    <div class="info" style="margin-bottom:14px">
+      <span>💡</span>
+      <div>YouTube Data API v3는 하루 <strong>10,000 유닛</strong> 무료 할당량이 있습니다. 영상 업로드는 약 1,600 유닛을 소비합니다.</div>
+    </div>
+    <div class="quota-row"><div>🎬 영상 업로드 1회</div><div class="quota-val">~1,600 유닛</div></div>
+    <div class="quota-row"><div>🖼 썸네일 업로드</div><div class="quota-val">~50 유닛</div></div>
+    <div class="quota-row"><div>📋 메타데이터 수정</div><div class="quota-val">~50 유닛</div></div>
+    <div class="quota-row"><div>📅 일일 무료 할당량</div><div class="quota-val">10,000 유닛</div></div>
+    <div class="quota-row"><div>🔄 하루 최대 업로드</div><div class="quota-val">약 6회</div></div>
+  </div>
+
+  <!-- ── GUIDE ── -->
+  <div class="card">
+    <div class="card-title">🗺 자동화 파이프라인 가이드</div>
+    <div style="display:grid;gap:12px;font-size:13px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--accent);color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0">1</div>
+        <div><strong>YTMaker v2</strong>로 콘텐츠 설계 → 스크립트 → 썸네일 → 메타데이터 생성</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--accent2);color:#000;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0">2</div>
+        <div><strong>캡컷 / CapCut</strong>으로 영상 편집 (YTMaker 캡컷 지시서 참고)</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--accent3);color:#000;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0">3</div>
+        <div><strong>YT AutoUpload</strong>에서 영상 파일 + 메타데이터 입력 → 자동 업로드</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--green);color:#000;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0">4</div>
+        <div>유튜브 스튜디오에서 최종 확인 → 공개 설정 변경</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+
+<script>
+// ── THEME ──
+let isDark = true;
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  isDark = false; document.body.classList.add('light');
+  document.getElementById('themeIcon').textContent = '🌙';
+  document.getElementById('themeLabel').textContent = '다크 모드';
+}
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('light', !isDark);
+  document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('themeLabel').textContent = isDark ? '라이트 모드' : '다크 모드';
+}
+
+// ── STATE ──
+let accessToken = null;
+let selectedVideoFile = null;
+let selectedThumbFile = null;
+let uploadedVideoId = null;
+
+// ── CHARACTER COUNTERS ──
+document.getElementById('vidTitle').addEventListener('input', function() {
+  document.getElementById('titleCount').textContent = this.value.length;
+});
+document.getElementById('vidDesc').addEventListener('input', function() {
+  document.getElementById('descCount').textContent = this.value.length;
+});
+
+// ── FILE SELECTION ──
+function onVideoSelect(input) {
+  selectedVideoFile = input.files[0];
+  if (!selectedVideoFile) return;
+  const size = (selectedVideoFile.size / 1024 / 1024).toFixed(1);
+  const dur = selectedVideoFile.type;
+  document.getElementById('fileInfo').innerHTML =
+    `✅ <strong>${selectedVideoFile.name}</strong> · ${size} MB · ${dur}`;
+}
+
+function onThumbSelect(input) {
+  selectedThumbFile = input.files[0];
+  if (!selectedThumbFile) return;
+  const url = URL.createObjectURL(selectedThumbFile);
+  document.getElementById('thumbPreview').innerHTML =
+    `<img src="${url}" style="width:280px;border-radius:8px;margin-top:10px;aspect-ratio:16/9;object-fit:cover">`;
+}
+
+// ── PREVIEW ──
+function showPreview() {
+  const title = document.getElementById('vidTitle').value || '(제목 없음)';
+  const desc = document.getElementById('vidDesc').value || '(설명 없음)';
+  const privacy = document.getElementById('vidPrivacy');
+  const privacyText = privacy.options[privacy.selectedIndex].text;
+
+  const thumbEl = selectedThumbFile
+    ? `<img class="video-thumb" src="${URL.createObjectURL(selectedThumbFile)}" alt="썸네일">`
+    : `<div class="video-thumb-placeholder">▶️</div>`;
+
+  document.getElementById('vidPreview').innerHTML = `
+    ${thumbEl}
+    <div class="video-info">
+      <div class="video-title-preview">${title}</div>
+      <div class="video-desc-preview">${desc}</div>
+      <div class="video-meta-row">
+        <span class="chip chip-r">${privacyText}</span>
+        ${document.getElementById('optKids').checked ? '<span class="chip chip-b">아동용</span>' : ''}
+      </div>
+    </div>`;
+  document.getElementById('previewCard').style.display = 'block';
+  document.getElementById('previewCard').scrollIntoView({behavior:'smooth'});
+}
+
+// ── IMPORT FROM YTMAKER ──
+function importFromYTMaker() {
+  // Try to get data from localStorage or prompt user
+  const data = prompt('YTMaker에서 복사한 메타데이터를 붙여넣으세요 (제목줄부터):\n\n예시:\n추천 제목: [제목]\n\n영상 설명\n[설명 내용]');
+  if (!data) return;
+
+  // Parse title
+  const titleMatch = data.match(/추천 제목[:\s]+(.+)/);
+  if (titleMatch) document.getElementById('vidTitle').value = titleMatch[1].trim();
+
+  // Parse description block
+  const descMatch = data.match(/영상 설명\n([\s\S]+?)(?:\n태그:|$)/);
+  if (descMatch) document.getElementById('vidDesc').value = descMatch[1].trim();
+
+  // Parse tags
+  const tagsMatch = data.match(/태그[:\s]+(.+)/);
+  if (tagsMatch) {
+    const tags = tagsMatch[1].replace(/#/g, '').trim();
+    document.getElementById('vidTags').value = tags;
+  }
+
+  document.getElementById('titleCount').textContent = document.getElementById('vidTitle').value.length;
+  document.getElementById('descCount').textContent = document.getElementById('vidDesc').value.length;
+  alert('✅ YTMaker 데이터를 가져왔습니다! 내용을 확인하고 수정해주세요.');
+}
+
+// ── AUTH ──
+function initAuth() {
+  const clientId = document.getElementById('clientId').value.trim();
+  if (!clientId) { alert('클라이언트 ID를 입력하세요'); return; }
+
+  // Save to session
+  sessionStorage.setItem('yt_client_id', clientId);
+
+  const scope = 'https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube';
+  const redirectUri = window.location.href.split('?')[0].split('#')[0];
+  const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=${encodeURIComponent(scope)}&include_granted_scopes=true`;
+
+  log('info', '🔑 Google OAuth 인증 페이지로 이동합니다...');
+  window.location.href = authUrl;
+}
+
+// Handle OAuth redirect
+function handleOAuthCallback() {
+  const hash = window.location.hash;
+  if (!hash.includes('access_token')) return;
+
+  const params = new URLSearchParams(hash.substring(1));
+  accessToken = params.get('access_token');
+  const expiresIn = params.get('expires_in');
+
+  if (accessToken) {
+    // Clean URL
+    history.replaceState(null, '', window.location.pathname);
+
+    const authDiv = document.getElementById('authStatus');
+    authDiv.style.display = 'block';
+    authDiv.innerHTML = `
+      <div style="background:rgba(0,201,122,.1);border:1px solid rgba(0,201,122,.3);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px">
+        <div class="live-dot"></div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--green)">✅ Google 계정 연결 완료!</div>
+          <div style="font-size:12px;color:var(--text-mid);margin-top:2px">액세스 토큰 유효 시간: ${Math.floor(expiresIn/60)}분</div>
+        </div>
+      </div>`;
+
+    // Restore client ID
+    const savedClientId = sessionStorage.getItem('yt_client_id');
+    if (savedClientId) document.getElementById('clientId').value = savedClientId;
+
+    addLog('✅ 인증 성공! 영상을 업로드할 준비가 됐습니다.', 'ok');
+  }
+}
+
+// ── UPLOAD ──
+async function startUpload() {
+  if (!accessToken) {
+    alert('먼저 Google 계정을 연결해주세요!');
+    return;
+  }
+  if (!selectedVideoFile) {
+    alert('영상 파일을 선택해주세요!');
+    return;
+  }
+  const title = document.getElementById('vidTitle').value.trim();
+  if (!title) {
+    alert('영상 제목을 입력해주세요!');
+    return;
+  }
+
+  document.getElementById('section-progress').style.display = 'block';
+  document.getElementById('section-success').style.display = 'none';
+  document.getElementById('uploadBtn').disabled = true;
+  document.getElementById('section-progress').scrollIntoView({behavior:'smooth'});
+
+  setProgress(5);
+  addLog('🚀 업로드를 시작합니다...', 'info');
+
+  try {
+    // Step 1: Initialize resumable upload
+    addLog('📡 YouTube API 연결 중...', 'info');
+    const videoId = await uploadVideo();
+    uploadedVideoId = videoId;
+    setProgress(85);
+    addLog(`✅ 영상 업로드 완료! Video ID: ${videoId}`, 'ok');
+
+    // Step 2: Upload thumbnail if provided
+    if (selectedThumbFile) {
+      addLog('🖼 썸네일 업로드 중...', 'info');
+      await uploadThumbnail(videoId);
+      addLog('✅ 썸네일 업로드 완료!', 'ok');
+    }
+
+    setProgress(100);
+    addLog('🎉 모든 작업 완료!', 'ok');
+
+    // Notification
+    if (document.getElementById('optNotif').checked && 'Notification' in window) {
+      Notification.requestPermission().then(p => {
+        if (p === 'granted') new Notification('YT AutoUpload', { body: `"${title}" 업로드 완료!` });
+      });
+    }
+
+    showSuccess(videoId, title);
+
+  } catch(e) {
+    addLog(`❌ 오류: ${e.message}`, 'err');
+    document.getElementById('uploadBtn').disabled = false;
+  }
+}
+
+async function uploadVideo() {
+  const title = document.getElementById('vidTitle').value.trim();
+  const desc = document.getElementById('vidDesc').value.trim();
+  const tagsRaw = document.getElementById('vidTags').value.trim();
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.replace(/#/g,'').trim()).filter(Boolean) : [];
+  const category = document.getElementById('vidCategory').value;
+  const privacy = document.getElementById('vidPrivacy').value;
+  const lang = document.getElementById('vidLang').value;
+  const madeForKids = document.getElementById('optKids').checked;
+
+  const metadata = {
+    snippet: { title, description: desc, tags, categoryId: category, defaultLanguage: lang, defaultAudioLanguage: lang },
+    status: { privacyStatus: privacy, selfDeclaredMadeForKids: madeForKids }
+  };
+
+  // Step 1: Get resumable upload URL
+  addLog('📋 메타데이터 전송 중...', 'info');
+  const initRes = await fetch(
+    'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'X-Upload-Content-Type': selectedVideoFile.type,
+        'X-Upload-Content-Length': selectedVideoFile.size,
+      },
+      body: JSON.stringify(metadata)
+    }
+  );
+
+  if (!initRes.ok) {
+    const err = await initRes.json();
+    throw new Error(err.error?.message || `API 오류 ${initRes.status}`);
+  }
+
+  const uploadUrl = initRes.headers.get('Location');
+  if (!uploadUrl) throw new Error('업로드 URL을 가져오지 못했습니다');
+
+  addLog('📤 영상 파일 업로드 중... (파일 크기에 따라 시간이 걸릴 수 있습니다)', 'info');
+
+  // Step 2: Upload the video file with progress
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', uploadUrl);
+    xhr.setRequestHeader('Content-Type', selectedVideoFile.type);
+    xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
+
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const pct = Math.round((e.loaded / e.total) * 75) + 5;
+        setProgress(pct);
+        const loaded = (e.loaded / 1024 / 1024).toFixed(1);
+        const total = (e.total / 1024 / 1024).toFixed(1);
+        document.getElementById('logList').lastElementChild
+          && (document.getElementById('logList').lastElementChild.textContent = `📤 업로드 중: ${loaded}MB / ${total}MB`);
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200 || xhr.status === 201) {
+        const res = JSON.parse(xhr.responseText);
+        resolve(res.id);
+      } else {
+        try {
+          const err = JSON.parse(xhr.responseText);
+          reject(new Error(err.error?.message || `업로드 실패 (${xhr.status})`));
+        } catch {
+          reject(new Error(`업로드 실패 (${xhr.status})`));
+        }
+      }
+    };
+    xhr.onerror = () => reject(new Error('네트워크 오류가 발생했습니다'));
+    xhr.send(selectedVideoFile);
+  });
+}
+
+async function uploadThumbnail(videoId) {
+  const reader = new FileReader();
+  const thumbData = await new Promise((res, rej) => {
+    reader.onload = () => res(reader.result);
+    reader.onerror = () => rej(new Error('썸네일 읽기 실패'));
+    reader.readAsArrayBuffer(selectedThumbFile);
+  });
+
+  const thumbRes = await fetch(
+    `https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${videoId}&uploadType=media`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': selectedThumbFile.type,
+      },
+      body: thumbData
+    }
+  );
+  if (!thumbRes.ok) {
+    const err = await thumbRes.json();
+    throw new Error('썸네일 오류: ' + (err.error?.message || thumbRes.status));
+  }
+}
+
+// ── SUCCESS ──
+function showSuccess(videoId, title) {
+  const ytUrl = `https://www.youtube.com/watch?v=${videoId}`;
+  const studioUrl = `https://studio.youtube.com/video/${videoId}/edit`;
+  document.getElementById('section-success').style.display = 'block';
+  document.getElementById('successContent').innerHTML = `
+    <div style="font-size:13px;color:var(--text-mid);margin-bottom:16px">"<strong>${title}</strong>" 업로드가 완료됐습니다!</div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="${ytUrl}" target="_blank" class="btn-p" style="text-decoration:none">▶ YouTube에서 보기</a>
+      <a href="${studioUrl}" target="_blank" class="btn-s" style="text-decoration:none">⚙ YouTube 스튜디오</a>
+    </div>
+    <div style="margin-top:16px;font-size:12px;color:var(--text-dim)">Video ID: ${videoId}</div>`;
+  document.getElementById('section-success').scrollIntoView({behavior:'smooth'});
+}
+
+// ── HELPERS ──
+function setProgress(pct) {
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function addLog(msg, type='info') {
+  const list = document.getElementById('logList');
+  const el = document.createElement('div');
+  el.className = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : 'log-info';
+  el.textContent = msg;
+  list.appendChild(el);
+  list.scrollTop = list.scrollHeight;
+}
+
+function log(type, msg) { addLog(msg, type); }
+
+// ── INIT ──
+handleOAuthCallback();
+</script>
+</body>
+</html>
