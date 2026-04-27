@@ -146,16 +146,15 @@ footer { border-top:1px solid var(--border); padding:20px 28px; text-align:cente
     <div class="panel-title">주제 & 채널 설정</div>
     <div class="panel-sub">영상 주제를 입력하면 AI가 전체 제작 패키지를 설계합니다.</div>
 
-    <!-- API KEY CARD -->
-    <div class="card" style="border-color:rgba(255,184,0,.35);background:rgba(255,184,0,.05)">
-      <label>🔑 Claude API 키 (필수)</label>
-      <div style="display:flex;gap:10px;align-items:center">
-        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." style="flex:1" oninput="saveApiKey(this.value)">
-        <button class="btn-s" onclick="toggleApiVis()" style="flex-shrink:0;padding:11px 14px">👁</button>
+    <!-- GEMINI FREE NOTICE -->
+    <div class="card" style="border-color:rgba(0,212,255,.3);background:rgba(0,212,255,.05)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="font-size:20px">⚡</span>
+        <span style="font-size:13px;font-weight:700;color:var(--accent3)">Google Gemini AI — 완전 무료</span>
+        <span class="badge-b">무료</span>
       </div>
-      <div style="font-size:11px;color:var(--text-dim);margin-top:7px">
-        API 키는 브라우저 로컬스토리지에만 저장됩니다.
-        <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--accent3)">키 발급 →</a>
+      <div style="font-size:12px;color:var(--text-mid);line-height:1.7">
+        API 키 불필요 · Gemini 2.0 Flash 무료 티어 사용 · 하루 1,500회 제한
       </div>
     </div>
 
@@ -280,22 +279,7 @@ let isDark = true, currentStep = 1, maxReachedStep = 1;
 let generatedData = {};
 const GEMINI_KEY = 'AIzaSyBeR4wobWnAmVAZ7tKI-sZwlPWU_VTfzx0';
 
-// ── API KEY HELPERS ──
-function saveApiKey(val) {
-  if (val) localStorage.setItem('ytmaker_apikey', val);
-}
-function toggleApiVis() {
-  const inp = document.getElementById('apiKeyInput');
-  inp.type = inp.type === 'password' ? 'text' : 'password';
-}
-// Restore saved API key on load (runs after DOM ready)
-window.addEventListener('DOMContentLoaded', function() {
-  const saved = localStorage.getItem('ytmaker_apikey');
-  if (saved) {
-    const el = document.getElementById('apiKeyInput');
-    if (el) el.value = saved;
-  }
-});
+// AI: Gemini 2.0 Flash (무료 티어)
 
 // System theme
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -340,27 +324,23 @@ function showStep(n) {
   document.getElementById('fab').style.display = n > 1 ? 'flex' : 'none';
 }
 
-// BUG FIX: max_tokens raised appropriately per call
+// Gemini API (무료 티어 — 하루 1,500회)
 async function callClaude(prompt, maxTokens = 3000) {
-  const apiKey = document.getElementById('apiKeyInput')?.value?.trim();
-  if (!apiKey) throw new Error('API 키를 입력해주세요! (상단 설정 패널)');
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens: maxTokens,
-      messages:[{role:'user',content:prompt}]
-    })
-  });
+  const apiKey = GEMINI_KEY;
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: maxTokens, temperature: 0.7 }
+      })
+    }
+  );
   const data = await res.json();
   if (data.error) throw new Error(data.error.message);
-  return data.content?.[0]?.text || '';
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
 function parseJSON(raw) {
@@ -491,7 +471,7 @@ async function runStep4() {
     <div class="loading-box">
       <div class="spinner"></div>
       <div class="load-title">🖼 썸네일 전략 + 이미지 생성 중...</div>
-      <div class="load-sub">① Claude 썸네일 전략 설계 → ② Gemini 이미지 생성 (약 20~40초)</div>
+      <div class="load-sub">① Gemini 썸네일 전략 설계 → ② Gemini 이미지 생성 (약 20~40초)</div>
     </div>`;
   try {
     const result = await generateThumbnail();
