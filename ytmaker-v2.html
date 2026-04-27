@@ -145,6 +145,20 @@ footer { border-top:1px solid var(--border); padding:20px 28px; text-align:cente
   <div class="panel active" id="panel-1">
     <div class="panel-title">주제 & 채널 설정</div>
     <div class="panel-sub">영상 주제를 입력하면 AI가 전체 제작 패키지를 설계합니다.</div>
+
+    <!-- API KEY CARD -->
+    <div class="card" style="border-color:rgba(255,184,0,.35);background:rgba(255,184,0,.05)">
+      <label>🔑 Claude API 키 (필수)</label>
+      <div style="display:flex;gap:10px;align-items:center">
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." style="flex:1" oninput="saveApiKey(this.value)">
+        <button class="btn-s" onclick="toggleApiVis()" style="flex-shrink:0;padding:11px 14px">👁</button>
+      </div>
+      <div style="font-size:11px;color:var(--text-dim);margin-top:7px">
+        API 키는 브라우저 로컬스토리지에만 저장됩니다.
+        <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--accent3)">키 발급 →</a>
+      </div>
+    </div>
+
     <div class="card">
       <label>영상 주제 / 스토리 *</label>
       <textarea id="topicInput" placeholder="예: 직장인이 6개월만에 월 500만원 부업 수익을 만든 실제 방법&#10;예: 시드니 부동산 지금 사야 할까? AI 분석&#10;예: 파이썬 완전 초보가 AI 챗봇 만들기"></textarea>
@@ -266,6 +280,23 @@ let isDark = true, currentStep = 1, maxReachedStep = 1;
 let generatedData = {};
 const GEMINI_KEY = 'AIzaSyBeR4wobWnAmVAZ7tKI-sZwlPWU_VTfzx0';
 
+// ── API KEY HELPERS ──
+function saveApiKey(val) {
+  if (val) localStorage.setItem('ytmaker_apikey', val);
+}
+function toggleApiVis() {
+  const inp = document.getElementById('apiKeyInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+// Restore saved API key on load (runs after DOM ready)
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('ytmaker_apikey');
+  if (saved) {
+    const el = document.getElementById('apiKeyInput');
+    if (el) el.value = saved;
+  }
+});
+
 // System theme
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
   isDark = false; document.body.classList.add('light');
@@ -311,9 +342,16 @@ function showStep(n) {
 
 // BUG FIX: max_tokens raised appropriately per call
 async function callClaude(prompt, maxTokens = 3000) {
+  const apiKey = document.getElementById('apiKeyInput')?.value?.trim();
+  if (!apiKey) throw new Error('API 키를 입력해주세요! (상단 설정 패널)');
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method:'POST',
-    headers:{'Content-Type':'application/json'},
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
     body: JSON.stringify({
       model:'claude-sonnet-4-20250514',
       max_tokens: maxTokens,
