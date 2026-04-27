@@ -429,6 +429,7 @@ footer {
   </div>
   <div class="header-right">
     <a class="bmc-btn" href="https://buymeacoffee.com/schoi0209" target="_blank">☕ Buy Me a Coffee</a>
+    <button class="theme-toggle" onclick="toggleLang()" id="langBtn" style="width:auto;padding:0 12px;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">KO</button>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
   </div>
 </header>
@@ -731,6 +732,267 @@ footer {
 </footer>
 
 <script>
+// ─── i18n ─────────────────────────────────────────────────────────
+let currentLang = 'ko';
+const i18n = {
+  ko: {
+    // Header
+    logoSub: 'ANALYSER — AU Market Tool',
+    // Tab buttons
+    tab1: '📊 임대 수익률 계산기',
+    tab2: '⚖️ 매물 비교 도구',
+    tab3: '🏘️ Suburb 벤치마크',
+    // Yield tab
+    yieldTitle: '임대 수익률 계산기',
+    yieldSub: 'GROSS & NET YIELD · WEEKLY CASH FLOW · ROI ANALYSIS',
+    lSuburb: '📍 Suburb',
+    lPropType: '🏠 부동산 유형',
+    lPurchase: '💰 매입가 (AUD $)',
+    lRent: '📅 주간 임대료 ($ / week)',
+    lLoan: '🏦 대출금 (AUD $)',
+    lRate: '📈 이자율 (% p.a.)',
+    lMaint: '🔧 연간 유지비 ($ / year)',
+    lStrata: '🏘️ Strata Levy ($ / quarter)',
+    lCouncil: '🏛️ Council Rates ($ / year)',
+    lInsurance: '🛡️ 보험료 ($ / year)',
+    lMgmt: '📋 Property Management (%)',
+    lVacancy: '🔖 공실율 (weeks / year)',
+    calcBtn: '📊 수익률 분석하기',
+    rGrossLabel: 'Gross Yield',
+    rGrossSub: '연간 임대료 / 매입가',
+    rNetLabel: 'Net Yield',
+    rNetSub: '비용 차감 후',
+    rCocLabel: 'Cash on Cash ROI',
+    rCocSub: '자기자본 대비',
+    rIncomeLabel: '연간 임대 수입',
+    rIncomeSub: '공실 반영',
+    rExpLabel: '연간 총 지출',
+    rExpSub: '이자 + 비용',
+    rFlowLabel: '주간 Cash Flow',
+    rFlowSub: '수입 - 지출',
+    yieldRatingLabel: '수익률 평가',
+    breakdownTitle: '상세 내역',
+    breakdownRows: ['연간 임대 수입 (공실 반영)', '이자 비용', '관리비 (PM Fee)', '유지보수비', 'Strata Levy', 'Council Rates', '보험료', '순수익 (Net Income)'],
+    // Compare tab
+    compareTitle: '매물 비교 도구',
+    compareSub: '최대 6개 매물 비교 · 자동 최적 분석',
+    cAddTitle: '매물 추가',
+    cAddr: '주소 / 매물명',
+    cAddrPh: '예: 12 Park St, Newtown',
+    cPrice: '매입가 ($)',
+    cRentW: '주간 임대료 ($)',
+    cBedLabel: '침실 수',
+    cBathLabel: '욕실 수',
+    cParkLabel: '주차',
+    cParkNone: '없음',
+    cParkOne: '1대',
+    cParkTwo: '2대',
+    addBtn: '+ 추가',
+    cEmptyMsg: '위에서 매물을 추가하면<br>자동으로 비교 분석됩니다',
+    cSummaryTitle: '🏆 최적 매물 분석',
+    wBestYield: '🏆 최고 수익률',
+    wLowest: '💰 최저 매입가',
+    wBestRent: '📅 최고 임대료',
+    pStatPrice: '매입가',
+    pStatRent: '주간 임대료',
+    pStatBed: '침실/욕실/주차',
+    pStatPpb: '침실당 가격',
+    // Benchmark tab
+    benchTitle: 'Suburb 벤치마크',
+    benchSub: '시드니 주요 SUBURB · 임대 수익률 데이터 (2024-25 기준)',
+    bTypeLabel: '부동산 유형 필터',
+    bAllTypes: '전체',
+    bHouse: 'House',
+    bUnit: 'Unit',
+    bAreaLabel: '지역 필터',
+    bAllAreas: '전체',
+    bInner: 'Inner Sydney',
+    bEast: 'Eastern Suburbs',
+    bNorth: 'North Shore',
+    bBeach: 'Northern Beaches',
+    bWest: 'Inner West',
+    bSW: 'South West',
+    bRyde: 'Rhodes / Ryde Corridor',
+    thSuburb: 'Suburb',
+    thArea: '지역',
+    thType: '유형',
+    thPrice: '중간 매입가',
+    thRent: '주간 임대료',
+    thYield: 'Gross Yield',
+    thRating: '평가',
+    barTitle: 'Gross Yield 비교 (상위 Suburbs)',
+    suburbSelect: '-- Suburb 선택 --',
+  },
+  en: {
+    logoSub: 'ANALYSER — AU Market Tool',
+    tab1: '📊 Rental Yield Calculator',
+    tab2: '⚖️ Property Comparison',
+    tab3: '🏘️ Suburb Benchmark',
+    yieldTitle: 'Rental Yield Calculator',
+    yieldSub: 'GROSS & NET YIELD · WEEKLY CASH FLOW · ROI ANALYSIS',
+    lSuburb: '📍 Suburb',
+    lPropType: '🏠 Property Type',
+    lPurchase: '💰 Purchase Price (AUD $)',
+    lRent: '📅 Weekly Rent ($ / week)',
+    lLoan: '🏦 Loan Amount (AUD $)',
+    lRate: '📈 Interest Rate (% p.a.)',
+    lMaint: '🔧 Annual Maintenance ($ / year)',
+    lStrata: '🏘️ Strata Levy ($ / quarter)',
+    lCouncil: '🏛️ Council Rates ($ / year)',
+    lInsurance: '🛡️ Insurance ($ / year)',
+    lMgmt: '📋 Property Management (%)',
+    lVacancy: '🔖 Vacancy (weeks / year)',
+    calcBtn: '📊 Calculate Yield',
+    rGrossLabel: 'Gross Yield',
+    rGrossSub: 'Annual rent / purchase price',
+    rNetLabel: 'Net Yield',
+    rNetSub: 'After all expenses',
+    rCocLabel: 'Cash on Cash ROI',
+    rCocSub: 'Return on equity',
+    rIncomeLabel: 'Annual Rental Income',
+    rIncomeSub: 'Vacancy adjusted',
+    rExpLabel: 'Annual Total Expenses',
+    rExpSub: 'Interest + costs',
+    rFlowLabel: 'Weekly Cash Flow',
+    rFlowSub: 'Income - Expenses',
+    yieldRatingLabel: 'Yield Rating',
+    breakdownTitle: 'Detailed Breakdown',
+    breakdownRows: ['Annual Rent (vacancy adj.)', 'Interest Expense', 'Mgmt Fee (PM)', 'Maintenance', 'Strata Levy', 'Council Rates', 'Insurance', 'Net Income'],
+    compareTitle: 'Property Comparison Tool',
+    compareSub: 'Compare up to 6 properties · Auto best-pick analysis',
+    cAddTitle: 'Add Property',
+    cAddr: 'Address / Property Name',
+    cAddrPh: 'e.g. 12 Park St, Newtown',
+    cPrice: 'Purchase Price ($)',
+    cRentW: 'Weekly Rent ($)',
+    cBedLabel: 'Bedrooms',
+    cBathLabel: 'Bathrooms',
+    cParkLabel: 'Parking',
+    cParkNone: 'None',
+    cParkOne: '1 space',
+    cParkTwo: '2 spaces',
+    addBtn: '+ Add',
+    cEmptyMsg: 'Add properties above<br>to start comparing automatically',
+    cSummaryTitle: '🏆 Best Property Analysis',
+    wBestYield: '🏆 Highest Yield',
+    wLowest: '💰 Lowest Price',
+    wBestRent: '📅 Highest Rent',
+    pStatPrice: 'Purchase Price',
+    pStatRent: 'Weekly Rent',
+    pStatBed: 'Bed/Bath/Parking',
+    pStatPpb: 'Price Per Bedroom',
+    benchTitle: 'Suburb Benchmark',
+    benchSub: 'KEY SYDNEY SUBURBS · Rental Yield Data (2024-25 Estimates)',
+    bTypeLabel: 'Property Type Filter',
+    bAllTypes: 'All',
+    bHouse: 'House',
+    bUnit: 'Unit',
+    bAreaLabel: 'Area Filter',
+    bAllAreas: 'All',
+    bInner: 'Inner Sydney',
+    bEast: 'Eastern Suburbs',
+    bNorth: 'North Shore',
+    bBeach: 'Northern Beaches',
+    bWest: 'Inner West',
+    bSW: 'South West',
+    bRyde: 'Rhodes / Ryde Corridor',
+    thSuburb: 'Suburb',
+    thArea: 'Area',
+    thType: 'Type',
+    thPrice: 'Median Price',
+    thRent: 'Weekly Rent',
+    thYield: 'Gross Yield',
+    thRating: 'Rating',
+    barTitle: 'Gross Yield Comparison (Top Suburbs)',
+    suburbSelect: '-- Select Suburb --',
+  }
+};
+
+function applyLang(lang) {
+  const t = i18n[lang];
+  // Logo sub
+  document.querySelector('.logo span').textContent = t.logoSub;
+  // Tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns[0].textContent = t.tab1;
+  tabBtns[1].textContent = t.tab2;
+  tabBtns[2].textContent = t.tab3;
+  // Tab 1 - Yield
+  document.querySelector('#tab-yield .section-title').textContent = t.yieldTitle;
+  document.querySelector('#tab-yield .section-sub').textContent = t.yieldSub;
+  const yLabels = document.querySelectorAll('#tab-yield .input-label');
+  const lKeys = ['lSuburb','lPropType','lPurchase','lRent','lLoan','lRate','lMaint','lStrata','lCouncil','lInsurance','lMgmt','lVacancy'];
+  yLabels.forEach((el,i) => { if(lKeys[i]) el.textContent = t[lKeys[i]]; });
+  document.querySelector('#tab-yield .calc-btn').textContent = t.calcBtn;
+  // Result labels
+  const rCards = document.querySelectorAll('#yResults .result-card');
+  if(rCards.length >= 6){
+    rCards[0].querySelector('.result-label').textContent = t.rGrossLabel;
+    rCards[0].querySelector('.result-sub').textContent = t.rGrossSub;
+    rCards[1].querySelector('.result-label').textContent = t.rNetLabel;
+    rCards[1].querySelector('.result-sub').textContent = t.rNetSub;
+    rCards[2].querySelector('.result-label').textContent = t.rCocLabel;
+    rCards[2].querySelector('.result-sub').textContent = t.rCocSub;
+    rCards[3].querySelector('.result-label').textContent = t.rIncomeLabel;
+    rCards[3].querySelector('.result-sub').textContent = t.rIncomeSub;
+    rCards[4].querySelector('.result-label').textContent = t.rExpLabel;
+    rCards[4].querySelector('.result-sub').textContent = t.rExpSub;
+    rCards[5].querySelector('.result-label').textContent = t.rFlowLabel;
+    rCards[5].querySelector('.result-sub').textContent = t.rFlowSub;
+  }
+  document.querySelector('.meter-label-row span:first-child').textContent = t.yieldRatingLabel;
+  // Suburb select placeholder
+  document.querySelector('#ySuburb option[value=""]').textContent = t.suburbSelect;
+  // Tab 2 - Compare
+  document.querySelector('#tab-compare .section-title').textContent = t.compareTitle;
+  document.querySelector('#tab-compare .section-sub').textContent = t.compareSub;
+  const cLabels = document.querySelectorAll('#tab-compare .input-label');
+  if(cLabels.length >= 6){
+    cLabels[0].textContent = t.cAddr;
+    cLabels[1].textContent = t.cPrice;
+    cLabels[2].textContent = t.cRentW;
+    cLabels[3].textContent = t.cBedLabel;
+    cLabels[4].textContent = t.cBathLabel;
+    cLabels[5].textContent = t.cParkLabel;
+  }
+  document.getElementById('cAddr').placeholder = t.cAddrPh;
+  document.querySelector('.add-btn').textContent = t.addBtn;
+  // Parking options
+  const parkSel = document.getElementById('cPark');
+  if(parkSel.options.length >= 3){
+    parkSel.options[0].textContent = t.cParkNone;
+    parkSel.options[1].textContent = t.cParkOne;
+    parkSel.options[2].textContent = t.cParkTwo;
+  }
+  // Tab 3 - Benchmark
+  document.querySelector('#tab-benchmark .section-title').textContent = t.benchTitle;
+  document.querySelector('#tab-benchmark .section-sub').textContent = t.benchSub;
+  const bLabels = document.querySelectorAll('#tab-benchmark .input-label');
+  if(bLabels.length >= 2){ bLabels[0].textContent = t.bTypeLabel; bLabels[1].textContent = t.bAreaLabel; }
+  // Benchmark filter selects
+  const bTypeOpts = document.querySelector('#bFilterType').options;
+  bTypeOpts[0].textContent = t.bAllTypes; bTypeOpts[1].textContent = t.bHouse; bTypeOpts[2].textContent = t.bUnit;
+  const bAreaOpts = document.querySelector('#bFilterArea').options;
+  bAreaOpts[0].textContent = t.bAllAreas; bAreaOpts[1].textContent = t.bInner; bAreaOpts[2].textContent = t.bEast;
+  bAreaOpts[3].textContent = t.bNorth; bAreaOpts[4].textContent = t.bBeach; bAreaOpts[5].textContent = t.bWest;
+  bAreaOpts[6].textContent = t.bSW; bAreaOpts[7].textContent = t.bRyde;
+  // Table headers
+  const ths = document.querySelectorAll('.suburb-table th');
+  const thKeys = ['thSuburb','thArea','thType','thPrice','thRent','thYield','thRating'];
+  ths.forEach((th,i) => { if(thKeys[i]) th.textContent = t[thKeys[i]]; });
+  // Bar chart title
+  const barTitleEl = document.querySelector('.benchmark-bar-wrap > div');
+  if(barTitleEl) barTitleEl.textContent = t.barTitle;
+  // Re-render benchmark (area labels)
+  renderBenchmark();
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'ko' ? 'en' : 'ko';
+  document.getElementById('langBtn').textContent = currentLang === 'ko' ? 'KO' : 'EN';
+  applyLang(currentLang);
+}
+
 // ─── THEME ───────────────────────────────────────────────────────
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
@@ -802,15 +1064,16 @@ function calculateYield() {
   document.getElementById('yieldRating').textContent = rating;
 
   // Breakdown
+  const bRows = i18n[currentLang].breakdownRows;
   const rows = [
-    ['연간 임대 수입 (공실 반영)', annualRent, true],
-    ['이자 비용', interestAnnual, false],
-    ['관리비 (PM Fee)', mgmtFee, false],
-    ['유지보수비', maint, false],
-    ['Strata Levy', strata, false],
-    ['Council Rates', council, false],
-    ['보험료', insurance, false],
-    ['순수익 (Net Income)', netIncome, null],
+    [bRows[0], annualRent, true],
+    [bRows[1], interestAnnual, false],
+    [bRows[2], mgmtFee, false],
+    [bRows[3], maint, false],
+    [bRows[4], strata, false],
+    [bRows[5], council, false],
+    [bRows[6], insurance, false],
+    [bRows[7], netIncome, null],
   ];
   let html = '';
   rows.forEach(([label, val, isIncome]) => {
@@ -869,6 +1132,7 @@ function renderProperties() {
   const lowestPrice = Math.min(...properties.map(p => p.price));
   const bestRent = Math.max(...properties.map(p => p.rentW));
   const bestPPB = Math.min(...properties.map(p => p.pricePerBed));
+  const t = i18n[currentLang];
 
   grid.innerHTML = properties.map((p, i) => `
     <div class="prop-card">
@@ -881,11 +1145,11 @@ function renderProperties() {
       </div>
       <div class="prop-card-body">
         <div class="prop-stat-row">
-          <span class="prop-stat-label">매입가</span>
+          <span class="prop-stat-label">${t.pStatPrice}</span>
           <span class="prop-stat-value ${p.price === lowestPrice ? 'best' : ''}">$${p.price.toLocaleString()}</span>
         </div>
         <div class="prop-stat-row">
-          <span class="prop-stat-label">주간 임대료</span>
+          <span class="prop-stat-label">${t.pStatRent}</span>
           <span class="prop-stat-value ${p.rentW === bestRent ? 'best' : ''}">$${p.rentW}/wk</span>
         </div>
         <div class="prop-stat-row">
@@ -893,11 +1157,11 @@ function renderProperties() {
           <span class="prop-stat-value ${p.grossYield === bestYield ? 'best' : ''}">${p.grossYield.toFixed(2)}%</span>
         </div>
         <div class="prop-stat-row">
-          <span class="prop-stat-label">침실/욕실/주차</span>
+          <span class="prop-stat-label">${t.pStatBed}</span>
           <span class="prop-stat-value">${p.bed}🛏 ${p.bath}🛁 ${p.park}🚗</span>
         </div>
         <div class="prop-stat-row">
-          <span class="prop-stat-label">침실당 가격</span>
+          <span class="prop-stat-label">${t.pStatPpb}</span>
           <span class="prop-stat-value ${p.pricePerBed === bestPPB ? 'best' : ''}">$${Math.round(p.pricePerBed).toLocaleString()}</span>
         </div>
       </div>
@@ -911,22 +1175,23 @@ function renderProperties() {
 
   document.getElementById('winnerRow').innerHTML = `
     <div class="winner-card">
-      <div class="winner-label">🏆 최고 수익률</div>
+      <div class="winner-label">${t.wBestYield}</div>
       <div class="winner-name">${bestYieldProp.addr.split(',')[0]}</div>
       <div class="winner-val">Gross Yield ${bestYieldProp.grossYield.toFixed(2)}%</div>
     </div>
     <div class="winner-card">
-      <div class="winner-label">💰 최저 매입가</div>
+      <div class="winner-label">${t.wLowest}</div>
       <div class="winner-name">${lowestPriceProp.addr.split(',')[0]}</div>
       <div class="winner-val">$${lowestPriceProp.price.toLocaleString()}</div>
     </div>
     <div class="winner-card">
-      <div class="winner-label">📅 최고 임대료</div>
+      <div class="winner-label">${t.wBestRent}</div>
       <div class="winner-name">${bestRentProp.addr.split(',')[0]}</div>
       <div class="winner-val">$${bestRentProp.rentW}/wk</div>
     </div>
   `;
   document.getElementById('cSummary').style.display = 'block';
+  document.querySelector('.compare-summary h3').textContent = t.cSummaryTitle;
 }
 
 // ─── BENCHMARK DATA ───────────────────────────────────────────────
@@ -981,9 +1246,12 @@ const benchmarkData = [
   { suburb:'Concord', area:'west', type:'unit', medPrice:820000, rentW:600, yield:3.80 },
 ];
 
-const areaLabels = { inner:'Inner Sydney', east:'Eastern Suburbs', north:'North Shore', beach:'Northern Beaches', west:'Inner West', sw:'South West', ryde:'Rhodes / Ryde Corridor' };
-
 function renderBenchmark() {
+  const t = i18n[currentLang];
+  const areaLabels = {
+    inner: t.bInner, east: t.bEast, north: t.bNorth,
+    beach: t.bBeach, west: t.bWest, sw: t.bSW, ryde: t.bRyde
+  };
   const typeF = document.getElementById('bFilterType').value;
   const areaF = document.getElementById('bFilterArea').value;
   let data = benchmarkData;
