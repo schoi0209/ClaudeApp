@@ -289,8 +289,7 @@ let generatedData = {};
 function getGeminiKey() {
   const key = document.getElementById('geminiKeyInput')?.value?.trim()
     || localStorage.getItem('ytmaker_gemini_key') || '';
-  if (!key) throw new Error('Gemini API 키를 입력해주세요!
-aistudio.google.com/app/apikey 에서 무료 발급');
+  if (!key) throw new Error('Gemini API 키를 입력해주세요!\naistudio.google.com/app/apikey 에서 무료 발급');
   return key;
 }
 function saveGeminiKey(val) {
