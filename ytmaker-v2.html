@@ -300,8 +300,16 @@ function toggleGeminiVis() {
   const inp = document.getElementById('geminiKeyInput');
   if (inp) inp.type = inp.type === 'password' ? 'text' : 'password';
 }
-// Restore saved Gemini key on load
+// Init on DOM ready: system theme + saved key restore
 window.addEventListener('DOMContentLoaded', function() {
+  // System theme detection (must run after DOM ready)
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    isDark = false;
+    document.body.classList.add('light');
+    document.getElementById('themeIcon').textContent = '🌙';
+    document.getElementById('themeLabel').textContent = '다크 모드';
+  }
+  // Restore saved Gemini key
   const saved = localStorage.getItem('ytmaker_gemini_key');
   if (saved) {
     const el = document.getElementById('geminiKeyInput');
@@ -309,13 +317,6 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 // AI: Gemini 2.0 Flash (무료 티어)
-
-// System theme
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-  isDark = false; document.body.classList.add('light');
-  document.getElementById('themeIcon').textContent = '🌙';
-  document.getElementById('themeLabel').textContent = '다크 모드';
-}
 
 function toggleTheme() {
   isDark = !isDark;
@@ -416,8 +417,10 @@ async function runStep1() {
   const tone = getSelectedTags('toneTags');
   const lang = getSelectedTags('langTags');
   generatedData = {topic, category, length, target, tone, lang};
-  showStep(2);
-  showLoading('contentResult','🔍 주제 분석 & 콘텐츠 설계 중...','훅, 타임라인, 핵심 포인트를 AI가 분석합니다');
+
+  // Show loading overlay on panel 1 first, then switch after success
+  const btn = document.querySelector('#panel-1 .btn-p');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 분석 중...'; }
 
   const prompt = `유튜브 콘텐츠 전략가입니다.
 주제: ${topic}
@@ -434,9 +437,12 @@ async function runStep1() {
     const raw = await callClaude(prompt, 2000);
     const json = parseJSON(raw);
     generatedData.content = json;
+    showStep(2);
+    showLoading('contentResult','🔍 콘텐츠 설계 완료!','결과를 렌더링합니다...');
     renderContent(json);
   } catch(e) {
-    document.getElementById('contentResult').innerHTML = `<div class="error-chip">⚠️ 오류: ${e.message}<br><small>다시 시도해주세요.</small></div>`;
+    if (btn) { btn.disabled = false; btn.textContent = '🔍 AI 콘텐츠 설계 시작'; }
+    alert('⚠️ 오류: ' + e.message);
   }
 }
 
