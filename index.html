@@ -202,7 +202,9 @@
 <canvas id="tubes-canvas"></canvas>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy Me a Coffee</a>
 <div class="top-controls">
-  <button class="tubes-toggle active" id="tubesBtn" onclick="toggleTubes()">🪄 Tubes On</button>
+  <button class="tubes-toggle active" id="tubesBtn" onclick="toggleTubes()">
+    <span id="tubesIcon">🌈</span><span id="tubesLabel">Tubes On</span>
+  </button>
   <button class="theme-toggle" onclick="toggleTheme()">
     <span id="themeIcon">🌙</span>
     <span id="themeLabel">Dark</span>
@@ -467,7 +469,7 @@
   const ctx = canvas.getContext('2d');
   let W, H, tubesOn = true;
   const mouse = { x: -300, y: -300 };
-  const COLORS = ['#C9A84C','#E8C97A','#8B6914','#D4AF6A','#F0D080','#A07820'];
+  const COLORS = ['#00F5FF','#BF5FFF','#FF2D9B','#00FFB3','#7B61FF','#FF6BF5','#00CFFF','#FF4DC4'];
 
   function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
@@ -478,9 +480,9 @@
     constructor(ox, oy) {
       this.pts = [];
       this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.w = 2 + Math.random() * 4;
+      this.w = 2.5 + Math.random() * 4;
       this.maxLen = 50 + Math.random() * 70;
-      this.alpha = 0.55 + Math.random() * 0.4;
+      this.alpha = 0.7 + Math.random() * 0.3;
       this.ox = ox; this.oy = oy;
       this.wobble = Math.random() * Math.PI * 2;
       this.ws = 0.05 + Math.random() * 0.1;
@@ -515,10 +517,10 @@
     draw() {
       ctx.save();
       const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 18);
-      g.addColorStop(0, 'rgba(201,168,76,0.5)'); g.addColorStop(1, 'rgba(201,168,76,0)');
+      g.addColorStop(0, 'rgba(0,245,255,0.5)'); g.addColorStop(1, 'rgba(0,245,255,0)');
       ctx.beginPath(); ctx.arc(this.x, this.y, 18, 0, Math.PI*2); ctx.fillStyle = g; ctx.fill();
       ctx.beginPath(); ctx.arc(this.x, this.y, 5, 0, Math.PI*2);
-      ctx.fillStyle = '#C9A84C'; ctx.globalAlpha = 0.95; ctx.fill();
+      ctx.fillStyle = '#00F5FF'; ctx.globalAlpha = 0.95; ctx.fill();
       ctx.restore();
     }
   }
@@ -537,7 +539,8 @@
   function toggleTubes() {
     tubesOn = !tubesOn;
     const btn = document.getElementById('tubesBtn');
-    btn.textContent = tubesOn ? '\ud83e\ude84 Tubes On' : '\u2726 Tubes Off';
+    document.getElementById('tubesIcon').textContent = tubesOn ? '🌈' : '✦';
+    document.getElementById('tubesLabel').textContent = tubesOn ? 'Tubes On' : 'Tubes Off';
     btn.classList.toggle('active', tubesOn);
     if (!tubesOn) ctx.clearRect(0, 0, W, H);
     localStorage.setItem('tubes', tubesOn ? '1' : '0');
