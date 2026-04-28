@@ -202,8 +202,8 @@
 <canvas id="tubes-canvas"></canvas>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy Me a Coffee</a>
 <div class="top-controls">
-  <button class="tubes-toggle active" id="tubesBtn" onclick="toggleTubes()">
-    <span id="tubesIcon">🌈</span><span id="tubesLabel">Tubes On</span>
+  <button class="tubes-toggle" id="tubesBtn" onclick="toggleTubes()">
+    <span id="tubesIcon">✦</span><span id="tubesLabel">Tubes Off</span>
   </button>
   <button class="theme-toggle" onclick="toggleTheme()">
     <span id="themeIcon">🌙</span>
@@ -467,7 +467,7 @@
   /* ——— TUBES CURSOR ——— */
   const canvas = document.getElementById('tubes-canvas');
   const ctx = canvas.getContext('2d');
-  let W, H, tubesOn = true;
+  let W, H, tubesOn = false;
   const mouse = { x: -300, y: -300 };
   const COLORS = ['#00F5FF','#BF5FFF','#FF2D9B','#00FFB3','#7B61FF','#FF6BF5','#00CFFF','#FF4DC4'];
 
@@ -545,7 +545,7 @@
     if (!tubesOn) ctx.clearRect(0, 0, W, H);
     localStorage.setItem('tubes', tubesOn ? '1' : '0');
   }
-  if (localStorage.getItem('tubes') === '0') toggleTubes();
+  if (localStorage.getItem('tubes') === '1') toggleTubes();
 
 </script>
 </body>
