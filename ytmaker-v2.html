@@ -554,23 +554,42 @@ async function generateThumbnail(customPrompt) {
   const strategy = parseJSON(stratRaw);
   generatedData.thumbnailStrategy = strategy;
 
-  // Step 2: Gemini image generation
-  // BUG FIX: correct model name (was non-existent 'gemini-3.1-flash-image-preview')
+  // Step 2: Image generation — try Gemini first, fallback to Pollinations AI
   const finalPrompt = customPrompt || strategy.imagePromptEn;
-  const gRes = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${getGeminiKey()}`,
-    { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        contents:[{parts:[{text:finalPrompt}]}],
-        generationConfig:{responseModalities:['TEXT','IMAGE']}
-      }) }
-  );
-  const gData = await gRes.json();
-  if (gData.error) throw new Error(gData.error.message);
-  const parts = gData?.candidates?.[0]?.content?.parts||[];
-  const imgPart = parts.find(p=>p.inlineData);
-  if (!imgPart) throw new Error('이미지 파트 없음. Gemini API 응답을 확인하세요.');
-  return { strategy, imageBase64:imgPart.inlineData.data, mimeType:imgPart.inlineData.mimeType||'image/png', usedPrompt:finalPrompt };
+
+  // Try Gemini imagen
+  try {
+    const gRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${getGeminiKey()}`,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          contents:[{parts:[{text:finalPrompt}]}],
+          generationConfig:{responseModalities:['TEXT','IMAGE']}
+        }) }
+    );
+    const gData = await gRes.json();
+    if (!gData.error) {
+      const parts = gData?.candidates?.[0]?.content?.parts||[];
+      const imgPart = parts.find(p=>p.inlineData);
+      if (imgPart) {
+        return { strategy, imageBase64:imgPart.inlineData.data, mimeType:imgPart.inlineData.mimeType||'image/png', usedPrompt:finalPrompt, source:'Gemini' };
+      }
+    }
+  } catch(e) { /* fall through to Pollinations */ }
+
+  // Fallback: Pollinations AI (free, no key needed, returns image URL)
+  const encoded = encodeURIComponent(finalPrompt + ', YouTube thumbnail, 16:9, high quality');
+  const pollUrl = `https://image.pollinations.ai/prompt/${encoded}?width=1280&height=720&nologo=true&seed=${Date.now()}`;
+  const pollRes = await fetch(pollUrl);
+  if (!pollRes.ok) throw new Error('이미지 생성 실패. 잠시 후 다시 시도해주세요.');
+  const blob = await pollRes.blob();
+  const base64 = await new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.onload = () => res(reader.result.split(',')[1]);
+    reader.onerror = rej;
+    reader.readAsDataURL(blob);
+  });
+  return { strategy, imageBase64:base64, mimeType:'image/jpeg', usedPrompt:finalPrompt, source:'Pollinations' };
 }
 
 async function retryCustomPrompt() {
@@ -593,7 +612,7 @@ function renderThumbnail(r) {
     <div class="result-grid">
       <div class="result-card">
         <div class="rc-header">
-          <div class="rc-title">🖼 생성된 썸네일 <span class="badge-r">Gemini AI</span></div>
+          <div class="rc-title">🖼 생성된 썸네일 <span class="badge-r">${r.source||'AI'}</span></div>
           <button class="copy-btn" onclick="downloadThumb()">⬇ 다운로드</button>
         </div>
         <div class="rc-body">
