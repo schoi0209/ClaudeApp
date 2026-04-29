@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Remotion Prompt Generator · Claude Code 용</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;600;700&family=Pretendard+Variable:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f1ea;
+    --bg-alt: #ebe5d9;
+    --paper: #ffffff;
+    --ink: #14110d;
+    --ink-soft: #4a443a;
+    --ink-muted: #8a8276;
+    --rule: #d8cfbf;
+    --rule-soft: #e6dfd0;
+    --accent: #c2410c;
+    --accent-2: #1e3a5f;
+    --accent-3: #5b3a29;
+    --code-bg: #1a1714;
+    --code-ink: #e8dec9;
+    --shadow-1: 0 1px 2px rgba(20,17,13,0.06), 0 8px 24px rgba(20,17,13,0.05);
+    --shadow-2: 0 1px 3px rgba(20,17,13,0.10), 0 24px 48px rgba(20,17,13,0.08);
+    --grain-opacity: 0.045;
+  }
+  [data-theme="dark"] {
+    --bg: #0e0c0a;
+    --bg-alt: #1a1612;
+    --paper: #181410;
+    --ink: #f5ecd8;
+    --ink-soft: #c5b89c;
+    --ink-muted: #7d7361;
+    --rule: #2d271f;
+    --rule-soft: #221d17;
+    --accent: #f97316;
+    --accent-2: #7dd3fc;
+    --accent-3: #d4a574;
+    --code-bg: #0a0807;
+    --code-ink: #f0e6d2;
+    --shadow-1: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.4);
+    --shadow-2: 0 1px 3px rgba(0,0,0,0.5), 0 24px 48px rgba(0,0,0,0.5);
+    --grain-opacity: 0.08;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', 'Fraunces', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  [data-theme="dark"] body::before { mix-blend-mode: screen; }
+
+  /* === TOP BAR === */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .bmc-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #FFDD00; color: #0d0d0d;
+    padding: 8px 14px; border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid #0d0d0d;
+    transition: transform 0.15s ease;
+    box-shadow: 3px 3px 0 #0d0d0d;
+  }
+  .bmc-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #0d0d0d; }
+  .topbar-spacer { flex: 1; }
+  .lang-toggle, .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  .lang-toggle:hover, .theme-toggle:hover {
+    background: var(--ink); color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* === HEADER === */
+  header {
+    padding: 80px 32px 60px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    z-index: 2;
+  }
+  .header-inner { max-width: 1280px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 104px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    font-variation-settings: 'opsz' 144;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 720px;
+    font-weight: 300;
+  }
+  .header-meta {
+    margin-top: 36px;
+    display: flex; gap: 32px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .header-meta span strong {
+    color: var(--ink); font-weight: 600;
+    margin-left: 6px;
+  }
+
+  /* === MAIN LAYOUT === */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 32px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .section {
+    margin-bottom: 56px;
+    border-top: 1px solid var(--rule);
+    padding-top: 40px;
+  }
+  .section:first-child { border-top: none; padding-top: 0; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-left: auto;
+    max-width: 360px;
+    text-align: right;
+  }
+
+  /* === FORM CONTROLS === */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .field input, .field select, .field textarea {
+    font-family: 'Pretendard Variable', sans-serif;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    padding: 11px 14px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 80px; font-family: 'Pretendard Variable'; }
+
+  /* === TEMPLATE PICKER === */
+  .templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .template-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .template-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+  .template-card:hover {
+    border-color: var(--ink-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-1);
+  }
+  .template-card.active {
+    border-color: var(--accent);
+    background: var(--bg-alt);
+  }
+  .template-card.active::before { transform: scaleY(1); }
+  .tpl-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .tpl-name {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .tpl-desc {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+  .tpl-spec {
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  /* === SCENE BUILDER === */
+  .scene-list { display: flex; flex-direction: column; gap: 12px; }
+  .scene-item {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 36px 80px 1fr 80px 80px 36px;
+    gap: 12px;
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .scene-item { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
+  .scene-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .scene-item input, .scene-item select {
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink);
+    padding: 7px 10px;
+    font-size: 13px;
+    border-radius: 3px;
+  }
+  .scene-item input:focus, .scene-item select:focus {
+    outline: none; border-color: var(--accent);
+  }
+  .scene-rm {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
+    width: 32px; height: 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    transition: all 0.15s ease;
+  }
+  .scene-rm:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .add-scene {
+    margin-top: 14px;
+    background: transparent;
+    border: 1.5px dashed var(--rule);
+    color: var(--ink-muted);
+    padding: 14px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    transition: all 0.2s ease;
+  }
+  .add-scene:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg-alt);
+  }
+
+  /* === TIMELINE === */
+  .timeline-wrap {
+    margin-top: 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 18px 14px;
+  }
+  .timeline-meta {
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+  .timeline-bar {
+    display: flex;
+    height: 36px;
+    background: var(--bg-alt);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .timeline-seg {
+    border-right: 1px solid var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .timeline-seg:hover { filter: brightness(1.15); }
+  .timeline-ruler {
+    display: flex; margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    justify-content: space-between;
+  }
+
+  /* === GENERATE BUTTON === */
+  .generate-bar {
+    position: sticky;
+    bottom: 24px;
+    z-index: 30;
+    margin: 56px 0 24px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .gen-btn {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 18px 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: var(--shadow-2);
+    transition: all 0.2s ease;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .gen-btn:hover { transform: translateY(-2px); }
+  .gen-btn.primary { background: var(--accent); color: white; }
+  .gen-btn .arrow { transition: transform 0.2s ease; }
+  .gen-btn:hover .arrow { transform: translateX(4px); }
+
+  /* === OUTPUT === */
+  .output-wrap {
+    margin-top: 32px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: var(--shadow-2);
+  }
+  .output-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-alt);
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    padding: 14px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    font-weight: 600;
+  }
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+    background: var(--paper);
+  }
+  .tab-btn:hover:not(.active) { color: var(--ink); }
+
+  .output-pane {
+    display: none;
+    padding: 0;
+  }
+  .output-pane.active { display: block; }
+  .pane-actions {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 18px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .pane-actions span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+  .copy-btn, .download-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 6px;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover, .download-btn:hover {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .copy-btn.copied { background: #16a34a; color: white; border-color: #16a34a; }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 22px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  pre.code-pane { white-space: pre; word-break: normal; }
+  pre code .kw { color: #c084fc; }
+  pre code .str { color: #fca5a5; }
+  pre code .com { color: #6b7280; font-style: italic; }
+  pre code .fn { color: #fbbf24; }
+  pre code .num { color: #5eead4; }
+
+  /* === FOOTER === */
+  footer {
+    margin-top: 80px;
+    padding: 40px 32px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    position: relative; z-index: 2;
+  }
+  footer .made { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--ink-soft); }
+
+  /* === EMPTY === */
+  .empty-state {
+    padding: 60px 24px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  /* anim */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { animation: fadeUp 0.5s ease both; }
+
+  ::selection { background: var(--accent); color: white; }
+</style>
+</head>
+<body data-theme="light">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a class="bmc-btn" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
+    ☕ <span data-i18n="bmc">Buy Me a Coffee</span>
+  </a>
+  <div class="topbar-spacer"></div>
+  <button class="lang-toggle" id="langToggle">EN</button>
+  <button class="theme-toggle" id="themeToggle">◐ DARK</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="eyebrow"><span data-i18n="eyebrow">Remotion · 프롬프트 · 생성기</span></div>
+    <h1 data-i18n="h1">Cinematic prompts<br /><em data-i18n="h1em">for Remotion,</em><br />engineered.</h1>
+    <p class="lede" data-i18n="lede">Claude Code 환경에서 즉시 실행 가능한 Remotion 영상 프로젝트를 만들기 위한 구조화된 프롬프트, 컴포넌트 코드, 보이스오버 스크립트를 한 번에 생성합니다.</p>
+    <div class="header-meta">
+      <span><span data-i18n="metaTpl">템플릿</span><strong>9</strong></span>
+      <span><span data-i18n="metaScene">씬 빌더</span><strong>∞</strong></span>
+      <span><span data-i18n="metaOut">출력</span><strong>4</strong></span>
+      <span><span data-i18n="metaLang">언어</span><strong>KO / EN</strong></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION 1: TEMPLATE -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title" data-i18n="s1t">Template</h2>
+      <span class="section-desc" data-i18n="s1d">시작점이 될 고품질 프리셋을 선택하세요. 모든 템플릿에는 카메라 모션, 타이포그래피 시스템, 색상 팔레트가 사전 정의되어 있습니다.</span>
+    </div>
+    <div class="templates" id="templateList"></div>
+  </section>
+
+  <!-- SECTION 2: META -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title" data-i18n="s2t">Project</h2>
+      <span class="section-desc" data-i18n="s2d">제목, 길이, 해상도, 스타일 톤을 설정합니다. Remotion 컴포지션 메타데이터로 사용됩니다.</span>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label data-i18n="lblTitle">프로젝트 제목</label>
+        <input type="text" id="projectTitle" placeholder="My Cinematic Story" />
+      </div>
+      <div class="field">
+        <label data-i18n="lblTopic">주제 / 핵심 메시지</label>
+        <input type="text" id="projectTopic" placeholder="Why minimalism wins in 2026" />
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:18px">
+      <div class="field">
+        <label data-i18n="lblFps">FPS</label>
+        <select id="fps">
+          <option value="30">30</option>
+          <option value="60" selected>60</option>
+          <option value="24">24 (cinematic)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblRes">해상도 / 비율</label>
+        <select id="resolution">
+          <option value="1080x1920">1080×1920 · Vertical (Shorts)</option>
+          <option value="1920x1080" selected>1920×1080 · 16:9 (YouTube)</option>
+          <option value="1080x1080">1080×1080 · 1:1 (Feed)</option>
+          <option value="1920x1920">1920×1920 · Square HD</option>
+          <option value="2560x1440">2560×1440 · 2K</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblTone">스타일 톤</label>
+        <select id="tone">
+          <option value="cinematic-noir">Cinematic Noir · 흑백 / 고대비</option>
+          <option value="editorial-luxury" selected>Editorial Luxury · 세리프 + 베이지</option>
+          <option value="brutalist-mono">Brutalist Mono · 거친 모노톤</option>
+          <option value="neon-cyber">Neon Cyber · 네온 / 글리치</option>
+          <option value="organic-warm">Organic Warm · 자연광 / 따뜻함</option>
+          <option value="minimal-swiss">Minimal Swiss · 그리드 / 헬베티카</option>
+          <option value="retro-vhs">Retro VHS · 80s / 스캔라인</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SCENES -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title" data-i18n="s3t">Scene Timeline</h2>
+      <span class="section-desc" data-i18n="s3d">씬 단위로 길이와 핵심 액션을 정의합니다. 각 씬은 별도의 Remotion <Sequence>로 변환됩니다.</span>
+    </div>
+    <div class="scene-list" id="sceneList"></div>
+    <button class="add-scene" id="addScene" data-i18n="addScene">+ 새 씬 추가</button>
+
+    <div class="timeline-wrap">
+      <div class="timeline-meta">
+        <span data-i18n="tlTotal">총 길이</span>
+        <span id="totalDuration">0.0s · 0 frames</span>
+      </div>
+      <div class="timeline-bar" id="timelineBar"></div>
+      <div class="timeline-ruler" id="timelineRuler"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: VOICEOVER -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title" data-i18n="s4t">Voiceover</h2>
+      <span class="section-desc" data-i18n="s4d">AI 보이스오버 스크립트의 톤과 화자를 결정합니다. ElevenLabs / OpenAI TTS 호환 형식으로 출력됩니다.</span>
+    </div>
+    <div class="grid-3">
+      <div class="field">
+        <label data-i18n="lblNarrator">화자 스타일</label>
+        <select id="narratorStyle">
+          <option value="documentary">Documentary · 차분한 다큐 톤</option>
+          <option value="ad-energetic" selected>Ad / Energetic · 광고 활기참</option>
+          <option value="storyteller">Storyteller · 친근한 이야기꾼</option>
+          <option value="news-authoritative">News · 권위있는 뉴스</option>
+          <option value="luxury-soft">Luxury · 부드럽고 우아한</option>
+          <option value="hype-shorts">Hype · Shorts/Reels 빠른 비트</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblPace">속도</label>
+        <select id="vPace">
+          <option value="slow">Slow (~120 wpm)</option>
+          <option value="normal" selected>Normal (~150 wpm)</option>
+          <option value="fast">Fast (~180 wpm)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblLang">언어</label>
+        <select id="vLang">
+          <option value="ko" selected>한국어</option>
+          <option value="en">English</option>
+          <option value="bilingual">Bilingual (KO + EN)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" style="margin-top:18px">
+      <label data-i18n="lblHook">선택적 첫 후크 (Hook) — 비워두면 AI가 작성</label>
+      <textarea id="hookText" placeholder="예) 단 3초 안에 시청자를 사로잡는 한 문장."></textarea>
+    </div>
+  </section>
+
+  <!-- SECTION 5: ADVANCED -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title" data-i18n="s5t">Advanced</h2>
+      <span class="section-desc" data-i18n="s5d">애니메이션 라이브러리, 폰트, 사운드 디자인 옵션. Remotion 4 + remotion/animations 기준.</span>
+    </div>
+    <div class="grid-3">
+      <div class="field">
+        <label data-i18n="lblAnim">애니메이션 라이브러리</label>
+        <select id="animLib">
+          <option value="spring" selected>Remotion spring (default)</option>
+          <option value="interpolate">interpolate + easing</option>
+          <option value="motion">framer-motion</option>
+          <option value="gsap">GSAP integration</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblFont">타이포그래피</label>
+        <select id="fontStack">
+          <option value="fraunces-pretendard" selected>Fraunces + Pretendard</option>
+          <option value="instrument-inter">Instrument Serif + Inter</option>
+          <option value="space-grotesk">Space Grotesk</option>
+          <option value="ibm-plex">IBM Plex Sans + Mono</option>
+          <option value="custom-bold">Editorial Bold (서체 자유)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="lblSfx">사운드 디자인</label>
+        <select id="soundDesign">
+          <option value="ambient">Ambient · 잔잔한 배경</option>
+          <option value="cinematic" selected>Cinematic · 임팩트 SFX</option>
+          <option value="upbeat">Upbeat · 활기찬 BGM</option>
+          <option value="silent">Silent · 음악 없음</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENERATE -->
+  <div class="generate-bar">
+    <button class="gen-btn primary" id="generateBtn">
+      <span data-i18n="generate">PROMPT 생성하기</span>
+      <span class="arrow">→</span>
+    </button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output-wrap" id="outputWrap" style="display:none">
+    <div class="output-tabs">
+      <button class="tab-btn active" data-tab="prompt">📋 Claude Prompt</button>
+      <button class="tab-btn" data-tab="component">⚛️ Remotion Code</button>
+      <button class="tab-btn" data-tab="vo">🎙️ Voiceover Script</button>
+      <button class="tab-btn" data-tab="cli">⌨️ CLI Commands</button>
+    </div>
+
+    <div class="output-pane active" data-pane="prompt">
+      <div class="pane-actions">
+        <span>OUTPUT · prompt.md</span>
+        <div>
+          <button class="copy-btn" data-target="promptOut">COPY</button>
+          <button class="download-btn" data-target="promptOut" data-filename="remotion-prompt.md">DOWNLOAD</button>
+        </div>
+      </div>
+      <pre id="promptOut"></pre>
+    </div>
+
+    <div class="output-pane" data-pane="component">
+      <div class="pane-actions">
+        <span>OUTPUT · src/Composition.tsx</span>
+        <div>
+          <button class="copy-btn" data-target="componentOut">COPY</button>
+          <button class="download-btn" data-target="componentOut" data-filename="Composition.tsx">DOWNLOAD</button>
+        </div>
+      </div>
+      <pre id="componentOut" class="code-pane"></pre>
+    </div>
+
+    <div class="output-pane" data-pane="vo">
+      <div class="pane-actions">
+        <span>OUTPUT · voiceover.txt</span>
+        <div>
+          <button class="copy-btn" data-target="voOut">COPY</button>
+          <button class="download-btn" data-target="voOut" data-filename="voiceover.txt">DOWNLOAD</button>
+        </div>
+      </div>
+      <pre id="voOut"></pre>
+    </div>
+
+    <div class="output-pane" data-pane="cli">
+      <div class="pane-actions">
+        <span>OUTPUT · run.sh</span>
+        <div>
+          <button class="copy-btn" data-target="cliOut">COPY</button>
+          <button class="download-btn" data-target="cliOut" data-filename="run.sh">DOWNLOAD</button>
+        </div>
+      </div>
+      <pre id="cliOut"></pre>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="made">Made by SunnyApps. All rights reserved.</div>
+  <div style="margin-top:8px">REMOTION PROMPT GENERATOR · v1.0 · 2026</div>
+</footer>
+
+<script>
+/* ============================================================
+   REMOTION PROMPT GENERATOR
+   ============================================================ */
+
+// ----- TEMPLATES -----
+const TEMPLATES = [
+  {
+    id: 'shorts-hook',
+    cat: 'Shorts',
+    name: 'Hook → Reveal → CTA',
+    desc: '3초 후크, 빠른 컷, 강한 CTA. YouTube Shorts/Reels/TikTok 최적화.',
+    spec: '1080×1920 · 30s · 60fps',
+    res: '1080x1920',
+    fps: 60,
+    tone: 'editorial-luxury',
+    scenes: [
+      { name: 'Hook', duration: 3, action: '강렬한 한 문장 + 풀스크린 타이포' },
+      { name: 'Problem', duration: 5, action: '관객의 페인 포인트 시각화' },
+      { name: 'Reveal', duration: 12, action: '솔루션 단계별 등장 + 카메라 줌' },
+      { name: 'Proof', duration: 6, action: '데이터 / 인용 / 결과 강조' },
+      { name: 'CTA', duration: 4, action: '구독 + 다음 영상 미리보기' }
+    ]
+  },
+  {
+    id: 'shorts-list',
+    cat: 'Shorts',
+    name: 'Top 5 List Reveal',
+    desc: '카운트다운 형식의 리스트 영상. 각 항목 슬라이드로 전환.',
+    spec: '1080×1920 · 45s · 60fps',
+    res: '1080x1920',
+    fps: 60,
+    tone: 'neon-cyber',
+    scenes: [
+      { name: 'Intro', duration: 3, action: '"TOP 5 ___" 큰 타이틀' },
+      { name: 'Item 5', duration: 8, action: '5위 카드 슬라이드 인' },
+      { name: 'Item 4', duration: 8, action: '4위 카드' },
+      { name: 'Item 3', duration: 8, action: '3위 카드' },
+      { name: 'Item 2', duration: 8, action: '2위 카드' },
+      { name: 'Item 1', duration: 10, action: '1위 — 드라마틱 등장' }
+    ]
+  },
+  {
+    id: 'ad-product',
+    cat: 'Ad',
+    name: 'Product Launch Ad',
+    desc: '제품 로고 등장, 핵심 기능 3개, 가격 강조 후 CTA.',
+    spec: '1920×1080 · 20s · 60fps',
+    res: '1920x1080',
+    fps: 60,
+    tone: 'editorial-luxury',
+    scenes: [
+      { name: 'Logo Reveal', duration: 3, action: '로고 마스크 애니메이션' },
+      { name: 'Feature 1', duration: 4, action: 'UI 클로즈업 + 라벨' },
+      { name: 'Feature 2', duration: 4, action: '슬로우 모션 인터랙션' },
+      { name: 'Feature 3', duration: 4, action: '비교 / 차별점' },
+      { name: 'Price + CTA', duration: 5, action: '큰 가격 타이포 + URL' }
+    ]
+  },
+  {
+    id: 'ad-promo',
+    cat: 'Ad',
+    name: 'Sale / Promo Burst',
+    desc: '할인율 임팩트, 긴급성, 매장/링크 CTA. 캠페인용 단편.',
+    spec: '1080×1080 · 15s · 30fps',
+    res: '1080x1080',
+    fps: 30,
+    tone: 'brutalist-mono',
+    scenes: [
+      { name: 'Attention', duration: 2, action: '풀스크린 빨강 + 충격 카피' },
+      { name: 'Discount', duration: 4, action: '할인율 카운트업 애니' },
+      { name: 'Items', duration: 5, action: '제품 그리드 빠른 컷' },
+      { name: 'Urgency', duration: 2, action: '"오늘 자정까지" 카운트다운' },
+      { name: 'CTA', duration: 2, action: '버튼 + URL' }
+    ]
+  },
+  {
+    id: 'data-bar',
+    cat: 'Data Viz',
+    name: 'Animated Bar Chart Race',
+    desc: '시간에 따른 순위 변화를 보여주는 바 차트 레이스.',
+    spec: '1920×1080 · 30s · 30fps',
+    res: '1920x1080',
+    fps: 30,
+    tone: 'minimal-swiss',
+    scenes: [
+      { name: 'Intro Title', duration: 3, action: '데이터셋 제목 + 출처' },
+      { name: 'Race Start', duration: 4, action: '초기 상태 바 등장' },
+      { name: 'Race Middle', duration: 16, action: '연도별 정렬 변화 + 카운터' },
+      { name: 'Final State', duration: 5, action: '최종 순위 강조 + 인사이트' },
+      { name: 'Outro', duration: 2, action: '출처 + 다음 데이터 예고' }
+    ]
+  },
+  {
+    id: 'data-line',
+    cat: 'Data Viz',
+    name: 'Line Chart Story',
+    desc: '라인 차트 위에 주석을 단계적으로 추가하며 트렌드 설명.',
+    spec: '1920×1080 · 25s · 60fps',
+    res: '1920x1080',
+    fps: 60,
+    tone: 'editorial-luxury',
+    scenes: [
+      { name: 'Setup', duration: 3, action: '축 + 그리드 그리기' },
+      { name: 'Draw Line', duration: 6, action: '라인 stroke 애니메이션' },
+      { name: 'Annotation 1', duration: 5, action: '첫 변곡점 라벨' },
+      { name: 'Annotation 2', duration: 5, action: '두번째 변곡점 + 데이터' },
+      { name: 'Conclusion', duration: 6, action: '인사이트 + 예측 점선' }
+    ]
+  },
+  {
+    id: 'editorial-quote',
+    cat: 'Editorial',
+    name: 'Quote Carousel',
+    desc: '명언/리뷰 텍스트 카루셀. 책/팟캐스트 홍보에 적합.',
+    spec: '1080×1920 · 25s · 60fps',
+    res: '1080x1920',
+    fps: 60,
+    tone: 'editorial-luxury',
+    scenes: [
+      { name: 'Cover', duration: 3, action: '책/팟캐스트 표지 + 저자' },
+      { name: 'Quote 1', duration: 6, action: '첫 인용구 큰 세리프' },
+      { name: 'Quote 2', duration: 6, action: '두번째 인용구' },
+      { name: 'Quote 3', duration: 6, action: '세번째 인용구' },
+      { name: 'CTA', duration: 4, action: '"전문 읽기" 링크' }
+    ]
+  },
+  {
+    id: 'tutorial-howto',
+    cat: 'Tutorial',
+    name: 'Step-by-Step Tutorial',
+    desc: '5단계 하우투. 스크린샷 + 라벨 + 화살표 강조.',
+    spec: '1920×1080 · 60s · 30fps',
+    res: '1920x1080',
+    fps: 30,
+    tone: 'minimal-swiss',
+    scenes: [
+      { name: 'Intro', duration: 5, action: '결과물 미리보기 + 제목' },
+      { name: 'Step 1', duration: 11, action: '스크린샷 + 화살표 + 라벨' },
+      { name: 'Step 2', duration: 11, action: 'Step 2 절차' },
+      { name: 'Step 3', duration: 11, action: 'Step 3 절차' },
+      { name: 'Step 4', duration: 11, action: 'Step 4 절차' },
+      { name: 'Outro', duration: 11, action: '최종 결과 + 추가 자료' }
+    ]
+  },
+  {
+    id: 'lyric-music',
+    cat: 'Music',
+    name: 'Lyric / Mood Video',
+    desc: '음악과 동기화되는 키네틱 타이포그래피. 분위기 중심.',
+    spec: '1920×1080 · 30s · 60fps',
+    res: '1920x1080',
+    fps: 60,
+    tone: 'cinematic-noir',
+    scenes: [
+      { name: 'Atmosphere', duration: 4, action: '풀스크린 그라디언트 + 노이즈' },
+      { name: 'Verse 1', duration: 8, action: '한 줄씩 페이드 인 / 단어별 강조' },
+      { name: 'Hook', duration: 6, action: '큰 타이포 + 컬러 시프트' },
+      { name: 'Verse 2', duration: 8, action: '키네틱 타이포 + 배경 변화' },
+      { name: 'Outro', duration: 4, action: '아티스트 / 곡 정보' }
+    ]
+  }
+];
+
+// ----- I18N -----
+const I18N = {
+  ko: {
+    bmc: 'Buy Me a Coffee',
+    eyebrow: 'Remotion · 프롬프트 · 생성기',
+    h1: 'Cinematic prompts<br /><em>for Remotion,</em><br />engineered.',
+    h1em: 'for Remotion,',
+    lede: 'Claude Code 환경에서 즉시 실행 가능한 Remotion 영상 프로젝트를 만들기 위한 구조화된 프롬프트, 컴포넌트 코드, 보이스오버 스크립트를 한 번에 생성합니다.',
+    metaTpl: '템플릿', metaScene: '씬 빌더', metaOut: '출력', metaLang: '언어',
+    s1t: 'Template', s1d: '시작점이 될 고품질 프리셋을 선택하세요. 모든 템플릿에는 카메라 모션, 타이포그래피 시스템, 색상 팔레트가 사전 정의되어 있습니다.',
+    s2t: 'Project', s2d: '제목, 길이, 해상도, 스타일 톤을 설정합니다. Remotion 컴포지션 메타데이터로 사용됩니다.',
+    s3t: 'Scene Timeline', s3d: '씬 단위로 길이와 핵심 액션을 정의합니다. 각 씬은 별도의 Remotion <Sequence>로 변환됩니다.',
+    s4t: 'Voiceover', s4d: 'AI 보이스오버 스크립트의 톤과 화자를 결정합니다. ElevenLabs / OpenAI TTS 호환 형식으로 출력됩니다.',
+    s5t: 'Advanced', s5d: '애니메이션 라이브러리, 폰트, 사운드 디자인 옵션. Remotion 4 + remotion/animations 기준.',
+    lblTitle: '프로젝트 제목', lblTopic: '주제 / 핵심 메시지',
+    lblFps: 'FPS', lblRes: '해상도 / 비율', lblTone: '스타일 톤',
+    lblNarrator: '화자 스타일', lblPace: '속도', lblLang: '언어', lblHook: '선택적 첫 후크 (Hook) — 비워두면 AI가 작성',
+    lblAnim: '애니메이션 라이브러리', lblFont: '타이포그래피', lblSfx: '사운드 디자인',
+    addScene: '+ 새 씬 추가',
+    tlTotal: '총 길이',
+    generate: 'PROMPT 생성하기',
+  },
+  en: {
+    bmc: 'Buy Me a Coffee',
+    eyebrow: 'Remotion · Prompt · Generator',
+    h1: 'Cinematic prompts<br /><em>for Remotion,</em><br />engineered.',
+    h1em: 'for Remotion,',
+    lede: 'Generate structured prompts, component code, and voiceover scripts to ship Remotion video projects directly inside Claude Code — in one click.',
+    metaTpl: 'TEMPLATES', metaScene: 'SCENE BUILDER', metaOut: 'OUTPUTS', metaLang: 'LANGUAGES',
+    s1t: 'Template', s1d: 'Pick a production-grade preset. Every template ships with predefined camera motion, type system, and palette.',
+    s2t: 'Project', s2d: 'Title, length, resolution, and tone. Used as Remotion composition metadata.',
+    s3t: 'Scene Timeline', s3d: 'Define duration and key action per scene. Each becomes a Remotion <Sequence>.',
+    s4t: 'Voiceover', s4d: 'Tone and narrator style for the voiceover. Output is ElevenLabs / OpenAI TTS compatible.',
+    s5t: 'Advanced', s5d: 'Animation library, fonts, sound design. Targets Remotion 4 + remotion/animations.',
+    lblTitle: 'Project Title', lblTopic: 'Topic / Core Message',
+    lblFps: 'FPS', lblRes: 'Resolution / Aspect', lblTone: 'Style Tone',
+    lblNarrator: 'Narrator Style', lblPace: 'Pace', lblLang: 'Language', lblHook: 'Optional opening hook — leave blank to let AI write it',
+    lblAnim: 'Animation Library', lblFont: 'Typography', lblSfx: 'Sound Design',
+    addScene: '+ Add Scene',
+    tlTotal: 'Total Duration',
+    generate: 'GENERATE PROMPT',
+  }
+};
+
+let currentLang = 'ko';
+let currentTemplateId = 'shorts-hook';
+let scenes = [];
+
+// ----- INIT -----
+function init() {
+  renderTemplates();
+  loadTemplate('shorts-hook');
+  bindEvents();
+  applyI18N();
+  updateTimeline();
+}
+
+function bindEvents() {
+  document.getElementById('langToggle').addEventListener('click', toggleLang);
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  document.getElementById('addScene').addEventListener('click', () => addScene());
+  document.getElementById('generateBtn').addEventListener('click', generate);
+
+  // tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // copy / download
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => copyText(btn));
+  });
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', () => downloadText(btn));
+  });
+}
+
+// ----- THEME / LANG -----
+function toggleTheme() {
+  const cur = document.body.dataset.theme;
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.body.dataset.theme = next;
+  document.getElementById('themeToggle').textContent = next === 'light' ? '◐ DARK' : '◑ LIGHT';
+  localStorage.setItem('rg_theme', next);
+}
+function toggleLang() {
+  currentLang = currentLang === 'ko' ? 'en' : 'ko';
+  document.getElementById('langToggle').textContent = currentLang === 'ko' ? 'EN' : 'KO';
+  document.documentElement.lang = currentLang;
+  applyI18N();
+  localStorage.setItem('rg_lang', currentLang);
+}
+function applyI18N() {
+  const t = I18N[currentLang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key]) el.innerHTML = t[key];
+  });
+}
+// restore
+(function restore() {
+  const th = localStorage.getItem('rg_theme');
+  if (th) {
+    document.body.dataset.theme = th;
+    document.getElementById('themeToggle')?.replaceChildren(document.createTextNode(th === 'light' ? '◐ DARK' : '◑ LIGHT'));
+  } else {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.dataset.theme = 'dark';
+    }
+  }
+  const lg = localStorage.getItem('rg_lang');
+  if (lg) currentLang = lg;
+})();
+
+// ----- TEMPLATES -----
+function renderTemplates() {
+  const list = document.getElementById('templateList');
+  list.innerHTML = TEMPLATES.map(t => `
+    <div class="template-card ${t.id === currentTemplateId ? 'active' : ''}" data-id="${t.id}">
+      <div class="tpl-cat">${t.cat}</div>
+      <div class="tpl-name">${t.name}</div>
+      <div class="tpl-desc">${t.desc}</div>
+      <div class="tpl-spec">${t.spec}</div>
+    </div>
+  `).join('');
+  list.querySelectorAll('.template-card').forEach(card => {
+    card.addEventListener('click', () => loadTemplate(card.dataset.id));
+  });
+}
+
+function loadTemplate(id) {
+  currentTemplateId = id;
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t) return;
+  document.querySelectorAll('.template-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.id === id);
+  });
+  document.getElementById('projectTitle').value = t.name;
+  document.getElementById('fps').value = String(t.fps);
+  document.getElementById('resolution').value = t.res;
+  document.getElementById('tone').value = t.tone;
+  scenes = t.scenes.map(s => ({ ...s }));
+  renderScenes();
+  updateTimeline();
+}
+
+// ----- SCENES -----
+function renderScenes() {
+  const list = document.getElementById('sceneList');
+  list.innerHTML = scenes.map((s, i) => `
+    <div class="scene-item reveal" data-idx="${i}">
+      <div class="scene-num">${String(i+1).padStart(2,'0')}</div>
+      <input type="text" class="s-name" value="${escapeHtml(s.name)}" placeholder="Scene name" />
+      <input type="text" class="s-action" value="${escapeHtml(s.action)}" placeholder="Action / description" />
+      <input type="number" class="s-dur" value="${s.duration}" min="0.5" step="0.5" />
+      <select class="s-trans">
+        <option value="cut">Cut</option>
+        <option value="fade">Fade</option>
+        <option value="slide" selected>Slide</option>
+        <option value="zoom">Zoom</option>
+        <option value="mask">Mask</option>
+      </select>
+      <button class="scene-rm" title="Remove">×</button>
+    </div>
+  `).join('');
+
+  // bind
+  list.querySelectorAll('.scene-item').forEach(item => {
+    const idx = parseInt(item.dataset.idx);
+    item.querySelector('.s-name').addEventListener('input', e => { scenes[idx].name = e.target.value; });
+    item.querySelector('.s-action').addEventListener('input', e => { scenes[idx].action = e.target.value; });
+    item.querySelector('.s-dur').addEventListener('input', e => {
+      scenes[idx].duration = parseFloat(e.target.value) || 0;
+      updateTimeline();
+    });
+    item.querySelector('.s-trans').addEventListener('change', e => { scenes[idx].transition = e.target.value; });
+    item.querySelector('.scene-rm').addEventListener('click', () => {
+      scenes.splice(idx, 1);
+      renderScenes();
+      updateTimeline();
+    });
+  });
+}
+
+function addScene() {
+  scenes.push({ name: `Scene ${scenes.length + 1}`, duration: 4, action: 'Describe what happens', transition: 'slide' });
+  renderScenes();
+  updateTimeline();
+}
+
+// ----- TIMELINE -----
+function updateTimeline() {
+  const fps = parseInt(document.getElementById('fps').value) || 60;
+  const total = scenes.reduce((a, b) => a + b.duration, 0);
+  const totalFrames = Math.round(total * fps);
+  document.getElementById('totalDuration').textContent = `${total.toFixed(1)}s · ${totalFrames} frames`;
+
+  const colors = ['#c2410c', '#1e3a5f', '#5b3a29', '#0d6e6e', '#7c3aed', '#b45309', '#0369a1', '#7e22ce', '#be123c'];
+  const bar = document.getElementById('timelineBar');
+  bar.innerHTML = scenes.map((s, i) => {
+    const pct = total > 0 ? (s.duration / total) * 100 : 0;
+    return `<div class="timeline-seg" style="width:${pct}%;background:${colors[i % colors.length]}" title="${escapeHtml(s.name)} · ${s.duration}s">${pct > 6 ? escapeHtml(s.name) : ''}</div>`;
+  }).join('');
+
+  const ruler = document.getElementById('timelineRuler');
+  const marks = 5;
+  ruler.innerHTML = Array.from({length: marks + 1}, (_, i) => {
+    const t = total * (i / marks);
+    return `<span>${t.toFixed(1)}s</span>`;
+  }).join('');
+}
+
+// ----- TAB SWITCH -----
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.output-pane').forEach(p => p.classList.toggle('active', p.dataset.pane === name));
+}
+
+// ----- COPY / DOWNLOAD -----
+function copyText(btn) {
+  const id = btn.dataset.target;
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = 'COPIED!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'COPY'; }, 1500);
+  });
+}
+function downloadText(btn) {
+  const id = btn.dataset.target;
+  const fname = btn.dataset.filename || 'output.txt';
+  const text = document.getElementById(id).textContent;
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = fname;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ----- GENERATE -----
+function generate() {
+  const fps = parseInt(document.getElementById('fps').value);
+  const [width, height] = document.getElementById('resolution').value.split('x').map(Number);
+  const tone = document.getElementById('tone').value;
+  const title = document.getElementById('projectTitle').value || 'Untitled Remotion Project';
+  const topic = document.getElementById('projectTopic').value || '(주제 미입력)';
+  const narrator = document.getElementById('narratorStyle').value;
+  const pace = document.getElementById('vPace').value;
+  const vlang = document.getElementById('vLang').value;
+  const hook = document.getElementById('hookText').value.trim();
+  const animLib = document.getElementById('animLib').value;
+  const fontStack = document.getElementById('fontStack').value;
+  const sfx = document.getElementById('soundDesign').value;
+  const tpl = TEMPLATES.find(x => x.id === currentTemplateId);
+  const totalSec = scenes.reduce((a, b) => a + b.duration, 0);
+  const totalFrames = Math.round(totalSec * fps);
+
+  // 1. CLAUDE PROMPT (markdown)
+  const promptMd = buildClaudePrompt({ title, topic, fps, width, height, tone, tpl, scenes, narrator, pace, vlang, hook, animLib, fontStack, sfx, totalSec, totalFrames });
+  document.getElementById('promptOut').textContent = promptMd;
+
+  // 2. COMPONENT CODE
+  const code = buildComponentCode({ title, fps, width, height, scenes, totalFrames, animLib, fontStack, tone });
+  document.getElementById('componentOut').textContent = code;
+
+  // 3. VOICEOVER SCRIPT
+  const vo = buildVoiceover({ title, topic, scenes, narrator, pace, vlang, hook });
+  document.getElementById('voOut').textContent = vo;
+
+  // 4. CLI COMMANDS
+  const cli = buildCli({ title, width, height, fps });
+  document.getElementById('cliOut').textContent = cli;
+
+  document.getElementById('outputWrap').style.display = 'block';
+  document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ----- BUILDERS -----
+function buildClaudePrompt(p) {
+  const toneMap = {
+    'cinematic-noir': 'High-contrast monochrome, deep shadows, slow camera moves, film grain.',
+    'editorial-luxury': 'Warm beige/cream palette, large serif display type (Fraunces), generous negative space, refined micro-animations.',
+    'brutalist-mono': 'Raw black/white, bold sans-serif, hard cuts, no easing on entry.',
+    'neon-cyber': 'Black bg with neon cyan/magenta accents, glitch transitions, scanline overlay.',
+    'organic-warm': 'Warm sunlight gradients, soft blur, hand-drawn underlines, slow drift.',
+    'minimal-swiss': 'Strict grid, Helvetica-style sans, primary red accent, geometric.',
+    'retro-vhs': 'VHS chromatic aberration, scanlines, old-school sans-serif, date stamp.'
+  };
+  const fontMap = {
+    'fraunces-pretendard': 'Display: Fraunces (italic, opsz 144). Body: Pretendard Variable.',
+    'instrument-inter': 'Display: Instrument Serif. Body: Inter.',
+    'space-grotesk': 'All: Space Grotesk Variable.',
+    'ibm-plex': 'Display: IBM Plex Sans. Mono: IBM Plex Mono.',
+    'custom-bold': 'Designer choice — pick a distinctive editorial display font.'
+  };
+  const animMap = {
+    'spring': 'Use Remotion `spring()` with config { damping: 12, stiffness: 100, mass: 0.8 } for entrances.',
+    'interpolate': 'Use `interpolate()` with `Easing.bezier(0.16, 1, 0.3, 1)` (out-expo) for entrances.',
+    'motion': 'Wrap React elements with `framer-motion` <motion.div /> using Remotion frame as `key`.',
+    'gsap': 'Use GSAP timelines synchronized with Remotion `useCurrentFrame()`.'
+  };
+  const sfxMap = {
+    'ambient': 'Background: continuous ambient pad (low volume). No SFX on cuts.',
+    'cinematic': 'Background: cinematic underscore. SFX: deep impacts on each scene change, whooshes on motion.',
+    'upbeat': 'Background: upbeat pop instrumental. Beat-matched cuts on quarter notes.',
+    'silent': 'No music. Voiceover only.'
+  };
+
+  const sceneList = p.scenes.map((s, i) => {
+    const start = p.scenes.slice(0, i).reduce((a, b) => a + b.duration, 0);
+    const startF = Math.round(start * p.fps);
+    const durF = Math.round(s.duration * p.fps);
+    return `### Scene ${i + 1}: ${s.name}
+- **Time**: ${start.toFixed(1)}s → ${(start + s.duration).toFixed(1)}s  (frames ${startF}–${startF + durF})
+- **Duration**: ${s.duration}s (${durF} frames)
+- **Action**: ${s.action}
+- **Transition in**: ${s.transition || 'slide'}`;
+  }).join('\n\n');
+
+  return `# Remotion Project: ${p.title}
+
+> Generated by Remotion Prompt Generator · feed this entire file to Claude Code with: \`claude < remotion-prompt.md\`
+
+---
+
+## 🎬 PROJECT BRIEF
+
+You are an expert Remotion 4 developer. Build a complete, production-ready Remotion project for the brief below. Follow every constraint exactly. Do not ask clarifying questions — make the best creative decisions and ship.
+
+**Topic / Core Message**: ${p.topic}
+**Template Pattern**: ${p.tpl.name} (${p.tpl.cat})
+**Resolution**: ${p.width} × ${p.height}
+**FPS**: ${p.fps}
+**Total Duration**: ${p.totalSec.toFixed(1)}s (${p.totalFrames} frames)
+**Style Tone**: ${p.tone}
+**Aesthetic Direction**: ${toneMap[p.tone]}
+
+---
+
+## 🎨 DESIGN SYSTEM
+
+**Typography**: ${fontMap[p.fontStack]}
+**Animation library**: ${animMap[p.animLib]}
+**Sound design**: ${sfxMap[p.sfx]}
+
+**Color tokens** (define in src/theme.ts):
+- bg, fg, accent (3 max — NO purple-on-white gradients)
+- Use OKLCH or HSL, not hex, for derivable variants
+- Provide light & dark variants if the project has UI overlays
+
+---
+
+## 🎞 SCENE-BY-SCENE BREAKDOWN
+
+${sceneList}
+
+---
+
+## 🛠 TECHNICAL REQUIREMENTS
+
+1. **Project structure**:
+   \`\`\`
+   src/
+     Root.tsx              ← <Composition> registration
+     Composition.tsx       ← <MainVideo> with <Sequence> per scene
+     scenes/
+       Scene01_${p.scenes[0]?.name?.replace(/\\s+/g,'') || 'Hook'}.tsx
+       Scene02_*.tsx ... (one file per scene)
+     theme.ts              ← color/font tokens
+     hooks/useEntrance.ts  ← shared spring/interpolate helper
+   \`\`\`
+
+2. **Composition registration** (src/Root.tsx):
+   - id: \`${p.title.replace(/[^a-zA-Z0-9]/g, '')}\`
+   - durationInFrames: ${p.totalFrames}
+   - fps: ${p.fps}
+   - width: ${p.width}, height: ${p.height}
+
+3. **Each scene must**:
+   - Live in its own file as a default-exported React component
+   - Receive no props (use \`useCurrentFrame()\` for timing)
+   - Subtract its own start frame internally for clean 0-based animation
+   - Include at least 2 layered animated elements (text + background or shape + text)
+   - Have an entry animation (frames 0–15) and a hold/exit phase
+
+4. **Forbidden**:
+   - Generic AI aesthetics (Inter on white, purple gradients, default Tailwind)
+   - Static text dumps without motion
+   - \`Math.sin\` shake hacks for "motion"
+   - Stock-looking icon spam
+
+5. **Required polish**:
+   - Add subtle film grain overlay across the whole video using \`<Img>\` + \`mix-blend-mode: overlay\`
+   - Add a 1-frame flash transition between every scene (white/black flash matching tone)
+   - Pre-load fonts using \`@remotion/google-fonts\` or \`delayRender/continueRender\`
+
+6. **Final deliverables Claude Code must produce**:
+   - All TSX/TS files
+   - \`package.json\` with: \`remotion\`, \`@remotion/cli\`, \`@remotion/google-fonts\`, \`react\`, \`react-dom\`, \`typescript\`, plus \`${p.animLib === 'motion' ? 'framer-motion' : p.animLib === 'gsap' ? 'gsap' : ''}\` if used
+   - \`tsconfig.json\` and \`remotion.config.ts\`
+   - A \`README.md\` explaining \`npm i && npx remotion studio\`
+
+---
+
+## 🎙 VOICEOVER
+
+A separate \`voiceover.txt\` is provided. Read it into the AI generator (ElevenLabs / OpenAI TTS) to produce \`public/voiceover.mp3\`, then load it in the composition with \`<Audio src={staticFile('voiceover.mp3')} />\`.
+
+---
+
+## ✅ ACCEPTANCE CRITERIA
+
+- [ ] \`npx remotion studio\` opens without errors
+- [ ] \`npx remotion render ${p.title.replace(/[^a-zA-Z0-9]/g, '')}\` completes without warnings
+- [ ] Total duration matches exactly ${p.totalFrames} frames
+- [ ] Every scene has visible motion (not just static text)
+- [ ] No generic AI fonts (no Inter / Roboto / system fallback as primary)
+- [ ] Code is split into one file per scene
+- [ ] Type-checks with \`tsc --noEmit\`
+
+Build it now. Output complete files in order.`;
+}
+
+function buildComponentCode(p) {
+  const compName = p.title.replace(/[^a-zA-Z0-9]/g, '') || 'MainVideo';
+  const fontImport = p.fontStack === 'fraunces-pretendard'
+    ? `import { loadFont as loadFraunces } from '@remotion/google-fonts/Fraunces';
+const { fontFamily: serifFont } = loadFraunces();`
+    : `// Configure your fonts via @remotion/google-fonts`;
+
+  let cursor = 0;
+  const sceneImports = p.scenes.map((s, i) => {
+    const cn = `Scene${String(i+1).padStart(2,'0')}_${(s.name || 'Scene').replace(/[^a-zA-Z0-9]/g, '')}`;
+    return `import ${cn} from './scenes/${cn}';`;
+  }).join('\n');
+
+  const sequences = p.scenes.map((s, i) => {
+    const cn = `Scene${String(i+1).padStart(2,'0')}_${(s.name || 'Scene').replace(/[^a-zA-Z0-9]/g, '')}`;
+    const from = Math.round(cursor * p.fps);
+    const dur = Math.round(s.duration * p.fps);
+    cursor += s.duration;
+    return `      <Sequence from={${from}} durationInFrames={${dur}} name="${s.name}">
+        <${cn} />
+      </Sequence>`;
+  }).join('\n');
+
+  // Sample first scene file
+  const firstScene = p.scenes[0] || { name: 'Hook', action: 'Bold opening line' };
+  const firstName = `Scene01_${(firstScene.name || 'Scene').replace(/[^a-zA-Z0-9]/g, '')}`;
+
+  return `// ============================================================
+// src/Root.tsx
+// ============================================================
+import { Composition } from 'remotion';
+import { ${compName} } from './Composition';
+
+export const RemotionRoot: React.FC = () => {
+  return (
+    <Composition
+      id="${compName}"
+      component={${compName}}
+      durationInFrames={${p.totalFrames}}
+      fps={${p.fps}}
+      width={${p.width}}
+      height={${p.height}}
+    />
+  );
+};
+
+
+// ============================================================
+// src/Composition.tsx
+// ============================================================
+import { AbsoluteFill, Sequence, Audio, staticFile, Img } from 'remotion';
+${sceneImports}
+
+export const ${compName}: React.FC = () => {
+  return (
+    <AbsoluteFill style={{ backgroundColor: '#0e0c0a', fontFamily: 'system-ui' }}>
+      {/* Voiceover */}
+      <Audio src={staticFile('voiceover.mp3')} />
+
+${sequences}
+
+      {/* Film grain overlay */}
+      <AbsoluteFill style={{ pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 0.08 }}>
+        <Img src={staticFile('grain.png')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+
+// ============================================================
+// src/theme.ts
+// ============================================================
+export const theme = {
+  bg: '#0e0c0a',
+  fg: '#f5ecd8',
+  accent: '#f97316',
+  accent2: '#7dd3fc',
+  rule: '#2d271f',
+} as const;
+
+
+// ============================================================
+// src/hooks/useEntrance.ts
+// ============================================================
+import { useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
+
+export const useEntrance = (delay = 0) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const progress = spring({
+    frame: frame - delay,
+    fps,
+    config: { damping: 12, stiffness: 100, mass: 0.8 },
+  });
+  const opacity = interpolate(progress, [0, 1], [0, 1]);
+  const y = interpolate(progress, [0, 1], [40, 0]);
+  return { progress, opacity, y };
+};
+
+
+// ============================================================
+// src/scenes/${firstName}.tsx
+// ============================================================
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+${fontImport}
+import { theme } from '../theme';
+import { useEntrance } from '../hooks/useEntrance';
+
+const ${firstName}: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const { opacity, y } = useEntrance(0);
+  const lineOpacity = interpolate(frame, [10, 25], [0, 1], { extrapolateRight: 'clamp' });
+
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: theme.bg,
+        color: theme.fg,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 80,
+      }}
+    >
+      <div
+        style={{
+          fontFamily: typeof serifFont !== 'undefined' ? serifFont : 'serif',
+          fontSize: 140,
+          lineHeight: 0.95,
+          fontStyle: 'italic',
+          fontWeight: 300,
+          textAlign: 'center',
+          opacity,
+          transform: \`translateY(\${y}px)\`,
+          letterSpacing: '-0.04em',
+        }}
+      >
+        ${escapeJs(firstScene.action || 'Bold opening line')}
+      </div>
+      <div
+        style={{
+          marginTop: 40,
+          width: 120,
+          height: 2,
+          background: theme.accent,
+          opacity: lineOpacity,
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+export default ${firstName};
+
+
+// ============================================================
+// remotion.config.ts
+// ============================================================
+import { Config } from '@remotion/cli/config';
+Config.setVideoImageFormat('jpeg');
+Config.setOverwriteOutput(true);
+
+
+// ============================================================
+// package.json (excerpt)
+// ============================================================
+/*
+{
+  "name": "${(p.title || 'remotion-project').toLowerCase().replace(/[^a-z0-9]/g, '-')}",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render ${compName} out/video.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.0",
+    "@remotion/google-fonts": "4.0.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.0"
+  }
+}
+*/`;
+}
+
+function buildVoiceover(p) {
+  const isKo = p.vlang === 'ko' || p.vlang === 'bilingual';
+  const isEn = p.vlang === 'en' || p.vlang === 'bilingual';
+  const narratorMap = {
+    'documentary': isKo ? '차분하고 사색적인 다큐멘터리 톤. 천천히, 명확하게.' : 'Calm, reflective documentary tone. Slow and clear.',
+    'ad-energetic': isKo ? '활기차고 에너지 넘치는 광고 톤. 강조 단어에 살짝 강하게.' : 'Energetic, punchy ad tone. Lean in on emphasis words.',
+    'storyteller': isKo ? '친근한 이야기꾼. 따뜻하고 자연스러운 호흡.' : 'Warm storyteller. Natural pauses, intimate.',
+    'news-authoritative': isKo ? '권위 있는 뉴스 앵커. 정확하고 절제됨.' : 'Authoritative news anchor. Precise, measured.',
+    'luxury-soft': isKo ? '럭셔리 광고용 부드럽고 우아한 톤. 천천히 호흡.' : 'Luxury soft tone. Slow, elegant breath.',
+    'hype-shorts': isKo ? 'Shorts/Reels용 빠르고 강한 비트. 호흡 없이.' : 'Fast hype for Shorts/Reels. No breath, full pace.'
+  };
+  const paceMap = { slow: '120 wpm', normal: '150 wpm', fast: '180 wpm' };
+
+  let out = `=== VOICEOVER SCRIPT ===
+Title: ${p.title}
+Topic: ${p.topic}
+Narrator: ${narratorMap[p.narrator]}
+Pace: ${paceMap[p.pace]}
+Language: ${p.vlang.toUpperCase()}
+
+[NARRATION DIRECTION FOR AI VOICE]
+- Use SSML-style pauses where you see <pause:0.5s>
+- Words in CAPS = emphasis
+- Words in *italics* = soft, slower
+- (whisper) = whisper voice
+- Match each scene's emotional beat
+
+`;
+
+  if (p.hook) {
+    out += `[HOOK — pre-scene 1, optional]\n${p.hook}\n<pause:0.6s>\n\n`;
+  }
+
+  p.scenes.forEach((s, i) => {
+    const start = p.scenes.slice(0, i).reduce((a, b) => a + b.duration, 0);
+    out += `[SCENE ${i + 1}: ${s.name}] (${start.toFixed(1)}s — ${(start + s.duration).toFixed(1)}s)\n`;
+    out += `Direction: ${s.action}\n`;
+    if (isKo) {
+      out += `\n[KO]\n${generateVoSampleKo(s, i, p)}\n`;
+    }
+    if (isEn) {
+      out += `\n[EN]\n${generateVoSampleEn(s, i, p)}\n`;
+    }
+    out += `<pause:0.4s>\n\n`;
+  });
+
+  out += `=== END OF SCRIPT ===
+\nTotal estimated duration: ~${p.scenes.reduce((a,b)=>a+b.duration,0).toFixed(1)}s
+Recommended TTS: ElevenLabs (multilingual v2) or OpenAI TTS (alloy/onyx for ${p.narrator.includes('news') ? 'news' : 'narrative'})
+`;
+  return out;
+}
+
+function generateVoSampleKo(s, i, p) {
+  const samples = [
+    `잠깐. ${p.topic} — 이거 진짜 알고 계셨나요?`,
+    `대부분의 사람들은 이 부분에서 멈춥니다. 하지만…`,
+    `핵심은 ${s.name.toLowerCase()}. 정확히 *이렇게* 작동합니다.`,
+    `데이터가 말합니다. 숫자는 거짓말을 하지 않죠.`,
+    `결론은 단 하나. 지금 바로 시작하세요.`,
+    `다음 이야기는 더 흥미롭습니다.`
+  ];
+  return `> ${samples[i % samples.length]}`;
+}
+function generateVoSampleEn(s, i, p) {
+  const samples = [
+    `Wait. ${p.topic} — did you actually know this?`,
+    `Most people stop right here. But…`,
+    `The core is *${s.name.toLowerCase()}*. Here is exactly how it works.`,
+    `The data speaks. Numbers do not lie.`,
+    `One conclusion. Start NOW.`,
+    `The next part is even better.`
+  ];
+  return `> ${samples[i % samples.length]}`;
+}
+
+function buildCli(p) {
+  const compName = p.title.replace(/[^a-zA-Z0-9]/g, '') || 'MainVideo';
+  const slug = (p.title || 'remotion-project').toLowerCase().replace(/[^a-z0-9]/g, '-');
+  return `#!/bin/bash
+# ============================================================
+# Remotion Project · Claude Code workflow
+# ============================================================
+
+# 1. Create the project (one-time)
+npx create-video@latest ${slug} --blank
+cd ${slug}
+
+# 2. Drop the generated files into place
+#    - Save remotion-prompt.md to project root
+#    - Save Composition.tsx into src/  (split per-scene as instructed)
+#    - Save voiceover.txt to project root
+
+# 3. Generate voiceover with your TTS of choice and save to public/
+#    Example with OpenAI:
+#    openai audio.speech.create model=tts-1 voice=onyx \\
+#      input="$(cat voiceover.txt)" > public/voiceover.mp3
+
+# 4. Install deps
+npm install
+npm install @remotion/google-fonts framer-motion gsap || true
+
+# 5. Open Remotion Studio (live preview)
+npx remotion studio
+
+# 6. Final render (production)
+npx remotion render ${compName} out/${slug}.mp4 \\
+  --codec=h264 \\
+  --crf=18 \\
+  --concurrency=4
+
+# 7. Or render to ProRes for editing in DaVinci/Premiere
+npx remotion render ${compName} out/${slug}.mov \\
+  --codec=prores \\
+  --prores-profile=4444
+
+# 8. Render still frame for thumbnail
+npx remotion still ${compName} out/thumbnail.png --frame=30
+
+# ============================================================
+# Inside Claude Code (recommended workflow):
+# ============================================================
+# claude code .
+# > read remotion-prompt.md and create the entire project. 
+# > follow every constraint. output complete files.
+`;
+}
+
+// ----- UTIL -----
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeJs(s) { return String(s).replace(/[`\\$]/g, c => '\\' + c); }
+
+// boot
+init();
+</script>
+
+</body>
+</html>
