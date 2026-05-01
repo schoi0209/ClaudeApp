@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willow — Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #161618;
+    --surface2: #1e1e21;
+    --border: rgba(255,255,255,0.07);
+    --accent: #c9a96e;
+    --accent2: #e8d5b0;
+    --text: #f0ece4;
+    --muted: #7a7770;
+    --green: #5cad7c;
+    --tag-bg: rgba(201,169,110,0.1);
+  }
+  [data-theme="light"] {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --border: rgba(0,0,0,0.08);
+    --accent: #8a6230;
+    --accent2: #5c3f18;
+    --text: #1a1714;
+    --muted: #9a948a;
+    --green: #2e7a4f;
+    --tag-bg: rgba(138,98,48,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    letter-spacing: 0.12em; color: var(--accent);
+  }
+  .logo span { color: var(--text); font-style: italic; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .date-tag {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+  }
+  .lang-btn {
+    padding: 5px 14px; cursor: pointer;
+    color: var(--muted); border: none; background: transparent;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400;
+    transition: all 0.2s; letter-spacing: 0.05em;
+  }
+  .lang-btn.active { background: var(--accent); color: var(--bg); font-weight: 500; }
+
+  .icon-btn {
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); width: 36px; height: 36px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: all 0.2s;
+  }
+  .icon-btn:hover { border-color: var(--accent); }
+
+  .hero { padding: 60px 32px 40px; max-width: 1200px; margin: 0 auto; }
+  .hero-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+  .stats-bar {
+    max-width: 1200px; margin: 0 auto 32px;
+    padding: 0 32px; display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 24px; flex: 1; min-width: 150px;
+  }
+  .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--accent); }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .filters {
+    max-width: 1200px; margin: 0 auto 28px;
+    padding: 0 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end;
+  }
+  .filter-group { display: flex; flex-direction: column; gap: 4px; }
+  .filter-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  select, input[type="text"] {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); padding: 9px 14px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+    cursor: pointer; transition: border-color 0.2s;
+    appearance: none; -webkit-appearance: none; min-width: 120px;
+  }
+  select:focus, input:focus { outline: none; border-color: var(--accent); }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap input { width: 100%; padding-left: 36px; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; }
+  .reset-btn {
+    background: var(--tag-bg); border: 1px solid var(--accent); color: var(--accent);
+    padding: 9px 18px; border-radius: 8px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.06em; transition: all 0.2s;
+  }
+  .reset-btn:hover { background: var(--accent); color: var(--bg); }
+
+  .results-info {
+    max-width: 1200px; margin: 0 auto 16px;
+    padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .results-count { font-size: 12px; color: var(--muted); }
+  .results-count strong { color: var(--text); font-weight: 500; }
+  .sort-select {
+    background: transparent; border: none; color: var(--muted);
+    font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    min-width: auto; padding: 0;
+  }
+
+  .table-wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); text-align: left; padding: 12px 16px;
+    border-bottom: 1px solid var(--border); white-space: nowrap; user-select: none;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:hover { background: var(--surface); }
+  tbody tr:last-child { border-bottom: none; }
+  td { padding: 16px 16px; font-size: 14px; white-space: nowrap; }
+
+  .unit-code { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; }
+  .lot-num { color: var(--muted); font-size: 12px; }
+  .bed-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--tag-bg); border: 1px solid rgba(201,169,110,0.2);
+    color: var(--accent2); font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  }
+  .aspect-badge {
+    display: inline-block; font-size: 11px; color: var(--muted);
+    border: 1px solid var(--border); padding: 3px 9px; border-radius: 4px; letter-spacing: 0.05em;
+  }
+  .aspect-NE,.aspect-N  { color: #6aabf7; border-color: rgba(106,171,247,0.25); }
+  .aspect-SE,.aspect-S  { color: var(--green); border-color: rgba(92,173,124,0.25); }
+  .aspect-SW,.aspect-W  { color: #e89b5c; border-color: rgba(232,155,92,0.25); }
+  .aspect-NW            { color: #b48be8; border-color: rgba(180,139,232,0.25); }
+  .aspect-E             { color: #f7d56a; border-color: rgba(247,213,106,0.25); }
+
+  .size-info { font-size: 13px; }
+  .size-total { font-weight: 500; }
+  .size-detail { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .price-cell { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--text); }
+  .price-psm { font-size: 11px; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 300; margin-top: 2px; }
+
+  .no-results { text-align: center; padding: 80px 32px; color: var(--muted); }
+  .no-results .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .bmc-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #FFDD00; color: #000; border: none;
+    padding: 10px 20px; border-radius: 24px; font-size: 13px; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s; z-index: 200;
+  }
+  .bmc-btn:hover { transform: translateY(-2px); }
+
+  footer {
+    text-align: center; padding: 24px; color: var(--muted);
+    font-size: 11px; letter-spacing: 0.05em; border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 16px; }
+    .hero, .stats-bar, .filters, .results-info, .table-wrap { padding-left: 16px; padding-right: 16px; }
+    .hero { padding-top: 36px; padding-bottom: 24px; }
+    .date-tag { display: none; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <div class="logo">WILLOW <span>Residences</span></div>
+  <div class="header-right">
+    <div class="date-tag">Price List — 1 May 2026</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-label" id="txt-hero-label">Available Units · Sydney</div>
+  <h1>Willow <em>Price</em><br>Overview</h1>
+  <p class="hero-sub" id="txt-hero-sub">Browse all available units sorted by price. Use the filters below to narrow your search.</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-label" id="txt-stat-total-lbl">Total Units</div>
+    <div class="stat-value" id="stat-total">26</div>
+    <div class="stat-sub" id="txt-stat-total-sub">Available Units</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-stat-min-lbl">From</div>
+    <div class="stat-value" id="stat-min">$854K</div>
+    <div class="stat-sub" id="stat-min-sub">1 Bed · H2602</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-stat-max-lbl">Up To</div>
+    <div class="stat-value" id="stat-max">$2.92M</div>
+    <div class="stat-sub" id="stat-max-sub">3 Bed · H0111</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-stat-avg-lbl">Average</div>
+    <div class="stat-value" id="stat-avg">$1.33M</div>
+    <div class="stat-sub" id="txt-stat-avg-sub">Average Price</div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="filter-group">
+    <span class="filter-label" id="txt-f-bed">Bedrooms</span>
+    <select id="filterBed" onchange="applyFilters()">
+      <option value="" id="opt-bed-all">All</option>
+      <option value="1">1 Bed</option>
+      <option value="2">2 Bed</option>
+      <option value="3">3 Bed</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label" id="txt-f-car">Car Spaces</span>
+    <select id="filterCar" onchange="applyFilters()">
+      <option value="" id="opt-car-all">All</option>
+      <option value="1">1 Car</option>
+      <option value="2">2 Car</option>
+      <option value="3">3 Car</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label" id="txt-f-aspect">Aspect</span>
+    <select id="filterAspect" onchange="applyFilters()">
+      <option value="" id="opt-asp-all">All</option>
+      <option value="N">N</option><option value="NE">NE</option><option value="NW">NW</option>
+      <option value="E">E</option><option value="SE">SE</option><option value="S">S</option>
+      <option value="SW">SW</option><option value="W">W</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label" id="txt-f-price">Max Price</span>
+    <select id="filterPrice" onchange="applyFilters()">
+      <option value="" id="opt-price-all">All</option>
+      <option value="1000000" id="opt-p1">Under $1M</option>
+      <option value="1200000" id="opt-p2">Under $1.2M</option>
+      <option value="1500000" id="opt-p3">Under $1.5M</option>
+      <option value="2000000" id="opt-p4">Under $2M</option>
+    </select>
+  </div>
+  <div class="filter-group" style="flex:1;min-width:200px;">
+    <span class="filter-label" id="txt-f-search">Search Unit / Lot</span>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="e.g. H2602, 299..." oninput="applyFilters()">
+    </div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<div class="results-info">
+  <div class="results-count"><strong id="resultCount">26</strong><span id="txt-units-shown"> units shown</span></div>
+  <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+    <option value="price-asc"  id="srt-p-asc">Price: Low to High</option>
+    <option value="price-desc" id="srt-p-desc">Price: High to Low</option>
+    <option value="size-desc"  id="srt-s-desc">Size: Largest First</option>
+    <option value="size-asc"   id="srt-s-asc">Size: Smallest First</option>
+    <option value="bed-asc"    id="srt-b-asc">Beds: Fewest First</option>
+    <option value="bed-desc"   id="srt-b-desc">Beds: Most First</option>
+  </select>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-unit">Unit</th>
+        <th id="th-lot">Lot</th>
+        <th id="th-bed">Bed · Car</th>
+        <th id="th-aspect">Aspect</th>
+        <th id="th-size">Area (㎡)</th>
+        <th id="th-price">Price</th>
+        <th id="th-psm">Price / ㎡</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults" style="display:none;">
+    <div class="icon">🏢</div>
+    <p id="txt-no-results">No units match your criteria</p>
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy me a coffee</a>
+
+<script>
+const rawData = [
+  {unit:"H2602",lot:299,bed:1,car:1,aspect:"NE",int:50,ext:10,total:60,price:854000},
+  {unit:"I0215",lot:18,bed:2,car:1,aspect:"W",int:78,ext:13,total:91,price:990000},
+  {unit:"J0330",lot:63,bed:2,car:1,aspect:"SE",int:75,ext:26,total:101,price:995000},
+  {unit:"H0308",lot:133,bed:2,car:1,aspect:"NE",int:75,ext:17,total:92,price:1010000},
+  {unit:"J0630",lot:99,bed:2,car:1,aspect:"SE",int:75,ext:10,total:85,price:1031000},
+  {unit:"J0432",lot:77,bed:2,car:1,aspect:"W",int:82,ext:10,total:92,price:1036000},
+  {unit:"J0730",lot:111,bed:2,car:1,aspect:"SE",int:75,ext:10,total:85,price:1046000},
+  {unit:"H0508",lot:149,bed:2,car:1,aspect:"NE",int:75,ext:17,total:92,price:1056000},
+  {unit:"J0428",lot:73,bed:2,car:1,aspect:"E",int:81,ext:11,total:92,price:1081000},
+  {unit:"H1203",lot:200,bed:2,car:1,aspect:"SE",int:77,ext:16,total:93,price:1162000},
+  {unit:"J0623",lot:92,bed:2,car:1,aspect:"NW",int:76,ext:21,total:97,price:1172000},
+  {unit:"H1503",lot:224,bed:2,car:2,aspect:"SE",int:77,ext:16,total:93,price:1197000},
+  {unit:"H1208",lot:205,bed:2,car:2,aspect:"NE",int:75,ext:17,total:92,price:1288000},
+  {unit:"H1604",lot:233,bed:2,car:2,aspect:"SW",int:84,ext:12,total:96,price:1344000},
+  {unit:"H1307",lot:212,bed:2,car:2,aspect:"NW",int:84,ext:17,total:101,price:1364000},
+  {unit:"H1808",lot:253,bed:2,car:2,aspect:"NE",int:75,ext:17,total:92,price:1369000},
+  {unit:"J0424",lot:69,bed:2,car:2,aspect:"NE",int:80,ext:15,total:95,price:1440000},
+  {unit:"H2304",lot:283,bed:2,car:2,aspect:"SW",int:84,ext:12,total:96,price:1445000},
+  {unit:"H2404",lot:289,bed:2,car:2,aspect:"SW",int:84,ext:12,total:96,price:1455000},
+  {unit:"H2504",lot:295,bed:2,car:2,aspect:"SW",int:84,ext:12,total:96,price:1465000},
+  {unit:"H2403",lot:288,bed:2,car:2,aspect:"SE",int:77,ext:16,total:93,price:1480000},
+  {unit:"H2503",lot:294,bed:2,car:2,aspect:"SE",int:77,ext:16,total:93,price:1490000},
+  {unit:"H2702",lot:305,bed:2,car:2,aspect:"SE",int:77,ext:16,total:93,price:1510000},
+  {unit:"H2401",lot:286,bed:2,car:2,aspect:"NE",int:83,ext:23,total:106,price:1616000},
+  {unit:"H2501",lot:292,bed:2,car:2,aspect:"NE",int:83,ext:23,total:106,price:1622000},
+  {unit:"H0111",lot:11,bed:3,car:3,aspect:"NW",int:162,ext:85,total:247,price:2919000},
+];
+
+const i18n = {
+  en: {
+    'txt-hero-label':     'Available Units · Sydney',
+    'txt-hero-sub':       'Browse all available units sorted by price. Use the filters below to narrow your search.',
+    'txt-stat-total-lbl': 'Total Units',
+    'txt-stat-total-sub': 'Available Units',
+    'txt-stat-min-lbl':   'From',
+    'txt-stat-max-lbl':   'Up To',
+    'txt-stat-avg-lbl':   'Average',
+    'txt-stat-avg-sub':   'Average Price',
+    'txt-f-bed':          'Bedrooms',
+    'txt-f-car':          'Car Spaces',
+    'txt-f-aspect':       'Aspect',
+    'txt-f-price':        'Max Price',
+    'txt-f-search':       'Search Unit / Lot',
+    'txt-reset':          'Reset',
+    'txt-units-shown':    ' units shown',
+    'txt-no-results':     'No units match your criteria',
+    'th-unit':            'Unit',
+    'th-lot':             'Lot',
+    'th-bed':             'Bed · Car',
+    'th-aspect':          'Aspect',
+    'th-size':            'Area (㎡)',
+    'th-price':           'Price',
+    'th-psm':             'Price / ㎡',
+    'opt-bed-all':        'All',
+    'opt-car-all':        'All',
+    'opt-asp-all':        'All',
+    'opt-price-all':      'All',
+    'opt-p1':             'Under $1M',
+    'opt-p2':             'Under $1.2M',
+    'opt-p3':             'Under $1.5M',
+    'opt-p4':             'Under $2M',
+    'srt-p-asc':          'Price: Low to High',
+    'srt-p-desc':         'Price: High to Low',
+    'srt-s-desc':         'Size: Largest First',
+    'srt-s-asc':          'Size: Smallest First',
+    'srt-b-asc':          'Beds: Fewest First',
+    'srt-b-desc':         'Beds: Most First',
+    searchPlaceholder:    'e.g. H2602, 299...',
+    lotPrefix:            'Lot ',
+    bedLabel:             (b,c) => `🛏 ${b}B · 🚗 ${c}C`,
+    intLabel:             'Int',
+    extLabel:             'Ext',
+  },
+  ko: {
+    'txt-hero-label':     '분양 가능 세대 · 시드니',
+    'txt-hero-sub':       '가격 순으로 정렬된 전체 매물 리스트입니다. 필터를 사용해 원하는 조건을 찾아보세요.',
+    'txt-stat-total-lbl': '총 매물',
+    'txt-stat-total-sub': '분양 가능 세대',
+    'txt-stat-min-lbl':   '최저가',
+    'txt-stat-max-lbl':   '최고가',
+    'txt-stat-avg-lbl':   '평균가',
+    'txt-stat-avg-sub':   '평균 분양가',
+    'txt-f-bed':          '침실 수',
+    'txt-f-car':          '주차',
+    'txt-f-aspect':       '방향',
+    'txt-f-price':        '최대 가격',
+    'txt-f-search':       '유닛 / Lot 검색',
+    'txt-reset':          '초기화',
+    'txt-units-shown':    '개 매물 표시 중',
+    'txt-no-results':     '조건에 맞는 매물이 없습니다',
+    'th-unit':            '유닛',
+    'th-lot':             'Lot',
+    'th-bed':             '침실 · 주차',
+    'th-aspect':          '방향',
+    'th-size':            '면적 (㎡)',
+    'th-price':           '분양가',
+    'th-psm':             '㎡당 가격',
+    'opt-bed-all':        '전체',
+    'opt-car-all':        '전체',
+    'opt-asp-all':        '전체',
+    'opt-price-all':      '전체',
+    'opt-p1':             '$1M 이하',
+    'opt-p2':             '$1.2M 이하',
+    'opt-p3':             '$1.5M 이하',
+    'opt-p4':             '$2M 이하',
+    'srt-p-asc':          '가격 낮은 순',
+    'srt-p-desc':         '가격 높은 순',
+    'srt-s-desc':         '면적 큰 순',
+    'srt-s-asc':          '면적 작은 순',
+    'srt-b-asc':          '침실 작은 순',
+    'srt-b-desc':         '침실 많은 순',
+    searchPlaceholder:    '예: H2602, 299...',
+    lotPrefix:            'Lot ',
+    bedLabel:             (b,c) => `🛏 ${b}BR · 🚗 ${c}대`,
+    intLabel:             '내부',
+    extLabel:             '외부',
+  }
+};
+
+let currentLang = 'en';
+let filtered = [...rawData];
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnKO').classList.toggle('active', lang === 'ko');
+  Object.keys(t).forEach(id => {
+    if (typeof t[id] === 'string') {
+      const el = document.getElementById(id);
+      if (el) el.textContent = t[id];
+    }
+  });
+  document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  renderTable();
+  updateStats();
+}
+
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(n%1000000===0?0:2).replace(/\.?0+$/,'') + 'M';
+  if (n >= 1000)    return '$' + (n/1000).toFixed(0) + 'K';
+  return '$' + n;
+}
+function fmtFull(n) { return '$' + n.toLocaleString(); }
+
+function applyFilters() {
+  const bed    = document.getElementById('filterBed').value;
+  const car    = document.getElementById('filterCar').value;
+  const aspect = document.getElementById('filterAspect').value;
+  const maxPx  = document.getElementById('filterPrice').value;
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort   = document.getElementById('sortSelect').value;
+
+  filtered = rawData.filter(d => {
+    if (bed    && d.bed !== parseInt(bed))   return false;
+    if (car    && d.car !== parseInt(car))   return false;
+    if (aspect && d.aspect !== aspect)       return false;
+    if (maxPx  && d.price > parseInt(maxPx)) return false;
+    if (search && !d.unit.toLowerCase().includes(search) && !String(d.lot).includes(search)) return false;
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    if (sort==='price-asc')  return a.price-b.price;
+    if (sort==='price-desc') return b.price-a.price;
+    if (sort==='size-desc')  return b.total-a.total;
+    if (sort==='size-asc')   return a.total-b.total;
+    if (sort==='bed-asc')    return a.bed-b.bed;
+    if (sort==='bed-desc')   return b.bed-a.bed;
+    return 0;
+  });
+
+  renderTable();
+  updateStats();
+}
+
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  const noRes = document.getElementById('noResults');
+  const t     = i18n[currentLang];
+  document.getElementById('resultCount').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    noRes.style.display = 'block';
+    document.getElementById('txt-no-results').textContent = t['txt-no-results'];
+    return;
+  }
+  noRes.style.display = 'none';
+
+  tbody.innerHTML = filtered.map(d => {
+    const psm = Math.round(d.price / d.total).toLocaleString();
+    return `
+    <tr>
+      <td><div class="unit-code">${d.unit}</div></td>
+      <td><div class="lot-num">${t.lotPrefix}${d.lot}</div></td>
+      <td><span class="bed-badge">${t.bedLabel(d.bed,d.car)}</span></td>
+      <td><span class="aspect-badge aspect-${d.aspect}">${d.aspect}</span></td>
+      <td>
+        <div class="size-info">
+          <div class="size-total">${d.total} ㎡</div>
+          <div class="size-detail">${t.intLabel} ${d.int} + ${t.extLabel} ${d.ext}</div>
+        </div>
+      </td>
+      <td><div class="price-cell">${fmtFull(d.price)}</div></td>
+      <td><div class="price-psm">$${psm}/㎡</div></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats() {
+  if (!filtered.length) return;
+  const prices = filtered.map(d => d.price);
+  const min  = Math.min(...prices);
+  const max  = Math.max(...prices);
+  const avg  = Math.round(prices.reduce((a,b)=>a+b,0)/prices.length);
+  const minU = filtered.find(d => d.price === min);
+  const maxU = filtered.find(d => d.price === max);
+  document.getElementById('stat-total').textContent   = filtered.length;
+  document.getElementById('stat-min').textContent     = fmt(min);
+  document.getElementById('stat-max').textContent     = fmt(max);
+  document.getElementById('stat-avg').textContent     = fmt(avg);
+  document.getElementById('stat-min-sub').textContent = `${minU.bed} Bed · ${minU.unit}`;
+  document.getElementById('stat-max-sub').textContent = `${maxU.bed} Bed · ${maxU.unit}`;
+}
+
+function resetFilters() {
+  ['filterBed','filterCar','filterAspect','filterPrice'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value  = 'price-asc';
+  applyFilters();
+}
+
+function toggleTheme() {
+  const body = document.body;
+  const btn  = document.getElementById('themeBtn');
+  if (body.dataset.theme === 'dark') { body.dataset.theme='light'; btn.textContent='🌙'; }
+  else                               { body.dataset.theme='dark';  btn.textContent='☀️'; }
+}
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  document.body.dataset.theme = 'light';
+  document.getElementById('themeBtn').textContent = '🌙';
+}
+applyFilters();
+</script>
+</body>
+</html>
