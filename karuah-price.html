@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Watermark Karuah — Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1117;
+  --surface: #131c24;
+  --surface2: #1a2633;
+  --border: rgba(120,180,140,0.12);
+  --accent: #78b48c;
+  --accent2: #a8d4b8;
+  --accent3: #4a8a60;
+  --text: #e8f0eb;
+  --muted: #6a8070;
+  --gold: #c8a96e;
+  --water: #4a90b8;
+  --tag-bg: rgba(120,180,140,0.08);
+  --stage2: #5b8caa;
+  --stage3: #6aaa7a;
+  --stage4: #c8a96e;
+  --stage5: #b07aa8;
+  --status-sale: #5cad7c;
+  --status-contract: #e89b5c;
+  --status-reserved: #6aabf7;
+  --status-sold: #888;
+  --status-eoi: #e8d56a;
+}
+[data-theme="light"] {
+  --bg: #f0f5f2;
+  --surface: #ffffff;
+  --surface2: #e8f0eb;
+  --border: rgba(60,120,80,0.12);
+  --accent: #3a7a50;
+  --accent2: #2a5a38;
+  --accent3: #4a8a60;
+  --text: #0d1f14;
+  --muted: #5a7a65;
+  --gold: #8a6230;
+  --water: #2a6a9a;
+  --tag-bg: rgba(60,120,80,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Header ── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; backdrop-filter: blur(16px);
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-icon { font-size: 20px; }
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 400;
+  color: var(--accent2); letter-spacing: 0.04em;
+}
+.logo-text span { color: var(--accent); }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.pill {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border);
+  padding: 4px 12px; border-radius: 20px;
+}
+.lang-toggle {
+  display: flex; background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+}
+.lang-btn {
+  padding: 5px 13px; cursor: pointer; color: var(--muted);
+  border: none; background: transparent;
+  font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400;
+  transition: all 0.2s; letter-spacing: 0.05em;
+}
+.lang-btn.active { background: var(--accent); color: #fff; font-weight: 500; }
+.icon-btn {
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); width: 34px; height: 34px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; transition: all 0.2s;
+}
+.icon-btn:hover { border-color: var(--accent); }
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 28px 32px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(120,180,140,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1280px; margin: 0 auto; }
+.hero-label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 56px); font-weight: 400; line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub { color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+/* ── Stats ── */
+.stats-bar {
+  max-width: 1280px; margin: 0 auto;
+  padding: 24px 28px; display: flex; gap: 16px; flex-wrap: wrap;
+}
+.stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 130px;
+}
+.stat-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.stat-value { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--accent); }
+.stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+/* ── Layout ── */
+.main-layout {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 440px; gap: 0;
+  padding: 0 28px 60px;
+  align-items: start;
+}
+
+/* ── Left: filters + table ── */
+.left-panel {}
+
+.filters {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  align-items: flex-end; padding: 20px 0 16px;
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; }
+.filter-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+select, input[type="text"] {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); padding: 8px 12px; border-radius: 7px;
+  font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 300;
+  cursor: pointer; transition: border-color 0.2s;
+  appearance: none; -webkit-appearance: none; min-width: 110px;
+}
+select:focus, input:focus { outline: none; border-color: var(--accent); }
+.search-wrap { position: relative; flex: 1; min-width: 160px; }
+.search-wrap input { width: 100%; padding-left: 32px; }
+.s-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; }
+.reset-btn {
+  background: var(--tag-bg); border: 1px solid var(--accent);
+  color: var(--accent); padding: 8px 16px; border-radius: 7px;
+  cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 11px;
+  letter-spacing: 0.05em; transition: all 0.2s;
+}
+.reset-btn:hover { background: var(--accent); color: #fff; }
+
+.results-info {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 0 12px; font-size: 11px; color: var(--muted);
+}
+.results-info strong { color: var(--text); font-weight: 500; }
+.sort-select {
+  background: transparent; border: none; color: var(--muted);
+  font-size: 11px; cursor: pointer; font-family: 'Outfit', sans-serif;
+  min-width: auto; padding: 0;
+}
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); text-align: left; padding: 10px 12px;
+  border-bottom: 1px solid var(--border); white-space: nowrap; user-select: none;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; cursor: pointer; }
+tbody tr:hover { background: var(--surface); }
+tbody tr.highlighted { background: rgba(120,180,140,0.08) !important; }
+tbody tr:last-child { border-bottom: none; }
+td { padding: 13px 12px; font-size: 12px; white-space: nowrap; }
+
+.lot-code { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--accent); }
+.lot-size { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+.stage-badge {
+  display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+}
+.stage-2 { background: rgba(91,140,170,0.15); color: var(--stage2); border: 1px solid rgba(91,140,170,0.3); }
+.stage-3 { background: rgba(106,170,122,0.15); color: var(--stage3); border: 1px solid rgba(106,170,122,0.3); }
+.stage-4 { background: rgba(200,169,110,0.15); color: var(--stage4); border: 1px solid rgba(200,169,110,0.3); }
+.stage-5 { background: rgba(176,122,168,0.15); color: var(--stage5); border: 1px solid rgba(176,122,168,0.3); }
+
+.house-type {
+  display: inline-block; font-size: 10px; color: var(--muted);
+  border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px;
+}
+.type-wattle { color: #78b4a0; border-color: rgba(120,180,160,0.3); background: rgba(120,180,160,0.06); }
+.type-lotus  { color: #b4a078; border-color: rgba(180,160,120,0.3); background: rgba(180,160,120,0.06); }
+.type-maple  { color: #a078b4; border-color: rgba(160,120,180,0.3); background: rgba(160,120,180,0.06); }
+
+.price-land { font-size: 13px; font-weight: 500; color: var(--text); }
+.price-total { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--text); }
+.price-house { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 3px 9px; border-radius: 12px; text-transform: uppercase; white-space: nowrap;
+}
+.s-sale     { background: rgba(92,173,124,0.12); color: var(--status-sale);     border: 1px solid rgba(92,173,124,0.3); }
+.s-contract { background: rgba(232,155,92,0.12); color: var(--status-contract); border: 1px solid rgba(232,155,92,0.3); }
+.s-reserved { background: rgba(106,171,247,0.12); color: var(--status-reserved); border: 1px solid rgba(106,171,247,0.3); }
+.s-sold     { background: rgba(136,136,136,0.1); color: var(--status-sold);     border: 1px solid rgba(136,136,136,0.2); }
+.s-eoi      { background: rgba(232,213,106,0.12); color: var(--status-eoi);     border: 1px solid rgba(232,213,106,0.3); }
+
+.no-results { text-align: center; padding: 60px 20px; color: var(--muted); }
+.no-results .icon { font-size: 40px; opacity: 0.3; margin-bottom: 12px; }
+
+/* ── Right: map ── */
+.right-panel {
+  position: sticky; top: 60px;
+  padding: 20px 0 0 24px; max-height: calc(100vh - 60px); overflow-y: auto;
+}
+.map-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.map-header {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.map-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+.map-svg-wrap {
+  padding: 12px;
+  overflow: auto;
+}
+#site-map {
+  width: 100%;
+  max-height: 560px;
+}
+
+/* Lot hover highlight */
+.lot-path { transition: opacity 0.15s, stroke-width 0.15s; cursor: pointer; }
+.lot-path:hover { opacity: 0.85 !important; stroke-width: 2 !important; }
+.lot-path.active-lot { stroke: #fff; stroke-width: 2.5 !important; opacity: 1 !important; }
+
+/* Tooltip */
+.map-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 11px; pointer-events: none;
+  opacity: 0; transition: opacity 0.15s;
+  min-width: 160px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.map-tooltip.visible { opacity: 1; }
+.tt-lot { font-family:'Playfair Display',serif; font-size: 14px; font-weight:700; color: var(--accent); margin-bottom: 4px; }
+.tt-row { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); margin-top: 2px; }
+.tt-val { color: var(--text); font-weight: 500; }
+
+/* ── Footer ── */
+footer {
+  text-align: center; padding: 20px; color: var(--muted);
+  font-size: 10px; letter-spacing: 0.05em; border-top: 1px solid var(--border);
+}
+.bmc-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  background: #FFDD00; color: #000; border: none;
+  padding: 9px 18px; border-radius: 22px; font-size: 12px; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 5px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: transform 0.2s; z-index: 300;
+}
+.bmc-btn:hover { transform: translateY(-2px); }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@media (max-width: 960px) {
+  .main-layout { grid-template-columns: 1fr; padding: 0 16px 40px; }
+  .right-panel { position: static; padding: 0; max-height: none; }
+  header { padding: 0 16px; }
+  .hero, .stats-bar { padding-left: 16px; padding-right: 16px; }
+  .pill { display: none; }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="map-tooltip" id="mapTooltip">
+  <div class="tt-lot" id="tt-lot">Lot 26</div>
+  <div class="tt-row"><span>Stage</span><span class="tt-val" id="tt-stage">–</span></div>
+  <div class="tt-row"><span>Size</span><span class="tt-val" id="tt-size">–</span></div>
+  <div class="tt-row"><span>Land Price</span><span class="tt-val" id="tt-land">–</span></div>
+  <div class="tt-row"><span>Status</span><span class="tt-val" id="tt-status">–</span></div>
+</div>
+
+<header>
+  <div class="logo">
+    <span class="logo-icon">🌿</span>
+    <div class="logo-text">THE WATERMARK <span>Karuah</span></div>
+  </div>
+  <div class="header-right">
+    <div class="pill">Price List — 29 Apr 2026</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label" id="txt-hero-label">Land & House Packages · Karuah NSW</div>
+    <h1>Watermark <em>Price</em><br>Overview</h1>
+    <p class="hero-sub" id="txt-hero-sub">Browse all available lots and house packages. Click a lot on the map to highlight it in the table.</p>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-label" id="txt-s1">Available Lots</div>
+    <div class="stat-value" id="stat-avail">–</div>
+    <div class="stat-sub" id="txt-s1b">For Sale / EOI</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-s2">Land From</div>
+    <div class="stat-value" id="stat-min-land">–</div>
+    <div class="stat-sub" id="stat-min-sub">–</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-s3">Package From</div>
+    <div class="stat-value" id="stat-min-pkg">–</div>
+    <div class="stat-sub" id="txt-s3b">Wattle 4B2B</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label" id="txt-s4">Registration</div>
+    <div class="stat-value">Q2</div>
+    <div class="stat-sub">2026 / 2027</div>
+  </div>
+</div>
+
+<div class="main-layout">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label" id="txt-f-stage">Stage</span>
+        <select id="filterStage" onchange="applyFilters()">
+          <option value="" id="opt-all-stage">All</option>
+          <option value="2">Stage 2</option>
+          <option value="3">Stage 3</option>
+          <option value="4">Stage 4</option>
+          <option value="5">Stage 5</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label" id="txt-f-status">Status</span>
+        <select id="filterStatus" onchange="applyFilters()">
+          <option value="" id="opt-all-status">All</option>
+          <option value="For Sale" id="opt-sale">For Sale</option>
+          <option value="EOI" id="opt-eoi">EOI</option>
+          <option value="Under Contract" id="opt-uc">Under Contract</option>
+          <option value="Reserved" id="opt-res">Reserved</option>
+          <option value="SOLD" id="opt-sold">Sold</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label" id="txt-f-price">Max Land Price</span>
+        <select id="filterPrice" onchange="applyFilters()">
+          <option value="" id="opt-all-price">All</option>
+          <option value="430000" id="opt-p1">Under $430K</option>
+          <option value="460000" id="opt-p2">Under $460K</option>
+          <option value="500000" id="opt-p3">Under $500K</option>
+          <option value="550000" id="opt-p4">Under $550K</option>
+        </select>
+      </div>
+      <div class="filter-group" style="flex:1;min-width:140px">
+        <span class="filter-label" id="txt-f-search">Search Lot</span>
+        <div class="search-wrap">
+          <span class="s-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="e.g. 26, 300..." oninput="applyFilters()">
+        </div>
+      </div>
+      <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+    </div>
+
+    <div class="results-info">
+      <div><strong id="resultCount">–</strong><span id="txt-shown"> lots shown</span></div>
+      <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+        <option value="lot-asc"   id="srt-lot">Lot Number</option>
+        <option value="land-asc"  id="srt-land-a">Land: Low to High</option>
+        <option value="land-desc" id="srt-land-d">Land: High to Low</option>
+        <option value="size-desc" id="srt-size-d">Size: Largest</option>
+        <option value="stage-asc" id="srt-stage">Stage</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th id="th-lot">Lot</th>
+            <th id="th-stage">Stage</th>
+            <th id="th-size">Size ㎡</th>
+            <th id="th-reg">Rego</th>
+            <th id="th-land">Land Price</th>
+            <th id="th-pkg">Package (Wattle)</th>
+            <th id="th-status">Status</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults" style="display:none">
+        <div class="icon">🏡</div>
+        <p id="txt-no-results">No lots match your criteria</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: MAP -->
+  <div class="right-panel">
+    <div class="map-card">
+      <div class="map-header">
+        <span class="map-title" id="txt-map-title">Site Plan — Click a lot to highlight</span>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#5b8caa"></div> <span>Stage 2–3</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div> <span>Stage 4</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#b07aa8"></div> <span>Stage 5</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#5cad7c"></div> <span id="leg-sale">For Sale</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#e89b5c"></div> <span id="leg-uc">Under Contract</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6aabf7"></div> <span id="leg-res">Reserved</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#e8d56a"></div> <span>EOI</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#555"></div> <span id="leg-sold">Sold</span></div>
+      </div>
+      <div class="map-svg-wrap">
+        <!-- SVG Site Plan -->
+        <svg id="site-map" viewBox="0 0 440 580" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,sans-serif">
+          <!-- Background -->
+          <rect width="440" height="580" fill="#0f1a20" rx="4"/>
+
+          <!-- Road labels -->
+          <text x="10" y="18" font-size="7" fill="#4a6a5a" letter-spacing="1">PEACHEY CIRCUIT</text>
+          <text x="10" y="55" font-size="6" fill="#3a5a48">WILLIAM ST</text>
+          <text x="320" y="575" font-size="6" fill="#3a5a48">WATTLE STREET</text>
+
+          <!-- Drainage basin -->
+          <rect x="8" y="25" width="50" height="40" rx="3" fill="#1a3040" stroke="#2a5060" stroke-width="0.5"/>
+          <text x="33" y="42" font-size="5.5" fill="#3a8090" text-anchor="middle">DRAINAGE</text>
+          <text x="33" y="51" font-size="5.5" fill="#3a8090" text-anchor="middle">BASIN</text>
+
+          <!-- Stage 2-3 lots: 100–series (top band) -->
+          <!-- Row: 100-107 -->
+          <g id="lots-s23">
+          <!-- Stage 2-3: 17 (Lot 203) -->
+          <rect class="lot-path" id="map-lot-17" data-lot="17" x="68" y="25" width="32" height="38" rx="2"
+            fill="#5b8caa" fill-opacity="0.35" stroke="#5b8caa" stroke-width="0.8"/>
+          <text x="84" y="48" font-size="7" fill="#8ab8d0" text-anchor="middle" pointer-events="none">17</text>
+
+          <!-- Stage 2: 37 (Lot 210) -->
+          <rect class="lot-path" id="map-lot-37" data-lot="37" x="100" y="25" width="30" height="38" rx="2"
+            fill="#5b8caa" fill-opacity="0.35" stroke="#5b8caa" stroke-width="0.8"/>
+          <text x="115" y="48" font-size="7" fill="#8ab8d0" text-anchor="middle" pointer-events="none">37</text>
+
+          <!-- Stage 3: 9 (Lot 300) -->
+          <rect class="lot-path" id="map-lot-9" data-lot="9" x="130" y="25" width="48" height="38" rx="2"
+            fill="#5b8caa" fill-opacity="0.35" stroke="#5b8caa" stroke-width="0.8"/>
+          <text x="154" y="48" font-size="7" fill="#8ab8d0" text-anchor="middle" pointer-events="none">9</text>
+          </g>
+
+          <!-- Stage 4 lots -->
+          <g id="lots-s4">
+          <!-- Lot 46 (400) -->
+          <rect class="lot-path" id="map-lot-46" data-lot="46" x="188" y="25" width="28" height="38" rx="2"
+            fill="#c8a96e" fill-opacity="0.35" stroke="#c8a96e" stroke-width="0.8"/>
+          <text x="202" y="48" font-size="7" fill="#e0c890" text-anchor="middle" pointer-events="none">46</text>
+
+          <!-- Lot 47 (401) -->
+          <rect class="lot-path" id="map-lot-47" data-lot="47" x="216" y="25" width="28" height="38" rx="2"
+            fill="#c8a96e" fill-opacity="0.35" stroke="#c8a96e" stroke-width="0.8"/>
+          <text x="230" y="48" font-size="7" fill="#e0c890" text-anchor="middle" pointer-events="none">47</text>
+
+          <!-- Lot 53 (407) -->
+          <rect class="lot-path" id="map-lot-53" data-lot="53" x="244" y="25" width="28" height="38" rx="2"
+            fill="#c8a96e" fill-opacity="0.35" stroke="#c8a96e" stroke-width="0.8"/>
+          <text x="258" y="48" font-size="7" fill="#e0c890" text-anchor="middle" pointer-events="none">53</text>
+
+          <!-- Lot 55 (409) -->
+          <rect class="lot-path" id="map-lot-55" data-lot="55" x="272" y="25" width="28" height="38" rx="2"
+            fill="#c8a96e" fill-opacity="0.35" stroke="#c8a96e" stroke-width="0.8"/>
+          <text x="286" y="48" font-size="7" fill="#e0c890" text-anchor="middle" pointer-events="none">55</text>
+
+          <!-- Lot 56 (410) -->
+          <rect class="lot-path" id="map-lot-56" data-lot="56" x="300" y="25" width="28" height="38" rx="2"
+            fill="#c8a96e" fill-opacity="0.35" stroke="#c8a96e" stroke-width="0.8"/>
+          <text x="314" y="48" font-size="7" fill="#e0c890" text-anchor="middle" pointer-events="none">56</text>
+          </g>
+
+          <!-- Road divider -->
+          <line x1="8" y1="72" x2="432" y2="72" stroke="#1e3428" stroke-width="6"/>
+          <text x="220" y="77" font-size="5" fill="#2a4a38" text-anchor="middle" letter-spacing="2">ROAD</text>
+
+          <!-- Stage 5 lots: arranged in a grid -->
+          <g id="lots-s5">
+          <!-- Row 1: Lots 26-33 -->
+          <!-- Lot 26 (500) -->
+          <rect class="lot-path" id="map-lot-26" data-lot="26" x="8"   y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="33" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">26</text>
+
+          <rect class="lot-path" id="map-lot-27" data-lot="27" x="60"  y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="85" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">27</text>
+
+          <rect class="lot-path" id="map-lot-28" data-lot="28" x="112" y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="137" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">28</text>
+
+          <rect class="lot-path" id="map-lot-29" data-lot="29" x="164" y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="189" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">29</text>
+
+          <rect class="lot-path" id="map-lot-30" data-lot="30" x="216" y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="241" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">30</text>
+
+          <rect class="lot-path" id="map-lot-31" data-lot="31" x="268" y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="293" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">31</text>
+
+          <rect class="lot-path" id="map-lot-32" data-lot="32" x="320" y="82" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="345" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">32</text>
+
+          <rect class="lot-path" id="map-lot-33" data-lot="33" x="372" y="82" width="60" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="402" y="106" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">33</text>
+
+          <!-- Row 2: Lots 45, 57, 58, 59, 60–68 -->
+          <rect class="lot-path" id="map-lot-45" data-lot="45" x="8"   y="130" width="54" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="35" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">45</text>
+
+          <rect class="lot-path" id="map-lot-57" data-lot="57" x="64"  y="130" width="52" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="90" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">57</text>
+
+          <rect class="lot-path" id="map-lot-58" data-lot="58" x="118" y="130" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="143" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">58</text>
+
+          <rect class="lot-path" id="map-lot-59" data-lot="59" x="170" y="130" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="195" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">59</text>
+
+          <rect class="lot-path" id="map-lot-60" data-lot="60" x="222" y="130" width="48" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="246" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">60</text>
+
+          <rect class="lot-path" id="map-lot-61" data-lot="61" x="272" y="130" width="48" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="296" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">61</text>
+
+          <rect class="lot-path" id="map-lot-62" data-lot="62" x="322" y="130" width="48" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="346" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">62</text>
+
+          <rect class="lot-path" id="map-lot-63" data-lot="63" x="372" y="130" width="60" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="402" y="154" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">63</text>
+
+          <!-- Row 3: Lots 64–68 -->
+          <rect class="lot-path" id="map-lot-64" data-lot="64" x="8"   y="178" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="33" y="202" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">64</text>
+
+          <rect class="lot-path" id="map-lot-65" data-lot="65" x="60"  y="178" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="85" y="202" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">65</text>
+
+          <rect class="lot-path" id="map-lot-66" data-lot="66" x="112" y="178" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="137" y="202" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">66</text>
+
+          <rect class="lot-path" id="map-lot-67" data-lot="67" x="164" y="178" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="189" y="202" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">67</text>
+
+          <rect class="lot-path" id="map-lot-68" data-lot="68" x="216" y="178" width="50" height="40" rx="2"
+            fill="#b07aa8" fill-opacity="0.35" stroke="#b07aa8" stroke-width="0.8"/>
+          <text x="241" y="202" font-size="7.5" fill="#d0a0c8" text-anchor="middle" pointer-events="none">68</text>
+          </g>
+
+          <!-- Stage labels -->
+          <text x="220" y="16" font-size="8" fill="#c8a96e" text-anchor="middle" letter-spacing="1.5" font-weight="600">STAGE 4</text>
+          <text x="70" y="98" font-size="6" fill="#b07aa8" text-anchor="middle" letter-spacing="1" opacity="0.7">STAGE 5</text>
+
+          <!-- Compass -->
+          <g transform="translate(410,530)">
+            <circle r="16" fill="#1a2a20" stroke="#2a4a30" stroke-width="0.8"/>
+            <text y="-6" font-size="7" fill="#78b48c" text-anchor="middle" font-weight="600">N</text>
+            <line x1="0" y1="-11" x2="0" y2="11" stroke="#78b48c" stroke-width="1.2"/>
+            <line x1="-11" y1="0" x2="11" y2="0" stroke="#3a5a48" stroke-width="0.6"/>
+            <polygon points="0,-11 -3,0 0,-4 3,0" fill="#78b48c"/>
+          </g>
+
+          <!-- Scale bar -->
+          <g transform="translate(10,545)">
+            <line x1="0" y1="0" x2="60" y2="0" stroke="#3a5a48" stroke-width="1.5"/>
+            <line x1="0" y1="-3" x2="0" y2="3" stroke="#3a5a48" stroke-width="1"/>
+            <line x1="60" y1="-3" x2="60" y2="3" stroke="#3a5a48" stroke-width="1"/>
+            <text x="30" y="-5" font-size="6" fill="#4a7a5a" text-anchor="middle">~50m</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy me a coffee</a>
+
+<script>
+// ─── Data ────────────────────────────────────────────────────────────
+// Each lot: { lot, dpPlan, size, landPrice, reg, status, wattleTotal, lotusTTotal, stage }
+// House packages (Wattle 153㎡ 4B2B): cheapest per lot = land + $430,000 (or $451,500 for later stages)
+const lotsData = [
+  // Stage 2-3
+  {lot:17, dpPlan:203, size:690.0,  landPrice:548000, reg:"Q2 2026", status:"For Sale",       stage:2, wattleTotal:978000,  lotusTotal:1001000},
+  {lot:37, dpPlan:210, size:513.9,  landPrice:436000, reg:"Q2 2026", status:"Under Contract", stage:2, wattleTotal:866000,  lotusTotal:889000},
+  {lot:9,  dpPlan:300, size:894.9,  landPrice:528000, reg:"Q2 2026", status:"For Sale",       stage:3, wattleTotal:958000,  lotusTotal:981000},
+  // Stage 4
+  {lot:46, dpPlan:400, size:504.7,  landPrice:428000, reg:"Q2 2027", status:"Under Contract", stage:4, wattleTotal:879500,  lotusTotal:903650},
+  {lot:47, dpPlan:401, size:549.5,  landPrice:458000, reg:"Q2 2027", status:"For Sale",       stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:53, dpPlan:407, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"For Sale",       stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:55, dpPlan:409, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"EOI",            stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:56, dpPlan:410, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"Under Contract", stage:4, wattleTotal:887500,  lotusTotal:911650},
+  // Stage 5
+  {lot:26, dpPlan:500, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:27, dpPlan:501, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:28, dpPlan:502, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"Under Contract", stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:29, dpPlan:503, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:30, dpPlan:504, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:31, dpPlan:505, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:32, dpPlan:506, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:33, dpPlan:507, size:636.0,  landPrice:505000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:956500,  lotusTotal:980650},
+  {lot:45, dpPlan:508, size:578.6,  landPrice:489000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:940500,  lotusTotal:964650},
+  {lot:57, dpPlan:508, size:578.6,  landPrice:489000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:940500,  lotusTotal:964650},
+  {lot:58, dpPlan:509, size:503.1,  landPrice:437000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:888500,  lotusTotal:912650},
+  {lot:59, dpPlan:510, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:60, dpPlan:511, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:61, dpPlan:512, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:62, dpPlan:513, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:63, dpPlan:514, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:64, dpPlan:515, size:501.0,  landPrice:425800, reg:"Q2 2027", status:"EOI",            stage:5, wattleTotal:877300,  lotusTotal:901450},
+  {lot:65, dpPlan:516, size:579.0,  landPrice:489000, reg:"Q2 2027", status:"EOI",            stage:5, wattleTotal:940500,  lotusTotal:964650},
+  {lot:66, dpPlan:517, size:503.0,  landPrice:437000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:888500,  lotusTotal:912650},
+  {lot:67, dpPlan:519, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:68, dpPlan:520, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+];
+
+// ─── i18n ──────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    'txt-hero-label':  'Land & House Packages · Karuah NSW',
+    'txt-hero-sub':    'Browse all available lots and house packages. Click a lot on the map to highlight it in the table.',
+    'txt-s1':          'Available Lots', 'txt-s1b': 'For Sale / EOI',
+    'txt-s2':          'Land From',
+    'txt-s3':          'Package From',  'txt-s3b': 'Wattle 4B2B',
+    'txt-s4':          'Registration',
+    'txt-f-stage':     'Stage',         'opt-all-stage': 'All',
+    'txt-f-status':    'Status',        'opt-all-status':'All',
+    'opt-sale':        'For Sale',      'opt-eoi':       'EOI',
+    'opt-uc':          'Under Contract','opt-res':        'Reserved',
+    'opt-sold':        'Sold',
+    'txt-f-price':     'Max Land Price','opt-all-price':  'All',
+    'opt-p1':          'Under $430K',   'opt-p2':         'Under $460K',
+    'opt-p3':          'Under $500K',   'opt-p4':         'Under $550K',
+    'txt-f-search':    'Search Lot',    'txt-reset':      'Reset',
+    'txt-shown':       ' lots shown',   'txt-no-results': 'No lots match your criteria',
+    'th-lot':          'Lot',           'th-stage':       'Stage',
+    'th-size':         'Size ㎡',       'th-reg':         'Rego',
+    'th-land':         'Land Price',    'th-pkg':         'Package (Wattle)',
+    'th-status':       'Status',
+    'txt-map-title':   'Site Plan — Click a lot to highlight',
+    'srt-lot':         'Lot Number',    'srt-land-a':     'Land: Low to High',
+    'srt-land-d':      'Land: High to Low','srt-size-d':  'Size: Largest',
+    'srt-stage':       'Stage',
+    'leg-sale':        'For Sale',      'leg-uc':         'Under Contract',
+    'leg-res':         'Reserved',      'leg-sold':       'Sold',
+    searchPlaceholder: 'e.g. 26, 500...',
+  },
+  ko: {
+    'txt-hero-label':  '토지 & 하우스 패키지 · 카루아 NSW',
+    'txt-hero-sub':    '분양 가능한 모든 토지와 하우스 패키지를 확인하세요. 지도에서 Lot을 클릭하면 목록에서 강조 표시됩니다.',
+    'txt-s1':          '분양 가능 Lot', 'txt-s1b': '판매 중 / EOI',
+    'txt-s2':          '토지 최저가',
+    'txt-s3':          '패키지 최저가', 'txt-s3b': 'Wattle 4B2B',
+    'txt-s4':          '등기 예정',
+    'txt-f-stage':     '스테이지',      'opt-all-stage': '전체',
+    'txt-f-status':    '상태',          'opt-all-status':'전체',
+    'opt-sale':        '판매 중',       'opt-eoi':       'EOI',
+    'opt-uc':          '계약 중',       'opt-res':        '예약됨',
+    'opt-sold':        '판매 완료',
+    'txt-f-price':     '최대 토지가',   'opt-all-price':  '전체',
+    'opt-p1':          '$430K 이하',    'opt-p2':         '$460K 이하',
+    'opt-p3':          '$500K 이하',    'opt-p4':         '$550K 이하',
+    'txt-f-search':    'Lot 검색',      'txt-reset':      '초기화',
+    'txt-shown':       '개 Lot 표시 중','txt-no-results': '조건에 맞는 Lot이 없습니다',
+    'th-lot':          'Lot',           'th-stage':       '스테이지',
+    'th-size':         '면적 ㎡',       'th-reg':         '등기',
+    'th-land':         '토지 가격',     'th-pkg':         '패키지 (Wattle)',
+    'th-status':       '상태',
+    'txt-map-title':   '사이트 플랜 — Lot 클릭 시 강조 표시',
+    'srt-lot':         'Lot 번호순',    'srt-land-a':     '토지가 낮은 순',
+    'srt-land-d':      '토지가 높은 순','srt-size-d':     '면적 큰 순',
+    'srt-stage':       '스테이지순',
+    'leg-sale':        '판매 중',       'leg-uc':         '계약 중',
+    'leg-res':         '예약됨',        'leg-sold':       '판매 완료',
+    searchPlaceholder: '예: 26, 500...',
+  }
+};
+
+let currentLang = 'en';
+let filtered = [...lotsData];
+let activeLot = null;
+
+// ─── Lang ──────────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  document.getElementById('btnKO').classList.toggle('active', lang==='ko');
+  const t = i18n[lang];
+  Object.keys(t).forEach(id => {
+    if (typeof t[id]==='string') { const el=document.getElementById(id); if(el) el.textContent=t[id]; }
+  });
+  document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  renderTable();
+  updateStats();
+}
+
+// ─── Format ────────────────────────────────────────────────────────
+function fmt(n) {
+  if (!n) return '–';
+  if (n>=1000000) return '$'+(n/1000000).toFixed(2).replace(/\.?0+$/,'')+'M';
+  if (n>=1000)    return '$'+(n/1000).toFixed(0)+'K';
+  return '$'+n;
+}
+function fmtFull(n) { return n ? '$'+n.toLocaleString() : '–'; }
+
+// ─── Status helper ─────────────────────────────────────────────────
+function statusClass(s) {
+  if (!s) return 's-sale';
+  const sl = s.toLowerCase();
+  if (sl.includes('for sale')) return 's-sale';
+  if (sl.includes('contract') || sl==='uc') return 's-contract';
+  if (sl.includes('reserved')) return 's-reserved';
+  if (sl==='sold') return 's-sold';
+  if (sl.includes('eoi')) return 's-eoi';
+  return 's-sale';
+}
+function statusLabel(s, lang) {
+  const map = {
+    en: {'For Sale':'For Sale','Under Contract':'Under Contract','Reserved':'Reserved','SOLD':'Sold','EOI':'EOI'},
+    ko: {'For Sale':'판매 중','Under Contract':'계약 중','Reserved':'예약됨','SOLD':'판매 완료','EOI':'EOI'}
+  };
+  return (map[lang]||map.en)[s] || s;
+}
+
+// ─── Map lot color by status ────────────────────────────────────────
+function lotFillByStatus(status) {
+  const sl = (status||'').toLowerCase();
+  if (sl.includes('for sale'))  return '#5cad7c';
+  if (sl.includes('contract'))  return '#e89b5c';
+  if (sl.includes('reserved'))  return '#6aabf7';
+  if (sl==='sold')              return '#555';
+  if (sl.includes('eoi'))       return '#e8d56a';
+  return '#78b48c';
+}
+
+// ─── Apply map colors from data ─────────────────────────────────────
+function applyMapColors() {
+  lotsData.forEach(d => {
+    const el = document.getElementById('map-lot-'+d.lot);
+    if (!el) return;
+    el.setAttribute('fill', lotFillByStatus(d.status));
+    el.setAttribute('fill-opacity', '0.55');
+  });
+}
+
+// ─── Filters ───────────────────────────────────────────────────────
+function applyFilters() {
+  const stage  = document.getElementById('filterStage').value;
+  const status = document.getElementById('filterStatus').value;
+  const maxPx  = document.getElementById('filterPrice').value;
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort   = document.getElementById('sortSelect').value;
+
+  filtered = lotsData.filter(d => {
+    if (stage  && String(d.stage) !== stage)               return false;
+    if (status && !d.status.toLowerCase().includes(status.toLowerCase())) return false;
+    if (maxPx  && d.landPrice > parseInt(maxPx))            return false;
+    if (search && !String(d.lot).includes(search) && !String(d.dpPlan).includes(search)) return false;
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    if (sort==='lot-asc')   return a.lot - b.lot;
+    if (sort==='land-asc')  return a.landPrice - b.landPrice;
+    if (sort==='land-desc') return b.landPrice - a.landPrice;
+    if (sort==='size-desc') return b.size - a.size;
+    if (sort==='stage-asc') return a.stage - b.stage || a.lot - b.lot;
+    return 0;
+  });
+
+  renderTable();
+  updateStats();
+}
+
+// ─── Render table ──────────────────────────────────────────────────
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  const noRes = document.getElementById('noResults');
+  const t     = i18n[currentLang];
+  document.getElementById('resultCount').textContent = filtered.length;
+  document.getElementById('txt-shown').textContent   = t['txt-shown'];
+
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    noRes.style.display = 'block';
+    document.getElementById('txt-no-results').textContent = t['txt-no-results'];
+    return;
+  }
+  noRes.style.display = 'none';
+
+  tbody.innerHTML = filtered.map(d => {
+    const hl = activeLot === d.lot ? 'highlighted' : '';
+    return `
+    <tr class="${hl}" onclick="selectLot(${d.lot})" id="row-${d.lot}">
+      <td>
+        <div class="lot-code">Lot ${d.lot}</div>
+        <div class="lot-size">DP ${d.dpPlan}</div>
+      </td>
+      <td><span class="stage-badge stage-${d.stage}">Stage ${d.stage}</span></td>
+      <td>${d.size.toFixed(1)}</td>
+      <td style="font-size:11px;color:var(--muted)">${d.reg}</td>
+      <td><div class="price-land">${fmtFull(d.landPrice)}</div></td>
+      <td>
+        <div class="price-total">${fmtFull(d.wattleTotal)}</div>
+        <div class="price-house">Lotus: ${fmtFull(d.lotusTotal)}</div>
+      </td>
+      <td><span class="status-badge ${statusClass(d.status)}">${statusLabel(d.status, currentLang)}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── Stats ─────────────────────────────────────────────────────────
+function updateStats() {
+  const avail = lotsData.filter(d => d.status==='For Sale'||d.status.includes('EOI'));
+  const prices = filtered.map(d=>d.landPrice).filter(Boolean);
+  const pkgs   = filtered.map(d=>d.wattleTotal).filter(Boolean);
+  document.getElementById('stat-avail').textContent   = avail.length;
+  document.getElementById('stat-min-land').textContent= prices.length ? fmt(Math.min(...prices)) : '–';
+  document.getElementById('stat-min-sub').textContent = prices.length ? `Lot ${filtered.find(d=>d.landPrice===Math.min(...prices)).lot}` : '–';
+  document.getElementById('stat-min-pkg').textContent = pkgs.length   ? fmt(Math.min(...pkgs))   : '–';
+}
+
+// ─── Select lot ────────────────────────────────────────────────────
+function selectLot(lotNum) {
+  if (activeLot === lotNum) { activeLot = null; }
+  else                       { activeLot = lotNum; }
+
+  // map highlight
+  document.querySelectorAll('.lot-path').forEach(el => el.classList.remove('active-lot'));
+  if (activeLot) {
+    const mapEl = document.getElementById('map-lot-'+activeLot);
+    if (mapEl) mapEl.classList.add('active-lot');
+    // scroll row into view
+    const row = document.getElementById('row-'+activeLot);
+    if (row) row.scrollIntoView({block:'nearest', behavior:'smooth'});
+  }
+  renderTable();
+}
+
+// ─── Map events ────────────────────────────────────────────────────
+const tooltip = document.getElementById('mapTooltip');
+document.querySelectorAll('.lot-path').forEach(el => {
+  el.addEventListener('click', e => {
+    const ln = parseInt(el.dataset.lot);
+    selectLot(ln);
+  });
+  el.addEventListener('mouseenter', e => {
+    const ln = parseInt(el.dataset.lot);
+    const d  = lotsData.find(x => x.lot===ln);
+    if (!d) return;
+    document.getElementById('tt-lot').textContent    = 'Lot ' + d.lot + ' (DP '+d.dpPlan+')';
+    document.getElementById('tt-stage').textContent  = 'Stage ' + d.stage;
+    document.getElementById('tt-size').textContent   = d.size + ' ㎡';
+    document.getElementById('tt-land').textContent   = fmtFull(d.landPrice);
+    document.getElementById('tt-status').textContent = d.status;
+    tooltip.classList.add('visible');
+  });
+  el.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.clientX + 14) + 'px';
+    tooltip.style.top  = (e.clientY - 10) + 'px';
+  });
+  el.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+});
+
+// ─── Reset ─────────────────────────────────────────────────────────
+function resetFilters() {
+  ['filterStage','filterStatus','filterPrice'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value  = 'lot-asc';
+  activeLot = null;
+  document.querySelectorAll('.lot-path').forEach(el => el.classList.remove('active-lot'));
+  applyFilters();
+}
+
+// ─── Theme ─────────────────────────────────────────────────────────
+function toggleTheme() {
+  const b = document.body;
+  const btn = document.getElementById('themeBtn');
+  if (b.dataset.theme==='dark') { b.dataset.theme='light'; btn.textContent='🌙'; }
+  else                          { b.dataset.theme='dark';  btn.textContent='☀️'; }
+}
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  document.body.dataset.theme = 'light';
+  document.getElementById('themeBtn').textContent = '🌙';
+}
+
+// ─── Init ──────────────────────────────────────────────────────────
+applyMapColors();
+applyFilters();
+</script>
+</body>
+</html>
