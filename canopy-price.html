@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANOPY Concord West — Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1f1f1f;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --text: #f0ede8;
+    --muted: rgba(240,237,232,0.5);
+    --faint: rgba(240,237,232,0.15);
+    --sold: rgba(255,255,255,0.12);
+    --available-bg: rgba(201,168,76,0.08);
+    --available-border: rgba(201,168,76,0.3);
+    --leased-bg: rgba(80,160,120,0.08);
+    --leased-border: rgba(80,160,120,0.35);
+    --accent: #c9a84c;
+  }
+  [data-theme="light"] {
+    --bg: #f5f2ec;
+    --surface: #fff;
+    --surface2: #f0ede6;
+    --border: rgba(0,0,0,0.08);
+    --text: #1a1a1a;
+    --muted: rgba(0,0,0,0.45);
+    --faint: rgba(0,0,0,0.08);
+    --sold: rgba(0,0,0,0.06);
+    --available-bg: rgba(201,168,76,0.07);
+    --available-border: rgba(201,168,76,0.4);
+    --leased-bg: rgba(80,160,120,0.07);
+    --leased-border: rgba(80,160,120,0.4);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* BUY ME A COFFEE */
+  .bmc-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .bmc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: var(--gold);
+    color: #0d0d0d;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+  }
+  .bmc-btn:hover { opacity: 0.85; }
+  .theme-toggle {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    padding: 56px 40px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+  }
+  .hero-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-top: 14px;
+  }
+  .hero-updated .dot { width:6px; height:6px; border-radius:50%; background: #4caf82; display:inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* STATS */
+  .stats-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 32px;
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .stat-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 20px;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+  .stat-chip .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-chip .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* FILTERS */
+  .filters-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 28px;
+  }
+  .filters-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .filter-group label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .filter-group select, .search-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .filter-group select:focus, .search-box:focus { border-color: var(--gold); }
+  .search-box { flex: 1.5; min-width: 180px; }
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    padding-bottom: 0;
+  }
+  .lang-btn {
+    padding: 9px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--gold); color: #0d0d0d; border-color: var(--gold); }
+  .reset-btn {
+    padding: 9px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    align-self: flex-end;
+  }
+  .reset-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* RESULTS BAR */
+  .results-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .results-bar strong { color: var(--gold); }
+
+  /* TABLE */
+  .table-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    font-size: 13px;
+  }
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  thead th:hover { color: var(--gold); }
+  thead th.sorted { color: var(--gold); }
+  .sort-arrow { display: inline-block; margin-left: 4px; opacity: 0.4; }
+  .sort-arrow.asc::after { content: '↑'; }
+  .sort-arrow.desc::after { content: '↓'; }
+
+  tbody tr {
+    background: var(--surface);
+    border-radius: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  tbody tr:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+  tbody tr.row-sold { opacity: 0.35; }
+  tbody tr.row-available { background: var(--available-bg); }
+  tbody tr.row-leased { background: var(--leased-bg); }
+  
+  td {
+    padding: 13px 14px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td:first-child { border-left: 1px solid var(--border); border-radius: 10px 0 0 10px; }
+  td:last-child { border-right: 1px solid var(--border); border-radius: 0 10px 10px 0; }
+  tbody tr.row-available td:first-child { border-left: 2px solid var(--gold); }
+  tbody tr.row-leased td:first-child { border-left: 2px solid #4caf82; }
+
+  .unit-badge {
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .building-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin-right: 6px;
+    background: var(--faint);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .pill-sold { background: var(--sold); color: var(--muted); }
+  .pill-available { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .pill-leased { background: rgba(80,160,120,0.15); color: #4caf82; border: 1px solid rgba(80,160,120,0.35); }
+  .pill-penthouse { background: rgba(180,130,60,0.2); color: #e8b86d; border: 1px solid rgba(180,130,60,0.4); }
+
+  .price-cell {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 0.01em;
+  }
+  .price-cell.sold-price { color: var(--muted); font-size: 13px; font-family: 'DM Sans', sans-serif; }
+  .bed-dot { display: inline-flex; gap: 3px; align-items: center; }
+  .bed-dot span { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
+  .direction-tag {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTION DIVIDERS */
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 40px 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-header .bldg-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+  .section-header .sep { flex: 1; height: 1px; background: var(--border); }
+  .section-header .cnt { font-size: 11px; color: var(--muted); }
+  .divider-row td {
+    padding: 6px 14px 2px;
+    background: transparent !important;
+    border: none !important;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 0 !important;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 14px;
+    display: none;
+  }
+  .no-results .icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 32px 20px 24px; }
+    .stats-bar, .filters-wrap, .results-bar, .table-wrap { padding-left: 20px; padding-right: 20px; }
+    .filters-grid { gap: 8px; }
+    .filter-group { min-width: 120px; }
+    td, th { padding: 10px 10px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="bmc-bar">
+  <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy Me a Coffee</a>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☀ Light</button>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Concord West · Sydney NSW</div>
+  <h1 class="hero-title">CANOPY<br><em>Price List</em></h1>
+  <p class="hero-sub" id="heroSub">분양가 조회 · 침실·방향·상태 필터</p>
+  <div class="hero-updated"><span class="dot"></span> <span id="updatedLabel">Updated 28 Apr 2026</span></div>
+</div>
+
+<div class="stats-bar" id="statsBar"></div>
+
+<div class="filters-wrap">
+  <div class="filters-grid">
+    <div class="filter-group" style="flex:1.5">
+      <label id="lbl-search">Search</label>
+      <input type="text" class="search-box" id="searchBox" placeholder="Unit No...">
+    </div>
+    <div class="filter-group">
+      <label id="lbl-status">Status</label>
+      <select id="filterStatus">
+        <option value="">All</option>
+        <option value="available">Available</option>
+        <option value="leased">Leased</option>
+        <option value="sold">Sold</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label id="lbl-beds">Bedrooms</label>
+      <select id="filterBeds">
+        <option value="">All</option>
+        <option value="1">1 Bed</option>
+        <option value="2">2 Bed</option>
+        <option value="3">3 Bed</option>
+        <option value="4">Penthouse</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label id="lbl-building">Building</label>
+      <select id="filterBuilding">
+        <option value="">All</option>
+        <option value="A">Block A</option>
+        <option value="B">Block B</option>
+        <option value="BB">Block BB</option>
+        <option value="C">Block C</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label id="lbl-aspect">Aspect</label>
+      <select id="filterAspect">
+        <option value="">All</option>
+        <option value="N">North</option>
+        <option value="NE">North-East</option>
+        <option value="E">East</option>
+        <option value="ES">East-South</option>
+        <option value="SE">South-East</option>
+        <option value="S">South</option>
+        <option value="SW">South-West</option>
+        <option value="W">West</option>
+        <option value="NW">North-West</option>
+        <option value="W&E">West & East</option>
+      </select>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKR" onclick="setLang('kr')">한국어</button>
+    </div>
+    <button class="reset-btn" onclick="resetFilters()" id="btnReset">Reset</button>
+  </div>
+</div>
+
+<div class="results-bar">
+  <span id="resultsCount"></span>
+  <span id="priceRange"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="mainTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable('unit')" id="th-unit">Unit <span class="sort-arrow" id="sa-unit"></span></th>
+        <th onclick="sortTable('building')" id="th-building">Building <span class="sort-arrow" id="sa-building"></span></th>
+        <th onclick="sortTable('status')" id="th-status">Status <span class="sort-arrow" id="sa-status"></span></th>
+        <th onclick="sortTable('beds')" id="th-beds">Beds <span class="sort-arrow" id="sa-beds"></span></th>
+        <th onclick="sortTable('internal')" id="th-internal">Internal ㎡ <span class="sort-arrow" id="sa-internal"></span></th>
+        <th onclick="sortTable('balcony')" id="th-balcony">Balcony ㎡ <span class="sort-arrow" id="sa-balcony"></span></th>
+        <th onclick="sortTable('parking')" id="th-parking">Parking <span class="sort-arrow" id="sa-parking"></span></th>
+        <th onclick="sortTable('aspect')" id="th-aspect">Aspect <span class="sort-arrow" id="sa-aspect"></span></th>
+        <th onclick="sortTable('price')" id="th-price">Price <span class="sort-arrow" id="sa-price"></span></th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">
+    <div class="icon">🌿</div>
+    <div id="noResultsText">No units match your filters.</div>
+  </div>
+</div>
+
+<footer>
+  Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.
+</footer>
+
+<script>
+const RAW = [
+  // Block A
+  {unit:'A102',building:'A',level:1,lot:6,beds:1,internal:55.0,balcony:0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'A103',building:'A',level:1,lot:5,beds:3,internal:96.0,balcony:0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'A104',building:'A',level:1,lot:4,beds:3,internal:107.0,balcony:0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'A105',building:'A',level:1,lot:3,beds:2,internal:82.0,balcony:0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'A106',building:'A',level:1,lot:2,beds:2,internal:85.0,balcony:0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'A201',building:'A',level:2,lot:7,beds:2,internal:83.0,balcony:12.0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'A202',building:'A',level:2,lot:12,beds:1,internal:55.0,balcony:9.0,parking:0,aspect:'E',price:null,status:'sold'},
+  {unit:'A203',building:'A',level:2,lot:11,beds:3,internal:95.0,balcony:11.0,parking:1,aspect:'NE',price:1445000,status:'available'},
+  {unit:'A204',building:'A',level:2,lot:10,beds:3,internal:107.0,balcony:38.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'A205',building:'A',level:2,lot:9,beds:2,internal:82.0,balcony:13.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'A206',building:'A',level:2,lot:8,beds:2,internal:84.0,balcony:12.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'A301',building:'A',level:3,lot:13,beds:2,internal:83.0,balcony:12.0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'A302',building:'A',level:3,lot:18,beds:1,internal:55.0,balcony:9.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'A303',building:'A',level:3,lot:17,beds:3,internal:95.0,balcony:11.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'A304',building:'A',level:3,lot:16,beds:3,internal:107.0,balcony:38.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'A305',building:'A',level:3,lot:15,beds:2,internal:82.0,balcony:13.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'A306',building:'A',level:3,lot:14,beds:2,internal:84.0,balcony:12.0,parking:1,aspect:'W',price:null,status:'sold'},
+  // Block B
+  {unit:'B101',building:'B',level:1,lot:2,beds:2,internal:89.0,balcony:0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'B102',building:'B',level:1,lot:3,beds:2,internal:84.0,balcony:0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'B103',building:'B',level:1,lot:4,beds:3,internal:115.0,balcony:0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'B104',building:'B',level:1,lot:5,beds:2,internal:80.0,balcony:0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'B105',building:'B',level:1,lot:1,beds:3,internal:97.0,balcony:0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'B201',building:'B',level:2,lot:12,beds:2,internal:89.0,balcony:15.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'B202',building:'B',level:2,lot:13,beds:2,internal:84.0,balcony:23.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'B203',building:'B',level:2,lot:14,beds:3,internal:114.0,balcony:29.0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'B204',building:'B',level:2,lot:15,beds:2,internal:79.0,balcony:16.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'B205',building:'B',level:2,lot:11,beds:3,internal:97.0,balcony:14.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'B301',building:'B',level:3,lot:22,beds:2,internal:89.0,balcony:15.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'B302',building:'B',level:3,lot:23,beds:2,internal:84.0,balcony:23.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'B303',building:'B',level:3,lot:24,beds:3,internal:114.0,balcony:29.0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'B304',building:'B',level:3,lot:25,beds:2,internal:79.0,balcony:16.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'B305',building:'B',level:3,lot:21,beds:3,internal:97.0,balcony:14.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'B401',building:'B',level:4,lot:32,beds:2,internal:89.0,balcony:15.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'B402',building:'B',level:4,lot:33,beds:2,internal:84.0,balcony:23.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'B403',building:'B',level:4,lot:34,beds:3,internal:129.0,balcony:158.0,parking:1,aspect:'W&E',price:2490000,status:'available',penthouse:true},
+  {unit:'B404',building:'B',level:4,lot:35,beds:2,internal:79.0,balcony:16.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'B405',building:'B',level:4,lot:31,beds:3,internal:97.0,balcony:14.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  // Block BB
+  {unit:'BB101',building:'BB',level:1,lot:10,beds:2,internal:76.0,balcony:0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'BB102',building:'BB',level:1,lot:9,beds:2,internal:84.0,balcony:0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'BB103',building:'BB',level:1,lot:8,beds:3,internal:115.0,balcony:0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'BB104',building:'BB',level:1,lot:7,beds:2,internal:84.0,balcony:0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'BB105',building:'BB',level:1,lot:6,beds:2,internal:84.0,balcony:0,parking:1,aspect:'SW',price:null,status:'sold'},
+  {unit:'BB201',building:'BB',level:2,lot:20,beds:2,internal:76.0,balcony:15.0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'BB202',building:'BB',level:2,lot:19,beds:2,internal:85.0,balcony:22.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'BB203',building:'BB',level:2,lot:18,beds:3,internal:114.0,balcony:32.0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'BB204',building:'BB',level:2,lot:17,beds:2,internal:84.0,balcony:26.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'BB205',building:'BB',level:2,lot:16,beds:2,internal:83.0,balcony:11.0,parking:1,aspect:'SW',price:null,status:'sold'},
+  {unit:'BB301',building:'BB',level:3,lot:30,beds:2,internal:76.0,balcony:15.0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'BB302',building:'BB',level:3,lot:29,beds:2,internal:85.0,balcony:22.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'BB303',building:'BB',level:3,lot:28,beds:3,internal:114.0,balcony:32.0,parking:1,aspect:'W&E',price:null,status:'sold'},
+  {unit:'BB304',building:'BB',level:3,lot:27,beds:2,internal:84.0,balcony:26.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'BB305',building:'BB',level:3,lot:26,beds:2,internal:83.0,balcony:11.0,parking:1,aspect:'SW',price:null,status:'sold'},
+  {unit:'BB401',building:'BB',level:4,lot:40,beds:2,internal:76.0,balcony:15.0,parking:1,aspect:'ES',price:null,status:'sold'},
+  {unit:'BB402',building:'BB',level:4,lot:39,beds:2,internal:85.0,balcony:22.0,parking:1,aspect:'E',price:null,status:'sold'},
+  {unit:'BB403',building:'BB',level:4,lot:38,beds:3,internal:129.0,balcony:158.0,parking:1,aspect:'W&E',price:null,status:'sold',penthouse:true},
+  {unit:'BB404',building:'BB',level:4,lot:37,beds:2,internal:84.0,balcony:26.0,parking:1,aspect:'W',price:null,status:'sold'},
+  {unit:'BB405',building:'BB',level:4,lot:36,beds:2,internal:83.0,balcony:11.0,parking:1,aspect:'SW',price:null,status:'sold'},
+  // Block C
+  {unit:'C101',building:'C',level:1,lot:5,beds:2,internal:81.0,balcony:0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'C102',building:'C',level:1,lot:6,beds:2,internal:80.0,balcony:0,parking:1,aspect:'SE',price:null,status:'sold'},
+  {unit:'C103',building:'C',level:1,lot:1,beds:1,internal:54.0,balcony:0,parking:0,aspect:'S',price:811000,status:'leased'},
+  {unit:'C104',building:'C',level:1,lot:2,beds:3,internal:102.0,balcony:0,parking:1,aspect:'SW',price:null,status:'sold'},
+  {unit:'C105',building:'C',level:1,lot:3,beds:2,internal:75.0,balcony:0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'C106',building:'C',level:1,lot:14,beds:2,internal:77.0,balcony:0,parking:1,aspect:'N',price:1209000,status:'available'},
+  {unit:'C201',building:'C',level:2,lot:11,beds:2,internal:81.0,balcony:14.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'C202',building:'C',level:2,lot:12,beds:2,internal:81.0,balcony:14.0,parking:1,aspect:'SE',price:null,status:'sold'},
+  {unit:'C203',building:'C',level:2,lot:27,beds:1,internal:54.0,balcony:8.0,parking:0,aspect:'S',price:821000,status:'leased'},
+  {unit:'C204',building:'C',level:2,lot:28,beds:3,internal:103.0,balcony:15.0,parking:1,aspect:'SW',price:1486000,status:'available'},
+  {unit:'C205',building:'C',level:2,lot:9,beds:2,internal:75.0,balcony:10.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'C206',building:'C',level:2,lot:10,beds:2,internal:76.0,balcony:11.0,parking:1,aspect:'N',price:null,status:'sold'},
+  {unit:'C301',building:'C',level:3,lot:17,beds:2,internal:81.0,balcony:14.0,parking:1,aspect:'NE',price:null,status:'sold'},
+  {unit:'C302',building:'C',level:3,lot:18,beds:2,internal:81.0,balcony:14.0,parking:1,aspect:'SE',price:null,status:'sold'},
+  {unit:'C303',building:'C',level:3,lot:13,beds:1,internal:54.0,balcony:8.0,parking:1,aspect:'S',price:null,status:'sold'},
+  {unit:'C304',building:'C',level:3,lot:14,beds:3,internal:103.0,balcony:15.0,parking:1,aspect:'SW',price:null,status:'sold'},
+  {unit:'C305',building:'C',level:3,lot:15,beds:2,internal:75.0,balcony:10.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'C306',building:'C',level:3,lot:16,beds:2,internal:76.0,balcony:11.0,parking:1,aspect:'N',price:null,status:'sold'},
+  {unit:'C402',building:'C',level:4,lot:24,beds:2,internal:81.0,balcony:14.0,parking:1,aspect:'SE',price:null,status:'sold'},
+  {unit:'C403',building:'C',level:4,lot:19,beds:1,internal:54.0,balcony:8.0,parking:1,aspect:'S',price:null,status:'sold'},
+  {unit:'C405',building:'C',level:4,lot:21,beds:2,internal:75.0,balcony:10.0,parking:1,aspect:'NW',price:null,status:'sold'},
+  {unit:'C406',building:'C',level:4,lot:22,beds:2,internal:76.0,balcony:11.0,parking:1,aspect:'N',price:1151000,status:'available'},
+];
+
+const LABELS = {
+  en: {
+    search:'Unit No', status:'Status', beds:'Bedrooms', building:'Building', aspect:'Aspect',
+    reset:'Reset', updated:'Updated 28 Apr 2026', heroSub:'Price search · filter by beds, aspect & status',
+    all:'All', available:'Available', leased:'Leased', sold:'Sold',
+    noResults:'No units match your filters.',
+    thUnit:'Unit', thBuilding:'Building', thStatus:'Status', thBeds:'Beds',
+    thInternal:'Internal ㎡', thBalcony:'Balcony ㎡', thParking:'Parking', thAspect:'Aspect', thPrice:'Price',
+    statAvail:'Available', statLeased:'Leased', statSold:'Sold', statTotal:'Total',
+    showing:'Showing', of:'of', units:'units',
+    priceFrom:'Price from', priceTo:'to',
+    pilSold:'SOLD', pilAvail:'AVAILABLE', pilLeased:'LEASED', pilPH:'PENTHOUSE',
+  },
+  kr: {
+    search:'호수', status:'상태', beds:'침실', building:'동', aspect:'방향',
+    reset:'초기화', updated:'2026년 4월 28일 업데이트', heroSub:'분양가 조회 · 침실·방향·상태 필터',
+    all:'전체', available:'분양중', leased:'임대중', sold:'완판',
+    noResults:'조건에 맞는 유닛이 없습니다.',
+    thUnit:'호수', thBuilding:'동', thStatus:'상태', thBeds:'침실',
+    thInternal:'전용면적㎡', thBalcony:'발코니㎡', thParking:'주차', thAspect:'방향', thPrice:'분양가',
+    statAvail:'분양가능', statLeased:'임대중', statSold:'완판', statTotal:'전체',
+    showing:'표시', of:'/', units:'유닛',
+    priceFrom:'최저가', priceTo:'~',
+    pilSold:'완판', pilAvail:'분양중', pilLeased:'임대중', pilPH:'펜트하우스',
+  }
+};
+
+let lang = 'en';
+let sortKey = 'unit';
+let sortDir = 'asc';
+let filtered = [...RAW];
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  document.getElementById('btnKR').classList.toggle('active', l==='kr');
+  updateLabels();
+  render();
+}
+
+function updateLabels() {
+  const L = LABELS[lang];
+  document.getElementById('lbl-search').textContent = L.search;
+  document.getElementById('lbl-status').textContent = L.status;
+  document.getElementById('lbl-beds').textContent = L.beds;
+  document.getElementById('lbl-building').textContent = L.building;
+  document.getElementById('lbl-aspect').textContent = L.aspect;
+  document.getElementById('btnReset').textContent = L.reset;
+  document.getElementById('updatedLabel').textContent = L.updated;
+  document.getElementById('heroSub').textContent = L.heroSub;
+  document.getElementById('th-unit').childNodes[0].textContent = L.thUnit+' ';
+  document.getElementById('th-building').childNodes[0].textContent = L.thBuilding+' ';
+  document.getElementById('th-status').childNodes[0].textContent = L.thStatus+' ';
+  document.getElementById('th-beds').childNodes[0].textContent = L.thBeds+' ';
+  document.getElementById('th-internal').childNodes[0].textContent = L.thInternal+' ';
+  document.getElementById('th-balcony').childNodes[0].textContent = L.thBalcony+' ';
+  document.getElementById('th-parking').childNodes[0].textContent = L.thParking+' ';
+  document.getElementById('th-aspect').childNodes[0].textContent = L.thAspect+' ';
+  document.getElementById('th-price').childNodes[0].textContent = L.thPrice+' ';
+  document.getElementById('noResultsText').textContent = L.noResults;
+  document.getElementById('filterStatus').options[0].textContent = L.all;
+  document.getElementById('filterStatus').options[1].textContent = L.available;
+  document.getElementById('filterStatus').options[2].textContent = L.leased;
+  document.getElementById('filterStatus').options[3].textContent = L.sold;
+}
+
+function filterData() {
+  const q = document.getElementById('searchBox').value.trim().toLowerCase();
+  const st = document.getElementById('filterStatus').value;
+  const bd = document.getElementById('filterBeds').value;
+  const bl = document.getElementById('filterBuilding').value;
+  const asp = document.getElementById('filterAspect').value;
+  filtered = RAW.filter(r => {
+    if (q && !r.unit.toLowerCase().includes(q)) return false;
+    if (st && r.status !== st) return false;
+    if (bd) {
+      if (bd==='4' && !r.penthouse) return false;
+      if (bd!=='4' && r.beds !== parseInt(bd)) return false;
+    }
+    if (bl && r.building !== bl) return false;
+    if (asp && r.aspect !== asp) return false;
+    return true;
+  });
+  sortData();
+}
+
+function sortData() {
+  filtered.sort((a,b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey==='price') { av = av||0; bv = bv||0; }
+    if (sortKey==='unit') { av = a.unit; bv = b.unit; }
+    if (typeof av === 'string') return sortDir==='asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir==='asc' ? av - bv : bv - av;
+  });
+}
+
+function sortTable(key) {
+  if (sortKey === key) sortDir = sortDir==='asc'?'desc':'asc';
+  else { sortKey=key; sortDir='asc'; }
+  document.querySelectorAll('.sort-arrow').forEach(e => { e.className='sort-arrow'; });
+  const sa = document.getElementById('sa-'+key);
+  if (sa) sa.className = 'sort-arrow '+sortDir;
+  sortData();
+  renderTable();
+}
+
+function fmtPrice(p) {
+  if (!p) return null;
+  return '$' + p.toLocaleString('en-AU');
+}
+
+function renderStats() {
+  const avail = RAW.filter(r=>r.status==='available').length;
+  const leased = RAW.filter(r=>r.status==='leased').length;
+  const sold = RAW.filter(r=>r.status==='sold').length;
+  const L = LABELS[lang];
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-chip"><div class="num">${RAW.length}</div><div class="lbl">${L.statTotal}</div></div>
+    <div class="stat-chip"><div class="num" style="color:#4caf82">${avail}</div><div class="lbl">${L.statAvail}</div></div>
+    <div class="stat-chip"><div class="num" style="color:#6bbfa0">${leased}</div><div class="lbl">${L.statLeased}</div></div>
+    <div class="stat-chip"><div class="num" style="color:var(--muted)">${sold}</div><div class="lbl">${L.statSold}</div></div>
+  `;
+}
+
+function renderTable() {
+  const L = LABELS[lang];
+  const tbody = document.getElementById('tableBody');
+  const noRes = document.getElementById('noResults');
+  const results = document.getElementById('resultsCount');
+  const priceEl = document.getElementById('priceRange');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    noRes.style.display = 'block';
+    results.innerHTML = '';
+    priceEl.innerHTML = '';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  const total = RAW.length;
+  results.innerHTML = `<strong>${filtered.length}</strong> ${L.of} ${total} ${L.units}`;
+
+  const prices = filtered.filter(r=>r.price).map(r=>r.price);
+  if (prices.length) {
+    const mn = Math.min(...prices), mx = Math.max(...prices);
+    priceEl.innerHTML = `${fmtPrice(mn)}${mn!==mx?' — '+fmtPrice(mx):''}`;
+  } else {
+    priceEl.innerHTML = '';
+  }
+
+  const bldgOrder = ['A','B','BB','C'];
+  const grouped = {};
+  filtered.forEach(r => {
+    if (!grouped[r.building]) grouped[r.building] = [];
+    grouped[r.building].push(r);
+  });
+
+  let html = '';
+  bldgOrder.forEach(b => {
+    if (!grouped[b]) return;
+    grouped[b].forEach(r => {
+      const isSold = r.status==='sold';
+      const isAvail = r.status==='available';
+      const isLeased = r.status==='leased';
+      const isPH = r.penthouse;
+
+      let statusPill = '';
+      if (isPH && isAvail) statusPill = `<span class="status-pill pill-penthouse">${L.pilPH}</span>`;
+      else if (isAvail) statusPill = `<span class="status-pill pill-available">${L.pilAvail}</span>`;
+      else if (isLeased) statusPill = `<span class="status-pill pill-leased">${L.pilLeased}</span>`;
+      else statusPill = `<span class="status-pill pill-sold">${L.pilSold}</span>`;
+
+      const bedDots = Array(r.beds).fill('<span></span>').join('');
+      const priceHtml = r.price
+        ? `<span class="price-cell">${fmtPrice(r.price)}</span>`
+        : `<span class="price-cell sold-price">—</span>`;
+
+      const rowClass = isSold ? 'row-sold' : isLeased ? 'row-leased' : 'row-available';
+      html += `<tr class="${rowClass}">
+        <td><span class="unit-badge">${r.unit}</span></td>
+        <td><span class="building-tag">${r.building}</span></td>
+        <td>${statusPill}</td>
+        <td><span class="bed-dot">${bedDots}</span> ${r.beds}</td>
+        <td>${r.internal}</td>
+        <td>${r.balcony || '—'}</td>
+        <td>${r.parking}</td>
+        <td><span class="direction-tag">${r.aspect}</span></td>
+        <td>${priceHtml}</td>
+      </tr>`;
+    });
+  });
+  tbody.innerHTML = html;
+}
+
+function render() {
+  filterData();
+  renderStats();
+  renderTable();
+}
+
+function resetFilters() {
+  document.getElementById('searchBox').value = '';
+  document.getElementById('filterStatus').value = '';
+  document.getElementById('filterBeds').value = '';
+  document.getElementById('filterBuilding').value = '';
+  document.getElementById('filterAspect').value = '';
+  render();
+}
+
+function toggleTheme() {
+  const body = document.body;
+  const btn = document.getElementById('themeBtn');
+  if (body.getAttribute('data-theme') === 'dark') {
+    body.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 Dark';
+  } else {
+    body.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀ Light';
+  }
+}
+
+// System preference
+if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+  document.body.setAttribute('data-theme', 'light');
+  document.getElementById('themeBtn').textContent = '🌙 Dark';
+}
+
+// Event listeners
+document.getElementById('searchBox').addEventListener('input', render);
+document.getElementById('filterStatus').addEventListener('change', render);
+document.getElementById('filterBeds').addEventListener('change', render);
+document.getElementById('filterBuilding').addEventListener('change', render);
+document.getElementById('filterAspect').addEventListener('change', render);
+
+// Init
+render();
+</script>
+</body>
+</html>
