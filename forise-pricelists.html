@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forise Group — Project Price Lists</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080f0c; --surface: #0e1812; --surface2: #152018; --surface3: #1c2b20;
+  --border: rgba(140,190,120,0.1); --border2: rgba(140,190,120,0.22);
+  --accent: #82c46e; --accent2: #b8e0a4;
+  --gold: #c8a96e; --gold2: #e8ca90;
+  --text: #e4efe0; --muted: #547050; --muted2: #334a30;
+}
+[data-theme="light"] {
+  --bg: #f0f5ee; --surface: #ffffff; --surface2: #e8f0e4; --surface3: #dce9d6;
+  --border: rgba(50,100,35,0.1); --border2: rgba(50,100,35,0.22);
+  --accent: #357a22; --accent2: #1d5010;
+  --gold: #876025; --gold2: #a07832;
+  --text: #0b1a08; --muted: #4e6e48; --muted2: #8a9e84;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
+.glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;}
+.glow-a{top:-180px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(80,180,50,.055) 0%,transparent 70%);}
+.glow-b{bottom:-100px;right:-100px;width:500px;height:400px;background:radial-gradient(ellipse,rgba(200,169,110,.04) 0%,transparent 70%);}
+
+/* Header */
+header{position:sticky;top:0;z-index:200;background:rgba(8,15,12,.88);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:62px;transition:background .3s;}
+[data-theme="light"] header{background:rgba(240,245,238,.92);}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#357a22,#82c46e);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-1px;flex-shrink:0;}
+.brand-text{display:flex;flex-direction:column;gap:1px;}
+.brand-name{font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);line-height:1;}
+.brand-sub{font-size:10px;color:var(--muted);letter-spacing:.08em;line-height:1;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.lang-toggle{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:5px 14px;cursor:pointer;color:var(--muted);border:none;background:transparent;font-family:'Outfit',sans-serif;font-size:11px;font-weight:400;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;font-weight:500;}
+.icon-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;}
+.icon-btn:hover{border-color:var(--accent);}
+
+/* Hero */
+.hero{position:relative;z-index:1;text-align:center;padding:88px 40px 56px;max-width:1000px;margin:0 auto;}
+.hero-label{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;border:1px solid rgba(130,196,110,.2);padding:5px 16px;border-radius:20px;background:rgba(130,196,110,.05);}
+.blink{animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-family:'Cormorant Garamond',serif;line-height:.95;font-weight:300;letter-spacing:-.01em;}
+.h1-a{display:block;font-size:clamp(44px,6.5vw,80px);color:var(--text);}
+.h1-b{display:block;font-size:clamp(50px,7.5vw,92px);font-style:italic;color:var(--accent);}
+.h1-c{display:block;font-size:clamp(44px,6.5vw,80px);color:var(--gold);font-weight:600;font-style:normal;}
+.hero-desc{margin-top:22px;font-size:14px;color:var(--muted);line-height:1.75;max-width:460px;margin-left:auto;margin-right:auto;}
+
+/* Stats band */
+.stats-band{position:relative;z-index:1;max-width:780px;margin:0 auto 72px;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden;}
+.sb-item{padding:22px 16px;text-align:center;border-right:1px solid var(--border);}
+.sb-item:last-child{border-right:none;}
+.sb-num{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--accent);line-height:1;}
+.sb-lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+/* Section */
+.section{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 40px 72px;}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:30px;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+
+/* Cards grid */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px;}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .25s,transform .28s,box-shadow .28s;position:relative;animation:fadeUp .55s ease both;}
+.pcard:hover{border-color:var(--border2);transform:translateY(-7px);box-shadow:0 24px 64px rgba(0,0,0,.35),0 0 0 1px rgba(130,196,110,.07);}
+.pcard.featured{background:linear-gradient(145deg,rgba(130,196,110,.07),var(--surface) 60%);border-color:rgba(130,196,110,.22);}
+.pcard.featured:hover{border-color:var(--accent);box-shadow:0 24px 64px rgba(0,0,0,.35),0 0 48px rgba(130,196,110,.07);}
+.pcard-bar{height:5px;}
+.pcard-body{padding:26px 26px 20px;display:flex;flex-direction:column;gap:16px;flex:1;}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.pc-icon{width:56px;height:56px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;transition:transform .22s;}
+.pcard:hover .pc-icon{transform:scale(1.1) rotate(-5deg);}
+.pc-badges{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.bdg{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+.bdg-type{background:rgba(130,196,110,.1);color:var(--accent);border:1px solid rgba(130,196,110,.22);}
+.bdg-date{background:rgba(200,169,110,.08);color:var(--gold);border:1px solid rgba(200,169,110,.18);}
+.bdg-new{background:rgba(92,173,124,.15);color:#5cad7c;border:1px solid rgba(92,173,124,.3);animation:dimPulse 2.5s infinite;}
+@keyframes dimPulse{0%,100%{opacity:1}50%{opacity:.55}}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;line-height:1.12;color:var(--text);}
+.pcard.featured .pc-name{color:var(--accent2);}
+.pc-loc{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.pc-loc::before{content:'📍';font-size:11px;}
+.pc-desc{font-size:12px;color:var(--muted);line-height:1.78;flex:1;}
+.pc-prices{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.pc-pbox{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:11px 13px;}
+.pc-plbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.pc-pval{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);}
+.pc-psub{font-size:9px;color:var(--muted);margin-top:2px;}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);margin-top:4px;}
+.pc-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.pc-tag{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;}
+.pc-arrow{font-size:20px;color:var(--muted);transition:all .22s;}
+.pcard:hover .pc-arrow{color:var(--accent);transform:translateX(6px);}
+
+/* House type cards */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .5s ease both;}
+.tc-bar{height:4px;}
+.tc-body{padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;}
+.tc-top{display:flex;align-items:center;justify-content:space-between;}
+.tc-icon{font-size:26px;}
+.tc-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--text);}
+.tc-spec{font-size:11px;color:var(--muted);line-height:1.6;}
+.tc-price{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
+.tc-plbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.tc-pval{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);}
+.tc-psub{font-size:9px;color:var(--muted);margin-top:1px;}
+
+footer{position:relative;z-index:1;text-align:center;padding:28px 40px 40px;border-top:1px solid var(--border);color:var(--muted);font-size:11px;letter-spacing:.05em;line-height:1.9;}
+footer a{color:var(--accent);text-decoration:none;}
+footer a:hover{color:var(--accent2);}
+.bmc-btn{position:fixed;bottom:22px;right:22px;background:#FFDD00;color:#000;border:none;padding:10px 20px;border-radius:24px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 4px 20px rgba(0,0,0,.28);transition:transform .2s;z-index:500;}
+.bmc-btn:hover{transform:translateY(-2px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+@media(max-width:768px){
+  header{padding:0 16px;}.hero{padding:60px 16px 40px;}
+  .stats-band{grid-template-columns:1fr 1fr;padding:0 16px;margin-bottom:48px;}
+  .sb-item:nth-child(2){border-right:none;}.sb-item:nth-child(3){border-top:1px solid var(--border);}
+  .section{padding:0 16px 56px;}.cards-grid{grid-template-columns:1fr;}.type-grid{grid-template-columns:1fr 1fr;}
+  .brand-sub{display:none;}
+}
+</style>
+</head>
+<body data-theme="dark">
+<div class="glow glow-a"></div>
+<div class="glow glow-b"></div>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">F</div>
+    <div class="brand-text">
+      <div class="brand-name">Forise Group</div>
+      <div class="brand-sub" id="txt-brand-sub">Project Price Lists</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-label"><span class="blink">●</span>&nbsp;<span id="txt-eyebrow">Forise Group · Sydney, Australia</span></div>
+  <h1>
+    <span class="h1-a" id="txt-h1a">Project</span>
+    <span class="h1-b" id="txt-h1b">Price Lists</span>
+    <span class="h1-c" id="txt-h1c">2026</span>
+  </h1>
+  <p class="hero-desc" id="txt-desc">Browse the latest pricing for all Forise Group residential developments across NSW. Click any project to view full details and apply filters.</p>
+</div>
+
+<div class="stats-band">
+  <div class="sb-item"><div class="sb-num">3</div><div class="sb-lbl" id="txt-st1">Projects</div></div>
+  <div class="sb-item"><div class="sb-num">NSW</div><div class="sb-lbl" id="txt-st2">Location</div></div>
+  <div class="sb-item"><div class="sb-num">$425K</div><div class="sb-lbl" id="txt-st3">Land From</div></div>
+  <div class="sb-item"><div class="sb-num">2026</div><div class="sb-lbl" id="txt-st4">Est. Completion</div></div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><div class="sec-lbl" id="txt-sec1">Current Projects</div><div class="sec-line"></div></div>
+  <div class="cards-grid">
+
+    <!-- CANOPY -->
+    <a href="./canopy-price.html" class="pcard featured" style="animation-delay:.04s">
+      <div class="pcard-bar" style="background:linear-gradient(90deg,#3a7a9a,#6ab8d8)"></div>
+      <div class="pcard-body">
+        <div class="pc-top">
+          <div class="pc-icon">🌳</div>
+          <div class="pc-badges">
+            <span class="bdg bdg-new" id="bdg-n1">Updated</span>
+            <span class="bdg bdg-date">2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="pc-name">CANOPY<br>Concord West</div>
+          <div class="pc-loc" id="loc-canopy">Concord West, Sydney NSW</div>
+        </div>
+        <div class="pc-desc" id="desc-canopy">Boutique apartment development in inner-west Sydney. 1, 2 & 3 bedroom apartments across multiple buildings. Prime location with excellent transport links.</div>
+        <div class="pc-prices">
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-c1">Type</div>
+            <div class="pc-pval">1 – 3</div>
+            <div class="pc-psub" id="sub-c1">Bedrooms</div>
+          </div>
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-c2">Location</div>
+            <div class="pc-pval" style="font-size:15px">Inner West</div>
+            <div class="pc-psub" id="sub-c2">Sydney</div>
+          </div>
+        </div>
+        <div class="pc-foot">
+          <div class="pc-tags"><span class="pc-tag">Apartment</span><span class="pc-tag">Inner West</span><span class="pc-tag">Sydney</span></div>
+          <span class="pc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- WILLOW -->
+    <a href="./willow-price.html" class="pcard featured" style="animation-delay:.10s">
+      <div class="pcard-bar" style="background:linear-gradient(90deg,#4a7a6a,#8ec8b0)"></div>
+      <div class="pcard-body">
+        <div class="pc-top">
+          <div class="pc-icon">🌿</div>
+          <div class="pc-badges">
+            <span class="bdg bdg-new" id="bdg-n2">Updated</span>
+            <span class="bdg bdg-date">May 2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="pc-name">Willow<br>Residences</div>
+          <div class="pc-loc" id="loc-willow">Sydney, NSW</div>
+        </div>
+        <div class="pc-desc" id="desc-willow">Premium Sydney apartment development. 1, 2 & 3 bedroom apartments with parking. NE · SE · SW · NW aspects. 26 units available from $854K.</div>
+        <div class="pc-prices">
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-w1">From</div>
+            <div class="pc-pval">$854K</div>
+            <div class="pc-psub" id="sub-w1">1 Bed · H2602</div>
+          </div>
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-w2">Up To</div>
+            <div class="pc-pval">$2.92M</div>
+            <div class="pc-psub" id="sub-w2">3 Bed · H0111</div>
+          </div>
+        </div>
+        <div class="pc-foot">
+          <div class="pc-tags"><span class="pc-tag">Apartment</span><span class="pc-tag" id="tag-w-u">26 Units</span><span class="pc-tag">Off-Plan</span></div>
+          <span class="pc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- KARUAH -->
+    <a href="./karuah-price.html" class="pcard featured" style="animation-delay:.16s">
+      <div class="pcard-bar" style="background:linear-gradient(90deg,#4a6a3a,#c8a96e)"></div>
+      <div class="pcard-body">
+        <div class="pc-top">
+          <div class="pc-icon">🏡</div>
+          <div class="pc-badges">
+            <span class="bdg bdg-new" id="bdg-n3">Updated</span>
+            <span class="bdg bdg-date">Apr 2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="pc-name">The Watermark<br>Karuah</div>
+          <div class="pc-loc" id="loc-karuah">Karuah, NSW</div>
+        </div>
+        <div class="pc-desc" id="desc-karuah">Land & house packages in Karuah NSW. Wattle · Lotus · Maple — 4-bed and dual-key designs. Stage 2–5 releasing now with Q2 2026–27 registration.</div>
+        <div class="pc-prices">
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-k1">Land From</div>
+            <div class="pc-pval">$425K</div>
+            <div class="pc-psub" id="sub-k1">500㎡ · Stage 5</div>
+          </div>
+          <div class="pc-pbox">
+            <div class="pc-plbl" id="lbl-k2">Package From</div>
+            <div class="pc-pval">$866K</div>
+            <div class="pc-psub" id="sub-k2">Wattle 4B2B1C</div>
+          </div>
+        </div>
+        <div class="pc-foot">
+          <div class="pc-tags"><span class="pc-tag">Land & House</span><span class="pc-tag">Dual Key</span><span class="pc-tag" id="tag-k-r">Q2 2026–27</span></div>
+          <span class="pc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- KARUAH HOUSE TYPES -->
+<div class="section" style="padding-top:0">
+  <div class="sec-head"><div class="sec-lbl" id="txt-sec2">Karuah — House Types</div><div class="sec-line"></div></div>
+  <div class="type-grid">
+    <div class="tcard" style="animation-delay:.06s">
+      <div class="tc-bar" style="background:linear-gradient(90deg,#4a9a70,#82c8a0)"></div>
+      <div class="tc-body">
+        <div class="tc-top"><span class="tc-icon">🌾</span><span class="bdg bdg-type">Wattle</span></div>
+        <div class="tc-name">Wattle</div>
+        <div class="tc-spec" id="spec-wattle">153㎡ · 4 Bed / 2 Bath / 1 Car<br>Classic family home</div>
+        <div class="tc-price"><div class="tc-plbl" id="lbl-hp1">House Price</div><div class="tc-pval">$430K – $452K</div><div class="tc-psub" id="sub-hp1">excl. land</div></div>
+      </div>
+    </div>
+    <div class="tcard" style="animation-delay:.11s">
+      <div class="tc-bar" style="background:linear-gradient(90deg,#9a7a4a,#c8b080)"></div>
+      <div class="tc-body">
+        <div class="tc-top"><span class="tc-icon">🪷</span><span class="bdg bdg-type">Lotus</span></div>
+        <div class="tc-name">Lotus</div>
+        <div class="tc-spec" id="spec-lotus">165㎡ · 4 Bed / 2 Bath / 2 Car<br>Spacious contemporary</div>
+        <div class="tc-price"><div class="tc-plbl" id="lbl-hp2">House Price</div><div class="tc-pval">$453K – $483K</div><div class="tc-psub" id="sub-hp2">excl. land</div></div>
+      </div>
+    </div>
+    <div class="tcard" style="animation-delay:.16s">
+      <div class="tc-bar" style="background:linear-gradient(90deg,#7a4a9a,#b08ac8)"></div>
+      <div class="tc-body">
+        <div class="tc-top"><span class="tc-icon">🍁</span><span class="bdg bdg-type">Maple</span></div>
+        <div class="tc-name">Maple</div>
+        <div class="tc-spec" id="spec-maple">194–226㎡ · Dual Key 3+2 / 4+2<br>Investment dual-key</div>
+        <div class="tc-price"><div class="tc-plbl" id="lbl-hp3">House Price</div><div class="tc-pval">$558K – $645K</div><div class="tc-psub" id="sub-hp3">excl. land · dual key</div></div>
+      </div>
+    </div>
+    <div class="tcard" style="animation-delay:.21s">
+      <div class="tc-bar" style="background:linear-gradient(90deg,#6a4a3a,#c8906a)"></div>
+      <div class="tc-body">
+        <div class="tc-top"><span class="tc-icon">🌺</span><span class="bdg bdg-type">Lotus 153</span></div>
+        <div class="tc-name">Lotus 153</div>
+        <div class="tc-spec" id="spec-lotus153">153㎡ · 4 Bed / 2 Bath / 1 Car<br>Compact Lotus variant</div>
+        <div class="tc-price"><div class="tc-plbl" id="lbl-hp4">House Price</div><div class="tc-pval">~$460K</div><div class="tc-psub" id="sub-hp4">excl. land</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Forise Group · Sydney NSW Australia</div>
+  <div>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</div>
+  <div style="margin-top:6px;font-size:10px;color:var(--muted2)" id="txt-disclaimer">Prices and availability are subject to change without notice. All figures are indicative only.</div>
+</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-btn">☕ Buy me a coffee</a>
+
+<script>
+const i18n = {
+  en: {
+    'txt-brand-sub':'Project Price Lists','txt-eyebrow':'Forise Group · Sydney, Australia',
+    'txt-h1a':'Project','txt-h1b':'Price Lists','txt-h1c':'2026',
+    'txt-desc':'Browse the latest pricing for all Forise Group residential developments across NSW. Click any project to view full details and apply filters.',
+    'txt-st1':'Projects','txt-st2':'Location','txt-st3':'Land From','txt-st4':'Est. Completion',
+    'txt-sec1':'Current Projects','txt-sec2':'Karuah — House Types',
+    'bdg-n1':'Updated','bdg-n2':'Updated','bdg-n3':'Updated',
+    'loc-canopy':'Concord West, Sydney NSW','loc-willow':'Sydney, NSW','loc-karuah':'Karuah, NSW',
+    'desc-canopy':'Boutique apartment development in inner-west Sydney. 1, 2 & 3 bedroom apartments across multiple buildings. Prime location with excellent transport links.',
+    'desc-willow':'Premium Sydney apartment development. 1, 2 & 3 bedroom apartments with parking. NE · SE · SW · NW aspects. 26 units available from $854K.',
+    'desc-karuah':'Land & house packages in Karuah NSW. Wattle · Lotus · Maple — 4-bed and dual-key designs. Stage 2–5 releasing now with Q2 2026–27 registration.',
+    'lbl-c1':'Type','sub-c1':'Bedrooms','lbl-c2':'Location','sub-c2':'Sydney',
+    'lbl-w1':'From','sub-w1':'1 Bed · H2602','lbl-w2':'Up To','sub-w2':'3 Bed · H0111','tag-w-u':'26 Units',
+    'lbl-k1':'Land From','sub-k1':'500㎡ · Stage 5','lbl-k2':'Package From','sub-k2':'Wattle 4B2B1C','tag-k-r':'Q2 2026–27',
+    'spec-wattle':'153㎡ · 4 Bed / 2 Bath / 1 Car<br>Classic family home',
+    'spec-lotus':'165㎡ · 4 Bed / 2 Bath / 2 Car<br>Spacious contemporary',
+    'spec-maple':'194–226㎡ · Dual Key 3+2 / 4+2<br>Investment dual-key',
+    'spec-lotus153':'153㎡ · 4 Bed / 2 Bath / 1 Car<br>Compact Lotus variant',
+    'lbl-hp1':'House Price','sub-hp1':'excl. land',
+    'lbl-hp2':'House Price','sub-hp2':'excl. land',
+    'lbl-hp3':'House Price','sub-hp3':'excl. land · dual key',
+    'lbl-hp4':'House Price','sub-hp4':'excl. land',
+    'txt-disclaimer':'Prices and availability are subject to change without notice. All figures are indicative only.',
+  },
+  ko: {
+    'txt-brand-sub':'프로젝트 분양가 목록','txt-eyebrow':'Forise Group · 호주 시드니',
+    'txt-h1a':'프로젝트','txt-h1b':'분양가 리스트','txt-h1c':'2026',
+    'txt-desc':'Forise Group NSW 주거 개발 프로젝트의 최신 분양가를 확인하세요. 각 프로젝트를 클릭해 상세 필터링 조회가 가능합니다.',
+    'txt-st1':'진행 프로젝트','txt-st2':'지역','txt-st3':'토지 최저가','txt-st4':'예상 완공',
+    'txt-sec1':'현재 프로젝트','txt-sec2':'카루아 — 하우스 타입',
+    'bdg-n1':'업데이트','bdg-n2':'업데이트','bdg-n3':'업데이트',
+    'loc-canopy':'콩코드 웨스트, 시드니 NSW','loc-willow':'시드니, NSW','loc-karuah':'카루아, NSW',
+    'desc-canopy':'시드니 이너웨스트 콩코드 웨스트 부티크 아파트. 1·2·3 베드룸, 멀티 빌딩. 교통 접근성 우수.',
+    'desc-willow':'시드니 프리미엄 아파트. 1·2·3 베드룸 및 주차 포함. NE·SE·SW·NW 방향. 26세대 $854K부터.',
+    'desc-karuah':'NSW 카루아 토지+하우스 패키지. Wattle·Lotus·Maple — 4베드룸 및 듀얼키. 스테이지 2–5 분양 중.',
+    'lbl-c1':'타입','sub-c1':'베드룸','lbl-c2':'위치','sub-c2':'시드니',
+    'lbl-w1':'최저가','sub-w1':'1베드 · H2602','lbl-w2':'최고가','sub-w2':'3베드 · H0111','tag-w-u':'26세대',
+    'lbl-k1':'토지 최저가','sub-k1':'500㎡ · 스테이지 5','lbl-k2':'패키지 최저가','sub-k2':'Wattle 4B2B1C','tag-k-r':'등기 Q2 2026–27',
+    'spec-wattle':'153㎡ · 4베드 / 2욕실 / 1주차<br>클래식 패밀리홈',
+    'spec-lotus':'165㎡ · 4베드 / 2욕실 / 2주차<br>넓고 현대적인 설계',
+    'spec-maple':'194–226㎡ · 듀얼키 3+2 / 4+2<br>투자용 듀얼키',
+    'spec-lotus153':'153㎡ · 4베드 / 2욕실 / 1주차<br>컴팩트 Lotus 변형',
+    'lbl-hp1':'건물 가격','sub-hp1':'토지 별도',
+    'lbl-hp2':'건물 가격','sub-hp2':'토지 별도',
+    'lbl-hp3':'건물 가격','sub-hp3':'토지 별도 · 듀얼키',
+    'lbl-hp4':'건물 가격','sub-hp4':'토지 별도',
+    'txt-disclaimer':'가격 및 분양 가능 여부는 사전 고지 없이 변경될 수 있습니다.',
+  }
+};
+function setLang(l){
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=t[id];});
+}
+function toggleTheme(){
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='dark'){b.dataset.theme='light';btn.textContent='🌙';}
+  else{b.dataset.theme='dark';btn.textContent='☀️';}
+}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){
+  document.body.dataset.theme='light';document.getElementById('themeBtn').textContent='🌙';
+}
+</script>
+</body>
+</html>
