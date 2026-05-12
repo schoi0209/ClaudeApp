@@ -1,0 +1,22 @@
+{
+  "name": "bar-chart-race",
+  "version": "1.0.0",
+  "description": "Animated Bar Chart Race: Global Tech Company Market Caps 2015–2024",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render AnimatedBarChartRace out/video.mp4",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "@remotion/google-fonts": "4.0.290",
+    "remotion": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.5.3"
+  }
+}
