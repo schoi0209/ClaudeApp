@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Price List — 11 May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f9f6f0; --surface:#fff; --surface2:#f2ede4; --surface3:#e8e0d0;
+  --border:rgba(80,60,20,.1); --border2:rgba(80,60,20,.2);
+  --ink:#1a1408; --muted:#7a6a48; --muted2:#c0b090;
+  --accent:#5a3e10; --accent-l:rgba(90,62,16,.07);
+  --gold:#b07820; --gold-l:rgba(176,120,32,.08);
+  --green:#2a6040; --green-l:rgba(42,96,64,.07);
+  --promo:#c84820; --promo-l:rgba(200,72,32,.07);
+  --net:#1a5a30;
+}
+[data-theme="dark"] {
+  --bg:#0f0d09; --surface:#1a1610; --surface2:#242018; --surface3:#2e2a20;
+  --border:rgba(220,200,140,.07); --border2:rgba(220,200,140,.14);
+  --ink:#f0e8d8; --muted:#8a7850; --muted2:#3a3020;
+  --accent:#c8a050; --accent-l:rgba(200,160,80,.07);
+  --gold:#d4aa60; --gold-l:rgba(212,170,96,.08);
+  --green:#60b880; --green-l:rgba(96,184,128,.07);
+  --promo:#e07050; --promo-l:rgba(224,112,80,.07);
+  --net:#80d0a0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);height:56px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 32px;
+}
+.h-left{display:flex;align-items:center;gap:8px;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;
+  color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;}
+.promo-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;
+  color:var(--promo);border:1px solid rgba(200,72,32,.25);
+  background:var(--promo-l);padding:3px 10px;border-radius:3px;font-weight:400;}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;
+  letter-spacing:.18em;text-align:center;text-transform:uppercase;}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;
+  cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);
+  width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── BMC ── */
+.bmc-top{
+  display:flex;align-items:center;gap:6px;
+  background:var(--gold-l);border-bottom:1px solid var(--border);
+  padding:7px 32px;font-size:11px;color:var(--gold);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.05em;
+}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+.bmc-top a:hover{text-decoration:underline;}
+
+/* ── MASTHEAD ── */
+.masthead{
+  padding:48px 32px 36px;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;
+  max-width:1400px;margin:0 auto;
+}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';display:block;width:20px;height:1px;background:var(--gold);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,84px);
+  font-weight:300;line-height:.92;letter-spacing:-.015em;}
+.masthead h1 i{font-style:italic;color:var(--gold);}
+.m-right{text-align:right;}
+
+/* Rebate notice */
+.rebate-notice{
+  background:var(--promo-l);border:1px solid rgba(200,72,32,.2);
+  border-radius:8px;padding:14px 18px;text-align:left;margin-bottom:16px;
+}
+.rebate-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--promo);margin-bottom:8px;}
+.rebate-row{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:12px;color:var(--ink);}
+.rebate-pct{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--promo);}
+.rebate-label{font-size:11px;color:var(--muted);}
+
+/* ── STATS ── */
+.stats{display:flex;border-bottom:1px solid var(--border);
+  max-width:1400px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* ── FILTERS ── */
+.filters{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;
+  padding:12px 32px;border-bottom:1px solid var(--border);
+  max-width:1400px;margin:0 auto;
+}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{
+  background:var(--surface);border:1px solid var(--border2);color:var(--ink);
+  padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;
+  min-width:105px;appearance:none;-webkit-appearance:none;
+  cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:150px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);
+  padding:6px 14px;border-radius:4px;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── RESULTS BAR ── */
+.rbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 32px;border-bottom:1px solid var(--border);
+  max-width:1400px;margin:0 auto;
+}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+/* ── TABLE ── */
+.tbl-wrap{max-width:1400px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:10px 12px;
+  border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:13px 12px;white-space:nowrap;}
+
+/* LOT */
+.lot-num{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--accent);font-weight:700;}
+.apt-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* LEVEL badge */
+.lvl-badge{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:600;letter-spacing:.08em;
+  padding:2px 8px;border-radius:3px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--muted);
+}
+.lvl-LG{background:var(--gold-l);color:var(--gold);border-color:rgba(176,120,32,.2);}
+.lvl-G{background:var(--green-l);color:var(--green);border-color:rgba(42,96,64,.2);}
+.lvl-UG{background:var(--accent-l);color:var(--accent);border-color:rgba(90,62,16,.2);}
+
+/* UNIT TYPE */
+.utype{font-size:12px;font-weight:500;}
+.adapt-yes{
+  display:inline-block;margin-left:5px;
+  font-family:'JetBrains Mono',monospace;font-size:8px;
+  background:rgba(90,62,16,.08);color:var(--accent);
+  border:1px solid rgba(90,62,16,.2);padding:1px 6px;border-radius:2px;
+}
+
+/* ASPECT */
+.asp{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;
+}
+.asp-NE,.asp-North\ East{color:#4a90c0;border-color:rgba(74,144,192,.25);background:rgba(74,144,192,.06);}
+.asp-SE,.asp-South\ East{color:#4a9a60;border-color:rgba(74,154,96,.25);background:rgba(74,154,96,.06);}
+.asp-SW,.asp-South\ West{color:#c07a3a;border-color:rgba(192,122,58,.25);background:rgba(192,122,58,.06);}
+.asp-N,.asp-North{color:#6090d0;border-color:rgba(96,144,208,.25);background:rgba(96,144,208,.06);}
+.asp-S,.asp-South{color:#4a8050;border-color:rgba(74,128,80,.25);background:rgba(74,128,80,.06);}
+.asp-W,.asp-West{color:#c06030;border-color:rgba(192,96,48,.25);background:rgba(192,96,48,.06);}
+
+/* SIZES */
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* PRICES */
+.list-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--muted);
+  text-decoration:line-through;text-decoration-color:rgba(122,106,72,.4);}
+.rebate-amt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--promo);margin-top:2px;}
+.net-price{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--net);}
+.net-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--net);margin-top:2px;letter-spacing:.06em;}
+
+/* PROMO badge */
+.promo-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;
+  background:var(--promo-l);color:var(--promo);
+  border:1px solid rgba(200,72,32,.2);
+}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:20px;border-top:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;
+}
+
+/* FIXED BMC */
+.bmc-fixed{
+  position:fixed;bottom:20px;right:20px;
+  background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;
+  font-size:12px;font-weight:700;text-decoration:none;
+  display:flex;align-items:center;gap:5px;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;
+}
+.bmc-fixed:hover{transform:translateY(-2px);}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+@media(max-width:768px){
+  header,.masthead,.stats,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:20px;}
+  .m-right{text-align:left;}
+  .h-center{font-size:12px;letter-spacing:.08em;}
+  .date-chip{display:none;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- BMC top bar -->
+<div class="bmc-top">
+  ☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a>
+  &nbsp;— SunnyApps
+</div>
+
+<header>
+  <div class="h-left">
+    <div class="date-chip">11 MAY 2026</div>
+    <div class="promo-chip" id="txt-promo-chip">★ SPECIAL OFFER</div>
+  </div>
+  <div class="h-center" id="txt-header-title">Price List & Promotion</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Available Units · 11 May 2026</div>
+    <h1>Price List<br><i>&amp; Promotion</i></h1>
+  </div>
+  <div class="m-right">
+    <div class="rebate-notice">
+      <div class="rebate-title" id="txt-rebate-title">🏷 Special Offer Rebate</div>
+      <div class="rebate-row">
+        <span class="rebate-pct">5%</span>
+        <div>
+          <div style="font-weight:500" id="txt-reb-1bed">1 Bedroom rebate</div>
+          <div class="rebate-label" id="txt-reb-1bed-sub">Applied at settlement</div>
+        </div>
+      </div>
+      <div class="rebate-row" style="margin-top:8px">
+        <span class="rebate-pct">10%</span>
+        <div>
+          <div style="font-weight:500" id="txt-reb-2bed">2 Bedroom rebate</div>
+          <div class="rebate-label" id="txt-reb-2bed-sub">Applied at settlement</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.7" id="txt-masthead-note">
+      All units Available · Storage &amp; Parking included<br>
+      Net Price = List Price minus rebate
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-total">Total Units</div>
+    <div class="s-val" id="sval-total">22</div>
+    <div class="s-sub" id="ssub-total">All Available</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-net-from">Net Price From</div>
+    <div class="s-val" id="sval-net-from">—</div>
+    <div class="s-sub" id="ssub-net-from">After rebate</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-net-avg">Avg Net Price</div>
+    <div class="s-val" id="sval-net-avg">—</div>
+    <div class="s-sub" id="ssub-net-avg">Filtered results</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-list-from">List Price From</div>
+    <div class="s-val" id="sval-list-from">—</div>
+    <div class="s-sub" id="ssub-list-from">Before rebate</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-shown">Showing</div>
+    <div class="s-val" id="sval-shown">—</div>
+    <div class="s-sub" id="ssub-shown">Current filter</div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-type">Unit Type</span>
+    <select id="fType" onchange="applyFilters()">
+      <option value="" id="opt-type-all">All</option>
+      <option value="1 Bed">1 Bed</option>
+      <option value="1 Bed+S">1 Bed+S</option>
+      <option value="2 Bed">2 Bed</option>
+      <option value="2 Bed+S">2 Bed+S</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-level">Level</span>
+    <select id="fLevel" onchange="applyFilters()">
+      <option value="" id="opt-lvl-all">All</option>
+      <option value="LG">LG (Lower Ground)</option>
+      <option value="G">G (Ground)</option>
+      <option value="UG">UG (Upper Ground)</option>
+      <option value="1">Level 1</option>
+      <option value="2">Level 2</option>
+      <option value="3">Level 3</option>
+      <option value="4">Level 4</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-asp">Aspect</span>
+    <select id="fAsp" onchange="applyFilters()">
+      <option value="" id="opt-asp-all">All</option>
+      <option value="North East">North East</option>
+      <option value="North">North</option>
+      <option value="South East">South East</option>
+      <option value="South West">South West</option>
+      <option value="South">South</option>
+      <option value="West">West</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-adapt">Adaptable</span>
+    <select id="fAdapt" onchange="applyFilters()">
+      <option value="" id="opt-adp-all">All</option>
+      <option value="yes" id="opt-adp-yes">Yes</option>
+      <option value="no" id="opt-adp-no">No</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxnet">Max Net Price</span>
+    <select id="fMaxNet" onchange="applyFilters()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="1100000" id="opt-px1">Under $1.1M</option>
+      <option value="1200000" id="opt-px2">Under $1.2M</option>
+      <option value="1400000" id="opt-px3">Under $1.4M</option>
+      <option value="1600000" id="opt-px4">Under $1.6M</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:140px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw">
+      <span class="si">⌕</span>
+      <input type="text" id="fSearch" placeholder="Lot, Apt, aspect..." oninput="applyFilters()">
+    </div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">22</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="net-asc"  id="srt-na">Net Price ↑</option>
+    <option value="net-desc" id="srt-nd">Net Price ↓</option>
+    <option value="list-asc" id="srt-la">List Price ↑</option>
+    <option value="size-desc" id="srt-sd">Total Area ↓</option>
+    <option value="lot-asc"  id="srt-lot">Lot ↑</option>
+  </select>
+</div>
+
+<!-- TABLE -->
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-lot">Lot</th>
+        <th id="th-apt">Apt #</th>
+        <th id="th-level">Level</th>
+        <th id="th-type">Unit Type</th>
+        <th id="th-bath">Bath</th>
+        <th id="th-size">Area (sqm)</th>
+        <th id="th-asp">Aspect</th>
+        <th id="th-adapt">Adaptable</th>
+        <th id="th-list">List Price</th>
+        <th id="th-rebate">Rebate</th>
+        <th id="th-net">Net Price</th>
+        <th id="th-status">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none">
+    <p id="txt-empty">— No units match your criteria —</p>
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const data = [
+  {lot:1,  apt:'LG01',level:'LG',type:'2 Bed+S',bath:2,int:90,ext:42,total:132,storage:1,parking:1,aspect:'North East',adaptable:'No', list:1790000,rebate:179000,net:1611000},
+  {lot:2,  apt:'LG02',level:'LG',type:'2 Bed',  bath:2,int:81,ext:43,total:124,storage:1,parking:1,aspect:'North East',adaptable:'No', list:1750000,rebate:175000,net:1575000},
+  {lot:4,  apt:'LG04',level:'LG',type:'2 Bed',  bath:2,int:82,ext:25,total:107,storage:1,parking:1,aspect:'South East',adaptable:'No', list:1575000,rebate:157500,net:1417500},
+  {lot:5,  apt:'LG05',level:'LG',type:'2 Bed',  bath:2,int:82,ext:25,total:107,storage:1,parking:1,aspect:'South East',adaptable:'No', list:1575000,rebate:157500,net:1417500},
+  {lot:9,  apt:'G03', level:'G', type:'2 Bed+S',bath:2,int:87,ext:26,total:113,storage:1,parking:1,aspect:'North',      adaptable:'Yes',list:1850000,rebate:185000,net:1665000},
+  {lot:10, apt:'G04', level:'G', type:'1 Bed',  bath:1,int:51,ext:16,total:67, storage:1,parking:1,aspect:'North',      adaptable:'No', list:1050000,rebate:52500, net:997500},
+  {lot:17, apt:'G11', level:'G', type:'2 Bed',  bath:2,int:81,ext:15,total:96, storage:1,parking:1,aspect:'North East',adaptable:'No', list:1625000,rebate:162500,net:1462500},
+  {lot:19, apt:'G13', level:'G', type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1495000,rebate:149500,net:1345500},
+  {lot:20, apt:'G14', level:'G', type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1495000,rebate:149500,net:1345500},
+  {lot:24, apt:'UG04',level:'UG',type:'2 Bed+S',bath:2,int:87,ext:26,total:113,storage:1,parking:1,aspect:'North',      adaptable:'Yes',list:1950000,rebate:195000,net:1755000},
+  {lot:25, apt:'UG05',level:'UG',type:'1 Bed',  bath:1,int:51,ext:16,total:67, storage:1,parking:1,aspect:'North',      adaptable:'No', list:1050000,rebate:52500, net:997500},
+  {lot:28, apt:'UG08',level:'UG',type:'2 Bed',  bath:2,int:80,ext:15,total:95, storage:1,parking:1,aspect:'South',      adaptable:'No', list:1525000,rebate:152500,net:1372500},
+  {lot:29, apt:'UG09',level:'UG',type:'2 Bed',  bath:2,int:80,ext:15,total:95, storage:1,parking:1,aspect:'South',      adaptable:'No', list:1525000,rebate:152500,net:1372500},
+  {lot:39, apt:'UG19',level:'UG',type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1525000,rebate:152500,net:1372500},
+  {lot:40, apt:'UG20',level:'UG',type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1525000,rebate:152500,net:1372500},
+  {lot:42, apt:'101', level:'1', type:'2 Bed',  bath:2,int:80,ext:13,total:93, storage:1,parking:1,aspect:'West',       adaptable:'No', list:1625000,rebate:162500,net:1462500},
+  {lot:57, apt:'127', level:'1', type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1550000,rebate:155000,net:1395000},
+  {lot:58, apt:'128', level:'1', type:'2 Bed',  bath:2,int:82,ext:12,total:94, storage:1,parking:1,aspect:'South East',adaptable:'No', list:1550000,rebate:155000,net:1395000},
+  {lot:59, apt:'201', level:'2', type:'2 Bed',  bath:2,int:80,ext:13,total:93, storage:1,parking:1,aspect:'West',       adaptable:'No', list:1650000,rebate:165000,net:1485000},
+  {lot:60, apt:'202', level:'2', type:'1 Bed+S',bath:1,int:61,ext:8, total:69, storage:1,parking:1,aspect:'West',       adaptable:'Yes',list:1100000,rebate:55000, net:1045000},
+  {lot:75, apt:'301', level:'3', type:'2 Bed',  bath:2,int:80,ext:13,total:93, storage:1,parking:1,aspect:'West',       adaptable:'No', list:1675000,rebate:167500,net:1507500},
+  {lot:76, apt:'302', level:'3', type:'1 Bed+S',bath:1,int:61,ext:8, total:69, storage:1,parking:1,aspect:'South West', adaptable:'Yes',list:1125000,rebate:56250, net:1068750},
+  {lot:90, apt:'401', level:'4', type:'2 Bed',  bath:2,int:80,ext:13,total:93, storage:1,parking:1,aspect:'South',      adaptable:'No', list:1700000,rebate:170000,net:1530000},
+  {lot:91, apt:'402', level:'4', type:'1 Bed+S',bath:1,int:61,ext:8, total:69, storage:1,parking:1,aspect:'South West', adaptable:'Yes',list:1140000,rebate:57000, net:1083000},
+];
+
+// ── i18n ─────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    'txt-promo-chip':'★ SPECIAL OFFER',
+    'txt-header-title':'Price List & Promotion',
+    'txt-overline':'Available Units · 11 May 2026',
+    'txt-rebate-title':'🏷 Special Offer Rebate',
+    'txt-reb-1bed':'1 Bedroom rebate',     'txt-reb-1bed-sub':'Applied at settlement',
+    'txt-reb-2bed':'2 Bedroom rebate',     'txt-reb-2bed-sub':'Applied at settlement',
+    'txt-masthead-note':'All units Available · Storage & Parking included<br>Net Price = List Price minus rebate',
+    'slbl-total':'Total Units',  'ssub-total':'All Available',
+    'slbl-net-from':'Net Price From', 'ssub-net-from':'After rebate',
+    'slbl-net-avg':'Avg Net Price',   'ssub-net-avg':'Filtered results',
+    'slbl-list-from':'List Price From','ssub-list-from':'Before rebate',
+    'slbl-shown':'Showing',      'ssub-shown':'Current filter',
+    'flbl-type':'Unit Type',     'opt-type-all':'All',
+    'flbl-level':'Level',        'opt-lvl-all':'All',
+    'flbl-asp':'Aspect',         'opt-asp-all':'All',
+    'flbl-adapt':'Adaptable',    'opt-adp-all':'All','opt-adp-yes':'Yes','opt-adp-no':'No',
+    'flbl-maxnet':'Max Net Price','opt-px-all':'All',
+    'opt-px1':'Under $1.1M','opt-px2':'Under $1.2M','opt-px3':'Under $1.4M','opt-px4':'Under $1.6M',
+    'flbl-search':'Search',      'txt-reset':'Reset',
+    'txt-shown-lbl':' units shown',
+    'th-lot':'Lot','th-apt':'Apt #','th-level':'Level','th-type':'Unit Type','th-bath':'Bath',
+    'th-size':'Area (sqm)','th-asp':'Aspect','th-adapt':'Adaptable',
+    'th-list':'List Price','th-rebate':'Rebate','th-net':'Net Price','th-status':'Status',
+    'srt-na':'Net Price ↑','srt-nd':'Net Price ↓','srt-la':'List Price ↑',
+    'srt-sd':'Total Area ↓','srt-lot':'Lot ↑',
+    'txt-empty':'— No units match your criteria —',
+    searchPh:'Lot, Apt, aspect...',
+    adaptYes:'Yes', adaptNo:'No', avail:'Available', special:'Special offer',
+  },
+  ko: {
+    'txt-promo-chip':'★ 특별 할인',
+    'txt-header-title':'분양가 & 프로모션',
+    'txt-overline':'분양 가능 세대 · 2026년 5월 11일',
+    'txt-rebate-title':'🏷 특별 할인 리베이트',
+    'txt-reb-1bed':'1베드룸 리베이트',   'txt-reb-1bed-sub':'정산 시 적용',
+    'txt-reb-2bed':'2베드룸 리베이트',   'txt-reb-2bed-sub':'정산 시 적용',
+    'txt-masthead-note':'전 세대 분양 가능 · 스토리지 & 주차 포함<br>순가격 = 분양가 - 리베이트',
+    'slbl-total':'총 세대',     'ssub-total':'전체 분양 가능',
+    'slbl-net-from':'순가격 최저', 'ssub-net-from':'리베이트 적용 후',
+    'slbl-net-avg':'평균 순가격',  'ssub-net-avg':'현재 필터 기준',
+    'slbl-list-from':'분양가 최저','ssub-list-from':'리베이트 적용 전',
+    'slbl-shown':'표시 중',     'ssub-shown':'현재 필터',
+    'flbl-type':'유닛 타입',    'opt-type-all':'전체',
+    'flbl-level':'층',          'opt-lvl-all':'전체',
+    'flbl-asp':'방향',          'opt-asp-all':'전체',
+    'flbl-adapt':'장애 적합',   'opt-adp-all':'전체','opt-adp-yes':'예','opt-adp-no':'아니오',
+    'flbl-maxnet':'최대 순가격', 'opt-px-all':'전체',
+    'opt-px1':'$1.1M 이하','opt-px2':'$1.2M 이하','opt-px3':'$1.4M 이하','opt-px4':'$1.6M 이하',
+    'flbl-search':'검색',       'txt-reset':'초기화',
+    'txt-shown-lbl':'개 세대 표시 중',
+    'th-lot':'Lot','th-apt':'Apt #','th-level':'층','th-type':'유닛 타입','th-bath':'욕실',
+    'th-size':'면적 (sqm)','th-asp':'방향','th-adapt':'장애 적합',
+    'th-list':'분양가','th-rebate':'리베이트','th-net':'순가격','th-status':'상태',
+    'srt-na':'순가격 낮은 순','srt-nd':'순가격 높은 순','srt-la':'분양가 낮은 순',
+    'srt-sd':'면적 큰 순','srt-lot':'Lot 순',
+    'txt-empty':'— 조건에 맞는 세대가 없습니다 —',
+    searchPh:'Lot, Apt, 방향 검색...',
+    adaptYes:'예', adaptNo:'아니오', avail:'분양 가능', special:'특별 할인',
+  }
+};
+
+let lang='en', filtered=[];
+
+function setLang(l) {
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{
+    if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}
+  });
+  document.getElementById('fSearch').placeholder=t.searchPh;
+  render();updateStats();
+}
+
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';return'$'+(n/1e3).toFixed(0)+'K';}
+
+function aspClass(a){return 'asp-'+a.replace(' ','\\ ');}
+
+function applyFilters(){
+  const type   =document.getElementById('fType').value;
+  const level  =document.getElementById('fLevel').value;
+  const asp    =document.getElementById('fAsp').value;
+  const adapt  =document.getElementById('fAdapt').value;
+  const maxNet =document.getElementById('fMaxNet').value;
+  const srch   =document.getElementById('fSearch').value.toLowerCase().trim();
+  const srt    =document.getElementById('sortSel').value;
+
+  filtered=data.filter(d=>{
+    if(type  && !d.type.includes(type.replace('+S',''))) return false;
+    if(type  && type.includes('+S') && !d.type.includes('+S')) return false;
+    if(type  && !type.includes('+S') && d.type.includes('+S')) return false;
+    if(level && d.level!==level) return false;
+    if(asp   && d.aspect!==asp) return false;
+    if(adapt==='yes' && d.adaptable!=='Yes') return false;
+    if(adapt==='no'  && d.adaptable!=='No')  return false;
+    if(maxNet && d.net>+maxNet) return false;
+    if(srch){
+      const hay=[String(d.lot),d.apt,d.aspect,d.type,d.level].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  // type filter fix — exact match
+  if(type) filtered=data.filter(d=>{
+    if(d.type!==type) return false;
+    if(level && d.level!==level) return false;
+    if(asp   && d.aspect!==asp) return false;
+    if(adapt==='yes' && d.adaptable!=='Yes') return false;
+    if(adapt==='no'  && d.adaptable!=='No')  return false;
+    if(maxNet && d.net>+maxNet) return false;
+    if(srch){
+      const hay=[String(d.lot),d.apt,d.aspect,d.type,d.level].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    if(srt==='net-asc')  return a.net-b.net;
+    if(srt==='net-desc') return b.net-a.net;
+    if(srt==='list-asc') return a.list-b.list;
+    if(srt==='size-desc')return b.total-a.total;
+    if(srt==='lot-asc')  return a.lot-b.lot;
+    return 0;
+  });
+
+  render(); updateStats();
+}
+
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=filtered.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tbody=document.getElementById('tBody');
+  const empty=document.getElementById('emptyMsg');
+
+  if(!filtered.length){tbody.innerHTML='';empty.style.display='block';
+    document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  empty.style.display='none';
+
+  tbody.innerHTML=filtered.map(d=>{
+    const rebPct=d.type.includes('1 Bed')?'5%':'10%';
+    const aspKey=d.aspect.replace(' ','');
+    return `
+    <tr>
+      <td><div class="lot-num">${d.lot}</div></td>
+      <td><div class="apt-num">${d.apt}</div></td>
+      <td><span class="lvl-badge lvl-${d.level}">${d.level}</span></td>
+      <td>
+        <div class="utype">${d.type}${d.adaptable==='Yes'?`<span class="adapt-yes">♿</span>`:''}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px">${d.bath} Bath</div>
+      </td>
+      <td>${d.bath}</td>
+      <td>
+        <div class="sz-main">${d.total} sqm</div>
+        <div class="sz-detail">Int ${d.int} + Ext ${d.ext}</div>
+      </td>
+      <td><span class="asp asp-${aspKey}">${d.aspect}</span></td>
+      <td style="text-align:center;font-size:12px">${d.adaptable==='Yes'?`<span style="color:var(--accent);font-weight:600">✓</span>`:'-'}</td>
+      <td><div class="list-price">${$c(d.list)}</div></td>
+      <td>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--promo);font-weight:600">${$c(d.rebate)}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--promo);margin-top:2px">${rebPct} off</div>
+      </td>
+      <td>
+        <div class="net-price">${$c(d.net)}</div>
+        <div class="net-lbl">NET PRICE</div>
+      </td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <span style="font-size:10px;color:var(--green);font-weight:500">${t.avail}</span>
+          <span class="promo-badge">${t.special}</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats(){
+  const nets=filtered.map(d=>d.net);
+  const lists=filtered.map(d=>d.list);
+  const minNet=nets.length?Math.min(...nets):null;
+  const avgNet=nets.length?Math.round(nets.reduce((a,b)=>a+b,0)/nets.length):null;
+  const minList=lists.length?Math.min(...lists):null;
+  document.getElementById('sval-total').textContent=data.length;
+  document.getElementById('sval-shown').textContent=filtered.length;
+  document.getElementById('sval-net-from').textContent=minNet?$f(minNet):'—';
+  document.getElementById('sval-net-avg').textContent=avgNet?$f(avgNet):'—';
+  document.getElementById('sval-list-from').textContent=minList?$f(minList):'—';
+}
+
+function resetFilters(){
+  ['fType','fLevel','fAsp','fAdapt','fMaxNet'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  document.getElementById('sortSel').value='net-asc';
+  applyFilters();
+}
+
+function toggleTheme(){
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
+}
+
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';
+  document.getElementById('themeBtn').textContent='🌙';
+}
+applyFilters();
+</script>
+</body>
+</html>
