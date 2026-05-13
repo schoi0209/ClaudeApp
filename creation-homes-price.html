@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creation Homes — 2026 Master Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f8f6f2; --surface:#fff; --surface2:#f2efe9; --surface3:#e8e4dc;
+  --border:rgba(30,24,14,.09); --border2:rgba(30,24,14,.18);
+  --ink:#1a160e; --muted:#7a7060; --muted2:#b8b0a0;
+  --accent:#1e4a6e; --accent-l:rgba(30,74,110,.07);
+  --gold:#b07d30; --gold-l:rgba(176,125,48,.08);
+  --green:#2a6642; --green-l:rgba(42,102,66,.07);
+  --red:#b03028; --red-l:rgba(176,48,40,.07);
+  --orange:#c06020;
+}
+[data-theme="dark"] {
+  --bg:#0d0f12; --surface:#141820; --surface2:#1c2230; --surface3:#242a38;
+  --border:rgba(200,210,240,.07); --border2:rgba(200,210,240,.14);
+  --ink:#e8ecf4; --muted:#6a7590; --muted2:#3a4258;
+  --accent:#5a9fd0; --accent-l:rgba(90,159,208,.08);
+  --gold:#d0a050; --gold-l:rgba(208,160,80,.08);
+  --green:#50a878; --green-l:rgba(80,168,120,.07);
+  --red:#d06860; --red-l:rgba(208,104,96,.07);
+  --orange:#d08040;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+/* ─── HEADER ─── */
+header{
+  position:sticky;top:0;z-index:200;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:0 36px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(20px);
+}
+.h-brand{display:flex;align-items:center;gap:12px;}
+.h-logo{
+  width:32px;height:32px;border-radius:7px;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Serif Display',serif;font-size:16px;color:#fff;
+}
+.h-title{font-family:'DM Serif Display',serif;font-size:15px;letter-spacing:.04em;color:var(--ink);}
+.h-right{display:flex;align-items:center;gap:8px;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);
+  font-family:'Geist',sans-serif;font-size:10px;font-weight:500;letter-spacing:.08em;
+  cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.icon-btn{background:var(--surface2);border:1px solid var(--border2);color:var(--muted);
+  width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ─── HERO ─── */
+.hero{
+  padding:52px 36px 36px;
+  border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
+  max-width:1440px;margin:0 auto;
+}
+.hero-label{
+  font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,5.5vw,80px);
+  line-height:.95;font-weight:400;letter-spacing:-.01em;}
+.hero h1 i{font-style:italic;color:var(--accent);}
+.hero-right{text-align:right;}
+.hero-note{font-family:'Geist Mono',monospace;font-size:10px;color:var(--muted);
+  line-height:1.8;border:1px solid var(--border);border-radius:8px;
+  padding:12px 16px;background:var(--surface);white-space:nowrap;}
+
+/* ─── STATS ─── */
+.stats{
+  display:flex;border-bottom:1px solid var(--border);
+  max-width:1440px;margin:0 auto;
+}
+.s-cell{flex:1;padding:16px 24px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'Geist Mono',monospace;font-size:8px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.s-val{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent);}
+.s-sub{font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* ─── PROJECT TABS ─── */
+.tab-row{
+  display:flex;gap:0;border-bottom:1px solid var(--border);
+  max-width:1440px;margin:0 auto;overflow-x:auto;
+  scrollbar-width:none;
+}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{
+  padding:12px 22px;border:none;background:none;color:var(--muted);
+  font-family:'Geist',sans-serif;font-size:12px;font-weight:500;
+  cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;
+  transition:all .2s;letter-spacing:.02em;
+}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-count{
+  display:inline-block;margin-left:5px;
+  font-size:9px;background:var(--accent-l);color:var(--accent);
+  border-radius:20px;padding:1px 7px;font-weight:600;
+}
+
+/* ─── FILTERS ─── */
+.filters{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;
+  padding:14px 36px;border-bottom:1px solid var(--border);
+  max-width:1440px;margin:0 auto;
+}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'Geist Mono',monospace;font-size:8px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{
+  background:var(--surface);border:1px solid var(--border2);
+  color:var(--ink);padding:6px 10px;border-radius:5px;
+  font-family:'Geist',sans-serif;font-size:12px;
+  min-width:100px;appearance:none;-webkit-appearance:none;
+  cursor:pointer;transition:border-color .2s;
+}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:150px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);
+  padding:6px 14px;border-radius:5px;cursor:pointer;
+  font-family:'Geist',sans-serif;font-size:11px;font-weight:500;
+  transition:all .2s;white-space:nowrap;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ─── RESULTS BAR ─── */
+.rbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 36px;border-bottom:1px solid var(--border);
+  max-width:1440px;margin:0 auto;
+}
+.rtxt{font-family:'Geist Mono',monospace;font-size:10px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);
+  font-family:'Geist Mono',monospace;font-size:10px;cursor:pointer;padding:0;}
+
+/* ─── TABLE ─── */
+.tbl-wrap{max-width:1440px;margin:0 auto;padding:0 36px 60px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  font-family:'Geist Mono',monospace;font-size:8px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:10px 12px;
+  border-bottom:2px solid var(--border2);white-space:nowrap;
+}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:13px 12px;font-size:12px;white-space:nowrap;}
+
+/* STATUS */
+.status{display:inline-flex;align-items:center;gap:4px;
+  font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;
+  letter-spacing:.08em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.s-available{background:var(--green-l);color:var(--green);border:1px solid rgba(42,102,66,.2);}
+.s-sold{background:rgba(120,120,120,.08);color:var(--muted2);border:1px solid rgba(120,120,120,.18);}
+.s-contract{background:var(--gold-l);color:var(--gold);border:1px solid rgba(176,125,48,.2);}
+.s-deposit{background:var(--orange-l, rgba(192,96,32,.08));color:var(--orange);border:1px solid rgba(192,96,32,.2);}
+
+/* LOT */
+.lot-num{font-family:'DM Serif Display',serif;font-size:17px;color:var(--accent);}
+.lot-addr{font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* DESIGN */
+.design-name{font-size:12px;font-weight:500;}
+.design-facade{font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* CHIPS */
+.chip-row{display:flex;gap:4px;flex-wrap:wrap;}
+.chip{font-size:10px;font-weight:500;padding:2px 8px;border-radius:3px;border:1px solid var(--border2);color:var(--muted);background:var(--surface2);}
+
+/* PRICE */
+.price-pkg{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
+.price-breakdown{font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* SIZE */
+.size-main{font-size:12px;font-weight:500;}
+.size-land{font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* PROJECT badge */
+.proj-badge{
+  display:inline-block;font-family:'Geist Mono',monospace;font-size:8px;
+  letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:3px;
+  font-weight:600;
+}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px;color:var(--muted);
+  font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);
+  font-family:'Geist Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+
+.bmc{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;
+  padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;
+  text-decoration:none;display:flex;align-items:center;gap:5px;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc:hover{transform:translateY(-2px);}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+@media(max-width:768px){
+  header,.hero,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}
+  .hero{grid-template-columns:1fr;gap:16px;padding-top:32px;}
+  .hero-right{display:none;}
+  .s-cell{min-width:120px;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">C</div>
+    <div class="h-title">Creation Homes</div>
+  </div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="hero-label" id="lbl-hero">2026 Master Price List · New South Wales</div>
+    <h1>Creation<br>Homes <i>Prices</i></h1>
+  </div>
+  <div class="hero-right">
+    <div class="hero-note" id="note-escalation">
+      ⚠ Build Price Expiry Notice<br>
+      Price escalation of 0.5%/month<br>
+      applies after fixed period expiry.
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-proj">Projects</div>
+    <div class="s-val" id="sval-proj">6</div>
+    <div class="s-sub" id="ssub-proj">NSW Estates</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-avail">Available</div>
+    <div class="s-val" id="sval-avail">—</div>
+    <div class="s-sub" id="ssub-avail">Lots for Sale</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-from">From</div>
+    <div class="s-val" id="sval-from">—</div>
+    <div class="s-sub" id="ssub-from">Package Price</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-avg">Average</div>
+    <div class="s-val" id="sval-avg">—</div>
+    <div class="s-sub" id="ssub-avg">Package Price</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-shown">Showing</div>
+    <div class="s-val" id="sval-shown">—</div>
+    <div class="s-sub" id="ssub-shown">Current Filter</div>
+  </div>
+</div>
+
+<!-- PROJECT TABS -->
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setProject('all')" id="tab-all">
+    All Projects <span class="tab-count" id="tc-all">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('bingara')" id="tab-bingara">
+    Bingara Gorge <span class="tab-count" id="tc-bingara">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('clarke')" id="tab-clarke">
+    Clarke Grounds <span class="tab-count" id="tc-clarke">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('guntawong')" id="tab-guntawong">
+    Guntawong <span class="tab-count" id="tc-guntawong">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('parade')" id="tab-parade">
+    Parade <span class="tab-count" id="tc-parade">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('emerald')" id="tab-emerald">
+    Emerald Grove <span class="tab-count" id="tc-emerald">0</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('sapphire')" id="tab-sapphire">
+    Sapphire <span class="tab-count" id="tc-sapphire">0</span>
+  </button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-status">Status</span>
+    <select id="fStatus" onchange="applyFilters()">
+      <option value="" id="opt-st-all">All</option>
+      <option value="AVAILABLE" id="opt-st-avail">Available</option>
+      <option value="SOLD" id="opt-st-sold">Sold</option>
+      <option value="CONTRACT" id="opt-st-contract">Under Contract</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-bed">Bedrooms</span>
+    <select id="fBed" onchange="applyFilters()">
+      <option value="" id="opt-bed-all">All</option>
+      <option value="3">3 Bed</option>
+      <option value="4">4 Bed</option>
+      <option value="5">5 Bed</option>
+      <option value="6">6 Bed</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-storey">Storey</span>
+    <select id="fStorey" onchange="applyFilters()">
+      <option value="" id="opt-sty-all">All</option>
+      <option value="Single">Single</option>
+      <option value="Double">Double</option>
+      <option value="Triple">Triple</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Package Price</span>
+    <select id="fMaxPx" onchange="applyFilters()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="1200000" id="opt-px1">Under $1.2M</option>
+      <option value="1400000" id="opt-px2">Under $1.4M</option>
+      <option value="1600000" id="opt-px3">Under $1.6M</option>
+      <option value="2000000" id="opt-px4">Under $2M</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:150px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw">
+      <span class="si">⌕</span>
+      <input type="text" id="fSearch" placeholder="Lot, design, street..." oninput="applyFilters()">
+    </div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown"> lots shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="price-asc" id="srt-pa">Price ↑</option>
+    <option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="lot-asc" id="srt-la">Lot ↑</option>
+    <option value="size-desc" id="srt-sd">House Size ↓</option>
+    <option value="bed-desc" id="srt-bd">Beds ↓</option>
+  </select>
+</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-status">Status</th>
+        <th id="th-project">Project</th>
+        <th id="th-lot">Lot</th>
+        <th id="th-design">Design</th>
+        <th id="th-spec">Bed · Bath · Car</th>
+        <th id="th-storey">Storey</th>
+        <th id="th-size">House ㎡</th>
+        <th id="th-land">Land ㎡</th>
+        <th id="th-rego">Registration</th>
+        <th id="th-land-px">Land Price</th>
+        <th id="th-build-px">Build Price</th>
+        <th id="th-pkg">Package Price</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none">
+    <p id="txt-empty">— No results match your criteria —</p>
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc">☕ Buy me a coffee</a>
+
+<script>
+// ─── PROJECT COLOURS ───────────────────────────────────────────────
+const projColor = {
+  bingara:  {bg:'rgba(30,74,110,.1)',  color:'#1e4a6e'},
+  clarke:   {bg:'rgba(42,102,66,.1)',  color:'#2a6642'},
+  guntawong:{bg:'rgba(130,60,160,.1)',color:'#823ca0'},
+  parade:   {bg:'rgba(176,48,40,.1)',  color:'#b03028'},
+  emerald:  {bg:'rgba(30,100,80,.1)',  color:'#1e6450'},
+  sapphire: {bg:'rgba(60,80,160,.1)', color:'#3c50a0'},
+};
+const projLabel = {
+  bingara:'Bingara Gorge', clarke:'Clarke Grounds', guntawong:'Guntawong',
+  parade:'Parade', emerald:'Emerald Grove', sapphire:'Sapphire'
+};
+
+// ─── DATA ──────────────────────────────────────────────────────────
+const allData = [
+  // BINGARA GORGE – Spec Contract
+  {proj:'bingara', lot:'113', addr:'Fairway East', design:'GOLF COURSE FRONTING', facade:'', storey:'', bed:4, bath:2, car:2, landSqm:1389, houseSqm:300, rego:'Completed', landPx:null, buildPx:null, pkgPx:2250000, status:'AVAILABLE', contractType:'N/A'},
+  {proj:'bingara', lot:'98',  addr:'13 Jullak Drive', design:'Balwyn Trad', facade:'', storey:'', bed:4, bath:2, car:2, landSqm:375, houseSqm:189.8, rego:'Completed', landPx:null, buildPx:null, pkgPx:1225000, status:'AVAILABLE', contractType:'One Part'},
+  {proj:'bingara', lot:'158', addr:'13 Gibney St', design:'PARKLAND (L)', facade:'', storey:'', bed:5, bath:2.5, car:2, landSqm:375, houseSqm:230.1, rego:'Completed', landPx:null, buildPx:null, pkgPx:1350000, status:'SOLD', contractType:'Spec'},
+  {proj:'bingara', lot:'183', addr:'6 McLellan St', design:'INTERNAL (L)', facade:'', storey:'', bed:5, bath:2.5, car:2, landSqm:480, houseSqm:231.9, rego:'Completed', landPx:null, buildPx:null, pkgPx:1450000, status:'SOLD', contractType:'Spec'},
+  {proj:'bingara', lot:'184', addr:'4 McLellan St', design:'INTERNAL (L)', facade:'', storey:'', bed:5, bath:2.5, car:2, landSqm:480, houseSqm:232.7, rego:'Completed', landPx:null, buildPx:null, pkgPx:1375000, status:'AVAILABLE', contractType:'Spec'},
+  {proj:'bingara', lot:'200', addr:'14 Frew Street', design:'INTERNAL (L)', facade:'', storey:'', bed:4, bath:2.5, car:2, landSqm:450, houseSqm:226, rego:'Completed', landPx:null, buildPx:null, pkgPx:1375000, status:'AVAILABLE', contractType:'Spec'},
+  {proj:'bingara', lot:'216', addr:'23 Frew Street', design:'INTERNAL (L)', facade:'', storey:'', bed:4, bath:2, car:2, landSqm:530, houseSqm:184.88, rego:'Completed', landPx:null, buildPx:null, pkgPx:1375000, status:'AVAILABLE', contractType:'Spec'},
+  // BINGARA GORGE – Dual Key
+  {proj:'bingara', lot:'121', addr:'Bingara Drive', design:'Hamptons (Dual Key)', facade:'', storey:'Double', bed:6, bath:3.5, car:2, landSqm:450, houseSqm:248.14, rego:'Mid 2026', landPx:710000, buildPx:796000, pkgPx:1506000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'bingara', lot:'125', addr:'Bingara Drive', design:'Modern (Dual Key)', facade:'', storey:'Double', bed:6, bath:3.5, car:2, landSqm:477.2, houseSqm:248.14, rego:'Mid 2026', landPx:720000, buildPx:803400, pkgPx:1523400, status:'AVAILABLE', contractType:'Split'},
+  {proj:'bingara', lot:'126', addr:'Bingara Drive', design:'Traditional (Dual Key)', facade:'', storey:'Double', bed:6, bath:3.5, car:2, landSqm:463.8, houseSqm:248.14, rego:'Mid 2026', landPx:715000, buildPx:794200, pkgPx:1509200, status:'AVAILABLE', contractType:'Split'},
+  {proj:'bingara', lot:'140', addr:'Bingara Drive', design:'Modern (Dual Key)', facade:'', storey:'Double', bed:6, bath:3.5, car:2, landSqm:460.4, houseSqm:248.14, rego:'Mid 2026', landPx:715000, buildPx:813400, pkgPx:1528400, status:'AVAILABLE', contractType:'Split'},
+  // CLARKE GROUNDS – Turnkey
+  {proj:'clarke', lot:'11', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:263.7, houseSqm:197.03, rego:'Q3 2026', landPx:675000, buildPx:570573, pkgPx:1245573, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'12', addr:'Clarke Grounds', design:'Waratah MK II', facade:'Traditional', storey:'Double', bed:3, bath:3, car:2, landSqm:264.1, houseSqm:197, rego:'Q3 2026', landPx:675000, buildPx:593840, pkgPx:1268840, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'54', addr:'Clarke Grounds', design:'Waratah MK II', facade:'Traditional', storey:'Double', bed:3, bath:2, car:2, landSqm:269.7, houseSqm:198.19, rego:'Q3 2026', landPx:679000, buildPx:602050, pkgPx:1281050, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'61', addr:'Clarke Grounds', design:'Waratah MK II', facade:'Traditional', storey:'Double', bed:3, bath:2, car:2, landSqm:273.3, houseSqm:197.15, rego:'Q3 2026', landPx:695000, buildPx:582300, pkgPx:1277300, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'62', addr:'Clarke Grounds', design:'Waratah MK II', facade:'Traditional', storey:'Double', bed:3, bath:2, car:2, landSqm:265.8, houseSqm:197.15, rego:'Q3 2026', landPx:690000, buildPx:581800, pkgPx:1271800, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'63', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:258.6, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:585404, pkgPx:1270404, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'64', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:255.6, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:584896, pkgPx:1269896, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'81', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:262.1, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:597223, pkgPx:1282223, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'82', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:262.1, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:602553, pkgPx:1287553, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'116', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:252, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:579900, pkgPx:1264900, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'117', addr:'Clarke Grounds', design:'Verona', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:252, houseSqm:197.03, rego:'Q3 2026', landPx:685000, buildPx:587200, pkgPx:1272200, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'128', addr:'Clarke Grounds', design:'Verona MKII', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:247.4, houseSqm:193.51, rego:'Q3 2026', landPx:685000, buildPx:574700, pkgPx:1259700, status:'AVAILABLE', contractType:'Turnkey'},
+  {proj:'clarke', lot:'129', addr:'Clarke Grounds', design:'Verona MKII', facade:'Traditional', storey:'Double', bed:4, bath:2, car:2, landSqm:247.4, houseSqm:193.51, rego:'Q3 2026', landPx:685000, buildPx:576100, pkgPx:1261100, status:'AVAILABLE', contractType:'Turnkey'},
+  // CLARKE GROUNDS – House & Land
+  {proj:'clarke', lot:'1', addr:'42 Clarke St, Rouse Hill', design:'Magnolia', facade:'Traditional', storey:'Double', bed:4, bath:3, car:2, landSqm:336.4, houseSqm:219.96, rego:'Q1 2026', landPx:984600, buildPx:575400, pkgPx:1560000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'clarke', lot:'2', addr:'42 Clarke St, Rouse Hill', design:'Magnolia', facade:'Traditional', storey:'Double', bed:4, bath:3, car:2, landSqm:320.7, houseSqm:219.96, rego:'Q1 2028', landPx:946950, buildPx:574700, pkgPx:1521650, status:'AVAILABLE', contractType:'Split'},
+  {proj:'clarke', lot:'3', addr:'42 Clarke St, Rouse Hill', design:'Magnolia', facade:'Traditional', storey:'Double', bed:4, bath:3, car:2, landSqm:320.7, houseSqm:219.96, rego:'Registered', landPx:946950, buildPx:581050, pkgPx:1528000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'clarke', lot:'8', addr:'42 Clarke St, Rouse Hill', design:'Belmont 18', facade:'Traditional', storey:'Double', bed:3, bath:2.5, car:2, landSqm:290.5, houseSqm:184.14, rego:'Registered', landPx:858500, buildPx:537800, pkgPx:1396300, status:'AVAILABLE', contractType:'Split'},
+  {proj:'clarke', lot:'12H', addr:'42 Clarke St, Rouse Hill', design:'Lynbrook', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:1, landSqm:344.8, houseSqm:206.88, rego:'Registered', landPx:974650, buildPx:551350, pkgPx:1526000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'clarke', lot:'15', addr:'42 Clarke St, Rouse Hill', design:'Edgewood', facade:'Contemporary', storey:'Double', bed:4, bath:2.5, car:1, landSqm:317.3, houseSqm:224.55, rego:'Registered', landPx:915500, buildPx:576500, pkgPx:1492000, status:'CONTRACT', contractType:'Split'},
+  {proj:'clarke', lot:'17', addr:'42 Clarke St, Rouse Hill', design:'Edgewood', facade:'Modern', storey:'Double', bed:4, bath:2.5, car:1, landSqm:312.8, houseSqm:225.67, rego:'Q1 2026', landPx:891480, buildPx:null, pkgPx:891480, status:'CONTRACT', contractType:'Split'},
+  {proj:'clarke', lot:'19', addr:'42 Clarke St, Rouse Hill', design:'Dalton 18', facade:'Modern', storey:'Double', bed:4, bath:2.5, car:1, landSqm:300, houseSqm:182.23, rego:'Q1 2026', landPx:null, buildPx:null, pkgPx:null, status:'SOLD', contractType:'Split'},
+  {proj:'clarke', lot:'28', addr:'42 Clarke St, Rouse Hill', design:'Willow', facade:'Traditional', storey:'Double', bed:5, bath:3, car:1, landSqm:251.1, houseSqm:191.2, rego:'Q1 2026', landPx:null, buildPx:null, pkgPx:null, status:'SOLD', contractType:'Split'},
+  // GUNTAWONG
+  {proj:'guntawong', lot:'114', addr:'Guntawong', design:'5BR House', facade:'', storey:'Double', bed:5, bath:3, car:2, landSqm:319.5, houseSqm:201.6, rego:'Registered', landPx:1009330, buildPx:589469, pkgPx:1598799, status:'AVAILABLE', contractType:'Split'},
+  {proj:'guntawong', lot:'133', addr:'Guntawong', design:'5BR House', facade:'', storey:'Double', bed:5, bath:2.5, car:1, landSqm:279, houseSqm:211.3, rego:'Registered', landPx:875000, buildPx:524600, pkgPx:1399600, status:'AVAILABLE', contractType:'Split'},
+  {proj:'guntawong', lot:'140', addr:'Guntawong', design:'5BR House', facade:'', storey:'Double', bed:5, bath:2.5, car:1, landSqm:279, houseSqm:211.3, rego:'Registered', landPx:875000, buildPx:521000, pkgPx:1396000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'guntawong', lot:'303', addr:'Guntawong', design:'4BR House', facade:'', storey:'Double', bed:4, bath:3, car:2, landSqm:174.6, houseSqm:176.1, rego:'Q1 2027', landPx:768000, buildPx:518742, pkgPx:1286742, status:'AVAILABLE', contractType:'Split'},
+  {proj:'guntawong', lot:'307', addr:'Guntawong', design:'4BR House', facade:'', storey:'Double', bed:4, bath:3, car:2, landSqm:174.6, houseSqm:174.9, rego:'Q1 2027', landPx:768000, buildPx:507064, pkgPx:1275064, status:'CONTRACT', contractType:'Split'},
+  {proj:'guntawong', lot:'308', addr:'Guntawong', design:'4BR House', facade:'', storey:'Double', bed:4, bath:3, car:2, landSqm:174.6, houseSqm:176.1, rego:'Q1 2027', landPx:768000, buildPx:521252, pkgPx:1289252, status:'CONTRACT', contractType:'Split'},
+  {proj:'guntawong', lot:'110', addr:'Guntawong', design:'5BR House', facade:'', storey:'Double', bed:5, bath:2.5, car:1, landSqm:275.6, houseSqm:211.3, rego:'Q1 2026', landPx:883050, buildPx:511600, pkgPx:1394650, status:'SOLD', contractType:'Split'},
+  {proj:'guntawong', lot:'302', addr:'Guntawong', design:'4BR House', facade:'', storey:'Double', bed:4, bath:3, car:2, landSqm:174.6, houseSqm:174.9, rego:'Q1 2027', landPx:718000, buildPx:498460, pkgPx:1216460, status:'SOLD', contractType:'Split'},
+  // PARADE
+  {proj:'parade', lot:'5_03/130', addr:'8 Murragauan', design:'Parker (Option 3)', facade:'Contemporary', storey:'Triple', bed:4, bath:2.5, car:2, landSqm:459, houseSqm:253.74, rego:'', landPx:null, buildPx:null, pkgPx:1795000, status:'AVAILABLE', contractType:'Single'},
+  {proj:'parade', lot:'5_09/124', addr:'20 Murragauan', design:'Parker (Option 3)', facade:'Modern', storey:'Triple', bed:4, bath:3.5, car:2, landSqm:445, houseSqm:253.74, rego:'', landPx:null, buildPx:null, pkgPx:1770000, status:'SOLD', contractType:'Single'},
+  {proj:'parade', lot:'5_10/123', addr:'22 Murragauan', design:'Maclean (Option 1)', facade:'Contemporary', storey:'Triple', bed:4, bath:2, car:2, landSqm:429, houseSqm:253.43, rego:'', landPx:null, buildPx:null, pkgPx:1749000, status:'SOLD', contractType:'Single'},
+  // EMERALD GROVE – Tranche 1
+  {proj:'emerald', lot:'1195', addr:'Armoury Rd', design:'Sara', facade:'Traditional', storey:'Double', bed:5, bath:3, car:1, landSqm:300, houseSqm:191.21, rego:'', landPx:569000, buildPx:599800, pkgPx:1168800, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'4103', addr:'Armoury Rd', design:'Sara', facade:'Traditional', storey:'Double', bed:5, bath:3, car:1, landSqm:281.3, houseSqm:191.03, rego:'', landPx:535000, buildPx:563700, pkgPx:1098700, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'1311', addr:'Navy Rd', design:'Harley', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:458.4, houseSqm:233.41, rego:'', landPx:698000, buildPx:641300, pkgPx:1339300, status:'SOLD', contractType:'Split'},
+  // EMERALD GROVE – Tranche 2
+  {proj:'emerald', lot:'1203', addr:'Armoury Road', design:'Harley', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:459.07, houseSqm:228.66, rego:'', landPx:730000, buildPx:659400, pkgPx:1379400, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'1374', addr:'Wianamatta Parkway', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:312.5, houseSqm:202.81, rego:'', landPx:618500, buildPx:638000, pkgPx:1246500, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'1375', addr:'Wianamatta Parkway', design:'Roseberry', facade:'Traditional', storey:'Single', bed:3, bath:2, car:2, landSqm:312.5, houseSqm:180.84, rego:'', landPx:618500, buildPx:541100, pkgPx:1149600, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'1376', addr:'Wianamatta Parkway', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:312.5, houseSqm:202.81, rego:'', landPx:618500, buildPx:631500, pkgPx:1240000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'1377', addr:'Wianamatta Parkway', design:'Roseberry', facade:'Traditional', storey:'Single', bed:3, bath:2, car:2, landSqm:312.5, houseSqm:180.84, rego:'', landPx:618500, buildPx:537600, pkgPx:1146100, status:'AVAILABLE', contractType:'Split'},
+  // EMERALD GROVE – Stages 153–162
+  {proj:'emerald', lot:'153', addr:'Emerald Grove', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:300, houseSqm:201.43, rego:'Q1 2026', landPx:710000, buildPx:543700, pkgPx:1253700, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'154', addr:'Emerald Grove', design:'Somerset', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:300, houseSqm:212.69, rego:'Q1 2026', landPx:710000, buildPx:554500, pkgPx:1264500, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'155', addr:'Emerald Grove', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:312.5, houseSqm:201.43, rego:'Q1 2026', landPx:710000, buildPx:539200, pkgPx:1249200, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'156', addr:'Emerald Grove', design:'Harley', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:312.5, houseSqm:233.41, rego:'Q1 2026', landPx:710000, buildPx:610000, pkgPx:1320000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'157', addr:'Emerald Grove', design:'Somerset', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:312.5, houseSqm:212.69, rego:'Q1 2026', landPx:710000, buildPx:558800, pkgPx:1268800, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'158', addr:'Emerald Grove', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:312.5, houseSqm:201.43, rego:'Q1 2026', landPx:710000, buildPx:543300, pkgPx:1253300, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'159', addr:'Emerald Grove', design:'Harley', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:312.5, houseSqm:233.41, rego:'Q1 2026', landPx:710000, buildPx:610000, pkgPx:1320000, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'160', addr:'Emerald Grove', design:'Somerset', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:312.5, houseSqm:212.69, rego:'Q1 2026', landPx:710000, buildPx:564700, pkgPx:1274700, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'161', addr:'Emerald Grove', design:'Chelsea', facade:'Traditional', storey:'Double', bed:5, bath:3, car:2, landSqm:312.5, houseSqm:201.43, rego:'Q1 2026', landPx:710000, buildPx:543300, pkgPx:1253300, status:'AVAILABLE', contractType:'Split'},
+  {proj:'emerald', lot:'162', addr:'Emerald Grove', design:'Harley', facade:'Traditional', storey:'Double', bed:5, bath:3.5, car:2, landSqm:312.5, houseSqm:233.41, rego:'Q1 2026', landPx:710000, buildPx:610900, pkgPx:1320900, status:'AVAILABLE', contractType:'Split'},
+  // SAPPHIRE
+  {proj:'sapphire', lot:'5014', addr:'349 Tallawong Rd', design:'Magnolia', facade:'Classic', storey:'Double', bed:4, bath:3, car:2, landSqm:283.5, houseSqm:220.4, rego:'Registered', landPx:820500, buildPx:567600, pkgPx:1388100, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'5022', addr:'28 Felsite Cres', design:'Magnolia', facade:'Classic', storey:'Double', bed:4, bath:3, car:2, landSqm:259.2, houseSqm:220.41, rego:'Registered', landPx:768560, buildPx:574800, pkgPx:1343360, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'2085', addr:'36 Scandinavian Cct', design:'Sara', facade:'Traditional', storey:'Double', bed:5, bath:3, car:1, landSqm:280, houseSqm:191.03, rego:'Registered', landPx:827900, buildPx:578900, pkgPx:1406800, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'2086', addr:'38 Scandinavian Cct', design:'Dalton 18', facade:'Modern', storey:'Double', bed:4, bath:2.5, car:1, landSqm:280, houseSqm:196.26, rego:'Registered', landPx:827900, buildPx:555900, pkgPx:1383800, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'2107', addr:'301 Tallawong Rd', design:'Sara', facade:'Traditional', storey:'Double', bed:5, bath:3, car:1, landSqm:280, houseSqm:191.03, rego:'Registered', landPx:827900, buildPx:565000, pkgPx:1392900, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'2108', addr:'299 Tallawong Rd', design:'Dalton 18', facade:'Modern', storey:'Double', bed:4, bath:2.5, car:1, landSqm:280, houseSqm:196.26, rego:'Registered', landPx:827900, buildPx:550300, pkgPx:1378200, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'2109', addr:'297 Tallawong Rd', design:'Dalton 18', facade:'Modern', storey:'Double', bed:4, bath:2.5, car:1, landSqm:280, houseSqm:196.26, rego:'Registered', landPx:827900, buildPx:571300, pkgPx:1399200, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'4015', addr:'Scandinavian Cct', design:'Dalton 18', facade:'Traditional', storey:'Double', bed:4, bath:2.5, car:1, landSqm:280, houseSqm:183.32, rego:'Registered', landPx:829900, buildPx:552200, pkgPx:1382100, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'5016', addr:'353 Tallawong Rd', design:'Magnolia', facade:'Traditional', storey:'Double', bed:4, bath:3, car:2, landSqm:335.2, houseSqm:220.41, rego:'Registered', landPx:962900, buildPx:613000, pkgPx:1575900, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'5017', addr:'355 Tallawong Rd', design:'Magnolia', facade:'Classic', storey:'Double', bed:4, bath:3, car:2, landSqm:337.3, houseSqm:220.41, rego:'Registered', landPx:967900, buildPx:595200, pkgPx:1563100, status:'AVAILABLE', contractType:'Split'},
+  {proj:'sapphire', lot:'5038', addr:'65 Brilliant St', design:'Magnolia', facade:'Classic', storey:'Double', bed:4, bath:3, car:2, landSqm:308.9, houseSqm:220.4, rego:'Registered', landPx:896820, buildPx:601700, pkgPx:1498520, status:'AVAILABLE', contractType:'Split'},
+];
+
+// ─── i18n ──────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    'lbl-hero':'2026 Master Price List · New South Wales',
+    'note-escalation':'⚠ Build Price Expiry Notice\nPrice escalation of 0.5%/month\napplies after fixed period expiry.',
+    'slbl-proj':'Projects','ssub-proj':'NSW Estates',
+    'slbl-avail':'Available','ssub-avail':'Lots for Sale',
+    'slbl-from':'From','ssub-from':'Package Price',
+    'slbl-avg':'Average','ssub-avg':'Package Price',
+    'slbl-shown':'Showing','ssub-shown':'Current Filter',
+    'tab-all':'All Projects','tab-bingara':'Bingara Gorge','tab-clarke':'Clarke Grounds',
+    'tab-guntawong':'Guntawong','tab-parade':'Parade','tab-emerald':'Emerald Grove','tab-sapphire':'Sapphire',
+    'flbl-status':'Status','flbl-bed':'Bedrooms','flbl-storey':'Storey',
+    'flbl-maxpx':'Max Package Price','flbl-search':'Search','txt-reset':'Reset',
+    'opt-st-all':'All','opt-st-avail':'Available','opt-st-sold':'Sold','opt-st-contract':'Under Contract',
+    'opt-bed-all':'All','opt-sty-all':'All','opt-px-all':'All',
+    'opt-px1':'Under $1.2M','opt-px2':'Under $1.4M','opt-px3':'Under $1.6M','opt-px4':'Under $2M',
+    'txt-shown':' lots shown',
+    'th-status':'Status','th-project':'Project','th-lot':'Lot','th-design':'Design',
+    'th-spec':'Bed · Bath · Car','th-storey':'Storey','th-size':'House ㎡',
+    'th-land':'Land ㎡','th-rego':'Registration','th-land-px':'Land Price',
+    'th-build-px':'Build Price','th-pkg':'Package Price',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-la':'Lot ↑','srt-sd':'House Size ↓','srt-bd':'Beds ↓',
+    'txt-empty':'— No results match your criteria —',
+    searchPh:'Lot, design, street...',
+    statusMap:{AVAILABLE:'Available', SOLD:'Sold', CONTRACT:'Under Contract', DEPOSIT:'Deposit Taken'},
+  },
+  ko: {
+    'lbl-hero':'2026 마스터 분양가 목록 · 뉴사우스웨일스',
+    'note-escalation':'⚠ 빌드 가격 만료 안내\n고정 기간 만료 후 월 0.5%\n가격 인상이 적용됩니다.',
+    'slbl-proj':'프로젝트','ssub-proj':'NSW 단지',
+    'slbl-avail':'분양 가능','ssub-avail':'판매 중 Lot',
+    'slbl-from':'최저가','ssub-from':'패키지 가격',
+    'slbl-avg':'평균가','ssub-avg':'패키지 가격',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'tab-all':'전체 프로젝트','tab-bingara':'빙가라 고지','tab-clarke':'클라크 그라운즈',
+    'tab-guntawong':'군타웡','tab-parade':'퍼레이드','tab-emerald':'에메랄드 그로브','tab-sapphire':'사파이어',
+    'flbl-status':'상태','flbl-bed':'침실 수','flbl-storey':'층수',
+    'flbl-maxpx':'최대 패키지 가격','flbl-search':'검색','txt-reset':'초기화',
+    'opt-st-all':'전체','opt-st-avail':'판매 중','opt-st-sold':'판매 완료','opt-st-contract':'계약 중',
+    'opt-bed-all':'전체','opt-sty-all':'전체','opt-px-all':'전체',
+    'opt-px1':'$1.2M 이하','opt-px2':'$1.4M 이하','opt-px3':'$1.6M 이하','opt-px4':'$2M 이하',
+    'txt-shown':'개 Lot 표시 중',
+    'th-status':'상태','th-project':'프로젝트','th-lot':'Lot','th-design':'설계',
+    'th-spec':'침실·욕실·주차','th-storey':'층수','th-size':'건물 ㎡',
+    'th-land':'토지 ㎡','th-rego':'등기','th-land-px':'토지 가격',
+    'th-build-px':'건물 가격','th-pkg':'패키지 가격',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-la':'Lot 순','srt-sd':'건물 큰 순','srt-bd':'침실 많은 순',
+    'txt-empty':'— 조건에 맞는 Lot이 없습니다 —',
+    searchPh:'Lot, 설계, 주소 검색...',
+    statusMap:{AVAILABLE:'판매 중', SOLD:'판매 완료', CONTRACT:'계약 중', DEPOSIT:'예약금 납부'},
+  }
+};
+
+let lang = 'en', curProj = 'all', filtered = [];
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  document.getElementById('btnKO').classList.toggle('active', l==='ko');
+  const t = i18n[l];
+  Object.keys(t).forEach(id => {
+    if (typeof t[id]==='string') { const el=document.getElementById(id); if(el) el.textContent=t[id]; }
+  });
+  document.getElementById('fSearch').placeholder = t.searchPh;
+  render(); updateStats();
+}
+
+function setProject(p) {
+  curProj = p;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+p).classList.add('active');
+  applyFilters();
+}
+
+function statusCls(s) {
+  if (!s) return 's-available';
+  const sl = s.toUpperCase();
+  if (sl.includes('AVAILABLE')) return 's-available';
+  if (sl.includes('SOLD')) return 's-sold';
+  if (sl.includes('CONTRACT')) return 's-contract';
+  if (sl.includes('DEPOSIT')) return 's-deposit';
+  return 's-available';
+}
+
+function $f(n) {
+  if (!n) return '—';
+  if (n>=1e6) return '$'+(n/1e6).toFixed(2).replace(/\.?0+$/,'')+'M';
+  return '$'+(n/1e3).toFixed(0)+'K';
+}
+function $c(n) { return n ? '$'+n.toLocaleString() : '—'; }
+
+function applyFilters() {
+  const status = document.getElementById('fStatus').value;
+  const bed    = document.getElementById('fBed').value;
+  const storey = document.getElementById('fStorey').value;
+  const maxPx  = document.getElementById('fMaxPx').value;
+  const srch   = document.getElementById('fSearch').value.toLowerCase();
+  const srt    = document.getElementById('sortSel').value;
+
+  filtered = allData.filter(d => {
+    if (curProj !== 'all' && d.proj !== curProj) return false;
+    if (status === 'AVAILABLE' && d.status !== 'AVAILABLE') return false;
+    if (status === 'SOLD' && d.status !== 'SOLD') return false;
+    if (status === 'CONTRACT' && d.status !== 'CONTRACT') return false;
+    if (bed    && d.bed !== +bed) return false;
+    if (storey && d.storey !== storey) return false;
+    if (maxPx  && d.pkgPx && d.pkgPx > +maxPx) return false;
+    if (srch) {
+      const hay = [d.lot,d.addr,d.design,d.facade,d.proj].join(' ').toLowerCase();
+      if (!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    if (srt==='price-asc')  return (a.pkgPx||0)-(b.pkgPx||0);
+    if (srt==='price-desc') return (b.pkgPx||0)-(a.pkgPx||0);
+    if (srt==='lot-asc')    return String(a.lot).localeCompare(String(b.lot), undefined, {numeric:true});
+    if (srt==='size-desc')  return (b.houseSqm||0)-(a.houseSqm||0);
+    if (srt==='bed-desc')   return (b.bed||0)-(a.bed||0);
+    return 0;
+  });
+
+  // Update tab counts
+  const projs = ['bingara','clarke','guntawong','parade','emerald','sapphire'];
+  projs.forEach(p => {
+    const cnt = allData.filter(d => d.proj===p).length;
+    document.getElementById('tc-'+p).textContent = cnt;
+  });
+  document.getElementById('tc-all').textContent = allData.length;
+
+  render(); updateStats();
+}
+
+function render() {
+  const t = i18n[lang];
+  document.getElementById('rCount').textContent = filtered.length;
+  document.getElementById('txt-shown').textContent = t['txt-shown'];
+
+  const tbody = document.getElementById('tBody');
+  const empty = document.getElementById('emptyMsg');
+
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    empty.style.display='block';
+    document.getElementById('txt-empty').textContent = t['txt-empty'];
+    return;
+  }
+  empty.style.display='none';
+
+  const pc = projColor;
+  tbody.innerHTML = filtered.map(d => {
+    const sc   = statusCls(d.status);
+    const slbl = t.statusMap[d.status] || d.status;
+    const pcol = pc[d.proj]||{bg:'rgba(100,100,100,.1)',color:'#666'};
+    return `
+    <tr>
+      <td><span class="status ${sc}">${slbl}</span></td>
+      <td>
+        <span class="proj-badge" style="background:${pcol.bg};color:${pcol.color}">
+          ${projLabel[d.proj]||d.proj}
+        </span>
+      </td>
+      <td>
+        <div class="lot-num">${d.lot}</div>
+        <div class="lot-addr">${d.addr}</div>
+      </td>
+      <td>
+        <div class="design-name">${d.design}</div>
+        ${d.facade?`<div class="design-facade">${d.facade}</div>`:''}
+      </td>
+      <td>
+        <div class="chip-row">
+          <span class="chip">🛏 ${d.bed}</span>
+          <span class="chip">🚿 ${d.bath}</span>
+          <span class="chip">🚗 ${d.car}</span>
+        </div>
+      </td>
+      <td><span style="font-size:11px;color:var(--muted)">${d.storey||'—'}</span></td>
+      <td>
+        <div class="size-main">${d.houseSqm||'—'} ㎡</div>
+      </td>
+      <td>
+        <div class="size-main">${d.landSqm||'—'} ㎡</div>
+      </td>
+      <td style="font-family:'Geist Mono',monospace;font-size:10px;color:var(--muted)">${d.rego||'—'}</td>
+      <td style="font-family:'Geist Mono',monospace;font-size:11px">${$c(d.landPx)}</td>
+      <td style="font-family:'Geist Mono',monospace;font-size:11px">${$c(d.buildPx)}</td>
+      <td>
+        <div class="price-pkg">${d.pkgPx?$c(d.pkgPx):'—'}</div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats() {
+  const avail = filtered.filter(d=>d.status==='AVAILABLE');
+  const prices = filtered.filter(d=>d.pkgPx).map(d=>d.pkgPx);
+  const min = prices.length ? Math.min(...prices) : null;
+  const avg = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length) : null;
+  document.getElementById('sval-avail').textContent = avail.length || '—';
+  document.getElementById('sval-from').textContent  = min ? $f(min) : '—';
+  document.getElementById('sval-avg').textContent   = avg ? $f(avg) : '—';
+  document.getElementById('sval-shown').textContent = filtered.length;
+}
+
+function resetFilters() {
+  ['fStatus','fBed','fStorey','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  document.getElementById('sortSel').value='price-asc';
+  applyFilters();
+}
+
+function toggleTheme() {
+  const b=document.body, btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark'; btn.textContent='🌙';}
+  else{b.dataset.theme='light'; btn.textContent='☀️';}
+}
+
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';
+  document.getElementById('themeBtn').textContent='🌙';
+}
+applyFilters();
+</script>
+</body>
+</html>
