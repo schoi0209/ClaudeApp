@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hillview Terrace — Jarrah Capital Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f7f3ef; --surface:#fff; --surface2:#f0ebe3; --surface3:#e4ddd2;
+  --border:rgba(100,40,40,.09); --border2:rgba(100,40,40,.18);
+  --ink:#1e0e0e; --muted:#7a5858; --muted2:#c0a898;
+  --accent:#6e1e1e; --accent-l:rgba(110,30,30,.07);
+  --gold:#a07820; --gold-l:rgba(160,120,32,.08);
+  --green:#256040; --green-l:rgba(37,96,64,.08);
+  --amber:#b06010; --amber-l:rgba(176,96,16,.08);
+  --blue:#205080; --blue-l:rgba(32,80,128,.08);
+  --yellow:#c8a000; --yellow-l:rgba(200,160,0,.1);
+}
+[data-theme="dark"]{
+  --bg:#0e0b0b; --surface:#1a1212; --surface2:#221a1a; --surface3:#2c2020;
+  --border:rgba(220,180,160,.07); --border2:rgba(220,180,160,.14);
+  --ink:#f0e4e0; --muted:#8a6868; --muted2:#3a2828;
+  --accent:#d06060; --accent-l:rgba(208,96,96,.08);
+  --gold:#d4a840; --gold-l:rgba(212,168,64,.08);
+  --green:#50b880; --green-l:rgba(80,184,128,.08);
+  --amber:#d08840; --amber-l:rgba(208,136,64,.08);
+  --blue:#5090d0; --blue-l:rgba(80,144,208,.08);
+  --yellow:#d4b820; --yellow-l:rgba(212,184,32,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+/* ── BMC TOP ── */
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);
+  padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+.bmc-top a:hover{text-decoration:underline;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);height:58px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-logo{width:32px;height:32px;border-radius:50%;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:14px;}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;
+  letter-spacing:.06em;color:var(--ink);}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;
+  letter-spacing:.15em;text-transform:uppercase;text-align:center;}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);
+  width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.theme-btn:hover{border-color:var(--accent);}
+
+/* ── MASTHEAD ── */
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;
+  max-width:1400px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--accent);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);
+  font-weight:300;line-height:.92;letter-spacing:-.01em;}
+.masthead h1 i{font-style:italic;color:var(--accent);}
+.m-right{text-align:right;}
+.addr-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:14px 18px;text-align:left;margin-bottom:14px;}
+.addr-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.addr-val{font-size:13px;font-weight:500;line-height:1.5;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;
+  color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;
+  display:inline-block;margin-bottom:8px;}
+
+/* ── STATUS LEGEND ── */
+.legend{display:flex;gap:12px;flex-wrap:wrap;padding:10px 32px;
+  border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+/* ── STATS ── */
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* ── BLOCK TABS ── */
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;
+  overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 18px;border:none;background:none;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;
+  cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;
+  transition:all .2s;letter-spacing:.02em;}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-cnt{display:inline-block;margin-left:4px;font-size:9px;
+  background:var(--accent-l);color:var(--accent);
+  border-radius:20px;padding:1px 6px;font-weight:600;}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;
+  padding:12px 32px;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{
+  background:var(--surface);border:1px solid var(--border2);color:var(--ink);
+  padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;
+  min-width:100px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);
+  padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;
+  font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── RESULTS BAR ── */
+.rbar{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 32px;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+/* ── TABLE ── */
+.tbl-wrap{max-width:1400px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;
+  border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:12px 12px;white-space:nowrap;}
+
+/* UNIT */
+.unit-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--accent);}
+.unit-addr{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* BLOCK badge */
+.block-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;
+  font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:3px;
+  background:var(--accent-l);color:var(--accent);border:1px solid rgba(110,30,30,.2);}
+
+/* SPEC chips */
+.spec-row{display:flex;gap:4px;}
+.chip{font-size:10px;font-weight:500;padding:2px 7px;border-radius:3px;
+  border:1px solid var(--border2);color:var(--muted);background:var(--surface2);}
+
+/* SIZES */
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* PRICE */
+.price-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);}
+
+/* STATUS */
+.status{display:inline-flex;align-items:center;gap:3px;font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 8px;border-radius:3px;
+  text-transform:uppercase;white-space:nowrap;}
+.s-available{background:var(--green-l);color:var(--green);border:1px solid rgba(37,96,64,.2);}
+.s-deposited{background:var(--amber-l);color:var(--amber);border:1px solid rgba(176,96,16,.2);}
+.s-exchanged{background:var(--yellow-l);color:var(--yellow);border:1px solid rgba(200,160,0,.2);}
+.s-contract{background:var(--blue-l);color:var(--blue);border:1px solid rgba(32,80,128,.2);}
+.s-sold{background:rgba(120,120,120,.08);color:var(--muted2);border:1px solid rgba(120,120,120,.18);}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;
+  padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;
+  text-decoration:none;display:flex;align-items:center;gap:5px;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){
+  header,.masthead,.stats,.legend,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}
+  .m-right{text-align:left;} .h-center{font-size:11px;} .h-name{display:none;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">🌿</div>
+    <div class="h-name">Jarrah Capital</div>
+  </div>
+  <div class="h-center" id="txt-h-center">Hillview Terrace</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Townhouse · North Kellyville NSW</div>
+    <h1>Hillview<br><i>Terrace</i></h1>
+  </div>
+  <div class="m-right">
+    <div class="date-chip">11 MAY 2026</div>
+    <div class="addr-box">
+      <div class="addr-lbl" id="lbl-addr">Project Address</div>
+      <div class="addr-val">3-23 Hillview Road<br>North Kellyville NSW</div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.8" id="txt-note">
+      Double Storey Townhouses · Blocks A–K<br>
+      All prices include Garage &amp; Build Area
+    </div>
+  </div>
+</div>
+
+<!-- STATUS LEGEND -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div><span id="leg-avail">Available</span></div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div><span id="leg-dep">Deposited</span></div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div><span id="leg-exc">Exchanged</span></div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div><span id="leg-con">Contract Issued</span></div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-total">Total Units</div>
+    <div class="s-val" id="sval-total">90</div>
+    <div class="s-sub" id="ssub-total">Townhouses</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-avail">Available</div>
+    <div class="s-val" id="sval-avail">—</div>
+    <div class="s-sub" id="ssub-avail">For Sale</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-from">From</div>
+    <div class="s-val" id="sval-from">$1.399M</div>
+    <div class="s-sub" id="ssub-from">List Price</div>
+  </div>
+  <div class="s-cell">
+    <div class="s-lbl" id="slbl-shown">Showing</div>
+    <div class="s-val" id="sval-shown">—</div>
+    <div class="s-sub" id="ssub-shown">Current filter</div>
+  </div>
+</div>
+
+<!-- BLOCK TABS -->
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setBlock('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">0</span></button>
+  <button class="tab-btn" onclick="setBlock('A')" id="tab-A">Block A <span class="tab-cnt" id="tc-A">0</span></button>
+  <button class="tab-btn" onclick="setBlock('B')" id="tab-B">Block B <span class="tab-cnt" id="tc-B">0</span></button>
+  <button class="tab-btn" onclick="setBlock('C')" id="tab-C">Block C <span class="tab-cnt" id="tc-C">0</span></button>
+  <button class="tab-btn" onclick="setBlock('D')" id="tab-D">Block D <span class="tab-cnt" id="tc-D">0</span></button>
+  <button class="tab-btn" onclick="setBlock('E')" id="tab-E">Block E <span class="tab-cnt" id="tc-E">0</span></button>
+  <button class="tab-btn" onclick="setBlock('F')" id="tab-F">Block F <span class="tab-cnt" id="tc-F">0</span></button>
+  <button class="tab-btn" onclick="setBlock('G')" id="tab-G">Block G <span class="tab-cnt" id="tc-G">0</span></button>
+  <button class="tab-btn" onclick="setBlock('H')" id="tab-H">Block H <span class="tab-cnt" id="tc-H">0</span></button>
+  <button class="tab-btn" onclick="setBlock('I')" id="tab-I">Block I <span class="tab-cnt" id="tc-I">0</span></button>
+  <button class="tab-btn" onclick="setBlock('J')" id="tab-J">Block J <span class="tab-cnt" id="tc-J">0</span></button>
+  <button class="tab-btn" onclick="setBlock('K')" id="tab-K">Block K <span class="tab-cnt" id="tc-K">0</span></button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-status">Status</span>
+    <select id="fStatus" onchange="applyFilters()">
+      <option value="" id="opt-st-all">All</option>
+      <option value="Available" id="opt-st-avail">Available</option>
+      <option value="Deposited" id="opt-st-dep">Deposited</option>
+      <option value="Exchanged" id="opt-st-exc">Exchanged</option>
+      <option value="Contract" id="opt-st-con">Contract Issued</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-bed">Bedrooms</span>
+    <select id="fBed" onchange="applyFilters()">
+      <option value="" id="opt-bed-all">All</option>
+      <option value="3">3 Bed</option>
+      <option value="4">4 Bed</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="applyFilters()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="1399990" id="opt-px1">$1,399,990</option>
+      <option value="1419990" id="opt-px2">Up to $1,419,990</option>
+      <option value="1449990" id="opt-px3">Up to $1,449,990</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:140px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw">
+      <span class="si">⌕</span>
+      <input type="text" id="fSearch" placeholder="Unit, street, block..." oninput="applyFilters()">
+    </div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="unit-asc"  id="srt-ua">Unit ↑</option>
+    <option value="price-asc" id="srt-pa">Price ↑</option>
+    <option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="size-desc"  id="srt-sd">Total Area ↓</option>
+    <option value="block-asc"  id="srt-ba">Block A→K</option>
+  </select>
+</div>
+
+<!-- TABLE -->
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-unit">Unit</th>
+        <th id="th-address">Address</th>
+        <th id="th-block">Block</th>
+        <th id="th-storey">Storey</th>
+        <th id="th-spec">Bed · Bath</th>
+        <th id="th-garage">Garage</th>
+        <th id="th-build">Build Area</th>
+        <th id="th-total">Total Area</th>
+        <th id="th-price">Price</th>
+        <th id="th-status">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none">
+    <p id="txt-empty">— No units match your criteria —</p>
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+// ── DATA (from Jarrah Capital price list 11/05/2026) ──────────────
+const data = [
+  // Block A
+  {unit:7,  addr:'11 Warrabah Road',   block:'A',storey:'Double',bed:3,bath:2.5,garage:2,build:150.9,total:229.4,price:1399990,status:'Deposited'},
+  // Block B
+  {unit:13, addr:'2 Grampians Road',   block:'B',storey:'Double',bed:3,bath:3,  garage:1,build:141.4,total:204.7,price:1399990,status:'Available'},
+  {unit:21, addr:'25 Grampians Road',  block:'B',storey:'Double',bed:3,bath:3,  garage:1,build:157.1,total:227,  price:1419990,status:'Available'},
+  // Block C
+  {unit:23, addr:'21 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Contract Issued'},
+  {unit:24, addr:'19 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:25, addr:'17 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:26, addr:'15 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:27, addr:'13 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.6,total:223.5,price:1399990,status:'Available'},
+  {unit:28, addr:'13 Grampians Road',  block:'C',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Exchanged'},
+  // Block D
+  {unit:29, addr:'9 Grampians Road',   block:'D',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:31, addr:'5 Grampians Road',   block:'D',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:32, addr:'3 Grampians Road',   block:'D',storey:'Double',bed:3,bath:2.5,garage:2,build:154.1,total:223,  price:1399990,status:'Available'},
+  {unit:33, addr:'1 Grampians Road',   block:'D',storey:'Double',bed:3,bath:2.5,garage:2,build:195.2,total:277.7,price:1449990,status:'Available'},
+  // Block E
+  {unit:40, addr:'7 Hillview Road',    block:'E',storey:'Double',bed:4,bath:3,  garage:1,build:169.9,total:245.6,price:1439990,status:'Available'},
+  {unit:42, addr:'',                   block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.4,total:214.4,price:1399990,status:'Available'},
+  {unit:43, addr:'6 Beedelup Road',    block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.3,total:214.3,price:1399990,status:'Available'},
+  {unit:44, addr:'8 Beedelup Road',    block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.3,total:214.3,price:1399990,status:'Available'},
+  {unit:46, addr:'12 Beedelup Road',   block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.4,total:214.4,price:1399990,status:'Available'},
+  {unit:48, addr:'16 Beedelup Road',   block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.3,total:214.3,price:1399990,status:'Available'},
+  {unit:49, addr:'18 Beedelup Road',   block:'E',storey:'Double',bed:3,bath:2.5,garage:2,build:147.3,total:214.3,price:1399990,status:'Available'},
+  // Block F
+  {unit:50, addr:'20 Beedelup Road',   block:'F',storey:'Double',bed:3,bath:2.5,garage:2,build:147.4,total:214.4,price:1399990,status:'Available'},
+  {unit:54, addr:'21 Beedelup Road',   block:'F',storey:'Double',bed:3,bath:2.5,garage:2,build:152.5,total:220.7,price:1399990,status:'Available'},
+  {unit:57, addr:'',                   block:'F',storey:'Double',bed:3,bath:2.5,garage:2,build:152.5,total:220.7,price:1399990,status:'Available'},
+  {unit:62, addr:'5 Beedelup Road',    block:'F',storey:'Double',bed:3,bath:2.5,garage:2,build:152.5,total:220.7,price:1399990,status:'Available'},
+  {unit:66, addr:'8 Butterleaf Way',   block:'F',storey:'Double',bed:3,bath:2.5,garage:2,build:154.9,total:215.9,price:1399990,status:'Available'},
+  // Block G
+  {unit:68, addr:'8 Butterleaf Way',   block:'G',storey:'Double',bed:3,bath:2.5,garage:2,build:154.9,total:222.2,price:1399990,status:'Available'},
+  {unit:69, addr:'10 Butterleaf Way',  block:'G',storey:'Double',bed:3,bath:2.5,garage:2,build:154.9,total:222.2,price:1399990,status:'Available'},
+  {unit:70, addr:'12 Butterleaf Way',  block:'G',storey:'Double',bed:3,bath:2.5,garage:2,build:154.9,total:222.2,price:1399990,status:'Available'},
+  // Block H
+  {unit:76, addr:'5 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:154.7,total:224.8,price:1410990,status:'Available'},
+  {unit:79, addr:'7 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:136,  total:209.2,price:1399990,status:'Available'},
+  {unit:80, addr:'13 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:136,  total:209.1,price:1399990,status:'Available'},
+  {unit:81, addr:'15 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:151.6,total:224.7,price:1399990,status:'Available'},
+  {unit:82, addr:'17 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:151.6,total:224.7,price:1399990,status:'Available'},
+  {unit:83, addr:'19 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:151.6,total:224.7,price:1399990,status:'Available'},
+  {unit:84, addr:'21 Kumbatine Crescent',block:'H',storey:'Double',bed:3,bath:2.5,garage:2,build:154.7,total:224.4,price:1410990,status:'Available'},
+  // Block I
+  {unit:87, addr:'36 Beedelup Road',   block:'I',storey:'Double',bed:4,bath:3,  garage:1,build:183.4,total:263.9,price:1439990,status:'Available'},
+  {unit:88, addr:'34 Beedelup Road',   block:'I',storey:'Double',bed:3,bath:2.5,garage:2,build:148.2,total:217.5,price:1399990,status:'Available'},
+  {unit:89, addr:'32 Beedelup Road',   block:'I',storey:'Double',bed:3,bath:2.5,garage:2,build:148.2,total:217.5,price:1399990,status:'Available'},
+  {unit:90, addr:'30 Beedelup Road',   block:'I',storey:'Double',bed:3,bath:2.5,garage:2,build:148.2,total:217.5,price:1399990,status:'Available'},
+  {unit:92, addr:'26 Beedelup Road',   block:'I',storey:'Double',bed:3,bath:2.5,garage:2,build:148.2,total:217.5,price:1399990,status:'Available'},
+  {unit:93, addr:'24 Beedelup Road',   block:'I',storey:'Double',bed:3,bath:2.5,garage:2,build:151.9,total:222.5,price:1410990,status:'Available'},
+  // Block J
+  {unit:94, addr:'27 Grampians Road',  block:'J',storey:'Double',bed:4,bath:3,  garage:1,build:147,  total:260.5,price:1439990,status:'Available'},
+  {unit:95, addr:'29 Grampians Road',  block:'J',storey:'Double',bed:3,bath:2.5,garage:2,build:147,  total:216.9,price:1399990,status:'Available'},
+  {unit:96, addr:'31 Grampians Road',  block:'J',storey:'Double',bed:3,bath:2.5,garage:2,build:147,  total:216.9,price:1399990,status:'Available'},
+  {unit:97, addr:'33 Grampians Road',  block:'J',storey:'Double',bed:3,bath:2.5,garage:2,build:147,  total:216.9,price:1399990,status:'Available'},
+  {unit:98, addr:'35 Grampians Road',  block:'J',storey:'Double',bed:3,bath:2.5,garage:2,build:147,  total:216.9,price:1399990,status:'Available'},
+  {unit:99, addr:'37 Grampians Road',  block:'J',storey:'Double',bed:3,bath:2.5,garage:2,build:147,  total:216.9,price:1399990,status:'Available'},
+  {unit:101,addr:'41 Grampians Road',  block:'J',storey:'Double',bed:4,bath:3,  garage:1,build:189.8,total:267.5,price:1410990,status:'Available'},
+  // Block K
+  {unit:102,addr:'39 Grampians Road',  block:'K',storey:'Double',bed:3,bath:2.5,garage:2,build:150.6,total:216.9,price:1399990,status:'Available'},
+  {unit:103,addr:'32 Grampians Road',  block:'K',storey:'Double',bed:3,bath:2.5,garage:2,build:150.6,total:216.9,price:1399990,status:'Available'},
+  {unit:104,addr:'30 Grampians Road',  block:'K',storey:'Double',bed:3,bath:2.5,garage:2,build:150.7,total:217,  price:1399990,status:'Available'},
+  {unit:106,addr:'26 Grampians Road',  block:'K',storey:'Double',bed:3,bath:2.5,garage:2,build:150.7,total:217,  price:1399990,status:'Available'},
+  {unit:107,addr:'24 Grampians Road',  block:'K',storey:'Double',bed:3,bath:2.5,garage:2,build:149.4,total:214.4,price:1399990,status:'Available'},
+];
+
+// ── i18n ──────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    'txt-h-center':'Hillview Terrace',
+    'txt-overline':'Townhouse · North Kellyville NSW',
+    'lbl-addr':'Project Address',
+    'txt-note':'Double Storey Townhouses · Blocks A–K<br>All prices include Garage & Build Area',
+    'leg-avail':'Available','leg-dep':'Deposited','leg-exc':'Exchanged','leg-con':'Contract Issued',
+    'slbl-total':'Total Units','ssub-total':'Townhouses',
+    'slbl-avail':'Available','ssub-avail':'For Sale',
+    'slbl-from':'From','ssub-from':'List Price',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-status':'Status','flbl-bed':'Bedrooms','flbl-maxpx':'Max Price','flbl-search':'Search',
+    'opt-st-all':'All','opt-st-avail':'Available','opt-st-dep':'Deposited',
+    'opt-st-exc':'Exchanged','opt-st-con':'Contract Issued',
+    'opt-bed-all':'All','opt-px-all':'All',
+    'opt-px1':'$1,399,990','opt-px2':'Up to $1,419,990','opt-px3':'Up to $1,449,990',
+    'txt-reset':'Reset','txt-shown-lbl':' units shown',
+    'th-unit':'Unit','th-address':'Address','th-block':'Block','th-storey':'Storey',
+    'th-spec':'Bed · Bath','th-garage':'Garage','th-build':'Build Area',
+    'th-total':'Total Area','th-price':'Price','th-status':'Status',
+    'srt-ua':'Unit ↑','srt-pa':'Price ↑','srt-pd':'Price ↓','srt-sd':'Total Area ↓','srt-ba':'Block A→K',
+    'txt-empty':'— No units match your criteria —',
+    searchPh:'Unit, street, block...',
+    statusMap:{
+      'Available':'Available','Deposited':'Deposited',
+      'Exchanged':'Exchanged','Contract Issued':'Contract Issued','Sold':'Sold'
+    },
+  },
+  ko: {
+    'txt-h-center':'힐뷰 테라스',
+    'txt-overline':'타운하우스 · 노스 켈리빌 NSW',
+    'lbl-addr':'프로젝트 주소',
+    'txt-note':'2층 타운하우스 · 블록 A–K<br>모든 가격은 차고 및 건물 면적 포함',
+    'leg-avail':'판매 가능','leg-dep':'보증금 납부','leg-exc':'계약 완료','leg-con':'계약서 발행',
+    'slbl-total':'총 세대','ssub-total':'타운하우스',
+    'slbl-avail':'분양 가능','ssub-avail':'판매 중',
+    'slbl-from':'최저가','ssub-from':'분양가',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-status':'상태','flbl-bed':'침실 수','flbl-maxpx':'최대 가격','flbl-search':'검색',
+    'opt-st-all':'전체','opt-st-avail':'판매 가능','opt-st-dep':'보증금 납부',
+    'opt-st-exc':'계약 완료','opt-st-con':'계약서 발행',
+    'opt-bed-all':'전체','opt-px-all':'전체',
+    'opt-px1':'$1,399,990','opt-px2':'$1,419,990 이하','opt-px3':'$1,449,990 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중',
+    'th-unit':'유닛','th-address':'주소','th-block':'블록','th-storey':'층수',
+    'th-spec':'침실·욕실','th-garage':'차고','th-build':'건물 면적',
+    'th-total':'전체 면적','th-price':'분양가','th-status':'상태',
+    'srt-ua':'유닛 순','srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-sd':'면적 큰 순','srt-ba':'블록 A→K',
+    'txt-empty':'— 조건에 맞는 유닛이 없습니다 —',
+    searchPh:'유닛, 주소, 블록 검색...',
+    statusMap:{
+      'Available':'판매 가능','Deposited':'보증금 납부',
+      'Exchanged':'계약 완료','Contract Issued':'계약서 발행','Sold':'판매 완료'
+    },
+  }
+};
+
+let lang='en', curBlock='all', filtered=[];
+
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{
+    if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}
+  });
+  document.getElementById('fSearch').placeholder=t.searchPh;
+  render();updateStats();
+}
+
+function setBlock(b){
+  curBlock=b;
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById('tab-'+b).classList.add('active');
+  applyFilters();
+}
+
+function statusCls(s){
+  if(s==='Available') return 's-available';
+  if(s==='Deposited') return 's-deposited';
+  if(s==='Exchanged') return 's-exchanged';
+  if(s==='Contract Issued') return 's-contract';
+  return 's-sold';
+}
+
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+
+function applyFilters(){
+  const status=document.getElementById('fStatus').value;
+  const bed   =document.getElementById('fBed').value;
+  const maxPx =document.getElementById('fMaxPx').value;
+  const srch  =document.getElementById('fSearch').value.toLowerCase().trim();
+  const srt   =document.getElementById('sortSel').value;
+
+  filtered=data.filter(d=>{
+    if(curBlock!=='all' && d.block!==curBlock) return false;
+    if(status && !d.status.includes(status)) return false;
+    if(bed    && d.bed!==+bed) return false;
+    if(maxPx  && d.price>+maxPx) return false;
+    if(srch){
+      const hay=[String(d.unit),d.addr,d.block,String(d.bed)].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    if(srt==='unit-asc')  return a.unit-b.unit;
+    if(srt==='price-asc') return a.price-b.price;
+    if(srt==='price-desc')return b.price-a.price;
+    if(srt==='size-desc') return b.total-a.total;
+    if(srt==='block-asc') return a.block.localeCompare(b.block)||a.unit-b.unit;
+    return 0;
+  });
+
+  // Update tab counts
+  ['A','B','C','D','E','F','G','H','I','J','K'].forEach(b=>{
+    document.getElementById('tc-'+b).textContent=data.filter(d=>d.block===b).length;
+  });
+  document.getElementById('tc-all').textContent=data.length;
+
+  render();updateStats();
+}
+
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=filtered.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tbody=document.getElementById('tBody');
+  const empty=document.getElementById('emptyMsg');
+  if(!filtered.length){
+    tbody.innerHTML='';empty.style.display='block';
+    document.getElementById('txt-empty').textContent=t['txt-empty'];return;
+  }
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map(d=>`
+    <tr>
+      <td><div class="unit-num">TH ${d.unit}</div></td>
+      <td><div class="unit-addr" style="max-width:180px;white-space:normal;font-size:11px">${d.addr||'—'}</div></td>
+      <td><span class="block-badge">Block ${d.block}</span></td>
+      <td style="font-size:11px;color:var(--muted)">${d.storey}</td>
+      <td>
+        <div class="spec-row">
+          <span class="chip">🛏 ${d.bed}</span>
+          <span class="chip">🚿 ${d.bath}</span>
+        </div>
+      </td>
+      <td style="font-size:12px;font-weight:500;text-align:center">${d.garage}</td>
+      <td>
+        <div class="sz-main">${d.build} m²</div>
+      </td>
+      <td>
+        <div class="sz-main">${d.total} m²</div>
+        <div class="sz-detail">incl. garage</div>
+      </td>
+      <td><div class="price-val">${$c(d.price)}</div></td>
+      <td><span class="status ${statusCls(d.status)}">${t.statusMap[d.status]||d.status}</span></td>
+    </tr>`).join('');
+}
+
+function updateStats(){
+  const avail=filtered.filter(d=>d.status==='Available');
+  const prices=filtered.map(d=>d.price);
+  document.getElementById('sval-total').textContent=data.length;
+  document.getElementById('sval-avail').textContent=avail.length;
+  document.getElementById('sval-from').textContent=prices.length?'$'+Math.min(...prices).toLocaleString():'—';
+  document.getElementById('sval-shown').textContent=filtered.length;
+}
+
+function resetFilters(){
+  ['fStatus','fBed','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  document.getElementById('sortSel').value='unit-asc';
+  applyFilters();
+}
+
+function toggleTheme(){
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
+}
+
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';
+  document.getElementById('themeBtn').textContent='🌙';
+}
+applyFilters();
+</script>
+</body>
+</html>
