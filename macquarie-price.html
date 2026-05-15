@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Macquarie Collection — Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7f9;--surface:#fff;--surface2:#edf1f5;--surface3:#e0e6ed;--border:rgba(20,50,90,.09);--border2:rgba(20,50,90,.18);--ink:#0e1e30;--muted:#5a7090;--muted2:#a8bccc;--accent:#1a3d6e;--accent-l:rgba(26,61,110,.07);--gold:#a07020;--gold-l:rgba(160,112,32,.08);--green:#1e6840;--green-l:rgba(30,104,64,.08);--sky:#1a6090;--sky-l:rgba(26,96,144,.07);--net:#1a5a32;}
+[data-theme="dark"]{--bg:#090d12;--surface:#10181f;--surface2:#18222c;--surface3:#202e3c;--border:rgba(140,180,220,.07);--border2:rgba(140,180,220,.14);--ink:#deeaf4;--muted:#5a7898;--muted2:#243040;--accent:#5a9fd4;--accent-l:rgba(90,159,212,.07);--gold:#c8a040;--gold-l:rgba(200,160,64,.07);--green:#44a870;--green-l:rgba(68,168,112,.07);--sky:#3890c0;--sky-l:rgba(56,144,192,.07);--net:#60c890;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-logo{width:34px;height:34px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#fff;}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;letter-spacing:.06em;}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1440px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--accent);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;letter-spacing:-.01em;}
+.masthead h1 i{font-style:italic;color:var(--accent);}
+.m-right{text-align:right;}
+.info-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;text-align:left;margin-bottom:12px;}
+.info-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.info-val{font-size:13px;font-weight:500;line-height:1.55;}
+.rebate-box{background:var(--green-l);border:1px solid rgba(30,104,64,.2);border-radius:8px;padding:12px 16px;}
+.reb-title{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.reb-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;margin-top:5px;}
+.reb-pct{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--green);}
+.reb-lbl{color:var(--muted);font-size:10px;}
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 20px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-cnt{display:inline-block;margin-left:4px;font-size:9px;background:var(--accent-l);color:var(--accent);border-radius:20px;padding:1px 6px;font-weight:600;}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;min-width:100px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+.tbl-wrap{max-width:1440px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:12px 12px;white-space:nowrap;}
+.apt-num{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--accent);}
+.bldg-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:3px;}
+.bldg-1{background:var(--accent-l);color:var(--accent);border:1px solid rgba(26,61,110,.2);}
+.bldg-2{background:var(--sky-l);color:var(--sky);border:1px solid rgba(26,96,144,.2);}
+.lvl-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;padding:2px 8px;border-radius:3px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
+.type-chip{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:3px;border:1px solid var(--border2);background:var(--surface2);}
+.asp{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;}
+.asp-N{color:#4a7ab0;border-color:rgba(74,122,176,.25);background:rgba(74,122,176,.06);}
+.asp-NE{color:#3a9a70;border-color:rgba(58,154,112,.25);background:rgba(58,154,112,.06);}
+.asp-W{color:#b05828;border-color:rgba(176,88,40,.25);background:rgba(176,88,40,.06);}
+.asp-E{color:#907020;border-color:rgba(144,112,32,.25);background:rgba(144,112,32,.06);}
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.contract-px{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(90,112,144,.35);}
+.net-px{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--net);}
+.net-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--net);margin-top:1px;letter-spacing:.06em;}
+.adapt-yes{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;background:var(--accent-l);color:var(--accent);border:1px solid rgba(26,61,110,.2);padding:1px 6px;border-radius:2px;margin-left:4px;}
+.avail-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 8px;border-radius:3px;background:var(--green-l);color:var(--green);border:1px solid rgba(30,104,64,.2);}
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){header,.masthead,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}.masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}.m-right{text-align:left;}.h-name{display:none;}}
+</style>
+</head>
+<body data-theme="light">
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+<header>
+  <div class="h-brand"><div class="h-logo">M</div><div class="h-name">The Macquarie Collection</div></div>
+  <div class="h-center" id="txt-h-center">5 Halifax St · Macquarie Park</div>
+  <div class="h-right">
+    <div class="lang-pill"><button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button><button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button></div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Apartment · Macquarie Park NSW</div>
+    <h1>The Macquarie<br><i>Collection</i></h1>
+  </div>
+  <div class="m-right">
+    <div class="info-box"><div class="info-lbl" id="lbl-addr">Address</div><div class="info-val">5 Halifax Street<br>Macquarie Park NSW 2113</div></div>
+    <div class="rebate-box">
+      <div class="reb-title" id="lbl-rebate">🏷 Rebate (Special Offer)</div>
+      <div class="reb-row"><div><span class="reb-pct">10%</span> <span class="reb-lbl" id="reb-1b">1 Bed / 2 Bed</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green)" id="reb-1b-note">At settlement</span></div>
+      <div class="reb-row"><div><span class="reb-pct">5%</span> <span class="reb-lbl" id="reb-3b">3 Bed</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green)" id="reb-3b-note">At settlement</span></div>
+      <div class="reb-row" style="margin-top:4px"><span style="font-size:10px;color:var(--muted)" id="reb-4b">4 Bed — No rebate</span></div>
+    </div>
+  </div>
+</div>
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">52</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-net-from">Net Price From</div><div class="s-val" id="sval-net-from">—</div><div class="s-sub" id="ssub-net-from">After rebate</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-net-avg">Avg Net Price</div><div class="s-val" id="sval-net-avg">—</div><div class="s-sub" id="ssub-net-avg">Filtered</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-contract-from">Contract From</div><div class="s-val" id="sval-contract-from">—</div><div class="s-sub" id="ssub-contract-from">Before rebate</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">52</span></button>
+  <button class="tab-btn" onclick="setBldg('1')" id="tab-1">Building 1 <span class="tab-cnt" id="tc-1">0</span></button>
+  <button class="tab-btn" onclick="setBldg('2')" id="tab-2">Building 2 <span class="tab-cnt" id="tc-2">0</span></button>
+</div>
+<div class="filters">
+  <div class="f-grp"><span class="f-lbl" id="flbl-type">Unit Type</span>
+    <select id="fType" onchange="applyFilters()">
+      <option value="" id="opt-t-all">All</option>
+      <option value="1B">1 Bed</option><option value="1B+S">1 Bed + Study</option>
+      <option value="2B">2 Bed</option><option value="2B+S">2 Bed + Study</option>
+      <option value="3B">3 Bed</option><option value="3B+S">3 Bed + Study</option>
+      <option value="4B">4 Bed</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-level">Level</span>
+    <select id="fLevel" onchange="applyFilters()"><option value="" id="opt-l-all">All</option></select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-asp">Aspect</span>
+    <select id="fAsp" onchange="applyFilters()">
+      <option value="" id="opt-a-all">All</option>
+      <option value="N">N (North)</option><option value="N/E">N/E (North East)</option>
+      <option value="W">W (West)</option><option value="E">E (East)</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-adapt">Adaptable</span>
+    <select id="fAdapt" onchange="applyFilters()">
+      <option value="" id="opt-ad-all">All</option>
+      <option value="Y" id="opt-ad-yes">Yes</option><option value="N" id="opt-ad-no">No</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-maxnet">Max Net Price</span>
+    <select id="fMaxNet" onchange="applyFilters()">
+      <option value="" id="opt-p-all">All</option>
+      <option value="850000" id="opt-p1">Under $850K</option>
+      <option value="1000000" id="opt-p2">Under $1M</option>
+      <option value="1200000" id="opt-p3">Under $1.2M</option>
+      <option value="1500000" id="opt-p4">Under $1.5M</option>
+    </select></div>
+  <div class="f-grp" style="flex:1;min-width:140px"><span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSearch" placeholder="Apt, lot, level..." oninput="applyFilters()"></div></div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="net-asc" id="srt-na">Net Price ↑</option>
+    <option value="net-desc" id="srt-nd">Net Price ↓</option>
+    <option value="contract-asc" id="srt-ca">Contract ↑</option>
+    <option value="level-asc" id="srt-la">Level ↑</option>
+    <option value="level-desc" id="srt-ld">Level ↓</option>
+    <option value="size-desc" id="srt-sd">Total Area ↓</option>
+    <option value="apt-asc" id="srt-aa">Apt # ↑</option>
+  </select>
+</div>
+<div class="tbl-wrap">
+  <table>
+    <thead><tr>
+      <th id="th-apt">Apt #</th><th id="th-lot">Lot</th><th id="th-bldg">Bldg</th>
+      <th id="th-level">Level</th><th id="th-type">Type</th><th id="th-bath">Bath</th>
+      <th id="th-area">Area (sqm)</th><th id="th-parking">Parking</th><th id="th-asp">Aspect</th>
+      <th id="th-contract">Contract Price</th><th id="th-rebate">Rebate</th>
+      <th id="th-net">Net Price</th><th id="th-status">Status</th>
+    </tr></thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
+</div>
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+<script>
+const data=[
+  {apt:'2-101',lot:1,bldg:'2',lvl:1,type:'1B+S',bath:1,int:61,ext:31,total:92,storage:1,parking:0,asp:'W',adapt:'N',contract:945000,rebate:94500,net:850500},
+  {apt:'2-102',lot:2,bldg:'2',lvl:1,type:'1B+S',bath:1,int:60,ext:31,total:91,storage:1,parking:0,asp:'W',adapt:'N',contract:945000,rebate:94500,net:850500},
+  {apt:'2-103',lot:3,bldg:'2',lvl:1,type:'2B',bath:2,int:76,ext:41,total:117,storage:1,parking:1,asp:'W',adapt:'N',contract:1215000,rebate:121500,net:1093500},
+  {apt:'1-105',lot:8,bldg:'1',lvl:1,type:'3B+S',bath:2,int:101,ext:63,total:164,storage:1,parking:1,asp:'N/E',adapt:'N',contract:1575000,rebate:78750,net:1496250},
+  {apt:'2-201',lot:9,bldg:'2',lvl:2,type:'1B+S',bath:1,int:61,ext:15,total:76,storage:1,parking:0,asp:'W',adapt:'N',contract:930000,rebate:93000,net:837000},
+  {apt:'2-202',lot:10,bldg:'2',lvl:2,type:'1B+S',bath:1,int:60,ext:17,total:77,storage:1,parking:0,asp:'W',adapt:'N',contract:930000,rebate:93000,net:837000},
+  {apt:'2-204',lot:12,bldg:'2',lvl:2,type:'1B+S',bath:1,int:56,ext:12,total:68,storage:1,parking:0,asp:'N/E',adapt:'N',contract:880000,rebate:88000,net:792000},
+  {apt:'2-302',lot:23,bldg:'2',lvl:3,type:'1B',bath:1,int:53,ext:8,total:61,storage:1,parking:0,asp:'W',adapt:'N',contract:850000,rebate:85000,net:765000},
+  {apt:'2-305',lot:26,bldg:'2',lvl:3,type:'2B+S',bath:2,int:79,ext:11,total:90,storage:1,parking:1,asp:'E',adapt:'N',contract:1102500,rebate:110250,net:992250},
+  {apt:'2-401',lot:37,bldg:'2',lvl:4,type:'2B',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'Y',contract:1095000,rebate:109500,net:985500},
+  {apt:'2-402',lot:38,bldg:'2',lvl:4,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:855000,rebate:85500,net:769500},
+  {apt:'2-403',lot:39,bldg:'2',lvl:4,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1095000,rebate:109500,net:985500},
+  {apt:'2-404',lot:40,bldg:'2',lvl:4,type:'2B+S',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'N',contract:1112500,rebate:111250,net:1001250},
+  {apt:'2-502',lot:53,bldg:'2',lvl:5,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:860000,rebate:86000,net:774000},
+  {apt:'2-503',lot:54,bldg:'2',lvl:5,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1100000,rebate:110000,net:990000},
+  {apt:'2-601',lot:67,bldg:'2',lvl:6,type:'2B',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'Y',contract:1107500,rebate:110750,net:996750},
+  {apt:'2-602',lot:68,bldg:'2',lvl:6,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:865000,rebate:86500,net:778500},
+  {apt:'2-603',lot:69,bldg:'2',lvl:6,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1105000,rebate:110500,net:994500},
+  {apt:'1-1408',lot:157,bldg:'1',lvl:14,type:'1B+S',bath:1,int:57,ext:11,total:68,storage:1,parking:0,asp:'N',adapt:'N',contract:819000,rebate:81900,net:737100},
+  {apt:'1-1707',lot:186,bldg:'1',lvl:17,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1080000,rebate:108000,net:972000},
+  {apt:'1-1807',lot:195,bldg:'1',lvl:18,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1082000,rebate:108200,net:973800},
+  {apt:'1-1903',lot:200,bldg:'1',lvl:19,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1107000,rebate:110700,net:996300},
+  {apt:'1-1904',lot:201,bldg:'1',lvl:19,type:'2B',bath:2,int:80,ext:13,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1119000,rebate:111900,net:1007100},
+  {apt:'1-1907',lot:204,bldg:'1',lvl:19,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1084000,rebate:108400,net:975600},
+  {apt:'1-2003',lot:209,bldg:'1',lvl:20,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1109000,rebate:110900,net:998100},
+  {apt:'1-2004',lot:210,bldg:'1',lvl:20,type:'2B',bath:2,int:80,ext:13,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1121000,rebate:112100,net:1008900},
+  {apt:'1-2006',lot:212,bldg:'1',lvl:20,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1342000,rebate:134200,net:1207800},
+  {apt:'1-2103',lot:218,bldg:'1',lvl:21,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1111000,rebate:111100,net:999900},
+  {apt:'1-2104',lot:219,bldg:'1',lvl:21,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1123000,rebate:112300,net:1010700},
+  {apt:'1-2106',lot:221,bldg:'1',lvl:21,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1344000,rebate:134400,net:1209600},
+  {apt:'1-2107',lot:222,bldg:'1',lvl:21,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1088000,rebate:108800,net:979200},
+  {apt:'1-2203',lot:227,bldg:'1',lvl:22,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1113000,rebate:111300,net:1001700},
+  {apt:'1-2204',lot:228,bldg:'1',lvl:22,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1125000,rebate:112500,net:1012500},
+  {apt:'1-2207',lot:231,bldg:'1',lvl:22,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1090000,rebate:109000,net:981000},
+  {apt:'1-2303',lot:236,bldg:'1',lvl:23,type:'2B',bath:2,int:77,ext:11,total:88,storage:1,parking:1,asp:'N',adapt:'N',contract:1115000,rebate:111500,net:1003500},
+  {apt:'1-2306',lot:239,bldg:'1',lvl:23,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1348000,rebate:134800,net:1213200},
+  {apt:'1-2307',lot:240,bldg:'1',lvl:23,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1092000,rebate:109200,net:982800},
+  {apt:'1-2407',lot:249,bldg:'1',lvl:24,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1094000,rebate:109400,net:984600},
+  {apt:'1-2504',lot:255,bldg:'1',lvl:25,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1135000,rebate:113500,net:1021500},
+  {apt:'1-2506',lot:257,bldg:'1',lvl:25,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1500000,rebate:75000,net:1425000},
+  {apt:'1-2604',lot:263,bldg:'1',lvl:26,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1140000,rebate:114000,net:1026000},
+  {apt:'1-2702',lot:269,bldg:'1',lvl:27,type:'1B+S',bath:1,int:64,ext:9,total:73,storage:1,parking:0,asp:'W',adapt:'N',contract:887000,rebate:88700,net:798300},
+  {apt:'1-2705',lot:272,bldg:'1',lvl:27,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
+  {apt:'1-2804',lot:278,bldg:'1',lvl:28,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1150000,rebate:115000,net:1035000},
+  {apt:'1-2806',lot:280,bldg:'1',lvl:28,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1555000,rebate:77750,net:1477250},
+  {apt:'1-2901',lot:283,bldg:'1',lvl:29,type:'2B',bath:2,int:87,ext:11,total:98,storage:1,parking:1,asp:'W',adapt:'N',contract:1215000,rebate:121500,net:1093500},
+  {apt:'1-2904',lot:286,bldg:'1',lvl:29,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1155000,rebate:115500,net:1039500},
+  {apt:'1-2906',lot:288,bldg:'1',lvl:29,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1570000,rebate:78500,net:1491500},
+  {apt:'1-3001',lot:291,bldg:'1',lvl:30,type:'4B',bath:2,int:152,ext:30,total:182,storage:1,parking:2,asp:'W',adapt:'N',contract:2550000,rebate:0,net:2550000},
+  {apt:'1-3002',lot:292,bldg:'1',lvl:30,type:'4B',bath:2,int:155,ext:33,total:188,storage:1,parking:2,asp:'N',adapt:'N',contract:2700000,rebate:0,net:2700000},
+  {apt:'1-3003',lot:293,bldg:'1',lvl:30,type:'4B',bath:2,int:125,ext:31,total:156,storage:1,parking:2,asp:'N',adapt:'N',contract:2200000,rebate:0,net:2200000},
+  {apt:'1-3004',lot:294,bldg:'1',lvl:30,type:'4B',bath:2,int:123,ext:19,total:142,storage:1,parking:2,asp:'N',adapt:'N',contract:2000000,rebate:0,net:2000000},
+];
+const i18n={
+  en:{'txt-h-center':'5 Halifax St · Macquarie Park','txt-overline':'Apartment · Macquarie Park NSW','lbl-addr':'Address','lbl-rebate':'🏷 Rebate (Special Offer)','reb-1b':'1 Bed / 2 Bed','reb-1b-note':'At settlement','reb-3b':'3 Bed','reb-3b-note':'At settlement','reb-4b':'4 Bed — No rebate','slbl-total':'Total Units','ssub-total':'All Available','slbl-net-from':'Net Price From','ssub-net-from':'After rebate','slbl-net-avg':'Avg Net Price','ssub-net-avg':'Filtered','slbl-contract-from':'Contract From','ssub-contract-from':'Before rebate','slbl-shown':'Showing','ssub-shown':'Current filter','flbl-type':'Unit Type','opt-t-all':'All','flbl-level':'Level','opt-l-all':'All','flbl-asp':'Aspect','opt-a-all':'All','flbl-adapt':'Adaptable','opt-ad-all':'All','opt-ad-yes':'Yes','opt-ad-no':'No','flbl-maxnet':'Max Net Price','opt-p-all':'All','opt-p1':'Under $850K','opt-p2':'Under $1M','opt-p3':'Under $1.2M','opt-p4':'Under $1.5M','flbl-search':'Search','txt-reset':'Reset','txt-shown-lbl':' units shown','th-apt':'Apt #','th-lot':'Lot #','th-bldg':'Bldg','th-level':'Level','th-type':'Type','th-bath':'Bath','th-area':'Area (sqm)','th-parking':'Parking','th-asp':'Aspect','th-contract':'Contract Price','th-rebate':'Rebate','th-net':'Net Price','th-status':'Status','srt-na':'Net Price ↑','srt-nd':'Net Price ↓','srt-ca':'Contract ↑','srt-la':'Level ↑','srt-ld':'Level ↓','srt-sd':'Total Area ↓','srt-aa':'Apt # ↑','txt-empty':'— No units match your criteria —',searchPh:'Apt, lot, level...'},
+  ko:{'txt-h-center':'5 Halifax St · 맥쿼리 파크','txt-overline':'아파트 · 맥쿼리 파크 NSW','lbl-addr':'주소','lbl-rebate':'🏷 리베이트 (특별 할인)','reb-1b':'1베드 / 2베드','reb-1b-note':'정산 시 적용','reb-3b':'3베드','reb-3b-note':'정산 시 적용','reb-4b':'4베드 — 리베이트 없음','slbl-total':'총 세대','ssub-total':'전체 분양 가능','slbl-net-from':'순가격 최저','ssub-net-from':'리베이트 적용 후','slbl-net-avg':'평균 순가격','ssub-net-avg':'필터 기준','slbl-contract-from':'계약가 최저','ssub-contract-from':'리베이트 적용 전','slbl-shown':'표시 중','ssub-shown':'현재 필터','flbl-type':'유닛 타입','opt-t-all':'전체','flbl-level':'층','opt-l-all':'전체','flbl-asp':'방향','opt-a-all':'전체','flbl-adapt':'장애 적합','opt-ad-all':'전체','opt-ad-yes':'예','opt-ad-no':'아니오','flbl-maxnet':'최대 순가격','opt-p-all':'전체','opt-p1':'$850K 이하','opt-p2':'$1M 이하','opt-p3':'$1.2M 이하','opt-p4':'$1.5M 이하','flbl-search':'검색','txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중','th-apt':'Apt #','th-lot':'Lot #','th-bldg':'동','th-level':'층','th-type':'타입','th-bath':'욕실','th-area':'면적(sqm)','th-parking':'주차','th-asp':'방향','th-contract':'계약 가격','th-rebate':'리베이트','th-net':'순가격','th-status':'상태','srt-na':'순가격 낮은 순','srt-nd':'순가격 높은 순','srt-ca':'계약가 낮은 순','srt-la':'층수 낮은 순','srt-ld':'층수 높은 순','srt-sd':'면적 큰 순','srt-aa':'Apt # 순','txt-empty':'— 조건에 맞는 세대가 없습니다 —',searchPh:'Apt #, Lot, 층수 검색...'}
+};
+let lang='en',curBldg='all',filtered=[];
+function setLang(l){lang=l;document.getElementById('btnEN').classList.toggle('active',l==='en');document.getElementById('btnKO').classList.toggle('active',l==='ko');const t=i18n[l];Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});document.getElementById('fSearch').placeholder=t.searchPh;render();updateStats();}
+function setBldg(b){curBldg=b;document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));document.getElementById('tab-'+b).classList.add('active');applyFilters();}
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';return'$'+(n/1e3).toFixed(0)+'K';}
+function populateLevelFilter(){const levels=[...new Set(data.map(d=>d.lvl))].sort((a,b)=>a-b);const sel=document.getElementById('fLevel');sel.innerHTML=`<option value="">All</option>`+levels.map(l=>`<option value="${l}">Level ${l}</option>`).join('');}
+function applyFilters(){const type=document.getElementById('fType').value,level=document.getElementById('fLevel').value,asp=document.getElementById('fAsp').value,adapt=document.getElementById('fAdapt').value,maxNet=document.getElementById('fMaxNet').value,srch=document.getElementById('fSearch').value.toLowerCase().trim(),srt=document.getElementById('sortSel').value;
+filtered=data.filter(d=>{if(curBldg!=='all'&&d.bldg!==curBldg)return false;if(type&&d.type!==type)return false;if(level&&d.lvl!==+level)return false;if(asp&&d.asp!==asp)return false;if(adapt&&d.adapt!==adapt)return false;if(maxNet&&d.net>+maxNet)return false;if(srch){const hay=[d.apt,String(d.lot),String(d.lvl),d.type,d.asp,d.bldg].join(' ').toLowerCase();if(!hay.includes(srch))return false;}return true;});
+filtered.sort((a,b)=>{if(srt==='net-asc')return a.net-b.net;if(srt==='net-desc')return b.net-a.net;if(srt==='contract-asc')return a.contract-b.contract;if(srt==='level-asc')return a.lvl-b.lvl||a.apt.localeCompare(b.apt);if(srt==='level-desc')return b.lvl-a.lvl||a.apt.localeCompare(b.apt);if(srt==='size-desc')return b.total-a.total;if(srt==='apt-asc')return a.apt.localeCompare(b.apt);return 0;});
+document.getElementById('tc-all').textContent=data.length;document.getElementById('tc-1').textContent=data.filter(d=>d.bldg==='1').length;document.getElementById('tc-2').textContent=data.filter(d=>d.bldg==='2').length;
+render();updateStats();}
+function render(){const t=i18n[lang];document.getElementById('rCount').textContent=filtered.length;document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];const tbody=document.getElementById('tBody'),empty=document.getElementById('emptyMsg');
+if(!filtered.length){tbody.innerHTML='';empty.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}empty.style.display='none';
+tbody.innerHTML=filtered.map(d=>{const is4B=d.type.startsWith('4B');const rebPct=is4B?'':d.rebate===d.contract*0.1?'10%':'5%';return`<tr><td><div class="apt-num">${d.apt}</div></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">#${d.lot}</td><td><span class="bldg-badge bldg-${d.bldg}">Bldg ${d.bldg}</span></td><td><span class="lvl-chip">${d.lvl}</span></td><td><span class="type-chip">${d.type}</span>${d.adapt==='Y'?'<span class="adapt-yes">♿</span>':''}</td><td style="font-size:12px;font-weight:500;text-align:center">${d.bath}</td><td><div class="sz-main">${d.total} sqm</div><div class="sz-detail">Int ${d.int} + Ext ${d.ext}</div></td><td style="font-size:12px;text-align:center">${d.parking>0?'🚗 '+d.parking:'—'}</td><td><span class="asp asp-${d.asp.replace('/','')}">${d.asp}</span></td><td><div class="contract-px">${$c(d.contract)}</div></td><td><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);font-weight:600">${is4B?'—':$c(d.rebate)}</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--green);margin-top:1px">${rebPct}</div></td><td><div class="net-px">${$c(d.net)}</div><div class="net-lbl">${is4B?'LISTED':'NET PRICE'}</div></td><td><span class="avail-badge">Available</span></td></tr>`;}).join('');}
+function updateStats(){const nets=filtered.map(d=>d.net),contracts=filtered.map(d=>d.contract);document.getElementById('sval-total').textContent=data.length;document.getElementById('sval-shown').textContent=filtered.length;document.getElementById('sval-net-from').textContent=nets.length?$f(Math.min(...nets)):'—';document.getElementById('sval-net-avg').textContent=nets.length?$f(Math.round(nets.reduce((a,b)=>a+b,0)/nets.length)):'—';document.getElementById('sval-contract-from').textContent=contracts.length?$f(Math.min(...contracts)):'—';}
+function resetFilters(){['fType','fLevel','fAsp','fAdapt','fMaxNet'].forEach(id=>document.getElementById(id).value='');document.getElementById('fSearch').value='';document.getElementById('sortSel').value='net-asc';applyFilters();}
+function toggleTheme(){const b=document.body,btn=document.getElementById('themeBtn');if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}else{b.dataset.theme='light';btn.textContent='☀️';}}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
+populateLevelFilter();applyFilters();
+</script>
+</body>
+</html>
