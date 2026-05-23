@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DAWN Melrose Park — Sekisui House × Forise Group</title>
+<meta name="description" content="DAWN Melrose Park – The first release by Sekisui House and HHP at Melrose Park. Sydney's first smart community. Bilingual EN/KR information site by Sunny Choi, Forise Group." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@300;400;500;600;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ ROOT THEME VARS ============ */
+  :root {
+    --bg:           #f5efe6;
+    --bg-soft:      #eee5d6;
+    --bg-card:     #ffffff;
+    --ink:          #1a1f2e;
+    --ink-soft:     #4a4f5e;
+    --ink-mute:     #7a7f8e;
+    --line:         #d9cfbe;
+    --accent:       #c8693c;  /* dawn amber */
+    --accent-2:     #d99564;  /* peach */
+    --accent-3:     #8e4928;  /* deep terracotta */
+    --gold:         #b58c4c;
+    --gradient-dawn: linear-gradient(135deg,#ffe0b8 0%,#f5b78a 35%,#e88c6a 70%,#a85a3a 100%);
+    --gradient-soft: linear-gradient(180deg,#f5efe6 0%,#eee5d6 100%);
+    --shadow-sm:    0 1px 2px rgba(26,31,46,.06), 0 2px 8px rgba(26,31,46,.04);
+    --shadow-md:    0 4px 16px rgba(26,31,46,.08), 0 16px 40px rgba(26,31,46,.06);
+    --shadow-lg:    0 12px 32px rgba(26,31,46,.12), 0 32px 80px rgba(26,31,46,.10);
+  }
+  [data-theme="dark"] {
+    --bg:           #0e1320;
+    --bg-soft:      #161c2c;
+    --bg-card:      #1a2030;
+    --ink:          #f0e7d8;
+    --ink-soft:     #b8ad9b;
+    --ink-mute:     #8a8270;
+    --line:         #2a3144;
+    --accent:       #e0a06a;
+    --accent-2:     #f2c08c;
+    --accent-3:     #c97a4f;
+    --gold:         #d4a574;
+    --gradient-dawn: linear-gradient(135deg,#3a2a1a 0%,#7a3a2a 35%,#c97a4f 70%,#f2c08c 100%);
+    --gradient-soft: linear-gradient(180deg,#0e1320 0%,#161c2c 100%);
+    --shadow-sm:    0 1px 2px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
+    --shadow-md:    0 4px 16px rgba(0,0,0,.5), 0 16px 40px rgba(0,0,0,.4);
+    --shadow-lg:    0 12px 32px rgba(0,0,0,.6), 0 32px 80px rgba(0,0,0,.5);
+  }
+
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background .4s ease, color .4s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  html[lang="ko"] body { font-family: 'Manrope', 'Noto Serif KR', sans-serif; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* grain overlay */
+  body::before {
+    content:'';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: .6;
+    mix-blend-mode: multiply;
+  }
+  [data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .3; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: .02em;
+  }
+  .brand-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--gradient-dawn);
+    position: relative;
+    box-shadow: 0 0 24px rgba(232,140,106,.4);
+  }
+  .brand-mark::after {
+    content:''; position:absolute; inset:6px;
+    background: var(--bg);
+    border-radius: 50%;
+    transition: background .4s;
+  }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+  .pill {
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .pill svg { width: 14px; height: 14px; }
+  .bmac { background: #ffdd00; color: #1a1f2e; border-color: #ffdd00; }
+  .bmac:hover { background: #ffdd00; color: #1a1f2e; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255,221,0,.4); }
+  [data-theme="dark"] .bmac { color: #1a1f2e; }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    padding: 64px 32px 80px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(232,140,106,.35) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(181,140,76,.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  [data-theme="dark"] .hero-bg {
+    background: radial-gradient(ellipse at 70% 30%, rgba(232,140,106,.18) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(181,140,76,.12) 0%, transparent 50%);
+  }
+  .hero-content {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    margin-top: 40px;
+  }
+  .hero-eyebrow::before {
+    content:''; width: 32px; height: 1px; background: var(--accent);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(64px, 14vw, 220px);
+    line-height: .9;
+    letter-spacing: -.04em;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    background: var(--gradient-dawn);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 400;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 56px;
+    line-height: 1.4;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .hero-meta-item .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+  .hero-meta-item .value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ============ NAV ============ */
+  .nav-sticky {
+    position: sticky; top: 65px; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-sticky::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    gap: 36px;
+    white-space: nowrap;
+  }
+  .nav-inner a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-inner a:hover { color: var(--accent); }
+  .nav-inner a::after {
+    content:''; position: absolute; bottom: -16px; left: 0; right: 0;
+    height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .2s;
+  }
+  .nav-inner a:hover::after { transform: scaleX(1); }
+
+  /* ============ SECTIONS ============ */
+  section { position: relative; padding: 120px 32px; z-index: 2; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+  @media (max-width: 768px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+    section { padding: 72px 24px; }
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .section-num span { color: var(--ink-mute); margin-right: 8px; }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-top: 12px;
+  }
+  .section-lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .alt { background: var(--bg-soft); }
+
+  /* ============ ABOUT MELROSE ============ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  @media (max-width: 968px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--ink); font-weight: 600; }
+  .stat-block {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-block::before {
+    content:''; position: absolute; top:0; left:0; width: 4px; height: 100%;
+    background: var(--gradient-dawn);
+  }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+  .stat-label {
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .stat-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ============ LOCATION ============ */
+  .location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .loc-cell {
+    background: var(--bg-card);
+    padding: 28px 24px;
+    transition: background .2s;
+  }
+  .loc-cell:hover { background: var(--bg-soft); }
+  .loc-time {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .loc-time small { font-size: 14px; color: var(--ink-mute); margin-left: 4px; }
+  .loc-mode {
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 12px;
+    font-weight: 600;
+  }
+  .loc-dest {
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ============ INFRA TIMELINE ============ */
+  .infra-list { margin-top: 56px; }
+  .infra-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 32px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .infra-item:last-child { border-bottom: 1px solid var(--line); }
+  .infra-year {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -.01em;
+  }
+  .infra-text h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .infra-text p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ============ DEVELOPER ============ */
+  .dev-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 968px) { .dev-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .dev-text p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .dev-text p strong { color: var(--ink); font-weight: 600; }
+  .badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .badge {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .badge.gold { background: var(--gradient-dawn); color: #fff; border-color: transparent; font-weight: 600; }
+  [data-theme="dark"] .badge.gold { color: #1a1f2e; }
+
+  .dev-numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .dn-cell {
+    background: var(--bg-card);
+    padding: 40px 28px;
+    text-align: left;
+  }
+  .dn-num {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+  .dn-num small { font-size: 18px; color: var(--ink-mute); margin-left: 4px; }
+  .dn-label {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 14px;
+    font-weight: 600;
+  }
+
+  /* ============ AWARDS ============ */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .award-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px 28px;
+    transition: all .3s;
+  }
+  .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+  .award-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .award-project {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -.01em;
+  }
+  .award-name {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ============ FEATURES ============ */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+  .feat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px;
+    transition: all .3s;
+  }
+  .feat-card:hover { border-color: var(--accent); }
+  .feat-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--gradient-dawn);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .feat-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .feat-card p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .room-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .room-block { background: var(--bg-card); padding: 32px 28px; }
+  .room-block h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .room-block ul { list-style: none; }
+  .room-block li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    padding-left: 16px;
+  }
+  .room-block li::before {
+    content:''; position: absolute; left: 0; top: 14px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .room-block li:last-child { border-bottom: none; }
+
+  /* ============ UNITS ============ */
+  .units-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .unit-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all .3s;
+    position: relative;
+  }
+  .unit-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .unit-banner {
+    height: 140px;
+    background: var(--gradient-dawn);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    color: #fff;
+  }
+  .unit-banner::after {
+    content:''; position: absolute; inset:0;
+    background: linear-gradient(180deg,transparent 0%,rgba(0,0,0,.4) 100%);
+  }
+  .unit-type {
+    position: relative; z-index: 2;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .unit-body { padding: 32px 28px; }
+  .unit-id {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    margin-bottom: 8px;
+  }
+  .unit-price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .unit-features {
+    list-style: none;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .unit-features li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .unit-features li::before {
+    content:'✓'; color: var(--accent); font-weight: 600;
+  }
+  .unit-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-top: 12px;
+  }
+
+  /* ============ UPGRADES TABLE ============ */
+  .upgrade-table {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ug-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: 1px solid var(--line);
+    transition: background .2s;
+  }
+  .ug-row:last-child { border-bottom: none; }
+  .ug-row:hover { background: var(--bg-soft); }
+  .ug-row.header {
+    background: var(--bg-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+  .ug-name, .ug-price { padding: 22px 28px; }
+  .ug-name strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 4px; }
+  .ug-name small { color: var(--ink-soft); font-size: 13px; }
+  .ug-price {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent);
+    text-align: right;
+    letter-spacing: -.01em;
+  }
+  .ug-price small { font-size: 12px; color: var(--ink-mute); display: block; font-family: 'Manrope', sans-serif; margin-top: 4px; }
+  @media (max-width: 640px) {
+    .ug-row { grid-template-columns: 1fr; }
+    .ug-price { text-align: left; padding-top: 0; }
+  }
+
+  /* ============ RENTAL YIELD ============ */
+  .yield-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 768px) { .yield-grid { grid-template-columns: 1fr; } }
+  .yield-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .yield-card.future {
+    background: var(--gradient-dawn);
+    color: #fff;
+  }
+  .yield-card.future .yield-row {
+    border-color: rgba(255,255,255,.25);
+  }
+  .yield-card.future .yield-bed, .yield-card.future .yield-price {
+    color: #fff;
+  }
+  .yield-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .yield-card.future .yield-eyebrow { color: #fff; opacity: .9; }
+  .yield-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 32px;
+    letter-spacing: -.01em;
+  }
+  .yield-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .yield-row:last-child { border-bottom: none; }
+  .yield-bed {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .yield-price {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--accent);
+    text-align: right;
+    letter-spacing: -.01em;
+  }
+  .yield-price small { font-size: 12px; color: var(--ink-mute); font-family:'Manrope', sans-serif; display:block; margin-top: 2px; }
+  .yield-card.future .yield-price small { color: rgba(255,255,255,.7); }
+
+  .yield-note {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ============ CONTACT ============ */
+  .contact {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 120px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content:''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(232,140,106,.2) 0%, transparent 60%);
+  }
+  [data-theme="dark"] .contact { background: var(--bg-soft); }
+  .contact .container { position: relative; z-index: 2; }
+  .contact .section-num { color: var(--accent-2); }
+  .contact .section-num span { color: rgba(245,239,230,.5); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .contact-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: .95;
+    letter-spacing: -.03em;
+    color: var(--bg);
+    margin-bottom: 32px;
+  }
+  .contact-title em {
+    font-style: italic;
+    background: var(--gradient-dawn);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .contact-detail {
+    border-top: 1px solid rgba(245,239,230,.2);
+    padding: 20px 0;
+  }
+  .contact-detail .lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(245,239,230,.6);
+    margin-bottom: 6px;
+  }
+  .contact-detail .val {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--bg);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .contact-detail .val:hover { color: var(--accent-2); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    padding: 32px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-mute);
+    position: relative;
+    z-index: 2;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; }
+  .reveal.in { animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) forwards; }
+
+  /* Hide non-active language */
+  [data-lang-section] { display: none; }
+  [data-lang-section="en"] { display: inline; }
+  html[lang="ko"] [data-lang-section="en"] { display: none; }
+  html[lang="ko"] [data-lang-section="ko"] { display: inline; }
+  [data-lang-block] { display: none; }
+  [data-lang-block="en"] { display: block; }
+  html[lang="ko"] [data-lang-block="en"] { display: none; }
+  html[lang="ko"] [data-lang-block="ko"] { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <span data-lang-section="en">DAWN — Melrose Park</span>
+    <span data-lang-section="ko">던 — 멜로즈파크</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="pill bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
+      Buy me a coffee
+    </a>
+    <button class="pill" id="langToggle" aria-label="Toggle language">
+      <span id="langLabel">한국어</span>
+    </button>
+    <button class="pill" id="themeToggle" aria-label="Toggle theme">
+      <span id="themeLabel">◐</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span data-lang-section="en">5th Stage · Sekisui House × HHP</span>
+      <span data-lang-section="ko">5단계 · 세키스이 하우스 × HHP</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-lang-section="en">DAWN<br><em>Melrose Park</em></span>
+      <span data-lang-section="ko">DAWN<br><em>멜로즈파크</em></span>
+    </h1>
+    <p class="hero-sub">
+      <span data-lang-section="en">Welcome to Sydney's first smart community — a place where you'll excite the senses, uncover a good dose of delight, and create new memories with the people you love.</span>
+      <span data-lang-section="ko">시드니 최초의 스마트 커뮤니티. 감각을 깨우고, 작은 기쁨을 발견하며, 사랑하는 사람들과 새로운 추억을 만들어가는 곳.</span>
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label" data-lang-section="en">Location</div>
+        <div class="label" data-lang-section="ko">위치</div>
+        <div class="value">Melrose Park, NSW</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label" data-lang-section="en">Distance to CBD</div>
+        <div class="label" data-lang-section="ko">시드니 CBD까지</div>
+        <div class="value">15 km · 30 min</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label" data-lang-section="en">Developer</div>
+        <div class="label" data-lang-section="ko">시행사</div>
+        <div class="value">Sekisui House</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label" data-lang-section="en">Rating</div>
+        <div class="label" data-lang-section="ko">등급</div>
+        <div class="value">4★ Gold iCIRT</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STICKY NAV ============ -->
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a href="#about" data-lang-section="en">About Melrose</a>
+    <a href="#about" data-lang-section="ko">멜로즈파크 소개</a>
+    <a href="#location" data-lang-section="en">Location & Amenities</a>
+    <a href="#location" data-lang-section="ko">위치 & 편의시설</a>
+    <a href="#developer" data-lang-section="en">Developer</a>
+    <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#awards" data-lang-section="en">Awards</a>
+    <a href="#awards" data-lang-section="ko">수상 내역</a>
+    <a href="#features" data-lang-section="en">Apartment Features</a>
+    <a href="#features" data-lang-section="ko">아파트 특징</a>
+    <a href="#units" data-lang-section="en">Recommended Units</a>
+    <a href="#units" data-lang-section="ko">추천 매물</a>
+    <a href="#upgrades" data-lang-section="en">Upgrades</a>
+    <a href="#upgrades" data-lang-section="ko">업그레이드</a>
+    <a href="#yield" data-lang-section="en">Rental Yield</a>
+    <a href="#yield" data-lang-section="ko">예상 임대료</a>
+    <a href="#contact" data-lang-section="en">Contact</a>
+    <a href="#contact" data-lang-section="ko">문의</a>
+  </div>
+</nav>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>01 /</span> About Melrose Park</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">The geographical<br>heart of Sydney.</span>
+          <span data-lang-section="ko">시드니의<br>지리적 중심.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Located between Ryde and Parramatta, Melrose Park is coming to life with new parklands, outdoor recreation, and schools. Just 15 km west of Sydney CBD — and minutes from Parramatta, Sydney's second CBD — you're never too far from anything you need.</span>
+        <span data-lang-section="ko">라이드와 파라마타 사이에 위치한 멜로즈파크는 새로운 공원, 야외 레크리에이션 시설, 학교가 들어서며 활기를 띠고 있습니다. 시드니 CBD에서 서쪽으로 15km, 시드니의 제2 CBD인 파라마타에서 단 몇 분 거리 — 필요한 모든 것이 가까이에 있습니다.</span>
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-lang-block="en"><strong>Strong population growth since 2016</strong> with forecasts pointing to roughly 2,750 residents by 2028 and a dramatic expansion through 2046. The number of dwellings in Melrose Park is forecast to grow from 280 in 2021 to <strong>2,993 by 2046</strong>, while average household size rises from 2.08 to 2.31.</p>
+        <p data-lang-block="en">This is one of Sydney's most strategically positioned growth corridors — a masterplanned community of 30 hectares (300,000 sqm), set for completion in 2038.</p>
+
+        <p data-lang-block="ko"><strong>2016년 이후 강력한 인구 성장</strong>을 이어왔으며, 2028년까지 약 2,750명, 2046년까지 더 큰 폭의 확장이 예상됩니다. 멜로즈파크 내 주거 세대 수는 2021년 280세대에서 <strong>2046년 2,993세대</strong>로 증가할 것으로 전망되며, 평균 가구 규모도 2.08명에서 2.31명으로 늘어납니다.</p>
+        <p data-lang-block="ko">시드니에서 전략적으로 가장 잘 자리잡은 성장 회랑 중 하나로, 총 30헥타르(300,000 sqm) 규모의 마스터플랜 커뮤니티이며 2038년 완공 예정입니다.</p>
+      </div>
+      <div>
+        <div class="stat-block">
+          <div class="stat-number">31.44%</div>
+          <div class="stat-label" data-lang-section="en">Population Growth 2016–2021</div>
+          <div class="stat-label" data-lang-section="ko">인구 증가율 2016–2021</div>
+          <div class="stat-desc" data-lang-section="en">From 1,574 people in 2016 to 2,059 in 2021 (ABS)</div>
+          <div class="stat-desc" data-lang-section="ko">2016년 1,574명에서 2021년 2,059명으로 증가 (ABS)</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">276.77%</div>
+          <div class="stat-label" data-lang-section="en">Forecast Change 2025–2046</div>
+          <div class="stat-label" data-lang-section="ko">전망 증가율 2025–2046</div>
+          <div class="stat-desc" data-lang-section="en">One of NSW's fastest forecasted growth suburbs.</div>
+          <div class="stat-desc" data-lang-section="ko">NSW 주에서 가장 빠른 성장이 예상되는 교외 지역 중 하나.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section id="location" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>02 /</span> Location & Connectivity</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">Minutes from<br>everything.</span>
+          <span data-lang-section="ko">모든 곳에서<br>단 몇 분 거리.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Over 2,000 express buses serve Melrose Park every week, with a free shuttle to Meadowbank Station and Wharf — plus the approved Metro West and light rail connections on the horizon.</span>
+        <span data-lang-section="ko">매주 2,000편 이상의 급행 버스가 운행되며, 미도우뱅크역과 선착장으로 무료 셔틀이 제공됩니다. 또한 메트로 웨스트와 경전철 연결이 확정되어 곧 개통됩니다.</span>
+      </p>
+    </div>
+
+    <div class="location-grid">
+      <div class="loc-cell">
+        <div class="loc-time">10<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Drive</div>
+        <div class="loc-mode" data-lang-section="ko">차량</div>
+        <div class="loc-dest" data-lang-section="en">Parramatta CBD</div>
+        <div class="loc-dest" data-lang-section="ko">파라마타 CBD</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">30<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Drive</div>
+        <div class="loc-mode" data-lang-section="ko">차량</div>
+        <div class="loc-dest" data-lang-section="en">Sydney CBD</div>
+        <div class="loc-dest" data-lang-section="ko">시드니 CBD</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">40<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Ferry</div>
+        <div class="loc-mode" data-lang-section="ko">페리</div>
+        <div class="loc-dest" data-lang-section="en">Barangaroo</div>
+        <div class="loc-dest" data-lang-section="ko">바랑가루</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">20<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Bus</div>
+        <div class="loc-mode" data-lang-section="ko">버스</div>
+        <div class="loc-dest" data-lang-section="en">Parramatta</div>
+        <div class="loc-dest" data-lang-section="ko">파라마타</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">40<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Bus</div>
+        <div class="loc-mode" data-lang-section="ko">버스</div>
+        <div class="loc-dest" data-lang-section="en">Town Hall</div>
+        <div class="loc-dest" data-lang-section="ko">타운홀</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">5<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Drive</div>
+        <div class="loc-mode" data-lang-section="ko">차량</div>
+        <div class="loc-dest" data-lang-section="en">Eastwood Shopping</div>
+        <div class="loc-dest" data-lang-section="ko">이스트우드 쇼핑센터</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">7<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Drive</div>
+        <div class="loc-mode" data-lang-section="ko">차량</div>
+        <div class="loc-dest" data-lang-section="en">Top Ryde Shopping</div>
+        <div class="loc-dest" data-lang-section="ko">탑 라이드 쇼핑센터</div>
+      </div>
+      <div class="loc-cell">
+        <div class="loc-time">10<small>min</small></div>
+        <div class="loc-mode" data-lang-section="en">Drive</div>
+        <div class="loc-mode" data-lang-section="ko">차량</div>
+        <div class="loc-dest" data-lang-section="en">Rhodes Waterside</div>
+        <div class="loc-dest" data-lang-section="ko">로즈 워터사이드</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:32px;font-weight:500;margin:80px 0 24px;letter-spacing:-.02em;">
+      <span data-lang-section="en">Infrastructure Roadmap</span>
+      <span data-lang-section="ko">인프라 로드맵</span>
+    </h3>
+    <div class="infra-list">
+      <div class="infra-item">
+        <div class="infra-year">2026</div>
+        <div class="infra-text">
+          <h4 data-lang-block="en">Melrose Town Centre</h4>
+          <h4 data-lang-block="ko">멜로즈 타운 센터 완공</h4>
+          <p data-lang-block="en">30,000 sqm shopping centre with major supermarket, retail, outdoor dining, gym, and childcare — completed late 2026, right on the doorstep.</p>
+          <p data-lang-block="ko">대형 슈퍼마켓, 리테일, 야외 다이닝, 헬스장, 보육시설을 갖춘 30,000 sqm 규모의 쇼핑센터가 2026년 말 완공됩니다.</p>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-year">2027</div>
+        <div class="infra-text">
+          <h4 data-lang-block="en">Schools Expansion</h4>
+          <h4 data-lang-block="ko">학교 확장 개교</h4>
+          <p data-lang-block="en">Melrose Park Primary upgraded to 700+ student capacity (Term 1, 2027) and new Melrose Park High School opens in the community (Term 1, 2027).</p>
+          <p data-lang-block="ko">멜로즈파크 초등학교가 700명 이상 수용 가능하도록 확장되며(2027년 1학기), 같은 커뮤니티 내 멜로즈파크 고등학교가 새로 개교합니다.</p>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-year">2032</div>
+        <div class="infra-text">
+          <h4 data-lang-block="en">Light Rail Connection</h4>
+          <h4 data-lang-block="ko">경전철 개통</h4>
+          <p data-lang-block="en">Approved Metro West light rail linking Melrose Park directly to Parramatta and Olympic Park.</p>
+          <p data-lang-block="ko">파라마타와 올림픽 파크를 직접 연결하는 메트로 웨스트 경전철이 개통됩니다.</p>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-year">2038</div>
+        <div class="infra-text">
+          <h4 data-lang-block="en">Masterplan Complete</h4>
+          <h4 data-lang-block="ko">마스터플랜 완성</h4>
+          <p data-lang-block="en">Full 30 HA (300,000 sqm) masterplanned community delivered, including Gateway Bridge connecting to Wentworth Point and 52,000+ sqm of green open spaces.</p>
+          <p data-lang-block="ko">웬트워스 포인트와 연결되는 게이트웨이 브릿지, 52,000 sqm 이상의 녹지 공간을 포함한 30 헥타르(300,000 sqm) 규모의 마스터플랜이 완성됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEVELOPER ============ -->
+<section id="developer">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>03 /</span> The Developer</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">Sekisui House.<br>Since 1960.</span>
+          <span data-lang-section="ko">세키스이 하우스<br>1960년부터.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Founded in Japan in 1960, Sekisui House is one of the world's largest homebuilders — and the global leader in net-zero-energy home construction.</span>
+        <span data-lang-section="ko">1960년 일본에서 설립된 세키스이 하우스는 세계 최대의 주택 건설사 중 하나이며, 넷제로 에너지 주택 건설 분야의 글로벌 리더입니다.</span>
+      </p>
+    </div>
+
+    <div class="dev-grid">
+      <div class="dev-text">
+        <p data-lang-block="en">In Australia, Sekisui House is firmly established as a leading residential property developer and builder, having delivered <strong>over 13,000 homes</strong> to Australian families — with a further <strong>10,000 in the pipeline</strong>.</p>
+        <p data-lang-block="en">Sekisui House has sustainability as a core value and is now the global leader in the construction of net-zero-energy homes, with <strong>more than 80,000 built since 2013</strong>.</p>
+        <p data-lang-block="en">We're proud to have been awarded a <strong>4 Gold Star iCIRT rating</strong> — the NSW Government-backed recognition of our commitment to quality.</p>
+
+        <p data-lang-block="ko">호주에서 세키스이 하우스는 호주 가족들에게 <strong>13,000세대 이상</strong>의 주택을 공급한 선도적인 주거용 부동산 개발사이자 시공사로 자리잡았으며, <strong>추가로 10,000세대가 진행 중</strong>입니다.</p>
+        <p data-lang-block="ko">지속가능성을 핵심 가치로 삼는 세키스이 하우스는 현재 넷제로 에너지 주택 건설 분야의 글로벌 리더로, <strong>2013년 이후 80,000세대 이상</strong>을 건설했습니다.</p>
+        <p data-lang-block="ko">NSW 정부가 인정하는 품질 보증 등급인 <strong>4성급 골드 iCIRT 등급</strong>을 자랑스럽게 수상했습니다.</p>
+
+        <div class="badges">
+          <span class="badge gold">4★ Gold iCIRT</span>
+          <span class="badge" data-lang-section="en">Founded 1960</span>
+          <span class="badge" data-lang-section="ko">1960년 설립</span>
+          <span class="badge" data-lang-section="en">Net-Zero Leader</span>
+          <span class="badge" data-lang-section="ko">넷제로 리더</span>
+        </div>
+      </div>
+
+      <div class="dev-numbers">
+        <div class="dn-cell">
+          <div class="dn-num">13,000<small>+</small></div>
+          <div class="dn-label" data-lang-section="en">Homes Delivered in AUS</div>
+          <div class="dn-label" data-lang-section="ko">호주 내 완공 세대</div>
+        </div>
+        <div class="dn-cell">
+          <div class="dn-num">10,000<small>+</small></div>
+          <div class="dn-label" data-lang-section="en">In Pipeline</div>
+          <div class="dn-label" data-lang-section="ko">진행 중인 세대</div>
+        </div>
+        <div class="dn-cell">
+          <div class="dn-num">80,000<small>+</small></div>
+          <div class="dn-label" data-lang-section="en">Net-Zero Homes</div>
+          <div class="dn-label" data-lang-section="ko">넷제로 주택</div>
+        </div>
+        <div class="dn-cell">
+          <div class="dn-num">65<small>yrs</small></div>
+          <div class="dn-label" data-lang-section="en">Of Building Excellence</div>
+          <div class="dn-label" data-lang-section="ko">건설 경력</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWARDS ============ -->
+<section id="awards" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>04 /</span> Awards & Past Projects</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">A legacy of<br>recognition.</span>
+          <span data-lang-section="ko">수상으로<br>이어지는 유산.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">From Central Park to The Orchards, Sekisui House projects have consistently been recognised by Australia's most respected industry bodies.</span>
+        <span data-lang-section="ko">센트럴 파크에서 디 오차드까지, 세키스이 하우스의 프로젝트는 호주에서 가장 권위 있는 업계 단체로부터 꾸준히 인정받아 왔습니다.</span>
+      </p>
+    </div>
+
+    <div class="awards-grid">
+      <div class="award-card">
+        <div class="award-year">2025</div>
+        <div class="award-project">Norman Estates</div>
+        <div class="award-name" data-lang-section="en">The Urban Developer's Industry Excellence Awards — Development of the Year, New Communities</div>
+        <div class="award-name" data-lang-section="ko">어반 디벨로퍼 산업 우수상 — 올해의 개발 (신규 커뮤니티 부문)</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2023</div>
+        <div class="award-project">West Village</div>
+        <div class="award-name" data-lang-section="en">UDIA National Awards for Excellence — Marketing Excellence (Alutra)</div>
+        <div class="award-name" data-lang-section="ko">UDIA 전국 우수상 — 마케팅 우수성 (Alutra)</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2023</div>
+        <div class="award-project">Melrose Park</div>
+        <div class="award-name" data-lang-section="en">Better Future Sydney Design Awards — Architecture, Multi Residence (10+ floors) — Pulse 8 Pavilion</div>
+        <div class="award-name" data-lang-section="ko">베터 퓨처 시드니 디자인 어워드 — 건축, 다세대 주거 (10층 이상) — 펄스 8 파빌리온</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2022</div>
+        <div class="award-project">The Orchards</div>
+        <div class="award-name" data-lang-section="en">2022 Annual REA Excellence Awards — Apartments Campaign of the Year (Lumia)</div>
+        <div class="award-name" data-lang-section="ko">2022 REA 연간 우수상 — 올해의 아파트 캠페인 (Lumia)</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2022</div>
+        <div class="award-project">Sanctuary</div>
+        <div class="award-name" data-lang-section="en">Property Council of Australia National Innovation & Excellence Awards — Best Residential Development</div>
+        <div class="award-name" data-lang-section="ko">호주 부동산 협회 전국 혁신 & 우수상 — 최우수 주거 개발</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2022</div>
+        <div class="award-project">Melrose Park</div>
+        <div class="award-name" data-lang-section="en">Sydney Design Awards — Architecture, Multi Residence (10+ floors) — The Residences</div>
+        <div class="award-name" data-lang-section="ko">시드니 디자인 어워드 — 건축, 다세대 주거 (10층 이상) — 더 레지던스</div>
+      </div>
+    </div>
+
+    <p style="margin-top:48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);">
+      <span data-lang-section="en">Past Projects: The Orchards · Sanctuary · Waterstone · Central Park · Gledswood Hills · Norman Estates</span>
+      <span data-lang-section="ko">주요 프로젝트: 디 오차드 · 생추어리 · 워터스톤 · 센트럴 파크 · 글레즈우드 힐스 · 노먼 에스테이트</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>05 /</span> Apartment Features</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">The art<br>of living.</span>
+          <span data-lang-section="ko">생활의<br>예술.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Each home is thoughtfully considered, with a diversity of apartment types that work for different lifestyles. Materials have been selected to last and get better with time.</span>
+        <span data-lang-section="ko">서로 다른 라이프스타일에 맞춰 다양한 아파트 타입이 세심하게 설계되었습니다. 시간이 갈수록 더욱 빛나는 소재만을 엄선했습니다.</span>
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">❄</div>
+        <h4 data-lang-block="en">Ducted Air-conditioning</h4>
+        <h4 data-lang-block="ko">덕트형 에어컨 시스템</h4>
+        <p data-lang-block="en">Whole-home climate control for year-round comfort.</p>
+        <p data-lang-block="ko">집 전체의 온도를 조절하는 시스템으로 사계절 쾌적함을 유지합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">◐</div>
+        <h4 data-lang-block="en">Smart Lighting</h4>
+        <h4 data-lang-block="ko">스마트 조명 제어</h4>
+        <p data-lang-block="en">App and voice-controlled lighting throughout your home.</p>
+        <p data-lang-block="ko">앱과 음성으로 집 전체의 조명을 제어할 수 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⌬</div>
+        <h4 data-lang-block="en">Keyless Entry</h4>
+        <h4 data-lang-block="ko">키리스 도어락</h4>
+        <p data-lang-block="en">Secure keyless entry door lock — no more fumbling for keys.</p>
+        <p data-lang-block="ko">키 없이도 안전하게 출입할 수 있는 스마트 도어락이 설치됩니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">◈</div>
+        <h4 data-lang-block="en">Voice-Activated Smart Home</h4>
+        <h4 data-lang-block="ko">음성 인식 스마트홈</h4>
+        <p data-lang-block="en">Integrated voice control for the whole apartment.</p>
+        <p data-lang-block="ko">아파트 전체를 음성으로 제어할 수 있는 통합 시스템.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">▣</div>
+        <h4 data-lang-block="en">Video Intercom Security</h4>
+        <h4 data-lang-block="ko">영상 인터콤 보안</h4>
+        <p data-lang-block="en">Video intercom and secure access from foyer to driveway.</p>
+        <p data-lang-block="ko">로비에서 차고까지 영상 인터콤과 안전한 출입 시스템이 적용됩니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⬢</div>
+        <h4 data-lang-block="en">Fibre Optic Broadband</h4>
+        <h4 data-lang-block="ko">광케이블 초고속 인터넷</h4>
+        <p data-lang-block="en">Provisioned to every apartment as standard.</p>
+        <p data-lang-block="ko">모든 세대에 기본 사양으로 제공됩니다.</p>
+      </div>
+    </div>
+
+    <div class="room-blocks">
+      <div class="room-block">
+        <h5 data-lang-section="en">Living Room</h5>
+        <h5 data-lang-section="ko">거실</h5>
+        <ul>
+          <li data-lang-block="en">Metropol Oak Matte Flooring</li>
+          <li data-lang-block="en">Smart lighting control</li>
+          <li data-lang-block="en">Ducted A/C throughout</li>
+          <li data-lang-block="en">Fibre optic broadband</li>
+          <li data-lang-block="ko">Metropol 오크 매트 플로어링</li>
+          <li data-lang-block="ko">스마트 조명 제어</li>
+          <li data-lang-block="ko">덕트형 에어컨</li>
+          <li data-lang-block="ko">광케이블 인터넷</li>
+        </ul>
+      </div>
+      <div class="room-block">
+        <h5 data-lang-section="en">Kitchen</h5>
+        <h5 data-lang-section="ko">키친</h5>
+        <ul>
+          <li data-lang-block="en">Bosch kitchen appliances</li>
+          <li data-lang-block="en">Quality benchtops & joinery</li>
+          <li data-lang-block="en">Optional Miele upgrade</li>
+          <li data-lang-block="en">Water line to fridge (option)</li>
+          <li data-lang-block="ko">보쉬(Bosch) 키친 가전</li>
+          <li data-lang-block="ko">고급 상판 & 캐비넷</li>
+          <li data-lang-block="ko">Miele 업그레이드 옵션</li>
+          <li data-lang-block="ko">냉장고 정수기 라인 (옵션)</li>
+        </ul>
+      </div>
+      <div class="room-block">
+        <h5 data-lang-section="en">Bathroom</h5>
+        <h5 data-lang-section="ko">욕실</h5>
+        <ul>
+          <li data-lang-block="en">PARISI Bathware</li>
+          <li data-lang-block="en">PARISI Bathroom Furniture</li>
+          <li data-lang-block="en">Premium finishes throughout</li>
+          <li data-lang-block="ko">PARISI 욕실 용품</li>
+          <li data-lang-block="ko">PARISI 욕실 가구</li>
+          <li data-lang-block="ko">프리미엄 마감재 적용</li>
+        </ul>
+      </div>
+      <div class="room-block">
+        <h5 data-lang-section="en">Bedroom & Outdoor</h5>
+        <h5 data-lang-section="ko">침실 & 야외</h5>
+        <ul>
+          <li data-lang-block="en">Private balcony</li>
+          <li data-lang-block="en">Carpeted (timber optional)</li>
+          <li data-lang-block="en">Podium landscaped gardens</li>
+          <li data-lang-block="en">Rooftop BBQ communal area</li>
+          <li data-lang-block="ko">개인 발코니</li>
+          <li data-lang-block="ko">카펫 (원목 마루 옵션)</li>
+          <li data-lang-block="ko">포디움 조경 정원</li>
+          <li data-lang-block="ko">루프탑 공용 BBQ 구역</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UNITS ============ -->
+<section id="units" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>06 /</span> Sunny's Picks</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">Recommended<br>units.</span>
+          <span data-lang-section="ko">추천 매물.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Hand-picked from the current release — three units that offer the strongest value across 1-bed, 2-bed, and 3-bed types. Prices and availability subject to change.</span>
+        <span data-lang-section="ko">현재 분양 중인 매물 중에서 1베드, 2베드, 3베드 각 타입별로 가장 가치 있는 세 가구를 선별했습니다. 가격 및 분양 가능 여부는 변동될 수 있습니다.</span>
+      </p>
+    </div>
+
+    <div class="units-grid">
+      <div class="unit-card">
+        <div class="unit-banner">
+          <div class="unit-type">1 Bedroom</div>
+        </div>
+        <div class="unit-body">
+          <div class="unit-id">Unit B010x</div>
+          <div class="unit-price">$649,000</div>
+          <ul class="unit-features">
+            <li data-lang-block="en">Car parking included</li>
+            <li data-lang-block="en">Smart home features</li>
+            <li data-lang-block="en">Strong rental potential</li>
+            <li data-lang-block="ko">주차 공간 포함</li>
+            <li data-lang-block="ko">스마트홈 시설</li>
+            <li data-lang-block="ko">강력한 임대 수익 잠재력</li>
+          </ul>
+          <span class="unit-tag" data-lang-section="en">Best Entry Price</span>
+          <span class="unit-tag" data-lang-section="ko">최저가 진입</span>
+        </div>
+      </div>
+
+      <div class="unit-card">
+        <div class="unit-banner">
+          <div class="unit-type">2 Bedroom</div>
+        </div>
+        <div class="unit-body">
+          <div class="unit-id">Unit D0205</div>
+          <div class="unit-price">$899,000</div>
+          <ul class="unit-features">
+            <li data-lang-block="en">Last 2-bedroom under $900K</li>
+            <li data-lang-block="en">Spacious layout</li>
+            <li data-lang-block="en">Smart home features</li>
+            <li data-lang-block="ko">90만 달러 이하 마지막 2베드</li>
+            <li data-lang-block="ko">넓은 평면</li>
+            <li data-lang-block="ko">스마트홈 시설</li>
+          </ul>
+          <span class="unit-tag" data-lang-section="en">Last One</span>
+          <span class="unit-tag" data-lang-section="ko">마지막 한 세대</span>
+        </div>
+      </div>
+
+      <div class="unit-card">
+        <div class="unit-banner">
+          <div class="unit-type">3 Bedroom</div>
+        </div>
+        <div class="unit-body">
+          <div class="unit-id">Unit A604</div>
+          <div class="unit-price">$1,599,000</div>
+          <ul class="unit-features">
+            <li data-lang-block="en">Parkside view</li>
+            <li data-lang-block="en">Big balcony</li>
+            <li data-lang-block="en">2 car spaces</li>
+            <li data-lang-block="ko">파크사이드 뷰</li>
+            <li data-lang-block="ko">대형 발코니</li>
+            <li data-lang-block="ko">주차 공간 2대</li>
+          </ul>
+          <span class="unit-tag" data-lang-section="en">Premium Pick</span>
+          <span class="unit-tag" data-lang-section="ko">프리미엄 추천</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UPGRADES ============ -->
+<section id="upgrades">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>07 /</span> Upgrade Options</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">Make it<br>yours.</span>
+          <span data-lang-section="ko">나만의<br>공간으로.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Optional upgrades available before completion — from smart EV charging to Miele appliances. All prices exclude GST.</span>
+        <span data-lang-section="ko">완공 전 신청 가능한 선택형 업그레이드 — 스마트 EV 충전기부터 Miele 가전까지. 모든 가격은 GST 별도입니다.</span>
+      </p>
+    </div>
+
+    <div class="upgrade-table">
+      <div class="ug-row header">
+        <div class="ug-name">
+          <span data-lang-section="en">Upgrade</span>
+          <span data-lang-section="ko">업그레이드</span>
+        </div>
+        <div class="ug-price" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink-mute);">
+          <span data-lang-section="en">Price (+GST)</span>
+          <span data-lang-section="ko">가격 (GST 별도)</span>
+        </div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">Sheer curtains</strong>
+          <strong data-lang-block="ko">시어 커튼</strong>
+          <small data-lang-block="en">100% polyester sheer curtains to living room windows in addition to standard blockout blinds.</small>
+          <small data-lang-block="ko">기본 제공되는 블랙아웃 블라인드에 더해 거실 창문에 100% 폴리에스터 시어 커튼을 설치합니다.</small>
+        </div>
+        <div class="ug-price">$5,000<small>per apartment</small></div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">Timber floorboards</strong>
+          <strong data-lang-block="ko">원목 마루</strong>
+          <small data-lang-block="en">Upgrade bedrooms from standard carpet to timber floorboards.</small>
+          <small data-lang-block="ko">침실 바닥을 기본 카펫에서 원목 마루로 업그레이드합니다.</small>
+        </div>
+        <div class="ug-price">$3,000<small data-lang-section="en">per bedroom</small><small data-lang-section="ko">침실당</small></div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">EV smart charger (1 car)</strong>
+          <strong data-lang-block="ko">EV 스마트 충전기 (1대)</strong>
+          <small data-lang-block="en">Smart EV charger with integrated charging cable to nominated car space.</small>
+          <small data-lang-block="ko">지정된 주차 공간에 충전 케이블이 통합된 스마트 EV 충전기.</small>
+        </div>
+        <div class="ug-price">$3,500</div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">EV smart charger (2 car)</strong>
+          <strong data-lang-block="ko">EV 스마트 충전기 (2대)</strong>
+          <small data-lang-block="en">Smart EV charger covering two nominated car spaces.</small>
+          <small data-lang-block="ko">지정된 2개의 주차 공간에 적용되는 스마트 EV 충전기.</small>
+        </div>
+        <div class="ug-price">$6,000</div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">Water line to fridge</strong>
+          <strong data-lang-block="ko">냉장고 정수 라인</strong>
+          <small data-lang-block="en">Plumbed water line to fridge cavity for ice makers and water dispensers.</small>
+          <small data-lang-block="ko">아이스 메이커 및 정수 디스펜서를 위한 냉장고 급수 라인.</small>
+        </div>
+        <div class="ug-price">$2,000</div>
+      </div>
+      <div class="ug-row">
+        <div class="ug-name">
+          <strong data-lang-block="en">Miele appliance upgrade</strong>
+          <strong data-lang-block="ko">Miele 가전 업그레이드</strong>
+          <small data-lang-block="en">5-burner cooktop · 90 cm built-in rangehood · 60 cm oven · semi-integrated dishwasher · built-in microwave (Bosch standard).</small>
+          <small data-lang-block="ko">5구 쿡탑 · 90cm 빌트인 후드 · 60cm 오븐 · 반매립형 식기세척기 · 빌트인 전자레인지 (보쉬 기본).</small>
+        </div>
+        <div class="ug-price">$4,000<small data-lang-section="en">3-bedroom only</small><small data-lang-section="ko">3베드 한정</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RENTAL YIELD ============ -->
+<section id="yield" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-num"><span>08 /</span> Rental Yield</div>
+        <h2 class="section-title">
+          <span data-lang-section="en">Income<br>outlook.</span>
+          <span data-lang-section="ko">임대 수익<br>전망.</span>
+        </h2>
+      </div>
+      <p class="section-lede">
+        <span data-lang-section="en">Comparing current Melrose Park weekly rents with forecast levels for DAWN at completion — informed by new infrastructure, the Town Centre, and the light rail.</span>
+        <span data-lang-section="ko">현재 멜로즈파크 주간 임대료와 DAWN 완공 시 예상 임대료를 비교합니다 — 신규 인프라, 타운 센터, 경전철 개통 등이 반영된 전망입니다.</span>
+      </p>
+    </div>
+
+    <div class="yield-grid">
+      <div class="yield-card">
+        <div class="yield-eyebrow" data-lang-section="en">Current Market · 2025</div>
+        <div class="yield-eyebrow" data-lang-section="ko">현재 시장 · 2025</div>
+        <h3 class="yield-title">
+          <span data-lang-section="en">Melrose Park today</span>
+          <span data-lang-section="ko">현재 멜로즈파크</span>
+        </h3>
+        <div class="yield-row">
+          <div class="yield-bed">1 Bed</div>
+          <div class="yield-price">$630–$680<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+        <div class="yield-row">
+          <div class="yield-bed">2 Bed</div>
+          <div class="yield-price">$750–$800<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+        <div class="yield-row">
+          <div class="yield-bed">3 Bed</div>
+          <div class="yield-price">~$1,000<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+      </div>
+
+      <div class="yield-card future">
+        <div class="yield-eyebrow" data-lang-section="en">Forecast · 2027+</div>
+        <div class="yield-eyebrow" data-lang-section="ko">예상치 · 2027 이후</div>
+        <h3 class="yield-title">
+          <span data-lang-section="en">DAWN at completion</span>
+          <span data-lang-section="ko">DAWN 완공 시점</span>
+        </h3>
+        <div class="yield-row">
+          <div class="yield-bed">1 Bed</div>
+          <div class="yield-price">$750–$900<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+        <div class="yield-row">
+          <div class="yield-bed">2 Bed</div>
+          <div class="yield-price">$1,000–$1,300<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+        <div class="yield-row">
+          <div class="yield-bed">3 Bed</div>
+          <div class="yield-price">$1,500+<small data-lang-section="en">per week</small><small data-lang-section="ko">주간</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="yield-note">
+      <span data-lang-section="en"><strong>Disclaimer:</strong> Forecast figures are estimates only, based on current market comparisons combined with the impact of new builds, the upcoming Town Centre, light rail, and proximity to schools and parks. Actual rents will depend on market conditions at completion. Not financial advice.</span>
+      <span data-lang-section="ko"><strong>면책 조항:</strong> 예상 수치는 현재 시장 비교와 신축 건물, 예정된 타운 센터, 경전철, 학교 및 공원 인접성의 영향을 고려한 추정치일 뿐입니다. 실제 임대료는 완공 시점의 시장 상황에 따라 달라질 수 있습니다. 본 내용은 재무 자문이 아닙니다.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-num"><span>09 /</span> Contact Us</div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-title">
+          <span data-lang-section="en">Let's<br>talk <em>DAWN</em>.</span>
+          <span data-lang-section="ko">DAWN에 대해<br><em>이야기</em>해요.</span>
+        </h2>
+      </div>
+      <div>
+        <div class="contact-detail">
+          <div class="lbl" data-lang-section="en">Agent</div>
+          <div class="lbl" data-lang-section="ko">담당 에이전트</div>
+          <div class="val" data-lang-section="en">Sunny Choi · 최성훈</div>
+          <div class="val" data-lang-section="ko">최성훈 · Sunny Choi</div>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Email</div>
+          <a class="val" href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl" data-lang-section="en">Phone</div>
+          <div class="lbl" data-lang-section="ko">전화</div>
+          <a class="val" href="tel:+61414824225">0414 824 225</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Web</div>
+          <a class="val" href="https://www.forise.com.au" target="_blank" rel="noopener">www.forise.com.au</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Agency</div>
+          <div class="val">Forise Group</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</p>
+  <p style="margin-top:8px;font-size:11px;opacity:.7;">
+    <span data-lang-section="en">Information presented for reference only. All pricing, availability and specifications subject to change without notice. Please contact the agent to confirm details.</span>
+    <span data-lang-section="ko">본 정보는 참고용으로 제공됩니다. 모든 가격, 분양 가능 여부 및 사양은 사전 통보 없이 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요.</span>
+  </p>
+</footer>
+
+<script>
+  // ============ THEME TOGGLE ============
+  const themeToggle = document.getElementById('themeToggle');
+  const themeLabel = document.getElementById('themeLabel');
+  const root = document.documentElement;
+
+  function getInitialTheme() {
+    const saved = localStorage.getItem('dawn-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeLabel.textContent = t === 'dark' ? '☀' : '◐';
+    localStorage.setItem('dawn-theme', t);
+  }
+
+  applyTheme(getInitialTheme());
+
+  themeToggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+
+  // listen for system change
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('dawn-theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // ============ LANGUAGE TOGGLE ============
+  const langToggle = document.getElementById('langToggle');
+  const langLabel = document.getElementById('langLabel');
+
+  function applyLang(l) {
+    document.documentElement.setAttribute('lang', l);
+    langLabel.textContent = l === 'ko' ? 'EN' : '한국어';
+    localStorage.setItem('dawn-lang', l);
+  }
+
+  applyLang(localStorage.getItem('dawn-lang') || 'en');
+
+  langToggle.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('lang');
+    applyLang(cur === 'ko' ? 'en' : 'ko');
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section .section-head, .stat-block, .loc-cell, .infra-item, .award-card, .feat-card, .unit-card, .ug-row, .yield-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.animationDelay = (i % 6) * 80 + 'ms';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
