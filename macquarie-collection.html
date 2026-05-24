@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Macquarie Collection — Landmark × AJC Architects · Macquarie Park</title>
+<meta name="description" content="The Macquarie Collection — A beautiful collection of contemporary Australian apartments at 5 Halifax St, Macquarie Park. Designed by AJC Architects, developed by Landmark. Bilingual EN/KR info site by Sunny Choi, Forise Group." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400;1,6..72,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ ROOT THEME ============ */
+  :root {
+    --bg:           #f7f6f1;
+    --bg-tint:      #ede9df;
+    --bg-card:      #ffffff;
+    --ink:          #0d2230;
+    --ink-soft:     #3a4f60;
+    --ink-mute:     #6b8090;
+    --line:         #d5d0c5;
+    --line-soft:    #e3dfd5;
+    --accent:       #0d4f5e;       /* deep teal */
+    --accent-2:     #6a8f7d;       /* sage */
+    --accent-3:     #c08a3a;       /* copper */
+    --accent-deep:  #062f3a;
+    --grad-still:   linear-gradient(135deg,#0d4f5e 0%,#1f6878 50%,#6a8f7d 100%);
+    --grad-park:    linear-gradient(160deg,#3d5d4d 0%,#6a8f7d 60%,#a8c094 100%);
+    --shadow-sm:    0 1px 2px rgba(13,34,48,.05), 0 3px 8px rgba(13,34,48,.04);
+    --shadow-md:    0 6px 18px rgba(13,34,48,.07), 0 18px 40px rgba(13,34,48,.05);
+    --shadow-lg:    0 12px 32px rgba(13,34,48,.10), 0 32px 80px rgba(13,34,48,.08);
+  }
+  [data-theme="dark"] {
+    --bg:           #0a141b;
+    --bg-tint:      #11202b;
+    --bg-card:      #142532;
+    --ink:          #e8eef2;
+    --ink-soft:     #aebcc8;
+    --ink-mute:     #6e8090;
+    --line:         #243440;
+    --line-soft:    #1a2934;
+    --accent:       #5fbfd0;
+    --accent-2:     #94b5a3;
+    --accent-3:     #e0a85a;
+    --accent-deep:  #aee0eb;
+    --grad-still:   linear-gradient(135deg,#1e5d6e 0%,#4a8a98 50%,#7fa893 100%);
+    --grad-park:    linear-gradient(160deg,#2a4a3a 0%,#4a7560 60%,#7fa893 100%);
+    --shadow-sm:    0 1px 2px rgba(0,0,0,.4), 0 3px 8px rgba(0,0,0,.3);
+    --shadow-md:    0 6px 18px rgba(0,0,0,.5), 0 18px 40px rgba(0,0,0,.4);
+    --shadow-lg:    0 12px 32px rgba(0,0,0,.6), 0 32px 80px rgba(0,0,0,.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background .4s, color .4s;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+
+  /* Subtle paper texture */
+  body::before {
+    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: .8; mix-blend-mode: multiply;
+  }
+  [data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .3; }
+
+  /* ============ TOPBAR ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: .04em;
+  }
+  .brand-mark {
+    width: 36px; height: 36px;
+    background: var(--ink);
+    border-radius: 2px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg);
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+  }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+  .pill {
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    color: var(--ink);
+    border-radius: 0;
+    padding: 9px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .25s;
+    font-family: 'Inter Tight', sans-serif;
+    display: inline-flex; align-items: center; gap: 7px;
+    text-decoration: none;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill svg { width: 14px; height: 14px; }
+  .bmac { background: #ffdd00; color: #0d2230; border-color: #ffdd00; }
+  .bmac:hover { background: #ffdd00; color: #0d2230; box-shadow: 0 4px 14px rgba(255,221,0,.35); }
+  [data-theme="dark"] .bmac { color: #0d2230; }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 95vh;
+    padding: 80px 32px 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, transparent 60%, color-mix(in srgb, var(--accent) 8%, transparent) 100%),
+      radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--accent-2) 25%, transparent) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* Architectural grid backdrop */
+  .hero-grid {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    width: 140%; height: 140%;
+    pointer-events: none;
+    opacity: .04;
+    background-image:
+      linear-gradient(var(--ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  [data-theme="dark"] .hero-grid { opacity: .08; }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 64px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 32px;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    line-height: 1.8;
+  }
+  .hero-eyebrow strong { color: var(--ink); font-weight: 500; }
+  .hero-coords {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    text-align: right;
+    letter-spacing: .1em;
+    line-height: 1.7;
+  }
+  .hero-center {
+    align-self: center;
+    text-align: left;
+    max-width: 1100px;
+  }
+  .hero-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 200;
+    font-size: clamp(56px, 11vw, 180px);
+    line-height: .92;
+    letter-spacing: -.025em;
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 72;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .hero-tagline {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(22px, 2.6vw, 36px);
+    line-height: 1.35;
+    color: var(--ink-soft);
+    max-width: 760px;
+  }
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .hb-cell {
+    background: var(--bg);
+    padding: 24px 8px 24px 0;
+  }
+  .hb-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .hb-val {
+    font-family: 'Newsreader', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  /* ============ STICKY NAV ============ */
+  .nav-sticky {
+    position: sticky; top: 65px; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-sticky::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    max-width: 1320px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; gap: 38px;
+    white-space: nowrap;
+  }
+  .nav-inner a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    transition: color .2s;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .nav-inner a:hover { color: var(--accent); }
+
+  /* ============ SECTIONS ============ */
+  section { position: relative; padding: 130px 32px; z-index: 2; }
+  .container { max-width: 1320px; margin: 0 auto; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 80px;
+    margin-bottom: 96px;
+    align-items: end;
+  }
+  @media (max-width: 800px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 56px; }
+    section { padding: 80px 24px; }
+    .hero { padding: 64px 24px 80px; }
+  }
+  .sec-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sec-tag::before {
+    content:''; width: 40px; height: 1px; background: var(--accent);
+  }
+  .sec-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 72;
+  }
+  .sec-title em { font-style: italic; color: var(--accent); }
+  .sec-lede {
+    font-family: 'Newsreader', serif;
+    font-size: clamp(18px, 1.9vw, 24px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .alt { background: var(--bg-tint); }
+
+  /* ============ WELCOME ============ */
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 968px) { .welcome-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .welcome-text p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .welcome-text p strong { color: var(--ink); font-weight: 600; }
+  .welcome-text p.lead {
+    font-family: 'Newsreader', serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .welcome-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 40px 32px;
+    position: relative;
+  }
+  .welcome-card::before {
+    content:''; position: absolute; top: -1px; left: -1px;
+    width: 24px; height: 24px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .welcome-card::after {
+    content:''; position: absolute; bottom: -1px; right: -1px;
+    width: 24px; height: 24px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .wc-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .wc-list { list-style: none; }
+  .wc-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+  }
+  .wc-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .wc-list li:first-child { padding-top: 0; }
+  .wc-list .lbl {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .wc-list .val {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    text-align: right;
+    letter-spacing: -.01em;
+  }
+  .wc-list .val small { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-mute); display: block; margin-top: 4px; }
+
+  /* ============ MACQUARIE PARK STATS ============ */
+  .mp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 64px;
+  }
+  @media (max-width: 800px) { .mp-grid { grid-template-columns: 1fr 1fr; } }
+  .mp-cell {
+    background: var(--bg);
+    padding: 40px 28px;
+  }
+  .mp-num {
+    font-family: 'Newsreader', serif;
+    font-weight: 200;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -.025em;
+    color: var(--accent);
+  }
+  .mp-num small {
+    font-size: 0.4em;
+    color: var(--ink-mute);
+    margin-left: 6px;
+    font-weight: 300;
+  }
+  .mp-lbl {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .mp-desc {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ============ INDUSTRIES ============ */
+  .industries {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin: 64px 0;
+  }
+  .ind-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 28px 24px;
+    transition: all .3s;
+  }
+  .ind-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .ind-pct {
+    font-family: 'Newsreader', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -.02em;
+  }
+  .ind-name {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .companies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .companies::before {
+    content: attr(data-label);
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+  }
+  .co-chip {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: .02em;
+    font-weight: 500;
+  }
+
+  /* ============ LOCATION GRID ============ */
+  .loc-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 700px) { .loc-meta { grid-template-columns: 1fr; } }
+  .loc-meta-card {
+    border: 1px solid var(--line);
+    padding: 36px 32px;
+    background: var(--bg-card);
+    position: relative;
+  }
+  .loc-mc-big {
+    font-family: 'Newsreader', serif;
+    font-size: 80px;
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -.03em;
+    color: var(--accent);
+  }
+  .loc-mc-big small { font-size: 0.3em; color: var(--ink-mute); margin-left: 8px; font-weight: 300; }
+  .loc-mc-lbl {
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .loc-mc-desc {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .stops-list {
+    border-top: 1px solid var(--line);
+  }
+  .stop-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto 100px;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  @media (max-width: 640px) {
+    .stop-row { grid-template-columns: 60px 1fr auto; }
+    .stop-mode { display: none; }
+  }
+  .stop-time {
+    font-family: 'Newsreader', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: -.02em;
+  }
+  .stop-time small { font-size: 13px; color: var(--ink-mute); margin-left: 3px; font-family: 'JetBrains Mono', monospace; }
+  .stop-name {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .stop-via {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .stop-mode {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+  }
+
+  /* ============ LIFESTYLE TILES ============ */
+  .lifestyle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(280px, auto);
+    gap: 24px;
+  }
+  @media (max-width: 800px) { .lifestyle-grid { grid-template-columns: 1fr; } }
+  .ls-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ls-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .ls-tile.feature {
+    background: var(--grad-still);
+    color: #fff;
+    border-color: transparent;
+    grid-column: span 2;
+    min-height: 320px;
+  }
+  @media (max-width: 800px) { .ls-tile.feature { grid-column: 1; } }
+  .ls-tile.nature {
+    background: var(--grad-park);
+    color: #fff;
+    border-color: transparent;
+  }
+  .ls-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .ls-tile.feature .ls-num, .ls-tile.nature .ls-num { color: rgba(255,255,255,.7); }
+  .ls-headline {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -.015em;
+    margin-bottom: 16px;
+  }
+  .ls-tile.feature .ls-headline { font-size: clamp(36px, 4.2vw, 60px); }
+  .ls-body {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .ls-tile.feature .ls-body, .ls-tile.nature .ls-body { color: rgba(255,255,255,.85); font-size: 17px; }
+
+  /* ============ DESIGN/BUILDING ============ */
+  .design-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 968px) { .design-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .design-text p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+  .design-text p strong { color: var(--ink); font-weight: 600; }
+  .design-text p.lead {
+    font-family: 'Newsreader', serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--ink);
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+  .feature-list {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .feature-list li {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .feature-list .ico {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .feature-list h4 {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .feature-list p {
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* ============ FLOORPLANS PREVIEW ============ */
+  .fp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 64px;
+  }
+  .fp-cell {
+    background: var(--bg-card);
+    padding: 36px 32px;
+    transition: all .3s;
+  }
+  .fp-cell:hover { background: var(--bg-tint); }
+  .fp-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .fp-name {
+    font-family: 'Newsreader', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .fp-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .fp-meta {
+    display: flex;
+    gap: 24px;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 18px;
+  }
+  .fp-meta-item .v {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .fp-meta-item .v small { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-mute); }
+  .fp-meta-item .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+
+  /* ============ DEVELOPER ============ */
+  .dev-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  @media (max-width: 968px) { .dev-section { grid-template-columns: 1fr; gap: 48px; } }
+  .dev-block h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .dev-block h3 em { font-style: italic; color: var(--accent); }
+  .dev-block p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .dev-block p strong { color: var(--ink); font-weight: 600; }
+  .dev-stats {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .dev-stat {
+    background: var(--bg-card);
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .dev-stat .n {
+    font-family: 'Newsreader', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -.02em;
+    line-height: 1;
+  }
+  .dev-stat .n small { font-size: 0.5em; }
+  .dev-stat .l {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* ============ PRICING CTA ============ */
+  .price-cta {
+    background: var(--accent-deep);
+    color: #fff;
+    padding: 120px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  [data-theme="dark"] .price-cta { background: var(--bg-card); }
+  .price-cta::before {
+    content:''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--accent-2) 30%, transparent) 0%, transparent 60%);
+  }
+  .price-cta-inner { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; }
+  .price-cta .sec-tag { color: var(--accent-3); }
+  .price-cta .sec-tag::before { background: var(--accent-3); }
+  .price-cta h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 200;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: .98;
+    letter-spacing: -.025em;
+    margin-bottom: 40px;
+    color: #fff;
+    max-width: 900px;
+  }
+  .price-cta h2 em { font-style: italic; color: var(--accent-3); }
+  .price-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.15);
+    margin: 56px 0 48px;
+  }
+  @media (max-width: 800px) { .price-summary { grid-template-columns: 1fr 1fr; } }
+  .ps-cell {
+    background: var(--accent-deep);
+    padding: 32px 24px;
+  }
+  [data-theme="dark"] .ps-cell { background: var(--bg-card); }
+  .ps-num {
+    font-family: 'Newsreader', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--accent-3);
+    letter-spacing: -.02em;
+    line-height: 1;
+  }
+  .ps-num small { font-size: 0.5em; color: rgba(255,255,255,.7); }
+  .ps-lbl {
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--accent-3);
+    color: var(--accent-deep);
+    text-decoration: none;
+    padding: 22px 36px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    transition: all .3s;
+    border: 1px solid var(--accent-3);
+  }
+  .cta-btn:hover { background: transparent; color: var(--accent-3); }
+  .cta-btn svg { width: 18px; height: 18px; }
+
+  /* ============ CONTACT ============ */
+  .contact-section {
+    background: var(--bg);
+    padding: 130px 32px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .contact-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 200;
+    font-size: clamp(48px, 8vw, 110px);
+    line-height: .92;
+    letter-spacing: -.03em;
+    color: var(--ink);
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+  .contact-detail {
+    border-top: 1px solid var(--line);
+    padding: 22px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items: baseline;
+  }
+  .contact-detail .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .contact-detail .val {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color .2s;
+    letter-spacing: -.01em;
+  }
+  .contact-detail .val:hover { color: var(--accent); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    padding: 40px 32px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-mute);
+    position: relative;
+    z-index: 2;
+    letter-spacing: .02em;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer p { margin-top: 8px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 11px; opacity: .85; }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; }
+  .reveal.in { animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards; }
+
+  /* Language toggle */
+  [data-lang-section] { display: none; }
+  [data-lang-section="en"] { display: inline; }
+  html[lang="ko"] [data-lang-section="en"] { display: none; }
+  html[lang="ko"] [data-lang-section="ko"] { display: inline; }
+  [data-lang-block] { display: none; }
+  [data-lang-block="en"] { display: block; }
+  html[lang="ko"] [data-lang-block="en"] { display: none; }
+  html[lang="ko"] [data-lang-block="ko"] { display: block; }
+  html[lang="ko"] body { font-family: 'Inter Tight', 'Noto Serif KR', sans-serif; }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><em>M</em></div>
+    <span data-lang-section="en">The Macquarie Collection</span>
+    <span data-lang-section="ko">더 매쿼리 컬렉션</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="pill bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
+      Buy me a coffee
+    </a>
+    <button class="pill" id="langToggle"><span id="langLabel">한국어</span></button>
+    <button class="pill" id="themeToggle"><span id="themeLabel">◐</span></button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-eyebrow">
+        <span data-lang-section="en"><strong>Landmark</strong> × AJC Architects<br>5 Halifax St · Macquarie Park NSW 2113</span>
+        <span data-lang-section="ko"><strong>Landmark</strong> × AJC 건축<br>5 Halifax St · Macquarie Park NSW 2113</span>
+      </div>
+      <div class="hero-coords">
+        33°46′32″S · 151°07′40″E<br>
+        <span data-lang-section="en">52 Apartments · 2 Buildings</span>
+        <span data-lang-section="ko">52세대 · 2개 건물</span>
+      </div>
+    </div>
+
+    <div class="hero-center">
+      <h1 class="hero-title">
+        <span data-lang-section="en">The Macquarie<br><em>Collection.</em></span>
+        <span data-lang-section="ko">매쿼리<br><em>컬렉션.</em></span>
+      </h1>
+      <p class="hero-tagline">
+        <span data-lang-section="en">A beautiful collection of contemporary Australian apartments — designed by AJC Architects, connected to the everyday convenience of Macquarie Park.</span>
+        <span data-lang-section="ko">현대 호주 아파트의 아름다운 컬렉션 — AJC 건축의 디자인, 매쿼리 파크의 일상적 편리함과 연결된 라이프스타일.</span>
+      </p>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hb-cell">
+        <div class="hb-lbl" data-lang-section="en">Apartments</div>
+        <div class="hb-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="hb-val">52 · 1B/1B+S/2B/3B+S</div>
+      </div>
+      <div class="hb-cell">
+        <div class="hb-lbl" data-lang-section="en">To Metro</div>
+        <div class="hb-lbl" data-lang-section="ko">메트로까지</div>
+        <div class="hb-val">650 m · 8 min walk</div>
+      </div>
+      <div class="hb-cell">
+        <div class="hb-lbl" data-lang-section="en">Net Price From</div>
+        <div class="hb-lbl" data-lang-section="ko">실가격 시작가</div>
+        <div class="hb-val">$737K</div>
+      </div>
+      <div class="hb-cell">
+        <div class="hb-lbl" data-lang-section="en">Rebate</div>
+        <div class="hb-lbl" data-lang-section="ko">리베이트</div>
+        <div class="hb-val">10% · 1B/2B</div>
+      </div>
+      <div class="hb-cell">
+        <div class="hb-lbl" data-lang-section="en">Structural Warranty</div>
+        <div class="hb-lbl" data-lang-section="ko">구조 보증</div>
+        <div class="hb-val">10 Years</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STICKY NAV ============ -->
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a href="#welcome" data-lang-section="en">Welcome</a>
+    <a href="#welcome" data-lang-section="ko">소개</a>
+    <a href="#macquarie" data-lang-section="en">Macquarie Park</a>
+    <a href="#macquarie" data-lang-section="ko">매쿼리 파크</a>
+    <a href="#location" data-lang-section="en">Connectivity</a>
+    <a href="#location" data-lang-section="ko">교통</a>
+    <a href="#lifestyle" data-lang-section="en">Lifestyle</a>
+    <a href="#lifestyle" data-lang-section="ko">라이프스타일</a>
+    <a href="#design" data-lang-section="en">Design</a>
+    <a href="#design" data-lang-section="ko">디자인</a>
+    <a href="#floorplans" data-lang-section="en">Floorplans</a>
+    <a href="#floorplans" data-lang-section="ko">평면도</a>
+    <a href="#developer" data-lang-section="en">Developer</a>
+    <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#pricing" data-lang-section="en">Pricing</a>
+    <a href="#pricing" data-lang-section="ko">분양가</a>
+    <a href="#contact" data-lang-section="en">Contact</a>
+    <a href="#contact" data-lang-section="ko">문의</a>
+  </div>
+</nav>
+
+<!-- ============ WELCOME ============ -->
+<section id="welcome">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">01 — Welcome</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">From your doorstep<br>to <em>everywhere.</em></span>
+          <span data-lang-section="ko">현관에서<br><em>모든 곳으로.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">A lively and connected community, central to everything the modern cosmopolitan lifestyle demands.</span>
+        <span data-lang-section="ko">현대적 코스모폴리탄 라이프스타일이 요구하는 모든 것의 중심에 자리한, 활기차고 연결된 커뮤니티.</span>
+      </p>
+    </div>
+
+    <div class="welcome-grid">
+      <div class="welcome-text">
+        <p class="lead" data-lang-block="en">The Macquarie Collection sits at the heart of the North Shore's constellation of leisure, retail, business and advanced education centres.</p>
+        <p class="lead" data-lang-block="ko">매쿼리 컬렉션은 노스 쇼어의 레저·리테일·비즈니스·고등교육 중심지가 모인 별자리 한복판에 자리합니다.</p>
+
+        <p data-lang-block="en">It's a home that keeps you in touch with all the things you need, all the places you love. Stroll <strong>650m to both the new North Ryde and Macquarie Park Metro stations</strong>. Enjoy premier shopping, dining and entertainment at nearby Macquarie Shopping Centre, Chatswood, North Ryde and St Leonards.</p>
+        <p data-lang-block="en">Take time out on the peaceful banks of Lane Cove River, or the wine bars and restaurants that populate the leafy North Shore.</p>
+
+        <p data-lang-block="ko">필요한 모든 것, 사랑하는 모든 장소와 연결되는 집입니다. <strong>새로 개통된 노스 라이드역과 매쿼리 파크 메트로역까지 도보 650m</strong>. 인근 매쿼리 쇼핑센터, 채즈우드, 노스 라이드, 세인트 레너즈에서 최고의 쇼핑·다이닝·엔터테인먼트를 즐길 수 있습니다.</p>
+        <p data-lang-block="ko">레인 코브 강변에서 여유를 누리거나, 녹음이 우거진 노스 쇼어의 와인바와 레스토랑을 탐험해보세요.</p>
+      </div>
+
+      <div class="welcome-card">
+        <div class="wc-lbl" data-lang-section="en">At a Glance</div>
+        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div>
+        <ul class="wc-list">
+          <li>
+            <div class="lbl" data-lang-block="en">Address</div>
+            <div class="lbl" data-lang-block="ko">주소</div>
+            <div class="val">5 Halifax St<small>Macquarie Park NSW 2113</small></div>
+          </li>
+          <li>
+            <div class="lbl" data-lang-block="en">Buildings</div>
+            <div class="lbl" data-lang-block="ko">건물</div>
+            <div class="val">2<small data-lang-section="en">Building 1 (Lvl 1–30) · Building 2 (Lvl 1–6)</small><small data-lang-section="ko">빌딩 1 (1–30층) · 빌딩 2 (1–6층)</small></div>
+          </li>
+          <li>
+            <div class="lbl" data-lang-block="en">Apartments</div>
+            <div class="lbl" data-lang-block="ko">세대수</div>
+            <div class="val">52<small data-lang-section="en">1B · 1B+S · 2B · 3B+S</small><small data-lang-section="ko">1베드 · 1베드+서재 · 2베드 · 3베드+서재</small></div>
+          </li>
+          <li>
+            <div class="lbl" data-lang-block="en">Architect</div>
+            <div class="lbl" data-lang-block="ko">건축</div>
+            <div class="val">AJC Architects<small data-lang-section="en">Founded 1956</small><small data-lang-section="ko">1956년 설립</small></div>
+          </li>
+          <li>
+            <div class="lbl" data-lang-block="en">Developer</div>
+            <div class="lbl" data-lang-block="ko">시행사</div>
+            <div class="val">Landmark<small data-lang-section="en">25+ years · 4000+ apartments</small><small data-lang-section="ko">25년 이상 · 4,000세대 이상</small></div>
+          </li>
+          <li>
+            <div class="lbl" data-lang-block="en">Warranty</div>
+            <div class="lbl" data-lang-block="ko">보증</div>
+            <div class="val">10 Years<small data-lang-section="en">Structural (NSW requires 6)</small><small data-lang-section="ko">구조 보증 (NSW 법정 6년)</small></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MACQUARIE PARK ============ -->
+<section id="macquarie" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">02 — Macquarie Park</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">Australia's<br><em>Silicon Valley.</em></span>
+          <span data-lang-section="ko">호주의<br><em>실리콘 밸리.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">Macquarie Park is the fourth-largest employment centre in NSW — a global hub for technology, education, and innovation, ranked amongst Sydney's premier live-work-play precincts.</span>
+        <span data-lang-section="ko">매쿼리 파크는 NSW에서 네 번째로 큰 고용 중심지이자, 시드니 최고의 직주근접 권역으로 꼽히는 기술·교육·혁신의 글로벌 허브입니다.</span>
+      </p>
+    </div>
+
+    <div class="mp-grid">
+      <div class="mp-cell">
+        <div class="mp-num">47<small>K+</small></div>
+        <div class="mp-lbl" data-lang-section="en">Jobs (2020)</div>
+        <div class="mp-lbl" data-lang-section="ko">일자리 (2020)</div>
+        <div class="mp-desc" data-lang-section="en">Capacity for over 47,000 jobs in NSW.</div>
+        <div class="mp-desc" data-lang-section="ko">NSW에서 47,000개 이상의 일자리 수용.</div>
+      </div>
+      <div class="mp-cell">
+        <div class="mp-num">$9.5<small>B</small></div>
+        <div class="mp-lbl" data-lang-section="en">NSW GDP Contribution</div>
+        <div class="mp-lbl" data-lang-section="ko">NSW GDP 기여</div>
+        <div class="mp-desc" data-lang-section="en">Macquarie Park's economic output in 2018.</div>
+        <div class="mp-desc" data-lang-section="ko">2018년 매쿼리 파크의 경제 기여 규모.</div>
+      </div>
+      <div class="mp-cell">
+        <div class="mp-num">20<small>K</small></div>
+        <div class="mp-lbl" data-lang-section="en">New Jobs by 2040</div>
+        <div class="mp-lbl" data-lang-section="ko">2040년까지 신규 일자리</div>
+        <div class="mp-desc" data-lang-section="en">Macquarie Park Place Strategy target.</div>
+        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 플레이스 전략 목표.</div>
+      </div>
+      <div class="mp-cell">
+        <div class="mp-num">519<small>%</small></div>
+        <div class="mp-lbl" data-lang-section="en">Population Growth to 2046</div>
+        <div class="mp-lbl" data-lang-section="ko">2046년까지 인구 성장</div>
+        <div class="mp-desc" data-lang-section="en">Forecast for Macquarie Park Station area.</div>
+        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 역 권역 인구 전망.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Newsreader',serif;font-weight:300;font-size:36px;letter-spacing:-.015em;margin-bottom:32px;">
+      <span data-lang-section="en">Key Industries by Workforce</span>
+      <span data-lang-section="ko">주요 산업 분포</span>
+    </h3>
+    <div class="industries">
+      <div class="ind-card">
+        <div class="ind-pct">25%</div>
+        <div class="ind-name" data-lang-section="en">High Tech & Computing</div>
+        <div class="ind-name" data-lang-section="ko">하이테크 & 컴퓨팅</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-pct">20%</div>
+        <div class="ind-name" data-lang-section="en">Electronics</div>
+        <div class="ind-name" data-lang-section="ko">전자</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-pct">19%</div>
+        <div class="ind-name" data-lang-section="en">Pharmaceuticals</div>
+        <div class="ind-name" data-lang-section="ko">제약</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-pct">7%</div>
+        <div class="ind-name" data-lang-section="en">Telecommunications</div>
+        <div class="ind-name" data-lang-section="ko">통신</div>
+      </div>
+    </div>
+
+    <div class="companies" data-label="Major Employers">
+      <span class="co-chip">Microsoft</span>
+      <span class="co-chip">AstraZeneca</span>
+      <span class="co-chip">Johnson & Johnson</span>
+      <span class="co-chip">Optus</span>
+      <span class="co-chip">Sony</span>
+      <span class="co-chip">Canon</span>
+      <span class="co-chip">Toshiba</span>
+      <span class="co-chip">Cochlear</span>
+      <span class="co-chip">Honeywell</span>
+      <span class="co-chip">Oracle</span>
+      <span class="co-chip">CSIRO</span>
+      <span class="co-chip">3M</span>
+      <span class="co-chip">Nestlé</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section id="location">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">03 — Connectivity</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">Live in<br>a <em>gateway.</em></span>
+          <span data-lang-section="ko">관문에<br><em>살다.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">A connected hub of trains, Metro and bus — the choice is yours. Just 650m to both North Ryde and Macquarie Park Metro stations.</span>
+        <span data-lang-section="ko">기차·메트로·버스가 연결된 허브 — 선택은 당신의 몫. 노스 라이드역과 매쿼리 파크 메트로역까지 단 650m.</span>
+      </p>
+    </div>
+
+    <div class="loc-meta">
+      <div class="loc-meta-card">
+        <div class="loc-mc-big">650<small>m</small></div>
+        <div class="loc-mc-lbl" data-lang-section="en">To Two Metro Stations</div>
+        <div class="loc-mc-lbl" data-lang-section="ko">두 개의 메트로역까지</div>
+        <div class="loc-mc-desc" data-lang-section="en">Walk to either North Ryde Station or Macquarie Park Station in under 9 minutes — the rare position of having two Metro lines within walking distance.</div>
+        <div class="loc-mc-desc" data-lang-section="ko">노스 라이드역 또는 매쿼리 파크역까지 도보 9분 이내 — 도보 거리에 두 개의 메트로역을 둔 흔치 않은 입지.</div>
+      </div>
+      <div class="loc-meta-card">
+        <div class="loc-mc-big">$200<small>M</small></div>
+        <div class="loc-mc-lbl" data-lang-section="en">Transport Investment</div>
+        <div class="loc-mc-lbl" data-lang-section="ko">교통 인프라 투자</div>
+        <div class="loc-mc-desc" data-lang-section="en">Australian and NSW Governments are investing nearly $200 million to upgrade Macquarie Park transport — including bus interchange upgrades and 165 new electric buses.</div>
+        <div class="loc-mc-desc" data-lang-section="ko">호주 연방 정부와 NSW 정부가 매쿼리 파크 교통 인프라 개선에 약 2억 달러 투자 — 버스 환승센터 업그레이드, 165대의 신규 전기버스 포함.</div>
+      </div>
+    </div>
+
+    <div class="stops-list" style="border-top:1px solid var(--line);">
+      <div class="stop-row">
+        <div class="stop-time">2<small>min</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">Macquarie University</div>
+          <div class="stop-name" data-lang-block="ko">매쿼리 대학교</div>
+          <div class="stop-via" data-lang-block="en">One stop on the Metro</div>
+          <div class="stop-via" data-lang-block="ko">메트로 한 정거장</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Metro</div>
+      </div>
+      <div class="stop-row">
+        <div class="stop-time">5<small>min</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">Chatswood Chase</div>
+          <div class="stop-name" data-lang-block="ko">채즈우드 체이스</div>
+          <div class="stop-via" data-lang-block="en">Luxury shopping precinct via Metro</div>
+          <div class="stop-via" data-lang-block="ko">럭셔리 쇼핑 권역, 메트로 이용</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Metro</div>
+      </div>
+      <div class="stop-row">
+        <div class="stop-time">8<small>min</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">North Sydney CBD</div>
+          <div class="stop-name" data-lang-block="ko">노스 시드니 CBD</div>
+          <div class="stop-via" data-lang-block="en">Via Metro</div>
+          <div class="stop-via" data-lang-block="ko">메트로 이용</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Metro</div>
+      </div>
+      <div class="stop-row">
+        <div class="stop-time">15<small>min</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">Sydney CBD (Barangaroo / Martin Place)</div>
+          <div class="stop-name" data-lang-block="ko">시드니 CBD (바랑가루 / 마틴 플레이스)</div>
+          <div class="stop-via" data-lang-block="en">Direct Metro line</div>
+          <div class="stop-via" data-lang-block="ko">메트로 직통 라인</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Metro</div>
+      </div>
+      <div class="stop-row">
+        <div class="stop-time">10<small>min</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">Lane Cove National Park</div>
+          <div class="stop-name" data-lang-block="ko">레인 코브 국립공원</div>
+          <div class="stop-via" data-lang-block="en">By car — bushland, river & picnic grounds</div>
+          <div class="stop-via" data-lang-block="ko">자동차 — 부시랜드·강·피크닉장</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Drive</div>
+      </div>
+      <div class="stop-row">
+        <div class="stop-time">30<small>+</small></div>
+        <div>
+          <div class="stop-name" data-lang-block="en">Bus Routes Servicing the Area</div>
+          <div class="stop-name" data-lang-block="ko">지역 운행 버스 노선</div>
+          <div class="stop-via" data-lang-block="en">M2 Motorway · Lane Cove Rd · Epping Rd · Delhi Rd</div>
+          <div class="stop-via" data-lang-block="ko">M2 모터웨이 · 레인 코브 로드 · 에핑 로드 · 델리 로드</div>
+        </div>
+        <div></div>
+        <div class="stop-mode">Bus</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIFESTYLE ============ -->
+<section id="lifestyle" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">04 — Lifestyle</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">A hub of<br><em>everything.</em></span>
+          <span data-lang-section="ko">모든 것의<br><em>중심지.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">Close to everything — rapid commuting, majestic parklands, destination dining and shopping, world-class education, and one of Australia's most influential innovation hubs.</span>
+        <span data-lang-section="ko">모든 것이 가까운 곳 — 빠른 통근, 장엄한 공원, 명소 다이닝과 쇼핑, 세계적 수준의 교육, 그리고 호주에서 가장 영향력 있는 혁신 허브 중 하나.</span>
+      </p>
+    </div>
+
+    <div class="lifestyle-grid">
+      <div class="ls-tile feature">
+        <div class="ls-num">01 · The Village Next Door</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Lachlan's Square Village.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">래클런 스퀘어 빌리지.</h3>
+          <p class="ls-body" data-lang-block="en">Your neighbourhood one-stop-shop — Coles, Liquorland, medical centre, chemist, gym, childcare, cafés, and an outdoor amphitheatre — all on your doorstep.</p>
+          <p class="ls-body" data-lang-block="ko">현관 앞의 원스톱 동네 광장 — 콜스, 리커랜드, 진료소, 약국, 헬스장, 보육시설, 카페, 야외 원형극장까지 모두 도보권 내에 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="ls-tile">
+        <div class="ls-num">02 · Shopping</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Macquarie Centre.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">매쿼리 센터.</h3>
+          <p class="ls-body" data-lang-block="en">Premier shopping mall with K-Mart, Aesop, Apple, Macquarie Ice Rink and over 350 stores — Sydney's North Shore retail crown.</p>
+          <p class="ls-body" data-lang-block="ko">K-Mart, 이솝, 애플, 매쿼리 아이스링크, 350개 이상의 매장이 있는 프리미어 쇼핑몰 — 시드니 노스 쇼어 리테일의 왕관.</p>
+        </div>
+      </div>
+
+      <div class="ls-tile">
+        <div class="ls-num">03 · Education</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Top 1% University.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">세계 상위 1% 대학.</h3>
+          <p class="ls-body" data-lang-block="en">Macquarie University ranks in the top 1% of universities worldwide — a sprawling campus with cutting-edge research facilities and industry partnerships.</p>
+          <p class="ls-body" data-lang-block="ko">매쿼리 대학교는 세계 상위 1%의 대학 — 최첨단 연구시설과 산업체 협력 파트너십을 갖춘 광활한 캠퍼스.</p>
+        </div>
+      </div>
+
+      <div class="ls-tile nature">
+        <div class="ls-num">04 · Nature</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Lane Cove National Park.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">레인 코브 국립공원.</h3>
+          <p class="ls-body" data-lang-block="en">A peaceful retreat of bushland, river banks and picnic grounds — minutes away. Plus Eden Gardens, Macquarie Park's abundant green spaces and the Ryde Aquatic Centre.</p>
+          <p class="ls-body" data-lang-block="ko">부시랜드, 강변, 피크닉 명소가 어우러진 평화로운 휴식처 — 단 몇 분 거리. 에덴 가든스와 라이드 아쿠아틱 센터도 함께.</p>
+        </div>
+      </div>
+
+      <div class="ls-tile">
+        <div class="ls-num">05 · Dining</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Restaurant Capital.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">레스토랑 캐피털.</h3>
+          <p class="ls-body" data-lang-block="en">Verace Pizzeria, Mama Mulan, Kin by Us, Senpai Ramen, PAFU, Manpuku, Hawkers Lane at Chatswood — international fusion and top chefs at your doorstep.</p>
+          <p class="ls-body" data-lang-block="ko">베라체 피체리아, 마마 물란, 킨 바이 어스, 센파이 라멘, PAFU, 만푸쿠, 채즈우드 호커스 레인 — 인터내셔널 퓨전과 최고의 셰프들이 현관 앞에.</p>
+        </div>
+      </div>
+
+      <div class="ls-tile">
+        <div class="ls-num">06 · Connection</div>
+        <div>
+          <h3 class="ls-headline" data-lang-block="en">Lower North Shore Access.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">로어 노스 쇼어 연결성.</h3>
+          <p class="ls-body" data-lang-block="en">A few Metro stops away are Crows Nest Village, St Leonards dining, and Chatswood Chase luxury. Plus M2 Motorway access to the rest of Sydney.</p>
+          <p class="ls-body" data-lang-block="ko">메트로 몇 정거장이면 크로우즈 네스트 빌리지, 세인트 레너즈 다이닝, 채즈우드 체이스 럭셔리 쇼핑. 또한 M2 모터웨이로 시드니 전역과 연결.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN ============ -->
+<section id="design">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">05 — The Architecture</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">A sanctuary<br>with <em>urban edge.</em></span>
+          <span data-lang-section="ko">도시적 감각의<br><em>안식처.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">The Macquarie Collection re-envisions modern living with residences interwoven with the natural world. Two buildings designed to foster a welcoming sense of community.</span>
+        <span data-lang-section="ko">매쿼리 컬렉션은 자연과 어우러진 주거를 통해 현대적 라이프스타일을 재해석합니다. 두 개의 건물이 환영의 커뮤니티 감각을 조성하도록 설계되었습니다.</span>
+      </p>
+    </div>
+
+    <div class="design-grid">
+      <div class="design-text">
+        <p class="lead" data-lang-block="en">Across the buildings, communal spaces blend indoor and outdoor life. From its leafy green park, double-height entry lobbies, roof terraces, and sky gardens there is connection to nature everywhere.</p>
+        <p class="lead" data-lang-block="ko">두 건물 전체에 걸쳐 공용 공간이 실내와 야외 생활을 자연스럽게 잇습니다. 녹음이 우거진 정원, 더블 하이트 로비, 루프테라스, 스카이가든 곳곳에서 자연과의 연결이 살아 있습니다.</p>
+
+        <p data-lang-block="en">On the sunny northeast corner, beautifully landscaped open space is your own <strong>'urban backyard.'</strong> Open-plan kitchens and eat-in islands invite people to gather, with timeless finishes blending into the living areas.</p>
+        <p data-lang-block="en">Floor-to-ceiling windows frame the views while spacious balconies form natural extensions of the living areas. The collection of one, two and three bedroom <strong>climate-controlled apartments</strong> are perfectly oriented to draw in breezes, sunlight and views.</p>
+
+        <p data-lang-block="ko">햇살이 잘 드는 북동쪽 코너에 자리한 아름답게 조성된 야외 공간은 <strong>'어반 백야드'</strong> — 나만의 도시 속 정원입니다. 오픈 플랜 키친과 아일랜드 식탁이 사람들을 모이게 하고, 시대를 초월한 마감재가 거실로 이어집니다.</p>
+        <p data-lang-block="ko">바닥에서 천장까지 이어지는 창이 풍경을 액자처럼 담아내며, 넓은 발코니는 거실의 자연스러운 확장입니다. 1·2·3베드룸 <strong>기후 제어 아파트</strong>는 산들바람, 햇빛, 전망을 최대한 끌어들이도록 완벽하게 배치되었습니다.</p>
+      </div>
+
+      <ul class="feature-list">
+        <li>
+          <div class="ico">i.</div>
+          <div>
+            <h4 data-lang-block="en">Climate-controlled comfort</h4>
+            <h4 data-lang-block="ko">기후 제어 시스템</h4>
+            <p data-lang-block="en">Year-round indoor climate control across all apartments.</p>
+            <p data-lang-block="ko">사계절 내내 일정한 실내 환경을 유지하는 시스템.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">ii.</div>
+          <div>
+            <h4 data-lang-block="en">Open-plan kitchens & islands</h4>
+            <h4 data-lang-block="ko">오픈플랜 키친 & 아일랜드</h4>
+            <p data-lang-block="en">Eat-in islands with timeless finishes designed for gathering.</p>
+            <p data-lang-block="ko">사람들이 모일 수 있도록 설계된 식사 가능한 아일랜드와 시대를 초월한 마감재.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">iii.</div>
+          <div>
+            <h4 data-lang-block="en">Floor-to-ceiling windows</h4>
+            <h4 data-lang-block="ko">전면 통창</h4>
+            <p data-lang-block="en">Frame the views and maximise natural light.</p>
+            <p data-lang-block="ko">전망을 액자처럼 담아내고 자연광을 극대화합니다.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">iv.</div>
+          <div>
+            <h4 data-lang-block="en">Spacious balconies</h4>
+            <h4 data-lang-block="ko">넓은 발코니</h4>
+            <p data-lang-block="en">Form natural extensions of the living areas.</p>
+            <p data-lang-block="ko">거실의 자연스러운 연장 공간.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">v.</div>
+          <div>
+            <h4 data-lang-block="en">Rooftop terraces & sky gardens</h4>
+            <h4 data-lang-block="ko">루프테라스 & 스카이 가든</h4>
+            <p data-lang-block="en">Communal spaces for barbecues and contemplation.</p>
+            <p data-lang-block="ko">바비큐와 휴식을 위한 공용 공간.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">vi.</div>
+          <div>
+            <h4 data-lang-block="en">Double-height lobbies</h4>
+            <h4 data-lang-block="ko">더블 하이트 로비</h4>
+            <p data-lang-block="en">Grand entry experiences with leafy green park surrounds.</p>
+            <p data-lang-block="ko">녹음이 어우러진 웅장한 입주 경험.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">vii.</div>
+          <div>
+            <h4 data-lang-block="en">Storage included</h4>
+            <h4 data-lang-block="ko">기본 제공 창고</h4>
+            <p data-lang-block="en">Every apartment includes a dedicated storage unit.</p>
+            <p data-lang-block="ko">모든 세대에 전용 창고가 기본 제공됩니다.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOORPLANS ============ -->
+<section id="floorplans" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">06 — Floorplans</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">Four<br><em>typologies.</em></span>
+          <span data-lang-section="ko">네 가지<br><em>유형.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">From a clever 1-bedroom-plus-study at 68 sqm to spacious 3-bed plus study apartments at 164 sqm total. Every home includes private storage.</span>
+        <span data-lang-section="ko">영리한 1베드+서재 68㎡부터 넓은 3베드+서재 164㎡까지. 모든 세대에 전용 창고가 포함됩니다.</span>
+      </p>
+    </div>
+
+    <div class="fp-grid">
+      <div class="fp-cell">
+        <div class="fp-type">Type A · 1 Bed + Study</div>
+        <div class="fp-name">68 sqm</div>
+        <div class="fp-sub" data-lang-section="en">A flexible plan with study nook and west aspect — apartments 12, 97, 107, 117, 127, 137, 147, 157.</div>
+        <div class="fp-sub" data-lang-section="ko">서재 공간과 서향이 포함된 유연한 평면 — 12, 97, 107, 117, 127, 137, 147, 157호.</div>
+        <div class="fp-meta">
+          <div class="fp-meta-item"><div class="v">57<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
+          <div class="fp-meta-item"><div class="v">11<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
+          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div></div>
+        </div>
+      </div>
+
+      <div class="fp-cell">
+        <div class="fp-type">Type B · 1 Bed + Study</div>
+        <div class="fp-name">76 sqm</div>
+        <div class="fp-sub" data-lang-section="en">Larger 1-bed with study, west or NE aspect — flexible for working from home.</div>
+        <div class="fp-sub" data-lang-section="ko">서재가 있는 더 넓은 1베드 — 서향 또는 북동향, 재택근무에 최적.</div>
+        <div class="fp-meta">
+          <div class="fp-meta-item"><div class="v">61<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
+          <div class="fp-meta-item"><div class="v">15<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
+          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div></div>
+        </div>
+      </div>
+
+      <div class="fp-cell">
+        <div class="fp-type">Type C · 2 Bedroom</div>
+        <div class="fp-name">117 sqm</div>
+        <div class="fp-sub" data-lang-section="en">2-bed with 2 bathrooms, parking space included — west aspect with large balcony.</div>
+        <div class="fp-sub" data-lang-section="ko">2개의 욕실과 주차 공간이 포함된 2베드 — 서향, 대형 발코니.</div>
+        <div class="fp-meta">
+          <div class="fp-meta-item"><div class="v">76<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
+          <div class="fp-meta-item"><div class="v">41<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
+          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div></div>
+        </div>
+      </div>
+
+      <div class="fp-cell">
+        <div class="fp-type">Type D · 3 Bed + Study</div>
+        <div class="fp-name">164 sqm</div>
+        <div class="fp-sub" data-lang-section="en">Premium 3-bed plus study, 2 baths, parking — N/E aspect with the largest balconies in the collection.</div>
+        <div class="fp-sub" data-lang-section="ko">프리미엄 3베드 + 서재, 2욕실, 주차 포함 — 북동향, 컬렉션 내 최대 크기의 발코니.</div>
+        <div class="fp-meta">
+          <div class="fp-meta-item"><div class="v">101<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
+          <div class="fp-meta-item"><div class="v">63<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
+          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEVELOPER ============ -->
+<section id="developer">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="sec-tag">07 — The Team</div>
+        <h2 class="sec-title">
+          <span data-lang-section="en">Quality<br>is a <em>promise.</em></span>
+          <span data-lang-section="ko">품질은<br><em>약속입니다.</em></span>
+        </h2>
+      </div>
+      <p class="sec-lede">
+        <span data-lang-section="en">Two of Sydney's most respected names — AJC Architects shaping the city since 1956, and Landmark delivering apartments for Australian families for over 25 years.</span>
+        <span data-lang-section="ko">시드니에서 가장 존경받는 두 이름의 협업 — 1956년부터 도시를 빚어온 AJC 건축, 그리고 25년 이상 호주 가정에 아파트를 선보여온 Landmark.</span>
+      </p>
+    </div>
+
+    <div class="dev-section">
+      <div class="dev-block">
+        <h3>
+          <span data-lang-section="en">AJC <em>Architects</em></span>
+          <span data-lang-section="ko">AJC <em>건축</em></span>
+        </h3>
+        <p data-lang-block="en">Founded in <strong>1956</strong>, the AJC name is synonymous with creative, spatially inspiring spaces and places. Today AJC works across many sectors and scales — from education and commercial projects to luxury and affordable residential developments.</p>
+        <p data-lang-block="en">The practice has earned scores of awards locally and internationally. Their work has changed the way people live, learn, work and play.</p>
+
+        <p data-lang-block="ko"><strong>1956년</strong>에 설립된 AJC는 창의적이고 영감을 주는 공간 설계의 대명사입니다. 오늘날 AJC는 교육·상업 프로젝트부터 럭셔리 및 합리적 주거 개발에 이르기까지 다양한 분야와 규모의 작업을 진행합니다.</p>
+        <p data-lang-block="ko">호주 내외에서 수많은 상을 수상했으며, 그들의 작업은 사람들이 살고, 배우고, 일하고, 노는 방식을 변화시켜 왔습니다.</p>
+
+        <div class="dev-stats">
+          <div class="dev-stat">
+            <div class="n">68<small>yr</small></div>
+            <div class="l" data-lang-section="en">Years of Practice</div>
+            <div class="l" data-lang-section="ko">설립 연수</div>
+          </div>
+          <div class="dev-stat">
+            <div class="n">Multi</div>
+            <div class="l" data-lang-section="en">Award Winner</div>
+            <div class="l" data-lang-section="ko">다수 수상</div>
+          </div>
+          <div class="dev-stat">
+            <div class="n">SYD</div>
+            <div class="l" data-lang-section="en">Modern Sydney</div>
+            <div class="l" data-lang-section="ko">현대 시드니</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dev-block">
+        <h3>
+          <span data-lang-section="en">Landmark <em>Group</em></span>
+          <span data-lang-section="ko">Landmark <em>그룹</em></span>
+        </h3>
+        <p data-lang-block="en">Australian property developer and builder since <strong>1999</strong>. With a team of over 60 property experts, Landmark has successfully delivered projects worth over <strong>$4 billion</strong> — making the dream of home ownership a reality for everyone.</p>
+        <p data-lang-block="en">Excellence is at the heart of what they do — from choosing the best materials and finishes to ensuring customers are supported at every stage. Every home comes with a <strong>10-year Structural Warranty</strong> that exceeds the NSW statutory requirement of 6 years.</p>
+
+        <p data-lang-block="ko"><strong>1999년부터</strong> 호주의 부동산 개발 및 시공사로 활동해 온 Landmark. 60명 이상의 전문가 팀과 함께 <strong>40억 달러</strong> 이상의 프로젝트를 성공적으로 완수해 왔으며, 모든 사람의 주택 소유의 꿈을 현실로 만들어 왔습니다.</p>
+        <p data-lang-block="ko">최고의 자재와 마감재 선택부터 모든 단계에서의 고객 지원까지, 우수성이 그들의 핵심 가치입니다. 모든 주택에는 NSW 법정 기준(6년)을 넘는 <strong>10년 구조 보증</strong>이 적용됩니다.</p>
+
+        <div class="dev-stats">
+          <div class="dev-stat">
+            <div class="n">$4<small>B+</small></div>
+            <div class="l" data-lang-section="en">Projects Delivered</div>
+            <div class="l" data-lang-section="ko">총 프로젝트 규모</div>
+          </div>
+          <div class="dev-stat">
+            <div class="n">4K<small>+</small></div>
+            <div class="l" data-lang-section="en">Apartments Built</div>
+            <div class="l" data-lang-section="ko">완공 세대</div>
+          </div>
+          <div class="dev-stat">
+            <div class="n">41</div>
+            <div class="l" data-lang-section="en">Projects Completed</div>
+            <div class="l" data-lang-section="ko">완료 프로젝트</div>
+          </div>
+        </div>
+
+        <p style="margin-top:32px; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute);">
+          <span data-lang-section="en">Recent: Delmar (Dee Why) · The Mills (Merrylands) · The Avenue (Mascot) · Echo (Lane Cove) · Delano (Crows Nest)</span>
+          <span data-lang-section="ko">최근 프로젝트: Delmar (Dee Why) · The Mills (Merrylands) · The Avenue (Mascot) · Echo (Lane Cove) · Delano (Crows Nest)</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING CTA ============ -->
+<section id="pricing" class="price-cta">
+  <div class="price-cta-inner">
+    <div class="sec-tag">08 — Pricing</div>
+    <h2>
+      <span data-lang-section="en">52 apartments.<br>10% rebate. <em>All available.</em></span>
+      <span data-lang-section="ko">52세대.<br>10% 리베이트. <em>전부 분양 가능.</em></span>
+    </h2>
+
+    <div class="price-summary">
+      <div class="ps-cell">
+        <div class="ps-num">52</div>
+        <div class="ps-lbl" data-lang-section="en">Total Apartments</div>
+        <div class="ps-lbl" data-lang-section="ko">총 세대</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-num">$737<small>K</small></div>
+        <div class="ps-lbl" data-lang-section="en">Net Price From</div>
+        <div class="ps-lbl" data-lang-section="ko">실가격 시작</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-num">10<small>%</small></div>
+        <div class="ps-lbl" data-lang-section="en">Rebate · 1B / 2B</div>
+        <div class="ps-lbl" data-lang-section="ko">리베이트 · 1B / 2B</div>
+      </div>
+      <div class="ps-cell">
+        <div class="ps-num">5<small>%</small></div>
+        <div class="ps-lbl" data-lang-section="en">Rebate · 3B</div>
+        <div class="ps-lbl" data-lang-section="ko">리베이트 · 3B</div>
+      </div>
+    </div>
+
+    <a href="./macquarie-price.html" class="cta-btn">
+      <span data-lang-section="en">View Full Price List</span>
+      <span data-lang-section="ko">전체 분양가 보기</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+    </a>
+
+    <p style="margin-top:48px; max-width:700px; font-size:14px; color:rgba(255,255,255,.6); line-height:1.6;">
+      <span data-lang-section="en">Prices, rebates and availability subject to change. Detailed unit-by-unit pricing — including aspect, size, level, parking and storage — is available on the dedicated price list page.</span>
+      <span data-lang-section="ko">가격, 리베이트 및 분양 가능 여부는 변경될 수 있습니다. 세대별 상세 가격 (방향, 면적, 층수, 주차, 창고 포함)은 별도의 분양가 페이지에서 확인하실 수 있습니다.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="sec-tag">09 — Contact</div>
+    <div class="contact-grid">
+      <h2 class="contact-title">
+        <span data-lang-section="en">Get the <em>full</em><br>price list.</span>
+        <span data-lang-section="ko"><em>전체</em><br>분양가 받기.</span>
+      </h2>
+      <div>
+        <div class="contact-detail">
+          <div class="lbl" data-lang-section="en">Agent</div>
+          <div class="lbl" data-lang-section="ko">담당</div>
+          <div>
+            <div class="val" data-lang-section="en">Sunny Choi · 최성훈</div>
+            <div class="val" data-lang-section="ko">최성훈 · Sunny Choi</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Email</div>
+          <a class="val" href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi<br>@forisegroup.com.au</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl" data-lang-section="en">Phone</div>
+          <div class="lbl" data-lang-section="ko">전화</div>
+          <a class="val" href="tel:+61414824225">0414 824 225</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Web</div>
+          <a class="val" href="https://www.forise.com.au" target="_blank" rel="noopener">www.forise.com.au</a>
+        </div>
+        <div class="contact-detail">
+          <div class="lbl">Agency</div>
+          <div class="val">Forise Group</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</p>
+  <p>
+    <span data-lang-section="en">All renderings are artist's impressions only. Completed apartments may vary from the images shown. Information presented for reference only; pricing, availability and specifications subject to change. Please contact the agent to confirm details. Disclaimer adapted from the official Landmark / Macquarie Collection brochure.</span>
+    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며, 완공된 아파트는 이미지와 다를 수 있습니다. 본 정보는 참고용이며, 가격·분양 가능 여부·사양은 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 면책 조항은 Landmark / Macquarie Collection 공식 브로셔에서 발췌되었습니다.</span>
+  </p>
+</footer>
+
+<script>
+  // ============ THEME ============
+  const themeToggle = document.getElementById('themeToggle');
+  const themeLabel  = document.getElementById('themeLabel');
+  const root        = document.documentElement;
+
+  function getInitTheme() {
+    const s = localStorage.getItem('tmc-theme');
+    if (s) return s;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeLabel.textContent = t === 'dark' ? '☀' : '◐';
+    localStorage.setItem('tmc-theme', t);
+  }
+  applyTheme(getInitTheme());
+  themeToggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('tmc-theme')) applyTheme(e.matches ? 'dark' : 'light');
+  });
+
+  // ============ LANGUAGE ============
+  const langToggle = document.getElementById('langToggle');
+  const langLabel  = document.getElementById('langLabel');
+  function applyLang(l) {
+    document.documentElement.setAttribute('lang', l);
+    langLabel.textContent = l === 'ko' ? 'EN' : '한국어';
+    localStorage.setItem('tmc-lang', l);
+  }
+  applyLang(localStorage.getItem('tmc-lang') || 'en');
+  langToggle.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('lang');
+    applyLang(cur === 'ko' ? 'en' : 'ko');
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(
+    'section .section-head, .mp-cell, .ind-card, .stop-row, .ls-tile, .feature-list li, .fp-cell, .dev-block, .ps-cell, .welcome-card, .loc-meta-card'
+  ).forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.animationDelay = (i % 5) * 80 + 'ms';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
