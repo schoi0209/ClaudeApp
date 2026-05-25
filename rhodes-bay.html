@@ -1280,6 +1280,105 @@
   footer a { color: var(--jade); text-decoration: none; }
   footer p { margin-top: 8px; max-width: 860px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 11px; opacity: .85; }
 
+  /* ============ IMAGERY ============ */
+  /* Full-width context image between sections */
+  .media-bleed {
+    margin: 0;
+    background: var(--bg-tint);
+    position: relative;
+  }
+  .media-bleed img {
+    display: block;
+    width: 100%;
+    height: clamp(320px, 56vh, 620px);
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.94);
+    transition: filter .4s;
+  }
+  [data-theme="dark"] .media-bleed img { filter: saturate(0.85) brightness(0.78); }
+  .media-bleed figcaption {
+    position: absolute;
+    left: 32px;
+    bottom: 32px;
+    right: 32px;
+    max-width: 720px;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,.45);
+  }
+  .media-bleed .mc-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .media-bleed .mc-cap {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.35;
+    letter-spacing: -.01em;
+  }
+  @media (max-width: 700px) {
+    .media-bleed figcaption { left: 20px; right: 20px; bottom: 20px; }
+  }
+
+  /* Inline figure for use inside a section */
+  .media-card {
+    margin: 0 0 48px;
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .media-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .media-card:hover img { transform: scale(1.02); }
+  .media-card figcaption {
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    border-top: 1px solid var(--line-soft);
+    flex-wrap: wrap;
+  }
+  .media-card .mc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .media-card .mc-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--jade);
+    font-weight: 600;
+  }
+
+  /* Floorplan-specific media card — preserves white technical drawing background */
+  .media-floorplan { background: #fff; }
+  .media-floorplan img { aspect-ratio: 4 / 3; object-fit: contain; padding: 12px; }
+
   /* ============ ANIMATIONS ============ */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -1481,6 +1580,17 @@
     </div>
   </div>
 </section>
+
+<!-- ============ MEDIA · AERIAL ============ -->
+<figure class="media-bleed">
+  <img src="./assets/rhodes-bay/aerial.jpg" alt="Aerial view of the Rhodes peninsula showing the Parramatta River and surrounding waterways" loading="lazy" />
+  <figcaption>
+    <span class="mc-tag" data-lang-section="en">Rhodes Peninsula · Aerial</span>
+    <span class="mc-tag" data-lang-section="ko">로즈 반도 · 항공 뷰</span>
+    <span class="mc-cap" data-lang-section="en">"Three sides embraced by water — the Parramatta River, Brays Bay, and Homebush Bay."</span>
+    <span class="mc-cap" data-lang-section="ko">"세 면이 물에 둘러싸인 — 파라마타 강, 브레이스 베이, 홈부시 베이."</span>
+  </figcaption>
+</figure>
 
 <!-- ============ MASTERPLAN ============ -->
 <section id="masterplan" class="alt">
@@ -1913,6 +2023,15 @@
       </p>
     </div>
 
+    <figure class="media-card">
+      <img src="./assets/rhodes-bay/interior.jpg" alt="Living room rendering with floor-to-ceiling glass opening onto a balcony overlooking Parramatta River, in the Pearl scheme" loading="lazy" />
+      <figcaption>
+        <span class="mc-title" data-lang-section="en">A living room opens onto the river — Pearl scheme shown.</span>
+        <span class="mc-title" data-lang-section="ko">강을 향해 열리는 거실 — Pearl 스킴 예시.</span>
+        <span class="mc-meta">Indicative · Pearl</span>
+      </figcaption>
+    </figure>
+
     <div class="schemes-grid">
       <div class="scheme-card amber">
         <div class="scheme-visual">
@@ -2074,6 +2193,15 @@
         <p data-lang-block="ko">A·D 빌딩에 걸친 희귀한 평면 — 로즈 반도 전체에서 거의 유일한 타운하우스 평면. 약 135㎡, 3베드룸 + 전용 입구.</p>
       </div>
     </div>
+
+    <figure class="media-card media-floorplan" style="margin-top:32px;">
+      <img src="./assets/rhodes-bay/floorplan.jpg" alt="Floorplan of townhouse apartment AG.02 — 3 bedrooms, 2.5 bathrooms, 1 car, 135 square metres" loading="lazy" />
+      <figcaption>
+        <span class="mc-title" data-lang-section="en">Apartment AG.02 — townhouse floorplan example.</span>
+        <span class="mc-title" data-lang-section="ko">AG.02 — 타운하우스 평면도 예시.</span>
+        <span class="mc-meta">3 BED · 2.5 BATH · 1 CAR · 135M²</span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
