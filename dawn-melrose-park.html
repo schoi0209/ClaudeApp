@@ -860,6 +860,96 @@
   footer a { color: var(--accent); text-decoration: none; }
 
   /* ============ ANIMATIONS ============ */
+
+  /* ============ IMAGERY ============ */
+  .media-bleed {
+    margin: 0;
+    background: var(--bg-card);
+    position: relative;
+  }
+  .media-bleed img {
+    display: block;
+    width: 100%;
+    height: clamp(320px, 56vh, 620px);
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.94);
+    transition: filter .4s;
+  }
+  [data-theme="dark"] .media-bleed img { filter: saturate(0.85) brightness(0.78); }
+  .media-bleed figcaption {
+    position: absolute;
+    left: 32px; bottom: 32px; right: 32px;
+    max-width: 720px;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,.5);
+  }
+  .media-bleed .mc-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .media-bleed .mc-cap {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.35;
+    letter-spacing: -.01em;
+  }
+  @media (max-width: 700px) {
+    .media-bleed figcaption { left: 20px; right: 20px; bottom: 20px; }
+  }
+  .media-card {
+    margin: 0 0 48px;
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .media-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .media-card:hover img { transform: scale(1.02); }
+  .media-card figcaption {
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+  }
+  .media-card .mc-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .media-card .mc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .media-floorplan { background: #fff; }
+  .media-floorplan img { aspect-ratio: 4 / 3; object-fit: contain; padding: 12px; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1011,6 +1101,17 @@
   </div>
 </section>
 
+<!-- ============ MEDIA · EXTERIOR ============ -->
+<figure class="media-bleed">
+  <img src="./assets/dawn-melrose-park/exterior.jpg" alt="Park-facing exterior rendering of DAWN Melrose Park apartments with families enjoying the landscaped grounds" loading="lazy" />
+  <figcaption>
+    <span class="mc-tag" data-lang-section="en">DAWN · Park-side</span>
+    <span class="mc-tag" data-lang-section="ko">DAWN · 공원변</span>
+    <span class="mc-cap" data-lang-section="en">"Excite the senses, uncover a good dose of delight."</span>
+    <span class="mc-cap" data-lang-section="ko">"감각을 깨우고, 일상의 기쁨을 발견하다."</span>
+  </figcaption>
+</figure>
+
 <!-- ============ LOCATION ============ -->
 <section id="location" class="alt">
   <div class="container">
@@ -1027,6 +1128,15 @@
         <span data-lang-section="ko">매주 2,000편 이상의 급행 버스가 운행되며, 미도우뱅크역과 선착장으로 무료 셔틀이 제공됩니다. 또한 메트로 웨스트와 경전철 연결이 확정되어 곧 개통됩니다.</span>
       </p>
     </div>
+
+    <figure class="media-card" style="margin-bottom:64px;">
+      <img src="./assets/dawn-melrose-park/masterplan.jpg" alt="Masterplan map of Melrose Park 5th Stage DAWN showing Central Park, The Residences, Pavilion, future stages, retail, and shuttle bus routes" loading="lazy" />
+      <figcaption>
+        <span class="mc-title" data-lang-section="en">DAWN sits at the heart of Melrose Park's masterplan.</span>
+        <span class="mc-title" data-lang-section="ko">DAWN은 멜로즈 파크 마스터플랜의 중심에 위치합니다.</span>
+        <span class="mc-meta">Masterplan · Sekisui House</span>
+      </figcaption>
+    </figure>
 
     <div class="location-grid">
       <div class="loc-cell">

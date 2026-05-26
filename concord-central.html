@@ -1113,6 +1113,107 @@
   footer p { margin-top: 8px; max-width: 820px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 11px; opacity: .85; }
 
   /* ============ ANIMATIONS ============ */
+
+  /* ============ IMAGERY ============ */
+  .media-bleed {
+    margin: 0;
+    background: var(--bg-card);
+    position: relative;
+  }
+  .media-bleed img {
+    display: block;
+    width: 100%;
+    height: clamp(320px, 56vh, 620px);
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.94);
+    transition: filter .4s;
+  }
+  [data-theme="dark"] .media-bleed img { filter: saturate(0.85) brightness(0.78); }
+  .media-bleed figcaption {
+    position: absolute;
+    left: 32px; bottom: 32px; right: 32px;
+    max-width: 720px;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,.5);
+  }
+  .media-bleed .mc-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .media-bleed .mc-cap {
+    display: block;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.35;
+    letter-spacing: -.01em;
+  }
+  @media (max-width: 700px) {
+    .media-bleed figcaption { left: 20px; right: 20px; bottom: 20px; }
+  }
+  .media-card {
+    margin: 0 0 48px;
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .media-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .media-card:hover img { transform: scale(1.02); }
+  .media-card figcaption {
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line-soft);
+  }
+  .media-card .mc-title {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .media-card .mc-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--sky);
+    font-weight: 600;
+  }
+  .media-floorplan { background: #fff; }
+  .media-floorplan img { aspect-ratio: 4 / 3; object-fit: contain; padding: 12px; }
+
+  /* Scheme visuals now hold real images, with gradient as fallback */
+  .scheme-card .scheme-visual { position: relative; }
+  .scheme-card .scheme-visual img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .scheme-card .scheme-visual .scheme-tag { z-index: 2; }
+  .scheme-card .scheme-visual::after { z-index: 1; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1306,6 +1407,17 @@
     </div>
   </div>
 </section>
+
+<!-- ============ MEDIA · EXTERIOR ============ -->
+<figure class="media-bleed">
+  <img src="./assets/concord-central/exterior.jpg" alt="Sunset exterior rendering of Concord Central showing the 37-storey B1 tower with its signature green wall, and the 27-storey A1 tower, with Concord West Station at the base" loading="lazy" />
+  <figcaption>
+    <span class="mc-tag" data-lang-section="en">B1 + A1 Towers · Golden Hour</span>
+    <span class="mc-tag" data-lang-section="ko">B1·A1 타워 · 일몰</span>
+    <span class="mc-cap" data-lang-section="en">"A new village in the sky, anchored at Concord West Station."</span>
+    <span class="mc-cap" data-lang-section="ko">"콩코드 웨스트역 위에 솟아오른 하늘의 마을."</span>
+  </figcaption>
+</figure>
 
 <!-- ============ MASTERPLAN ============ -->
 <section id="masterplan" class="alt">
@@ -1733,6 +1845,7 @@
     <div class="schemes-grid">
       <div class="scheme-card dawn">
         <div class="scheme-visual">
+          <img src="./assets/concord-central/kitchen-dawn.jpg" alt="Kitchen and living area in the Dawn light scheme — natural oak floors, light cream cabinetry, marble island" loading="lazy" />
           <div class="scheme-tag">Light Scheme</div>
         </div>
         <div class="scheme-body">
@@ -1746,6 +1859,7 @@
 
       <div class="scheme-card dusk">
         <div class="scheme-visual">
+          <img src="./assets/concord-central/kitchen-dusk.jpg" alt="Kitchen and living area in the Dusk dark scheme — darker timber floors, deeper marble, sophisticated greys" loading="lazy" />
           <div class="scheme-tag">Dark Scheme</div>
         </div>
         <div class="scheme-body">
