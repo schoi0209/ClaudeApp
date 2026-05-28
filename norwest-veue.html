@@ -9,441 +9,232 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #FAF7F2;
-  --bg2: #F1ECE3;
-  --fg: #1C1A17;
-  --fg2: #4A4540;
-  --gold: #B8892A;
-  --gold-light: #D4A94A;
-  --gold-pale: #F5E8CC;
-  --divider: #DDD5C8;
-  --card-bg: #FFFFFF;
-  --hero-bg: #1A1712;
-  --hero-text: #FAF5EB;
-  --tag-bg: rgba(184,137,42,0.12);
-  --shadow: 0 2px 24px rgba(28,26,23,0.08);
+  --bg:#FAF7F2;--bg2:#F1ECE3;--fg:#1C1A17;--fg2:#4A4540;
+  --gold:#B8892A;--gold-light:#D4A94A;--gold-pale:#F5E8CC;
+  --divider:#DDD5C8;--card-bg:#FFFFFF;
+  --hero-bg:#1A1712;--hero-text:#FAF5EB;
+  --tag-bg:rgba(184,137,42,0.12);
+  --shadow:0 2px 24px rgba(28,26,23,0.08);
 }
-[data-theme="dark"] {
-  --bg: #14120E;
-  --bg2: #1D1A14;
-  --fg: #F0E8D8;
-  --fg2: #A09880;
-  --gold: #D4A94A;
-  --gold-light: #E8C064;
-  --gold-pale: rgba(212,169,74,0.12);
-  --divider: #2E2A22;
-  --card-bg: #1D1A14;
-  --hero-bg: #0C0B08;
-  --hero-text: #FAF5EB;
-  --tag-bg: rgba(212,169,74,0.12);
-  --shadow: 0 2px 24px rgba(0,0,0,0.4);
+[data-theme="dark"]{
+  --bg:#14120E;--bg2:#1D1A14;--fg:#F0E8D8;--fg2:#A09880;
+  --gold:#D4A94A;--gold-light:#E8C064;--gold-pale:rgba(212,169,74,0.12);
+  --divider:#2E2A22;--card-bg:#1D1A14;
+  --hero-bg:#0C0B08;--hero-text:#FAF5EB;
+  --tag-bg:rgba(212,169,74,0.12);
+  --shadow:0 2px 24px rgba(0,0,0,0.4);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--fg);
-  font-family:'Jost',sans-serif;
-  font-weight:400;
-  transition:background 0.3s,color 0.3s;
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-weight:400;transition:background .3s,color .3s;overflow-x:hidden}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:72px;
-  background:rgba(20,18,14,0.88);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.2rem;font-weight:500;letter-spacing:0.06em;
-  color:#D4A94A;text-decoration:none;
-}
-.nav-logo span{color:rgba(212,169,74,0.5);margin:0 6px;font-weight:300;}
-.nav-actions{display:flex;align-items:center;gap:12px;}
-.btn-lang,.btn-theme{
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
-  color:#D4A94A;cursor:pointer;border-radius:4px;
-  font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:500;
-  letter-spacing:0.08em;padding:6px 14px;
-  transition:all 0.2s;
-}
-.btn-lang:hover,.btn-theme:hover{background:rgba(212,169,74,0.15);border-color:#D4A94A;}
-.btn-bmac{
-  display:flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,#FFDD00,#FFC400);
-  color:#1a1200;border:none;border-radius:4px;
-  font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:600;
-  letter-spacing:0.04em;padding:7px 14px;cursor:pointer;text-decoration:none;
-  transition:opacity 0.2s;
-}
-.btn-bmac:hover{opacity:0.88;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:72px;background:rgba(20,18,14,0.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;letter-spacing:.06em;color:#D4A94A;text-decoration:none}
+.nav-logo span{color:rgba(212,169,74,0.5);margin:0 6px;font-weight:300}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-lang,.btn-theme{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#D4A94A;cursor:pointer;border-radius:4px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.08em;padding:6px 14px;transition:all .2s}
+.btn-lang:hover,.btn-theme:hover{background:rgba(212,169,74,0.15);border-color:#D4A94A}
+.btn-bmac{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFDD00,#FFC400);color:#1a1200;border:none;border-radius:4px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.04em;padding:7px 14px;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.btn-bmac:hover{opacity:.88}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;display:flex;align-items:flex-end;
-  background:var(--hero-bg);
-  position:relative;overflow:hidden;
-}
-.hero-bg-art{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 70% 40%,rgba(184,137,42,0.12) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 80%,rgba(140,100,20,0.08) 0%,transparent 60%),
-    linear-gradient(160deg,#1A1712 0%,#0C0B08 100%);
-}
-.hero-grain{
-  position:absolute;inset:0;opacity:0.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:200px;
-}
-.hero-badge{
-  position:absolute;top:110px;right:50px;
-  border:1px solid rgba(212,169,74,0.4);
-  color:rgba(212,169,74,0.7);
-  font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;
-  padding:10px 18px;border-radius:2px;
-}
-.hero-content{
-  position:relative;z-index:2;
-  padding:0 60px 80px;max-width:900px;
-}
-.hero-eyebrow{
-  font-family:'Jost',sans-serif;font-size:0.7rem;font-weight:500;
-  letter-spacing:0.22em;text-transform:uppercase;
-  color:#D4A94A;margin-bottom:28px;display:flex;align-items:center;gap:12px;
-}
-.hero-eyebrow::before{content:'';width:40px;height:1px;background:#D4A94A;flex-shrink:0;}
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,7vw,6rem);
-  font-weight:300;line-height:1.0;
-  color:var(--hero-text);letter-spacing:-0.01em;
-  margin-bottom:10px;
-}
-.hero-title em{font-style:italic;color:#D4A94A;}
-.hero-title-kr{
-  font-family:'Jost',sans-serif;font-size:clamp(1rem,2vw,1.4rem);
-  font-weight:300;color:rgba(250,245,235,0.55);
-  letter-spacing:0.06em;margin-bottom:40px;
-}
-.hero-meta{
-  display:flex;gap:40px;flex-wrap:wrap;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:32px;margin-top:32px;
-}
-.hero-meta-item label{
-  display:block;font-size:0.62rem;font-weight:500;letter-spacing:0.16em;
-  text-transform:uppercase;color:rgba(212,169,74,0.6);margin-bottom:4px;
-}
-.hero-meta-item span{
-  font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;
-  color:var(--hero-text);letter-spacing:0.02em;
-}
-.hero-meta-item small{
-  font-size:0.75rem;color:rgba(250,245,235,0.4);margin-left:4px;
-}
-.hero-cta{
-  margin-top:48px;
-  display:inline-flex;align-items:center;gap:14px;
-  background:transparent;border:1px solid rgba(212,169,74,0.5);
-  color:#D4A94A;padding:16px 36px;border-radius:2px;
-  font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;
-  cursor:pointer;transition:all 0.3s;
-}
-.hero-cta:hover{background:rgba(212,169,74,0.1);border-color:#D4A94A;}
-.hero-cta-kr{display:none;}
-.hero-scroll{
-  position:absolute;bottom:40px;right:60px;z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:rgba(212,169,74,0.4);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
-}
-.hero-scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(212,169,74,0.4),transparent);animation:scrollLine 2s ease-in-out infinite;}
-@keyframes scrollLine{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.3);opacity:0.4}}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,7,0.92) 0%,rgba(10,9,7,0.55) 40%,rgba(10,9,7,0.2) 100%)}
+.hero-grain{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.hero-badge{position:absolute;top:110px;right:50px;border:1px solid rgba(212,169,74,0.4);color:rgba(212,169,74,0.7);font-size:.65rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
+.hero-content{position:relative;z-index:2;padding:0 60px 80px;max-width:900px}
+.hero-eyebrow{font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#D4A94A;margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:#D4A94A;flex-shrink:0}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1.0;color:var(--hero-text);letter-spacing:-.01em;margin-bottom:10px}
+.hero-title em{font-style:italic;color:#D4A94A}
+.hero-sub{font-family:'Jost',sans-serif;font-size:clamp(1rem,2vw,1.4rem);font-weight:300;color:rgba(250,245,235,0.55);letter-spacing:.06em;margin-bottom:40px}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.1);padding-top:32px;margin-top:32px}
+.hero-meta-item label{display:block;font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(212,169,74,0.6);margin-bottom:4px}
+.hero-meta-item span{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--hero-text);letter-spacing:.02em}
+.hero-meta-item small{font-size:.75rem;color:rgba(250,245,235,0.4);margin-left:4px}
+.hero-cta{margin-top:48px;display:inline-flex;align-items:center;gap:14px;background:transparent;border:1px solid rgba(212,169,74,0.5);color:#D4A94A;padding:16px 36px;border-radius:2px;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .3s}
+.hero-cta:hover{background:rgba(212,169,74,0.1);border-color:#D4A94A}
+.hero-scroll{position:absolute;bottom:40px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(212,169,74,0.4);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(212,169,74,0.4),transparent);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.3);opacity:.4}}
 
-/* ── SECTION BASE ── */
-section{padding:100px 60px;}
-.section-eyebrow{
-  font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;
-}
-.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);flex-shrink:0;}
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,4vw,3.5rem);font-weight:400;
-  line-height:1.15;color:var(--fg);margin-bottom:20px;
-}
-.section-title em{font-style:italic;color:var(--gold);}
-.section-subtitle{
-  font-size:0.9rem;line-height:1.7;color:var(--fg2);max-width:560px;
-}
+/* SECTION BASE */
+section{padding:100px 60px}
+.section-eyebrow{font-size:.65rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);flex-shrink:0}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;line-height:1.15;color:var(--fg);margin-bottom:20px}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-subtitle{font-size:.9rem;line-height:1.7;color:var(--fg2);max-width:560px}
 
-/* ── ABOUT ── */
-.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1280px;margin:0 auto;}
-.about-visual{
-  position:relative;height:580px;border-radius:2px;overflow:hidden;
-  background:linear-gradient(145deg,#1A1712 0%,#2C2518 40%,#1A1410 100%);
-}
-.about-visual-art{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%,rgba(184,137,42,0.15) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 80% at 20% 80%,rgba(120,90,20,0.1) 0%,transparent 60%);
-}
-.about-visual-text{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:40px;
-  background:linear-gradient(to top,rgba(10,9,7,0.9) 0%,transparent 60%);
-}
-.about-visual-stat{
-  font-family:'Cormorant Garamond',serif;
-  font-size:5rem;font-weight:300;color:#D4A94A;line-height:1;
-}
-.about-visual-label{
-  font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:rgba(212,169,74,0.6);margin-top:6px;
-}
-.about-floater{
-  position:absolute;top:40px;right:40px;
-  border:1px solid rgba(212,169,74,0.3);
-  padding:20px 24px;backdrop-filter:blur(8px);
-  background:rgba(20,18,12,0.7);
-}
-.about-floater-num{
-  font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:400;
-  color:#D4A94A;line-height:1;
-}
-.about-floater-label{font-size:0.65rem;letter-spacing:0.12em;color:rgba(212,169,74,0.6);margin-top:4px;}
-.about-right{padding-top:20px;}
-.about-body{font-size:0.92rem;line-height:1.85;color:var(--fg2);margin-bottom:32px;}
-.about-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.tag{
-  background:var(--tag-bg);border:1px solid rgba(184,137,42,0.2);
-  color:var(--gold);font-size:0.68rem;letter-spacing:0.1em;
-  padding:6px 14px;border-radius:2px;
-}
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1280px;margin:0 auto}
+.about-visual{position:relative;height:580px;border-radius:2px;overflow:hidden}
+.about-visual img{width:100%;height:100%;object-fit:cover;object-position:center}
+.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,7,0.7) 0%,transparent 50%)}
+.about-floater{position:absolute;top:30px;right:30px;border:1px solid rgba(212,169,74,0.4);padding:18px 22px;backdrop-filter:blur(10px);background:rgba(12,11,8,0.75)}
+.about-floater-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;color:#D4A94A;line-height:1}
+.about-floater-label{font-size:.62rem;letter-spacing:.12em;color:rgba(212,169,74,0.6);margin-top:4px}
+.about-visual-caption{position:absolute;bottom:30px;left:30px;right:30px}
+.about-visual-caption p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(250,245,235,0.85)}
+.about-right{padding-top:20px}
+.about-body{font-size:.92rem;line-height:1.85;color:var(--fg2);margin-bottom:32px}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:var(--tag-bg);border:1px solid rgba(184,137,42,0.2);color:var(--gold);font-size:.68rem;letter-spacing:.1em;padding:6px 14px;border-radius:2px}
 
-/* ── STAGES ── */
-.stages-section{background:var(--bg2);}
-.stages-wrap{max-width:1280px;margin:0 auto;}
-.stages-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
-  margin-top:60px;
-}
-.stage-card{
-  background:var(--card-bg);padding:32px 28px;
-  position:relative;overflow:hidden;
-  transition:transform 0.3s;cursor:default;
-  border-bottom:3px solid transparent;
-}
-.stage-card:hover{transform:translateY(-4px);}
-.stage-card.complete{border-bottom-color:#6B8E6B;}
-.stage-card.active{border-bottom-color:var(--gold);}
-.stage-card.upcoming{border-bottom-color:#8B7355;}
-.stage-num{
-  font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;
-  color:var(--divider);line-height:1;margin-bottom:16px;
-}
-.stage-name{
-  font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;
-  color:var(--fg);margin-bottom:6px;
-}
-.stage-status{
-  font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;
-  font-weight:600;margin-bottom:16px;
-}
-.complete .stage-status{color:#6B8E6B;}
-.active .stage-status{color:var(--gold);}
-.upcoming .stage-status{color:#8B7355;}
-.stage-info{font-size:0.78rem;color:var(--fg2);line-height:1.6;}
+/* FULL-WIDTH IMAGE BAND */
+.img-band{width:100%;height:480px;position:relative;overflow:hidden}
+.img-band img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.img-band-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,9,7,0.55) 0%,transparent 50%)}
+.img-band-caption{position:absolute;bottom:40px;left:60px;color:var(--hero-text)}
+.img-band-caption h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;margin-bottom:6px}
+.img-band-caption p{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,245,235,0.55)}
 
-/* ── AMENITIES ── */
-.amenities-wrap{max-width:1280px;margin:0 auto;}
-.amenities-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:70px;}
-.amenities-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-}
-.amenity-card{
-  background:var(--card-bg);padding:44px 36px;
-  position:relative;
-  border-top:1px solid var(--divider);
-  transition:background 0.3s;
-}
-.amenity-card:hover{background:var(--bg2);}
-.amenity-icon{font-size:2rem;margin-bottom:20px;}
-.amenity-name{
-  font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;
-  color:var(--fg);margin-bottom:8px;
-}
-.amenity-desc{font-size:0.8rem;color:var(--fg2);line-height:1.65;}
-.amenity-divider{
-  position:absolute;left:36px;bottom:0;
-  width:40px;height:2px;background:var(--gold);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.3s;
-}
-.amenity-card:hover .amenity-divider{transform:scaleX(1);}
+/* STAGES */
+.stages-section{background:var(--bg2)}
+.stages-wrap{max-width:1280px;margin:0 auto}
+.stages-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:60px}
+.stage-card{background:var(--card-bg);padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s;cursor:default;border-bottom:3px solid transparent}
+.stage-card:hover{transform:translateY(-4px)}
+.stage-card.complete{border-bottom-color:#6B8E6B}
+.stage-card.active{border-bottom-color:var(--gold)}
+.stage-card.upcoming{border-bottom-color:#8B7355}
+.stage-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--divider);line-height:1;margin-bottom:16px}
+.stage-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--fg);margin-bottom:6px}
+.stage-status{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.complete .stage-status{color:#6B8E6B}
+.active .stage-status{color:var(--gold)}
+.upcoming .stage-status{color:#8B7355}
+.stage-info{font-size:.78rem;color:var(--fg2);line-height:1.6}
 
-/* ── LOCATION ── */
-.location-section{background:var(--hero-bg);color:var(--hero-text);}
-.location-wrap{max-width:1280px;margin:0 auto;}
-.location-wrap .section-eyebrow{color:#D4A94A;}
-.location-wrap .section-eyebrow::before{background:#D4A94A;}
-.location-wrap .section-title{color:var(--hero-text);}
-.location-wrap .section-subtitle{color:rgba(250,245,235,0.5);}
-.location-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  margin-top:60px;background:rgba(255,255,255,0.05);
-}
-.location-card{
-  background:rgba(255,255,255,0.03);
-  padding:40px 32px;text-align:center;
-  transition:background 0.3s;
-}
-.location-card:hover{background:rgba(212,169,74,0.06);}
-.location-dist{
-  font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;
-  color:#D4A94A;line-height:1;margin-bottom:8px;
-}
-.location-dist small{font-size:1rem;color:rgba(212,169,74,0.6);}
-.location-name{font-size:0.85rem;color:rgba(250,245,235,0.75);margin-bottom:4px;}
-.location-mode{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,245,235,0.3);}
+/* INTERIORS SECTION */
+.interiors-section{background:var(--hero-bg);overflow:hidden}
+.interiors-wrap{max-width:1280px;margin:0 auto}
+.interiors-intro{margin-bottom:50px}
+.interiors-intro .section-eyebrow{color:#D4A94A}
+.interiors-intro .section-eyebrow::before{background:#D4A94A}
+.interiors-intro .section-title{color:var(--hero-text)}
+.interiors-intro .section-subtitle{color:rgba(250,245,235,0.5)}
+.interiors-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.interior-card{position:relative;height:520px;overflow:hidden}
+.interior-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.interior-card:hover img{transform:scale(1.04)}
+.interior-card-label{position:absolute;bottom:0;left:0;right:0;padding:30px 36px;background:linear-gradient(to top,rgba(10,9,7,0.85) 0%,transparent 100%)}
+.interior-card-label h4{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--hero-text);margin-bottom:4px}
+.interior-card-label p{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(212,169,74,0.7)}
 
-/* ── NORWEST STATS ── */
-.stats-section{background:var(--bg2);}
-.stats-wrap{max-width:1280px;margin:0 auto;}
-.stats-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start;}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.stat-card{
-  background:var(--card-bg);padding:40px 36px;
-  border-left:3px solid transparent;
-  transition:border-color 0.3s;
-}
-.stat-card:hover{border-left-color:var(--gold);}
-.stat-num{
-  font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:400;
-  color:var(--gold);line-height:1;margin-bottom:10px;
-}
-.stat-label{font-size:0.8rem;color:var(--fg);font-weight:500;margin-bottom:6px;}
-.stat-sub{font-size:0.72rem;color:var(--fg2);}
+/* AMENITIES */
+.amenities-wrap{max-width:1280px;margin:0 auto}
+.amenities-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:70px}
+.amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.amenity-card{background:var(--card-bg);padding:44px 36px;position:relative;border-top:1px solid var(--divider);transition:background .3s}
+.amenity-card:hover{background:var(--bg2)}
+.amenity-icon{font-size:2rem;margin-bottom:20px}
+.amenity-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--fg);margin-bottom:8px}
+.amenity-desc{font-size:.8rem;color:var(--fg2);line-height:1.65}
+.amenity-divider{position:absolute;left:36px;bottom:0;width:40px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.amenity-card:hover .amenity-divider{transform:scaleX(1)}
 
-/* ── DEVELOPER ── */
-.developer-wrap{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
-}
-.developer-visual{
-  height:460px;background:var(--bg2);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border:1px solid var(--divider);position:relative;overflow:hidden;
-}
-.developer-visual::before{
-  content:'積水ハウス';
-  position:absolute;
-  font-family:'Cormorant Garamond',serif;
-  font-size:8rem;font-weight:300;
-  color:var(--divider);
-  opacity:0.3;letter-spacing:-0.04em;
-  white-space:nowrap;
-}
-.developer-logo-text{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.8rem;font-weight:400;color:var(--fg);
-  letter-spacing:0.06em;position:relative;z-index:1;
-}
-.developer-stats{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;
-}
-.dev-stat{padding:24px;background:var(--tag-bg);border:1px solid rgba(184,137,42,0.15);}
-.dev-stat-num{
-  font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;
-  color:var(--gold);line-height:1;margin-bottom:4px;
-}
-.dev-stat-label{font-size:0.7rem;color:var(--fg2);letter-spacing:0.04em;}
+/* LOCATION */
+.location-section{background:var(--hero-bg);color:var(--hero-text)}
+.location-wrap{max-width:1280px;margin:0 auto}
+.location-wrap .section-eyebrow{color:#D4A94A}
+.location-wrap .section-eyebrow::before{background:#D4A94A}
+.location-wrap .section-title{color:var(--hero-text)}
+.location-wrap .section-subtitle{color:rgba(250,245,235,0.5)}
+.location-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:60px;background:rgba(255,255,255,0.05)}
+.location-card{background:rgba(255,255,255,0.03);padding:40px 32px;text-align:center;transition:background .3s}
+.location-card:hover{background:rgba(212,169,74,0.06)}
+.location-dist{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#D4A94A;line-height:1;margin-bottom:8px}
+.location-dist small{font-size:1rem;color:rgba(212,169,74,0.6)}
+.location-name{font-size:.85rem;color:rgba(250,245,235,0.75);margin-bottom:4px}
+.location-mode{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,245,235,0.3)}
 
-/* ── CONTACT ── */
-.contact-section{
-  background:var(--hero-bg);color:var(--hero-text);
-  text-align:center;
-}
-.contact-wrap{max-width:680px;margin:0 auto;}
-.contact-wrap .section-title{color:var(--hero-text);}
-.contact-wrap .section-subtitle{color:rgba(250,245,235,0.5);margin:0 auto 48px;}
-.contact-info{
-  display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
-  margin-bottom:48px;
-}
-.contact-item{text-align:center;}
-.contact-item label{
-  display:block;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;
-  color:rgba(212,169,74,0.5);margin-bottom:6px;
-}
-.contact-item a,.contact-item span{
-  font-size:0.9rem;color:rgba(250,245,235,0.8);text-decoration:none;
-}
-.contact-item a:hover{color:#D4A94A;}
-.contact-cta{
-  display:inline-block;
-  background:linear-gradient(135deg,#B8892A,#D4A94A);
-  color:#0C0B08;
-  font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;
-  letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;
-  padding:18px 48px;border-radius:2px;
-  transition:opacity 0.2s;
-}
-.contact-cta:hover{opacity:0.88;}
-.contact-divider{margin:32px auto;width:1px;height:40px;background:rgba(212,169,74,0.2);}
-.contact-disclaimer{font-size:0.7rem;color:rgba(250,245,235,0.2);line-height:1.6;}
+/* STATS */
+.stats-section{background:var(--bg2)}
+.stats-wrap{max-width:1280px;margin:0 auto}
+.stats-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.stat-card{background:var(--card-bg);padding:40px 36px;border-left:3px solid transparent;transition:border-color .3s}
+.stat-card:hover{border-left-color:var(--gold)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:400;color:var(--gold);line-height:1;margin-bottom:10px}
+.stat-label{font-size:.8rem;color:var(--fg);font-weight:500;margin-bottom:6px}
+.stat-sub{font-size:.72rem;color:var(--fg2)}
 
-/* ── FOOTER ── */
-footer{
-  background:var(--bg2);border-top:1px solid var(--divider);
-  padding:40px 60px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.footer-brand{
-  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;
-  color:var(--gold);
-}
-.footer-copy{font-size:0.72rem;color:var(--fg2);}
+/* MASTERPLAN BAND */
+.masterplan-band{width:100%;position:relative;overflow:hidden;background:var(--bg2)}
+.masterplan-band img{width:100%;display:block;max-height:500px;object-fit:cover;object-position:center}
+.masterplan-band-label{position:absolute;top:30px;left:50px;background:rgba(250,247,242,0.92);padding:12px 24px;border-left:3px solid var(--gold)}
+[data-theme="dark"] .masterplan-band-label{background:rgba(20,18,14,0.88)}
+.masterplan-band-label span{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--fg)}
 
-/* ── FADE-IN ── */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.fade-in.visible{opacity:1;transform:none;}
+/* DEVELOPER */
+.developer-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.developer-visual{height:460px;background:var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--divider);position:relative;overflow:hidden}
+.developer-visual::before{content:'積水ハウス';position:absolute;font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:300;color:var(--divider);opacity:.3;letter-spacing:-.04em;white-space:nowrap}
+.developer-logo-text{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:400;color:var(--fg);letter-spacing:.06em;position:relative;z-index:1}
+.developer-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+.dev-stat{padding:24px;background:var(--tag-bg);border:1px solid rgba(184,137,42,0.15)}
+.dev-stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--gold);line-height:1;margin-bottom:4px}
+.dev-stat-label{font-size:.7rem;color:var(--fg2);letter-spacing:.04em}
 
-/* ── LANGUAGE HIDDEN ── */
-[data-lang="ko"]{display:none;}
-body.lang-ko [data-lang="en"]{display:none;}
-body.lang-ko [data-lang="ko"]{display:block;}
-body.lang-ko .hero-cta .en-text{display:none;}
-body.lang-ko .hero-cta .ko-text{display:inline;}
-.hero-cta .ko-text{display:none;}
+/* CONTACT */
+.contact-section{background:var(--hero-bg);color:var(--hero-text);text-align:center}
+.contact-wrap{max-width:680px;margin:0 auto}
+.contact-wrap .section-title{color:var(--hero-text)}
+.contact-wrap .section-subtitle{color:rgba(250,245,235,0.5);margin:0 auto 48px}
+.contact-info{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:48px}
+.contact-item label{display:block;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,169,74,0.5);margin-bottom:6px}
+.contact-item a,.contact-item span{font-size:.9rem;color:rgba(250,245,235,0.8);text-decoration:none}
+.contact-item a:hover{color:#D4A94A}
+.contact-cta{display:inline-block;background:linear-gradient(135deg,#B8892A,#D4A94A);color:#0C0B08;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:2px;transition:opacity .2s}
+.contact-cta:hover{opacity:.88}
+.contact-divider{margin:32px auto;width:1px;height:40px;background:rgba(212,169,74,0.2)}
+.contact-disclaimer{font-size:.7rem;color:rgba(250,245,235,0.2);line-height:1.6}
 
-/* ── RESPONSIVE ── */
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--divider);padding:40px 60px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold)}
+.footer-copy{font-size:.72rem;color:var(--fg2)}
+
+/* FADE-IN */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* LANG */
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:block}
+body.lang-ko .hero-cta .en-text{display:none}
+body.lang-ko .hero-cta .ko-text{display:inline}
+.hero-cta .ko-text{display:none}
+
+/* RESPONSIVE */
 @media(max-width:900px){
-  nav{padding:0 20px;}
-  .hero-content{padding:0 24px 60px;}
-  section{padding:70px 24px;}
-  .about-wrap,.developer-wrap,.stats-header,.amenities-intro,.location-wrap .section-eyebrow ~ .section-subtitle{grid-template-columns:1fr;gap:40px;}
-  .stages-grid{grid-template-columns:1fr 1fr;}
-  .amenities-grid{grid-template-columns:1fr 1fr;}
-  .location-grid{grid-template-columns:1fr 1fr;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  footer{flex-direction:column;gap:8px;text-align:center;padding:24px;}
-  .hero-badge{display:none;}
-  .hero-scroll{display:none;}
-  .about-visual{height:380px;}
+  nav{padding:0 20px}
+  .hero-content{padding:0 24px 60px}
+  section{padding:70px 24px}
+  .about-wrap,.developer-wrap,.stats-header,.amenities-intro{grid-template-columns:1fr;gap:40px}
+  .stages-grid{grid-template-columns:1fr 1fr}
+  .amenities-grid{grid-template-columns:1fr 1fr}
+  .location-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .interiors-grid{grid-template-columns:1fr}
+  .interior-card{height:360px}
+  .img-band{height:300px}
+  .img-band-caption{left:24px;bottom:24px}
+  .img-band-caption h3{font-size:1.5rem}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px}
+  .hero-badge,.hero-scroll{display:none}
+  .about-visual{height:340px}
+  .masterplan-band img{max-height:280px;object-position:center 20%}
+  .masterplan-band-label{top:16px;left:16px}
 }
 @media(max-width:600px){
-  .stages-grid,.amenities-grid,.location-grid,.stats-grid{grid-template-columns:1fr;}
-  .hero-meta{gap:24px;}
-  .contact-info{gap:20px;}
+  .stages-grid,.amenities-grid,.location-grid,.stats-grid{grid-template-columns:1fr}
+  .hero-meta{gap:24px}
+  .contact-info{gap:20px}
 }
 </style>
 </head>
@@ -461,7 +252,8 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-bg-art"></div>
+  <img class="hero-img" src="assets/norwest-veue/building-exterior.jpg" alt="Veue Grand by Sekisui House — Artist Impression" loading="eager">
+  <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
   <div class="hero-badge" data-lang="en">NORWEST NSW 2153</div>
   <div class="hero-badge" data-lang="ko">노스웨스트 NSW 2153</div>
@@ -472,28 +264,24 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
       <span data-lang="en">Where Nature<br>Meets <em>Refined</em><br>Modern Living</span>
       <span data-lang="ko">자연과<br><em>세련된</em> 현대적<br>삶이 만나는 곳</span>
     </h1>
-    <p class="hero-title-kr" data-lang="en">Norwest's Premier Masterplanned Apartment Community</p>
-    <p class="hero-title-kr" data-lang="ko">노스웨스트 프리미어 마스터플랜 아파트 커뮤니티</p>
+    <p class="hero-sub" data-lang="en">Norwest's Premier Masterplanned Apartment Community</p>
+    <p class="hero-sub" data-lang="ko">노스웨스트 프리미어 마스터플랜 아파트 커뮤니티</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <label data-lang="en">Total Homes</label>
-        <label data-lang="ko">총 세대수</label>
+        <label data-lang="en">Total Homes</label><label data-lang="ko">총 세대수</label>
         <span>1,300<small data-lang="en"> units</small><small data-lang="ko"> 세대</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Development Area</label>
-        <label data-lang="ko">개발 면적</label>
+        <label data-lang="en">Development Area</label><label data-lang="ko">개발 면적</label>
         <span>8.1<small> ha</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Project Value</label>
-        <label data-lang="ko">프로젝트 가치</label>
+        <label data-lang="en">Project Value</label><label data-lang="ko">프로젝트 가치</label>
         <span>$1<small data-lang="en"> Billion</small><small data-lang="ko"> 십억</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Metro Station</label>
-        <label data-lang="ko">메트로역</label>
-        <span>600<small data-lang="en">m away</small><small data-lang="ko">m</small></span>
+        <label data-lang="en">Metro Station</label><label data-lang="ko">메트로역</label>
+        <span>600<small>m</small></span>
       </div>
     </div>
     <a href="#contact" class="hero-cta">
@@ -503,8 +291,7 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
     </a>
   </div>
   <div class="hero-scroll">
-    <span data-lang="en">SCROLL</span>
-    <span data-lang="ko">스크롤</span>
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
@@ -513,46 +300,32 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 <section id="about">
   <div class="about-wrap fade-in">
     <div class="about-visual">
-      <div class="about-visual-art"></div>
+      <img src="assets/norwest-veue/masterplan.jpg" alt="The Orchards Masterplan" loading="lazy">
+      <div class="about-visual-overlay"></div>
       <div class="about-floater">
         <div class="about-floater-num">2017</div>
         <div class="about-floater-label" data-lang="en">Project Commenced</div>
         <div class="about-floater-label" data-lang="ko">프로젝트 시작</div>
       </div>
-      <div class="about-visual-text">
-        <div class="about-visual-stat">5</div>
-        <div class="about-visual-label" data-lang="en">Distinctive Stages · Complete Community</div>
-        <div class="about-visual-label" data-lang="ko">5단계 · 완성된 커뮤니티</div>
+      <div class="about-visual-caption">
+        <p data-lang="en">The Orchards Masterplan — Spurway Drive, Norwest</p>
+        <p data-lang="ko">더 오차드 마스터플랜 — 노스웨스트, 스퍼웨이 드라이브</p>
       </div>
     </div>
     <div class="about-right">
-      <div class="section-eyebrow">
-        <span data-lang="en">About the Project</span>
-        <span data-lang="ko">프로젝트 소개</span>
-      </div>
+      <div class="section-eyebrow"><span data-lang="en">About the Project</span><span data-lang="ko">프로젝트 소개</span></div>
       <h2 class="section-title">
         <span data-lang="en">The Orchards<br><em>Norwest</em></span>
         <span data-lang="ko">오차드<br><em>노스웨스트</em></span>
       </h2>
-      <p class="about-body" data-lang="en">
-        The Orchards is a beautiful masterplanned community growing in the heart of Norwest. Inspired by nature and the rich history of Sydney's Hills District, Sekisui House introduces a community that balances modern luxury with organic living.<br><br>
-        Comprising 1, 2, 3 and 4 bedroom apartments across five distinct stages, The Orchards offers a complete lifestyle — from vibrant streetscapes and landscaped parklands to resort-style amenities that bring residents together.
-      </p>
-      <p class="about-body" data-lang="ko">
-        더 오차드는 노스웨스트 중심부에 조성되는 아름다운 마스터플랜 커뮤니티입니다. 시드니 힐스 지구의 풍부한 자연과 역사에서 영감을 받아, 세키스이 하우스가 선보이는 현대적 럭셔리와 자연이 조화를 이루는 커뮤니티입니다.<br><br>
-        5개의 독립적인 단계로 구성된 1~4베드룸 아파트로 이루어진 더 오차드는 활기찬 거리, 조경된 공원, 리조트 스타일의 편의시설까지 완전한 라이프스타일을 제공합니다.
-      </p>
+      <p class="about-body" data-lang="en">The Orchards is a beautiful masterplanned community growing in the heart of Norwest. Inspired by nature and the rich history of Sydney's Hills District, Sekisui House introduces a community that balances modern luxury with organic living.<br><br>Comprising 1, 2, 3 and 4 bedroom apartments across five distinct stages, The Orchards offers a complete lifestyle — from vibrant streetscapes and landscaped parklands to resort-style amenities.</p>
+      <p class="about-body" data-lang="ko">더 오차드는 노스웨스트 중심부에 조성되는 아름다운 마스터플랜 커뮤니티입니다. 시드니 힐스 지구의 자연과 역사에서 영감을 받아, 현대적 럭셔리와 자연이 조화를 이루는 커뮤니티입니다.<br><br>5단계로 구성된 1~4베드룸 아파트로 이루어지며, 조경된 공원부터 리조트 스타일의 편의시설까지 완전한 라이프스타일을 제공합니다.</p>
       <div class="about-tags">
-        <span class="tag" data-lang="en">Masterplanned Community</span>
-        <span class="tag" data-lang="ko">마스터플랜 커뮤니티</span>
-        <span class="tag" data-lang="en">1–4 Bedroom Apartments</span>
-        <span class="tag" data-lang="ko">1~4베드룸 아파트</span>
-        <span class="tag" data-lang="en">1.4ha Linear Park</span>
-        <span class="tag" data-lang="ko">1.4ha 리니어 파크</span>
-        <span class="tag" data-lang="en">Metro Connected</span>
-        <span class="tag" data-lang="ko">메트로 연결</span>
-        <span class="tag" data-lang="en">Resort Amenities</span>
-        <span class="tag" data-lang="ko">리조트 편의시설</span>
+        <span class="tag" data-lang="en">Masterplanned Community</span><span class="tag" data-lang="ko">마스터플랜 커뮤니티</span>
+        <span class="tag" data-lang="en">1–4 Bedroom Apartments</span><span class="tag" data-lang="ko">1~4베드룸 아파트</span>
+        <span class="tag" data-lang="en">1.4ha Linear Park</span><span class="tag" data-lang="ko">1.4ha 리니어 파크</span>
+        <span class="tag" data-lang="en">Metro Connected</span><span class="tag" data-lang="ko">메트로 연결</span>
+        <span class="tag" data-lang="en">Resort Amenities</span><span class="tag" data-lang="ko">리조트 편의시설</span>
       </div>
     </div>
   </div>
@@ -562,10 +335,7 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 <section class="stages-section" id="stages">
   <div class="stages-wrap">
     <div class="fade-in">
-      <div class="section-eyebrow">
-        <span data-lang="en">Development Stages</span>
-        <span data-lang="ko">개발 단계</span>
-      </div>
+      <div class="section-eyebrow"><span data-lang="en">Development Stages</span><span data-lang="ko">개발 단계</span></div>
       <h2 class="section-title">
         <span data-lang="en">A Community Built<br><em>Over Time</em></span>
         <span data-lang="ko">시간을 거쳐<br><em>완성되는</em> 커뮤니티</span>
@@ -578,39 +348,86 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
         <div class="stage-status" data-lang="en">✓ Completed · Sold Out</div>
         <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div>
         <div class="stage-info" data-lang="en">Completed 2019. The first stage established the benchmark for luxury apartment living at The Orchards.</div>
-        <div class="stage-info" data-lang="ko">2019년 완공. 더 오차드의 럭셔리 아파트 기준을 세운 첫 번째 단계입니다.</div>
+        <div class="stage-info" data-lang="ko">2019년 완공. 더 오차드의 럭셔리 아파트 기준을 세운 첫 번째 단계.</div>
       </div>
       <div class="stage-card complete">
         <div class="stage-num">02</div>
         <div class="stage-name">Lumia</div>
         <div class="stage-status" data-lang="en">✓ Completed · Sold Out</div>
         <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div>
-        <div class="stage-info" data-lang="en">Completed 2022. Building on the success of Imperial, Lumia further expanded the community's footprint.</div>
-        <div class="stage-info" data-lang="ko">2022년 완공. 임페리얼의 성공을 이어, 루미아는 커뮤니티를 더욱 확장했습니다.</div>
+        <div class="stage-info" data-lang="en">Completed 2022. Building on the success of Imperial, Lumia further expanded the community.</div>
+        <div class="stage-info" data-lang="ko">2022년 완공. 임페리얼의 성공을 이어 커뮤니티를 더욱 확장했습니다.</div>
       </div>
       <div class="stage-card active">
         <div class="stage-num">03</div>
         <div class="stage-name">Veue Central</div>
         <div class="stage-status" data-lang="en">⬤ Under Construction</div>
         <div class="stage-status" data-lang="ko">⬤ 공사중</div>
-        <div class="stage-info" data-lang="en">210 apartments across Levels 1–22 (Tower A & B). Construction commenced 2023, expected completion 2026. Colour schemes: Dune &amp; Grove.</div>
-        <div class="stage-info" data-lang="ko">타워 A&B, 1~22층 210세대. 2023년 공사 시작, 2026년 완공 예정. 컬러스킴: 던 &amp; 그로브.</div>
+        <div class="stage-info" data-lang="en">210 apartments, Levels 1–22 (Tower A & B). Construction commenced 2023, completion expected 2026.</div>
+        <div class="stage-info" data-lang="ko">타워 A&B, 1~22층 210세대. 2023년 착공, 2026년 완공 예정.</div>
       </div>
       <div class="stage-card active">
         <div class="stage-num">04</div>
         <div class="stage-name">Veue Parkside</div>
         <div class="stage-status" data-lang="en">⬤ Now Selling</div>
         <div class="stage-status" data-lang="ko">⬤ 분양중</div>
-        <div class="stage-info" data-lang="en">Building E &amp; F. A curated collection of 1, 2 and 3 bedroom apartments with park-side outlooks and premium finishes.</div>
-        <div class="stage-info" data-lang="ko">빌딩 E&F. 공원 전망의 1~3베드룸 아파트 컬렉션. 프리미엄 마감재 적용.</div>
+        <div class="stage-info" data-lang="en">Building E & F. 1, 2 and 3 bedroom apartments with park-side outlooks and premium finishes.</div>
+        <div class="stage-info" data-lang="ko">빌딩 E&F. 공원 전망의 1~3베드룸 아파트. 프리미엄 마감재 적용.</div>
       </div>
       <div class="stage-card upcoming">
         <div class="stage-num">05</div>
         <div class="stage-name">Veue Grand</div>
         <div class="stage-status" data-lang="en">★ Latest Release</div>
         <div class="stage-status" data-lang="ko">★ 최신 분양</div>
-        <div class="stage-info" data-lang="en">The newest and most prestigious stage. Launched March 2025. Grand scale apartments at 104 Fairway Drive, corner of Spurway Drive.</div>
-        <div class="stage-info" data-lang="ko">가장 최신, 최고급 단계. 2025년 3월 론칭. 페어웨이 드라이브 104번지, 스퍼웨이 드라이브 코너 위치.</div>
+        <div class="stage-info" data-lang="en">Newest & most prestigious stage. Launched March 2025. Grand scale apartments at 104 Fairway Drive.</div>
+        <div class="stage-info" data-lang="ko">최신, 최고급 단계. 2025년 3월 론칭. 페어웨이 드라이브 104번지.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDING EXTERIOR IMAGE BAND -->
+<div class="img-band">
+  <img src="assets/norwest-veue/building-exterior.jpg" alt="Veue Grand — Artist Impression" loading="lazy">
+  <div class="img-band-overlay"></div>
+  <div class="img-band-caption">
+    <h3 data-lang="en">Veue Grand</h3>
+    <h3 data-lang="ko">뷰에 그랜드</h3>
+    <p data-lang="en">Stage 5 · 104 Fairway Drive, Norwest · Artist Impression</p>
+    <p data-lang="ko">5단계 · 노스웨스트 페어웨이 드라이브 104번지 · 조감도</p>
+  </div>
+</div>
+
+<!-- INTERIORS -->
+<section class="interiors-section" id="interiors">
+  <div class="interiors-wrap fade-in">
+    <div class="interiors-intro">
+      <div class="section-eyebrow"><span data-lang="en">Interior Finishes</span><span data-lang="ko">인테리어 마감</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Two Distinctive<br><em>Colour Schemes</em></span>
+        <span data-lang="ko">두 가지 독창적인<br><em>컬러 스킴</em></span>
+      </h2>
+      <p class="section-subtitle" data-lang="en">Each apartment at The Orchards offers a choice of two expertly curated interior palettes — Dune and Grove — designed to complement the natural surroundings with timeless elegance.</p>
+      <p class="section-subtitle" data-lang="ko">더 오차드의 모든 아파트는 던(Dune)과 그로브(Grove), 두 가지 정교하게 큐레이션된 인테리어 팔레트를 선택할 수 있습니다. 자연 환경을 보완하는 시간을 초월한 우아함으로 설계되었습니다.</p>
+    </div>
+    <div class="interiors-grid">
+      <div class="interior-card">
+        <img src="assets/norwest-veue/interior-dune.jpg" alt="Dune Colour Scheme — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">Dune — At First Light</h4>
+          <h4 data-lang="ko">던 — 새벽빛의 밝음</h4>
+          <p data-lang="en">Light timber · Stone benchtops · Soft tones · Artist Impression</p>
+          <p data-lang="ko">밝은 목재 · 스톤 벤치탑 · 소프트 톤 · 조감도</p>
+        </div>
+      </div>
+      <div class="interior-card">
+        <img src="assets/norwest-veue/interior-grove.jpg" alt="Grove Colour Scheme — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">Grove — In Afterglow</h4>
+          <h4 data-lang="ko">그로브 — 황혼의 온기</h4>
+          <p data-lang="en">Dark wenge joinery · Champagne floors · Warm accents · Artist Impression</p>
+          <p data-lang="ko">다크 웬지 조이너리 · 샴페인 바닥 · 따뜻한 포인트 · 조감도</p>
+        </div>
       </div>
     </div>
   </div>
@@ -621,22 +438,15 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
   <div class="amenities-wrap">
     <div class="amenities-intro fade-in">
       <div>
-        <div class="section-eyebrow">
-          <span data-lang="en">Community Amenities</span>
-          <span data-lang="ko">커뮤니티 편의시설</span>
-        </div>
+        <div class="section-eyebrow"><span data-lang="en">Community Amenities</span><span data-lang="ko">커뮤니티 편의시설</span></div>
         <h2 class="section-title">
           <span data-lang="en">A Life Beyond<br><em>the Apartment</em></span>
           <span data-lang="ko">아파트를 넘어선<br><em>더 넓은 삶</em></span>
         </h2>
       </div>
       <div>
-        <p class="section-subtitle" data-lang="en">
-          The Orchards offers unrivalled access to the best things in life — from connection and convenience to abundant green spaces. Every amenity has been designed to bring the community together.
-        </p>
-        <p class="section-subtitle" data-lang="ko">
-          더 오차드는 연결성, 편의성, 풍부한 녹지 공간까지 삶의 최고를 누릴 수 있는 환경을 제공합니다. 모든 편의시설은 커뮤니티를 하나로 이어주도록 설계되었습니다.
-        </p>
+        <p class="section-subtitle" data-lang="en">The Orchards offers unrivalled access to the best things in life — from connection and convenience to abundant green spaces. Every amenity has been designed to bring the community together.</p>
+        <p class="section-subtitle" data-lang="ko">더 오차드는 연결성, 편의성, 풍부한 녹지 공간까지 삶의 최고를 누릴 수 있는 환경을 제공합니다. 모든 편의시설은 커뮤니티를 하나로 이어주도록 설계되었습니다.</p>
       </div>
     </div>
     <div class="amenities-grid fade-in">
@@ -645,31 +455,31 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
         <div class="amenity-name" data-lang="en">Outdoor Lagoon Pool</div>
         <div class="amenity-name" data-lang="ko">야외 라군 풀</div>
         <div class="amenity-desc" data-lang="en">A cool oasis in summer, the lagoon pool makes the most of the area's natural assets with resort-quality swimming.</div>
-        <div class="amenity-desc" data-lang="ko">여름철 시원한 오아시스. 리조트 수준의 수영을 즐길 수 있는 라군 풀로 자연의 매력을 극대화했습니다.</div>
+        <div class="amenity-desc" data-lang="ko">여름철 시원한 오아시스. 리조트 수준의 라군 풀로 자연의 매력을 극대화했습니다.</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🎬</div>
         <div class="amenity-name" data-lang="en">Outdoor Cinema</div>
         <div class="amenity-name" data-lang="ko">야외 시네마</div>
-        <div class="amenity-desc" data-lang="en">Enjoy your favourite movie under the stars in The Orchards' high-end outdoor cinema experience — open year-round.</div>
-        <div class="amenity-desc" data-lang="ko">별 아래에서 좋아하는 영화를 감상하세요. 연중 이용 가능한 프리미엄 야외 시네마 경험을 제공합니다.</div>
+        <div class="amenity-desc" data-lang="en">Enjoy your favourite movie under the stars in The Orchards' high-end outdoor cinema — open year-round.</div>
+        <div class="amenity-desc" data-lang="ko">별 아래에서 좋아하는 영화를 감상하세요. 연중 이용 가능한 프리미엄 야외 시네마.</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🌿</div>
         <div class="amenity-name" data-lang="en">1.4ha Parklands</div>
         <div class="amenity-name" data-lang="ko">1.4ha 공원</div>
-        <div class="amenity-desc" data-lang="en">Publicly accessible linear park with retention of significant trees. Walk the dog, take the kids for a ride, or simply unwind.</div>
-        <div class="amenity-desc" data-lang="ko">기존 수목을 보존한 1.4ha의 공개 리니어 파크. 반려견 산책, 자전거 타기, 휴식 등 다양한 활동이 가능합니다.</div>
+        <div class="amenity-desc" data-lang="en">Publicly accessible linear park with retention of significant trees. Walk, ride, or simply unwind in nature.</div>
+        <div class="amenity-desc" data-lang="ko">기존 수목을 보존한 공개 리니어 파크. 산책, 자전거, 휴식 등 다양한 활동이 가능합니다.</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🏋️</div>
         <div class="amenity-name" data-lang="en">Community Centre</div>
         <div class="amenity-name" data-lang="ko">커뮤니티 센터</div>
-        <div class="amenity-desc" data-lang="en">Complete with gym, indoor heated swimming pool, spa, and function centre for residents to enjoy year-round.</div>
-        <div class="amenity-desc" data-lang="ko">피트니스 센터, 실내 온수 수영장, 스파, 행사장을 갖춘 종합 커뮤니티 시설입니다.</div>
+        <div class="amenity-desc" data-lang="en">Complete with gym, indoor heated swimming pool, spa, and function centre for residents year-round.</div>
+        <div class="amenity-desc" data-lang="ko">피트니스 센터, 실내 온수 수영장, 스파, 행사장을 갖춘 종합 커뮤니티 시설.</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
@@ -677,14 +487,14 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
         <div class="amenity-name" data-lang="en">BBQ & Entertaining</div>
         <div class="amenity-name" data-lang="ko">BBQ & 엔터테이닝</div>
         <div class="amenity-desc" data-lang="en">With a selection of outdoor spaces to entertain in, getting together with friends and family has never been easier.</div>
-        <div class="amenity-desc" data-lang="ko">다양한 야외 공간에서 가족, 친구들과의 모임을 언제든지 즐길 수 있습니다.</div>
+        <div class="amenity-desc" data-lang="ko">다양한 야외 공간에서 가족, 친구들과의 모임을 언제든 즐길 수 있습니다.</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🚶</div>
         <div class="amenity-name" data-lang="en">Walking Trails</div>
         <div class="amenity-name" data-lang="ko">워킹 트레일</div>
-        <div class="amenity-desc" data-lang="en">Explore the path network while staying connected to the community. Get active and discover nature right at your doorstep.</div>
+        <div class="amenity-desc" data-lang="en">Explore the path network while staying connected to the community. Nature right at your doorstep.</div>
         <div class="amenity-desc" data-lang="ko">커뮤니티와 연결된 산책로 네트워크를 탐험하세요. 바로 앞에 있는 자연을 즐길 수 있습니다.</div>
         <div class="amenity-divider"></div>
       </div>
@@ -695,142 +505,107 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 <!-- LOCATION -->
 <section class="location-section" id="location">
   <div class="location-wrap fade-in">
-    <div class="section-eyebrow">
-      <span data-lang="en">Location & Connectivity</span>
-      <span data-lang="ko">위치 & 교통</span>
-    </div>
-    <h2 class="section-title">
-      <span data-lang="en">Connected to <em>Everything</em></span>
-      <span data-lang="ko"><em>모든 것</em>이 가까운 위치</span>
-    </h2>
+    <div class="section-eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
+    <h2 class="section-title"><span data-lang="en">Connected to <em>Everything</em></span><span data-lang="ko"><em>모든 것</em>이 가까운 위치</span></h2>
     <p class="section-subtitle" data-lang="en">9 Spurway Drive, Norwest NSW 2153 — at the heart of one of Sydney's fastest-growing business and lifestyle precincts. Norwest Metro Station is just 600 metres away.</p>
-    <p class="section-subtitle" data-lang="ko">노스웨스트 NSW 2153, 스퍼웨이 드라이브 9번지 — 시드니에서 가장 빠르게 성장하는 비즈니스 및 라이프스타일 지구의 중심부. 노스웨스트 메트로역까지 단 600m.</p>
+    <p class="section-subtitle" data-lang="ko">노스웨스트 NSW 2153, 스퍼웨이 드라이브 9번지 — 시드니에서 가장 빠르게 성장하는 지구의 중심부. 노스웨스트 메트로역까지 단 600m.</p>
     <div class="location-grid">
       <div class="location-card">
         <div class="location-dist">600<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Metro Station</div>
-        <div class="location-name" data-lang="ko">노스웨스트 메트로역</div>
-        <div class="location-mode" data-lang="en">On foot</div>
-        <div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Metro Station</div><div class="location-name" data-lang="ko">노스웨스트 메트로역</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
       </div>
       <div class="location-card">
         <div class="location-dist">200<small>m</small></div>
-        <div class="location-name" data-lang="en">Lakeview Private Hospital</div>
-        <div class="location-name" data-lang="ko">레이크뷰 사립병원</div>
-        <div class="location-mode" data-lang="en">On foot</div>
-        <div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Lakeview Private Hospital</div><div class="location-name" data-lang="ko">레이크뷰 사립병원</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
       </div>
       <div class="location-card">
         <div class="location-dist">500<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Business Park</div>
-        <div class="location-name" data-lang="ko">노스웨스트 비즈니스파크</div>
-        <div class="location-mode" data-lang="en">On foot</div>
-        <div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Business Park</div><div class="location-name" data-lang="ko">노스웨스트 비즈니스파크</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
       </div>
       <div class="location-card">
         <div class="location-dist">400<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Marketown</div>
-        <div class="location-name" data-lang="ko">노스웨스트 마켓타운</div>
-        <div class="location-mode" data-lang="en">On foot</div>
-        <div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Marketown</div><div class="location-name" data-lang="ko">노스웨스트 마켓타운</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
       </div>
       <div class="location-card">
         <div class="location-dist">10<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Castle Towers</div>
-        <div class="location-name" data-lang="ko">캐슬 타워스</div>
-        <div class="location-mode" data-lang="en">By car</div>
-        <div class="location-mode" data-lang="ko">차량</div>
+        <div class="location-name" data-lang="en">Castle Towers</div><div class="location-name" data-lang="ko">캐슬 타워스</div>
+        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
       </div>
       <div class="location-card">
         <div class="location-dist">25<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Chatswood</div>
-        <div class="location-name" data-lang="ko">채츠우드</div>
-        <div class="location-mode" data-lang="en">Metro</div>
-        <div class="location-mode" data-lang="ko">메트로</div>
+        <div class="location-name" data-lang="en">Chatswood</div><div class="location-name" data-lang="ko">채츠우드</div>
+        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div>
       </div>
       <div class="location-card">
         <div class="location-dist">48<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Sydney CBD</div>
-        <div class="location-name" data-lang="ko">시드니 CBD</div>
-        <div class="location-mode" data-lang="en">Metro (future)</div>
-        <div class="location-mode" data-lang="ko">메트로 (예정)</div>
+        <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div>
+        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div>
       </div>
       <div class="location-card">
         <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Castle Hill Country Club</div>
-        <div class="location-name" data-lang="ko">캐슬힐 컨트리클럽</div>
-        <div class="location-mode" data-lang="en">By car</div>
-        <div class="location-mode" data-lang="ko">차량</div>
+        <div class="location-name" data-lang="en">Castle Hill Country Club</div><div class="location-name" data-lang="ko">캐슬힐 컨트리클럽</div>
+        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- MASTERPLAN BAND -->
+<div class="masterplan-band fade-in">
+  <div class="masterplan-band-label"><span data-lang="en">The Orchards — Site Masterplan</span><span data-lang="ko">더 오차드 — 단지 마스터플랜</span></div>
+  <img src="assets/norwest-veue/masterplan.jpg" alt="The Orchards Norwest Masterplan" loading="lazy">
+</div>
 
 <!-- NORWEST STATS -->
 <section class="stats-section" id="suburb">
   <div class="stats-wrap">
     <div class="stats-header fade-in">
       <div>
-        <div class="section-eyebrow">
-          <span data-lang="en">Why Norwest</span>
-          <span data-lang="ko">왜 노스웨스트인가</span>
-        </div>
+        <div class="section-eyebrow"><span data-lang="en">Why Norwest</span><span data-lang="ko">왜 노스웨스트인가</span></div>
         <h2 class="section-title">
           <span data-lang="en">A Suburb of<br><em>High Achievers</em></span>
           <span data-lang="ko">높은 성취를 이룬<br><em>사람들의 지역</em></span>
         </h2>
       </div>
       <div>
-        <p class="section-subtitle" data-lang="en">
-          Norwest consistently attracts Sydney's most educated and high-earning residents. The suburb's demographics reflect a thriving professional community driven by proximity to major business parks, hospitals, and educational institutions.
-        </p>
-        <p class="section-subtitle" data-lang="ko">
-          노스웨스트는 시드니에서 가장 교육 수준이 높고 소득이 높은 주민들을 지속적으로 유치하고 있습니다. 주요 비즈니스파크, 병원, 교육기관과의 근접성으로 번영하는 전문직 커뮤니티가 형성되어 있습니다.
-        </p>
+        <p class="section-subtitle" data-lang="en">Norwest consistently attracts Sydney's most educated and high-earning residents. The suburb's demographics reflect a thriving professional community driven by proximity to major business parks, hospitals, and educational institutions.</p>
+        <p class="section-subtitle" data-lang="ko">노스웨스트는 시드니에서 가장 교육 수준이 높고 소득이 높은 주민들을 지속적으로 유치하고 있습니다. 주요 비즈니스파크, 병원, 교육기관과의 근접성으로 번영하는 전문직 커뮤니티가 형성되어 있습니다.</p>
       </div>
     </div>
     <div class="stats-grid fade-in">
       <div class="stat-card">
         <div class="stat-num">$2,207</div>
-        <div class="stat-label" data-lang="en">Median Weekly Household Income</div>
-        <div class="stat-label" data-lang="ko">주당 중간 가구 소득</div>
-        <div class="stat-sub" data-lang="en">2021 Census · Norwest suburb</div>
-        <div class="stat-sub" data-lang="ko">2021년 인구조사 · 노스웨스트</div>
+        <div class="stat-label" data-lang="en">Median Weekly Household Income</div><div class="stat-label" data-lang="ko">주당 중간 가구 소득</div>
+        <div class="stat-sub" data-lang="en">2021 Census · Norwest suburb</div><div class="stat-sub" data-lang="ko">2021년 인구조사 · 노스웨스트</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">39.7%</div>
-        <div class="stat-label" data-lang="en">Bachelor Degree or Above</div>
-        <div class="stat-label" data-lang="ko">학사 이상 학력 보유자</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 27.8%</div>
-        <div class="stat-sub" data-lang="ko">NSW 평균 27.8% 대비</div>
+        <div class="stat-label" data-lang="en">Bachelor Degree or Above</div><div class="stat-label" data-lang="ko">학사 이상 학력 보유자</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 27.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 27.8% 대비</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">36.2%</div>
-        <div class="stat-label" data-lang="en">Professional Workforce</div>
-        <div class="stat-label" data-lang="ko">전문직 종사자 비율</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 25.8%</div>
-        <div class="stat-sub" data-lang="ko">NSW 평균 25.8% 대비</div>
+        <div class="stat-label" data-lang="en">Professional Workforce</div><div class="stat-label" data-lang="ko">전문직 종사자 비율</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 25.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 25.8% 대비</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">18.4%</div>
-        <div class="stat-label" data-lang="en">Managers</div>
-        <div class="stat-label" data-lang="ko">관리직 비율</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 14.6%</div>
-        <div class="stat-sub" data-lang="ko">NSW 평균 14.6% 대비</div>
+        <div class="stat-label" data-lang="en">Managers</div><div class="stat-label" data-lang="ko">관리직 비율</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 14.6%</div><div class="stat-sub" data-lang="ko">NSW 평균 14.6% 대비</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">Top 3</div>
-        <div class="stat-label" data-lang="en">Local School Rankings</div>
-        <div class="stat-label" data-lang="ko">지역 학교 순위</div>
-        <div class="stat-sub" data-lang="en">Baulkham Hills HS ranks #3 in Sydney</div>
-        <div class="stat-sub" data-lang="ko">볼컴힐스 HS 시드니 3위권</div>
+        <div class="stat-label" data-lang="en">Local School Rankings</div><div class="stat-label" data-lang="ko">지역 학교 순위</div>
+        <div class="stat-sub" data-lang="en">Baulkham Hills HS ranks #3 in Sydney</div><div class="stat-sub" data-lang="ko">볼컴힐스 HS 시드니 3위권</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">$1.42M</div>
-        <div class="stat-label" data-lang="en">Recent 2BR Resale (2024)</div>
-        <div class="stat-label" data-lang="ko">2BR 최근 재매도가 (2024)</div>
-        <div class="stat-sub" data-lang="en">223/9 Spurway Dr · bought $950K in 2020</div>
-        <div class="stat-sub" data-lang="ko">2020년 $950K 구매 → 2024년 $1.42M</div>
+        <div class="stat-label" data-lang="en">Recent 2BR Resale (2024)</div><div class="stat-label" data-lang="ko">2BR 최근 재매도가 (2024)</div>
+        <div class="stat-sub" data-lang="en">223/9 Spurway Dr · bought $950K in 2020</div><div class="stat-sub" data-lang="ko">2020년 $950K → 2024년 $1.42M</div>
       </div>
     </div>
   </div>
@@ -843,40 +618,29 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
       <div class="developer-logo-text">SEKISUI HOUSE</div>
     </div>
     <div>
-      <div class="section-eyebrow">
-        <span data-lang="en">The Developer</span>
-        <span data-lang="ko">디벨로퍼</span>
-      </div>
+      <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
       <h2 class="section-title">
         <span data-lang="en">Built on a Legacy<br>of <em>Trust</em></span>
         <span data-lang="ko">신뢰의 유산 위에<br><em>세워진</em> 브랜드</span>
       </h2>
-      <p class="section-subtitle" data-lang="en">
-        Established in 1960, Sekisui House is one of the world's largest residential development companies, having built more than 2.6 million homes across the globe. Their defining philosophy, <em>Love of Humanity</em>, underpins every home they create.
-      </p>
-      <p class="section-subtitle" data-lang="ko">
-        1960년 설립된 세키스이 하우스는 전 세계에 260만 채 이상의 주택을 건설한 세계 최대 주거 개발 회사 중 하나입니다. '인류에 대한 사랑'이라는 핵심 철학이 모든 주택 건설의 기반이 됩니다.
-      </p>
+      <p class="section-subtitle" data-lang="en">Established in 1960, Sekisui House is one of the world's largest residential development companies, having built more than 2.6 million homes globally. Their defining philosophy, <em>Love of Humanity</em>, underpins every home they create.</p>
+      <p class="section-subtitle" data-lang="ko">1960년 설립된 세키스이 하우스는 전 세계에 260만 채 이상의 주택을 건설한 세계 최대 주거 개발 회사 중 하나입니다. '인류에 대한 사랑'이라는 핵심 철학이 모든 주택 건설의 기반이 됩니다.</p>
       <div class="developer-stats">
         <div class="dev-stat">
           <div class="dev-stat-num">2.6M+</div>
-          <div class="dev-stat-label" data-lang="en">Homes Delivered Worldwide</div>
-          <div class="dev-stat-label" data-lang="ko">전 세계 주택 공급 실적</div>
+          <div class="dev-stat-label" data-lang="en">Homes Delivered Worldwide</div><div class="dev-stat-label" data-lang="ko">전 세계 주택 공급 실적</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">$18.5B</div>
-          <div class="dev-stat-label" data-lang="en">Development Value in Australia</div>
-          <div class="dev-stat-label" data-lang="ko">호주 개발 총 가치</div>
+          <div class="dev-stat-label" data-lang="en">Development Value in Australia</div><div class="dev-stat-label" data-lang="ko">호주 개발 총 가치</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">12,500+</div>
-          <div class="dev-stat-label" data-lang="en">Properties Delivered in Australia</div>
-          <div class="dev-stat-label" data-lang="ko">호주 공급 주택 수</div>
+          <div class="dev-stat-label" data-lang="en">Properties Delivered in Australia</div><div class="dev-stat-label" data-lang="ko">호주 공급 주택 수</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">65+</div>
-          <div class="dev-stat-label" data-lang="en">Years of Excellence</div>
-          <div class="dev-stat-label" data-lang="ko">혁신의 역사</div>
+          <div class="dev-stat-label" data-lang="en">Years of Excellence</div><div class="dev-stat-label" data-lang="ko">혁신의 역사</div>
         </div>
       </div>
     </div>
@@ -886,44 +650,34 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-wrap fade-in">
-    <div class="section-eyebrow" style="justify-content:center;color:#D4A94A;">
-      <span data-lang="en">Enquire Now</span>
-      <span data-lang="ko">지금 문의하세요</span>
-    </div>
+    <div class="section-eyebrow" style="justify-content:center;color:#D4A94A"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
     <h2 class="section-title">
       <span data-lang="en">Your New Home<br>at The <em>Orchards</em></span>
       <span data-lang="ko">더 오차드에서<br><em>새 삶</em>을 시작하세요</span>
     </h2>
-    <p class="section-subtitle" data-lang="en">
-      Interested in Norwest Veue? Contact Sunny Choi at Forise Group for a personalised consultation on available apartments and investment opportunities.
-    </p>
-    <p class="section-subtitle" data-lang="ko">
-      노스웨스트 뷰에에 관심이 있으신가요? 포라이즈 그룹의 Sunny Choi에게 연락하여 개인 맞춤형 상담과 투자 기회에 대해 문의하세요.
-    </p>
+    <p class="section-subtitle" data-lang="en">Interested in Norwest Veue? Contact Sunny Choi at Forise Group for a personalised consultation on available apartments and investment opportunities.</p>
+    <p class="section-subtitle" data-lang="ko">노스웨스트 뷰에에 관심이 있으신가요? 포라이즈 그룹의 Sunny Choi에게 연락하여 개인 맞춤형 상담과 투자 기회에 대해 문의하세요.</p>
     <div class="contact-divider"></div>
     <div class="contact-info">
       <div class="contact-item">
-        <label data-lang="en">Agent</label>
-        <label data-lang="ko">에이전트</label>
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
         <span>Sunny Choi — Forise Group</span>
       </div>
       <div class="contact-item">
-        <label data-lang="en">Mobile</label>
-        <label data-lang="ko">연락처</label>
+        <label data-lang="en">Mobile</label><label data-lang="ko">연락처</label>
         <a href="tel:0414824225">0414 824 225</a>
       </div>
       <div class="contact-item">
-        <label data-lang="en">Email</label>
-        <label data-lang="ko">이메일</label>
+        <label data-lang="en">Email</label><label data-lang="ko">이메일</label>
         <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
       </div>
     </div>
-    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Norwest%20Veue%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Norwest%20Veue%20at%20The%20Orchards." class="contact-cta">
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Norwest%20Veue%20Enquiry" class="contact-cta">
       <span data-lang="en">Request Information / 분양 문의</span>
     </a>
     <div class="contact-divider"></div>
     <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Images are artist impressions only. Pricing information is available upon request. Forise Group acts as selling agent on behalf of Sekisui House.</p>
-    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도이며 실제와 다를 수 있습니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 세키스이 하우스를 대리하는 판매 에이전트입니다.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도이며 실제와 다를 수 있습니다. 가격 정보는 문의 시 제공됩니다.</p>
   </div>
 </section>
 
@@ -934,34 +688,23 @@ body.lang-ko .hero-cta .ko-text{display:inline;}
 </footer>
 
 <script>
-// Theme
 function toggleTheme(){
-  const body = document.body;
-  const isDark = body.getAttribute('data-theme')==='dark';
-  body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.querySelector('.btn-theme').textContent = isDark ? '☾' : '☀';
+  const b=document.body,dark=b.getAttribute('data-theme')==='dark';
+  b.setAttribute('data-theme',dark?'light':'dark');
+  document.querySelector('.btn-theme').textContent=dark?'☾':'☀';
 }
-// Detect system preference
 if(window.matchMedia('(prefers-color-scheme: dark)').matches){
   document.body.setAttribute('data-theme','dark');
   document.querySelector('.btn-theme').textContent='☀';
 }
-
-// Language
-let isKo = false;
+let isKo=false;
 function toggleLang(){
-  isKo = !isKo;
-  document.body.classList.toggle('lang-ko', isKo);
-  document.querySelector('.btn-lang').textContent = isKo ? 'English' : '한국어';
+  isKo=!isKo;
+  document.body.classList.toggle('lang-ko',isKo);
+  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
 }
-
-// Fade-in on scroll
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('visible'); }
-  });
-},{threshold:0.12});
-document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
