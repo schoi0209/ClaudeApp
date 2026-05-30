@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silo Oran Park — Micro-Warehouses & Storage Units</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F4F1;--bg2:#ECEAE4;--fg:#0D0F1A;--fg2:#3A3D4A;
+  --orange:#E8851A;--orange2:#F5A030;--orange-pale:rgba(232,133,26,0.1);
+  --navy:#0D1428;--navy2:#162040;
+  --divider:#D8D5CC;--card-bg:#FFFFFF;
+  --hero-text:#F5F4F1;
+  --shadow:0 2px 20px rgba(13,15,26,0.08);
+}
+[data-theme="dark"]{
+  --bg:#0A0C14;--bg2:#0F1220;--fg:#E8E4D8;--fg2:#7A7D8A;
+  --orange:#F5A030;--orange2:#FFBA50;--orange-pale:rgba(245,160,48,0.1);
+  --divider:#1E2132;--card-bg:#0F1220;
+  --shadow:0 2px 20px rgba(0,0,0,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transition:background .3s,color .3s;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(13,15,26,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(232,133,26,0.15)}
+.nav-logo{font-family:'Jost',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);text-decoration:none}
+.nav-logo span{color:rgba(232,133,26,0.4);margin:0 8px;font-weight:300}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-lang,.btn-theme{background:rgba(255,255,255,0.06);border:1px solid rgba(232,133,26,0.2);color:var(--orange);cursor:pointer;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;padding:6px 14px;transition:all .2s}
+.btn-lang:hover,.btn-theme:hover{background:rgba(232,133,26,0.12);border-color:var(--orange)}
+.btn-bmac{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFDD00,#FFC400);color:#1a1200;border:none;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:7px 14px;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.btn-bmac:hover{opacity:.88}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:var(--navy)}
+.hero-img{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;object-position:center 35%;filter:blur(5px);transform:scale(1.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,15,26,0.97) 0%,rgba(13,15,26,0.75) 45%,rgba(13,15,26,0.45) 100%)}
+.hero-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2),transparent)}
+.hero-badge{position:absolute;top:100px;right:48px;border:1px solid rgba(232,133,26,0.35);color:rgba(232,133,26,0.7);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:2px}
+.hero-content{position:relative;z-index:2;padding:0 60px 80px;max-width:900px}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:36px;height:2px;background:var(--orange);flex-shrink:0}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;line-height:1.0;color:var(--hero-text);margin-bottom:8px}
+.hero-title em{font-style:italic;color:var(--orange)}
+.hero-sub{font-size:clamp(.9rem,1.5vw,1.15rem);font-weight:300;color:rgba(245,244,241,0.55);letter-spacing:.06em;margin-bottom:44px}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid rgba(232,133,26,0.2);padding-top:28px;margin-top:28px}
+.hero-meta-item label{display:block;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,133,26,0.55);margin-bottom:4px}
+.hero-meta-item span{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:500;color:var(--hero-text);letter-spacing:.02em}
+.hero-meta-item small{font-size:.72rem;color:rgba(245,244,241,0.35);margin-left:3px}
+.hero-cta{margin-top:44px;display:inline-flex;align-items:center;gap:12px;background:var(--orange);color:#0D0F1A;padding:16px 36px;border-radius:3px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--orange2);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:36px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(232,133,26,0.35);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(232,133,26,0.35),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.3)}}
+
+/* SECTIONS */
+section{padding:100px 60px}
+.section-eyebrow{font-size:.63rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:28px;height:2px;background:var(--orange);flex-shrink:0}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:400;line-height:1.15;color:var(--fg);margin-bottom:18px}
+.section-title em{font-style:italic;color:var(--orange)}
+.section-sub{font-size:.9rem;line-height:1.75;color:var(--fg2);max-width:560px}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1280px;margin:0 auto}
+.about-visual{position:relative;height:520px;overflow:hidden;border-radius:2px}
+.about-visual img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,15,26,0.85) 0%,rgba(13,15,26,0.1) 50%)}
+.about-visual-badge{position:absolute;top:28px;left:28px;background:var(--orange);color:#0D0F1A;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border-radius:2px}
+.about-visual-caption{position:absolute;bottom:28px;left:28px;right:28px}
+.about-visual-caption p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(245,244,241,0.8)}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tag{background:var(--orange-pale);border:1px solid rgba(232,133,26,0.2);color:var(--orange);font-size:.66rem;letter-spacing:.1em;padding:6px 14px;border-radius:2px;font-weight:500}
+.about-body{font-size:.92rem;line-height:1.85;color:var(--fg2);margin-bottom:24px}
+
+/* WHY INDUSTRIAL BAND */
+.why-band{position:relative;overflow:hidden;background:var(--navy)}
+.why-band img{width:100%;display:block;max-height:420px;object-fit:cover;object-position:center top;filter:brightness(0.55)}
+.why-band-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.why-stats-row{display:flex;gap:0;max-width:900px;width:100%}
+.why-stat{flex:1;text-align:center;padding:40px 20px;border-right:1px solid rgba(232,133,26,0.15)}
+.why-stat:last-child{border-right:none}
+.why-stat-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:400;color:var(--orange);line-height:1}
+.why-stat-sup{font-size:1.8rem;vertical-align:super}
+.why-stat-label{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,244,241,0.55);margin-top:8px;font-weight:500}
+.why-stat-desc{font-size:.75rem;color:rgba(245,244,241,0.35);margin-top:4px}
+
+/* PRODUCTS */
+.products-section{background:var(--bg2)}
+.products-wrap{max-width:1280px;margin:0 auto}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:60px}
+.product-card{background:var(--card-bg);position:relative;overflow:hidden}
+.product-card-img{height:320px;overflow:hidden}
+.product-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.product-card:hover .product-card-img img{transform:scale(1.04)}
+.product-card-body{padding:40px 44px}
+.product-card-type{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.product-card-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;color:var(--fg);margin-bottom:16px}
+.product-card-desc{font-size:.85rem;color:var(--fg2);line-height:1.7;margin-bottom:24px}
+.product-specs{display:flex;flex-wrap:wrap;gap:12px}
+.spec-badge{background:var(--orange-pale);border:1px solid rgba(232,133,26,0.2);color:var(--fg);font-size:.72rem;padding:6px 14px;border-radius:2px;font-weight:500}
+.product-bar{height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
+
+/* FEATURES */
+.features-wrap{max-width:1280px;margin:0 auto}
+.features-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.feature-card{background:var(--card-bg);padding:40px 36px;border-top:3px solid transparent;transition:border-color .3s,background .3s}
+.feature-card:hover{border-top-color:var(--orange);background:var(--bg2)}
+.feature-icon{font-size:2rem;margin-bottom:18px}
+.feature-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--fg);margin-bottom:8px}
+.feature-desc{font-size:.8rem;color:var(--fg2);line-height:1.65}
+
+/* LOCATION */
+.location-section{background:var(--navy);color:var(--hero-text)}
+.location-wrap{max-width:1280px;margin:0 auto}
+.location-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.location-img-wrap{position:relative;height:500px;overflow:hidden;border-radius:2px}
+.location-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
+.location-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(13,20,40,0.4),transparent)}
+.location-info .section-eyebrow{color:var(--orange)}
+.location-info .section-eyebrow::before{background:var(--orange)}
+.location-info .section-title{color:var(--hero-text)}
+.location-info .section-sub{color:rgba(245,244,241,0.5)}
+.location-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:36px;background:rgba(232,133,26,0.1)}
+.location-card{background:rgba(255,255,255,0.03);padding:22px 20px;transition:background .3s}
+.location-card:hover{background:rgba(232,133,26,0.06)}
+.location-dist{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--orange);line-height:1;margin-bottom:4px}
+.location-dist small{font-size:.9rem;color:rgba(232,133,26,0.6)}
+.location-name{font-size:.78rem;color:rgba(245,244,241,0.7);margin-bottom:2px}
+.location-mode{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,241,0.28)}
+
+/* TRACK RECORD */
+.track-section{background:var(--bg2)}
+.track-wrap{max-width:1280px;margin:0 auto}
+.track-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:center}
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.track-card{background:var(--card-bg);padding:40px 36px;border-left:3px solid #6B8E6B;position:relative}
+.track-card::after{content:'✓ SOLD OUT';position:absolute;top:24px;right:24px;background:#6B8E6B;color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:2px}
+.track-city{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:500;color:var(--fg);margin-bottom:6px}
+.track-desc{font-size:.8rem;color:var(--fg2);line-height:1.6}
+.track-cta-row{margin-top:48px;display:flex;align-items:center;gap:16px}
+.track-cta-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--fg2)}
+
+/* GUARANTEE */
+.guarantee-section{background:var(--navy);color:var(--hero-text);text-align:center}
+.guarantee-wrap{max-width:720px;margin:0 auto}
+.guarantee-num{font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:300;color:var(--orange);line-height:1;margin:20px 0 8px}
+.guarantee-label{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,244,241,0.45);margin-bottom:32px}
+.guarantee-desc{font-size:.95rem;color:rgba(245,244,241,0.55);line-height:1.8;margin-bottom:48px}
+
+/* CONTACT */
+.contact-section{text-align:center}
+.contact-wrap{max-width:680px;margin:0 auto}
+.contact-info{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:44px;margin-top:36px}
+.contact-item label{display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);opacity:.6;margin-bottom:6px;font-weight:600}
+.contact-item a,.contact-item span{font-size:.9rem;color:var(--fg)}
+.contact-item a:hover{color:var(--orange);text-decoration:none}
+.contact-cta{display:inline-block;background:var(--orange);color:#0D0F1A;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:3px;transition:all .25s}
+.contact-cta:hover{background:var(--orange2);transform:translateY(-2px)}
+.contact-divider{margin:32px auto;width:1px;height:40px;background:rgba(232,133,26,0.15)}
+.contact-disclaimer{font-size:.7rem;color:var(--fg2);opacity:.5;line-height:1.65}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(232,133,26,0.1);padding:36px 60px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:'Jost',sans-serif;font-size:.9rem;font-weight:700;color:var(--orange);letter-spacing:.08em}
+.footer-copy{font-size:.7rem;color:rgba(245,244,241,0.25)}
+
+/* LANG */
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:block}
+body.lang-ko .hero-cta .ko-t{display:inline}
+body.lang-ko .hero-cta .en-t{display:none}
+.hero-cta .ko-t{display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  section{padding:70px 24px}
+  .hero-content{padding:0 24px 60px}
+  .about-wrap,.products-grid,.features-header,.track-header,.location-inner{grid-template-columns:1fr;gap:40px}
+  .features-grid,.track-grid{grid-template-columns:1fr 1fr}
+  .why-stats-row{flex-wrap:wrap}
+  .why-stat{flex:1 1 33%;border-right:none;border-bottom:1px solid rgba(232,133,26,0.1);padding:28px 16px}
+  .location-cards{grid-template-columns:1fr 1fr}
+  .about-visual,.location-img-wrap{height:300px}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px}
+  .hero-badge,.hero-scroll{display:none}
+}
+@media(max-width:600px){
+  .features-grid,.track-grid,.location-cards,.hero-meta{grid-template-columns:1fr}
+  .contact-info{gap:20px}
+  .guarantee-num{font-size:5rem}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SILO <span>/</span> ORAN PARK</a>
+  <div class="nav-actions">
+    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <button class="btn-theme" onclick="toggleTheme()">☾</button>
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <img class="hero-img" src="assets/oran-park-silo/hero.jpg" alt="Silo Oran Park — Micro-Warehouses & Storage Units" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-badge" data-lang="en">ORAN PARK · SYDNEY SW</div>
+  <div class="hero-badge" data-lang="ko">오란 파크 · 시드니 남서부</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-lang="en">Industrial Investment · Silo Oran Park</div>
+    <div class="hero-eyebrow" data-lang="ko">산업용 투자 · 실로 오란 파크</div>
+    <h1 class="hero-title">
+      <span data-lang="en">Your Warehouse,<br><em>Your Income.</em></span>
+      <span data-lang="ko">창고가<br><em>수익이 된다.</em></span>
+    </h1>
+    <p class="hero-sub" data-lang="en">Micro-Warehouses & Self-Storage Units · Oran Park, Sydney South West</p>
+    <p class="hero-sub" data-lang="ko">마이크로 창고 & 셀프 스토리지 유닛 · 오란 파크, 시드니 남서부</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <label data-lang="en">Rental Guarantee</label><label data-lang="ko">임대 보장</label>
+        <span>2<small data-lang="en"> Years</small><small data-lang="ko"> 년</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">Completion</label><label data-lang="ko">준공</label>
+        <span>Dec<small> 2025</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">To New Airport</label><label data-lang="ko">신공항까지</label>
+        <span>16.5<small>km</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">Zoning</label><label data-lang="ko">조닝</label>
+        <span style="font-size:1.2rem">IN1<small data-lang="en"> Industrial</small><small data-lang="ko"> 산업용</small></span>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta">
+      <span class="en-t" data-lang="en">Request Information</span>
+      <span class="ko-t" data-lang="ko">투자 문의하기</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap fade-in">
+    <div class="about-visual">
+      <img src="assets/oran-park-silo/warehouse-interior.jpg" alt="Silo Oran Park — Micro-Warehouse Interior" loading="lazy">
+      <div class="about-visual-overlay"></div>
+      <div class="about-visual-badge" data-lang="en">IN1 General Industrial</div>
+      <div class="about-visual-badge" data-lang="ko">IN1 일반 산업용</div>
+      <div class="about-visual-caption">
+        <p data-lang="en">Drive-in access · 5.0m clearance · Mezzanine optional</p>
+        <p data-lang="ko">차량 진입 · 5.0m 천장 · 중층 옵션</p>
+      </div>
+    </div>
+    <div>
+      <div class="section-eyebrow"><span data-lang="en">About the Project</span><span data-lang="ko">프로젝트 소개</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Silo <em>Oran Park</em></span>
+        <span data-lang="ko">실로 <em>오란 파크</em></span>
+      </h2>
+      <p class="about-body" data-lang="en">Silo Oran Park is a purpose-built industrial facility offering micro-warehouses and self-storage units at the heart of Oran Park's growing business precinct. With a $127M TV & film production studio planned nearby and direct access to the A9 motorway, this is a rare opportunity to own industrial property in one of Sydney's fastest-growing south-west corridors.</p>
+      <p class="about-body" data-lang="ko">실로 오란 파크는 오란 파크 비즈니스 중심부에 위치한 마이크로 창고 및 셀프 스토리지 시설입니다. 인근에 $1억 2,700만 규모의 TV & 영화 스튜디오 개발이 예정되어 있으며, A9 고속도로 직접 접근이 가능한 시드니 남서부 고성장 지역의 희소한 산업용 부동산 투자 기회입니다.</p>
+      <p class="about-body" data-lang="en">Completed December 2025, with a 2-year post-completion rental guarantee. Past Silo projects in Wollongong, Huskisson and Nowra have all sold out — this is your chance.</p>
+      <p class="about-body" data-lang="ko">2025년 12월 준공 완료, 준공 후 2년 임대 보장 제공. 울롱공, 허스키슨, 노라의 과거 실로 프로젝트는 모두 완판 — 지금이 기회입니다.</p>
+      <div class="about-tags">
+        <span class="tag" data-lang="en">Micro-Warehouse</span><span class="tag" data-lang="ko">마이크로 창고</span>
+        <span class="tag" data-lang="en">Self-Storage Unit</span><span class="tag" data-lang="ko">셀프 스토리지</span>
+        <span class="tag" data-lang="en">2-Year Rental Guarantee</span><span class="tag" data-lang="ko">2년 임대 보장</span>
+        <span class="tag" data-lang="en">IN1 Zoning</span><span class="tag" data-lang="ko">IN1 조닝</span>
+        <span class="tag" data-lang="en">Solar Included</span><span class="tag" data-lang="ko">솔라 포함</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY INDUSTRIAL BAND -->
+<div class="why-band fade-in">
+  <img src="assets/oran-park-silo/why-stats.jpg" alt="Why Industrial Property" loading="lazy">
+  <div class="why-band-content">
+    <div class="why-stats-row">
+      <div class="why-stat">
+        <div class="why-stat-num">2.4<span class="why-stat-sup">%</span></div>
+        <div class="why-stat-label" data-lang="en">Sydney Vacancy Rate</div>
+        <div class="why-stat-label" data-lang="ko">시드니 공실률</div>
+        <div class="why-stat-desc" data-lang="en">World's lowest</div>
+        <div class="why-stat-desc" data-lang="ko">세계 최저</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">15.3<span class="why-stat-sup">%</span></div>
+        <div class="why-stat-label" data-lang="en">10yr Annual Return</div>
+        <div class="why-stat-label" data-lang="ko">10년 연평균 수익률</div>
+        <div class="why-stat-desc" data-lang="en">Industrial sector</div>
+        <div class="why-stat-desc" data-lang="ko">산업용 부동산</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">97<span class="why-stat-sup">%+</span></div>
+        <div class="why-stat-label" data-lang="en">Silo Occupancy</div>
+        <div class="why-stat-label" data-lang="ko">실로 입주율</div>
+        <div class="why-stat-desc" data-lang="en">Past projects</div>
+        <div class="why-stat-desc" data-lang="ko">과거 프로젝트</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow"><span data-lang="en">Product Types</span><span data-lang="ko">유닛 종류</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Choose Your <em>Unit</em></span>
+        <span data-lang="ko">유닛을 <em>선택하세요</em></span>
+      </h2>
+    </div>
+    <div class="products-grid fade-in">
+      <div class="product-card">
+        <div class="product-bar"></div>
+        <div class="product-card-img">
+          <img src="assets/oran-park-silo/warehouse-interior.jpg" alt="Micro-Warehouse" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-type" data-lang="en">Type 01</div>
+          <div class="product-card-type" data-lang="ko">타입 01</div>
+          <div class="product-card-name" data-lang="en">Micro-Warehouse</div>
+          <div class="product-card-name" data-lang="ko">마이크로 창고</div>
+          <p class="product-card-desc" data-lang="en">Drive-in vehicle access with 5.0m clearance height. Perfect for small businesses, trades, couriers and e-commerce operators needing a secure, accessible base.</p>
+          <p class="product-card-desc" data-lang="ko">5.0m 천장 높이의 차량 진입 가능 공간. 소규모 비즈니스, 무역업, 택배사, 이커머스 운영자에게 최적의 안전한 비즈니스 베이스입니다.</p>
+          <div class="product-specs">
+            <span class="spec-badge">5.0m Clearance</span>
+            <span class="spec-badge" data-lang="en">Drive-in Access</span><span class="spec-badge" data-lang="ko">차량 진입</span>
+            <span class="spec-badge" data-lang="en">Mezzanine Optional</span><span class="spec-badge" data-lang="ko">중층 옵션</span>
+            <span class="spec-badge" data-lang="en">Solar Included</span><span class="spec-badge" data-lang="ko">솔라 포함</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-bar"></div>
+        <div class="product-card-img">
+          <img src="assets/oran-park-silo/hero.jpg" alt="Self-Storage Unit" loading="lazy" style="object-position:center 60%">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-type" data-lang="en">Type 02</div>
+          <div class="product-card-type" data-lang="ko">타입 02</div>
+          <div class="product-card-name" data-lang="en">Self-Storage Unit</div>
+          <div class="product-card-name" data-lang="ko">셀프 스토리지 유닛</div>
+          <p class="product-card-desc" data-lang="en">3.5m clearance with solar power included. Ideal for personal storage, business inventory, and seasonal goods — with 24/7 secure access.</p>
+          <p class="product-card-desc" data-lang="ko">3.5m 천장 높이, 솔라 전기 포함. 개인 물품 보관, 사업 재고 관리, 계절 상품 보관에 이상적이며 24시간 보안 출입이 가능합니다.</p>
+          <div class="product-specs">
+            <span class="spec-badge">3.5m Clearance</span>
+            <span class="spec-badge" data-lang="en">Solar Power</span><span class="spec-badge" data-lang="ko">솔라 전기</span>
+            <span class="spec-badge">24/7 Access</span>
+            <span class="spec-badge" data-lang="en">Secure</span><span class="spec-badge" data-lang="ko">보안</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-wrap">
+    <div class="features-header fade-in">
+      <div>
+        <div class="section-eyebrow"><span data-lang="en">Inclusions & Features</span><span data-lang="ko">포함 사항 & 특징</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">Everything<br><em>Included</em></span>
+          <span data-lang="ko">모든 것이<br><em>포함되어 있습니다</em></span>
+        </h2>
+      </div>
+      <p class="section-sub" data-lang="en">Every unit at Silo Oran Park comes packed with features designed to make your business or investment effortless from day one.</p>
+      <p class="section-sub" data-lang="ko">실로 오란 파크의 모든 유닛은 첫날부터 비즈니스 또는 투자를 손쉽게 만들어 주는 기능들이 탑재되어 있습니다.</p>
+    </div>
+    <div class="features-grid fade-in">
+      <div class="feature-card">
+        <div class="feature-icon">☀️</div>
+        <div class="feature-name" data-lang="en">Solar Power Included</div>
+        <div class="feature-name" data-lang="ko">솔라 전기 포함</div>
+        <div class="feature-desc" data-lang="en">Free electricity via solar — reduce your operating costs from day one.</div>
+        <div class="feature-desc" data-lang="ko">솔라를 통한 무료 전기 — 첫날부터 운영 비용을 절감하세요.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚗</div>
+        <div class="feature-name" data-lang="en">Drive-In Vehicle Access</div>
+        <div class="feature-name" data-lang="ko">차량 드라이브인</div>
+        <div class="feature-desc" data-lang="en">Full vehicle access with 5.0m clearance height for vans and light trucks.</div>
+        <div class="feature-desc" data-lang="ko">밴 및 소형 트럭이 진입 가능한 5.0m 천장 높이의 차량 드라이브인 접근.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <div class="feature-name" data-lang="en">24/7 Secure Access</div>
+        <div class="feature-name" data-lang="ko">24시간 보안 출입</div>
+        <div class="feature-desc" data-lang="en">Your space, in your hands around the clock. Keypad or smart access system.</div>
+        <div class="feature-desc" data-lang="ko">24시간, 365일 내 손안의 공간. 키패드 또는 스마트 출입 시스템.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <div class="feature-name" data-lang="en">Mezzanine Option</div>
+        <div class="feature-name" data-lang="ko">중층 추가 옵션</div>
+        <div class="feature-desc" data-lang="en">Optional mezzanine add-on to double your usable floor space within the same footprint.</div>
+        <div class="feature-desc" data-lang="ko">선택적 중층 추가로 동일한 면적 내 사용 가능 공간을 두 배로 늘릴 수 있습니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <div class="feature-name" data-lang="en">Net Lease Structure</div>
+        <div class="feature-name" data-lang="ko">Net Lease 구조</div>
+        <div class="feature-desc" data-lang="en">Tenants cover outgoings — your net returns are maximised with minimal management.</div>
+        <div class="feature-desc" data-lang="ko">임차인이 관리비 부담 — 최소한의 관리로 순수익을 극대화합니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <div class="feature-name" data-lang="en">Long-Term Leases</div>
+        <div class="feature-name" data-lang="ko">장기 임대 계약</div>
+        <div class="feature-desc" data-lang="en">3–10 year tenancies delivering stable, predictable cash flow year after year.</div>
+        <div class="feature-desc" data-lang="ko">3~10년 장기 계약으로 매년 안정적이고 예측 가능한 현금 흐름을 제공합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location" style="padding-top:100px;padding-bottom:100px;padding-left:60px;padding-right:60px">
+  <div class="location-wrap fade-in">
+    <div class="location-inner">
+      <div class="location-img-wrap">
+        <img src="assets/oran-park-silo/location-aerial.jpg" alt="Oran Park aerial view — Industrial hub" loading="lazy">
+      </div>
+      <div class="location-info">
+        <div class="section-eyebrow"><span data-lang="en">Location</span><span data-lang="ko">위치</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">Industrial Hub<br>of <em>Oran Park</em></span>
+          <span data-lang="ko">오란 파크의<br><em>산업 중심</em></span>
+        </h2>
+        <p class="section-sub" data-lang="en">Strategically positioned in Oran Park's growing industrial precinct — minutes from the A9 motorway and 16.5km from Western Sydney International Airport (Badgerys Creek).</p>
+        <p class="section-sub" data-lang="ko">A9 고속도로에서 불과 몇 분 거리, 웨스턴 시드니 국제공항(배저리스 크릭)까지 16.5km — 오란 파크 성장하는 산업 지구에 전략적으로 위치합니다.</p>
+        <div class="location-cards">
+          <div class="location-card">
+            <div class="location-dist">1<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Oran Park Residential Area</div><div class="location-name" data-lang="ko">오란 파크 주거지</div>
+            <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">1<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Northern Road</div><div class="location-name" data-lang="ko">노던 로드</div>
+            <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">2<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">A9 Motorway</div><div class="location-name" data-lang="ko">A9 고속도로</div>
+            <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">16.5<small>km</small></div>
+            <div class="location-name" data-lang="en">New Airport (WSI)</div><div class="location-name" data-lang="ko">신공항 (배저리스)</div>
+            <div class="location-mode" data-lang="en">Badgerys Creek</div><div class="location-mode" data-lang="ko">배저리스 크릭</div>
+          </div>
+          <div class="location-card" style="grid-column:1/-1">
+            <div class="location-dist" style="font-size:1.3rem;color:var(--orange2)">★ $127M</div>
+            <div class="location-name" data-lang="en">Oran Park Studios — TV & Film Production Hub (Planned)</div>
+            <div class="location-name" data-lang="ko">오란 파크 스튜디오 — TV & 영화 제작 허브 (개발 예정)</div>
+            <div class="location-mode" data-lang="en">Driving further business demand</div>
+            <div class="location-mode" data-lang="ko">추가 비즈니스 수요 창출</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK RECORD -->
+<section class="track-section" id="track">
+  <div class="track-wrap">
+    <div class="track-header fade-in">
+      <div>
+        <div class="section-eyebrow"><span data-lang="en">Track Record</span><span data-lang="ko">과거 실적</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">Every Past Project.<br><em>Sold Out.</em></span>
+          <span data-lang="ko">역대 모든 프로젝트.<br><em>완판.</em></span>
+        </h2>
+      </div>
+      <p class="section-sub" data-lang="en">Silo's proven formula — quality industrial product, prime location, strong rental guarantee — has delivered sell-out results across every project in NSW. Oran Park is next.</p>
+      <p class="section-sub" data-lang="ko">실로의 검증된 공식 — 고품질 산업용 부동산, 최적의 위치, 강력한 임대 보장 — 은 NSW의 모든 프로젝트에서 완판 결과를 달성했습니다. 오란 파크가 다음입니다.</p>
+    </div>
+    <div class="track-grid fade-in">
+      <div class="track-card">
+        <div class="track-city">Wollongong</div>
+        <p class="track-desc" data-lang="en">South Coast industrial precinct. Delivered strong occupancy from opening and sold out ahead of schedule.</p>
+        <p class="track-desc" data-lang="ko">사우스 코스트 산업 지구. 오픈부터 강력한 입주율을 달성하고 예정보다 빠르게 완판.</p>
+      </div>
+      <div class="track-card">
+        <div class="track-city">Huskisson</div>
+        <p class="track-desc" data-lang="en">Jervis Bay's thriving coastal business hub. High demand from local trades and tourism-related logistics.</p>
+        <p class="track-desc" data-lang="ko">저비스 베이의 번성하는 해안 비즈니스 허브. 지역 무역 및 관광 관련 물류로 높은 수요.</p>
+      </div>
+      <div class="track-card">
+        <div class="track-city">Nowra</div>
+        <p class="track-desc" data-lang="en">Shoalhaven's industrial gateway. 97%+ occupancy sustained throughout ownership, then sold out.</p>
+        <p class="track-desc" data-lang="ko">쇼얼헤이번의 산업 관문. 보유 기간 내내 97%+ 입주율 유지 후 완판.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENTAL GUARANTEE -->
+<section class="guarantee-section" id="guarantee">
+  <div class="guarantee-wrap fade-in">
+    <div class="section-eyebrow" style="justify-content:center;color:var(--orange)"><span data-lang="en">Rental Guarantee</span><span data-lang="ko">임대 보장</span></div>
+    <div class="guarantee-num">2</div>
+    <div class="guarantee-label" data-lang="en">Years Post-Completion Rental Guarantee</div>
+    <div class="guarantee-label" data-lang="ko">년 준공 후 임대 수익 보장</div>
+    <p class="guarantee-desc" data-lang="en">Invest with confidence. Silo Oran Park provides a 2-year post-completion rental guarantee — delivering reliable income from the moment settlement occurs, regardless of market conditions. Combined with the net lease structure, your return is predictable and hands-free.</p>
+    <p class="guarantee-desc" data-lang="ko">확신을 가지고 투자하세요. 실로 오란 파크는 준공 후 2년 임대 수익을 보장합니다 — 시장 상황에 관계없이 잔금일로부터 안정적인 수익을 제공합니다. Net Lease 구조와 결합하여 수익이 예측 가능하고 관리 부담이 없습니다.</p>
+    <a href="#contact" class="hero-cta" style="margin-top:0">
+      <span data-lang="en">Request Information / 투자 문의</span>
+      <span data-lang="ko" style="display:none">투자 문의하기 →</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap fade-in">
+    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <h2 class="section-title">
+      <span data-lang="en">Start Your<br><em>Industrial Investment</em></span>
+      <span data-lang="ko">산업용 투자를<br><em>시작하세요</em></span>
+    </h2>
+    <p class="section-sub" style="margin:0 auto 0;text-align:center" data-lang="en">Contact Sunny Choi at Forise Group for an investment pack, rental guarantee terms, and free returns simulation.</p>
+    <p class="section-sub" style="margin:0 auto 0;text-align:center" data-lang="ko">포라이즈 그룹의 Sunny Choi에게 연락하여 투자 패키지, 임대 보장 조건, 무료 수익 시뮬레이션을 받으세요.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
+        <span>Sunny Choi — Forise Group</span>
+      </div>
+      <div class="contact-item">
+        <label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label>
+        <a href="tel:0414824225">0414 824 225</a>
+      </div>
+      <div class="contact-item">
+        <label>Email</label>
+        <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
+      </div>
+    </div>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Silo%20Oran%20Park%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Silo%20Oran%20Park." class="contact-cta">
+      <span data-lang="en">Request Information / 투자 문의</span>
+      <span data-lang="ko">투자 문의하기 →</span>
+    </a>
+    <div class="contact-divider"></div>
+    <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Pricing information is available upon request. Forise Group acts as selling agent. Investment returns are not guaranteed and are subject to market conditions.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트로 활동합니다. 투자 수익은 보장되지 않으며 시장 상황에 따라 다를 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SunnyApps</div>
+  <div class="footer-copy">Made by SunnyApps. All rights reserved.</div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const b=document.body,dark=b.getAttribute('data-theme')==='dark';
+  b.setAttribute('data-theme',dark?'light':'dark');
+  document.querySelector('.btn-theme').textContent=dark?'☾':'☀';
+  localStorage.setItem('theme',dark?'light':'dark');
+}
+const saved=localStorage.getItem('theme');
+if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
+else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.setAttribute('data-theme','dark');document.querySelector('.btn-theme').textContent='☀';}
+
+let isKo=false;
+function toggleLang(){
+  isKo=!isKo;
+  document.body.classList.toggle('lang-ko',isKo);
+  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+  // Handle guarantee CTA separately
+  document.querySelectorAll('.guarantee-section .hero-cta span').forEach(s=>{
+    if(s.hasAttribute('data-lang')){
+      s.style.display=(isKo&&s.getAttribute('data-lang')==='ko')?'inline':((!isKo&&s.getAttribute('data-lang')==='en')?'inline':'none');
+    }
+  });
+}
+
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
