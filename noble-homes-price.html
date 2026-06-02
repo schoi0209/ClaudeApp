@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noble Homes — Gold Inclusion Price Matrix 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0a06;--surface:#171209;--surface2:#201a0f;--surface3:#2a2215;
+  --border:rgba(220,180,80,.08);--border2:rgba(220,180,80,.18);
+  --ink:#f5edd8;--muted:#8a7848;--muted2:#3a3020;
+  --accent:#c8960a;--accent-l:rgba(200,150,10,.08);
+  --gold:#e0aa20;--gold-l:rgba(224,170,32,.1);
+  --green:#3a8a50;--green-l:rgba(58,138,80,.08);
+  --amber:#c07020;--amber-l:rgba(192,112,32,.08);
+  --red:#9a3020;--red-l:rgba(154,48,32,.08);
+  --blue:#2a5a8a;--blue-l:rgba(42,90,138,.08);
+}
+[data-theme="light"]{
+  --bg:#fdf8ef;--surface:#fff;--surface2:#f8f2e4;--surface3:#f0e8d0;
+  --border:rgba(120,80,10,.09);--border2:rgba(120,80,10,.2);
+  --ink:#1a1206;--muted:#7a6030;--muted2:#c8b080;
+  --accent:#8a6408;--accent-l:rgba(138,100,8,.07);
+  --gold:#9a7010;--gold-l:rgba(154,112,16,.08);
+  --green:#256040;--green-l:rgba(37,96,64,.07);
+  --amber:#a05a10;--amber-l:rgba(160,90,16,.08);
+  --red:#802010;--red-l:rgba(128,32,16,.07);
+  --blue:#1a4a7a;--blue-l:rgba(26,74,122,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+/* BMC TOP */
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-logo{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(224,170,32,.3);padding:4px 12px;border-radius:2px;}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+
+/* MASTHEAD */
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1440px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--gold);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,78px);font-weight:300;line-height:.92;letter-spacing:-.01em;}
+.masthead h1 i{font-style:italic;color:var(--gold);}
+.m-right{text-align:right;}
+.incl-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;text-align:left;margin-bottom:10px;}
+.incl-title{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.incl-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:4px;}
+.incl-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* STATS */
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--gold);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* ESTATE TABS */
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 18px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.02em;}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-cnt{display:inline-block;margin-left:4px;font-size:9px;background:var(--gold-l);color:var(--gold);border-radius:20px;padding:1px 6px;font-weight:600;}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;min-width:110px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--gold);}
+.sw{position:relative;flex:1;min-width:150px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* RBAR */
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+/* MAIN LAYOUT */
+.main-layout{display:grid;grid-template-columns:1fr 380px;gap:0;max-width:1440px;margin:0 auto;}
+
+/* LOT TABLE */
+.lot-panel{padding:0 0 0 32px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 10px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+tbody tr.selected-row{background:var(--gold-l) !important;border-left:3px solid var(--gold);}
+td{padding:12px 10px;font-size:12px;white-space:nowrap;}
+
+.lot-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);}
+.lot-estate{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+.rego-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;border:1px solid;}
+.rego-reg{color:var(--green);border-color:rgba(58,138,80,.3);background:var(--green-l);}
+.rego-unreg{color:var(--amber);border-color:rgba(192,112,32,.3);background:var(--amber-l);}
+.lot-type-chip{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);}
+.lt-zero{color:var(--blue);border-color:rgba(42,90,138,.25);background:var(--blue-l);}
+.lt-corner{color:var(--amber);border-color:rgba(192,112,32,.25);background:var(--amber-l);}
+.status-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:2px;text-transform:uppercase;border:1px solid;}
+.sc-avail{background:var(--green-l);color:var(--green);border-color:rgba(58,138,80,.25);}
+.sc-sold{background:rgba(120,120,120,.08);color:var(--muted2);border-color:rgba(120,120,120,.18);}
+.sc-reserved{background:var(--amber-l);color:var(--amber);border-color:rgba(192,112,32,.25);}
+.sc-dt{background:var(--blue-l);color:var(--blue);border-color:rgba(42,90,138,.25);}
+.land-price{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--ink);}
+.pkg-from{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);margin-top:1px;}
+
+/* HOUSE DESIGN PANEL */
+.design-panel{position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto;border-left:1px solid var(--border);padding:20px 20px 40px 20px;}
+.dp-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:var(--muted);text-align:center;gap:12px;}
+.dp-icon{font-size:40px;opacity:.3;}
+.dp-hint{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+.dp-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.dp-lot{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--gold);}
+.dp-estate{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+.dp-info{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
+.dp-cell{background:var(--surface2);border-radius:5px;padding:8px 10px;}
+.dp-cl{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.dp-cv{font-size:12px;font-weight:500;}
+.dp-incentive{background:var(--gold-l);border:1px solid rgba(224,170,32,.2);border-radius:5px;padding:8px 10px;margin-top:8px;font-size:10px;color:var(--gold);}
+.designs-title{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;}
+.design-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;}
+.design-card:hover{border-color:var(--gold);background:var(--gold-l);}
+.dc-left{}
+.dc-name{font-size:12px;font-weight:500;color:var(--ink);}
+.dc-size{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:1px;}
+.dc-price{text-align:right;}
+.dc-pkg{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--gold);}
+.dc-house{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+.no-designs{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-align:center;padding:20px;letter-spacing:.06em;}
+
+.empty{text-align:center;padding:60px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:900px){
+  .main-layout{grid-template-columns:1fr;}.design-panel{position:static;max-height:none;border-left:none;border-top:1px solid var(--border);padding:20px 16px;}
+  header,.masthead,.stats,.tab-row,.filters,.rbar{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}.m-right{text-align:left;}
+  .lot-panel{padding:0 16px;}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+
+<header>
+  <div class="h-brand"><div class="h-logo">NOBLE HOMES</div></div>
+  <div class="h-center" id="txt-h-center">Gold Inclusion · Price Matrix 2026</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Noble Home Builders · NSW · Jan 2026</div>
+    <h1>Gold<br><i>Inclusion</i><br>Matrix</h1>
+  </div>
+  <div class="m-right">
+    <div class="incl-box">
+      <div class="incl-title" id="incl-title">✦ Gold Inclusion Package</div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-1">Gold Inclusion (2025) — 7-star BASIX compliant</span></div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-2">6-month price lock from contract exchange</span></div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-3">Standard site cost included</span></div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-4">Landscaping: +$31K (driveway + fence)</span></div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-5">0.4%/month extension after 6 months</span></div>
+    </div>
+    <div style="font-size:10px;color:var(--muted);line-height:1.7" id="txt-note">Click any lot to see available house designs and package prices.</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-estates">Estates</div><div class="s-val" id="sval-estates">10</div><div class="s-sub" id="ssub-estates">Across NSW</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Lots</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">Land From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Land Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-pkg-from">Package From</div><div class="s-val" id="sval-pkg-from">—</div><div class="s-sub" id="ssub-pkg-from">incl. house</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+
+<!-- ESTATE TABS -->
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setEstate('all')" id="tab-all">All Estates <span class="tab-cnt" id="tc-all">0</span></button>
+  <button class="tab-btn" onclick="setEstate('newpark')"   id="tab-newpark">NewPark <span class="tab-cnt" id="tc-newpark">0</span></button>
+  <button class="tab-btn" onclick="setEstate('hills')"     id="tab-hills">Hills of Carmel <span class="tab-cnt" id="tc-hills">0</span></button>
+  <button class="tab-btn" onclick="setEstate('boxhill39')" id="tab-boxhill39">Box Hill 39 Mason <span class="tab-cnt" id="tc-boxhill39">0</span></button>
+  <button class="tab-btn" onclick="setEstate('austral325')"id="tab-austral325">Austral 325 <span class="tab-cnt" id="tc-austral325">0</span></button>
+  <button class="tab-btn" onclick="setEstate('westwood')"  id="tab-westwood">Westwood <span class="tab-cnt" id="tc-westwood">0</span></button>
+  <button class="tab-btn" onclick="setEstate('lepp64')"    id="tab-lepp64">Leppington 64 <span class="tab-cnt" id="tc-lepp64">0</span></button>
+  <button class="tab-btn" onclick="setEstate('lepp48')"    id="tab-lepp48">Leppington 48 <span class="tab-cnt" id="tc-lepp48">0</span></button>
+  <button class="tab-btn" onclick="setEstate('jacaranda')" id="tab-jacaranda">Jacaranda <span class="tab-cnt" id="tc-jacaranda">0</span></button>
+  <button class="tab-btn" onclick="setEstate('austral275')"id="tab-austral275">Austral 275 <span class="tab-cnt" id="tc-austral275">0</span></button>
+  <button class="tab-btn" onclick="setEstate('rousehill')" id="tab-rousehill">Rouse Hill <span class="tab-cnt" id="tc-rousehill">0</span></button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-status">Status</span>
+    <select id="fStatus" onchange="applyFilters()">
+      <option value="" id="opt-st-all">All</option>
+      <option value="available" id="opt-st-avail">Available</option>
+      <option value="sold" id="opt-st-sold">Sold</option>
+      <option value="reserved" id="opt-st-res">Reserved</option>
+      <option value="dt" id="opt-st-dt">Deposit Taken</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-rego">Registration</span>
+    <select id="fRego" onchange="applyFilters()">
+      <option value="" id="opt-rg-all">All</option>
+      <option value="Registered" id="opt-rg-reg">Registered</option>
+      <option value="unregistered" id="opt-rg-unreg">Unregistered</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-type">Land Type</span>
+    <select id="fType" onchange="applyFilters()">
+      <option value="" id="opt-ty-all">All</option>
+      <option value="Zero" id="opt-ty-zero">Zero Lot</option>
+      <option value="Standard" id="opt-ty-std">Standard</option>
+      <option value="Corner" id="opt-ty-cor">Corner</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxland">Max Land Price</span>
+    <select id="fMaxLand" onchange="applyFilters()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="700000" id="opt-px1">Under $700K</option>
+      <option value="800000" id="opt-px2">Under $800K</option>
+      <option value="900000" id="opt-px3">Under $900K</option>
+      <option value="1000000" id="opt-px4">Under $1M</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:150px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSearch" placeholder="Lot, estate..." oninput="applyFilters()"></div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> lots shown</span> — <span style="color:var(--gold)" id="txt-click-hint">click a row to see house designs</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="land-asc"  id="srt-la">Land Price ↑</option>
+    <option value="land-desc" id="srt-ld">Land Price ↓</option>
+    <option value="size-desc" id="srt-sd">Land Size ↓</option>
+    <option value="size-asc"  id="srt-sa">Land Size ↑</option>
+    <option value="lot-asc"   id="srt-lot">Lot # ↑</option>
+  </select>
+</div>
+
+<div class="main-layout">
+  <!-- LOT TABLE -->
+  <div class="lot-panel">
+    <table>
+      <thead>
+        <tr>
+          <th id="th-lot">Lot</th>
+          <th id="th-rego">Rego</th>
+          <th id="th-size">Size m²</th>
+          <th id="th-front">Front</th>
+          <th id="th-type">Type</th>
+          <th id="th-land">Land Price</th>
+          <th id="th-pkg-from">Pkg From</th>
+          <th id="th-status">Status</th>
+        </tr>
+      </thead>
+      <tbody id="tBody"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No lots match your criteria —</p></div>
+  </div>
+
+  <!-- DESIGN PANEL -->
+  <div class="design-panel" id="designPanel">
+    <div class="dp-placeholder" id="dpPlaceholder">
+      <div class="dp-icon">🏠</div>
+      <div class="dp-hint" id="dp-hint-txt">Select a lot to view<br>available house designs</div>
+    </div>
+    <div id="dpContent" style="display:none">
+      <div class="dp-header">
+        <div class="dp-lot" id="dp-lot-num">Lot —</div>
+        <div class="dp-estate" id="dp-estate-name">—</div>
+        <div class="dp-info">
+          <div class="dp-cell"><div class="dp-cl" id="dp-lbl-size">Land Size</div><div class="dp-cv" id="dp-size">—</div></div>
+          <div class="dp-cell"><div class="dp-cl" id="dp-lbl-front">Frontage</div><div class="dp-cv" id="dp-front">—</div></div>
+          <div class="dp-cell"><div class="dp-cl" id="dp-lbl-land">Land Price</div><div class="dp-cv" id="dp-land">—</div></div>
+          <div class="dp-cell"><div class="dp-cl" id="dp-lbl-type">Land Type</div><div class="dp-cv" id="dp-type">—</div></div>
+        </div>
+        <div class="dp-incentive" id="dp-incentive" style="display:none"></div>
+      </div>
+      <div class="designs-title" id="dp-designs-title">Available House Designs & Package Prices</div>
+      <div id="designList"></div>
+    </div>
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved. · Noble Homes Gold Inclusion Price Matrix — 29 Jan 2026</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+// House designs: {name, size, price (base house price)}
+const designs = [
+  {key:'vista118',    name:'Vista 118',     size:118,  housePrice:347000},
+  {key:'vista137',    name:'Vista 137',     size:137,  housePrice:373000},
+  {key:'vista146',    name:'Vista 146',     size:146,  housePrice:380000},
+  {key:'vista171',    name:'Vista 171',     size:171,  housePrice:407000},
+  {key:'viva151',     name:'Viva 151',      size:151,  housePrice:381000},
+  {key:'viva163',     name:'Viva 163',      size:163,  housePrice:385000},
+  {key:'seabreeze188',name:'Seabreeze 188', size:188,  housePrice:502000},
+  {key:'aurora172',   name:'Aurora 172',    size:172,  housePrice:452000},
+  {key:'aurora210mg', name:'Aurora 210MG',  size:210,  housePrice:555000},
+  {key:'aurora230mg', name:'Aurora 230MG',  size:230,  housePrice:585000},
+  {key:'sienna175',   name:'Sienna 175',    size:175,  housePrice:462000},
+  {key:'sienna200',   name:'Sienna 200',    size:200,  housePrice:495000},
+  {key:'newlife182',  name:'Newlife 182',   size:182,  housePrice:472000},
+  {key:'newlife182mg',name:'Newlife 182MG', size:182,  housePrice:488000},
+  {key:'newlife193mg',name:'Newlife 193MG', size:193,  housePrice:502000},
+  {key:'brookvale195',name:'Brookvale 195', size:195,  housePrice:499000},
+  {key:'brookvale195mg',name:'Brookvale 195MG',size:195,housePrice:508000},
+  {key:'harrington207',name:'Harrington 207',size:207, housePrice:508000},
+  {key:'harrington240',name:'Harrington 240',size:240, housePrice:534000},
+  {key:'rose260',     name:'Rosé 260',      size:260,  housePrice:558000},
+  {key:'sienna239',   name:'Sienna 239',    size:239,  housePrice:518000},
+  {key:'oxley182',    name:'Oxley 182',     size:182,  housePrice:473000},
+  {key:'oxley195',    name:'Oxley 195',     size:195,  housePrice:482000},
+  {key:'oxley233',    name:'Oxley 233',     size:233,  housePrice:521000},
+  {key:'oxley257',    name:'Oxley 257',     size:257,  housePrice:552000},
+  {key:'opal244',     name:'Opal 244',      size:244,  housePrice:531000},
+  {key:'opal267',     name:'Opal 267',      size:267,  housePrice:568000},
+  {key:'carrington240',name:'Carrington 240',size:240, housePrice:526000},
+  {key:'brighton263', name:'Brighton 263',  size:263,  housePrice:578000},
+  {key:'brighton263mg',name:'Brighton 263MG',size:263, housePrice:589000},
+  {key:'chelsea294',  name:'Chelsea 294',   size:294,  housePrice:605000},
+  {key:'benham180',   name:'Benham 180',    size:180,  housePrice:478000},
+  {key:'benham182',   name:'Benham 182',    size:182,  housePrice:480000},
+  {key:'elsie166',    name:'Elsie 166',     size:166,  housePrice:462000},
+  {key:'belview168',  name:'Belview 168',   size:168,  housePrice:472000},
+  {key:'elyna204',    name:'Elyna 204',     size:204,  housePrice:508000},
+  {key:'linley207a',  name:'Linley 207A',   size:207,  housePrice:518000},
+];
+
+// Lot data — pkg prices are total package price (land + house)
+// null = N/A for that design
+const lots = [
+  // NewPark — Marsden Park
+  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7807', rego:'Registered', size:275,  front:10,   len:27.5,  type:'Zero',    landPrice:720000, status:'available', incentive:'$25k Rebate & Fixed site cost, Driveway',
+   pkgs:{vista118:1067000,aurora172:1172000,sienna175:1182000,sienna200:1215000,newlife182:1192000,newlife182mg:1208000,harrington207:1228000,harrington240:1254000,rose260:1281000,oxley182:1196000,oxley195:1205000}},
+  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7492', rego:'Registered', size:310.9,front:11.14,len:27.5,  type:'Zero',    landPrice:750000, status:'sold',      incentive:'',
+   pkgs:{vista118:1097000,viva151:1135000,aurora172:1202000,sienna175:1212000,sienna200:1245000,newlife182:1222000,newlife182mg:1238000,newlife193mg:1252000,harrington207:1258000,harrington240:1284000,rose260:1311000,oxley182:1226000,oxley195:1235000}},
+  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7572', rego:'Registered', size:289.6,front:10,   len:28.6,  type:'Zero',    landPrice:730000, status:'available', incentive:'',
+   pkgs:{vista118:1077000,vista137:1103000,aurora172:1182000,sienna175:1192000,sienna200:1225000,newlife182:1202000,newlife182mg:1218000,harrington207:1238000,harrington240:1264000,rose260:1291000,oxley182:1206000,oxley195:1215000,oxley233:1254000}},
+  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7220', rego:'Registered', size:275,  front:10,   len:27.5,  type:'Zero',    landPrice:725000, status:'available', incentive:'',
+   pkgs:{vista118:1072000,aurora172:1177000,sienna175:1187000,sienna200:1220000,newlife182:1197000,newlife182mg:1213000,harrington207:1233000,harrington240:1259000,rose260:1286000,oxley182:1201000,oxley195:1210000}},
+  // Hills of Carmel — Box Hill
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9536', rego:'Registered', size:251,  front:14.42,len:17.41, type:'Standard',landPrice:725000, status:'sold',      incentive:'30k commission — Fixed Price Contract, Driveway Included',
+   pkgs:{benham182:1205000,elsie166:1187000,belview168:1197000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9034', rego:'Registered', size:312.5,front:12.5, len:25,    type:'Standard',landPrice:850000, status:'available', incentive:'',
+   pkgs:{aurora172:1302000,sienna175:1312000,newlife182:1322000,newlife182mg:1338000,newlife193mg:1352000,harrington207:1358000,oxley182:1323000,opal244:1381000,opal267:1418000,brighton263:1428000,brighton263mg:1439000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9058', rego:'Registered', size:326,  front:10,   len:32.6,  type:'Zero',    landPrice:867000, status:'available', incentive:'',
+   pkgs:{vista118:1214000,vista137:1240000,vista146:1247000,vista171:1274000,seabreeze188:1369000,aurora172:1319000,aurora210mg:1422000,sienna175:1329000,sienna200:1362000,newlife182:1339000,newlife182mg:1355000,harrington207:1375000,harrington240:1401000,rose260:1425000,oxley182:1340000,oxley195:1349000,oxley233:1388000,oxley257:1419000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7314', rego:'Registered', size:300,  front:10,   len:30,    type:'Zero',    landPrice:840000, status:'available', incentive:'',
+   pkgs:{vista118:1187000,vista137:1213000,vista146:1220000,vista171:1247000,aurora172:1292000,aurora210mg:1395000,sienna175:1302000,sienna200:1335000,newlife182:1312000,newlife182mg:1328000,harrington207:1348000,harrington240:1374000,rose260:1398000,oxley182:1313000,oxley195:1322000,oxley233:1361000,oxley257:1392000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7327', rego:'Registered', size:312.5,front:12.5, len:25,    type:'Standard',landPrice:850000, status:'available', incentive:'',
+   pkgs:{aurora172:1302000,sienna175:1312000,newlife182:1322000,newlife182mg:1338000,newlife193mg:1352000,harrington207:1358000,oxley182:1323000,opal244:1381000,opal267:1418000,brighton263:1428000,brighton263mg:1439000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7531', rego:'Registered', size:251,  front:14.34,len:17.5,  type:'Standard',landPrice:760000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
+   pkgs:{linley207a:1278000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7532', rego:'Registered', size:288.3,front:16.95,len:17.5,  type:'Corner',  landPrice:835000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
+   pkgs:{linley207a:1354000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7543', rego:'Registered', size:251,  front:14.34,len:17.5,  type:'Standard',landPrice:750000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
+   pkgs:{benham182:1268000,belview168:1260000}},
+  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7544', rego:'Registered', size:266,  front:15.66,len:17.5,  type:'Corner',  landPrice:770000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
+   pkgs:{linley207a:1289000}},
+  // Austral 325
+  {estate:'austral325', estName:'Austral — 325 Fifteenth Ave', lot:'13', rego:'Registered', size:307, front:10, len:30.71, type:'Standard',landPrice:650000, status:'available', incentive:'',
+   pkgs:{vista118:997000,vista137:1023000,vista146:1030000,aurora172:1102000,aurora210mg:1205000,sienna175:1112000,sienna200:1145000,newlife182:1122000,newlife182mg:1138000}},
+  // Westwood Estate
+  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'118', rego:'Registered', size:290,  front:10,  len:29,    type:'Standard',landPrice:735000, status:'sold',      incentive:'Extra 30k Bonus',
+   pkgs:{vista118:1082000,vista137:1108000,aurora172:1187000,aurora210mg:1290000,sienna175:1197000,sienna200:1230000,newlife182:1207000,newlife182mg:1223000}},
+  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'107', rego:'Registered', size:269,  front:10,  len:26.9,  type:'Standard',landPrice:699000, status:'sold',      incentive:'',
+   pkgs:{vista118:1046000,aurora172:1151000,sienna175:1161000,sienna200:1194000,newlife182:1171000,newlife182mg:1187000,oxley182:1172000,oxley195:1181000}},
+  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'108', rego:'Registered', size:269,  front:10,  len:26.9,  type:'Standard',landPrice:699000, status:'reserved',  incentive:'',
+   pkgs:{vista118:1046000,aurora172:1151000,sienna175:1161000,sienna200:1194000,newlife182:1171000,newlife182mg:1187000,oxley182:1172000,oxley195:1181000}},
+  // Leppington 64 Dickson Road
+  {estate:'lepp64', estName:'Leppington — 64 Dickson Road', lot:'53', rego:'Registered', size:404.9,front:12.5,len:32.39, type:'Standard',landPrice:880000, status:'available', incentive:'',
+   pkgs:{vista118:1227000,vista137:1253000,vista146:1260000,vista171:1287000,viva163:1265000,seabreeze188:1382000,aurora172:1332000,aurora210mg:1435000,sienna175:1342000,sienna200:1375000,newlife182:1352000,newlife182mg:1368000,newlife193mg:1382000,harrington207:1388000,harrington240:1414000,rose260:1438000,sienna239:1398000,oxley182:1353000,oxley195:1362000,oxley233:1401000,oxley257:1432000,opal244:1411000,opal267:1448000,carrington240:1406000,brighton263:1458000,brighton263mg:1469000}},
+  // Leppington 48 Dickson Road Stage 2
+  {estate:'lepp48', estName:'Leppington — 48 Dickson Road Stage 2', lot:'10', rego:'Registered', size:243,  front:7.5, len:32.4,  type:'Zero',    landPrice:645000, status:'available', incentive:'',
+   pkgs:{}},
+  {estate:'lepp48', estName:'Leppington — 48 Dickson Road Stage 2', lot:'18', rego:'Registered', size:291,  front:9,   len:32.4,  type:'Zero',    landPrice:699000, status:'reserved',  incentive:'',
+   pkgs:{vista118:1046000,vista137:1072000,vista146:1079000,aurora172:1151000,aurora210mg:1254000,sienna175:1161000,sienna200:1194000}},
+  // Jacaranda Estate
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'5',  rego:'46054',    size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'sold',      incentive:'',
+   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'6',  rego:'',         size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'sold',      incentive:'',
+   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'7',  rego:'',         size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'dt',        incentive:'',
+   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'21', rego:'',         size:253.9,front:10,  len:25.39, type:'Zero',    landPrice:685000, status:'sold',      incentive:'',
+   pkgs:{vista118:1032000,aurora172:1137000,sienna175:1147000,newlife182:1157000,newlife182mg:1173000,harrington207:1193000,oxley182:1158000,oxley195:1167000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'25', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
+   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'26', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'sold',      incentive:'',
+   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'27', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
+   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
+  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'28', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
+   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
+  // Austral 275 Twelfth Ave
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'2',  rego:'Q1 2026', size:250.1,front:9.92, len:25.2,  type:'Standard',landPrice:675000, status:'available', incentive:'',
+   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000,newlife182:1147000,newlife182mg:1163000}},
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'6',  rego:'',        size:250.1,front:10.49,len:23.84, type:'Standard',landPrice:685000, status:'available', incentive:'',
+   pkgs:{sienna175:1147000,newlife182:1157000,newlife182mg:1173000,newlife193mg:1187000,oxley182:1158000}},
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'9',  rego:'',        size:250.1,front:9.79, len:25.53, type:'Standard',landPrice:675000, status:'available', incentive:'',
+   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000}},
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'10', rego:'',        size:250.1,front:9.79, len:25.53, type:'Standard',landPrice:675000, status:'available', incentive:'',
+   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000}},
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'16', rego:'',        size:300.1,front:9.31, len:32.23, type:'Standard',landPrice:740000, status:'available', incentive:'',
+   pkgs:{aurora172:1192000,aurora210mg:1295000}},
+  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'17', rego:'',        size:300.1,front:9.31, len:32.23, type:'Standard',landPrice:740000, status:'available', incentive:'',
+   pkgs:{aurora172:1192000,aurora210mg:1295000}},
+  // Rouse Hill
+  {estate:'rousehill', estName:'Rouse Hill — 124 Tallawong Rd', lot:'33', rego:'Registered', size:360,  front:12,  len:30.5,  type:'Standard',landPrice:1035000, status:'available', incentive:'',
+   pkgs:{vista118:1382000,vista137:1408000,vista146:1415000,vista171:1442000,viva163:1420000,aurora172:1487000,aurora210mg:1590000,sienna175:1497000,sienna200:1530000,newlife182:1507000,newlife182mg:1523000,newlife193mg:1537000,harrington207:1543000,harrington240:1569000,rose260:1593000,oxley182:1508000,oxley195:1517000,oxley233:1556000,oxley257:1587000}},
+];
+
+// i18n
+const i18n = {
+  en:{
+    'txt-h-center':'Gold Inclusion · Price Matrix 2026',
+    'txt-overline':'Noble Home Builders · NSW · Jan 2026',
+    'incl-title':'✦ Gold Inclusion Package',
+    'incl-1':'Gold Inclusion (2025) — 7-star BASIX compliant',
+    'incl-2':'6-month price lock from contract exchange',
+    'incl-3':'Standard site cost included',
+    'incl-4':'Landscaping: +$31K (driveway + fence)',
+    'incl-5':'0.4%/month extension after 6 months',
+    'txt-note':'Click any lot to see available house designs and package prices.',
+    'slbl-estates':'Estates','ssub-estates':'Across NSW',
+    'slbl-avail':'Available','ssub-avail':'Lots',
+    'slbl-from':'Land From','ssub-from':'Land Price',
+    'slbl-pkg-from':'Package From','ssub-pkg-from':'incl. house',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-status':'Status','flbl-rego':'Registration','flbl-type':'Land Type',
+    'flbl-maxland':'Max Land Price','flbl-search':'Search',
+    'opt-st-all':'All','opt-st-avail':'Available','opt-st-sold':'Sold','opt-st-res':'Reserved','opt-st-dt':'Deposit Taken',
+    'opt-rg-all':'All','opt-rg-reg':'Registered','opt-rg-unreg':'Unregistered',
+    'opt-ty-all':'All','opt-ty-zero':'Zero Lot','opt-ty-std':'Standard','opt-ty-cor':'Corner',
+    'opt-px-all':'All','opt-px1':'Under $700K','opt-px2':'Under $800K','opt-px3':'Under $900K','opt-px4':'Under $1M',
+    'txt-reset':'Reset','txt-shown-lbl':' lots shown','txt-click-hint':'click a row to see house designs',
+    'th-lot':'Lot','th-rego':'Rego','th-size':'Size m²','th-front':'Front','th-type':'Type',
+    'th-land':'Land Price','th-pkg-from':'Pkg From','th-status':'Status',
+    'srt-la':'Land Price ↑','srt-ld':'Land Price ↓','srt-sd':'Size ↓','srt-sa':'Size ↑','srt-lot':'Lot # ↑',
+    'txt-empty':'— No lots match your criteria —',
+    'dp-hint-txt':'Select a lot to view<br>available house designs',
+    'dp-lbl-size':'Land Size','dp-lbl-front':'Frontage','dp-lbl-land':'Land Price','dp-lbl-type':'Land Type',
+    'dp-designs-title':'Available House Designs & Package Prices',
+    searchPh:'Lot, estate...',
+    statusLabel:{available:'Available',sold:'Sold',reserved:'Reserved',dt:'Deposit Taken'},
+  },
+  ko:{
+    'txt-h-center':'골드 인클루전 · 가격 매트릭스 2026',
+    'txt-overline':'Noble Home Builders · NSW · 2026년 1월',
+    'incl-title':'✦ 골드 인클루전 패키지',
+    'incl-1':'골드 인클루전 (2025) — 7스타 BASIX 기준 충족',
+    'incl-2':'계약 교환일로부터 6개월 가격 고정',
+    'incl-3':'표준 사이트 비용 포함',
+    'incl-4':'조경: +$31K (진입로 + 울타리)',
+    'incl-5':'6개월 이후 연장 시 월 0.4% 추가',
+    'txt-note':'Lot을 클릭하면 가능한 하우스 디자인과 패키지 가격을 볼 수 있습니다.',
+    'slbl-estates':'단지','ssub-estates':'NSW 전역',
+    'slbl-avail':'분양 가능','ssub-avail':'Lot 수',
+    'slbl-from':'토지 최저가','ssub-from':'토지 가격',
+    'slbl-pkg-from':'패키지 최저가','ssub-pkg-from':'하우스 포함',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-status':'상태','flbl-rego':'등기','flbl-type':'토지 유형',
+    'flbl-maxland':'최대 토지 가격','flbl-search':'검색',
+    'opt-st-all':'전체','opt-st-avail':'판매 가능','opt-st-sold':'판매 완료','opt-st-res':'예약됨','opt-st-dt':'예약금 납부',
+    'opt-rg-all':'전체','opt-rg-reg':'등기 완료','opt-rg-unreg':'등기 예정',
+    'opt-ty-all':'전체','opt-ty-zero':'제로 Lot','opt-ty-std':'스탠다드','opt-ty-cor':'코너',
+    'opt-px-all':'전체','opt-px1':'$700K 이하','opt-px2':'$800K 이하','opt-px3':'$900K 이하','opt-px4':'$1M 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 Lot 표시 중','txt-click-hint':'행 클릭 시 하우스 디자인 확인',
+    'th-lot':'Lot','th-rego':'등기','th-size':'면적 m²','th-front':'전면','th-type':'유형',
+    'th-land':'토지 가격','th-pkg-from':'최저 패키지','th-status':'상태',
+    'srt-la':'토지가 낮은 순','srt-ld':'토지가 높은 순','srt-sd':'면적 큰 순','srt-sa':'면적 작은 순','srt-lot':'Lot 순',
+    'txt-empty':'— 조건에 맞는 Lot이 없습니다 —',
+    'dp-hint-txt':'Lot을 선택하면<br>하우스 디자인을 볼 수 있습니다',
+    'dp-lbl-size':'면적','dp-lbl-front':'전면','dp-lbl-land':'토지 가격','dp-lbl-type':'토지 유형',
+    'dp-designs-title':'가능한 하우스 디자인 & 패키지 가격',
+    searchPh:'Lot 번호, 단지명 검색...',
+    statusLabel:{available:'판매 가능',sold:'판매 완료',reserved:'예약됨',dt:'예약금 납부'},
+  }
+};
+
+let lang='en', curEstate='all', filtered=[], selectedLot=null;
+
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});
+  document.getElementById('fSearch').placeholder=t.searchPh;
+  render(); updateStats();
+  if(selectedLot) showDesigns(selectedLot);
+}
+
+function setEstate(e){
+  curEstate=e;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+e).classList.add('active');
+  applyFilters();
+}
+
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';return'$'+(n/1e3).toFixed(0)+'K';}
+
+function statusCls(s){
+  if(s==='available')return'sc-avail';if(s==='sold')return'sc-sold';
+  if(s==='reserved')return'sc-reserved';return'sc-dt';
+}
+function lotTypeCls(t){if(t==='Zero')return'lt-zero';if(t.includes('Corner'))return'lt-corner';return'';}
+function regoCls(r){if(r==='Registered')return'rego-chip rego-reg';if(!r||r==='')return'rego-chip';return'rego-chip rego-unreg';}
+function regoLabel(r){if(r==='Registered')return'Registered';if(!r||r==='')return'TBC';return r;}
+
+function pkgFrom(lot){
+  const vals=Object.values(lot.pkgs).filter(v=>v&&v>0);
+  return vals.length?Math.min(...vals):null;
+}
+
+function applyFilters(){
+  const status  =document.getElementById('fStatus').value;
+  const rego    =document.getElementById('fRego').value;
+  const type    =document.getElementById('fType').value;
+  const maxLand =document.getElementById('fMaxLand').value;
+  const srch    =document.getElementById('fSearch').value.toLowerCase().trim();
+  const srt     =document.getElementById('sortSel').value;
+
+  filtered=lots.filter(d=>{
+    if(curEstate!=='all'&&d.estate!==curEstate) return false;
+    if(status){
+      if(status==='available'&&d.status!=='available') return false;
+      if(status==='sold'&&d.status!=='sold') return false;
+      if(status==='reserved'&&d.status!=='reserved') return false;
+      if(status==='dt'&&d.status!=='dt') return false;
+    }
+    if(rego==='Registered'&&d.rego!=='Registered') return false;
+    if(rego==='unregistered'&&d.rego==='Registered') return false;
+    if(type&&!d.type.includes(type)) return false;
+    if(maxLand&&d.landPrice>+maxLand) return false;
+    if(srch){
+      const hay=[d.lot,d.estName,d.estate,d.type].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    if(srt==='land-asc')  return a.landPrice-b.landPrice;
+    if(srt==='land-desc') return b.landPrice-a.landPrice;
+    if(srt==='size-desc') return b.size-a.size;
+    if(srt==='size-asc')  return a.size-b.size;
+    if(srt==='lot-asc')   return (+a.lot||0)-(+b.lot||0)||a.lot.localeCompare(b.lot);
+    return 0;
+  });
+
+  // Tab counts
+  const estates=['newpark','hills','boxhill39','austral325','westwood','lepp64','lepp48','jacaranda','austral275','rousehill'];
+  estates.forEach(e=>{document.getElementById('tc-'+e).textContent=lots.filter(l=>l.estate===e).length;});
+  document.getElementById('tc-all').textContent=lots.length;
+
+  render(); updateStats();
+}
+
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=filtered.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tbody=document.getElementById('tBody');
+  const empty=document.getElementById('emptyMsg');
+  if(!filtered.length){tbody.innerHTML='';empty.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map(d=>{
+    const pf=pkgFrom(d);
+    const isSelected=selectedLot&&selectedLot.lot===d.lot&&selectedLot.estate===d.estate;
+    return`<tr class="${isSelected?'selected-row':''}" onclick="selectLot('${d.estate}','${d.lot}')">
+      <td>
+        <div class="lot-num">${d.lot}</div>
+        <div class="lot-estate" style="font-size:8px;color:var(--muted);margin-top:1px">${d.estName.split('—')[0].trim()}</div>
+      </td>
+      <td><span class="${regoCls(d.rego)}">${regoLabel(d.rego)}</span></td>
+      <td style="font-size:12px;font-weight:500">${d.size}m²</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${d.front}m</td>
+      <td><span class="lot-type-chip ${lotTypeCls(d.type)}">${d.type}</span></td>
+      <td><div class="land-price">${$c(d.landPrice)}</div></td>
+      <td><div class="pkg-from">${pf?$f(pf):'—'}</div></td>
+      <td><span class="status-chip ${statusCls(d.status)}">${t.statusLabel[d.status]||d.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats(){
+  const avail=filtered.filter(d=>d.status==='available');
+  const lands=filtered.map(d=>d.landPrice);
+  const pkgs=filtered.map(d=>pkgFrom(d)).filter(v=>v);
+  document.getElementById('sval-estates').textContent=[...new Set(lots.map(l=>l.estate))].length;
+  document.getElementById('sval-avail').textContent=avail.length;
+  document.getElementById('sval-from').textContent=lands.length?$f(Math.min(...lands)):'—';
+  document.getElementById('sval-pkg-from').textContent=pkgs.length?$f(Math.min(...pkgs)):'—';
+  document.getElementById('sval-shown').textContent=filtered.length;
+}
+
+function selectLot(estate, lotNum){
+  const lot=lots.find(l=>l.estate===estate&&l.lot===lotNum);
+  if(!lot)return;
+  selectedLot=lot;
+  render(); // re-render to highlight
+  showDesigns(lot);
+}
+
+function showDesigns(lot){
+  const t=i18n[lang];
+  document.getElementById('dpPlaceholder').style.display='none';
+  document.getElementById('dpContent').style.display='block';
+  document.getElementById('dp-lot-num').textContent='Lot '+lot.lot;
+  document.getElementById('dp-estate-name').textContent=lot.estName;
+  document.getElementById('dp-size').textContent=lot.size+'m²';
+  document.getElementById('dp-front').textContent=lot.front+'m';
+  document.getElementById('dp-land').textContent=$c(lot.landPrice);
+  document.getElementById('dp-type').textContent=lot.type;
+  document.getElementById('dp-lbl-size').textContent=t['dp-lbl-size'];
+  document.getElementById('dp-lbl-front').textContent=t['dp-lbl-front'];
+  document.getElementById('dp-lbl-land').textContent=t['dp-lbl-land'];
+  document.getElementById('dp-lbl-type').textContent=t['dp-lbl-type'];
+  document.getElementById('dp-designs-title').textContent=t['dp-designs-title'];
+  const incEl=document.getElementById('dp-incentive');
+  if(lot.incentive){incEl.style.display='block';incEl.innerHTML='⭐ '+lot.incentive;}
+  else{incEl.style.display='none';}
+  const avail=designs.filter(d=>lot.pkgs[d.key]&&lot.pkgs[d.key]>0).sort((a,b)=>lot.pkgs[a.key]-lot.pkgs[b.key]);
+  const list=document.getElementById('designList');
+  if(!avail.length){list.innerHTML=`<div class="no-designs">No house designs configured<br>for this lot</div>`;return;}
+  list.innerHTML=avail.map(d=>`
+    <div class="design-card">
+      <div class="dc-left">
+        <div class="dc-name">${d.name}</div>
+        <div class="dc-size">${d.size}m² · House $${d.housePrice.toLocaleString()}</div>
+      </div>
+      <div class="dc-price">
+        <div class="dc-pkg">${$f(lot.pkgs[d.key])}</div>
+        <div class="dc-house">Package Total</div>
+      </div>
+    </div>`).join('');
+}
+
+function resetFilters(){
+  ['fStatus','fRego','fType','fMaxLand'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  document.getElementById('sortSel').value='land-asc';
+  selectedLot=null;
+  document.getElementById('dpPlaceholder').style.display='flex';
+  document.getElementById('dpContent').style.display='none';
+  applyFilters();
+}
+
+function toggleTheme(){
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='dark'){b.dataset.theme='light';btn.textContent='☀️';}
+  else{b.dataset.theme='dark';btn.textContent='🌙';}
+}
+
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){
+  document.body.dataset.theme='light';document.getElementById('themeBtn').textContent='☀️';
+}
+applyFilters();
+</script>
+</body>
+</html>
