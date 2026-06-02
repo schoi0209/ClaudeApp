@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Castle Group — Land Price List 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f8f6f1;--surface:#fff;--surface2:#f2ede4;--surface3:#e8e0d0;
+  --border:rgba(80,60,20,.09);--border2:rgba(80,60,20,.18);
+  --ink:#1a1408;--muted:#7a6a48;--muted2:#c0b090;
+  --accent:#5a4a20;--accent-l:rgba(90,74,32,.07);
+  --gold:#9a7828;--gold-l:rgba(154,120,40,.08);
+  --green:#256040;--green-l:rgba(37,96,64,.08);
+  --amber:#b06010;--amber-l:rgba(176,96,16,.08);
+  --red:#903020;--red-l:rgba(144,48,32,.08);
+  /* project accent colours */
+  --valley:#6a4e2a;--valley-l:rgba(106,78,42,.08);
+  --central:#3a6a30;--central-l:rgba(58,106,48,.08);
+  --edave:#1a4a7a;--edave-l:rgba(26,74,122,.08);
+  --bloomfield:#5a2a5a;--bloomfield-l:rgba(90,42,90,.08);
+}
+[data-theme="dark"]{
+  --bg:#0d0b07;--surface:#1a1610;--surface2:#222018;--surface3:#2c2820;
+  --border:rgba(220,200,140,.07);--border2:rgba(220,200,140,.14);
+  --ink:#f0e8d8;--muted:#8a7850;--muted2:#3a3020;
+  --accent:#c8a050;--accent-l:rgba(200,160,80,.07);
+  --gold:#d4a840;--gold-l:rgba(212,168,64,.08);
+  --green:#50b880;--green-l:rgba(80,184,128,.08);
+  --amber:#d08840;--amber-l:rgba(208,136,64,.08);
+  --red:#d06050;--red-l:rgba(208,96,80,.08);
+  --valley:#c8a060;--valley-l:rgba(200,160,96,.08);
+  --central:#60b860;--central-l:rgba(96,184,96,.08);
+  --edave:#60a0d8;--edave-l:rgba(96,160,216,.08);
+  --bloomfield:#c060c0;--bloomfield-l:rgba(192,96,192,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+/* BMC */
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-logo{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--accent);border:1.5px solid var(--accent);padding:4px 10px;border-radius:3px;}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+
+/* MASTHEAD */
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1400px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--gold);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;letter-spacing:-.01em;}
+.masthead h1 i{font-style:italic;color:var(--gold);}
+.m-right{text-align:right;}
+.proj-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.proj-mini{border-radius:7px;padding:10px 12px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .2s;}
+.proj-mini:hover{transform:translateY(-2px);}
+.pm-name{font-size:11px;font-weight:600;letter-spacing:.04em;margin-bottom:2px;}
+.pm-loc{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);}
+.pm-cnt{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;float:right;margin-top:-18px;}
+
+/* STATS */
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* PROJECT TABS */
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 20px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tab-cnt{font-size:9px;background:var(--accent-l);color:var(--accent);border-radius:20px;padding:1px 6px;font-weight:600;}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;min-width:105px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* RESULTS */
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1400px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+/* TABLE */
+.tbl-wrap{max-width:1400px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:13px 12px;white-space:nowrap;}
+
+/* PROJECT badge */
+.proj-badge{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 9px;border-radius:3px;text-transform:uppercase;border:1px solid;}
+.pb-valley{color:var(--valley);border-color:rgba(106,78,42,.25);background:var(--valley-l);}
+.pb-central{color:var(--central);border-color:rgba(58,106,48,.25);background:var(--central-l);}
+.pb-edave{color:var(--edave);border-color:rgba(26,74,122,.25);background:var(--edave-l);}
+.pb-bloomfield{color:var(--bloomfield);border-color:rgba(90,42,90,.25);background:var(--bloomfield-l);}
+
+/* LOT */
+.lot-num{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--accent);}
+.lot-note{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* SIZE */
+.sz-main{font-size:13px;font-weight:500;}
+.sz-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* SHAPE badge */
+.shape{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);}
+.shape-corner{color:var(--amber);border-color:rgba(176,96,16,.25);background:var(--amber-l);}
+.shape-irregular{color:var(--red);border-color:rgba(144,48,32,.25);background:var(--red-l);}
+.shape-padmount{color:var(--edave);border-color:rgba(26,74,122,.25);background:var(--edave-l);}
+
+/* PRICE */
+.price-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);}
+.price-psm{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+/* STATUS */
+.status{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 9px;border-radius:3px;text-transform:uppercase;white-space:nowrap;}
+.s-available{background:var(--green-l);color:var(--green);border:1px solid rgba(37,96,64,.2);}
+.s-offer{background:var(--amber-l);color:var(--amber);border:1px solid rgba(176,96,16,.2);}
+.s-sold{background:rgba(120,120,120,.08);color:var(--muted2);border:1px solid rgba(120,120,120,.18);}
+
+/* REGO badge */
+.rego-badge{font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;border:1px solid var(--border2);color:var(--muted);}
+.rego-done{color:var(--green);border-color:rgba(37,96,64,.25);background:var(--green-l);}
+.rego-pending{color:var(--amber);border-color:rgba(176,96,16,.25);background:var(--amber-l);}
+
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){
+  header,.masthead,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}
+  .m-right{text-align:left;}.proj-cards{grid-template-columns:1fr 1fr;}
+  .h-center{font-size:11px;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">CASTLE GROUP</div>
+  </div>
+  <div class="h-center" id="txt-h-center">Land Price List · 2026</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Castle Group · Sydney NSW · 2026</div>
+    <h1>Land<br><i>Price</i><br>List</h1>
+  </div>
+  <div class="m-right">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px" id="txt-proj-label">4 Projects Available</div>
+    <div class="proj-cards">
+      <div class="proj-mini" onclick="setProject('valley')" style="border-color:rgba(106,78,42,.2)">
+        <div class="pm-name" style="color:var(--valley)">Valley Rise</div>
+        <div class="pm-loc">Leppington</div>
+        <div class="pm-cnt" style="color:var(--valley)" id="cnt-valley">4</div>
+      </div>
+      <div class="proj-mini" onclick="setProject('central')" style="border-color:rgba(58,106,48,.2)">
+        <div class="pm-name" style="color:var(--central)">Central Grove</div>
+        <div class="pm-loc">Fifteenth Ave, Austral</div>
+        <div class="pm-cnt" style="color:var(--central)" id="cnt-central">7</div>
+      </div>
+      <div class="proj-mini" onclick="setProject('edave')" style="border-color:rgba(26,74,122,.2)">
+        <div class="pm-name" style="color:var(--edave)">Ed. Ave</div>
+        <div class="pm-loc">Austral</div>
+        <div class="pm-cnt" style="color:var(--edave)" id="cnt-edave">12</div>
+      </div>
+      <div class="proj-mini" onclick="setProject('bloomfield')" style="border-color:rgba(90,42,90,.2)">
+        <div class="pm-name" style="color:var(--bloomfield)">Bloomfield</div>
+        <div class="pm-loc">Austral</div>
+        <div class="pm-cnt" style="color:var(--bloomfield)" id="cnt-bloomfield">5</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Lots</div><div class="s-val" id="sval-total">28</div><div class="s-sub" id="ssub-total">Across 4 Projects</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">For Sale</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Land Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avg">Average</div><div class="s-val" id="sval-avg">—</div><div class="s-sub" id="ssub-avg">Land Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+
+<!-- PROJECT TABS -->
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setProject('all')" id="tab-all">
+    <span id="txt-tab-all">All Projects</span> <span class="tab-cnt" id="tc-all">28</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('valley')" id="tab-valley">
+    <span class="tab-dot" style="background:var(--valley)"></span> Valley Rise <span class="tab-cnt" id="tc-valley">4</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('central')" id="tab-central">
+    <span class="tab-dot" style="background:var(--central)"></span> Central Grove <span class="tab-cnt" id="tc-central">7</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('edave')" id="tab-edave">
+    <span class="tab-dot" style="background:var(--edave)"></span> Ed. Ave <span class="tab-cnt" id="tc-edave">12</span>
+  </button>
+  <button class="tab-btn" onclick="setProject('bloomfield')" id="tab-bloomfield">
+    <span class="tab-dot" style="background:var(--bloomfield)"></span> Bloomfield <span class="tab-cnt" id="tc-bloomfield">5</span>
+  </button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-status">Status</span>
+    <select id="fStatus" onchange="applyFilters()">
+      <option value="" id="opt-st-all">All</option>
+      <option value="Available" id="opt-st-avail">Available</option>
+      <option value="UNDER OFFER" id="opt-st-offer">Under Offer</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-rego">Registration</span>
+    <select id="fRego" onchange="applyFilters()">
+      <option value="" id="opt-rg-all">All</option>
+      <option value="registered" id="opt-rg-reg">Registered</option>
+      <option value="unregistered" id="opt-rg-unreg">Unregistered</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="applyFilters()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="700000" id="opt-px1">Under $700K</option>
+      <option value="750000" id="opt-px2">Under $750K</option>
+      <option value="800000" id="opt-px3">Under $800K</option>
+      <option value="900000" id="opt-px4">Under $900K</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxsize">Min Size (m²)</span>
+    <select id="fMinSize" onchange="applyFilters()">
+      <option value="" id="opt-sz-all">All</option>
+      <option value="300" id="opt-sz1">300m² +</option>
+      <option value="350" id="opt-sz2">350m² +</option>
+      <option value="400" id="opt-sz3">400m² +</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:140px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSearch" placeholder="Lot no, project..." oninput="applyFilters()"></div>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> lots shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="applyFilters()">
+    <option value="price-asc"  id="srt-pa">Price ↑</option>
+    <option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="size-desc"  id="srt-sd">Size ↓</option>
+    <option value="size-asc"   id="srt-sa">Size ↑</option>
+    <option value="lot-asc"    id="srt-la">Lot # ↑</option>
+    <option value="psm-asc"    id="srt-psa">$/m² ↑</option>
+  </select>
+</div>
+
+<!-- TABLE -->
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-lot">Lot</th>
+        <th id="th-proj">Project</th>
+        <th id="th-loc">Location</th>
+        <th id="th-stage">Stage</th>
+        <th id="th-size">Size (m²)</th>
+        <th id="th-front">Frontage</th>
+        <th id="th-depth">Depth</th>
+        <th id="th-shape">Shape</th>
+        <th id="th-rego">Registration</th>
+        <th id="th-price">Price</th>
+        <th id="th-psm">$/m²</th>
+        <th id="th-status">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No lots match your criteria —</p></div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const data = [
+  // Valley Rise — Leppington (19/05/2026)
+  {proj:'valley',projName:'Valley Rise',   loc:'Leppington',  stage:'1', lot:'25',  size:450,  front:23.8,depth:null, shape:'Padmount', rego:'registered',   price:830000, status:'Available'},
+  {proj:'valley',projName:'Valley Rise',   loc:'Leppington',  stage:'1', lot:'35',  size:450,  front:6.5, depth:null, shape:'Irregular', rego:'registered',   price:835000, status:'Available'},
+  {proj:'valley',projName:'Valley Rise',   loc:'Leppington',  stage:'1', lot:'45',  size:450,  front:29.9,depth:null, shape:'Corner',    rego:'registered',   price:885000, status:'UNDER OFFER'},
+  {proj:'valley',projName:'Valley Rise',   loc:'Leppington',  stage:'1', lot:'201', size:300,  front:12.0,depth:null, shape:'Regular',   rego:'unregistered', price:725000, status:'Available'},
+  // Central Grove — Fifteenth Ave, Austral (Stage 1, May Release)
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'49',  size:450,  front:15.59,depth:30.01,shape:'Regular',  rego:'unregistered', price:960000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'59',  size:450,  front:14.17,depth:32.80,shape:'Regular',  rego:'unregistered', price:950000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'90',  size:300,  front:10.92,depth:27.62,shape:'Regular',  rego:'unregistered', price:726000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'93',  size:328,  front:14.90,depth:22.98,shape:'Regular',  rego:'unregistered', price:750000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'94',  size:300,  front:13.05,depth:22.98,shape:'Regular',  rego:'unregistered', price:737000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'96',  size:328,  front:14.9, depth:22.98,shape:'Corner',   rego:'unregistered', price:750000, status:'Available'},
+  {proj:'central',projName:'Central Grove',loc:'Austral',     stage:'1', lot:'113', size:300,  front:9.27, depth:32.53,shape:'Regular',  rego:'unregistered', price:710000, status:'Available'},
+  // Ed. Ave — Austral (June Release 2026)
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'109', size:340,  front:10,   depth:34,   shape:'Regular',  rego:'unregistered', price:780000, status:'Available'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'110', size:340,  front:10,   depth:34,   shape:'Regular',  rego:'unregistered', price:780000, status:'Available'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'111', size:268.9,front:5.3,  depth:25.3, shape:'Regular',  rego:'unregistered', price:625000, status:'Available'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'113', size:281.7,front:9,    depth:31.3, shape:'Regular',  rego:'unregistered', price:678000, status:'Available'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'118', size:264.6,front:5.30, depth:25,   shape:'Regular',  rego:'unregistered', price:659000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'123', size:264.7,front:11.3, depth:25,   shape:'Corner',   rego:'unregistered', price:659000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'127', size:313.1,front:10,   depth:31.3, shape:'Regular',  rego:'unregistered', price:735000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'128', size:313.1,front:10,   depth:31.3, shape:'Regular',  rego:'unregistered', price:735000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'301', size:253.8,front:10,   depth:25.3, shape:'Regular',  rego:'unregistered', price:640000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'302', size:253.8,front:10,   depth:25.3, shape:'Regular',  rego:'unregistered', price:640000, status:'UNDER OFFER'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'401', size:340,  front:10,   depth:34,   shape:'Regular',  rego:'unregistered', price:780000, status:'Available'},
+  {proj:'edave',projName:'Ed. Ave',        loc:'Austral',     stage:'-', lot:'402', size:369.7,front:10.8, depth:34,   shape:'Regular',  rego:'unregistered', price:789000, status:'Available'},
+  // Bloomfield — Austral (Stage 2, June Release)
+  {proj:'bloomfield',projName:'Bloomfield',loc:'Austral',     stage:'2', lot:'2',   size:371.7,front:10,   depth:37.1, shape:'Regular',  rego:'unregistered', price:765000, status:'Available'},
+  {proj:'bloomfield',projName:'Bloomfield',loc:'Austral',     stage:'2', lot:'4',   size:371.7,front:10,   depth:37.1, shape:'Regular',  rego:'unregistered', price:765000, status:'UNDER OFFER'},
+  {proj:'bloomfield',projName:'Bloomfield',loc:'Austral',     stage:'2', lot:'5',   size:353.2,front:9.5,  depth:37.1, shape:'Regular',  rego:'unregistered', price:735000, status:'Available'},
+  {proj:'bloomfield',projName:'Bloomfield',loc:'Austral',     stage:'2', lot:'6',   size:334.6,front:9,    depth:37.1, shape:'Regular',  rego:'unregistered', price:725000, status:'Available'},
+  {proj:'bloomfield',projName:'Bloomfield',loc:'Austral',     stage:'2', lot:'21',  size:376.2,front:10,   depth:37.6, shape:'Regular',  rego:'unregistered', price:795000, status:'UNDER OFFER'},
+];
+
+// ── i18n ──────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    'txt-h-center':'Land Price List · 2026',
+    'txt-overline':'Castle Group · Sydney NSW · 2026',
+    'txt-proj-label':'4 Projects Available',
+    'txt-tab-all':'All Projects',
+    'slbl-total':'Total Lots','ssub-total':'Across 4 Projects',
+    'slbl-avail':'Available','ssub-avail':'For Sale',
+    'slbl-from':'From','ssub-from':'Land Price',
+    'slbl-avg':'Average','ssub-avg':'Land Price',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-status':'Status','flbl-rego':'Registration',
+    'flbl-maxpx':'Max Price','flbl-maxsize':'Min Size (m²)','flbl-search':'Search',
+    'opt-st-all':'All','opt-st-avail':'Available','opt-st-offer':'Under Offer',
+    'opt-rg-all':'All','opt-rg-reg':'Registered','opt-rg-unreg':'Unregistered',
+    'opt-px-all':'All','opt-px1':'Under $700K','opt-px2':'Under $750K','opt-px3':'Under $800K','opt-px4':'Under $900K',
+    'opt-sz-all':'All','opt-sz1':'300m² +','opt-sz2':'350m² +','opt-sz3':'400m² +',
+    'txt-reset':'Reset','txt-shown-lbl':' lots shown',
+    'th-lot':'Lot','th-proj':'Project','th-loc':'Location','th-stage':'Stage',
+    'th-size':'Size (m²)','th-front':'Frontage','th-depth':'Depth',
+    'th-shape':'Shape','th-rego':'Registration','th-price':'Price','th-psm':'$/m²','th-status':'Status',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-sd':'Size ↓','srt-sa':'Size ↑','srt-la':'Lot # ↑','srt-psa':'$/m² ↑',
+    'txt-empty':'— No lots match your criteria —',
+    searchPh:'Lot no, project...',
+    statusMap:{'Available':'Available','UNDER OFFER':'Under Offer','SOLD':'Sold'},
+    regoMap:{'registered':'Registered','unregistered':'Q2/Q3 2026*'},
+  },
+  ko: {
+    'txt-h-center':'토지 분양가 리스트 · 2026',
+    'txt-overline':'Castle Group · 시드니 NSW · 2026',
+    'txt-proj-label':'4개 프로젝트 분양 중',
+    'txt-tab-all':'전체 프로젝트',
+    'slbl-total':'총 Lot 수','ssub-total':'4개 프로젝트',
+    'slbl-avail':'분양 가능','ssub-avail':'판매 중',
+    'slbl-from':'최저가','ssub-from':'토지 가격',
+    'slbl-avg':'평균가','ssub-avg':'토지 가격',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-status':'상태','flbl-rego':'등기',
+    'flbl-maxpx':'최대 가격','flbl-maxsize':'최소 면적 (m²)','flbl-search':'검색',
+    'opt-st-all':'전체','opt-st-avail':'판매 가능','opt-st-offer':'오퍼 중',
+    'opt-rg-all':'전체','opt-rg-reg':'등기 완료','opt-rg-unreg':'등기 예정',
+    'opt-px-all':'전체','opt-px1':'$700K 이하','opt-px2':'$750K 이하','opt-px3':'$800K 이하','opt-px4':'$900K 이하',
+    'opt-sz-all':'전체','opt-sz1':'300m² 이상','opt-sz2':'350m² 이상','opt-sz3':'400m² 이상',
+    'txt-reset':'초기화','txt-shown-lbl':'개 Lot 표시 중',
+    'th-lot':'Lot','th-proj':'프로젝트','th-loc':'위치','th-stage':'스테이지',
+    'th-size':'면적 (m²)','th-front':'전면','th-depth':'깊이',
+    'th-shape':'모양','th-rego':'등기','th-price':'토지 가격','th-psm':'m²당 가격','th-status':'상태',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-sd':'면적 큰 순','srt-sa':'면적 작은 순','srt-la':'Lot 순','srt-psa':'단가 낮은 순',
+    'txt-empty':'— 조건에 맞는 Lot이 없습니다 —',
+    searchPh:'Lot 번호, 프로젝트 검색...',
+    statusMap:{'Available':'판매 가능','UNDER OFFER':'오퍼 중','SOLD':'판매 완료'},
+    regoMap:{'registered':'등기 완료','unregistered':'Q2/Q3 2026 예정'},
+  }
+};
+
+let lang='en', curProj='all', filtered=[];
+
+const projColors = {
+  valley:'valley', central:'central', edave:'edave', bloomfield:'bloomfield'
+};
+
+function setLang(l) {
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{
+    if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}
+  });
+  document.getElementById('fSearch').placeholder=t.searchPh;
+  render(); updateStats();
+}
+
+function setProject(p) {
+  curProj=p;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+p).classList.add('active');
+  applyFilters();
+}
+
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(0)+'K';return'$'+n;}
+
+function shapeClass(s) {
+  if(!s)return'shape';
+  if(s==='Corner')return'shape shape-corner';
+  if(s==='Irregular')return'shape shape-irregular';
+  if(s==='Padmount')return'shape shape-padmount';
+  return'shape';
+}
+
+function applyFilters() {
+  const status  =document.getElementById('fStatus').value;
+  const rego    =document.getElementById('fRego').value;
+  const maxPx   =document.getElementById('fMaxPx').value;
+  const minSize =document.getElementById('fMinSize').value;
+  const srch    =document.getElementById('fSearch').value.toLowerCase().trim();
+  const srt     =document.getElementById('sortSel').value;
+
+  filtered=data.filter(d=>{
+    if(curProj!=='all' && d.proj!==curProj) return false;
+    if(status && d.status!==status) return false;
+    if(rego   && d.rego!==rego)     return false;
+    if(maxPx  && d.price>+maxPx)   return false;
+    if(minSize && d.size<+minSize)  return false;
+    if(srch) {
+      const hay=[d.lot,d.projName,d.loc,d.shape,d.stage].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    if(srt==='price-asc')  return a.price-b.price;
+    if(srt==='price-desc') return b.price-a.price;
+    if(srt==='size-desc')  return b.size-a.size;
+    if(srt==='size-asc')   return a.size-b.size;
+    if(srt==='lot-asc')    return (+a.lot||0)-(+b.lot||0)||a.lot.localeCompare(b.lot);
+    if(srt==='psm-asc')    return (a.price/a.size)-(b.price/b.size);
+    return 0;
+  });
+
+  // Update tab counts
+  ['valley','central','edave','bloomfield'].forEach(p=>{
+    document.getElementById('tc-'+p).textContent=data.filter(d=>d.proj===p).length;
+    document.getElementById('cnt-'+p).textContent=data.filter(d=>d.proj===p).length;
+  });
+  document.getElementById('tc-all').textContent=data.length;
+
+  render(); updateStats();
+}
+
+function render() {
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=filtered.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tbody=document.getElementById('tBody');
+  const empty=document.getElementById('emptyMsg');
+  if(!filtered.length){tbody.innerHTML='';empty.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map(d=>{
+    const psm=Math.round(d.price/d.size);
+    const pc=projColors[d.proj]||'valley';
+    const regoLbl=t.regoMap[d.rego]||d.rego;
+    const regoCls=d.rego==='registered'?'rego-badge rego-done':'rego-badge rego-pending';
+    const sc=d.status==='Available'?'s-available':d.status==='UNDER OFFER'?'s-offer':'s-sold';
+    return `
+    <tr>
+      <td><div class="lot-num">${d.lot}</div></td>
+      <td><span class="proj-badge pb-${pc}">${d.projName}</span></td>
+      <td style="font-size:11px;color:var(--muted)">${d.loc}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-align:center">${d.stage==='−'||d.stage==='-'?'—':'St.'+d.stage}</td>
+      <td><div class="sz-main">${d.size} m²</div></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px">${d.front}m</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px">${d.depth?d.depth+'m':'—'}</td>
+      <td><span class="${shapeClass(d.shape)}">${d.shape}</span></td>
+      <td><span class="${regoCls}">${regoLbl}</span></td>
+      <td><div class="price-val">${$c(d.price)}</div></td>
+      <td><div class="price-psm">$${psm.toLocaleString()}</div></td>
+      <td><span class="status ${sc}">${t.statusMap[d.status]||d.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats() {
+  const avail=filtered.filter(d=>d.status==='Available');
+  const prices=filtered.map(d=>d.price);
+  document.getElementById('sval-total').textContent=data.length;
+  document.getElementById('sval-avail').textContent=avail.length;
+  document.getElementById('sval-from').textContent=prices.length?$f(Math.min(...prices)):'—';
+  document.getElementById('sval-avg').textContent=prices.length?$f(Math.round(prices.reduce((a,b)=>a+b,0)/prices.length)):'—';
+  document.getElementById('sval-shown').textContent=filtered.length;
+}
+
+function resetFilters() {
+  ['fStatus','fRego','fMaxPx','fMinSize'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSearch').value='';
+  document.getElementById('sortSel').value='price-asc';
+  applyFilters();
+}
+
+function toggleTheme() {
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
+}
+
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';
+}
+applyFilters();
+</script>
+</body>
+</html>
