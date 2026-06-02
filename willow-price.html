@@ -3,400 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Willow Residences — Price List</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Willow — Price List May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f7f4ef;
-  --ink: #1a1612;
-  --surface: #ffffff;
-  --surface2: #f0ece4;
-  --surface3: #e8e2d8;
-  --border: rgba(26,22,18,0.1);
-  --border2: rgba(26,22,18,0.18);
-  --accent: #2d5a3d;
-  --accent2: #4a8a60;
-  --accent-light: rgba(45,90,61,0.08);
-  --gold: #c8963c;
-  --gold-light: rgba(200,150,60,0.1);
-  --muted: #7a7268;
-  --muted2: #b0a898;
-  --red: #c0392b;
+:root{
+  --bg:#f6f8fa;--surface:#fff;--surface2:#eef2f6;--surface3:#e4eaf0;
+  --border:rgba(20,50,90,.09);--border2:rgba(20,50,90,.18);
+  --ink:#0c1a28;--muted:#5a7090;--muted2:#a8bccc;
+  --accent:#1a3d6e;--accent-l:rgba(26,61,110,.07);
+  --gold:#9a7020;--gold-l:rgba(154,112,32,.08);
+  --green:#1e6840;--green-l:rgba(30,104,64,.08);
+  --teal:#0e7090;--teal-l:rgba(14,112,144,.07);
 }
-[data-theme="dark"] {
-  --bg: #0f0e0c;
-  --ink: #f0ece4;
-  --surface: #1a1814;
-  --surface2: #221f1a;
-  --surface3: #2a2720;
-  --border: rgba(240,236,228,0.08);
-  --border2: rgba(240,236,228,0.15);
-  --accent: #7ab88a;
-  --accent2: #9ad0aa;
-  --accent-light: rgba(122,184,138,0.08);
-  --gold: #e0aa5a;
-  --gold-light: rgba(224,170,90,0.1);
-  --muted: #887e72;
-  --muted2: #4a4540;
-  --red: #e06050;
+[data-theme="dark"]{
+  --bg:#080d12;--surface:#0f1820;--surface2:#162030;--surface3:#1e2a3a;
+  --border:rgba(130,180,230,.07);--border2:rgba(130,180,230,.14);
+  --ink:#d8eaf8;--muted:#5a7898;--muted2:#243040;
+  --accent:#5a9fd4;--accent-l:rgba(90,159,212,.07);
+  --gold:#c8a040;--gold-l:rgba(200,160,64,.07);
+  --green:#44a870;--green-l:rgba(68,168,112,.07);
+  --teal:#30b0d0;--teal-l:rgba(48,176,208,.07);
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
 
-* { margin:0; padding:0; box-sizing:border-box; }
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Syne', sans-serif;
-  min-height: 100vh;
-  transition: background 0.4s, color 0.4s;
-}
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;flex-direction:column;}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;letter-spacing:.08em;color:var(--ink);}
+.h-sub{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--muted);margin-top:0px;}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
 
-/* ─── Header ─── */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 0 32px;
-  height: 56px;
-  backdrop-filter: blur(16px);
-}
-.h-left { display: flex; align-items: center; gap: 10px; }
-.h-center {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px; font-weight: 400; letter-spacing: 0.18em;
-  text-transform: uppercase; text-align: center;
-  color: var(--ink);
-}
-.h-right { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1440px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--accent);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;}
+.masthead h1 i{font-style:italic;color:var(--accent);}
+.m-right{text-align:right;}
+.info-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;text-align:left;margin-bottom:10px;}
+.info-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.info-val{font-size:13px;font-weight:500;line-height:1.6;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;display:inline-block;}
 
-.lang-pill {
-  display: flex; background: var(--surface2);
-  border: 1px solid var(--border2); border-radius: 20px; overflow: hidden;
-}
-.lang-btn {
-  padding: 4px 12px; cursor: pointer; color: var(--muted);
-  border: none; background: transparent;
-  font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 600;
-  letter-spacing: 0.08em; transition: all 0.2s;
-}
-.lang-btn.active { background: var(--accent); color: #fff; }
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
 
-.date-chip {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; letter-spacing: 0.1em;
-  color: var(--muted); border: 1px solid var(--border2);
-  padding: 4px 10px; border-radius: 4px;
-}
-.theme-btn {
-  background: none; border: 1px solid var(--border2);
-  color: var(--muted); width: 30px; height: 30px;
-  border-radius: 50%; cursor: pointer; font-size: 13px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
-.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* BUILDING TABS */
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 18px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-cnt{display:inline-block;margin-left:4px;font-size:9px;background:var(--accent-l);color:var(--accent);border-radius:20px;padding:1px 6px;font-weight:600;}
 
-/* ─── Masthead ─── */
-.masthead {
-  border-bottom: 1px solid var(--border);
-  padding: 48px 32px 36px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: end;
-  max-width: 1400px; margin: 0 auto;
-}
-.masthead-left {}
-.overline {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.overline::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
-.masthead h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(52px, 7vw, 96px);
-  font-weight: 400; line-height: 0.92;
-  letter-spacing: -0.02em;
-}
-.masthead h1 em { font-style: italic; color: var(--accent); }
-.masthead-right { text-align: right; }
-.masthead-tagline {
-  font-size: 12px; color: var(--muted); line-height: 1.8;
-  max-width: 280px; margin-left: auto; margin-bottom: 20px;
-}
+/* FILTERS */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;min-width:100px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
 
-/* Stats row */
-.stats-row {
-  display: flex; gap: 0;
-  border: 1px solid var(--border2); border-radius: 8px;
-  overflow: hidden; background: var(--surface);
-  max-width: 1400px; margin: 0 auto;
-}
-.stat-cell {
-  flex: 1; padding: 16px 20px;
-  border-right: 1px solid var(--border);
-  position: relative;
-}
-.stat-cell:last-child { border-right: none; }
-.stat-cell-lbl {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 4px;
-}
-.stat-cell-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 700; color: var(--accent);
-  line-height: 1;
-}
-.stat-cell-sub { font-size: 9px; color: var(--muted); margin-top: 3px; font-family:'JetBrains Mono',monospace; }
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
 
-/* ─── Controls bar ─── */
-.controls {
-  max-width: 1400px; margin: 0 auto;
-  padding: 16px 32px;
-  display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;
-  border-bottom: 1px solid var(--border);
-}
-.ctrl-group { display: flex; flex-direction: column; gap: 4px; }
-.ctrl-lbl {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted);
-}
-select, input[type="text"] {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  color: var(--ink);
-  padding: 7px 11px; border-radius: 5px;
-  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 400;
-  cursor: pointer; transition: border-color 0.2s;
-  appearance: none; -webkit-appearance: none;
-  min-width: 110px;
-}
-select:focus, input:focus { outline: none; border-color: var(--accent); }
-.search-wrap { position: relative; flex: 1; min-width: 160px; }
-.search-wrap input { width: 100%; padding-left: 30px; }
-.s-ico {
-  position: absolute; left: 10px; top: 50%;
-  transform: translateY(-50%); color: var(--muted); font-size: 12px;
-}
-.reset-btn {
-  background: none; border: 1px solid var(--border2);
-  color: var(--muted); padding: 7px 16px; border-radius: 5px;
-  cursor: pointer; font-family: 'Syne', sans-serif; font-size: 11px;
-  font-weight: 600; letter-spacing: 0.05em; transition: all 0.2s;
-}
-.reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* TABLE */
+.tbl-wrap{max-width:1440px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:12px 12px;white-space:nowrap;}
 
-/* view toggle */
-.view-toggle {
-  display: flex; border: 1px solid var(--border2); border-radius: 5px; overflow: hidden; margin-left: auto;
-}
-.view-btn {
-  padding: 7px 12px; background: none; border: none;
-  color: var(--muted); cursor: pointer; font-size: 14px;
-  transition: all 0.2s;
-}
-.view-btn.active { background: var(--accent); color: #fff; }
+.lot-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--accent);}
+.lot-id{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
 
-/* ─── Results bar ─── */
-.results-bar {
-  max-width: 1400px; margin: 0 auto;
-  padding: 10px 32px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-.results-txt {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
-}
-.results-txt strong { color: var(--ink); }
-.sort-sel {
-  background: none; border: none; color: var(--muted);
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  cursor: pointer; letter-spacing: 0.05em;
-  min-width: auto; padding: 0;
-}
+/* BLDG badge */
+.bldg-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:3px;}
+.bb-H{background:var(--accent-l);color:var(--accent);border:1px solid rgba(26,61,110,.2);}
+.bb-J{background:var(--teal-l);color:var(--teal);border:1px solid rgba(14,112,144,.2);}
+.bb-I{background:var(--gold-l);color:var(--gold);border:1px solid rgba(154,112,32,.2);}
 
-/* ─── TABLE VIEW ─── */
-.table-wrap {
-  max-width: 1400px; margin: 0 auto;
-  padding: 0 32px 60px; overflow-x: auto;
-}
-table { width: 100%; border-collapse: collapse; }
-thead th {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--muted); text-align: left; padding: 12px 14px;
-  border-bottom: 2px solid var(--border2); user-select: none;
-  white-space: nowrap;
-}
-tbody tr {
-  border-bottom: 1px solid var(--border);
-  transition: background 0.12s; cursor: pointer;
-}
-tbody tr:hover { background: var(--accent-light); }
-tbody tr:last-child { border-bottom: none; }
-td { padding: 14px 14px; }
+/* LEVEL */
+.lvl-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
 
-.unit-id {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px; font-weight: 700; color: var(--accent);
-  letter-spacing: 0.02em;
-}
-.lot-id {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); margin-top: 2px; letter-spacing: 0.08em;
-}
+/* TYPE CHIPS */
+.bed-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:3px;border:1px solid var(--border2);background:var(--surface2);}
+.study-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;padding:1px 6px;border-radius:2px;background:var(--gold-l);color:var(--gold);border:1px solid rgba(154,112,32,.2);margin-left:4px;}
 
-.bed-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 11px; font-weight: 600;
-  background: var(--accent-light); color: var(--accent);
-  border: 1px solid rgba(45,90,61,0.2);
-  padding: 4px 10px; border-radius: 4px;
-}
+/* ASPECT */
+.asp{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;}
+.asp-N{color:#4a7ab0;border-color:rgba(74,122,176,.25);background:rgba(74,122,176,.06);}
+.asp-NE{color:#3a9a70;border-color:rgba(58,154,112,.25);background:rgba(58,154,112,.06);}
+.asp-NW{color:#5a7a9a;border-color:rgba(90,122,154,.25);background:rgba(90,122,154,.06);}
+.asp-SE{color:#4a8050;border-color:rgba(74,128,80,.25);background:rgba(74,128,80,.06);}
+.asp-SW{color:#c07030;border-color:rgba(192,112,48,.25);background:rgba(192,112,48,.06);}
+.asp-E{color:#907020;border-color:rgba(144,112,32,.25);background:rgba(144,112,32,.06);}
+.asp-W{color:#b05828;border-color:rgba(176,88,40,.25);background:rgba(176,88,40,.06);}
 
-.asp-chip {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 400; letter-spacing: 0.06em;
-  padding: 3px 8px; border-radius: 3px; border: 1px solid;
-}
-.asp-NE,.asp-N { color:#4a90c0; border-color:rgba(74,144,192,.25); background:rgba(74,144,192,.06); }
-.asp-SE,.asp-S { color:#4a9a60; border-color:rgba(74,154,96,.25); background:rgba(74,154,96,.06); }
-.asp-SW,.asp-W { color:#c07a3a; border-color:rgba(192,122,58,.25); background:rgba(192,122,58,.06); }
-.asp-NW { color:#8a5ab0; border-color:rgba(138,90,176,.25); background:rgba(138,90,176,.06); }
-.asp-E { color:#b0a020; border-color:rgba(176,160,32,.25); background:rgba(176,160,32,.06); }
+/* SIZE */
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
 
-.size-main { font-size: 13px; font-weight: 600; }
-.size-detail {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em;
-}
+/* PARKING */
+.parking-chip{font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);}
 
-.price-main {
-  font-family: 'Playfair Display', serif;
-  font-size: 19px; font-weight: 700; color: var(--ink);
-}
-.price-psm {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); margin-top: 2px;
-}
+/* PRICE */
+.price-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);}
+.price-psm{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
 
-/* ─── CARD VIEW ─── */
-.cards-wrap {
-  max-width: 1400px; margin: 0 auto;
-  padding: 24px 32px 60px;
-  display: none;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-}
-.cards-wrap.active { display: grid; }
+/* STRATA */
+.strata-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
 
-.price-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px; overflow: hidden;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  cursor: pointer; position: relative;
-}
-.price-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-}
-.card-accent-bar { height: 3px; }
-.card-body { padding: 18px 18px 14px; }
-.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-.card-unit {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 700; color: var(--accent);
-}
-.card-lot {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); margin-top: 2px; letter-spacing: 0.06em;
-}
-.card-price {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; font-weight: 700; color: var(--ink); text-align: right;
-}
-.card-psm {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); text-align: right; margin-top: 2px;
-}
-.card-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-.card-sizes {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px; padding-top: 12px; border-top: 1px solid var(--border);
-}
-.sz-box {
-  background: var(--surface2);
-  border-radius: 5px; padding: 7px 8px; text-align: center;
-}
-.sz-lbl {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 3px;
-}
-.sz-val { font-size: 13px; font-weight: 700; }
-
-/* No results */
-.no-results {
-  text-align: center; padding: 80px 20px; color: var(--muted);
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  letter-spacing: 0.08em;
-}
-
-/* ─── Footer ─── */
-footer {
-  text-align: center; padding: 20px;
-  color: var(--muted); font-size: 10px;
-  letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace;
-  border-top: 1px solid var(--border);
-}
-
-/* BMC */
-.bmc {
-  position: fixed; bottom: 20px; right: 20px;
-  background: #FFDD00; color: #000;
-  padding: 9px 18px; border-radius: 22px;
-  font-size: 12px; font-weight: 700;
-  text-decoration: none; display: flex; align-items: center; gap: 5px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.2s; z-index: 500;
-}
-.bmc:hover { transform: translateY(-2px); }
-
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-
-@media(max-width: 768px) {
-  header { padding: 0 16px; }
-  .h-center { font-size: 12px; }
-  .masthead { grid-template-columns: 1fr; padding: 32px 16px 24px; gap: 20px; }
-  .masthead-right { text-align: left; }
-  .masthead-tagline { margin-left: 0; }
-  .stats-row { flex-wrap: wrap; }
-  .stat-cell { min-width: 50%; border-bottom: 1px solid var(--border); }
-  .controls { padding: 12px 16px; }
-  .results-bar, .table-wrap, .cards-wrap { padding-left: 16px; padding-right: 16px; }
-  .date-chip { display: none; }
-}
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){header,.masthead,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}.masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}.m-right{text-align:left;}}
 </style>
 </head>
 <body data-theme="light">
 
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+
 <header>
-  <div class="h-left">
-    <div class="date-chip">01 MAY 2026</div>
+  <div class="h-brand">
+    <div class="h-name">Willow</div>
+    <div class="h-sub">Residences · Sydney</div>
   </div>
-  <div class="h-center">WILLOW RESIDENCES</div>
+  <div class="h-center" id="txt-h-center">Price List · May 2026</div>
   <div class="h-right">
     <div class="lang-pill">
       <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
@@ -407,394 +159,399 @@ footer {
 </header>
 
 <div class="masthead">
-  <div class="masthead-left">
-    <div class="overline" id="txt-overline">Available Units · Sydney</div>
-    <h1>Willow<br><em>Price</em><br>List</h1>
+  <div>
+    <div class="m-overline" id="txt-overline">Apartment · Sydney NSW · May 2026</div>
+    <h1>Willow<br><i>Residences</i></h1>
   </div>
-  <div class="masthead-right">
-    <p class="masthead-tagline" id="txt-tagline">
-      Browse all available apartments. Filter by bedroom, aspect or price — click any row to highlight.
-    </p>
-  </div>
-</div>
-
-<div class="stats-row" id="statsRow">
-  <div class="stat-cell">
-    <div class="stat-cell-lbl" id="slbl-total">Total Units</div>
-    <div class="stat-cell-val" id="sval-total">26</div>
-    <div class="stat-cell-sub" id="ssub-total">Available</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-cell-lbl" id="slbl-min">From</div>
-    <div class="stat-cell-val" id="sval-min">$854K</div>
-    <div class="stat-cell-sub" id="ssub-min">1 Bed · H2602</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-cell-lbl" id="slbl-max">Up To</div>
-    <div class="stat-cell-val" id="sval-max">$2.92M</div>
-    <div class="stat-cell-sub" id="ssub-max">3 Bed · H0111</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-cell-lbl" id="slbl-avg">Average</div>
-    <div class="stat-cell-val" id="sval-avg">$1.33M</div>
-    <div class="stat-cell-sub" id="ssub-avg">Across all units</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-cell-lbl" id="slbl-avgpsm">Avg $/㎡</div>
-    <div class="stat-cell-val" id="sval-avgpsm">—</div>
-    <div class="stat-cell-sub" id="ssub-avgpsm">Total area</div>
-  </div>
-</div>
-
-<div class="controls">
-  <div class="ctrl-group">
-    <span class="ctrl-lbl" id="clbl-bed">Bedrooms</span>
-    <select id="fBed" onchange="applyFilters()">
-      <option value="" id="opt-bed-all">All</option>
-      <option value="1">1 Bed</option>
-      <option value="2">2 Bed</option>
-      <option value="3">3 Bed</option>
-    </select>
-  </div>
-  <div class="ctrl-group">
-    <span class="ctrl-lbl" id="clbl-car">Car Spaces</span>
-    <select id="fCar" onchange="applyFilters()">
-      <option value="" id="opt-car-all">All</option>
-      <option value="1">1 Car</option>
-      <option value="2">2 Car</option>
-      <option value="3">3 Car</option>
-    </select>
-  </div>
-  <div class="ctrl-group">
-    <span class="ctrl-lbl" id="clbl-asp">Aspect</span>
-    <select id="fAsp" onchange="applyFilters()">
-      <option value="" id="opt-asp-all">All</option>
-      <option value="N">N</option><option value="NE">NE</option>
-      <option value="NW">NW</option><option value="E">E</option>
-      <option value="SE">SE</option><option value="S">S</option>
-      <option value="SW">SW</option><option value="W">W</option>
-    </select>
-  </div>
-  <div class="ctrl-group">
-    <span class="ctrl-lbl" id="clbl-price">Max Price</span>
-    <select id="fPrice" onchange="applyFilters()">
-      <option value="" id="opt-px-all">All</option>
-      <option value="1000000" id="opt-px1">Under $1M</option>
-      <option value="1200000" id="opt-px2">Under $1.2M</option>
-      <option value="1500000" id="opt-px3">Under $1.5M</option>
-      <option value="2000000" id="opt-px4">Under $2M</option>
-    </select>
-  </div>
-  <div class="ctrl-group" style="flex:1;min-width:160px">
-    <span class="ctrl-lbl" id="clbl-search">Search</span>
-    <div class="search-wrap">
-      <span class="s-ico">⌕</span>
-      <input type="text" id="fSearch" placeholder="Unit or Lot..." oninput="applyFilters()">
+  <div class="m-right">
+    <div class="info-box">
+      <div class="info-lbl" id="lbl-addr">Address</div>
+      <div class="info-val">Sydney, NSW</div>
+    </div>
+    <div class="date-chip">Updated: 25 May 2026</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.7" id="txt-note">
+      Building H · Building I · Building J<br>
+      87 apartments · 2–4 Bedrooms
     </div>
   </div>
-  <button class="reset-btn" onclick="resetFilters()" id="txt-reset">Reset</button>
-  <div class="view-toggle">
-    <button class="view-btn active" id="vTable" onclick="setView('table')" title="Table">☰</button>
-    <button class="view-btn" id="vCards" onclick="setView('cards')" title="Cards">⊞</button>
-  </div>
 </div>
 
-<div class="results-bar">
-  <div class="results-txt"><strong id="rCount">26</strong><span id="txt-shown"> units shown</span></div>
-  <select class="sort-sel" id="sortSel" onchange="applyFilters()">
-    <option value="price-asc" id="srt-pa">Price ↑</option>
+<!-- STATS -->
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Apts</div><div class="s-val" id="sval-total">87</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">List Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avg">Avg Price</div><div class="s-val" id="sval-avg">—</div><div class="s-sub" id="ssub-avg">Filtered</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avg-psm">Avg $/m²</div><div class="s-val" id="sval-avg-psm">—</div><div class="s-sub" id="ssub-avg-psm">Internal area</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+
+<!-- BUILDING TABS -->
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">87</span></button>
+  <button class="tab-btn" onclick="setBldg('H')" id="tab-H">Building H <span class="tab-cnt" id="tc-H">0</span></button>
+  <button class="tab-btn" onclick="setBldg('I')" id="tab-I">Building I <span class="tab-cnt" id="tc-I">0</span></button>
+  <button class="tab-btn" onclick="setBldg('J')" id="tab-J">Building J <span class="tab-cnt" id="tc-J">0</span></button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-bed">Bedrooms</span>
+    <select id="fBed" onchange="go()">
+      <option value="" id="opt-bed-all">All</option>
+      <option value="2">2 Bed</option>
+      <option value="3">3 Bed</option>
+      <option value="4">4 Bed</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-study">Study</span>
+    <select id="fStudy" onchange="go()">
+      <option value="" id="opt-sty-all">All</option>
+      <option value="1" id="opt-sty-yes">With Study</option>
+      <option value="0" id="opt-sty-no">No Study</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-car">Parking</span>
+    <select id="fCar" onchange="go()">
+      <option value="" id="opt-car-all">All</option>
+      <option value="1">1 Car</option>
+      <option value="2">2 Cars</option>
+      <option value="3">3 Cars</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-asp">Aspect</span>
+    <select id="fAsp" onchange="go()">
+      <option value="" id="opt-asp-all">All</option>
+      <option value="N">N (North)</option>
+      <option value="NE">NE (North East)</option>
+      <option value="NW">NW (North West)</option>
+      <option value="SE">SE (South East)</option>
+      <option value="SW">SW (South West)</option>
+      <option value="E">E (East)</option>
+      <option value="W">W (West)</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="go()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="1200000" id="opt-px1">Under .2M</option>
+      <option value="1500000" id="opt-px2">Under .5M</option>
+      <option value="2000000" id="opt-px3">Under M</option>
+      <option value="3000000" id="opt-px4">Under M</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:140px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSrch" placeholder="Lot, ID, aspect..." oninput="go()"></div>
+  </div>
+  <button class="reset-btn" onclick="rst()" id="txt-reset">Reset</button>
+</div>
+
+<!-- RBAR -->
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="go()">
+    <option value="price-asc"  id="srt-pa">Price ↑</option>
     <option value="price-desc" id="srt-pd">Price ↓</option>
-    <option value="size-desc" id="srt-sd">Size ↓</option>
-    <option value="size-asc" id="srt-sa">Size ↑</option>
-    <option value="bed-asc" id="srt-ba">Beds ↑</option>
-    <option value="psm-asc" id="srt-psa">$/㎡ ↑</option>
+    <option value="lot-asc"    id="srt-la">Lot ↑</option>
+    <option value="level-asc"  id="srt-lva">Level ↑</option>
+    <option value="level-desc" id="srt-lvd">Level ↓</option>
+    <option value="size-desc"  id="srt-sd">Size ↓</option>
+    <option value="psm-asc"    id="srt-psa">$/m² ↑</option>
   </select>
 </div>
 
-<!-- TABLE VIEW -->
-<div class="table-wrap" id="tableWrap">
+<!-- TABLE -->
+<div class="tbl-wrap">
   <table>
     <thead>
       <tr>
-        <th id="th-unit">Unit</th>
-        <th id="th-bed">Bed · Car</th>
+        <th id="th-lot">Lot</th>
+        <th id="th-bldg">Bldg</th>
+        <th id="th-level">Level</th>
+        <th id="th-type">Type</th>
+        <th id="th-car">Car</th>
+        <th id="th-size">Area (sqm)</th>
         <th id="th-asp">Aspect</th>
-        <th id="th-size">Area ㎡</th>
         <th id="th-price">Price</th>
-        <th id="th-psm">$/㎡</th>
+        <th id="th-psm">$/m²</th>
+        <th id="th-strata">Strata/qtr</th>
       </tr>
     </thead>
     <tbody id="tBody"></tbody>
   </table>
-  <div class="no-results" id="noResults" style="display:none">
-    <p id="txt-no">— No units match your criteria —</p>
-  </div>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
 </div>
 
-<!-- CARD VIEW -->
-<div class="cards-wrap" id="cardsWrap"></div>
-
-<footer>Made by SunnyApps. All rights reserved.</footer>
-<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc">☕ Buy me a coffee</a>
+<footer>Made by SunnyApps. All rights reserved. · Willow Residences Price List — 25 May 2026</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 
 <script>
-const data = [
-  {unit:"H2602",lot:299,bed:1,car:1,asp:"NE",int:50,ext:10,total:60,price:854000},
-  {unit:"I0215",lot:18, bed:2,car:1,asp:"W", int:78,ext:13,total:91,price:990000},
-  {unit:"J0330",lot:63, bed:2,car:1,asp:"SE",int:75,ext:26,total:101,price:995000},
-  {unit:"H0308",lot:133,bed:2,car:1,asp:"NE",int:75,ext:17,total:92,price:1010000},
-  {unit:"J0630",lot:99, bed:2,car:1,asp:"SE",int:75,ext:10,total:85,price:1031000},
-  {unit:"J0432",lot:77, bed:2,car:1,asp:"W", int:82,ext:10,total:92,price:1036000},
-  {unit:"J0730",lot:111,bed:2,car:1,asp:"SE",int:75,ext:10,total:85,price:1046000},
-  {unit:"H0508",lot:149,bed:2,car:1,asp:"NE",int:75,ext:17,total:92,price:1056000},
-  {unit:"J0428",lot:73, bed:2,car:1,asp:"E", int:81,ext:11,total:92,price:1081000},
-  {unit:"H1203",lot:200,bed:2,car:1,asp:"SE",int:77,ext:16,total:93,price:1162000},
-  {unit:"J0623",lot:92, bed:2,car:1,asp:"NW",int:76,ext:21,total:97,price:1172000},
-  {unit:"H1503",lot:224,bed:2,car:2,asp:"SE",int:77,ext:16,total:93,price:1197000},
-  {unit:"H1208",lot:205,bed:2,car:2,asp:"NE",int:75,ext:17,total:92,price:1288000},
-  {unit:"H1604",lot:233,bed:2,car:2,asp:"SW",int:84,ext:12,total:96,price:1344000},
-  {unit:"H1307",lot:212,bed:2,car:2,asp:"NW",int:84,ext:17,total:101,price:1364000},
-  {unit:"H1808",lot:253,bed:2,car:2,asp:"NE",int:75,ext:17,total:92,price:1369000},
-  {unit:"J0424",lot:69, bed:2,car:2,asp:"NE",int:80,ext:15,total:95,price:1440000},
-  {unit:"H2304",lot:283,bed:2,car:2,asp:"SW",int:84,ext:12,total:96,price:1445000},
-  {unit:"H2404",lot:289,bed:2,car:2,asp:"SW",int:84,ext:12,total:96,price:1455000},
-  {unit:"H2504",lot:295,bed:2,car:2,asp:"SW",int:84,ext:12,total:96,price:1465000},
-  {unit:"H2403",lot:288,bed:2,car:2,asp:"SE",int:77,ext:16,total:93,price:1480000},
-  {unit:"H2503",lot:294,bed:2,car:2,asp:"SE",int:77,ext:16,total:93,price:1490000},
-  {unit:"H2702",lot:305,bed:2,car:2,asp:"SE",int:77,ext:16,total:93,price:1510000},
-  {unit:"H2401",lot:286,bed:2,car:2,asp:"NE",int:83,ext:23,total:106,price:1616000},
-  {unit:"H2501",lot:292,bed:2,car:2,asp:"NE",int:83,ext:23,total:106,price:1622000},
-  {unit:"H0111",lot:11, bed:3,car:3,asp:"NW",int:162,ext:85,total:247,price:2919000},
+const DATA = [
+  {id:'Willow J0721',lot:102,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:975000,strata:1206.12,asp:'W',bldg:'J',level:7},
+  {id:'Willow I0215',lot:18,bed:2,study:0,car:1,parking:'Standard',int:78,ext:13,total:91,price:990000,strata:1113.34,asp:'W',bldg:'I',level:2},
+  {id:'Willow J0330',lot:63,bed:2,study:0,car:1,parking:'Standard',int:75,ext:26,total:101,price:995000,strata:1329.82,asp:'SE',bldg:'J',level:3},
+  {id:'Willow H0308',lot:133,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1010000,strata:1360.75,asp:'NE',bldg:'H',level:3},
+  {id:'Willow J0430',lot:75,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1030000,strata:1360.75,asp:'SE',bldg:'J',level:4},
+  {id:'Willow J0530',lot:87,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1035000,strata:1366.93,asp:'SE',bldg:'J',level:5},
+  {id:'Willow J0630',lot:99,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1035000,strata:1373.12,asp:'SE',bldg:'J',level:6},
+  {id:'Willow J0432',lot:77,bed:2,study:0,car:1,parking:'Standard',int:82,ext:10,total:92,price:1040000,strata:1298.9,asp:'W',bldg:'J',level:4},
+  {id:'Willow H0408',lot:141,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1050000,strata:1360.75,asp:'NE',bldg:'H',level:4},
+  {id:'Willow J0730',lot:111,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1050000,strata:1379.3,asp:'SE',bldg:'J',level:7},
+  {id:'Willow H0508',lot:149,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1060000,strata:1404.04,asp:'NE',bldg:'H',level:5},
+  {id:'Willow J0628',lot:97,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1060000,strata:1311.27,asp:'E',bldg:'J',level:6},
+  {id:'Willow J0732',lot:113,bed:2,study:0,car:1,parking:'Standard',int:82,ext:10,total:92,price:1070000,strata:1360.75,asp:'W',bldg:'J',level:7},
+  {id:'Willow J0428',lot:73,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1085000,strata:1298.9,asp:'E',bldg:'J',level:4},
+  {id:'Willow J0828',lot:121,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1090000,strata:1329.82,asp:'E',bldg:'J',level:8},
+  {id:'Willow H1203',lot:200,bed:2,study:0,car:1,parking:'Standard',int:77,ext:16,total:93,price:1165000,strata:1453.53,asp:'SE',bldg:'H',level:12},
+  {id:'Willow J0623',lot:92,bed:2,study:0,car:1,parking:'Standard',int:76,ext:21,total:97,price:1175000,strata:1478.27,asp:'NW',bldg:'J',level:6},
+  {id:'Willow H1503',lot:224,bed:2,study:0,car:1,parking:'Standard',int:77,ext:16,total:93,price:1200000,strata:1608.16,asp:'SE',bldg:'H',level:15},
+  {id:'Willow H1403',lot:216,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1270000,strata:1577.23,asp:'SE',bldg:'H',level:14},
+  {id:'Willow H1108',lot:197,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1290000,strata:1577.23,asp:'NE',bldg:'H',level:11},
+  {id:'Willow H1208',lot:205,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1290000,strata:1608.16,asp:'NE',bldg:'H',level:12},
+  {id:'Willow H1308',lot:213,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1300000,strata:1670.01,asp:'NE',bldg:'H',level:13},
+  {id:'Willow H1703',lot:240,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1300000,strata:1676.19,asp:'SE',bldg:'H',level:17},
+  {id:'Willow H1404',lot:217,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1310000,strata:1781.34,asp:'SW',bldg:'H',level:14},
+  {id:'Willow H1408',lot:221,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1310000,strata:1694.75,asp:'NE',bldg:'H',level:14},
+  {id:'Willow H1508',lot:229,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1320000,strata:1700.93,asp:'NE',bldg:'H',level:15},
+  {id:'Willow H1608',lot:237,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1330000,strata:1731.86,asp:'NE',bldg:'H',level:16},
+  {id:'Willow H1604',lot:233,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1345000,strata:1793.71,asp:'SW',bldg:'H',level:16},
+  {id:'Willow H1704',lot:241,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1355000,strata:1799.9,asp:'SW',bldg:'H',level:17},
+  {id:'Willow H1307',lot:212,bed:2,study:1,car:2,parking:'Tandem',int:84,ext:17,total:101,price:1365000,strata:1775.16,asp:'NW',bldg:'H',level:13},
+  {id:'Willow H1804',lot:249,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1365000,strata:1806.08,asp:'SW',bldg:'H',level:18},
+  {id:'Willow H1808',lot:253,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1370000,strata:1744.23,asp:'NE',bldg:'H',level:18},
+  {id:'Willow H1407',lot:220,bed:2,study:1,car:2,parking:'Tandem',int:84,ext:17,total:101,price:1375000,strata:1781.34,asp:'NW',bldg:'H',level:14},
+  {id:'Willow H2004',lot:265,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1415000,strata:1818.45,asp:'SW',bldg:'H',level:20},
+  {id:'Willow H2104',lot:271,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1425000,strata:1824.64,asp:'SW',bldg:'H',level:21},
+  {id:'Willow H2204',lot:277,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1435000,strata:1830.82,asp:'SW',bldg:'H',level:22},
+  {id:'Willow H2003',lot:264,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1440000,strata:1694.75,asp:'SE',bldg:'H',level:20},
+  {id:'Willow J0424',lot:69,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1440000,strata:1768.97,asp:'NE',bldg:'J',level:4},
+  {id:'Willow H2304',lot:283,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1445000,strata:1837.01,asp:'SW',bldg:'H',level:23},
+  {id:'Willow H2103',lot:270,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1450000,strata:1700.93,asp:'SE',bldg:'H',level:21},
+  {id:'Willow H2404',lot:289,bed:2,study:0,car:2,parking:'Standard',int:84,ext:12,total:96,price:1455000,strata:1843.19,asp:'SW',bldg:'H',level:24},
+  {id:'Willow H2203',lot:276,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1460000,strata:1707.12,asp:'SE',bldg:'H',level:22},
+  {id:'Willow H2504',lot:295,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1465000,strata:1849.38,asp:'SW',bldg:'H',level:25},
+  {id:'Willow J0624',lot:93,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1465000,strata:1855.56,asp:'NE',bldg:'J',level:6},
+  {id:'Willow H2303',lot:282,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1470000,strata:1713.3,asp:'SE',bldg:'H',level:23},
+  {id:'Willow H2403',lot:288,bed:2,study:0,car:2,parking:'Side by Side',int:77,ext:16,total:93,price:1480000,strata:1719.49,asp:'SE',bldg:'H',level:24},
+  {id:'Willow H2503',lot:294,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1490000,strata:1725.68,asp:'SE',bldg:'H',level:25},
+  {id:'Willow H2603',lot:300,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1500000,strata:1731.86,asp:'SE',bldg:'H',level:26},
+  {id:'Willow H2702',lot:305,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1510000,strata:1756.6,asp:'SE',bldg:'H',level:27},
+  {id:'Willow J0524',lot:81,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1510000,strata:1849.38,asp:'NE',bldg:'J',level:5},
+  {id:'Willow H2301',lot:280,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1611000,strata:1960.71,asp:'NE',bldg:'H',level:23},
+  {id:'Willow H2401',lot:286,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1620000,strata:1966.9,asp:'NE',bldg:'H',level:24},
+  {id:'Willow H2501',lot:292,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1625000,strata:1973.08,asp:'NE',bldg:'H',level:25},
+  {id:'Willow J0102',lot:2,bed:2,study:1,car:2,parking:'Tandem',int:115,ext:37,total:152,price:1720000,strata:2226.68,asp:'E',bldg:'J',level:1},
+  {id:'Willow J0103',lot:3,bed:2,study:1,car:2,parking:'Tandem',int:114,ext:55,total:169,price:1720000,strata:2226.68,asp:'E',bldg:'J',level:1},
+  {id:'Willow J0104',lot:4,bed:2,study:1,car:2,parking:'Tandem',int:114,ext:46,total:160,price:1720000,strata:2257.6,asp:'E',bldg:'J',level:1},
+  {id:'Willow J0107',lot:7,bed:2,study:1,car:2,parking:'Tandem',int:110,ext:32,total:142,price:1870000,strata:2412.23,asp:'N',bldg:'J',level:1},
+  {id:'Willow J0108',lot:8,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:37,total:154,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
+  {id:'Willow J0109',lot:9,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:36,total:153,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
+  {id:'Willow J0110',lot:10,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:38,total:155,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
+  {id:'Willow H2105',lot:272,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1855000,strata:2535.94,asp:'W',bldg:'H',level:21},
+  {id:'Willow H2205',lot:278,bed:3,study:1,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1875000,strata:2566.86,asp:'W',bldg:'H',level:22},
+  {id:'Willow H2305',lot:284,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1900000,strata:2597.79,asp:'W',bldg:'H',level:23},
+  {id:'Willow H2005',lot:266,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1905000,strata:2505.01,asp:'W',bldg:'H',level:20},
+  {id:'Willow H2405',lot:290,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1925000,strata:2628.72,asp:'W',bldg:'H',level:24},
+  {id:'Willow H2505',lot:296,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1950000,strata:2659.64,asp:'W',bldg:'H',level:25},
+  {id:'Willow H2605',lot:302,bed:3,study:1,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1975000,strata:2690.57,asp:'W',bldg:'H',level:26},
+  {id:'Willow H2704',lot:307,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:2000000,strata:2721.5,asp:'W',bldg:'H',level:27},
+  {id:'Willow H2701',lot:304,bed:3,study:0,car:3,parking:'Standard',int:122,ext:49,total:171,price:2685000,strata:3463.72,asp:'NE',bldg:'H',level:27},
+  {id:'Willow H2106',lot:273,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2780000,strata:3525.57,asp:'N',bldg:'H',level:21},
+  {id:'Willow H2006',lot:267,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2805000,strata:3494.65,asp:'N',bldg:'H',level:20},
+  {id:'Willow H2206',lot:279,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2830000,strata:3556.5,asp:'N',bldg:'H',level:22},
+  {id:'Willow H2306',lot:285,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2880000,strata:3587.43,asp:'N',bldg:'H',level:23},
+  {id:'Willow H0111',lot:11,bed:3,study:1,car:3,parking:'Tandem + Standard',int:162,ext:85,total:247,price:2925000,strata:3092.61,asp:'NW',bldg:'H',level:1},
+  {id:'Willow H2406',lot:291,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2930000,strata:3618.35,asp:'N',bldg:'H',level:24},
+  {id:'Willow J0106',lot:6,bed:3,study:1,car:3,parking:'Standard',int:149,ext:92,total:241,price:2935000,strata:4020.39,asp:'NE',bldg:'J',level:1},
+  {id:'Willow H2506',lot:297,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2980000,strata:3649.28,asp:'N',bldg:'H',level:25},
+  {id:'Willow H2606',lot:303,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:3030000,strata:3680.2,asp:'N',bldg:'H',level:26},
+  {id:'Willow H2705',lot:308,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:3085000,strata:3711.13,asp:'N',bldg:'H',level:27},
+  {id:'Willow J0105',lot:5,bed:4,study:0,car:3,parking:'Standard',int:145,ext:53,total:198,price:2215000,strata:4020.39,asp:'E',bldg:'J',level:1},
+  {id:'Willow J0827',lot:120,bed:4,study:0,car:3,parking:'Standard',int:129,ext:90,total:219,price:2585000,strata:3587.43,asp:'W',bldg:'J',level:8},
+  {id:'Willow J0826',lot:119,bed:4,study:0,car:3,parking:'Standard',int:141,ext:90,total:231,price:2685000,strata:3587.43,asp:'E',bldg:'J',level:8},
+  {id:'Willow J0832',lot:125,bed:4,study:0,car:3,parking:'Standard',int:149,ext:81,total:230,price:2760000,strata:3711.13,asp:'W',bldg:'J',level:8},
+  {id:'Willow J0830',lot:123,bed:4,study:0,car:3,parking:'Standard',int:137,ext:92,total:229,price:2810000,strata:3834.83,asp:'SE',bldg:'J',level:8},
+  {id:'Willow J0825',lot:118,bed:4,study:0,car:3,parking:'Standard',int:138,ext:92,total:230,price:2985000,strata:4020.39,asp:'NE',bldg:'J',level:8},
+  {id:'Willow J0824',lot:117,bed:4,study:0,car:3,parking:'Standard',int:147,ext:132,total:279,price:3030000,strata:4020.39,asp:'NE',bldg:'J',level:8},
+  {id:'Willow H2801',lot:309,bed:4,study:1,car:3,parking:'Standard',int:179,ext:147,total:326,price:4545000,strata:5566.69,asp:'NW',bldg:'H',level:28},
 ];
 
 const i18n = {
-  en: {
-    'txt-overline':'Available Units · Sydney',
-    'txt-tagline':'Browse all available apartments. Filter by bedroom, aspect or price — click any row to highlight.',
-    'slbl-total':'Total Units','ssub-total':'Available',
-    'slbl-min':'From','slbl-max':'Up To','slbl-avg':'Average','ssub-avg':'Across all units',
-    'slbl-avgpsm':'Avg $/㎡','ssub-avgpsm':'Total area',
-    'clbl-bed':'Bedrooms','clbl-car':'Car Spaces','clbl-asp':'Aspect',
-    'clbl-price':'Max Price','clbl-search':'Search','txt-reset':'Reset',
-    'opt-bed-all':'All','opt-car-all':'All','opt-asp-all':'All','opt-px-all':'All',
-    'opt-px1':'Under $1M','opt-px2':'Under $1.2M','opt-px3':'Under $1.5M','opt-px4':'Under $2M',
-    'txt-shown':' units shown','txt-no':'— No units match your criteria —',
-    'th-unit':'Unit','th-bed':'Bed · Car','th-asp':'Aspect','th-size':'Area ㎡','th-price':'Price','th-psm':'$/㎡',
-    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-sd':'Size ↓','srt-sa':'Size ↑','srt-ba':'Beds ↑','srt-psa':'$/㎡ ↑',
-    searchPlaceholder:'Unit or Lot...',
-    intLbl:'Int', extLbl:'Ext', totalLbl:'Total',
-    bedFn:(b,c)=>`${b}B · ${c}C`,
+  en:{
+    'txt-h-center':'Price List · May 2026','txt-overline':'Apartment · Sydney NSW · May 2026',
+    'lbl-addr':'Address','txt-note':'Building H · Building I · Building J<br>87 apartments · 2–4 Bedrooms',
+    'slbl-total':'Total Apts','ssub-total':'All Available',
+    'slbl-from':'From','ssub-from':'List Price',
+    'slbl-avg':'Avg Price','ssub-avg':'Filtered',
+    'slbl-avg-psm':'Avg $/m²','ssub-avg-psm':'Internal area',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-bed':'Bedrooms','flbl-study':'Study','flbl-car':'Parking','flbl-asp':'Aspect',
+    'flbl-maxpx':'Max Price','flbl-search':'Search',
+    'opt-bed-all':'All','opt-sty-all':'All','opt-sty-yes':'With Study','opt-sty-no':'No Study',
+    'opt-car-all':'All','opt-asp-all':'All',
+    'opt-px-all':'All','opt-px1':'Under $1.2M','opt-px2':'Under $1.5M','opt-px3':'Under $2M','opt-px4':'Under $3M',
+    'txt-reset':'Reset','txt-shown-lbl':' units shown',
+    'th-lot':'Lot','th-bldg':'Bldg','th-level':'Level','th-type':'Type',
+    'th-car':'Car','th-size':'Area (sqm)','th-asp':'Aspect',
+    'th-price':'Price','th-psm':'$/m²','th-strata':'Strata/qtr',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-la':'Lot ↑','srt-lva':'Level ↑','srt-lvd':'Level ↓','srt-sd':'Size ↓','srt-psa':'$/m² ↑',
+    'txt-empty':'— No units match your criteria —',
+    searchPh:'Lot, ID, aspect...',
   },
-  ko: {
-    'txt-overline':'분양 가능 세대 · 시드니',
-    'txt-tagline':'전체 분양 세대를 확인하세요. 침실·방향·가격으로 필터링 — 행 클릭 시 강조 표시됩니다.',
-    'slbl-total':'총 매물','ssub-total':'분양 가능',
-    'slbl-min':'최저가','slbl-max':'최고가','slbl-avg':'평균가','ssub-avg':'전체 평균',
-    'slbl-avgpsm':'평균 $/㎡','ssub-avgpsm':'전용 기준',
-    'clbl-bed':'침실 수','clbl-car':'주차','clbl-asp':'방향',
-    'clbl-price':'최대 가격','clbl-search':'검색','txt-reset':'초기화',
-    'opt-bed-all':'전체','opt-car-all':'전체','opt-asp-all':'전체','opt-px-all':'전체',
-    'opt-px1':'$1M 이하','opt-px2':'$1.2M 이하','opt-px3':'$1.5M 이하','opt-px4':'$2M 이하',
-    'txt-shown':'개 매물 표시 중','txt-no':'— 조건에 맞는 매물이 없습니다 —',
-    'th-unit':'유닛','th-bed':'침실 · 주차','th-asp':'방향','th-size':'면적 ㎡','th-price':'분양가','th-psm':'㎡당',
-    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-sd':'면적 큰 순','srt-sa':'면적 작은 순','srt-ba':'침실 작은 순','srt-psa':'단가 낮은 순',
-    searchPlaceholder:'유닛 또는 Lot...',
-    intLbl:'내부', extLbl:'외부', totalLbl:'합계',
-    bedFn:(b,c)=>`${b}BR · ${c}대`,
+  ko:{
+    'txt-h-center':'분양가 리스트 · 2026년 5월','txt-overline':'아파트 · 시드니 NSW · 2026년 5월',
+    'lbl-addr':'주소','txt-note':'빌딩 H · 빌딩 I · 빌딩 J<br>87세대 · 2~4베드룸',
+    'slbl-total':'총 세대','ssub-total':'전체',
+    'slbl-from':'최저가','ssub-from':'분양가',
+    'slbl-avg':'평균 분양가','ssub-avg':'필터 기준',
+    'slbl-avg-psm':'평균 $/m²','ssub-avg-psm':'내부 면적',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-bed':'침실 수','flbl-study':'스터디','flbl-car':'주차','flbl-asp':'방향',
+    'flbl-maxpx':'최대 가격','flbl-search':'검색',
+    'opt-bed-all':'전체','opt-sty-all':'전체','opt-sty-yes':'스터디 포함','opt-sty-no':'스터디 없음',
+    'opt-car-all':'전체','opt-asp-all':'전체',
+    'opt-px-all':'전체','opt-px1':'$1.2M 이하','opt-px2':'$1.5M 이하','opt-px3':'$2M 이하','opt-px4':'$3M 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중',
+    'th-lot':'Lot','th-bldg':'빌딩','th-level':'층','th-type':'타입',
+    'th-car':'주차','th-size':'면적 (sqm)','th-asp':'방향',
+    'th-price':'분양가','th-psm':'m²당 가격','th-strata':'스트라타/분기',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-la':'Lot 순','srt-lva':'층수 낮은 순','srt-lvd':'층수 높은 순','srt-sd':'면적 큰 순','srt-psa':'단가 낮은 순',
+    'txt-empty':'— 조건에 맞는 세대가 없습니다 —',
+    searchPh:'Lot, ID, 방향 검색...',
   }
 };
 
-let lang = 'en';
-let view = 'table';
-let filtered = [...data];
-let activeRow = null;
+let lang='en', curBldg='all', fil=[];
 
-// aspect bar colours
-const aspColors = {
-  NE:'#4a90c0',N:'#4a90c0',
-  SE:'#4a9a60',S:'#4a9a60',
-  SW:'#c07a3a',W:'#c07a3a',
-  NW:'#8a5ab0',E:'#b0a020'
-};
-
-function $f(n){ if(!n)return'–'; if(n>=1e6)return'$'+(n/1e6).toFixed(2).replace(/\.?0+$/,'')+'M'; if(n>=1e3)return'$'+(n/1e3).toFixed(0)+'K'; return'$'+n; }
-function $c(n){ return n?'$'+n.toLocaleString():'–'; }
-
-function setLang(l) {
-  lang = l;
-  document.getElementById('btnEN').classList.toggle('active', l==='en');
-  document.getElementById('btnKO').classList.toggle('active', l==='ko');
-  const t = i18n[l];
-  Object.keys(t).forEach(id => {
-    if (typeof t[id]==='string') { const el=document.getElementById(id); if(el) el.textContent=t[id]; }
-  });
-  document.getElementById('fSearch').placeholder = t.searchPlaceholder;
-  render(); updateStats();
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});
+  document.getElementById('fSrch').placeholder=t.searchPh;
+  render();upStats();
 }
 
-function setView(v) {
-  view = v;
-  document.getElementById('vTable').classList.toggle('active', v==='table');
-  document.getElementById('vCards').classList.toggle('active', v==='cards');
-  document.getElementById('tableWrap').style.display = v==='table' ? 'block' : 'none';
-  const cw = document.getElementById('cardsWrap');
-  cw.style.display = v==='cards' ? 'grid' : 'none';
-  if (v==='cards') cw.classList.add('active');
-  else cw.classList.remove('active');
-  render();
+function setBldg(b){
+  curBldg=b;
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById('tab-'+b).classList.add('active');
+  go();
 }
 
-function applyFilters() {
-  const bed   = document.getElementById('fBed').value;
-  const car   = document.getElementById('fCar').value;
-  const asp   = document.getElementById('fAsp').value;
-  const maxPx = document.getElementById('fPrice').value;
-  const srch  = document.getElementById('fSearch').value.toLowerCase().trim();
-  const srt   = document.getElementById('sortSel').value;
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';return'$'+(n/1e3).toFixed(0)+'K';}
 
-  filtered = data.filter(d => {
-    if (bed   && d.bed !== +bed)           return false;
-    if (car   && d.car !== +car)           return false;
-    if (asp   && d.asp !== asp)            return false;
-    if (maxPx && d.price > +maxPx)         return false;
-    if (srch  && !d.unit.toLowerCase().includes(srch) && !String(d.lot).includes(srch)) return false;
+function go(){
+  const bed=document.getElementById('fBed').value;
+  const study=document.getElementById('fStudy').value;
+  const car=document.getElementById('fCar').value;
+  const asp=document.getElementById('fAsp').value;
+  const maxPx=document.getElementById('fMaxPx').value;
+  const srch=document.getElementById('fSrch').value.toLowerCase().trim();
+  const srt=document.getElementById('sortSel').value;
+
+  fil=DATA.filter(d=>{
+    if(curBldg!=='all'&&d.bldg!==curBldg) return false;
+    if(bed&&d.bed!==+bed) return false;
+    if(study!==''&&d.study!==+study) return false;
+    if(car&&d.car!==+car) return false;
+    if(asp&&d.asp!==asp) return false;
+    if(maxPx&&d.price>+maxPx) return false;
+    if(srch){
+      const hay=[String(d.lot),d.id,d.asp,d.bldg,String(d.bed)].join(' ').toLowerCase();
+      if(!hay.includes(srch)) return false;
+    }
     return true;
   });
 
-  filtered.sort((a,b) => {
-    if (srt==='price-asc')  return a.price-b.price;
-    if (srt==='price-desc') return b.price-a.price;
-    if (srt==='size-desc')  return b.total-a.total;
-    if (srt==='size-asc')   return a.total-b.total;
-    if (srt==='bed-asc')    return a.bed-b.bed;
-    if (srt==='psm-asc')    return (a.price/a.total)-(b.price/b.total);
+  fil.sort((a,b)=>{
+    if(srt==='price-asc')  return a.price-b.price;
+    if(srt==='price-desc') return b.price-a.price;
+    if(srt==='lot-asc')    return a.lot-b.lot;
+    if(srt==='level-asc')  return (a.level||0)-(b.level||0);
+    if(srt==='level-desc') return (b.level||0)-(a.level||0);
+    if(srt==='size-desc')  return b.total-a.total;
+    if(srt==='psm-asc')    return (a.price/a.int)-(b.price/b.int);
     return 0;
   });
 
-  render(); updateStats();
+  // Update tab counts
+  ['H','I','J'].forEach(b=>{
+    document.getElementById('tc-'+b).textContent=DATA.filter(d=>d.bldg===b).length;
+  });
+  document.getElementById('tc-all').textContent=DATA.length;
+
+  render(); upStats();
 }
 
-function render() {
-  const t = i18n[lang];
-  document.getElementById('rCount').textContent = filtered.length;
-  document.getElementById('txt-shown').textContent = t['txt-shown'];
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=fil.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tbody=document.getElementById('tBody');
+  const empty=document.getElementById('emptyMsg');
+  if(!fil.length){tbody.innerHTML='';empty.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  empty.style.display='none';
 
-  if (view==='table') renderTable(t);
-  else                renderCards(t);
-}
-
-function renderTable(t) {
-  const tbody = document.getElementById('tBody');
-  const noR   = document.getElementById('noResults');
-
-  if (!filtered.length) {
-    tbody.innerHTML=''; noR.style.display='block';
-    document.getElementById('txt-no').textContent = t['txt-no'];
-    return;
-  }
-  noR.style.display='none';
-
-  tbody.innerHTML = filtered.map(d => {
-    const psm = Math.round(d.price/d.total);
-    const hl  = activeRow===d.unit ? 'style="background:var(--accent-light)"' : '';
-    return `
-    <tr ${hl} onclick="selectRow('${d.unit}')">
+  tbody.innerHTML=fil.map(d=>{
+    const psm=Math.round(d.price/d.int);
+    const typeStr=d.bed+'B'+(d.study?'+S':'');
+    return `<tr>
+      <td><div class="lot-num">${d.lot}</div><div class="lot-id">${d.id}</div></td>
+      <td><span class="bldg-badge bb-${d.bldg}">Bldg ${d.bldg}</span></td>
+      <td><span class="lvl-chip">${d.level||'—'}</span></td>
       <td>
-        <div class="unit-id">${d.unit}</div>
-        <div class="lot-id">LOT ${d.lot}</div>
-      </td>
-      <td><span class="bed-chip">${t.bedFn(d.bed,d.car)}</span></td>
-      <td><span class="asp-chip asp-${d.asp}">${d.asp}</span></td>
-      <td>
-        <div class="size-main">${d.total} ㎡</div>
-        <div class="size-detail">${t.intLbl} ${d.int} + ${t.extLbl} ${d.ext}</div>
+        <span class="bed-chip">🛏 ${d.bed} Bed${d.study?'<span class="study-tag">+Study</span>':''}</span>
       </td>
       <td>
-        <div class="price-main">${$c(d.price)}</div>
+        <div style="font-size:12px;font-weight:500">🚗 ${d.car}</div>
+        <div class="parking-chip" style="margin-top:2px">${d.parking}</div>
       </td>
       <td>
-        <div class="price-psm">$${psm.toLocaleString()}</div>
+        <div class="sz-main">${d.total} sqm</div>
+        <div class="sz-detail">Int ${d.int} + Ext ${d.ext}</div>
       </td>
+      <td><span class="asp asp-${d.asp}">${d.asp}</span></td>
+      <td><div class="price-val">$${d.price.toLocaleString()}</div></td>
+      <td><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">$${psm.toLocaleString()}</div></td>
+      <td><div class="strata-val">$${d.strata.toLocaleString()}</div></td>
     </tr>`;
   }).join('');
 }
 
-function renderCards(t) {
-  const wrap = document.getElementById('cardsWrap');
-  if (!filtered.length) { wrap.innerHTML=`<div class="no-results"><p>${t['txt-no']}</p></div>`; return; }
-  const aspC = asp => aspColors[asp]||'#888';
-  wrap.innerHTML = filtered.map(d => {
-    const psm = Math.round(d.price/d.total);
-    const col = aspC(d.asp);
-    return `
-    <div class="price-card" onclick="selectRow('${d.unit}')">
-      <div class="card-accent-bar" style="background:linear-gradient(90deg,${col},${col}88)"></div>
-      <div class="card-body">
-        <div class="card-top">
-          <div>
-            <div class="card-unit">${d.unit}</div>
-            <div class="card-lot">LOT ${d.lot}</div>
-          </div>
-          <div>
-            <div class="card-price">${$c(d.price)}</div>
-            <div class="card-psm">$${psm.toLocaleString()}/㎡</div>
-          </div>
-        </div>
-        <div class="card-chips">
-          <span class="bed-chip">${t.bedFn(d.bed,d.car)}</span>
-          <span class="asp-chip asp-${d.asp}">${d.asp}</span>
-        </div>
-        <div class="card-sizes">
-          <div class="sz-box"><div class="sz-lbl">${t.intLbl}</div><div class="sz-val">${d.int}㎡</div></div>
-          <div class="sz-box"><div class="sz-lbl">${t.extLbl}</div><div class="sz-val">${d.ext}㎡</div></div>
-          <div class="sz-box"><div class="sz-lbl">${t.totalLbl}</div><div class="sz-val">${d.total}㎡</div></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+function upStats(){
+  const prices=fil.map(d=>d.price);
+  const psms=fil.map(d=>Math.round(d.price/d.int));
+  document.getElementById('sval-total').textContent=DATA.length;
+  document.getElementById('sval-shown').textContent=fil.length;
+  document.getElementById('sval-from').textContent=prices.length?$f(Math.min(...prices)):'—';
+  document.getElementById('sval-avg').textContent=prices.length?$f(Math.round(prices.reduce((a,b)=>a+b,0)/prices.length)):'—';
+  document.getElementById('sval-avg-psm').textContent=psms.length?'$'+Math.round(psms.reduce((a,b)=>a+b,0)/psms.length).toLocaleString():'—';
 }
 
-function selectRow(unit) {
-  activeRow = activeRow===unit ? null : unit;
-  render();
-}
-
-function updateStats() {
-  if (!filtered.length) return;
-  const prices = filtered.map(d=>d.price);
-  const min = Math.min(...prices), max = Math.max(...prices);
-  const avg = Math.round(prices.reduce((a,b)=>a+b,0)/prices.length);
-  const avgpsm = Math.round(filtered.reduce((a,d)=>a+d.price/d.total,0)/filtered.length);
-  const minU = filtered.find(d=>d.price===min);
-  const maxU = filtered.find(d=>d.price===max);
-  document.getElementById('sval-total').textContent = filtered.length;
-  document.getElementById('sval-min').textContent   = $f(min);
-  document.getElementById('ssub-min').textContent   = `${minU.bed} Bed · ${minU.unit}`;
-  document.getElementById('sval-max').textContent   = $f(max);
-  document.getElementById('ssub-max').textContent   = `${maxU.bed} Bed · ${maxU.unit}`;
-  document.getElementById('sval-avg').textContent   = $f(avg);
-  document.getElementById('sval-avgpsm').textContent= '$'+avgpsm.toLocaleString();
-}
-
-function resetFilters() {
-  ['fBed','fCar','fAsp','fPrice'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('fSearch').value='';
+function rst(){
+  ['fBed','fStudy','fCar','fAsp','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSrch').value='';
   document.getElementById('sortSel').value='price-asc';
-  activeRow=null; applyFilters();
+  go();
 }
 
-function toggleTheme() {
-  const b=document.body, btn=document.getElementById('themeBtn');
-  if(b.dataset.theme==='light'){b.dataset.theme='dark'; btn.textContent='🌙';}
-  else{b.dataset.theme='light'; btn.textContent='☀️';}
+function toggleTheme(){
+  const b=document.body,btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
 }
-
 if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
-  document.body.dataset.theme='dark';
-  document.getElementById('themeBtn').textContent='🌙';
+  document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';
 }
-
-applyFilters();
+go();
 </script>
 </body>
 </html>
