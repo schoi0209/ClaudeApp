@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Watermark Karuah — Price List</title>
+<title>The Watermark Karuah — Price List Jun 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -655,37 +655,38 @@ footer {
 // House packages (Wattle 153㎡ 4B2B): cheapest per lot = land + $430,000 (or $451,500 for later stages)
 const lotsData = [
   // Stage 2-3
-  {lot:17, dpPlan:203, size:690.0,  landPrice:548000, reg:"Q2 2026", status:"For Sale",       stage:2, wattleTotal:978000,  lotusTotal:1001000},
-  {lot:37, dpPlan:210, size:513.9,  landPrice:436000, reg:"Q2 2026", status:"Under Contract", stage:2, wattleTotal:866000,  lotusTotal:889000},
-  {lot:9,  dpPlan:300, size:894.9,  landPrice:528000, reg:"Q2 2026", status:"For Sale",       stage:3, wattleTotal:958000,  lotusTotal:981000},
+  {lot:9,  dpPlan:300, size:894.9,  landPrice:528000, reg:"Q2 2026", status:"For Sale",        stage:3, wattleTotal:958000,  lotusTotal:981000},
+  {lot:17, dpPlan:203, size:690.0,  landPrice:548000, reg:"Q2 2026", status:"Deposit Taken",    stage:2, wattleTotal:978000,  lotusTotal:1001000},
+  {lot:37, dpPlan:210, size:513.9,  landPrice:436000, reg:"Q2 2026", status:"Under Contract",   stage:2, wattleTotal:866000,  lotusTotal:889000},
   // Stage 4
-  {lot:46, dpPlan:400, size:504.7,  landPrice:428000, reg:"Q2 2027", status:"Under Contract", stage:4, wattleTotal:879500,  lotusTotal:903650},
-  {lot:47, dpPlan:401, size:549.5,  landPrice:458000, reg:"Q2 2027", status:"For Sale",       stage:4, wattleTotal:887500,  lotusTotal:911650},
-  {lot:53, dpPlan:407, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"For Sale",       stage:4, wattleTotal:887500,  lotusTotal:911650},
-  {lot:55, dpPlan:409, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"EOI",            stage:4, wattleTotal:887500,  lotusTotal:911650},
-  {lot:56, dpPlan:410, size:513.9,  landPrice:436000, reg:"Q2 2027", status:"Under Contract", stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:46, dpPlan:400, size:504.7,  landPrice:428000, reg:"Q4 2027", status:"Under Contract",   stage:4, wattleTotal:879500,  lotusTotal:903650},
+  {lot:47, dpPlan:401, size:549.5,  landPrice:458000, reg:"Q4 2027", status:"For Sale",         stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:53, dpPlan:407, size:513.9,  landPrice:436000, reg:"Q4 2027", status:"For Sale",         stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:54, dpPlan:408, size:513.9,  landPrice:436000, reg:"Q4 2027", status:"Under Contract",   stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:55, dpPlan:409, size:513.9,  landPrice:436000, reg:"Q4 2027", status:"Under EOI",        stage:4, wattleTotal:887500,  lotusTotal:911650},
+  {lot:56, dpPlan:410, size:513.9,  landPrice:436000, reg:"Q4 2027", status:"For Sale",         stage:4, wattleTotal:887500,  lotusTotal:911650},
   // Stage 5
-  {lot:26, dpPlan:500, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:27, dpPlan:501, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:28, dpPlan:502, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"Under Contract", stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:29, dpPlan:503, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:30, dpPlan:504, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:31, dpPlan:505, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:32, dpPlan:506, size:560.0,  landPrice:465000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:916500,  lotusTotal:940650},
-  {lot:33, dpPlan:507, size:636.0,  landPrice:505000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:956500,  lotusTotal:980650},
-  {lot:45, dpPlan:508, size:578.6,  landPrice:489000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:940500,  lotusTotal:964650},
-  {lot:57, dpPlan:508, size:578.6,  landPrice:489000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:940500,  lotusTotal:964650},
-  {lot:58, dpPlan:509, size:503.1,  landPrice:437000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:888500,  lotusTotal:912650},
-  {lot:59, dpPlan:510, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:60, dpPlan:511, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:61, dpPlan:512, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:62, dpPlan:513, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:63, dpPlan:514, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:64, dpPlan:515, size:501.0,  landPrice:425800, reg:"Q2 2027", status:"EOI",            stage:5, wattleTotal:877300,  lotusTotal:901450},
-  {lot:65, dpPlan:516, size:579.0,  landPrice:489000, reg:"Q2 2027", status:"EOI",            stage:5, wattleTotal:940500,  lotusTotal:964650},
-  {lot:66, dpPlan:517, size:503.0,  landPrice:437000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:888500,  lotusTotal:912650},
-  {lot:67, dpPlan:519, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
-  {lot:68, dpPlan:520, size:500.0,  landPrice:425000, reg:"Q2 2027", status:"For Sale",       stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:26, dpPlan:500, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:27, dpPlan:501, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:28, dpPlan:502, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"Under Contract",   stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:29, dpPlan:503, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:30, dpPlan:504, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:31, dpPlan:505, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:32, dpPlan:506, size:560.0,  landPrice:465000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:916500,  lotusTotal:940650},
+  {lot:33, dpPlan:507, size:636.0,  landPrice:505000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:956500,  lotusTotal:980650},
+  {lot:45, dpPlan:508, size:579.0,  landPrice:489000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:940500,  lotusTotal:964650},
+  {lot:57, dpPlan:509, size:503.1,  landPrice:437000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:888500,  lotusTotal:912650},
+  {lot:58, dpPlan:509, size:579.0,  landPrice:489000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:940500,  lotusTotal:964650},
+  {lot:59, dpPlan:510, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"Deposit Taken",    stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:60, dpPlan:511, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:61, dpPlan:512, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"Deposit Taken",    stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:62, dpPlan:513, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"Deposit Taken",    stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:63, dpPlan:514, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:64, dpPlan:515, size:501.0,  landPrice:425000, reg:"Q4 2027", status:"Deposit Taken",    stage:5, wattleTotal:877300,  lotusTotal:901450},
+  {lot:65, dpPlan:516, size:503.0,  landPrice:437000, reg:"Q4 2027", status:"Under Contract",   stage:5, wattleTotal:888500,  lotusTotal:912650},
+  {lot:66, dpPlan:517, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"SOLD",             stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:67, dpPlan:518, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"Deposit Taken",    stage:5, wattleTotal:876500,  lotusTotal:900650},
+  {lot:68, dpPlan:520, size:500.0,  landPrice:425000, reg:"Q4 2027", status:"For Sale",         stage:5, wattleTotal:876500,  lotusTotal:900650},
 ];
 
 // ─── i18n ──────────────────────────────────────────────────────────
@@ -786,6 +787,7 @@ function statusClass(s) {
   if (sl.includes('reserved')) return 's-reserved';
   if (sl==='sold') return 's-sold';
   if (sl.includes('eoi')) return 's-eoi';
+  if (sl.includes('deposit')) return 's-reserved';
   return 's-sale';
 }
 function statusLabel(s, lang) {
