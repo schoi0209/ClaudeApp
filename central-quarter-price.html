@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Quarter — Apartment Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#eef0f4;--surface3:#e3e7ed;
+  --border:rgba(30,40,70,.09);--border2:rgba(30,40,70,.18);
+  --ink:#0e1424;--muted:#5c6480;--muted2:#aab2c4;
+  --accent:#2a4a8a;--accent-l:rgba(42,74,138,.07);
+  --gold:#9a7820;--gold-l:rgba(154,120,32,.08);
+  --green:#1e6840;--green-l:rgba(30,104,64,.08);
+  --teal:#1a7088;--teal-l:rgba(26,112,136,.07);
+  --purple:#6a3a9a;--purple-l:rgba(106,58,154,.07);
+}
+[data-theme="dark"]{
+  --bg:#080a10;--surface:#11151f;--surface2:#181d2a;--surface3:#212838;
+  --border:rgba(150,180,230,.07);--border2:rgba(150,180,230,.14);
+  --ink:#e4eaf6;--muted:#6a7a95;--muted2:#2a3344;
+  --accent:#6a9fe0;--accent-l:rgba(106,159,224,.08);
+  --gold:#c8a040;--gold-l:rgba(200,160,64,.07);
+  --green:#44a870;--green-l:rgba(68,168,112,.07);
+  --teal:#3aa8c0;--teal-l:rgba(58,168,192,.07);
+  --purple:#a070d0;--purple-l:rgba(160,112,208,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;flex-direction:column;}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;letter-spacing:.08em;color:var(--ink);}
+.h-sub{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--muted);}
+.h-center{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1440px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:20px;height:1px;background:var(--accent);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;}
+.masthead h1 i{font-style:italic;color:var(--accent);}
+.m-right{text-align:right;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;display:inline-block;}
+.m-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7;}
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.s-cell{flex:1;padding:14px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 18px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-cnt{display:inline-block;margin-left:4px;font-size:9px;background:var(--accent-l);color:var(--accent);border-radius:20px;padding:1px 6px;font-weight:600;}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;min-width:100px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1440px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+.tbl-wrap{max-width:1440px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 10px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:11px 10px;white-space:nowrap;}
+.unit-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--accent);}
+.lot-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+.floor-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
+.bed-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:3px;border:1px solid var(--border2);background:var(--surface2);}
+.bed-1{color:var(--teal);border-color:rgba(26,112,136,.25);background:var(--teal-l);}
+.bed-2{color:var(--accent);border-color:rgba(42,74,138,.2);background:var(--accent-l);}
+.bed-3{color:var(--purple);border-color:rgba(106,58,154,.25);background:var(--purple-l);}
+.opt-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;padding:1px 5px;border-radius:2px;margin-left:3px;}
+.opt-media{background:var(--gold-l);color:var(--gold);border:1px solid rgba(154,120,32,.2);}
+.opt-adapt{background:var(--teal-l);color:var(--teal);border:1px solid rgba(26,112,136,.2);}
+.asp{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;}
+.asp-N{color:#4a7ab0;border-color:rgba(74,122,176,.25);background:rgba(74,122,176,.06);}
+.asp-NE{color:#3a9a70;border-color:rgba(58,154,112,.25);background:rgba(58,154,112,.06);}
+.asp-NW{color:#5a7a9a;border-color:rgba(90,122,154,.25);background:rgba(90,122,154,.06);}
+.asp-SE{color:#4a8050;border-color:rgba(74,128,80,.25);background:rgba(74,128,80,.06);}
+.asp-SW{color:#c07030;border-color:rgba(192,112,48,.25);background:rgba(192,112,48,.06);}
+.asp-E{color:#907020;border-color:rgba(144,112,32,.25);background:rgba(144,112,32,.06);}
+.asp-W{color:#b05828;border-color:rgba(176,88,40,.25);background:rgba(176,88,40,.06);}
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);}
+.price-psm{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.avail-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 8px;border-radius:3px;background:var(--green-l);color:var(--green);border:1px solid rgba(30,104,64,.2);}
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){header,.masthead,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}.masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}.m-right{text-align:left;}}
+</style>
+</head>
+<body data-theme="light">
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps</div>
+<header>
+  <div class="h-brand"><div class="h-name">Central Quarter</div><div class="h-sub">Apartments</div></div>
+  <div class="h-center" id="txt-h-center">Apartment Price List</div>
+  <div class="h-right">
+    <div class="lang-pill"><button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button><button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button></div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Apartment · NSW · Jun 2026</div>
+    <h1>Central<br><i>Quarter</i></h1>
+  </div>
+  <div class="m-right">
+    <div class="date-chip">Generated: 5 Jun 2026</div>
+    <div class="m-note" id="txt-note">93 apartments · 1–3 Bedrooms<br>Floors 3–20 · All Available</div>
+  </div>
+</div>
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">93</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">List Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avg">Avg Price</div><div class="s-val" id="sval-avg">—</div><div class="s-sub" id="ssub-avg">Filtered</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Internal area</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setBed('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">93</span></button>
+  <button class="tab-btn" onclick="setBed('1')" id="tab-1">1 Bed <span class="tab-cnt" id="tc-1">0</span></button>
+  <button class="tab-btn" onclick="setBed('2')" id="tab-2">2 Bed <span class="tab-cnt" id="tc-2">0</span></button>
+  <button class="tab-btn" onclick="setBed('3')" id="tab-3">3 Bed <span class="tab-cnt" id="tc-3">0</span></button>
+</div>
+<div class="filters">
+  <div class="f-grp"><span class="f-lbl" id="flbl-asp">Aspect</span>
+    <select id="fAsp" onchange="go()">
+      <option value="" id="opt-asp-all">All</option>
+      <option value="N">N (North)</option><option value="NE">NE (North East)</option>
+      <option value="NW">NW (North West)</option><option value="SE">SE (South East)</option>
+      <option value="SW">SW (South West)</option><option value="E">E (East)</option><option value="W">W (West)</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-media">Media Room</span>
+    <select id="fMedia" onchange="go()">
+      <option value="" id="opt-md-all">All</option><option value="Y" id="opt-md-yes">With Media</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-adapt">Adaptable</span>
+    <select id="fAdapt" onchange="go()">
+      <option value="" id="opt-ad-all">All</option><option value="Y" id="opt-ad-yes">Adaptable</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-floor">Floor</span>
+    <select id="fFloor" onchange="go()">
+      <option value="" id="opt-fl-all">All</option>
+      <option value="low">Low (3–9)</option><option value="mid">Mid (10–15)</option><option value="high">High (16–20)</option>
+    </select></div>
+  <div class="f-grp"><span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="go()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="700000" id="opt-px1">Under $700K</option><option value="800000" id="opt-px2">Under $800K</option>
+      <option value="900000" id="opt-px3">Under $900K</option><option value="1100000" id="opt-px4">Under $1.1M</option>
+    </select></div>
+  <div class="f-grp" style="flex:1;min-width:130px"><span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSrch" placeholder="Unit, lot, aspect..." oninput="go()"></div></div>
+  <button class="reset-btn" onclick="rst()" id="txt-reset">Reset</button>
+</div>
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="go()">
+    <option value="price-asc" id="srt-pa">Price ↑</option><option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="floor-asc" id="srt-fa">Floor ↑</option><option value="floor-desc" id="srt-fd">Floor ↓</option>
+    <option value="size-desc" id="srt-sd">Size ↓</option><option value="psm-asc" id="srt-psa">$/m² ↑</option>
+  </select>
+</div>
+<div class="tbl-wrap">
+  <table>
+    <thead><tr>
+      <th id="th-unit">Unit</th><th id="th-floor">Floor</th><th id="th-type">Type</th>
+      <th id="th-bath">Bath</th><th id="th-car">Car</th><th id="th-size">Area (sqm)</th>
+      <th id="th-asp">Aspect</th><th id="th-price">Price</th><th id="th-psm">$/m²</th><th id="th-status">Status</th>
+    </tr></thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
+</div>
+<footer>Made by SunnyApps. All rights reserved. · Central Quarter Apartments — 5 Jun 2026</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+<script>
+const DATA = [
+  {lot:5,unit:'305',price:1029000,bed:3,bath:2,car:1,media:'Y',adaptable:'N',int:106,ext:128,total:234,asp:'NE',floor:3,status:'Available'},
+  {lot:11,unit:'311',price:780500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:88,total:163,asp:'W',floor:3,status:'Available'},
+  {lot:35,unit:'602',price:792500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:6,status:'Available'},
+  {lot:41,unit:'608',price:765000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:6,status:'Available'},
+  {lot:55,unit:'711',price:763000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:7,status:'Available'},
+  {lot:56,unit:'801',price:771000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:8,status:'Available'},
+  {lot:67,unit:'901',price:776000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:9,status:'Available'},
+  {lot:68,unit:'902',price:807000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:9,status:'Available'},
+  {lot:71,unit:'905',price:992000,bed:3,bath:2,car:1,media:'Y',adaptable:'N',int:106,ext:32,total:138,asp:'NE',floor:9,status:'Available'},
+  {lot:77,unit:'911',price:774000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:9,status:'Available'},
+  {lot:78,unit:'1001',price:780500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:10,status:'Available'},
+  {lot:82,unit:'1005',price:1001500,bed:3,bath:2,car:1,media:'Y',adaptable:'N',int:106,ext:32,total:138,asp:'NE',floor:10,status:'Available'},
+  {lot:86,unit:'1009',price:778500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:10,status:'Available'},
+  {lot:88,unit:'1011',price:778500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:10,status:'Available'},
+  {lot:89,unit:'1101',price:785500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:11,status:'Available'},
+  {lot:90,unit:'1102',price:817000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:11,status:'Available'},
+  {lot:93,unit:'1105',price:1029000,bed:3,bath:2,car:1,media:'Y',adaptable:'N',int:106,ext:32,total:138,asp:'NE',floor:11,status:'Available'},
+  {lot:96,unit:'1108',price:793500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:11,status:'Available'},
+  {lot:97,unit:'1109',price:783500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:11,status:'Available'},
+  {lot:98,unit:'1110',price:793500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:11,status:'Available'},
+  {lot:99,unit:'1111',price:783500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:11,status:'Available'},
+  {lot:100,unit:'1201',price:790500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:12,status:'Available'},
+  {lot:101,unit:'1202',price:822000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:12,status:'Available'},
+  {lot:109,unit:'1301',price:795500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:13,status:'Available'},
+  {lot:110,unit:'1302',price:826500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:13,status:'Available'},
+  {lot:111,unit:'1303',price:630000,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:52,ext:11,total:63,asp:'N',floor:13,status:'Available'},
+  {lot:114,unit:'1306',price:899000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:93,ext:12,total:105,asp:'E',floor:13,status:'Available'},
+  {lot:116,unit:'1308',price:899000,bed:2,bath:3,car:1,media:'N',adaptable:'Y',int:98,ext:12,total:110,asp:'SW',floor:13,status:'Available'},
+  {lot:117,unit:'1309',price:875500,bed:2,bath:2,car:1,media:'Y',adaptable:'N',int:86,ext:11,total:97,asp:'W',floor:13,status:'Available'},
+  {lot:118,unit:'1401',price:800500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:14,status:'Available'},
+  {lot:119,unit:'1402',price:831500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:14,status:'Available'},
+  {lot:121,unit:'1404',price:636000,bed:1,bath:1,car:1,media:'N',adaptable:'Y',int:53,ext:11,total:64,asp:'N',floor:14,status:'Available'},
+  {lot:122,unit:'1405',price:1041000,bed:3,bath:2,car:2,media:'Y',adaptable:'N',int:106,ext:32,total:138,asp:'NE',floor:14,status:'Available'},
+  {lot:123,unit:'1406',price:808000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:14,status:'Available'},
+  {lot:125,unit:'1408',price:808000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:14,status:'Available'},
+  {lot:126,unit:'1409',price:798500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:14,status:'Available'},
+  {lot:127,unit:'1410',price:808000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:14,status:'Available'},
+  {lot:128,unit:'1411',price:798500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:14,status:'Available'},
+  {lot:129,unit:'1501',price:805000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:15,status:'Available'},
+  {lot:130,unit:'1502',price:836500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:15,status:'Available'},
+  {lot:131,unit:'1503',price:640000,bed:1,bath:1,car:1,media:'N',adaptable:'Y',int:52,ext:11,total:63,asp:'N',floor:15,status:'Available'},
+  {lot:134,unit:'1506',price:813000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:15,status:'Available'},
+  {lot:137,unit:'1509',price:803000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:15,status:'Available'},
+  {lot:138,unit:'1510',price:813000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:15,status:'Available'},
+  {lot:139,unit:'1511',price:803000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:15,status:'Available'},
+  {lot:140,unit:'1601',price:810000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:16,status:'Available'},
+  {lot:141,unit:'1602',price:841500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:16,status:'Available'},
+  {lot:142,unit:'1603',price:645000,bed:1,bath:1,car:1,media:'N',adaptable:'Y',int:52,ext:11,total:63,asp:'N',floor:16,status:'Available'},
+  {lot:143,unit:'1604',price:645500,bed:1,bath:1,car:1,media:'N',adaptable:'Y',int:53,ext:11,total:64,asp:'N',floor:16,status:'Available'},
+  {lot:145,unit:'1606',price:818000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:16,status:'Available'},
+  {lot:147,unit:'1608',price:818000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:16,status:'Available'},
+  {lot:148,unit:'1609',price:808000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:16,status:'Available'},
+  {lot:149,unit:'1610',price:818000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:16,status:'Available'},
+  {lot:150,unit:'1611',price:808000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:16,status:'Available'},
+  {lot:151,unit:'1701',price:815000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:17,status:'Available'},
+  {lot:152,unit:'1702',price:846000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:17,status:'Available'},
+  {lot:153,unit:'1703',price:649500,bed:1,bath:1,car:1,media:'N',adaptable:'Y',int:52,ext:11,total:63,asp:'N',floor:17,status:'Available'},
+  {lot:154,unit:'1704',price:650500,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:53,ext:11,total:64,asp:'N',floor:17,status:'Available'},
+  {lot:156,unit:'1706',price:822500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:17,status:'Available'},
+  {lot:157,unit:'1707',price:852000,bed:2,bath:2,car:1,media:'Y',adaptable:'N',int:80,ext:14,total:94,asp:'E',floor:17,status:'Available'},
+  {lot:158,unit:'1708',price:822500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:17,status:'Available'},
+  {lot:159,unit:'1709',price:813000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:17,status:'Available'},
+  {lot:160,unit:'1710',price:822500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:17,status:'Available'},
+  {lot:161,unit:'1711',price:813000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:17,status:'Available'},
+  {lot:162,unit:'1801',price:820000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:18,status:'Available'},
+  {lot:163,unit:'1802',price:851000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:18,status:'Available'},
+  {lot:165,unit:'1804',price:655500,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:53,ext:11,total:64,asp:'N',floor:18,status:'Available'},
+  {lot:167,unit:'1806',price:827500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:18,status:'Available'},
+  {lot:168,unit:'1807',price:857000,bed:2,bath:2,car:1,media:'Y',adaptable:'N',int:80,ext:14,total:94,asp:'E',floor:18,status:'Available'},
+  {lot:169,unit:'1808',price:827500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:18,status:'Available'},
+  {lot:170,unit:'1809',price:818000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:18,status:'Available'},
+  {lot:171,unit:'1810',price:827500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:18,status:'Available'},
+  {lot:172,unit:'1811',price:818000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:18,status:'Available'},
+  {lot:173,unit:'1901',price:824500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:12,total:90,asp:'W',floor:19,status:'Available'},
+  {lot:174,unit:'1902',price:856000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:30,total:107,asp:'NW',floor:19,status:'Available'},
+  {lot:175,unit:'1903',price:659500,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:52,ext:11,total:63,asp:'N',floor:19,status:'Available'},
+  {lot:176,unit:'1904',price:660500,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:53,ext:11,total:64,asp:'N',floor:19,status:'Available'},
+  {lot:178,unit:'1906',price:832500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:19,status:'Available'},
+  {lot:180,unit:'1908',price:832500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:19,status:'Available'},
+  {lot:181,unit:'1909',price:822500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:19,status:'Available'},
+  {lot:182,unit:'1910',price:832500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:19,status:'Available'},
+  {lot:183,unit:'1911',price:822500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:19,status:'Available'},
+  {lot:184,unit:'2001',price:1250000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:78,ext:113,total:191,asp:'W',floor:20,status:'Available'},
+  {lot:185,unit:'2002',price:1300000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:148,total:225,asp:'NW',floor:20,status:'Available'},
+  {lot:186,unit:'2003',price:714000,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:52,ext:11,total:63,asp:'N',floor:20,status:'Available'},
+  {lot:187,unit:'2004',price:714000,bed:1,bath:1,car:1,media:'N',adaptable:'N',int:53,ext:11,total:64,asp:'N',floor:20,status:'Available'},
+  {lot:188,unit:'2005',price:1500000,bed:3,bath:2,car:2,media:'Y',adaptable:'N',int:106,ext:117,total:223,asp:'NE',floor:20,status:'Available'},
+  {lot:189,unit:'2006',price:890000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:12,total:88,asp:'E',floor:20,status:'Available'},
+  {lot:190,unit:'2007',price:919500,bed:2,bath:2,car:1,media:'Y',adaptable:'N',int:80,ext:14,total:94,asp:'E',floor:20,status:'Available'},
+  {lot:191,unit:'2008',price:890000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:11,total:87,asp:'SE',floor:20,status:'Available'},
+  {lot:192,unit:'2009',price:880500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:77,ext:11,total:88,asp:'SW',floor:20,status:'Available'},
+  {lot:193,unit:'2010',price:890000,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:76,ext:14,total:90,asp:'W',floor:20,status:'Available'},
+  {lot:194,unit:'2011',price:880500,bed:2,bath:2,car:1,media:'N',adaptable:'N',int:75,ext:11,total:86,asp:'W',floor:20,status:'Available'},
+];
+const i18n = {
+  en:{
+    'txt-h-center':'Apartment Price List','txt-overline':'Apartment · NSW · Jun 2026',
+    'txt-note':'93 apartments · 1–3 Bedrooms<br>Floors 3–20 · All Available',
+    'slbl-total':'Total Units','ssub-total':'All Available','slbl-from':'From','ssub-from':'List Price',
+    'slbl-avg':'Avg Price','ssub-avg':'Filtered','slbl-psm':'Avg $/m²','ssub-psm':'Internal area',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-asp':'Aspect','flbl-media':'Media Room','flbl-adapt':'Adaptable','flbl-floor':'Floor','flbl-maxpx':'Max Price','flbl-search':'Search',
+    'opt-asp-all':'All','opt-md-all':'All','opt-md-yes':'With Media','opt-ad-all':'All','opt-ad-yes':'Adaptable','opt-fl-all':'All',
+    'opt-px-all':'All','opt-px1':'Under $700K','opt-px2':'Under $800K','opt-px3':'Under $900K','opt-px4':'Under $1.1M',
+    'txt-reset':'Reset','txt-shown-lbl':' units shown',
+    'th-unit':'Unit','th-floor':'Floor','th-type':'Type','th-bath':'Bath','th-car':'Car','th-size':'Area (sqm)','th-asp':'Aspect','th-price':'Price','th-psm':'$/m²','th-status':'Status',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-fa':'Floor ↑','srt-fd':'Floor ↓','srt-sd':'Size ↓','srt-psa':'$/m² ↑',
+    'txt-empty':'— No units match your criteria —',searchPh:'Unit, lot, aspect...',
+  },
+  ko:{
+    'txt-h-center':'아파트 분양가 리스트','txt-overline':'아파트 · NSW · 2026년 6월',
+    'txt-note':'93세대 · 1~3베드룸<br>3~20층 · 전체 분양 가능',
+    'slbl-total':'총 세대','ssub-total':'전체','slbl-from':'최저가','ssub-from':'분양가',
+    'slbl-avg':'평균 분양가','ssub-avg':'필터 기준','slbl-psm':'평균 $/m²','ssub-psm':'내부 면적',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-asp':'방향','flbl-media':'미디어룸','flbl-adapt':'장애 적합','flbl-floor':'층','flbl-maxpx':'최대 가격','flbl-search':'검색',
+    'opt-asp-all':'전체','opt-md-all':'전체','opt-md-yes':'미디어룸 포함','opt-ad-all':'전체','opt-ad-yes':'장애 적합','opt-fl-all':'전체',
+    'opt-px-all':'전체','opt-px1':'$700K 이하','opt-px2':'$800K 이하','opt-px3':'$900K 이하','opt-px4':'$1.1M 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중',
+    'th-unit':'유닛','th-floor':'층','th-type':'타입','th-bath':'욕실','th-car':'주차','th-size':'면적 (sqm)','th-asp':'방향','th-price':'분양가','th-psm':'m²당','th-status':'상태',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-fa':'층수 낮은 순','srt-fd':'층수 높은 순','srt-sd':'면적 큰 순','srt-psa':'단가 낮은 순',
+    'txt-empty':'— 조건에 맞는 세대가 없습니다 —',searchPh:'유닛, Lot, 방향 검색...',
+  }
+};
+let lang='en',curBed='all',fil=[];
+function setLang(l){lang=l;document.getElementById('btnEN').classList.toggle('active',l==='en');document.getElementById('btnKO').classList.toggle('active',l==='ko');const t=i18n[l];Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});document.getElementById('fSrch').placeholder=t.searchPh;render();upStats();}
+function setBed(b){curBed=b;document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));document.getElementById('tab-'+b).classList.add('active');go();}
+function go(){
+  const asp=document.getElementById('fAsp').value;
+  const media=document.getElementById('fMedia').value;
+  const adapt=document.getElementById('fAdapt').value;
+  const floor=document.getElementById('fFloor').value;
+  const maxPx=document.getElementById('fMaxPx').value;
+  const sr=document.getElementById('fSrch').value.toLowerCase().trim();
+  const srt=document.getElementById('sortSel').value;
+  fil=DATA.filter(d=>{
+    if(curBed!=='all'&&d.bed!==+curBed)return false;
+    if(asp&&d.asp!==asp)return false;
+    if(media&&d.media!==media)return false;
+    if(adapt&&d.adaptable!==adapt)return false;
+    if(floor==='low'&&!(d.floor>=3&&d.floor<=9))return false;
+    if(floor==='mid'&&!(d.floor>=10&&d.floor<=15))return false;
+    if(floor==='high'&&!(d.floor>=16&&d.floor<=20))return false;
+    if(maxPx&&d.price>+maxPx)return false;
+    if(sr){const h=[d.unit,String(d.lot),d.asp,String(d.bed)].join(' ').toLowerCase();if(!h.includes(sr))return false;}
+    return true;
+  });
+  fil.sort((a,b)=>{
+    if(srt==='price-asc')return a.price-b.price;if(srt==='price-desc')return b.price-a.price;
+    if(srt==='floor-asc')return a.floor-b.floor||a.price-b.price;if(srt==='floor-desc')return b.floor-a.floor||a.price-b.price;
+    if(srt==='size-desc')return b.total-a.total;if(srt==='psm-asc')return(a.price/a.int)-(b.price/b.int);return 0;
+  });
+  [1,2,3].forEach(b=>{document.getElementById('tc-'+b).textContent=DATA.filter(d=>d.bed===b).length;});
+  document.getElementById('tc-all').textContent=DATA.length;
+  render();upStats();
+}
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=fil.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tb=document.getElementById('tBody'),em=document.getElementById('emptyMsg');
+  if(!fil.length){tb.innerHTML='';em.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  em.style.display='none';
+  tb.innerHTML=fil.map(d=>{
+    const psm=Math.round(d.price/d.int);
+    return `<tr>
+      <td><div class="unit-num">${d.unit}</div><div class="lot-num">Lot ${d.lot}</div></td>
+      <td><span class="floor-chip">L${d.floor}</span></td>
+      <td>
+        <span class="bed-chip bed-${d.bed}">🛏 ${d.bed} Bed</span>
+        ${d.media==='Y'?'<span class="opt-tag opt-media">MEDIA</span>':''}${d.adaptable==='Y'?'<span class="opt-tag opt-adapt">♿</span>':''}
+      </td>
+      <td style="font-size:12px;text-align:center">${d.bath}</td>
+      <td style="font-size:12px;text-align:center">${d.car}</td>
+      <td><div class="sz-main">${d.total} sqm</div><div class="sz-detail">Int ${d.int} + Ext ${d.ext}</div></td>
+      <td><span class="asp asp-${d.asp}">${d.asp}</span></td>
+      <td><div class="price-val">$${d.price.toLocaleString()}</div></td>
+      <td><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">$${psm.toLocaleString()}</div></td>
+      <td><span class="avail-badge">Available</span></td>
+    </tr>`;
+  }).join('');
+}
+function upStats(){
+  const px=fil.map(d=>d.price);const psms=fil.map(d=>Math.round(d.price/d.int));
+  document.getElementById('sval-total').textContent=DATA.length;
+  document.getElementById('sval-shown').textContent=fil.length;
+  document.getElementById('sval-from').textContent=px.length?'$'+(Math.min(...px)/1000).toFixed(0)+'K':'—';
+  document.getElementById('sval-avg').textContent=px.length?'$'+(Math.round(px.reduce((a,b)=>a+b,0)/px.length)/1000).toFixed(0)+'K':'—';
+  document.getElementById('sval-psm').textContent=psms.length?'$'+Math.round(psms.reduce((a,b)=>a+b,0)/psms.length).toLocaleString():'—';
+}
+function rst(){['fAsp','fMedia','fAdapt','fFloor','fMaxPx'].forEach(id=>document.getElementById(id).value='');document.getElementById('fSrch').value='';document.getElementById('sortSel').value='price-asc';curBed='all';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-all').classList.add('active');go();}
+function toggleTheme(){const b=document.body,btn=document.getElementById('themeBtn');if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}else{b.dataset.theme='light';btn.textContent='☀️';}}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
+go();
+</script>
+</body>
+</html>
