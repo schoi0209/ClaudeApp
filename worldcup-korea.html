@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOREA 2026 — 대한민국 월드컵 대시보드 | SunnyApps</title>
+<meta name="description" content="2026 FIFA 월드컵 대한민국 대표팀 대시보드 — 일정, 조 순위, 스쿼드, 카운트다운">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#CD2E3A; --blue:#0047A0;
+  --bg:#F7F5F0; --surface:#FFFFFF; --ink:#14171F; --muted:#6B7180;
+  --line:#E4E1D8; --card-shadow:0 6px 24px rgba(20,23,31,.07);
+  --hero-ink:#F7F5F0;
+}
+[data-theme="dark"]{
+  --bg:#0A0E1A; --surface:#121829; --ink:#F2F4F8; --muted:#8B93A7;
+  --line:#222B42; --card-shadow:0 8px 28px rgba(0,0,0,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;transition:background .3s,color .3s}
+.display{font-family:'Anton','Noto Sans KR',sans-serif;font-weight:900;letter-spacing:.5px}
+.mono{font-family:'IBM Plex Mono',monospace}
+a{color:inherit}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.topbar .brand{font-weight:900;font-size:.95rem}
+.topbar .brand span{color:var(--red)}
+.topbar .spacer{flex:1}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--red)}
+.bmac{background:#FFDD00;color:#111;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.bmac:hover{filter:brightness(.95)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:#0A0E1A;color:var(--hero-ink);padding:64px 20px 56px;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,var(--blue) 0%,var(--blue) 42%,var(--red) 42.3%,var(--red) 100%);opacity:.16}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(205,46,58,.35),transparent 60%)}
+.hero>*{position:relative;z-index:2}
+.hero .eyebrow{font-size:.78rem;letter-spacing:3px;text-transform:uppercase;color:#9AA3B8;font-weight:700}
+.hero h1{font-size:clamp(2.6rem,9vw,5rem);line-height:1.05;margin:10px 0 4px}
+.hero h1 .ko{display:block;font-size:.42em;letter-spacing:8px;font-weight:900;color:#C8D0E2;margin-top:6px}
+.taegeuk{display:inline-block;width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,var(--red) 50%,var(--blue) 50%);vertical-align:middle;margin:0 8px}
+
+/* ticket / countdown */
+.ticket{max-width:640px;margin:28px auto 0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:22px 18px;backdrop-filter:blur(6px)}
+.ticket .vs{display:flex;align-items:center;justify-content:center;gap:18px;font-size:1.5rem;font-weight:900}
+.ticket .vs .flag{font-size:2.2rem}
+.ticket .meta{font-size:.85rem;color:#AEB6C9;margin-top:6px}
+.count{display:flex;justify-content:center;gap:14px;margin-top:18px}
+.count .cell{min-width:64px}
+.count .num{font-size:2rem;font-weight:700;background:rgba(255,255,255,.08);border-radius:10px;padding:6px 4px}
+.count .lab{font-size:.68rem;letter-spacing:2px;color:#9AA3B8;margin-top:5px;text-transform:uppercase}
+.live-note{margin-top:14px;font-size:.8rem;color:#FFD9DD}
+
+/* layout */
+.wrap{max-width:1060px;margin:0 auto;padding:0 18px}
+section{padding:46px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:8px;margin-bottom:22px}
+.sec-head h2{font-size:1.5rem;font-weight:900}
+.sec-head .en-sub{font-size:.75rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* standings */
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow)}
+th,td{padding:12px 10px;text-align:center;font-size:.9rem;border-bottom:1px solid var(--line)}
+th{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+td.team{text-align:left;font-weight:700;white-space:nowrap}
+tr.kor{background:linear-gradient(90deg,rgba(205,46,58,.10),rgba(0,71,160,.10))}
+tr.kor td.team{color:var(--red)}
+.note{font-size:.78rem;color:var(--muted);margin-top:10px}
+
+/* fixtures */
+.fixtures{display:grid;gap:14px}
+.fx{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--card-shadow);border-left:5px solid var(--blue)}
+.fx.next{border-left-color:var(--red)}
+.fx .md{text-align:center}
+.fx .md .m{font-size:.68rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.fx .md .d{font-size:1.6rem;font-weight:700}
+.fx .opp{font-weight:900;font-size:1.05rem}
+.fx .venue,.fx .times{font-size:.8rem;color:var(--muted)}
+.fx .tag{font-size:.68rem;font-weight:700;letter-spacing:1px;color:#fff;background:var(--red);border-radius:999px;padding:4px 10px;text-transform:uppercase}
+
+/* squad */
+.squad{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.pos-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--card-shadow)}
+.pos-card h3{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:#fff;background:var(--blue);display:inline-block;border-radius:6px;padding:3px 10px;margin-bottom:12px}
+.pos-card.fw h3{background:var(--red)}
+.pos-card ul{list-style:none}
+.pos-card li{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;padding:5px 0;border-bottom:1px dashed var(--line)}
+.pos-card li:last-child{border:none}
+.pos-card li .club{color:var(--muted);font-size:.76rem;text-align:right}
+.pos-card li.star{font-weight:900;color:var(--red)}
+
+/* key players */
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.kp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.kp::after{content:attr(data-no);position:absolute;right:8px;top:-14px;font-family:'Anton',sans-serif;font-size:5rem;color:var(--line);z-index:0}
+.kp>*{position:relative;z-index:1}
+.kp .nm{font-weight:900;font-size:1.1rem}
+.kp .cl{font-size:.76rem;color:var(--muted);margin-bottom:8px}
+.kp p{font-size:.83rem}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:4px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--card-shadow)}
+.fact .v{font-family:'Anton','Noto Sans KR',sans-serif;font-size:2rem;color:var(--red)}
+.fact .k{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+footer{margin-top:56px;padding:26px 18px;text-align:center;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted)}
+@media(max-width:560px){
+  .fx{grid-template-columns:54px 1fr}
+  .fx .tagcol{grid-column:1/-1;justify-self:start}
+  .count .cell{min-width:56px}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Sunny<span>Apps</span> ⚽</div>
+  <div class="spacer"></div>
+  <a class="btn bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
+  <button class="btn" id="langBtn" aria-label="Toggle language">EN</button>
+  <button class="btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+</div>
+
+<header class="hero">
+  <div class="eyebrow">FIFA World Cup 2026 · Canada · Mexico · USA</div>
+  <h1 class="display">KOREA<span class="taegeuk" aria-hidden="true"></span>REPUBLIC<span class="ko" data-ko="대 한 민 국" data-en="TAEGEUK WARRIORS">대 한 민 국</span></h1>
+  <div class="ticket">
+    <div class="eyebrow" id="nextLabel" data-ko="다음 경기 · 조별리그 A조" data-en="Next Match · Group A">다음 경기 · 조별리그 A조</div>
+    <div class="vs" id="vsLine"><span class="flag">🇰🇷</span><span data-ko="대한민국" data-en="Korea Republic">대한민국</span><span style="color:#9AA3B8">vs</span><span id="oppName">체코</span><span class="flag" id="oppFlag">🇨🇿</span></div>
+    <div class="meta" id="vsMeta"></div>
+    <div class="count" id="countdown" role="timer">
+      <div class="cell"><div class="num mono" id="cd-d">--</div><div class="lab" data-ko="일" data-en="Days">일</div></div>
+      <div class="cell"><div class="num mono" id="cd-h">--</div><div class="lab" data-ko="시간" data-en="Hrs">시간</div></div>
+      <div class="cell"><div class="num mono" id="cd-m">--</div><div class="lab" data-ko="분" data-en="Min">분</div></div>
+      <div class="cell"><div class="num mono" id="cd-s">--</div><div class="lab" data-ko="초" data-en="Sec">초</div></div>
+    </div>
+    <div class="live-note" id="liveNote"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="group">
+  <div class="sec-head"><h2 data-ko="A조 순위" data-en="Group A Standings">A조 순위</h2><span class="en-sub">Group A</span></div>
+  <table>
+    <thead><tr><th>#</th><th style="text-align:left" data-ko="팀" data-en="Team">팀</th><th data-ko="경기" data-en="P">경기</th><th data-ko="승" data-en="W">승</th><th data-ko="무" data-en="D">무</th><th data-ko="패" data-en="L">패</th><th data-ko="득실" data-en="GD">득실</th><th data-ko="승점" data-en="Pts">승점</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="team">🇲🇽 <span data-ko="멕시코" data-en="Mexico">멕시코</span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+      <tr class="kor"><td>2</td><td class="team">🇰🇷 <span data-ko="대한민국" data-en="Korea Republic">대한민국</span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+      <tr><td>3</td><td class="team">🇨🇿 <span data-ko="체코" data-en="Czechia">체코</span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+      <tr><td>4</td><td class="team">🇿🇦 <span data-ko="남아프리카공화국" data-en="South Africa">남아프리카공화국</span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+    </tbody>
+  </table>
+  <p class="note" data-ko="※ 조별리그 개막 전 기준 (2026.6.11). 상위 2팀 + 조 3위 일부가 32강에 진출합니다. FIFA 랭킹: 멕시코 15위 · 대한민국 22위 · 체코 44위 · 남아공 61위." data-en="※ As of June 11, 2026 (pre-matchday). Top two teams, plus some third-placed teams, advance to the Round of 32. FIFA rankings: Mexico 15 · Korea 22 · Czechia 44 · South Africa 61.">※ 조별리그 개막 전 기준 (2026.6.11). 상위 2팀 + 조 3위 일부가 32강에 진출합니다. FIFA 랭킹: 멕시코 15위 · 대한민국 22위 · 체코 44위 · 남아공 61위.</p>
+</section>
+
+<section id="fixtures">
+  <div class="sec-head"><h2 data-ko="대한민국 일정" data-en="Korea Fixtures">대한민국 일정</h2><span class="en-sub">Group Stage</span></div>
+  <div class="fixtures" id="fxList"></div>
+  <p class="note" data-ko="모든 시간은 한국시간(KST)과 시드니시간(AEST)으로 표시됩니다." data-en="All times shown in Korea Standard Time (KST) and Sydney time (AEST).">모든 시간은 한국시간(KST)과 시드니시간(AEST)으로 표시됩니다.</p>
+</section>
+
+<section id="keyplayers">
+  <div class="sec-head"><h2 data-ko="핵심 선수" data-en="Key Players">핵심 선수</h2><span class="en-sub">Stars to Watch</span></div>
+  <div class="keys">
+    <div class="kp" data-no="7"><div class="nm" data-ko="손흥민 (C)" data-en="Son Heung-min (C)">손흥민 (C)</div><div class="cl">FW · LAFC</div><p data-ko="주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다." data-en="Captain and 'the heart' of the team, per coach Hong. His fourth — and likely final — World Cup, urging teammates to fear no one.">주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다.</p></div>
+    <div class="kp" data-no="4"><div class="nm" data-ko="김민재" data-en="Kim Min-jae">김민재</div><div class="cl" data-ko="DF · 바이에른 뮌헨" data-en="DF · Bayern Munich">DF · 바이에른 뮌헨</div><p data-ko="수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다." data-en="The defensive anchor and starting point of Korea's build-up play. A world-class centre-back.">수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다.</p></div>
+    <div class="kp" data-no="10"><div class="nm" data-ko="이강인" data-en="Lee Kang-in">이강인</div><div class="cl">MF · PSG</div><p data-ko="플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다." data-en="The playmaker — Korea's present and future, responsible for creative attacking play.">플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다.</p></div>
+    <div class="kp" data-no="11"><div class="nm" data-ko="황희찬" data-en="Hwang Hee-chan">황희찬</div><div class="cl" data-ko="MF · 울버햄튼" data-en="MF · Wolves">MF · 울버햄튼</div><p data-ko="폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다." data-en="Explosive pace and runs in behind — the other key axis of Korea's attack.">폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다.</p></div>
+  </div>
+</section>
+
+<section id="squad">
+  <div class="sec-head"><h2 data-ko="최종 스쿼드 26인" data-en="Final 26-Man Squad">최종 스쿼드 26인</h2><span class="en-sub">Coach: Hong Myung-bo</span></div>
+  <div class="squad">
+    <div class="pos-card"><h3 data-ko="골키퍼" data-en="Goalkeepers">골키퍼</h3><ul>
+      <li><span data-ko="김승규" data-en="Kim Seung-gyu">김승규</span><span class="club">FC Tokyo</span></li>
+      <li><span data-ko="조현우" data-en="Jo Hyeon-woo">조현우</span><span class="club" data-ko="울산 HD" data-en="Ulsan HD">울산 HD</span></li>
+      <li><span data-ko="송범근" data-en="Song Bum-keun">송범근</span><span class="club" data-ko="전북" data-en="Jeonbuk">전북</span></li>
+    </ul></div>
+    <div class="pos-card"><h3 data-ko="수비수" data-en="Defenders">수비수</h3><ul>
+      <li class="star"><span data-ko="김민재" data-en="Kim Min-jae">김민재</span><span class="club">Bayern</span></li>
+      <li><span data-ko="설영우" data-en="Seol Young-woo">설영우</span><span class="club">Red Star</span></li>
+      <li><span data-ko="이한범" data-en="Lee Han-beom">이한범</span><span class="club">Midtjylland</span></li>
+      <li><span data-ko="이태석" data-en="Lee Tae-seok">이태석</span><span class="club">Austria Wien</span></li>
+      <li><span data-ko="옌스 카스트로프" data-en="Jens Castrop">옌스 카스트로프</span><span class="club">M'gladbach</span></li>
+      <li><span data-ko="김문환" data-en="Kim Moon-hwan">김문환</span><span class="club" data-ko="대전" data-en="Daejeon">대전</span></li>
+      <li><span data-ko="김태현" data-en="Kim Tae-hyeon">김태현</span><span class="club">Kashima</span></li>
+      <li><span data-ko="박진섭" data-en="Park Jin-seob">박진섭</span><span class="club">Zhejiang</span></li>
+      <li><span data-ko="이기혁" data-en="Lee Ki-hyuk">이기혁</span><span class="club" data-ko="강원" data-en="Gangwon">강원</span></li>
+      <li><span data-ko="조위제 *" data-en="Cho Wi-je *">조위제 *</span><span class="club" data-ko="전북" data-en="Jeonbuk">전북</span></li>
+    </ul></div>
+    <div class="pos-card"><h3 data-ko="미드필더" data-en="Midfielders">미드필더</h3><ul>
+      <li class="star"><span data-ko="이강인" data-en="Lee Kang-in">이강인</span><span class="club">PSG</span></li>
+      <li class="star"><span data-ko="황희찬" data-en="Hwang Hee-chan">황희찬</span><span class="club">Wolves</span></li>
+      <li><span data-ko="황인범" data-en="Hwang In-beom">황인범</span><span class="club">Feyenoord</span></li>
+      <li><span data-ko="이재성" data-en="Lee Jae-sung">이재성</span><span class="club">Mainz</span></li>
+      <li><span data-ko="백승호" data-en="Paik Seung-ho">백승호</span><span class="club">Birmingham</span></li>
+      <li><span data-ko="양현준" data-en="Yang Hyun-jun">양현준</span><span class="club">Celtic</span></li>
+      <li><span data-ko="배준호" data-en="Bae Jun-ho">배준호</span><span class="club">Stoke City</span></li>
+      <li><span data-ko="엄지성" data-en="Eom Ji-sung">엄지성</span><span class="club">Swansea</span></li>
+      <li><span data-ko="이동경" data-en="Lee Dong-gyeong">이동경</span><span class="club" data-ko="울산 HD" data-en="Ulsan HD">울산 HD</span></li>
+      <li><span data-ko="김진규" data-en="Kim Jin-gyu">김진규</span><span class="club" data-ko="전북" data-en="Jeonbuk">전북</span></li>
+    </ul></div>
+    <div class="pos-card fw"><h3 data-ko="공격수" data-en="Forwards">공격수</h3><ul>
+      <li class="star"><span data-ko="손흥민 (C)" data-en="Son Heung-min (C)">손흥민 (C)</span><span class="club">LAFC</span></li>
+      <li><span data-ko="오현규" data-en="Oh Hyeon-gyu">오현규</span><span class="club">Beşiktaş</span></li>
+      <li><span data-ko="조규성" data-en="Cho Gue-sung">조규성</span><span class="club">Midtjylland</span></li>
+    </ul></div>
+  </div>
+  <p class="note" data-ko="* 조위제는 조유민(부상)의 대체 발탁 (6월 2일). 체코전 예상 라인업(3-4-2-1): 김승규 — 김민재 · 이한범 · 이기혁 — 설영우 · 이태석 · 황인범 · 백승호 — 이강인 · 이재성 — 손흥민." data-en="* Cho Wi-je called up June 2 as injury replacement for Cho Yu-min. Predicted XI vs Czechia (3-4-2-1): Kim Seung-gyu — Kim Min-jae · Lee Han-beom · Lee Ki-hyuk — Seol Young-woo · Lee Tae-seok · Hwang In-beom · Paik Seung-ho — Lee Kang-in · Lee Jae-sung — Son Heung-min.">* 조위제는 조유민(부상)의 대체 발탁 (6월 2일). 체코전 예상 라인업(3-4-2-1): 김승규 — 김민재 · 이한범 · 이기혁 — 설영우 · 이태석 · 황인범 · 백승호 — 이강인 · 이재성 — 손흥민.</p>
+</section>
+
+<section id="facts">
+  <div class="sec-head"><h2 data-ko="대표팀 한눈에" data-en="Team at a Glance">대표팀 한눈에</h2><span class="en-sub">Key Facts</span></div>
+  <div class="facts">
+    <div class="fact"><div class="v">12th</div><div class="k" data-ko="월드컵 본선 진출 (11회 연속)" data-en="World Cup appearance (11th in a row)">월드컵 본선 진출 (11회 연속)</div></div>
+    <div class="fact"><div class="v">22</div><div class="k" data-ko="FIFA 랭킹" data-en="FIFA Ranking">FIFA 랭킹</div></div>
+    <div class="fact"><div class="v" data-ko="무패" data-en="Unbeaten">무패</div><div class="k" data-ko="아시아 예선 유일 무패 통과" data-en="Only Asian side unbeaten in qualifying">아시아 예선 유일 무패 통과</div></div>
+    <div class="fact"><div class="v">4th</div><div class="k" data-ko="역대 최고 성적 (2002 한일)" data-en="Best finish (2002, on home soil)">역대 최고 성적 (2002 한일)</div></div>
+    <div class="fact"><div class="v" data-ko="홍명보" data-en="Hong M.B.">홍명보</div><div class="k" data-ko="감독" data-en="Head Coach">감독</div></div>
+  </div>
+</section>
+
+<section id="path">
+  <div class="sec-head"><h2 data-ko="토너먼트 일정" data-en="Tournament Timeline">토너먼트 일정</h2><span class="en-sub">Road to the Final</span></div>
+  <table>
+    <thead><tr><th style="text-align:left" data-ko="라운드" data-en="Round">라운드</th><th data-ko="기간" data-en="Dates">기간</th></tr></thead>
+    <tbody>
+      <tr><td class="team" data-ko="조별리그" data-en="Group Stage">조별리그</td><td>6.11 – 6.27</td></tr>
+      <tr><td class="team" data-ko="32강" data-en="Round of 32">32강</td><td>6.28 – 7.3</td></tr>
+      <tr><td class="team" data-ko="16강" data-en="Round of 16">16강</td><td>7.4 – 7.7</td></tr>
+      <tr><td class="team" data-ko="8강" data-en="Quarter-finals">8강</td><td>7.9 – 7.11</td></tr>
+      <tr><td class="team" data-ko="4강" data-en="Semi-finals">4강</td><td>7.14 – 7.15</td></tr>
+      <tr class="kor"><td class="team" data-ko="결승 (메트라이프 스타디움, 뉴저지)" data-en="Final (MetLife Stadium, NJ)">결승 (메트라이프 스타디움, 뉴저지)</td><td>7.19</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <div data-ko="데이터 기준: 2026년 6월 11일 · 경기 결과는 공식 FIFA 발표를 확인하세요." data-en="Data as of June 11, 2026 · Check official FIFA sources for live results.">데이터 기준: 2026년 6월 11일 · 경기 결과는 공식 FIFA 발표를 확인하세요.</div>
+  <div style="margin-top:8px">Made by SunnyApps. All rights reserved.</div>
+</footer>
+
+<script>
+/* ---------- theme ---------- */
+const root=document.documentElement, themeBtn=document.getElementById('themeBtn');
+function setTheme(t){root.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('wc-theme',t)}catch(e){}}
+let savedT=null;try{savedT=localStorage.getItem('wc-theme')}catch(e){}
+setTheme(savedT||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+themeBtn.onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+
+/* ---------- language ---------- */
+const langBtn=document.getElementById('langBtn');
+let lang='ko';try{lang=localStorage.getItem('wc-lang')||'ko'}catch(e){}
+function applyLang(){
+  document.querySelectorAll('[data-ko]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.ko});
+  langBtn.textContent=lang==='ko'?'EN':'한국어';
+  document.documentElement.lang=lang;
+  renderFixtures();updateTicketMeta();
+}
+langBtn.onclick=()=>{lang=lang==='ko'?'en':'ko';try{localStorage.setItem('wc-lang',lang)}catch(e){};applyLang()};
+
+/* ---------- fixtures data (UTC kickoffs) ---------- */
+const FX=[
+ {opp:{ko:'체코',en:'Czechia'},flag:'🇨🇿',utc:'2026-06-12T02:00:00Z',venue:{ko:'에스타디오 아크론, 과달라하라 (멕시코)',en:'Estadio Akron, Guadalajara (MEX)'},md:1},
+ {opp:{ko:'멕시코',en:'Mexico'},flag:'🇲🇽',utc:'2026-06-19T01:00:00Z',venue:{ko:'에스타디오 아크론, 과달라하라 (멕시코)',en:'Estadio Akron, Guadalajara (MEX)'},md:2},
+ {opp:{ko:'남아공',en:'South Africa'},flag:'🇿🇦',utc:'2026-06-25T01:00:00Z',venue:{ko:'에스타디오 BBVA, 몬테레이 (멕시코)',en:'Estadio BBVA, Monterrey (MEX)'},md:3}
+];
+function fmt(d,tz){return new Intl.DateTimeFormat(lang==='ko'?'ko-KR':'en-AU',{timeZone:tz,month:'numeric',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(d)}
+function nextFx(){const now=Date.now();return FX.find(f=>new Date(f.utc).getTime()+125*60000>now)||null}
+
+function renderFixtures(){
+  const list=document.getElementById('fxList');list.innerHTML='';
+  const nx=nextFx();
+  FX.forEach(f=>{
+    const d=new Date(f.utc);
+    const isNext=nx&&nx.md===f.md;
+    const el=document.createElement('div');
+    el.className='fx'+(isNext?' next':'');
+    el.innerHTML=`<div class="md"><div class="m">${lang==='ko'?'경기':'MD'} ${f.md}</div><div class="d display">${d.getUTCDate()===12&&f.md===1?'6.11':'6.'+(f.md===2?'18':'24')}</div></div>
+    <div><div class="opp">🇰🇷 ${lang==='ko'?'대한민국':'Korea'} vs ${f.flag} ${f.opp[lang]}</div>
+    <div class="venue">${f.venue[lang]}</div>
+    <div class="times mono">KST ${fmt(d,'Asia/Seoul')} · ${lang==='ko'?'시드니':'SYD'} ${fmt(d,'Australia/Sydney')}</div></div>
+    <div class="tagcol">${isNext?`<span class="tag">${lang==='ko'?'다음 경기':'Next'}</span>`:''}</div>`;
+    list.appendChild(el);
+  });
+}
+
+/* ---------- ticket + countdown ---------- */
+function updateTicketMeta(){
+  const nx=nextFx();
+  const meta=document.getElementById('vsMeta'),note=document.getElementById('liveNote');
+  if(!nx){meta.textContent=lang==='ko'?'조별리그 일정 종료':'Group stage complete';return}
+  document.getElementById('oppName').textContent=nx.opp[lang];
+  document.getElementById('oppFlag').textContent=nx.flag;
+  const d=new Date(nx.utc);
+  meta.textContent=`${nx.venue[lang]} · KST ${fmt(d,'Asia/Seoul')} · ${lang==='ko'?'시드니':'SYD'} ${fmt(d,'Australia/Sydney')}`;
+  note.textContent='';
+}
+function tick(){
+  const nx=nextFx();if(!nx)return;
+  const diff=new Date(nx.utc).getTime()-Date.now();
+  const note=document.getElementById('liveNote');
+  if(diff<=0){
+    ['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='00');
+    note.textContent=lang==='ko'?'🔴 경기 진행 중! 대한민국 파이팅!':'🔴 Match in progress! Daehanminguk!';
+    return;
+  }
+  const s=Math.floor(diff/1000);
+  document.getElementById('cd-d').textContent=String(Math.floor(s/86400)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor(s%86400/3600)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s%60).padStart(2,'0');
+}
+applyLang();tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
