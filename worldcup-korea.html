@@ -97,6 +97,8 @@ tr.kor td.team{color:var(--red)}
 /* key players */
 .keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .kp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.kp .photo{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--red);margin-bottom:12px;background:var(--line)}
+.kp:nth-child(even) .photo{border-color:var(--blue)}
 .kp::after{content:attr(data-no);position:absolute;right:8px;top:-14px;font-family:'Anton',sans-serif;font-size:5rem;color:var(--line);z-index:0}
 .kp>*{position:relative;z-index:1}
 .kp .nm{font-weight:900;font-size:1.1rem}
@@ -186,11 +188,12 @@ footer{margin-top:56px;padding:26px 18px;text-align:center;border-top:1px solid 
 <section id="keyplayers">
   <div class="sec-head"><h2 data-ko="핵심 선수" data-en="Key Players">핵심 선수</h2><span class="en-sub">Stars to Watch</span></div>
   <div class="keys">
-    <div class="kp" data-no="7"><div class="nm" data-ko="손흥민 (C)" data-en="Son Heung-min (C)">손흥민 (C)</div><div class="cl">FW · LAFC</div><p data-ko="주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다." data-en="Captain and 'the heart' of the team, per coach Hong. His fourth — and likely final — World Cup, urging teammates to fear no one.">주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다.</p></div>
-    <div class="kp" data-no="4"><div class="nm" data-ko="김민재" data-en="Kim Min-jae">김민재</div><div class="cl" data-ko="DF · 바이에른 뮌헨" data-en="DF · Bayern Munich">DF · 바이에른 뮌헨</div><p data-ko="수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다." data-en="The defensive anchor and starting point of Korea's build-up play. A world-class centre-back.">수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다.</p></div>
-    <div class="kp" data-no="10"><div class="nm" data-ko="이강인" data-en="Lee Kang-in">이강인</div><div class="cl">MF · PSG</div><p data-ko="플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다." data-en="The playmaker — Korea's present and future, responsible for creative attacking play.">플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다.</p></div>
-    <div class="kp" data-no="11"><div class="nm" data-ko="황희찬" data-en="Hwang Hee-chan">황희찬</div><div class="cl" data-ko="MF · 울버햄튼" data-en="MF · Wolves">MF · 울버햄튼</div><p data-ko="폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다." data-en="Explosive pace and runs in behind — the other key axis of Korea's attack.">폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다.</p></div>
+    <div class="kp" data-no="7"><img class="photo" loading="lazy" alt="손흥민 Son Heung-min" src="https://commons.wikimedia.org/wiki/Special:FilePath/BFA%202023%20-2%20Heung-Min%20Son%20(cropped).jpg?width=480"><div class="nm" data-ko="손흥민 (C)" data-en="Son Heung-min (C)">손흥민 (C)</div><div class="cl">FW · LAFC</div><p data-ko="주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다." data-en="Captain and 'the heart' of the team, per coach Hong. His fourth — and likely final — World Cup, urging teammates to fear no one.">주장이자 팀의 심장. 4번째 월드컵이자 사실상 마지막 무대 — 강팀을 두려워하지 말자고 동료들을 독려하고 있습니다.</p></div>
+    <div class="kp" data-no="4"><img class="photo" loading="lazy" alt="김민재 Kim Min-jae" src="https://commons.wikimedia.org/wiki/Special:FilePath/FC%20Red%20Bull%20Salzburg%20gegen%20Bayern%20M%C3%BCnchen%20(2025-01-06%20Testspiel)%2026.jpg?width=480"><div class="nm" data-ko="김민재" data-en="Kim Min-jae">김민재</div><div class="cl" data-ko="DF · 바이에른 뮌헨" data-en="DF · Bayern Munich">DF · 바이에른 뮌헨</div><p data-ko="수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다." data-en="The defensive anchor and starting point of Korea's build-up play. A world-class centre-back.">수비의 핵심이자 후방 빌드업의 시작점. 세계 정상급 센터백입니다.</p></div>
+    <div class="kp" data-no="10"><img class="photo" loading="lazy" alt="이강인 Lee Kang-in" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lee%20Kang-in%20-%202022%20(52551771501)%20(cropped).jpg?width=480"><div class="nm" data-ko="이강인" data-en="Lee Kang-in">이강인</div><div class="cl">MF · PSG</div><p data-ko="플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다." data-en="The playmaker — Korea's present and future, responsible for creative attacking play.">플레이메이커. 대표팀의 현재이자 미래로, 창의적인 공격 전개를 책임집니다.</p></div>
+    <div class="kp" data-no="11"><img class="photo" loading="lazy" alt="황희찬 Hwang Hee-chan" src="https://commons.wikimedia.org/wiki/Special:FilePath/240622%20%ED%99%A9%ED%9D%AC%EC%B0%AC%20%ED%92%8B%EB%B3%BC%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C.jpg?width=480"><div class="nm" data-ko="황희찬" data-en="Hwang Hee-chan">황희찬</div><div class="cl" data-ko="MF · 울버햄튼" data-en="MF · Wolves">MF · 울버햄튼</div><p data-ko="폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다." data-en="Explosive pace and runs in behind — the other key axis of Korea's attack.">폭발적인 스피드와 침투. 공격의 또 다른 핵심축입니다.</p></div>
   </div>
+  <p class="note" data-ko="선수 사진: Wikimedia Commons (CC 라이선스)" data-en="Player photos: Wikimedia Commons (CC licensed)">선수 사진: Wikimedia Commons (CC 라이선스)</p>
 </section>
 
 <section id="squad">
