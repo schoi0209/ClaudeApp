@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML 슬라이드 편집기 · SunnyApps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ECEAE3; --panel:#FBFAF7; --panel-2:#FFFFFF; --line:#E4E0D6;
+    --ink:#1B1A17; --muted:#6E6A60; --accent:#B07A1E; --accent-ink:#fff;
+    --hover:#F1EEE6; --danger:#B23B3B; --shadow:0 1px 2px rgba(20,18,14,.06),0 8px 30px rgba(20,18,14,.08);
+  }
+  [data-theme="dark"]{
+    --bg:#100F14; --panel:#1A1920; --panel-2:#232229; --line:#2C2B34;
+    --ink:#ECEAE3; --muted:#928D84; --accent:#E0A93C; --accent-ink:#1B1A17;
+    --hover:#26252E; --danger:#E07070; --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 40px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    display:flex; flex-direction:column; height:100vh; overflow:hidden;
+    transition:background .25s ease, color .25s ease;
+  }
+  button{font-family:inherit}
+  .ff-grotesk{font-family:"Space Grotesk",Inter,sans-serif}
+
+  /* ---------- Top bar ---------- */
+  header{
+    display:flex; align-items:center; gap:14px; padding:10px 16px;
+    background:var(--panel); border-bottom:1px solid var(--line); flex:0 0 auto; z-index:30;
+  }
+  .brand{display:flex; align-items:center; gap:10px; margin-right:4px}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--accent);
+    display:grid;place-items:center;color:var(--accent-ink);font-weight:700;font-family:"Space Grotesk";font-size:15px}
+  .brand .t{line-height:1.1}
+  .brand .t b{font-family:"Space Grotesk";font-size:15px;font-weight:600;letter-spacing:-.2px}
+  .brand .t span{display:block;font-size:11px;color:var(--muted);letter-spacing:.5px}
+  .spacer{flex:1}
+  .grp{display:flex; align-items:center; gap:8px}
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);
+    background:var(--panel-2);color:var(--ink);border-radius:10px;padding:8px 13px;
+    font-size:13px;font-weight:500;cursor:pointer;transition:.15s; white-space:nowrap;
+  }
+  .btn:hover{background:var(--hover)}
+  .btn svg{width:15px;height:15px}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+  .btn.primary:hover{filter:brightness(1.06)}
+  .btn.icon{padding:8px;width:38px;justify-content:center}
+  .btn.bmac{background:#FFDD00;border-color:#FFDD00;color:#1a1a1a;font-weight:600}
+  .btn.bmac:hover{filter:brightness(.97)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  /* ---------- Workspace ---------- */
+  main{flex:1;display:flex;min-height:0}
+  aside{
+    width:212px;flex:0 0 212px;background:var(--panel);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;min-height:0;
+  }
+  .aside-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .aside-head .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .mini{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;width:28px;height:28px;
+    display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+  .mini:hover{background:var(--hover)}
+  .thumbs{overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .thumb{position:relative;border:2px solid var(--line);border-radius:9px;background:#fff;overflow:hidden;cursor:pointer;
+    aspect-ratio:16/9;transition:.15s}
+  .thumb:hover{border-color:var(--muted)}
+  .thumb.active{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+  .thumb .num{position:absolute;top:5px;left:6px;font-size:10px;font-weight:700;background:rgba(0,0,0,.55);color:#fff;
+    border-radius:5px;padding:1px 6px;z-index:2;font-family:"Space Grotesk"}
+  .thumb iframe{width:1280px;height:720px;border:0;transform-origin:top left;pointer-events:none;background:#fff}
+  .thumb .tools{position:absolute;bottom:5px;right:5px;display:flex;gap:4px;opacity:0;transition:.15s;z-index:2}
+  .thumb:hover .tools{opacity:1}
+  .thumb .tools button{border:0;background:rgba(0,0,0,.6);color:#fff;width:22px;height:22px;border-radius:6px;
+    cursor:pointer;font-size:12px;display:grid;place-items:center}
+  .thumb .tools button:hover{background:var(--accent);color:var(--accent-ink)}
+
+  /* ---------- Stage ---------- */
+  .stage{flex:1;display:flex;flex-direction:column;min-width:0;position:relative}
+  .canvas-wrap{flex:1;display:grid;place-items:center;padding:28px;min-height:0;overflow:hidden}
+  .canvas-frame{position:relative;background:#fff;box-shadow:var(--shadow);border-radius:4px}
+  .canvas{width:1280px;height:720px;transform-origin:top left;overflow:hidden}
+  .canvas iframe{width:1280px;height:720px;border:0;display:block;background:#fff}
+  .stage-bar{flex:0 0 auto;display:flex;align-items:center;gap:10px;justify-content:center;
+    padding:10px 16px;background:var(--panel);border-top:1px solid var(--line)}
+  .stage-bar .pg{font-size:13px;color:var(--muted);min-width:64px;text-align:center;font-family:"Space Grotesk"}
+  .nav-btn{border:1px solid var(--line);background:var(--panel-2);border-radius:9px;width:34px;height:34px;
+    cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+  .nav-btn:hover{background:var(--hover)}
+
+  /* ---------- Empty state ---------- */
+  .empty{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center}
+  .empty .card{max-width:520px}
+  .empty .ic{width:64px;height:64px;border-radius:18px;background:color-mix(in srgb,var(--accent) 16%,var(--panel));
+    display:grid;place-items:center;margin:0 auto 20px;color:var(--accent)}
+  .empty h2{font-family:"Space Grotesk";font-size:26px;margin:0 0 10px;letter-spacing:-.4px}
+  .empty p{color:var(--muted);font-size:15px;line-height:1.65;margin:0 0 22px}
+  .empty .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .steps{display:flex;gap:0;justify-content:center;margin:26px auto 0;max-width:520px;text-align:left}
+  .steps .s{flex:1;padding:0 14px;position:relative}
+  .steps .s:not(:last-child):after{content:"";position:absolute;right:0;top:14px;bottom:0;width:1px;background:var(--line)}
+  .steps .n{width:26px;height:26px;border-radius:8px;background:var(--accent);color:var(--accent-ink);
+    font-weight:700;display:grid;place-items:center;font-size:13px;margin-bottom:9px;font-family:"Space Grotesk"}
+  .steps .s b{font-size:13px;display:block;margin-bottom:3px}
+  .steps .s span{font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* ---------- Floating text toolbar ---------- */
+  .fmt{position:fixed;z-index:60;display:none;gap:3px;align-items:center;padding:5px;border-radius:11px;
+    background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .fmt.on{display:flex}
+  .fmt button{border:0;background:transparent;color:var(--ink);width:30px;height:30px;border-radius:7px;cursor:pointer;
+    font-size:14px;display:grid;place-items:center}
+  .fmt button:hover{background:var(--hover)}
+  .fmt .sep{width:1px;height:20px;background:var(--line);margin:0 2px}
+  .fmt b{font-weight:800}
+  .fmt i{font-style:italic;font-family:Georgia,serif}
+  .fmt u{text-decoration:underline}
+  .fmt label.color{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;cursor:pointer;position:relative}
+  .fmt label.color:hover{background:var(--hover)}
+  .fmt label.color input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .fmt .swatch{width:16px;height:16px;border-radius:5px;border:1px solid var(--line)}
+
+  /* ---------- Modal ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(10,9,7,.5);backdrop-filter:blur(3px);z-index:80;
+    display:none;align-items:center;justify-content:center;padding:24px}
+  .overlay.on{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:18px;width:min(720px,100%);
+    max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow);overflow:hidden}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .modal-head h3{margin:0;font-family:"Space Grotesk";font-size:18px;letter-spacing:-.3px}
+  .modal-body{padding:22px;overflow-y:auto}
+  .modal-body p.hint{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.6}
+  textarea.code{width:100%;min-height:240px;resize:vertical;border:1px solid var(--line);border-radius:12px;
+    background:var(--panel-2);color:var(--ink);padding:14px;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:12.5px;line-height:1.6;outline:none}
+  textarea.code:focus{border-color:var(--accent)}
+  .modal-foot{display:flex;align-items:center;gap:10px;justify-content:flex-end;padding:16px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .modal-foot .left{margin-right:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .x{border:0;background:transparent;color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:20px}
+  .x:hover{background:var(--hover)}
+
+  /* ---------- Toast ---------- */
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:11px;font-size:13.5px;font-weight:500;
+    z-index:90;transition:.25s;pointer-events:none;box-shadow:var(--shadow)}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ---------- Present mode ---------- */
+  body.presenting header,body.presenting aside,body.presenting .stage-bar{display:none}
+  body.presenting .canvas-wrap{padding:0;background:#08080a}
+  body.presenting{background:#08080a}
+
+  footer{flex:0 0 auto;text-align:center;padding:7px;font-size:11px;color:var(--muted);
+    background:var(--panel);border-top:1px solid var(--line)}
+  body.presenting footer{display:none}
+
+  /* dropdown */
+  .menu-wrap{position:relative}
+  .menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;box-shadow:var(--shadow);padding:6px;display:none;min-width:190px;z-index:40}
+  .menu.on{display:block}
+  .menu button{display:flex;width:100%;align-items:center;gap:9px;background:transparent;border:0;color:var(--ink);
+    padding:9px 11px;border-radius:8px;cursor:pointer;font-size:13px;text-align:left}
+  .menu button:hover{background:var(--hover)}
+
+  @media (max-width:760px){
+    aside{display:none}
+    .brand .t span{display:none}
+    header{gap:8px;padding:9px 10px}
+    .btn span.lbl{display:none}
+    .btn{padding:8px 11px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="dot">S</div>
+    <div class="t"><b>슬라이드 편집기</b><span>Slide Studio · SunnyApps</span></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="grp">
+    <button class="btn primary" id="btnImport">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      <span class="lbl">코드 불러오기</span>
+    </button>
+    <button class="btn" id="btnPresent" disabled>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <span class="lbl">발표</span>
+    </button>
+    <div class="menu-wrap">
+      <button class="btn" id="btnExport" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        <span class="lbl">내보내기</span>
+      </button>
+      <div class="menu" id="exportMenu">
+        <button id="expDownload">⬇️ HTML 파일로 저장</button>
+        <button id="expCopy">📋 코드 복사</button>
+      </div>
+    </div>
+    <a class="btn bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span class="lbl">Buy me a coffee</span></a>
+    <button class="btn icon" id="btnTheme" title="테마 전환">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <aside>
+    <div class="aside-head">
+      <span class="lbl">슬라이드 <span id="slideCount">0</span></span>
+      <button class="mini" id="btnAdd" title="빈 슬라이드 추가">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </aside>
+
+  <section class="stage">
+    <div class="canvas-wrap" id="canvasWrap">
+      <div class="canvas-frame" id="canvasFrame" style="display:none">
+        <div class="canvas" id="canvas">
+          <iframe id="view" title="슬라이드"></iframe>
+        </div>
+      </div>
+
+      <div class="empty" id="empty">
+        <div class="card">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+          </div>
+          <h2>AI가 짠 슬라이드를 여기서 편집하세요</h2>
+          <p>AI에게 “이 기획안을 슬라이드 코드로 짜줘”라고 시킨 뒤,<br>나온 코드를 붙여넣으면 파워포인트처럼 글자와 이미지를 바로 고칠 수 있어요.</p>
+          <div class="row">
+            <button class="btn primary" id="emptyImport">코드 붙여넣기</button>
+            <button class="btn" id="emptySample">샘플 먼저 보기</button>
+            <button class="btn" id="emptyPrompt">📋 AI 프롬프트 복사</button>
+          </div>
+          <div class="steps">
+            <div class="s"><div class="n">1</div><b>AI에게 요청</b><span>프롬프트 복사 → 기획안 붙여넣고 코드 받기</span></div>
+            <div class="s"><div class="n">2</div><b>코드 붙여넣기</b><span>받은 HTML을 편집기에 그대로 붙여넣기</span></div>
+            <div class="s"><div class="n">3</div><b>직접 편집</b><span>글자 클릭해 수정, 이미지 클릭해 교체</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-bar" id="stageBar" style="display:none">
+      <button class="nav-btn" id="prev" title="이전 (←)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="pg" id="pgInd">1 / 1</span>
+      <button class="nav-btn" id="next" title="다음 (→)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button class="btn" id="btnRaw" style="margin-left:14px">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+        <span class="lbl">HTML 직접 편집</span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+
+<!-- floating text format toolbar -->
+<div class="fmt" id="fmt">
+  <button data-cmd="bold" title="굵게"><b>B</b></button>
+  <button data-cmd="italic" title="기울임"><i>I</i></button>
+  <button data-cmd="underline" title="밑줄"><u>U</u></button>
+  <span class="sep"></span>
+  <button data-cmd="smaller" title="글자 작게">A−</button>
+  <button data-cmd="bigger" title="글자 크게">A＋</button>
+  <span class="sep"></span>
+  <label class="color" title="글자 색"><span class="swatch" id="swatch" style="background:#B07A1E"></span><input type="color" id="colorPick" value="#B07A1E"></label>
+</div>
+
+<!-- import modal -->
+<div class="overlay" id="importOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>슬라이드 코드 불러오기</h3><button class="x" data-close>×</button></div>
+    <div class="modal-body">
+      <p class="hint">AI가 만든 HTML 슬라이드 코드를 아래에 붙여넣으세요. 각 슬라이드를 <code>&lt;section class="slide"&gt;</code>로 감싸는 형식을 권장합니다. <code>&lt;style&gt;</code> 블록과 <code>&lt;img&gt;</code>도 그대로 인식합니다.</p>
+      <textarea class="code" id="codeInput" placeholder="여기에 AI가 만든 슬라이드 HTML 코드를 붙여넣으세요..."></textarea>
+    </div>
+    <div class="modal-foot">
+      <div class="left">
+        <button class="btn" id="loadSample">샘플 코드 넣기</button>
+        <button class="btn" id="copyPrompt">📋 AI 프롬프트 복사</button>
+      </div>
+      <button class="btn" data-close>취소</button>
+      <button class="btn primary" id="loadCode">불러오기</button>
+    </div>
+  </div>
+</div>
+
+<!-- raw edit modal -->
+<div class="overlay" id="rawOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>이 슬라이드 HTML 직접 편집</h3><button class="x" data-close>×</button></div>
+    <div class="modal-body">
+      <p class="hint">현재 슬라이드의 HTML입니다. 수정 후 “적용”을 누르면 바로 반영됩니다.</p>
+      <textarea class="code" id="rawInput"></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close>취소</button>
+      <button class="btn primary" id="rawApply">적용</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   HTML 슬라이드 편집기 — 핵심 로직
+   각 슬라이드는 격리된 iframe에 렌더링되어, AI가 작성한 CSS가
+   에디터 UI에 영향을 주지 않습니다.
+============================================================ */
+
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+
+const state = { slides:[], sharedCSS:"", current:0, fit:1, presenting:false };
+let activeEditable = null, saveTimer = null, activeCdoc = null;
+
+/* 슬라이드 iframe에 주입되는 기본 스타일 (AI의 .slide CSS가 우선됨) */
+const BASE_CSS = `
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{width:1280px;height:720px;overflow:hidden;background:#fff;font-family:Inter,system-ui,sans-serif;color:#111}
+body>*{width:1280px;height:720px;overflow:hidden}
+[data-eh]{outline:2px dashed #B07A1E !important;outline-offset:2px;cursor:text}
+img[data-eh]{outline:2px dashed #1F9C8B !important;cursor:pointer}
+.is-editing{outline:2px solid #B07A1E !important;outline-offset:2px}
+`;
+const FONT_LINK = '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">';
+
+const TXT = new Set(['H1','H2','H3','H4','H5','H6','P','SPAN','LI','A','BUTTON','TD','TH','BLOCKQUOTE','FIGCAPTION','STRONG','EM','SMALL','LABEL','DT','DD','DIV']);
+function pickOK(el){
+  if(!el || el.nodeType!==1) return false;
+  if(!TXT.has(el.tagName)) return false;
+  if(el.querySelector('h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,section,img,table,figure')) return false;
+  return el.textContent.trim().length>0 || el.children.length===0;
+}
+
+/* ---------- 코드 파싱 ---------- */
+function parseDeck(raw){
+  const doc = new DOMParser().parseFromString(raw, 'text/html');
+  doc.querySelectorAll('script').forEach(s=>s.remove());   // 안전: 스크립트 제거
+  let css = "";
+  doc.querySelectorAll('style').forEach(s=>{ css += s.textContent + "\n"; });
+
+  let els = [...doc.querySelectorAll('.slide, section.slide, [data-slide]')];
+  if(!els.length) els = [...doc.querySelectorAll('body > section')];
+  if(!els.length) els = [...doc.querySelectorAll('section')];
+  if(!els.length) els = [...doc.querySelectorAll('body > div')];
+  if(!els.length && doc.body && doc.body.children.length) els = [...doc.body.children];
+  if(!els.length && doc.body && doc.body.textContent.trim())
+    els = [Object.assign(doc.createElement('section'),{className:'slide',innerHTML:doc.body.innerHTML})];
+
+  const slides = els.map(e=>({ id:uid(), html:e.outerHTML }));
+  return { slides, css };
+}
+function uid(){ return 'sl'+Math.random().toString(36).slice(2,9); }
+
+/* ---------- 렌더 ---------- */
+function slideDoc(html, forThumb){
+  return '<!doctype html><html><head><meta charset="utf-8">'+FONT_LINK+
+         '<style>'+BASE_CSS+state.sharedCSS+'</style></head><body>'+html+'</body></html>';
+}
+
+function renderActive(){
+  const slide = state.slides[state.current];
+  if(!slide) return;
+  const view = $('#view');
+  view.onload = ()=>{ activeCdoc = view.contentDocument; if(!state.presenting) attachEditing(activeCdoc); };
+  view.srcdoc = slideDoc(slide.html, false);
+  $('#pgInd').textContent = (state.current+1)+' / '+state.slides.length;
+  $$('.thumb').forEach((t,i)=>t.classList.toggle('active', i===state.current));
+}
+
+function fitCanvas(){
+  const wrap = $('#canvasWrap');
+  const pad = state.presenting ? 0 : 56;
+  const w = wrap.clientWidth - pad, h = wrap.clientHeight - pad;
+  const f = Math.max(.05, Math.min(w/1280, h/720));
+  state.fit = f;
+  $('#canvas').style.transform = 'scale('+f+')';
+  const frame = $('#canvasFrame');
+  frame.style.width = (1280*f)+'px';
+  frame.style.height = (720*f)+'px';
+}
+
+/* ---------- 썸네일 ---------- */
+function buildThumbs(){
+  const box = $('#thumbs'); box.innerHTML = '';
+  state.slides.forEach((s,i)=>{
+    const t = document.createElement('div');
+    t.className = 'thumb'+(i===state.current?' active':'');
+    t.innerHTML = '<span class="num">'+(i+1)+'</span>'+
+      '<iframe sandbox="allow-same-origin" tabindex="-1"></iframe>'+
+      '<div class="tools">'+
+        '<button data-act="dup" title="복제">⧉</button>'+
+        '<button data-act="up" title="위로">↑</button>'+
+        '<button data-act="down" title="아래로">↓</button>'+
+        '<button data-act="del" title="삭제">🗑</button>'+
+      '</div>';
+    const fr = t.querySelector('iframe');
+    fr.srcdoc = slideDoc(s.html, true);
+    requestAnimationFrame(()=>{ const sc = t.clientWidth/1280; fr.style.transform='scale('+sc+')'; });
+    t.addEventListener('click', e=>{
+      if(e.target.closest('.tools')) return;
+      go(i);
+    });
+    t.querySelectorAll('.tools button').forEach(b=>{
+      b.addEventListener('click', e=>{ e.stopPropagation(); slideOp(b.dataset.act, i); });
+    });
+    box.appendChild(t);
+  });
+  $('#slideCount').textContent = state.slides.length;
+}
+function refreshThumb(i){
+  const t = $$('.thumb')[i]; if(!t) return;
+  const fr = t.querySelector('iframe');
+  fr.srcdoc = slideDoc(state.slides[i].html, true);
+  requestAnimationFrame(()=>{ fr.style.transform='scale('+(t.clientWidth/1280)+')'; });
+}
+
+/* ---------- 슬라이드 조작 ---------- */
+function slideOp(act, i){
+  commitEdit();
+  if(act==='del'){
+    if(state.slides.length<=1){ toast('마지막 슬라이드는 삭제할 수 없어요'); return; }
+    state.slides.splice(i,1);
+    if(state.current>=state.slides.length) state.current=state.slides.length-1;
+  } else if(act==='dup'){
+    state.slides.splice(i+1,0,{id:uid(), html:state.slides[i].html});
+    state.current=i+1;
+  } else if(act==='up' && i>0){
+    [state.slides[i-1],state.slides[i]]=[state.slides[i],state.slides[i-1]]; state.current=i-1;
+  } else if(act==='down' && i<state.slides.length-1){
+    [state.slides[i+1],state.slides[i]]=[state.slides[i],state.slides[i+1]]; state.current=i+1;
+  } else return;
+  buildThumbs(); renderActive();
+}
+function addBlank(){
+  commitEdit();
+  const html = '<section class="slide" style="display:flex;flex-direction:column;justify-content:center;padding:80px;font-family:Inter,sans-serif"><h1 style="font-size:60px;margin:0 0 14px">제목을 입력하세요</h1><p style="font-size:24px;color:#666;margin:0">내용을 입력하세요</p></section>';
+  state.slides.splice(state.current+1,0,{id:uid(),html});
+  state.current++; buildThumbs(); renderActive();
+}
+function go(i){
+  commitEdit();
+  state.current = Math.max(0, Math.min(i, state.slides.length-1));
+  renderActive();
+  $$('.thumb').forEach((t,k)=>t.classList.toggle('active',k===state.current));
+}
+
+/* ---------- 인라인 편집 ---------- */
+function attachEditing(cdoc){
+  let hover=null;
+  cdoc.addEventListener('mousemove', e=>{
+    if(activeEditable) return;
+    const img = e.target.closest && e.target.closest('img');
+    const cand = img || (pickOK(e.target)?e.target:null);
+    if(hover && hover!==cand) hover.removeAttribute('data-eh');
+    if(cand && cand!==hover){ cand.setAttribute('data-eh',''); hover=cand; }
+    if(!cand) hover=null;
+  });
+  cdoc.addEventListener('mouseleave', ()=>{ if(hover){hover.removeAttribute('data-eh');hover=null;} });
+  cdoc.addEventListener('mousedown', e=>{
+    if(e.target.closest && e.target.closest('img')) return;          // 이미지는 click에서 처리
+    const el = pickOK(e.target)? e.target : null;
+    if(el){
+      if(activeEditable && activeEditable!==el) commitEdit();
+      if(activeEditable!==el){
+        if(hover) hover.removeAttribute('data-eh');
+        el.contentEditable='true'; el.classList.add('is-editing'); activeEditable=el;
+        setTimeout(()=>{ el.focus(); showFmt(el); },0);
+      }
+    } else { commitEdit(); }
+  });
+  cdoc.addEventListener('click', e=>{
+    const img = e.target.closest && e.target.closest('img');
+    if(img) replaceImage(img);
+  });
+  cdoc.addEventListener('input', ()=>{ scheduleSave(); if(activeEditable) positionFmt(activeEditable); });
+  cdoc.addEventListener('keydown', e=>{ if(e.key==='Escape'){ commitEdit(); } });
+  cdoc.addEventListener('scroll', ()=>{ if(activeEditable) positionFmt(activeEditable); });
+}
+
+function scheduleSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(saveCurrent, 250); }
+function saveCurrent(){
+  if(!activeCdoc) return;
+  const clone = activeCdoc.body.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(e=>e.removeAttribute('contenteditable'));
+  clone.querySelectorAll('[data-eh]').forEach(e=>e.removeAttribute('data-eh'));
+  clone.querySelectorAll('.is-editing').forEach(e=>e.classList.remove('is-editing'));
+  state.slides[state.current].html = clone.innerHTML.trim();
+}
+function commitEdit(){
+  clearTimeout(saveTimer);
+  if(activeEditable){
+    activeEditable.contentEditable='false';
+    activeEditable.classList.remove('is-editing');
+    activeEditable=null;
+  }
+  hideFmt();
+  if(activeCdoc){ saveCurrent(); refreshThumb(state.current); }
+}
+
+function replaceImage(img){
+  const inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*';
+  inp.onchange = ()=>{
+    const f = inp.files[0]; if(!f) return;
+    const r = new FileReader();
+    r.onload = ()=>{ img.src = r.result; img.removeAttribute('srcset'); scheduleSave(); setTimeout(()=>refreshThumb(state.current),100); toast('이미지를 교체했어요'); };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+/* ---------- 포맷 툴바 ---------- */
+const fmt = $('#fmt');
+function showFmt(el){ fmt.classList.add('on'); positionFmt(el); }
+function hideFmt(){ fmt.classList.remove('on'); }
+function positionFmt(el){
+  const view = $('#view'); const ir = view.getBoundingClientRect();
+  const er = el.getBoundingClientRect();
+  let x = ir.left + er.left*state.fit;
+  let y = ir.top + er.top*state.fit - fmt.offsetHeight - 9;
+  if(y < 8) y = ir.top + er.bottom*state.fit + 9;
+  x = Math.max(8, Math.min(x, innerWidth - fmt.offsetWidth - 8));
+  fmt.style.left = x+'px'; fmt.style.top = y+'px';
+}
+fmt.querySelectorAll('button[data-cmd]').forEach(b=>{
+  b.addEventListener('mousedown', e=>e.preventDefault());
+  b.addEventListener('click', ()=>{
+    const cmd=b.dataset.cmd; if(!activeEditable||!activeCdoc) return;
+    if(cmd==='bold'||cmd==='italic'||cmd==='underline'){ activeCdoc.execCommand(cmd,false,null); }
+    else if(cmd==='bigger'||cmd==='smaller'){
+      const cur = parseFloat(getComputedStyle(activeEditable).fontSize)||40;
+      activeEditable.style.fontSize = Math.max(8, cur*(cmd==='bigger'?1.12:0.9)).toFixed(1)+'px';
+    }
+    activeEditable.focus(); scheduleSave();
+  });
+});
+$('#colorPick').addEventListener('mousedown', e=>e.stopPropagation());
+$('#colorPick').addEventListener('input', e=>{
+  const v=e.target.value; $('#swatch').style.background=v;
+  if(!activeEditable||!activeCdoc) return;
+  const sel = activeCdoc.getSelection();
+  if(sel && !sel.isCollapsed){ activeCdoc.execCommand('foreColor',false,v); }
+  else { activeEditable.style.color=v; }
+  scheduleSave();
+});
+
+/* ---------- 발표 모드 ---------- */
+function enterPresent(){
+  if(!state.slides.length) return;
+  commitEdit();
+  state.presenting=true; document.body.classList.add('presenting');
+  const wrap=$('#canvasWrap');
+  (wrap.requestFullscreen?wrap.requestFullscreen():Promise.resolve()).catch(()=>{});
+  renderActive(); setTimeout(fitCanvas,60);
+}
+function exitPresent(){
+  state.presenting=false; document.body.classList.remove('presenting');
+  if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+  renderActive(); setTimeout(fitCanvas,60);
+}
+document.addEventListener('fullscreenchange', ()=>{ if(!document.fullscreenElement && state.presenting) exitPresent(); });
+
+/* ---------- 내보내기 ---------- */
+function buildExport(){
+  const slidesHTML = state.slides.map(s=>s.html).join('\n');
+  const css = BASE_CSS.replace(/\[data-eh\][^}]*}/g,'').replace(/\.is-editing[^}]*}/g,'') + state.sharedCSS;
+  const RT = [
+   "var S=[].slice.call(document.querySelectorAll('#cv>*')),i=0,cv=document.getElementById('cv');",
+   "function fit(){var f=Math.min(innerWidth/1280,innerHeight/720)*0.94;cv.style.transform='translate(-50%,-50%) scale('+f+')';}",
+   "function show(n){i=Math.max(0,Math.min(n,S.length-1));S.forEach(function(s,k){s.style.display=(k===i)?'':'none';});document.getElementById('ix').textContent=(i+1)+' / '+S.length;}",
+   "addEventListener('resize',fit);fit();show(0);",
+   "document.getElementById('n').onclick=function(){show(i+1)};document.getElementById('p').onclick=function(){show(i-1)};",
+   "document.getElementById('f').onclick=function(){if(!document.fullscreenElement){document.documentElement.requestFullscreen()}else{document.exitFullscreen()}};",
+   "addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'){show(i-1)}});"
+  ].join('\n');
+  return [
+   '<!doctype html><html lang="ko"><head><meta charset="utf-8">',
+   '<meta name="viewport" content="width=device-width,initial-scale=1">',
+   '<title>Presentation · SunnyApps</title>',
+   FONT_LINK,
+   '<style>',
+   'html,body{margin:0;height:100%;background:#0c0c0e;overflow:hidden;font-family:Inter,system-ui,sans-serif}',
+   '#cv{position:fixed;top:50%;left:50%;width:1280px;height:720px;transform:translate(-50%,-50%);background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.6)}',
+   '#cv>*{position:absolute !important;inset:0 !important;width:1280px;height:720px;overflow:hidden}',
+   '#nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;',
+   'color:#fff;background:rgba(18,18,22,.72);backdrop-filter:blur(8px);padding:7px 12px;border-radius:999px;font-size:13px;z-index:9}',
+   '#nav button{background:#2c2c34;color:#fff;border:0;border-radius:8px;padding:6px 11px;cursor:pointer;font-size:13px}',
+   '#nav button:hover{background:#3a3a44}#nav #ix{min-width:54px;text-align:center}',
+   css,
+   '</style></head><body>',
+   '<div id="cv">'+slidesHTML+'</div>',
+   '<div id="nav"><button id="p">‹</button><span id="ix">1 / '+state.slides.length+'</span><button id="n">›</button><button id="f">전체화면</button></div>',
+   '<scr'+'ipt>'+RT+'</scr'+'ipt>',
+   '</body></html>'
+  ].join('\n');
+}
+function download(){
+  const blob = new Blob([buildExport()], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'presentation.html'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  toast('HTML 파일을 저장했어요');
+}
+
+/* ---------- 데이터 로드 ---------- */
+function loadDeck(raw){
+  const {slides, css} = parseDeck(raw);
+  if(!slides.length){ toast('슬라이드를 찾지 못했어요. 코드를 확인해 주세요'); return false; }
+  state.slides = slides; state.sharedCSS = css; state.current = 0;
+  $('#empty').style.display='none';
+  $('#canvasFrame').style.display='';
+  $('#stageBar').style.display='flex';
+  $('#btnPresent').disabled=false; $('#btnExport').disabled=false;
+  buildThumbs(); renderActive(); fitCanvas();
+  toast(slides.length+'개의 슬라이드를 불러왔어요');
+  return true;
+}
+
+/* ---------- 프롬프트 / 샘플 ---------- */
+const AI_PROMPT =
+`다음 내용을 16:9 HTML 프레젠테이션 슬라이드로 만들어줘.
+
+규칙:
+1. 각 슬라이드는 <section class="slide"> ... </section> 로 감쌀 것
+2. 모든 CSS는 하나의 <style> 블록에 작성 (.slide 기준 1280x720px)
+3. <script> 는 넣지 말 것
+4. 텍스트와 <img> 중심으로 구성 (편집기에서 클릭해 직접 수정함)
+5. 전체를 하나의 코드 블록으로 출력
+
+기획안:
+[여기에 기획안 또는 내용을 붙여넣으세요]`;
+
+const SAMPLE =
+`<style>
+.slide{font-family:'Space Grotesk',Inter,sans-serif;background:#0F1117;color:#fff;
+  display:flex;flex-direction:column;justify-content:center;padding:88px}
+.slide .eyebrow{font-size:15px;letter-spacing:4px;text-transform:uppercase;color:#C8A24A;margin-bottom:22px}
+.slide h1{font-size:64px;margin:0 0 16px;font-weight:700;letter-spacing:-1.5px;line-height:1.05}
+.slide .sub{font-size:24px;color:#9AA3B2;line-height:1.5}
+.slide.cover{background:linear-gradient(135deg,#13233F 0%,#0F1117 60%)}
+.slide ul{font-size:27px;line-height:2;color:#DFE4EC;padding-left:26px;margin:8px 0 0}
+.kpi{display:flex;gap:64px;margin-top:18px}
+.kpi .n{font-size:60px;color:#C8A24A;font-weight:700;font-family:'Space Grotesk'}
+.kpi .l{font-size:18px;color:#9AA3B2;margin-top:4px}
+</style>
+<section class="slide cover">
+  <div class="eyebrow">SunnyApps · Proposal</div>
+  <h1>프로젝트 제안서<br>Project Proposal</h1>
+  <div class="sub">AI가 짜준 슬라이드를 여기서 자유롭게 편집하세요</div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Overview · 개요</div>
+  <h1>핵심 요약</h1>
+  <ul>
+    <li>AI에게 기획안을 슬라이드 코드로 변환 요청</li>
+    <li>나온 결과를 편집기에 그대로 붙여넣기</li>
+    <li>글자는 클릭해서, 이미지는 눌러서 교체</li>
+  </ul>
+</section>
+<section class="slide">
+  <div class="eyebrow">Numbers · 지표</div>
+  <h1>한눈에 보는 성과</h1>
+  <div class="kpi">
+    <div><div class="n">14+</div><div class="l">Published Apps</div></div>
+    <div><div class="n">2</div><div class="l">Languages</div></div>
+    <div><div class="n">∞</div><div class="l">Possibilities</div></div>
+  </div>
+</section>`;
+
+function copyText(t, msg){
+  navigator.clipboard.writeText(t).then(()=>toast(msg)).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');ta.remove();toast(msg);
+  });
+}
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),1900);
+}
+
+/* ---------- 테마 ---------- */
+function setTheme(mode){
+  document.documentElement.setAttribute('data-theme',mode);
+  $('#themeIcon').innerHTML = mode==='dark'
+    ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'
+    : '<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>';
+  try{ localStorage.setItem('slideStudioTheme',mode); }catch(e){}
+}
+(function initTheme(){
+  let saved=null; try{ saved=localStorage.getItem('slideStudioTheme'); }catch(e){}
+  if(!saved) saved = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light';
+  setTheme(saved);
+})();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
+  let saved=null; try{ saved=localStorage.getItem('slideStudioTheme'); }catch(_){}
+  if(!saved) setTheme(e.matches?'dark':'light');
+});
+
+/* ---------- 모달 ---------- */
+function openModal(id){ $('#'+id).classList.add('on'); }
+function closeModal(el){ el.classList.remove('on'); }
+$$('[data-close]').forEach(b=>b.addEventListener('click',e=>closeModal(e.target.closest('.overlay'))));
+$$('.overlay').forEach(o=>o.addEventListener('mousedown',e=>{ if(e.target===o) closeModal(o); }));
+
+/* ---------- 이벤트 바인딩 ---------- */
+$('#btnImport').addEventListener('click',()=>openModal('importOverlay'));
+$('#emptyImport').addEventListener('click',()=>openModal('importOverlay'));
+$('#loadSample').addEventListener('click',()=>{ $('#codeInput').value=SAMPLE; });
+$('#emptySample').addEventListener('click',()=>{ loadDeck(SAMPLE); });
+$('#copyPrompt').addEventListener('click',()=>copyText(AI_PROMPT,'AI 프롬프트를 복사했어요'));
+$('#emptyPrompt').addEventListener('click',()=>copyText(AI_PROMPT,'AI 프롬프트를 복사했어요'));
+$('#loadCode').addEventListener('click',()=>{
+  const v=$('#codeInput').value.trim();
+  if(!v){ toast('코드를 붙여넣어 주세요'); return; }
+  if(loadDeck(v)) closeModal($('#importOverlay'));
+});
+$('#btnAdd').addEventListener('click',addBlank);
+$('#prev').addEventListener('click',()=>go(state.current-1));
+$('#next').addEventListener('click',()=>go(state.current+1));
+$('#btnPresent').addEventListener('click',enterPresent);
+$('#btnTheme').addEventListener('click',()=>{
+  setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+
+/* export menu */
+$('#btnExport').addEventListener('click',e=>{ e.stopPropagation(); $('#exportMenu').classList.toggle('on'); });
+document.addEventListener('click',()=>$('#exportMenu').classList.remove('on'));
+$('#exportMenu').addEventListener('click',e=>e.stopPropagation());
+$('#expDownload').addEventListener('click',()=>{ download(); $('#exportMenu').classList.remove('on'); });
+$('#expCopy').addEventListener('click',()=>{ copyText(buildExport(),'전체 코드를 복사했어요'); $('#exportMenu').classList.remove('on'); });
+
+/* raw edit */
+$('#btnRaw').addEventListener('click',()=>{
+  commitEdit();
+  $('#rawInput').value = state.slides[state.current].html;
+  openModal('rawOverlay');
+});
+$('#rawApply').addEventListener('click',()=>{
+  state.slides[state.current].html = $('#rawInput').value;
+  renderActive(); refreshThumb(state.current); closeModal($('#rawOverlay'));
+  toast('슬라이드를 업데이트했어요');
+});
+
+/* 전역 키보드 */
+document.addEventListener('keydown',e=>{
+  if(activeEditable) return;                       // 편집 중엔 비활성
+  if($$('.overlay.on').length) return;             // 모달 열려있으면 비활성
+  if(e.key==='ArrowRight') go(state.current+1);
+  else if(e.key==='ArrowLeft') go(state.current-1);
+  else if(e.key==='Escape' && state.presenting) exitPresent();
+});
+
+/* 캔버스 밖 클릭 → 편집 종료 */
+$('#canvasWrap').addEventListener('mousedown',e=>{
+  if(e.target===$('#canvasWrap')) commitEdit();
+});
+
+window.addEventListener('resize',()=>{ fitCanvas(); if(activeEditable) positionFmt(activeEditable); });
+</script>
+</body>
+</html>
