@@ -189,24 +189,27 @@
   <div class="grp">
     <button class="btn primary" id="btnImport">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      <span class="lbl">코드 불러오기</span>
+      <span class="lbl" data-i18n="importCode">코드 불러오기</span>
     </button>
     <button class="btn" id="btnPresent" disabled>
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <span class="lbl">발표</span>
+      <span class="lbl" data-i18n="present">발표</span>
     </button>
     <div class="menu-wrap">
       <button class="btn" id="btnExport" disabled>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-        <span class="lbl">내보내기</span>
+        <span class="lbl" data-i18n="export">내보내기</span>
       </button>
       <div class="menu" id="exportMenu">
-        <button id="expDownload">⬇️ HTML 파일로 저장</button>
-        <button id="expCopy">📋 코드 복사</button>
+        <button id="expDownload" data-i18n="saveHtml">⬇️ HTML 파일로 저장</button>
+        <button id="expCopy" data-i18n="copyCode">📋 코드 복사</button>
       </div>
     </div>
     <a class="btn bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span class="lbl">Buy me a coffee</span></a>
-    <button class="btn icon" id="btnTheme" title="테마 전환">
+    <button class="btn icon" id="btnLang" data-i18n-title="toggleLang" title="한국어 / English">
+      <span id="langLabel" class="ff-grotesk" style="font-size:12px;font-weight:600">EN</span>
+    </button>
+    <button class="btn icon" id="btnTheme" data-i18n-title="toggleTheme" title="테마 전환">
       <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>
     </button>
   </div>
@@ -215,8 +218,8 @@
 <main>
   <aside>
     <div class="aside-head">
-      <span class="lbl">슬라이드 <span id="slideCount">0</span></span>
-      <button class="mini" id="btnAdd" title="빈 슬라이드 추가">
+      <span class="lbl"><span data-i18n="slides">슬라이드</span> <span id="slideCount">0</span></span>
+      <button class="mini" id="btnAdd" data-i18n-title="addBlank" title="빈 슬라이드 추가">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
       </button>
     </div>
@@ -236,33 +239,33 @@
           <div class="ic">
             <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
           </div>
-          <h2>AI가 짠 슬라이드를 여기서 편집하세요</h2>
-          <p>AI에게 “이 기획안을 슬라이드 코드로 짜줘”라고 시킨 뒤,<br>나온 코드를 붙여넣으면 파워포인트처럼 글자와 이미지를 바로 고칠 수 있어요.</p>
+          <h2 data-i18n="emptyTitle">AI가 짠 슬라이드를 여기서 편집하세요</h2>
+          <p data-i18n-html="emptyDesc">AI에게 “이 기획안을 슬라이드 코드로 짜줘”라고 시킨 뒤,<br>나온 코드를 붙여넣으면 파워포인트처럼 글자와 이미지를 바로 고칠 수 있어요.</p>
           <div class="row">
-            <button class="btn primary" id="emptyImport">코드 붙여넣기</button>
-            <button class="btn" id="emptySample">샘플 먼저 보기</button>
-            <button class="btn" id="emptyPrompt">📋 AI 프롬프트 복사</button>
+            <button class="btn primary" id="emptyImport" data-i18n="pasteCode">코드 붙여넣기</button>
+            <button class="btn" id="emptySample" data-i18n="seeSample">샘플 먼저 보기</button>
+            <button class="btn" id="emptyPrompt" data-i18n="copyPrompt">📋 AI 프롬프트 복사</button>
           </div>
           <div class="steps">
-            <div class="s"><div class="n">1</div><b>AI에게 요청</b><span>프롬프트 복사 → 기획안 붙여넣고 코드 받기</span></div>
-            <div class="s"><div class="n">2</div><b>코드 붙여넣기</b><span>받은 HTML을 편집기에 그대로 붙여넣기</span></div>
-            <div class="s"><div class="n">3</div><b>직접 편집</b><span>글자 클릭해 수정, 이미지 클릭해 교체</span></div>
+            <div class="s"><div class="n">1</div><b data-i18n="step1Title">AI에게 요청</b><span data-i18n="step1Desc">프롬프트 복사 → 기획안 붙여넣고 코드 받기</span></div>
+            <div class="s"><div class="n">2</div><b data-i18n="step2Title">코드 붙여넣기</b><span data-i18n="step2Desc">받은 HTML을 편집기에 그대로 붙여넣기</span></div>
+            <div class="s"><div class="n">3</div><b data-i18n="step3Title">직접 편집</b><span data-i18n="step3Desc">글자 클릭해 수정, 이미지 클릭해 교체</span></div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="stage-bar" id="stageBar" style="display:none">
-      <button class="nav-btn" id="prev" title="이전 (←)">
+      <button class="nav-btn" id="prev" data-i18n-title="prev" title="이전 (←)">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
       <span class="pg" id="pgInd">1 / 1</span>
-      <button class="nav-btn" id="next" title="다음 (→)">
+      <button class="nav-btn" id="next" data-i18n-title="next" title="다음 (→)">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
       </button>
       <button class="btn" id="btnRaw" style="margin-left:14px">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-        <span class="lbl">HTML 직접 편집</span>
+        <span class="lbl" data-i18n="editHtml">HTML 직접 편집</span>
       </button>
     </div>
   </section>
@@ -272,31 +275,31 @@
 
 <!-- floating text format toolbar -->
 <div class="fmt" id="fmt">
-  <button data-cmd="bold" title="굵게"><b>B</b></button>
-  <button data-cmd="italic" title="기울임"><i>I</i></button>
-  <button data-cmd="underline" title="밑줄"><u>U</u></button>
+  <button data-cmd="bold" data-i18n-title="fmtBold" title="굵게"><b>B</b></button>
+  <button data-cmd="italic" data-i18n-title="fmtItalic" title="기울임"><i>I</i></button>
+  <button data-cmd="underline" data-i18n-title="fmtUnderline" title="밑줄"><u>U</u></button>
   <span class="sep"></span>
-  <button data-cmd="smaller" title="글자 작게">A−</button>
-  <button data-cmd="bigger" title="글자 크게">A＋</button>
+  <button data-cmd="smaller" data-i18n-title="fmtSmaller" title="글자 작게">A−</button>
+  <button data-cmd="bigger" data-i18n-title="fmtBigger" title="글자 크게">A＋</button>
   <span class="sep"></span>
-  <label class="color" title="글자 색"><span class="swatch" id="swatch" style="background:#B07A1E"></span><input type="color" id="colorPick" value="#B07A1E"></label>
+  <label class="color" data-i18n-title="fmtColor" title="글자 색"><span class="swatch" id="swatch" style="background:#B07A1E"></span><input type="color" id="colorPick" value="#B07A1E"></label>
 </div>
 
 <!-- import modal -->
 <div class="overlay" id="importOverlay">
   <div class="modal">
-    <div class="modal-head"><h3>슬라이드 코드 불러오기</h3><button class="x" data-close>×</button></div>
+    <div class="modal-head"><h3 data-i18n="importTitle">슬라이드 코드 불러오기</h3><button class="x" data-close>×</button></div>
     <div class="modal-body">
-      <p class="hint">AI가 만든 HTML 슬라이드 코드를 아래에 붙여넣으세요. 각 슬라이드를 <code>&lt;section class="slide"&gt;</code>로 감싸는 형식을 권장합니다. <code>&lt;style&gt;</code> 블록과 <code>&lt;img&gt;</code>도 그대로 인식합니다.</p>
-      <textarea class="code" id="codeInput" placeholder="여기에 AI가 만든 슬라이드 HTML 코드를 붙여넣으세요..."></textarea>
+      <p class="hint" data-i18n-html="importHint">AI가 만든 HTML 슬라이드 코드를 아래에 붙여넣으세요. 각 슬라이드를 <code>&lt;section class="slide"&gt;</code>로 감싸는 형식을 권장합니다. <code>&lt;style&gt;</code> 블록과 <code>&lt;img&gt;</code>도 그대로 인식합니다.</p>
+      <textarea class="code" id="codeInput" data-i18n-ph="importPh" placeholder="여기에 AI가 만든 슬라이드 HTML 코드를 붙여넣으세요..."></textarea>
     </div>
     <div class="modal-foot">
       <div class="left">
-        <button class="btn" id="loadSample">샘플 코드 넣기</button>
-        <button class="btn" id="copyPrompt">📋 AI 프롬프트 복사</button>
+        <button class="btn" id="loadSample" data-i18n="loadSampleCode">샘플 코드 넣기</button>
+        <button class="btn" id="copyPrompt" data-i18n="copyPrompt">📋 AI 프롬프트 복사</button>
       </div>
-      <button class="btn" data-close>취소</button>
-      <button class="btn primary" id="loadCode">불러오기</button>
+      <button class="btn" data-close data-i18n="cancel">취소</button>
+      <button class="btn primary" id="loadCode" data-i18n="importBtn">불러오기</button>
     </div>
   </div>
 </div>
@@ -304,14 +307,14 @@
 <!-- raw edit modal -->
 <div class="overlay" id="rawOverlay">
   <div class="modal">
-    <div class="modal-head"><h3>이 슬라이드 HTML 직접 편집</h3><button class="x" data-close>×</button></div>
+    <div class="modal-head"><h3 data-i18n="rawTitle">이 슬라이드 HTML 직접 편집</h3><button class="x" data-close>×</button></div>
     <div class="modal-body">
-      <p class="hint">현재 슬라이드의 HTML입니다. 수정 후 “적용”을 누르면 바로 반영됩니다.</p>
+      <p class="hint" data-i18n="rawHint">현재 슬라이드의 HTML입니다. 수정 후 “적용”을 누르면 바로 반영됩니다.</p>
       <textarea class="code" id="rawInput"></textarea>
     </div>
     <div class="modal-foot">
-      <button class="btn" data-close>취소</button>
-      <button class="btn primary" id="rawApply">적용</button>
+      <button class="btn" data-close data-i18n="cancel">취소</button>
+      <button class="btn primary" id="rawApply" data-i18n="apply">적용</button>
     </div>
   </div>
 </div>
@@ -331,6 +334,80 @@ const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 
 const state = { slides:[], sharedCSS:"", current:0, fit:1, presenting:false };
 let activeEditable = null, saveTimer = null, activeCdoc = null;
+let lang = 'ko';
+
+/* ---------- i18n ---------- */
+const I18N = {
+  ko:{
+    importCode:`코드 불러오기`, present:`발표`, export:`내보내기`,
+    saveHtml:`⬇️ HTML 파일로 저장`, copyCode:`📋 코드 복사`,
+    toggleTheme:`테마 전환`, toggleLang:`한국어 / English`,
+    slides:`슬라이드`, addBlank:`빈 슬라이드 추가`,
+    dup:`복제`, up:`위로`, down:`아래로`, del:`삭제`,
+    prev:`이전 (←)`, next:`다음 (→)`, editHtml:`HTML 직접 편집`,
+    emptyTitle:`AI가 짠 슬라이드를 여기서 편집하세요`,
+    emptyDesc:`AI에게 “이 기획안을 슬라이드 코드로 짜줘”라고 시킨 뒤,<br>나온 코드를 붙여넣으면 파워포인트처럼 글자와 이미지를 바로 고칠 수 있어요.`,
+    pasteCode:`코드 붙여넣기`, seeSample:`샘플 먼저 보기`, copyPrompt:`📋 AI 프롬프트 복사`,
+    step1Title:`AI에게 요청`, step1Desc:`프롬프트 복사 → 기획안 붙여넣고 코드 받기`,
+    step2Title:`코드 붙여넣기`, step2Desc:`받은 HTML을 편집기에 그대로 붙여넣기`,
+    step3Title:`직접 편집`, step3Desc:`글자 클릭해 수정, 이미지 클릭해 교체`,
+    fmtBold:`굵게`, fmtItalic:`기울임`, fmtUnderline:`밑줄`,
+    fmtSmaller:`글자 작게`, fmtBigger:`글자 크게`, fmtColor:`글자 색`,
+    importTitle:`슬라이드 코드 불러오기`,
+    importHint:`AI가 만든 HTML 슬라이드 코드를 아래에 붙여넣으세요. 각 슬라이드를 <code>&lt;section class="slide"&gt;</code>로 감싸는 형식을 권장합니다. <code>&lt;style&gt;</code> 블록과 <code>&lt;img&gt;</code>도 그대로 인식합니다.`,
+    importPh:`여기에 AI가 만든 슬라이드 HTML 코드를 붙여넣으세요...`,
+    loadSampleCode:`샘플 코드 넣기`, cancel:`취소`, importBtn:`불러오기`,
+    rawTitle:`이 슬라이드 HTML 직접 편집`,
+    rawHint:`현재 슬라이드의 HTML입니다. 수정 후 “적용”을 누르면 바로 반영됩니다.`, apply:`적용`,
+    noSlides:`슬라이드를 찾지 못했어요. 코드를 확인해 주세요`,
+    imported:`{n}개의 슬라이드를 불러왔어요`,
+    lastSlide:`마지막 슬라이드는 삭제할 수 없어요`,
+    imgReplaced:`이미지를 교체했어요`, promptCopied:`AI 프롬프트를 복사했어요`,
+    pasteFirst:`코드를 붙여넣어 주세요`, htmlSaved:`HTML 파일을 저장했어요`,
+    codeCopied:`전체 코드를 복사했어요`, slideUpdated:`슬라이드를 업데이트했어요`
+  },
+  en:{
+    importCode:`Import code`, present:`Present`, export:`Export`,
+    saveHtml:`⬇️ Save as HTML`, copyCode:`📋 Copy code`,
+    toggleTheme:`Toggle theme`, toggleLang:`Korean / English`,
+    slides:`Slides`, addBlank:`Add blank slide`,
+    dup:`Duplicate`, up:`Move up`, down:`Move down`, del:`Delete`,
+    prev:`Previous (←)`, next:`Next (→)`, editHtml:`Edit HTML`,
+    emptyTitle:`Edit AI-made slides right here`,
+    emptyDesc:`Ask an AI to "turn this outline into slide code,"<br>then paste the result here to edit text and images like PowerPoint.`,
+    pasteCode:`Paste code`, seeSample:`See a sample first`, copyPrompt:`📋 Copy AI prompt`,
+    step1Title:`Ask the AI`, step1Desc:`Copy the prompt, paste your outline, get code`,
+    step2Title:`Paste the code`, step2Desc:`Paste the returned HTML into the editor`,
+    step3Title:`Edit directly`, step3Desc:`Click text to edit, click an image to swap`,
+    fmtBold:`Bold`, fmtItalic:`Italic`, fmtUnderline:`Underline`,
+    fmtSmaller:`Smaller text`, fmtBigger:`Bigger text`, fmtColor:`Text color`,
+    importTitle:`Import slide code`,
+    importHint:`Paste the AI-generated HTML slide code below. Wrapping each slide in <code>&lt;section class="slide"&gt;</code> is recommended. <code>&lt;style&gt;</code> blocks and <code>&lt;img&gt;</code> tags are recognized as-is.`,
+    importPh:`Paste the AI-generated slide HTML code here...`,
+    loadSampleCode:`Load sample code`, cancel:`Cancel`, importBtn:`Import`,
+    rawTitle:`Edit this slide's HTML`,
+    rawHint:`This is the current slide's HTML. Edit it and press "Apply" to update.`, apply:`Apply`,
+    noSlides:`No slides found — check your code`,
+    imported:`Imported {n} slides`,
+    lastSlide:`Can't delete the last slide`,
+    imgReplaced:`Image replaced`, promptCopied:`AI prompt copied`,
+    pasteFirst:`Please paste some code`, htmlSaved:`Saved the HTML file`,
+    codeCopied:`Copied the full code`, slideUpdated:`Slide updated`
+  }
+};
+function t(key, vars){
+  let s = (I18N[lang] && I18N[lang][key]) || I18N.ko[key] || key;
+  if(vars) Object.keys(vars).forEach(k=> s = s.replace('{'+k+'}', vars[k]));
+  return s;
+}
+function applyLang(){
+  document.documentElement.lang = lang;
+  $$('[data-i18n]').forEach(el=> el.textContent = t(el.getAttribute('data-i18n')));
+  $$('[data-i18n-html]').forEach(el=> el.innerHTML = t(el.getAttribute('data-i18n-html')));
+  $$('[data-i18n-title]').forEach(el=> el.title = t(el.getAttribute('data-i18n-title')));
+  $$('[data-i18n-ph]').forEach(el=> el.placeholder = t(el.getAttribute('data-i18n-ph')));
+  $('#langLabel').textContent = lang==='ko' ? 'EN' : '한';
+}
 
 /* 슬라이드 iframe에 주입되는 기본 스타일 (AI의 .slide CSS가 우선됨) */
 const BASE_CSS = `
@@ -409,10 +486,10 @@ function buildThumbs(){
     t.innerHTML = '<span class="num">'+(i+1)+'</span>'+
       '<iframe sandbox="allow-same-origin" tabindex="-1"></iframe>'+
       '<div class="tools">'+
-        '<button data-act="dup" title="복제">⧉</button>'+
-        '<button data-act="up" title="위로">↑</button>'+
-        '<button data-act="down" title="아래로">↓</button>'+
-        '<button data-act="del" title="삭제">🗑</button>'+
+        '<button data-act="dup" data-i18n-title="dup">⧉</button>'+
+        '<button data-act="up" data-i18n-title="up">↑</button>'+
+        '<button data-act="down" data-i18n-title="down">↓</button>'+
+        '<button data-act="del" data-i18n-title="del">🗑</button>'+
       '</div>';
     const fr = t.querySelector('iframe');
     fr.srcdoc = slideDoc(s.html, true);
@@ -427,6 +504,7 @@ function buildThumbs(){
     box.appendChild(t);
   });
   $('#slideCount').textContent = state.slides.length;
+  applyLang();
 }
 function refreshThumb(i){
   const t = $$('.thumb')[i]; if(!t) return;
@@ -439,7 +517,7 @@ function refreshThumb(i){
 function slideOp(act, i){
   commitEdit();
   if(act==='del'){
-    if(state.slides.length<=1){ toast('마지막 슬라이드는 삭제할 수 없어요'); return; }
+    if(state.slides.length<=1){ toast(t('lastSlide')); return; }
     state.slides.splice(i,1);
     if(state.current>=state.slides.length) state.current=state.slides.length-1;
   } else if(act==='dup'){
@@ -454,7 +532,7 @@ function slideOp(act, i){
 }
 function addBlank(){
   commitEdit();
-  const html = '<section class="slide" style="display:flex;flex-direction:column;justify-content:center;padding:80px;font-family:Inter,sans-serif"><h1 style="font-size:60px;margin:0 0 14px">제목을 입력하세요</h1><p style="font-size:24px;color:#666;margin:0">내용을 입력하세요</p></section>';
+  const html = '<section class="slide" style="display:flex;flex-direction:column;justify-content:center;padding:80px;font-family:Inter,sans-serif"><h1 style="font-size:60px;margin:0 0 14px">'+(lang==='en'?'Type a title':'제목을 입력하세요')+'</h1><p style="font-size:24px;color:#666;margin:0">'+(lang==='en'?'Type your content':'내용을 입력하세요')+'</p></section>';
   state.slides.splice(state.current+1,0,{id:uid(),html});
   state.current++; buildThumbs(); renderActive();
 }
@@ -524,7 +602,7 @@ function replaceImage(img){
   inp.onchange = ()=>{
     const f = inp.files[0]; if(!f) return;
     const r = new FileReader();
-    r.onload = ()=>{ img.src = r.result; img.removeAttribute('srcset'); scheduleSave(); setTimeout(()=>refreshThumb(state.current),100); toast('이미지를 교체했어요'); };
+    r.onload = ()=>{ img.src = r.result; img.removeAttribute('srcset'); scheduleSave(); setTimeout(()=>refreshThumb(state.current),100); toast(t('imgReplaced')); };
     r.readAsDataURL(f);
   };
   inp.click();
@@ -594,8 +672,9 @@ function buildExport(){
    "document.getElementById('f').onclick=function(){if(!document.fullscreenElement){document.documentElement.requestFullscreen()}else{document.exitFullscreen()}};",
    "addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'){show(i-1)}});"
   ].join('\n');
+  const fsLabel = lang==='en' ? 'Fullscreen' : '전체화면';
   return [
-   '<!doctype html><html lang="ko"><head><meta charset="utf-8">',
+   '<!doctype html><html lang="'+lang+'"><head><meta charset="utf-8">',
    '<meta name="viewport" content="width=device-width,initial-scale=1">',
    '<title>Presentation · SunnyApps</title>',
    FONT_LINK,
@@ -610,7 +689,7 @@ function buildExport(){
    css,
    '</style></head><body>',
    '<div id="cv">'+slidesHTML+'</div>',
-   '<div id="nav"><button id="p">‹</button><span id="ix">1 / '+state.slides.length+'</span><button id="n">›</button><button id="f">전체화면</button></div>',
+   '<div id="nav"><button id="p">‹</button><span id="ix">1 / '+state.slides.length+'</span><button id="n">›</button><button id="f">'+fsLabel+'</button></div>',
    '<scr'+'ipt>'+RT+'</scr'+'ipt>',
    '</body></html>'
   ].join('\n');
@@ -621,25 +700,25 @@ function download(){
   a.href = URL.createObjectURL(blob);
   a.download = 'presentation.html'; a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-  toast('HTML 파일을 저장했어요');
+  toast(t('htmlSaved'));
 }
 
 /* ---------- 데이터 로드 ---------- */
 function loadDeck(raw){
-  const {slides, css} = parseDeck(raw);
-  if(!slides.length){ toast('슬라이드를 찾지 못했어요. 코드를 확인해 주세요'); return false; }
-  state.slides = slides; state.sharedCSS = css; state.current = 0;
+  const r = parseDeck(raw);
+  if(!r.slides.length){ toast(t('noSlides')); return false; }
+  state.slides = r.slides; state.sharedCSS = r.css; state.current = 0;
   $('#empty').style.display='none';
   $('#canvasFrame').style.display='';
   $('#stageBar').style.display='flex';
   $('#btnPresent').disabled=false; $('#btnExport').disabled=false;
   buildThumbs(); renderActive(); fitCanvas();
-  toast(slides.length+'개의 슬라이드를 불러왔어요');
+  toast(t('imported',{n:r.slides.length}));
   return true;
 }
 
 /* ---------- 프롬프트 / 샘플 ---------- */
-const AI_PROMPT =
+const AI_PROMPT_KO =
 `다음 내용을 16:9 HTML 프레젠테이션 슬라이드로 만들어줘.
 
 규칙:
@@ -651,6 +730,21 @@ const AI_PROMPT =
 
 기획안:
 [여기에 기획안 또는 내용을 붙여넣으세요]`;
+
+const AI_PROMPT_EN =
+`Turn the following into a 16:9 HTML presentation.
+
+Rules:
+1. Wrap each slide in <section class="slide"> ... </section>
+2. Put all CSS in a single <style> block (.slide is 1280x720px)
+3. Do not include any <script>
+4. Build it around text and <img> elements (you'll edit them directly in the editor)
+5. Output everything as one code block
+
+Outline:
+[Paste your outline or content here]`;
+
+function aiPrompt(){ return lang==='en' ? AI_PROMPT_EN : AI_PROMPT_KO; }
 
 const SAMPLE =
 `<style>
@@ -689,9 +783,9 @@ const SAMPLE =
   </div>
 </section>`;
 
-function copyText(t, msg){
-  navigator.clipboard.writeText(t).then(()=>toast(msg)).catch(()=>{
-    const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();
+function copyText(txt, msg){
+  navigator.clipboard.writeText(txt).then(()=>toast(msg)).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();
     document.execCommand('copy');ta.remove();toast(msg);
   });
 }
@@ -699,8 +793,8 @@ function copyText(t, msg){
 /* ---------- Toast ---------- */
 let toastTimer;
 function toast(msg){
-  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
-  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),1900);
+  const el=$('#toast'); el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('on'),1900);
 }
 
 /* ---------- 테마 ---------- */
@@ -721,6 +815,13 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
   if(!saved) setTheme(e.matches?'dark':'light');
 });
 
+/* ---------- 언어 ---------- */
+(function initLang(){
+  let saved=null; try{ saved=localStorage.getItem('slideStudioLang'); }catch(e){}
+  if(saved==='ko'||saved==='en') lang=saved;
+  else lang = (navigator.language||'ko').toLowerCase().startsWith('ko') ? 'ko' : 'en';
+})();
+
 /* ---------- 모달 ---------- */
 function openModal(id){ $('#'+id).classList.add('on'); }
 function closeModal(el){ el.classList.remove('on'); }
@@ -732,11 +833,11 @@ $('#btnImport').addEventListener('click',()=>openModal('importOverlay'));
 $('#emptyImport').addEventListener('click',()=>openModal('importOverlay'));
 $('#loadSample').addEventListener('click',()=>{ $('#codeInput').value=SAMPLE; });
 $('#emptySample').addEventListener('click',()=>{ loadDeck(SAMPLE); });
-$('#copyPrompt').addEventListener('click',()=>copyText(AI_PROMPT,'AI 프롬프트를 복사했어요'));
-$('#emptyPrompt').addEventListener('click',()=>copyText(AI_PROMPT,'AI 프롬프트를 복사했어요'));
+$('#copyPrompt').addEventListener('click',()=>copyText(aiPrompt(), t('promptCopied')));
+$('#emptyPrompt').addEventListener('click',()=>copyText(aiPrompt(), t('promptCopied')));
 $('#loadCode').addEventListener('click',()=>{
   const v=$('#codeInput').value.trim();
-  if(!v){ toast('코드를 붙여넣어 주세요'); return; }
+  if(!v){ toast(t('pasteFirst')); return; }
   if(loadDeck(v)) closeModal($('#importOverlay'));
 });
 $('#btnAdd').addEventListener('click',addBlank);
@@ -746,13 +847,18 @@ $('#btnPresent').addEventListener('click',enterPresent);
 $('#btnTheme').addEventListener('click',()=>{
   setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
 });
+$('#btnLang').addEventListener('click',()=>{
+  lang = lang==='ko' ? 'en' : 'ko';
+  try{ localStorage.setItem('slideStudioLang',lang); }catch(e){}
+  applyLang();
+});
 
 /* export menu */
 $('#btnExport').addEventListener('click',e=>{ e.stopPropagation(); $('#exportMenu').classList.toggle('on'); });
 document.addEventListener('click',()=>$('#exportMenu').classList.remove('on'));
 $('#exportMenu').addEventListener('click',e=>e.stopPropagation());
 $('#expDownload').addEventListener('click',()=>{ download(); $('#exportMenu').classList.remove('on'); });
-$('#expCopy').addEventListener('click',()=>{ copyText(buildExport(),'전체 코드를 복사했어요'); $('#exportMenu').classList.remove('on'); });
+$('#expCopy').addEventListener('click',()=>{ copyText(buildExport(), t('codeCopied')); $('#exportMenu').classList.remove('on'); });
 
 /* raw edit */
 $('#btnRaw').addEventListener('click',()=>{
@@ -763,7 +869,7 @@ $('#btnRaw').addEventListener('click',()=>{
 $('#rawApply').addEventListener('click',()=>{
   state.slides[state.current].html = $('#rawInput').value;
   renderActive(); refreshThumb(state.current); closeModal($('#rawOverlay'));
-  toast('슬라이드를 업데이트했어요');
+  toast(t('slideUpdated'));
 });
 
 /* 전역 키보드 */
@@ -781,6 +887,9 @@ $('#canvasWrap').addEventListener('mousedown',e=>{
 });
 
 window.addEventListener('resize',()=>{ fitCanvas(); if(activeEditable) positionFmt(activeEditable); });
+
+/* ---------- 초기화 ---------- */
+applyLang();
 </script>
 </body>
 </html>
