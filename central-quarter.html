@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Quarter Merrylands — Live. Experience. Enjoy.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6F5;--bg2:#E8EDEB;--fg:#10201C;--fg2:#3D4F4A;
+  --teal:#1E6B5E;--teal2:#2A8C7A;--teal-light:#3FB89E;--teal-pale:rgba(30,107,94,0.1);
+  --coral:#E07856;
+  --divider:#D2DCD9;--card-bg:#FFFFFF;
+  --hero-bg:#0C1A16;--hero-text:#F4F6F5;
+  --shadow:0 2px 24px rgba(16,32,28,0.08);
+}
+[data-theme="dark"]{
+  --bg:#0A1412;--bg2:#0F1C18;--fg:#E4EDEA;--fg2:#7E928C;
+  --teal:#3FB89E;--teal2:#52CCB0;--teal-light:#6DD9C0;--teal-pale:rgba(63,184,158,0.1);
+  --coral:#E89070;
+  --divider:#1C2A26;--card-bg:#0F1C18;
+  --hero-bg:#060E0C;--hero-text:#F4F6F5;
+  --shadow:0 2px 24px rgba(0,0,0,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transition:background .3s,color .3s;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;background:rgba(12,26,22,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(63,184,158,0.15)}
+.nav-logo{font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-light);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-logo .cq{background:var(--teal-light);color:#0C1A16;font-weight:700;padding:3px 7px;border-radius:3px;font-size:.85rem;letter-spacing:.02em}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-lang,.btn-theme{background:rgba(255,255,255,0.06);border:1px solid rgba(63,184,158,0.25);color:var(--teal-light);cursor:pointer;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;padding:6px 14px;transition:all .2s}
+.btn-lang:hover,.btn-theme:hover{background:rgba(63,184,158,0.12);border-color:var(--teal-light)}
+.btn-bmac{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFDD00,#FFC400);color:#1a1200;border:none;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:7px 14px;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.btn-bmac:hover{opacity:.88}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:var(--hero-bg)}
+.hero-img{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;object-position:center 35%;filter:blur(5px);transform:scale(1.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,15,0.96) 0%,rgba(8,18,15,0.7) 45%,rgba(8,18,15,0.4) 100%)}
+.hero-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-light),transparent)}
+.hero-badge{position:absolute;top:100px;right:48px;border:1px solid rgba(63,184,158,0.35);color:rgba(63,184,158,0.75);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:2px}
+.hero-content{position:relative;z-index:2;padding:0 60px 80px;max-width:920px}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-light);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:36px;height:2px;background:var(--teal-light);flex-shrink:0}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;line-height:1.0;color:var(--hero-text);margin-bottom:8px}
+.hero-title em{font-style:italic;color:var(--teal-light)}
+.hero-sub{font-size:clamp(.9rem,1.5vw,1.15rem);font-weight:300;color:rgba(244,246,245,0.55);letter-spacing:.06em;margin-bottom:44px}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid rgba(63,184,158,0.2);padding-top:28px;margin-top:28px}
+.hero-meta-item label{display:block;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(63,184,158,0.6);margin-bottom:4px}
+.hero-meta-item span{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:500;color:var(--hero-text);letter-spacing:.02em}
+.hero-meta-item small{font-size:.72rem;color:rgba(244,246,245,0.4);margin-left:3px}
+.hero-cta{margin-top:44px;display:inline-flex;align-items:center;gap:12px;background:var(--teal);color:#fff;padding:16px 36px;border-radius:3px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--teal2);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:36px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(63,184,158,0.4);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(63,184,158,0.4),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.3)}}
+
+/* SECTIONS */
+section{padding:100px 60px}
+.section-eyebrow{font-size:.63rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:28px;height:2px;background:var(--teal);flex-shrink:0}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:400;line-height:1.15;color:var(--fg);margin-bottom:18px}
+.section-title em{font-style:italic;color:var(--teal)}
+.section-sub{font-size:.9rem;line-height:1.75;color:var(--fg2);max-width:560px}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1280px;margin:0 auto}
+.about-visual{position:relative;height:560px;overflow:hidden;border-radius:2px}
+.about-visual img{width:100%;height:100%;object-fit:cover;object-position:center}
+.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,15,0.8) 0%,rgba(8,18,15,0.05) 50%)}
+.about-visual-badge{position:absolute;top:28px;left:28px;background:var(--teal);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border-radius:2px}
+.about-visual-caption{position:absolute;bottom:28px;left:28px;right:28px}
+.about-visual-caption p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(244,246,245,0.85)}
+.about-body{font-size:.92rem;line-height:1.85;color:var(--fg2);margin-bottom:24px}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tag{background:var(--teal-pale);border:1px solid rgba(30,107,94,0.2);color:var(--teal);font-size:.66rem;letter-spacing:.1em;padding:6px 14px;border-radius:2px;font-weight:500}
+
+/* SPECS STRIP */
+.specs-strip{background:var(--teal);color:#fff}
+.specs-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.spec-item{text-align:center;padding:20px;border-right:1px solid rgba(255,255,255,0.15)}
+.spec-item:last-child{border-right:none}
+.spec-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:400;line-height:1;margin-bottom:6px}
+.spec-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+
+/* BUILDING BAND */
+.building-band{width:100%;height:480px;position:relative;overflow:hidden}
+.building-band img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.building-band-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,18,15,0.6) 0%,transparent 55%)}
+.building-band-caption{position:absolute;bottom:40px;left:60px;color:var(--hero-text)}
+.building-band-caption h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;margin-bottom:6px}
+.building-band-caption p{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,246,245,0.6)}
+
+/* INTERIORS */
+.interiors-section{background:var(--hero-bg)}
+.interiors-wrap{max-width:1280px;margin:0 auto}
+.interiors-intro{margin-bottom:50px}
+.interiors-intro .section-eyebrow{color:var(--teal-light)}
+.interiors-intro .section-eyebrow::before{background:var(--teal-light)}
+.interiors-intro .section-title{color:var(--hero-text)}
+.interiors-intro .section-sub{color:rgba(244,246,245,0.5)}
+.interiors-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.interior-card{position:relative;height:480px;overflow:hidden}
+.interior-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.interior-card:hover img{transform:scale(1.04)}
+.interior-card-label{position:absolute;bottom:0;left:0;right:0;padding:30px 36px;background:linear-gradient(to top,rgba(8,18,15,0.88) 0%,transparent 100%)}
+.interior-card-label h4{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--hero-text);margin-bottom:4px}
+.interior-card-label p{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(63,184,158,0.75)}
+.finishes-list{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:3px}
+.finish-item{background:var(--card-bg);padding:24px 28px}
+.finish-item .fi-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:6px}
+.finish-item .fi-val{font-size:.88rem;color:var(--fg);font-weight:500}
+
+/* FEATURES */
+.features-wrap{max-width:1280px;margin:0 auto}
+.features-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.feature-card{background:var(--card-bg);padding:40px 36px;border-top:3px solid transparent;transition:border-color .3s,background .3s}
+.feature-card:hover{border-top-color:var(--teal);background:var(--bg2)}
+.feature-icon{font-size:1.9rem;margin-bottom:18px}
+.feature-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--fg);margin-bottom:8px}
+.feature-desc{font-size:.8rem;color:var(--fg2);line-height:1.65}
+
+/* LOCATION */
+.location-section{background:var(--hero-bg);color:var(--hero-text)}
+.location-wrap{max-width:1280px;margin:0 auto}
+.location-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.location-img-wrap{position:relative;height:520px;overflow:hidden;border-radius:2px}
+.location-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
+.location-info .section-eyebrow{color:var(--teal-light)}
+.location-info .section-eyebrow::before{background:var(--teal-light)}
+.location-info .section-title{color:var(--hero-text)}
+.location-info .section-sub{color:rgba(244,246,245,0.5)}
+.location-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:36px;background:rgba(63,184,158,0.12)}
+.location-card{background:rgba(255,255,255,0.03);padding:24px 22px;transition:background .3s}
+.location-card:hover{background:rgba(63,184,158,0.07)}
+.location-dist{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--teal-light);line-height:1;margin-bottom:4px}
+.location-dist small{font-size:.9rem;color:rgba(63,184,158,0.6)}
+.location-name{font-size:.8rem;color:rgba(244,246,245,0.72);margin-bottom:2px}
+.location-mode{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,246,245,0.3)}
+
+/* LIFESTYLE */
+.lifestyle-section{background:var(--bg2)}
+.lifestyle-wrap{max-width:1280px;margin:0 auto}
+.lifestyle-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:50px}
+.lifestyle-img{height:480px;overflow:hidden;border-radius:2px;position:relative}
+.lifestyle-img img{width:100%;height:100%;object-fit:cover}
+.lifestyle-img-cap{position:absolute;bottom:0;left:0;right:0;padding:24px 28px;background:linear-gradient(to top,rgba(8,18,15,0.8),transparent)}
+.lifestyle-img-cap p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:#fff}
+.park-list{display:flex;flex-direction:column;gap:2px}
+.park-item{background:var(--card-bg);padding:28px 32px;border-left:3px solid var(--teal)}
+.park-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;color:var(--fg);margin-bottom:6px}
+.park-desc{font-size:.82rem;color:var(--fg2);line-height:1.6}
+.park-meta{font-size:.68rem;color:var(--teal);font-weight:600;letter-spacing:.06em;margin-top:8px}
+
+/* FLOORPLAN BAND */
+.floorplan-band{background:var(--bg);padding:90px 60px}
+.floorplan-wrap{max-width:1100px;margin:0 auto;text-align:center}
+.floorplan-img{margin-top:40px;border-radius:4px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+.floorplan-img img{width:100%;display:block}
+.floorplan-note{font-size:.72rem;color:var(--fg2);opacity:.6;margin-top:16px}
+
+/* LDI */
+.ldi-section{background:var(--teal);color:#fff;text-align:center}
+.ldi-wrap{max-width:760px;margin:0 auto}
+.ldi-badge{display:inline-block;border:2px solid rgba(255,255,255,0.4);border-radius:50%;width:120px;height:120px;line-height:116px;font-family:'Cormorant Garamond',serif;font-size:2.6rem;margin-bottom:28px}
+.ldi-wrap .section-title{color:#fff}
+.ldi-desc{font-size:.95rem;line-height:1.8;color:rgba(255,255,255,0.8);margin-bottom:20px}
+
+/* CONTACT */
+.contact-section{text-align:center}
+.contact-wrap{max-width:680px;margin:0 auto}
+.contact-info{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:44px;margin-top:36px}
+.contact-item label{display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);opacity:.7;margin-bottom:6px;font-weight:600}
+.contact-item a,.contact-item span{font-size:.9rem;color:var(--fg)}
+.contact-item a:hover{color:var(--teal)}
+.contact-cta{display:inline-block;background:var(--teal);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:3px;transition:all .25s}
+.contact-cta:hover{background:var(--teal2);transform:translateY(-2px)}
+.contact-divider{margin:32px auto;width:1px;height:40px;background:rgba(30,107,94,0.2)}
+.contact-disclaimer{font-size:.7rem;color:var(--fg2);opacity:.55;line-height:1.65}
+
+/* FOOTER */
+footer{background:var(--hero-bg);border-top:1px solid rgba(63,184,158,0.1);padding:36px 60px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:'Jost',sans-serif;font-size:.9rem;font-weight:700;color:var(--teal-light);letter-spacing:.08em}
+.footer-copy{font-size:.7rem;color:rgba(244,246,245,0.28)}
+
+/* LANG */
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:block}
+body.lang-ko .hero-cta .ko-t{display:inline}
+body.lang-ko .hero-cta .en-t{display:none}
+.hero-cta .ko-t{display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  section{padding:70px 24px}
+  .hero-content{padding:0 24px 60px}
+  .about-wrap,.features-header,.location-inner,.lifestyle-grid,.interiors-grid{grid-template-columns:1fr;gap:40px}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .specs-wrap{grid-template-columns:1fr 1fr}
+  .spec-item:nth-child(2){border-right:none}
+  .location-cards{grid-template-columns:1fr 1fr}
+  .about-visual,.location-img-wrap,.lifestyle-img{height:320px}
+  .building-band{height:320px}
+  .building-band-caption{left:24px;bottom:24px}
+  .floorplan-band{padding:60px 24px}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px}
+  .hero-badge,.hero-scroll{display:none}
+}
+@media(max-width:600px){
+  .features-grid,.location-cards,.specs-wrap,.finishes-list,.hero-meta{grid-template-columns:1fr}
+  .spec-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.15)}
+  .contact-info{gap:20px}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><span class="cq">CQ</span> Central Quarter</a>
+  <div class="nav-actions">
+    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <button class="btn-theme" onclick="toggleTheme()">☾</button>
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <img class="hero-img" src="assets/central-quarter/hero.jpg" alt="Central Quarter Merrylands — Artist Impression" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-badge" data-lang="en">MERRYLANDS NSW 2160</div>
+  <div class="hero-badge" data-lang="ko">메릴랜즈 NSW 2160</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-lang="en">Central Quarter · by Northland</div>
+    <div class="hero-eyebrow" data-lang="ko">센트럴 쿼터 · by Northland</div>
+    <h1 class="hero-title">
+      <span data-lang="en">Live. Experience.<br><em>Enjoy.</em></span>
+      <span data-lang="ko">살고. 경험하고.<br><em>즐기다.</em></span>
+    </h1>
+    <p class="hero-sub" data-lang="en">The Most Family-Friendly Address in Western Sydney · Merrylands</p>
+    <p class="hero-sub" data-lang="ko">웨스턴 시드니에서 가장 가족 친화적인 주소 · 메릴랜즈</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <label data-lang="en">Apartments</label><label data-lang="ko">총 세대수</label>
+        <span>194<small data-lang="en"> homes</small><small data-lang="ko"> 세대</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">Levels</label><label data-lang="ko">층수</label>
+        <span>21<small data-lang="en"> storeys</small><small data-lang="ko"> 층</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">Completion</label><label data-lang="ko">준공</label>
+        <span>Q1<small> 2026</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label>
+        <span>5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></span>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta">
+      <span class="en-t" data-lang="en">Request Information</span>
+      <span class="ko-t" data-lang="ko">분양 문의하기</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap fade-in">
+    <div class="about-visual">
+      <img src="assets/central-quarter/building-exterior.jpg" alt="Central Quarter — Artist Impression" loading="lazy">
+      <div class="about-visual-overlay"></div>
+      <div class="about-visual-badge" data-lang="en">242–252 Pitt St, Merrylands</div>
+      <div class="about-visual-badge" data-lang="ko">242–252 핏 스트리트, 메릴랜즈</div>
+      <div class="about-visual-caption">
+        <p data-lang="en">21 levels · 194 apartments · 3 levels of retail</p>
+        <p data-lang="ko">21층 · 194세대 · 리테일 3개 층</p>
+      </div>
+    </div>
+    <div>
+      <div class="section-eyebrow"><span data-lang="en">About the Building</span><span data-lang="ko">건물 소개</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Central <em>Quarter</em></span>
+        <span data-lang="ko">센트럴 <em>쿼터</em></span>
+      </h2>
+      <p class="about-body" data-lang="en">Central Quarter is a landmark 21-level mixed-use development in the heart of Merrylands, delivering 194 thoughtfully designed apartments above three levels of retail and commercial space. Located directly across from Stockland Merrylands — one of Western Sydney's largest shopping centres — it places everyday convenience at your doorstep.</p>
+      <p class="about-body" data-lang="ko">센트럴 쿼터는 메릴랜즈 중심부에 위치한 21층 복합 개발 랜드마크로, 리테일 및 상업 공간 3개 층 위에 정교하게 설계된 194세대를 제공합니다. 웨스턴 시드니 최대 규모의 쇼핑센터 중 하나인 Stockland Merrylands 바로 맞은편에 위치해 일상의 편리함을 누릴 수 있습니다.</p>
+      <p class="about-body" data-lang="en">Residents enjoy a rooftop communal area with BBQ facilities and recreational spaces, a secondary communal zone on Level 3, plus an on-site 24/7 gym and childcare. Expected completion Q1 2026.</p>
+      <p class="about-body" data-lang="ko">입주민은 BBQ 시설과 레크리에이션 공간을 갖춘 루프탑 커뮤널 공간, 레벨 3의 추가 커뮤널 존, 그리고 단지 내 24시간 짐과 차일드케어를 이용할 수 있습니다. 2026년 1분기 준공 예정입니다.</p>
+      <div class="about-tags">
+        <span class="tag" data-lang="en">Mixed-Use</span><span class="tag" data-lang="ko">복합 개발</span>
+        <span class="tag" data-lang="en">Rooftop BBQ</span><span class="tag" data-lang="ko">루프탑 BBQ</span>
+        <span class="tag" data-lang="en">24/7 Gym</span><span class="tag" data-lang="ko">24시간 짐</span>
+        <span class="tag" data-lang="en">On-site Childcare</span><span class="tag" data-lang="ko">단지 내 차일드케어</span>
+        <span class="tag" data-lang="en">10-Year LDI</span><span class="tag" data-lang="ko">10년 LDI 보험</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS STRIP -->
+<div class="specs-strip">
+  <div class="specs-wrap">
+    <div class="spec-item">
+      <div class="spec-num">194</div>
+      <div class="spec-label" data-lang="en">Apartments</div><div class="spec-label" data-lang="ko">세대</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">21</div>
+      <div class="spec-label" data-lang="en">Levels</div><div class="spec-label" data-lang="ko">층</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">3</div>
+      <div class="spec-label" data-lang="en">Retail Levels</div><div class="spec-label" data-lang="ko">리테일 층</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">10</div>
+      <div class="spec-label" data-lang="en">Years LDI Cover</div><div class="spec-label" data-lang="ko">년 LDI 보장</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUILDING BAND -->
+<div class="building-band">
+  <img src="assets/central-quarter/building-exterior.jpg" alt="Central Quarter daytime — Artist Impression" loading="lazy">
+  <div class="building-band-overlay"></div>
+  <div class="building-band-caption">
+    <h3 data-lang="en">A Landmark for Merrylands</h3>
+    <h3 data-lang="ko">메릴랜즈의 랜드마크</h3>
+    <p data-lang="en">Corner of Pitt Street & Terminal Place · Artist Impression</p>
+    <p data-lang="ko">핏 스트리트 & 터미널 플레이스 코너 · 조감도</p>
+  </div>
+</div>
+
+<!-- INTERIORS -->
+<section class="interiors-section" id="interiors">
+  <div class="interiors-wrap fade-in">
+    <div class="interiors-intro">
+      <div class="section-eyebrow"><span data-lang="en">Interiors & Finishes</span><span data-lang="ko">인테리어 & 마감</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Quality in <em>Every Detail</em></span>
+        <span data-lang="ko">디테일까지 <em>완벽하게</em></span>
+      </h2>
+      <p class="section-sub" data-lang="en">Every apartment is finished with premium European appliances and timeless materials, designed for modern family living.</p>
+      <p class="section-sub" data-lang="ko">모든 아파트는 프리미엄 유럽산 가전과 시대를 초월한 소재로 마감되어, 현대적인 가족 생활을 위해 설계되었습니다.</p>
+    </div>
+    <div class="interiors-grid">
+      <div class="interior-card">
+        <img src="assets/central-quarter/interior-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">The Kitchen</h4>
+          <h4 data-lang="ko">주방</h4>
+          <p data-lang="en">SMEG appliances · Beige Oak laminate · Artist Impression</p>
+          <p data-lang="ko">SMEG 가전 · 베이지 오크 라미네이트 · 조감도</p>
+        </div>
+      </div>
+      <div class="interior-card">
+        <img src="assets/central-quarter/interior-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">The Bathroom</h4>
+          <h4 data-lang="ko">욕실</h4>
+          <p data-lang="en">Villeroy & Boch tapware · Full-height tiling · Artist Impression</p>
+          <p data-lang="ko">Villeroy & Boch 수전 · 전체 높이 타일 · 조감도</p>
+        </div>
+      </div>
+    </div>
+    <div class="finishes-list">
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Flooring</div><div class="fi-label" data-lang="ko">바닥재</div>
+        <div class="fi-val" data-lang="en">Laminate Timber — Beige Oak</div>
+        <div class="fi-val" data-lang="ko">라미네이트 팀버 — 베이지 오크</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Appliances</div><div class="fi-label" data-lang="ko">가전</div>
+        <div class="fi-val" data-lang="en">European SMEG — Oven, Cooktop, Dishwasher, Rangehood, Microwave</div>
+        <div class="fi-val" data-lang="ko">유럽산 SMEG — 오븐, 쿡탑, 식기세척기, 레인지후드, 전자레인지</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Tapware</div><div class="fi-label" data-lang="ko">수전</div>
+        <div class="fi-val" data-lang="en">Villeroy & Boch premium fixtures</div>
+        <div class="fi-val" data-lang="ko">Villeroy & Boch 프리미엄 수전</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Climate Control</div><div class="fi-label" data-lang="ko">냉난방</div>
+        <div class="fi-val" data-lang="en">Concealed VRF A/C — individual temperature per room</div>
+        <div class="fi-val" data-lang="ko">매립형 VRF 에어컨 — 룸별 개별 온도 조절</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES (Why Merrylands) -->
+<section id="features">
+  <div class="features-wrap">
+    <div class="features-header fade-in">
+      <div>
+        <div class="section-eyebrow"><span data-lang="en">Why Merrylands</span><span data-lang="ko">왜 메릴랜즈인가</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">The Most<br><em>Family-Friendly</em><br>in Western Sydney</span>
+          <span data-lang="ko">웨스턴 시드니에서<br>가장 <em>가족 친화적인</em><br>지역</span>
+        </h2>
+      </div>
+      <p class="section-sub" data-lang="en">Merrylands combines infrastructure investment, outstanding family amenities, and strong rental demand — making it one of Western Sydney's most liveable and resilient suburbs.</p>
+      <p class="section-sub" data-lang="ko">메릴랜즈는 인프라 투자, 뛰어난 가족 편의시설, 강력한 임대 수요를 결합하여 웨스턴 시드니에서 가장 살기 좋고 견고한 지역 중 하나입니다.</p>
+    </div>
+    <div class="features-grid fade-in">
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <div class="feature-name" data-lang="en">Infrastructure Upgrade</div>
+        <div class="feature-name" data-lang="ko">인프라 업그레이드</div>
+        <div class="feature-desc" data-lang="en">A five-year infrastructure project completed in April 2025 enhanced roads, facilities and essential services across Merrylands.</div>
+        <div class="feature-desc" data-lang="ko">2025년 4월 완료된 5년 인프라 프로젝트로 메릴랜즈 전역의 도로, 시설, 필수 서비스가 개선되었습니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏫</div>
+        <div class="feature-name" data-lang="en">40–70 Childcare Centres</div>
+        <div class="feature-name" data-lang="ko">40~70개 차일드케어</div>
+        <div class="feature-desc" data-lang="en">The 2160 postcode hosts 40–70 childcare centres — well above the Sydney average, giving families real flexibility and choice.</div>
+        <div class="feature-desc" data-lang="ko">2160 우편번호 지역에 40~70개의 차일드케어가 있어 시드니 평균을 크게 상회하며, 가족에게 유연성과 선택권을 제공합니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <div class="feature-name" data-lang="en">Strong Schools</div>
+        <div class="feature-name" data-lang="ko">우수한 학교</div>
+        <div class="feature-desc" data-lang="en">Merrylands Public, Merrylands High, plus private options and quick access to Western Sydney University (Parramatta).</div>
+        <div class="feature-desc" data-lang="ko">메릴랜즈 공립·고등학교, 사립 학교 옵션, 그리고 웨스턴 시드니 대학교(파라마타 캠퍼스) 빠른 접근.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛍️</div>
+        <div class="feature-name" data-lang="en">Stockland Merrylands</div>
+        <div class="feature-name" data-lang="ko">Stockland 메릴랜즈</div>
+        <div class="feature-desc" data-lang="en">One of Western Sydney's largest shopping centres — 200+ retailers, family services and casual dining, directly across the road.</div>
+        <div class="feature-desc" data-lang="ko">웨스턴 시드니 최대 쇼핑센터 중 하나 — 200개 이상의 매장, 가족 서비스, 캐주얼 다이닝이 바로 길 건너에 있습니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div class="feature-name" data-lang="en">High Rental Demand</div>
+        <div class="feature-name" data-lang="ko">높은 임대 수요</div>
+        <div class="feature-desc" data-lang="en">A diverse community and broad amenity base drive strong rental demand from families and professionals alike.</div>
+        <div class="feature-desc" data-lang="ko">다양한 커뮤니티와 폭넓은 편의시설 기반이 가족과 전문직 모두로부터 강력한 임대 수요를 이끌어냅니다.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌳</div>
+        <div class="feature-name" data-lang="en">Parks & Open Space</div>
+        <div class="feature-name" data-lang="ko">공원 & 녹지</div>
+        <div class="feature-desc" data-lang="en">Central Gardens Nature Reserve, Granville Park, Merrylands Park and Holroyd Gardens all within easy reach.</div>
+        <div class="feature-desc" data-lang="ko">센트럴 가든스 자연보호구역, 그랜빌 파크, 메릴랜즈 파크, 홀로이드 가든스가 모두 가까운 거리에 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-wrap fade-in">
+    <div class="location-inner">
+      <div class="location-img-wrap">
+        <img src="assets/central-quarter/location-aerial.jpg" alt="Central Quarter location — aerial view across from Stockland Merrylands" loading="lazy">
+      </div>
+      <div class="location-info">
+        <div class="section-eyebrow"><span data-lang="en">Connectivity</span><span data-lang="ko">교통 & 접근성</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">Connected to<br><em>Everywhere</em></span>
+          <span data-lang="ko"><em>어디든</em><br>연결됩니다</span>
+        </h2>
+        <p class="section-sub" data-lang="en">Merrylands Station sits on the T2 Inner West & Leppington Line, with direct trains to Parramatta and the Sydney CBD. Close to the M4 Motorway and Cumberland Highway.</p>
+        <p class="section-sub" data-lang="ko">메릴랜즈역은 T2 이너 웨스트 & 레핑턴 라인에 위치하며, 파라마타와 시드니 CBD로 직접 연결됩니다. M4 고속도로와 컴벌랜드 하이웨이도 가깝습니다.</p>
+        <div class="location-cards">
+          <div class="location-card">
+            <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Parramatta</div><div class="location-name" data-lang="ko">파라마타</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">30<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">200m</div>
+            <div class="location-name" data-lang="en">Merrylands Station</div><div class="location-name" data-lang="ko">메릴랜즈역</div>
+            <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">Across<small data-lang="en"> rd</small></div>
+            <div class="location-name" data-lang="en">Stockland Merrylands</div><div class="location-name" data-lang="ko">Stockland 메릴랜즈</div>
+            <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">M4</div>
+            <div class="location-name" data-lang="en">M4 Motorway & Cumberland Hwy</div><div class="location-name" data-lang="ko">M4 고속도로 & 컴벌랜드 하이웨이</div>
+            <div class="location-mode" data-lang="en">Nearby</div><div class="location-mode" data-lang="ko">인근</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">Bus</div>
+            <div class="location-name" data-lang="en">To Lidcombe, Granville, Bankstown</div><div class="location-name" data-lang="ko">리드컴·그랜빌·뱅크스타운行</div>
+            <div class="location-mode" data-lang="en">Public transport</div><div class="location-mode" data-lang="ko">대중교통</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE -->
+<section class="lifestyle-section" id="lifestyle">
+  <div class="lifestyle-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow"><span data-lang="en">Parks, Recreation & Lifestyle</span><span data-lang="ko">공원 · 레크리에이션 · 라이프스타일</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Nature on Your <em>Doorstep</em></span>
+        <span data-lang="ko"><em>문 앞</em>에 펼쳐진 자연</span>
+      </h2>
+    </div>
+    <div class="lifestyle-grid fade-in">
+      <div class="lifestyle-img">
+        <img src="assets/central-quarter/lifestyle-nature.jpg" alt="Central Gardens Nature Reserve waterfall" loading="lazy">
+        <div class="lifestyle-img-cap">
+          <p data-lang="en">Central Gardens Nature Reserve</p>
+          <p data-lang="ko">센트럴 가든스 자연보호구역</p>
+        </div>
+      </div>
+      <div class="park-list">
+        <div class="park-item">
+          <div class="park-name" data-lang="en">Central Gardens Nature Reserve</div>
+          <div class="park-name" data-lang="ko">센트럴 가든스 자연보호구역</div>
+          <div class="park-desc" data-lang="en">A 12-hectare urban reserve with two adventure playgrounds, native animal enclosures, waterfalls, ponds, bushwalking trails, an amphitheatre and BBQ facilities.</div>
+          <div class="park-desc" data-lang="ko">12헥타르 도심 보호구역 — 어드벤처 놀이터 2곳, 토종 동물 사육장, 폭포, 연못, 부시워킹 트레일, 야외극장, BBQ 시설.</div>
+          <div class="park-meta">12 ha</div>
+        </div>
+        <div class="park-item">
+          <div class="park-name" data-lang="en">Granville Park</div>
+          <div class="park-name" data-lang="ko">그랜빌 파크</div>
+          <div class="park-desc" data-lang="en">A ~13.2-hectare park with open green space, playgrounds, and Eric Tweedale Stadium — a 5,000-capacity rugby venue renovated in 2021.</div>
+          <div class="park-desc" data-lang="ko">약 13.2헥타르 공원 — 녹지, 놀이터, 그리고 2021년 리노베이션된 5,000명 수용 럭비 경기장 에릭 트위들 스타디움.</div>
+          <div class="park-meta">13.2 ha</div>
+        </div>
+        <div class="park-item">
+          <div class="park-name" data-lang="en">Merrylands Park & Holroyd Gardens</div>
+          <div class="park-name" data-lang="ko">메릴랜즈 파크 & 홀로이드 가든스</div>
+          <div class="park-desc" data-lang="en">Cricket, tennis, netball and basketball courts, an adjoining swimming centre, plus shaded picnic and BBQ zones for family weekends.</div>
+          <div class="park-desc" data-lang="ko">크리켓·테니스·넷볼·농구 코트, 인접 수영센터, 그늘진 피크닉 및 BBQ 존으로 가족 주말에 완벽합니다.</div>
+          <div class="park-meta" data-lang="en">Sports & Swimming</div>
+          <div class="park-meta" data-lang="ko">스포츠 & 수영</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOORPLAN BAND -->
+<div class="floorplan-band">
+  <div class="floorplan-wrap fade-in">
+    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Sample Floorplan</span><span data-lang="ko">샘플 평면도</span></div>
+    <h2 class="section-title">
+      <span data-lang="en">1 Bedroom <em>Residence</em></span>
+      <span data-lang="ko">1 베드룸 <em>레지던스</em></span>
+    </h2>
+    <p class="section-sub" style="margin:0 auto" data-lang="en">Total 63 sqm — 52 sqm internal + 11 sqm balcony. Levels 4–20. One of several layouts available across the development.</p>
+    <p class="section-sub" style="margin:0 auto" data-lang="ko">총 63㎡ — 내부 52㎡ + 발코니 11㎡. 레벨 4~20. 단지 내 다양한 평면 중 하나입니다.</p>
+    <div class="floorplan-img">
+      <img src="assets/central-quarter/floorplan.jpg" alt="Central Quarter 1 Bedroom floorplan" loading="lazy">
+    </div>
+    <p class="floorplan-note" data-lang="en">Floorplan is a guide only and does not constitute an offer or contract. Areas and configurations may change.</p>
+    <p class="floorplan-note" data-lang="ko">평면도는 참고용이며 제안이나 계약을 구성하지 않습니다. 면적 및 구성은 변경될 수 있습니다.</p>
+  </div>
+</div>
+
+<!-- LDI -->
+<section class="ldi-section" id="ldi">
+  <div class="ldi-wrap fade-in">
+    <div class="ldi-badge">10</div>
+    <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)"><span data-lang="en">Latent Defects Insurance</span><span data-lang="ko">잠재하자보험 (LDI)</span></div>
+    <h2 class="section-title">
+      <span data-lang="en">10 Years of <em>Protection</em></span>
+      <span data-lang="ko">10년간의 <em>보호</em></span>
+    </h2>
+    <p class="ldi-desc" data-lang="en">Central Quarter is covered by Latent Defects Insurance — providing up to 10 years of protection against significant structural and waterproofing defects from design, material or workmanship issues.</p>
+    <p class="ldi-desc" data-lang="ko">센트럴 쿼터는 잠재하자보험(LDI)으로 보장됩니다 — 설계, 자재, 시공 문제로 인한 중대한 구조적·방수 하자에 대해 최대 10년간 보호를 제공합니다.</p>
+    <p class="ldi-desc" data-lang="en">LDI is voluntary and only available to developers deemed trustworthy by the insurance industry — safeguarding your investment and preserving its long-term value.</p>
+    <p class="ldi-desc" data-lang="ko">LDI는 자발적 보험으로 보험업계가 신뢰할 수 있다고 인정한 디벨로퍼에게만 제공됩니다 — 귀하의 투자를 보호하고 장기적 가치를 보존합니다.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap fade-in">
+    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <h2 class="section-title">
+      <span data-lang="en">Your New Home<br>at <em>Central Quarter</em></span>
+      <span data-lang="ko">센트럴 쿼터에서<br><em>새 보금자리</em>를</span>
+    </h2>
+    <p class="section-sub" style="margin:0 auto;text-align:center" data-lang="en">Contact Sunny Choi at Forise Group for available apartments, floorplans, and a personalised consultation.</p>
+    <p class="section-sub" style="margin:0 auto;text-align:center" data-lang="ko">포라이즈 그룹의 Sunny Choi에게 연락하여 잔여 세대, 평면도, 개인 맞춤 상담을 받으세요.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
+        <span>Sunny Choi — Forise Group</span>
+      </div>
+      <div class="contact-item">
+        <label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label>
+        <a href="tel:0414824225">0414 824 225</a>
+      </div>
+      <div class="contact-item">
+        <label>Email</label>
+        <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
+      </div>
+    </div>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Central%20Quarter%20Merrylands%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Central%20Quarter%20Merrylands." class="contact-cta">
+      <span data-lang="en">Request Information / 분양 문의</span>
+      <span data-lang="ko">분양 문의하기 →</span>
+    </a>
+    <div class="contact-divider"></div>
+    <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Images are artist impressions only. Pricing information is available upon request. Forise Group acts as selling agent. Developed by Northland.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 개발사: Northland.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SunnyApps</div>
+  <div class="footer-copy">Made by SunnyApps. All rights reserved.</div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const b=document.body,dark=b.getAttribute('data-theme')==='dark';
+  b.setAttribute('data-theme',dark?'light':'dark');
+  document.querySelector('.btn-theme').textContent=dark?'☾':'☀';
+  localStorage.setItem('theme',dark?'light':'dark');
+}
+const saved=localStorage.getItem('theme');
+if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
+else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.setAttribute('data-theme','dark');document.querySelector('.btn-theme').textContent='☀';}
+
+let isKo=false;
+function toggleLang(){
+  isKo=!isKo;
+  document.body.classList.toggle('lang-ko',isKo);
+  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+}
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
