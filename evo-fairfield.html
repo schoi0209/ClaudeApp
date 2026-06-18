@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVO Fairfield — An Exciting Evolution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F1;--bg2:#EDE9E2;--fg:#1A1815;--fg2:#46423B;
+  --gold:#A8843E;--gold-light:#C9A458;--gold-pale:rgba(168,132,62,0.1);
+  --charcoal:#1E1C19;
+  --divider:#DAD4C8;--card-bg:#FFFFFF;
+  --hero-bg:#15130F;--hero-text:#F7F2E8;
+  --tag-bg:rgba(168,132,62,0.12);
+  --shadow:0 2px 24px rgba(26,24,21,0.08);
+}
+[data-theme="dark"]{
+  --bg:#121009;--bg2:#1A1710;--fg:#EFE8D8;--fg2:#9C9482;
+  --gold:#C9A458;--gold-light:#E0BE6E;--gold-pale:rgba(201,164,88,0.1);
+  --charcoal:#0E0C09;
+  --divider:#29251C;--card-bg:#1A1710;
+  --hero-bg:#0A0906;--hero-text:#F7F2E8;
+  --tag-bg:rgba(201,164,88,0.12);
+  --shadow:0 2px 24px rgba(0,0,0,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transition:background .3s,color .3s;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;background:rgba(21,19,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,164,88,0.15)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:.14em;color:var(--gold-light);text-decoration:none}
+.nav-logo span{font-family:'Jost',sans-serif;font-size:.7rem;font-weight:400;letter-spacing:.18em;color:rgba(201,164,88,0.5);margin-left:8px}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-lang,.btn-theme{background:rgba(255,255,255,0.06);border:1px solid rgba(201,164,88,0.25);color:var(--gold-light);cursor:pointer;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;padding:6px 14px;transition:all .2s}
+.btn-lang:hover,.btn-theme:hover{background:rgba(201,164,88,0.12);border-color:var(--gold-light)}
+.btn-bmac{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFDD00,#FFC400);color:#1a1200;border:none;border-radius:3px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:7px 14px;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.btn-bmac:hover{opacity:.88}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:var(--hero-bg)}
+.hero-img{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;object-position:center 30%;filter:blur(5px);transform:scale(1.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,9,0.96) 0%,rgba(15,13,9,0.74) 45%,rgba(15,13,9,0.5) 100%)}
+.hero-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent)}
+.hero-badge{position:absolute;top:100px;right:48px;border:1px solid rgba(201,164,88,0.35);color:rgba(201,164,88,0.75);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:2px}
+.hero-content{position:relative;z-index:2;padding:0 60px 80px;max-width:920px}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:36px;height:2px;background:var(--gold-light);flex-shrink:0}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1.0;color:var(--hero-text);margin-bottom:8px}
+.hero-title em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-size:clamp(.9rem,1.5vw,1.15rem);font-weight:300;color:rgba(247,242,232,0.55);letter-spacing:.06em;margin-bottom:44px}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid rgba(201,164,88,0.2);padding-top:28px;margin-top:28px}
+.hero-meta-item label{display:block;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,164,88,0.6);margin-bottom:4px}
+.hero-meta-item span{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;color:var(--hero-text);letter-spacing:.02em}
+.hero-meta-item small{font-size:.72rem;color:rgba(247,242,232,0.4);margin-left:3px}
+.hero-cta{margin-top:44px;display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:#15130F;padding:16px 36px;border-radius:3px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:36px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(201,164,88,0.4);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(201,164,88,0.4),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.3)}}
+
+/* SECTIONS */
+section{padding:100px 60px}
+.section-eyebrow{font-size:.63rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:28px;height:2px;background:var(--gold);flex-shrink:0}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:400;line-height:1.15;color:var(--fg);margin-bottom:18px}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-sub{font-size:.9rem;line-height:1.75;color:var(--fg2);max-width:560px}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1280px;margin:0 auto}
+.about-visual{position:relative;height:560px;overflow:hidden;border-radius:2px}
+.about-visual img{width:100%;height:100%;object-fit:cover;object-position:center}
+.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,9,0.8) 0%,rgba(15,13,9,0.05) 50%)}
+.about-visual-badge{position:absolute;top:28px;left:28px;background:var(--gold);color:#15130F;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border-radius:2px}
+.about-visual-caption{position:absolute;bottom:28px;left:28px;right:28px}
+.about-visual-caption p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(247,242,232,0.85)}
+.about-body{font-size:.92rem;line-height:1.85;color:var(--fg2);margin-bottom:24px}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tag{background:var(--tag-bg);border:1px solid rgba(168,132,62,0.2);color:var(--gold);font-size:.66rem;letter-spacing:.1em;padding:6px 14px;border-radius:2px;font-weight:500}
+
+/* SPECS STRIP */
+.specs-strip{background:var(--gold)}
+.specs-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.spec-item{text-align:center;padding:36px 20px;border-right:1px solid rgba(255,255,255,0.18)}
+.spec-item:last-child{border-right:none}
+.spec-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:400;line-height:1;margin-bottom:6px;color:#fff}
+.spec-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+
+/* BUILDING BAND */
+.building-band{width:100%;height:480px;position:relative;overflow:hidden}
+.building-band img{width:100%;height:100%;object-fit:cover;object-position:center 50%}
+.building-band-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,13,9,0.6) 0%,transparent 55%)}
+.building-band-caption{position:absolute;bottom:40px;left:60px;color:var(--hero-text)}
+.building-band-caption h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;margin-bottom:6px}
+.building-band-caption p{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,232,0.6)}
+
+/* INTERIORS */
+.interiors-section{background:var(--hero-bg)}
+.interiors-wrap{max-width:1280px;margin:0 auto}
+.interiors-intro{margin-bottom:50px}
+.interiors-intro .section-eyebrow{color:var(--gold-light)}
+.interiors-intro .section-eyebrow::before{background:var(--gold-light)}
+.interiors-intro .section-title{color:var(--hero-text)}
+.interiors-intro .section-sub{color:rgba(247,242,232,0.5)}
+.interiors-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.interior-card{position:relative;height:440px;overflow:hidden}
+.interior-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.interior-card:hover img{transform:scale(1.04)}
+.interior-card-label{position:absolute;bottom:0;left:0;right:0;padding:28px 30px;background:linear-gradient(to top,rgba(15,13,9,0.88) 0%,transparent 100%)}
+.interior-card-label h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--hero-text);margin-bottom:4px}
+.interior-card-label p{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,164,88,0.75)}
+.finishes-list{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:3px}
+.finish-item{background:var(--card-bg);padding:24px 28px}
+.finish-item .fi-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px}
+.finish-item .fi-val{font-size:.88rem;color:var(--fg);font-weight:500}
+
+/* AMENITIES */
+.amenities-wrap{max-width:1280px;margin:0 auto}
+.amenities-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start}
+.amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.amenity-card{background:var(--card-bg);padding:40px 36px;border-top:3px solid transparent;transition:border-color .3s,background .3s}
+.amenity-card:hover{border-top-color:var(--gold);background:var(--bg2)}
+.amenity-icon{font-size:1.9rem;margin-bottom:18px}
+.amenity-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--fg);margin-bottom:8px}
+.amenity-desc{font-size:.8rem;color:var(--fg2);line-height:1.65}
+
+/* PODIUM BAND */
+.podium-band{width:100%;height:520px;position:relative;overflow:hidden}
+.podium-band img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.podium-band-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,9,0.55) 0%,transparent 50%)}
+.podium-band-caption{position:absolute;bottom:40px;left:60px;color:var(--hero-text)}
+.podium-band-caption h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;margin-bottom:6px}
+.podium-band-caption p{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,232,0.6)}
+
+/* LOCATION */
+.location-section{background:var(--hero-bg);color:var(--hero-text)}
+.location-wrap{max-width:1280px;margin:0 auto}
+.location-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.location-img-wrap{position:relative;height:520px;overflow:hidden;border-radius:2px}
+.location-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
+.location-info .section-eyebrow{color:var(--gold-light)}
+.location-info .section-eyebrow::before{background:var(--gold-light)}
+.location-info .section-title{color:var(--hero-text)}
+.location-info .section-sub{color:rgba(247,242,232,0.5)}
+.location-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:36px;background:rgba(201,164,88,0.12)}
+.location-card{background:rgba(255,255,255,0.03);padding:24px 22px;transition:background .3s}
+.location-card:hover{background:rgba(201,164,88,0.07)}
+.location-dist{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--gold-light);line-height:1;margin-bottom:4px}
+.location-dist small{font-size:.9rem;color:rgba(201,164,88,0.6)}
+.location-name{font-size:.8rem;color:rgba(247,242,232,0.72);margin-bottom:2px}
+.location-mode{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,232,0.3)}
+
+/* STATS */
+.stats-section{background:var(--bg2)}
+.stats-wrap{max-width:1280px;margin:0 auto}
+.stats-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px;align-items:start}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.stat-card{background:var(--card-bg);padding:40px 36px;border-left:3px solid transparent;transition:border-color .3s}
+.stat-card:hover{border-left-color:var(--gold)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:400;color:var(--gold);line-height:1;margin-bottom:10px}
+.stat-label{font-size:.8rem;color:var(--fg);font-weight:500;margin-bottom:6px}
+.stat-sub{font-size:.72rem;color:var(--fg2)}
+
+/* DEVELOPER */
+.developer-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.developer-visual{height:420px;background:var(--bg2);display:flex;align-items:center;justify-content:center;border:1px solid var(--divider);position:relative;overflow:hidden}
+.developer-visual::before{content:'L33';position:absolute;font-family:'Cormorant Garamond',serif;font-size:11rem;font-weight:300;color:var(--divider);opacity:.4;letter-spacing:-.04em}
+.developer-logo-text{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:400;color:var(--fg);letter-spacing:.04em;position:relative;z-index:1;text-align:center;line-height:1.2}
+.developer-logo-text small{display:block;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:8px}
+.developer-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:36px}
+.dev-stat{padding:24px;background:var(--tag-bg);border:1px solid rgba(168,132,62,0.15)}
+.dev-stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--gold);line-height:1;margin-bottom:4px}
+.dev-stat-label{font-size:.7rem;color:var(--fg2);letter-spacing:.04em}
+
+/* CONTACT */
+.contact-section{background:var(--hero-bg);color:var(--hero-text);text-align:center}
+.contact-wrap{max-width:680px;margin:0 auto}
+.contact-wrap .section-title{color:var(--hero-text)}
+.contact-wrap .section-sub{color:rgba(247,242,232,0.5);margin:0 auto 0}
+.contact-info{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:44px;margin-top:36px}
+.contact-item label{display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,164,88,0.6);margin-bottom:6px;font-weight:600}
+.contact-item a,.contact-item span{font-size:.9rem;color:rgba(247,242,232,0.85);text-decoration:none}
+.contact-item a:hover{color:var(--gold-light)}
+.contact-cta{display:inline-block;background:var(--gold);color:#15130F;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:3px;transition:all .25s}
+.contact-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+.contact-divider{margin:32px auto;width:1px;height:40px;background:rgba(201,164,88,0.2)}
+.contact-disclaimer{font-size:.7rem;color:rgba(247,242,232,0.25);line-height:1.65}
+
+/* FOOTER */
+footer{background:var(--charcoal);border-top:1px solid rgba(201,164,88,0.1);padding:36px 60px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-light)}
+.footer-copy{font-size:.7rem;color:rgba(247,242,232,0.28)}
+
+/* LANG */
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:block}
+body.lang-ko .hero-cta .ko-t{display:inline}
+body.lang-ko .hero-cta .en-t{display:none}
+.hero-cta .ko-t{display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  section{padding:70px 24px}
+  .hero-content{padding:0 24px 60px}
+  .about-wrap,.amenities-intro,.stats-header,.location-inner,.developer-wrap{grid-template-columns:1fr;gap:40px}
+  .interiors-grid{grid-template-columns:1fr}
+  .amenities-grid,.stats-grid{grid-template-columns:1fr 1fr}
+  .specs-wrap{grid-template-columns:1fr 1fr}
+  .spec-item:nth-child(2){border-right:none}
+  .location-cards{grid-template-columns:1fr 1fr}
+  .about-visual,.location-img-wrap{height:320px}
+  .building-band,.podium-band{height:320px}
+  .building-band-caption,.podium-band-caption{left:24px;bottom:24px}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px}
+  .hero-badge,.hero-scroll{display:none}
+}
+@media(max-width:600px){
+  .amenities-grid,.stats-grid,.location-cards,.specs-wrap,.finishes-list,.hero-meta,.developer-stats{grid-template-columns:1fr}
+  .spec-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.18)}
+  .contact-info{gap:20px}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">EVO<span>FAIRFIELD</span></a>
+  <div class="nav-actions">
+    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <button class="btn-theme" onclick="toggleTheme()">☾</button>
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <img class="hero-img" src="assets/evo-fairfield/hero.jpg" alt="EVO Fairfield — Artist Impression" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-badge" data-lang="en">FAIRFIELD NSW 2165</div>
+  <div class="hero-badge" data-lang="ko">페어필드 NSW 2165</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-lang="en">An Exciting Evolution · by Level 33</div>
+    <div class="hero-eyebrow" data-lang="ko">An Exciting Evolution · by Level 33</div>
+    <h1 class="hero-title">
+      <span data-lang="en">The Beating Heart<br>of <em>Fairfield</em></span>
+      <span data-lang="ko">페어필드의<br><em>심장부</em></span>
+    </h1>
+    <p class="hero-sub" data-lang="en">A New Level of Luxury — Four Innovatively Designed Buildings on Horsley Drive</p>
+    <p class="hero-sub" data-lang="ko">새로운 차원의 럭셔리 — 호슬리 드라이브의 혁신적인 4개 빌딩</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <label data-lang="en">Buildings</label><label data-lang="ko">빌딩 수</label>
+        <span>4<small data-lang="en"> towers</small><small data-lang="ko"> 동</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">Apartments</label><label data-lang="ko">주거 타입</label>
+        <span>1–3<small data-lang="en"> bed</small><small data-lang="ko"> 베드</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">To Train Station</label><label data-lang="ko">기차역까지</label>
+        <span>350<small>m</small></span>
+      </div>
+      <div class="hero-meta-item">
+        <label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label>
+        <span>15<small data-lang="en"> min</small><small data-lang="ko"> 분</small></span>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta">
+      <span class="en-t" data-lang="en">Request Information</span>
+      <span class="ko-t" data-lang="ko">분양 문의하기</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap fade-in">
+    <div class="about-visual">
+      <img src="assets/evo-fairfield/building-exterior.jpg" alt="EVO Fairfield — Artist Impression" loading="lazy">
+      <div class="about-visual-overlay"></div>
+      <div class="about-visual-badge" data-lang="en">Horsley Drive, Fairfield</div>
+      <div class="about-visual-badge" data-lang="ko">호슬리 드라이브, 페어필드</div>
+      <div class="about-visual-caption">
+        <p data-lang="en">Four buildings among landscaped surrounds</p>
+        <p data-lang="ko">조경된 환경 속 4개 빌딩</p>
+      </div>
+    </div>
+    <div>
+      <div class="section-eyebrow"><span data-lang="en">An Exciting Evolution</span><span data-lang="ko">새로운 진화</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">EVO <em>Fairfield</em></span>
+        <span data-lang="ko">EVO <em>페어필드</em></span>
+      </h2>
+      <p class="about-body" data-lang="en">Bringing a new level of luxury to the area, EVO represents the significant evolution and transformation of Fairfield. Acclaimed developers and architects Level 33 have brought this unique vision to life with a collection of four innovatively designed buildings set among beautifully landscaped surrounds.</p>
+      <p class="about-body" data-lang="ko">이 지역에 새로운 차원의 럭셔리를 선사하는 EVO는 페어필드의 의미 있는 진화와 변화를 상징합니다. 명망 있는 디벨로퍼이자 건축가인 Level 33이 아름답게 조경된 환경 속에 혁신적으로 디자인된 4개의 빌딩으로 이 독창적인 비전을 실현했습니다.</p>
+      <p class="about-body" data-lang="en">A collection of carefully considered one, two and three-bedroom apartments — a select number featuring a unique design — command views of Parramatta, the city skyline or the Blue Mountains to the west, with café and retail spaces at ground level bringing life to the precinct.</p>
+      <p class="about-body" data-lang="ko">정교하게 설계된 1·2·3베드룸 아파트 컬렉션은 일부 독특한 디자인을 갖추고 있으며, 파라마타, 시티 스카이라인, 서쪽 블루마운틴의 전망을 자랑합니다. 지상층의 카페와 리테일 공간이 단지에 활기를 더합니다.</p>
+      <div class="about-tags">
+        <span class="tag" data-lang="en">Four Buildings</span><span class="tag" data-lang="ko">4개 빌딩</span>
+        <span class="tag" data-lang="en">1–3 Bedroom</span><span class="tag" data-lang="ko">1~3베드룸</span>
+        <span class="tag" data-lang="en">Podium Garden</span><span class="tag" data-lang="ko">포디움 가든</span>
+        <span class="tag" data-lang="en">Rooftop Terraces</span><span class="tag" data-lang="ko">루프탑 테라스</span>
+        <span class="tag" data-lang="en">Ground-Level Retail</span><span class="tag" data-lang="ko">지상층 리테일</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS STRIP -->
+<div class="specs-strip">
+  <div class="specs-wrap">
+    <div class="spec-item">
+      <div class="spec-num">4</div>
+      <div class="spec-label" data-lang="en">Buildings</div><div class="spec-label" data-lang="ko">빌딩</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">1–3</div>
+      <div class="spec-label" data-lang="en">Bedroom Types</div><div class="spec-label" data-lang="ko">베드룸 타입</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">350m</div>
+      <div class="spec-label" data-lang="en">To Train Station</div><div class="spec-label" data-lang="ko">기차역까지</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-num">15<span style="font-size:1.4rem">min</span></div>
+      <div class="spec-label" data-lang="en">To Parramatta</div><div class="spec-label" data-lang="ko">파라마타까지</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUILDING BAND -->
+<div class="building-band">
+  <img src="assets/evo-fairfield/building-exterior.jpg" alt="EVO Fairfield street level — Artist Impression" loading="lazy">
+  <div class="building-band-overlay"></div>
+  <div class="building-band-caption">
+    <h3 data-lang="en">Architectural Innovation</h3>
+    <h3 data-lang="ko">건축적 혁신</h3>
+    <p data-lang="en">Horsley Drive, Fairfield · Artist Impression</p>
+    <p data-lang="ko">호슬리 드라이브, 페어필드 · 조감도</p>
+  </div>
+</div>
+
+<!-- INTERIORS -->
+<section class="interiors-section" id="interiors">
+  <div class="interiors-wrap fade-in">
+    <div class="interiors-intro">
+      <div class="section-eyebrow"><span data-lang="en">Interiors & Finishes</span><span data-lang="ko">인테리어 & 마감</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">A Fusion of <em>Style & Comfort</em></span>
+        <span data-lang="ko">스타일과 편안함의 <em>융합</em></span>
+      </h2>
+      <p class="section-sub" data-lang="en">Ambient living spaces flow seamlessly to generous balconies and private courtyard gardens, with quality Franke appliances and refined finishes throughout.</p>
+      <p class="section-sub" data-lang="ko">은은한 거실 공간이 넓은 발코니와 프라이빗 코트야드 정원으로 자연스럽게 이어지며, 고급 Franke 가전과 세련된 마감재가 전체에 적용되었습니다.</p>
+    </div>
+    <div class="interiors-grid">
+      <div class="interior-card">
+        <img src="assets/evo-fairfield/interior-living.jpg" alt="Living room — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">Living</h4><h4 data-lang="ko">거실</h4>
+          <p data-lang="en">City & Blue Mountains views · Artist Impression</p>
+          <p data-lang="ko">시티 & 블루마운틴 전망 · 조감도</p>
+        </div>
+      </div>
+      <div class="interior-card">
+        <img src="assets/evo-fairfield/interior-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4>
+          <p data-lang="en">Franke stainless appliances · Artist Impression</p>
+          <p data-lang="ko">Franke 스테인리스 가전 · 조감도</p>
+        </div>
+      </div>
+      <div class="interior-card">
+        <img src="assets/evo-fairfield/interior-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy">
+        <div class="interior-card-label">
+          <h4 data-lang="en">Bathroom</h4><h4 data-lang="ko">욕실</h4>
+          <p data-lang="en">Floor-to-ceiling tiling · Artist Impression</p>
+          <p data-lang="ko">천장까지 이어진 타일 · 조감도</p>
+        </div>
+      </div>
+    </div>
+    <div class="finishes-list">
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Kitchen Appliances</div><div class="fi-label" data-lang="ko">주방 가전</div>
+        <div class="fi-val" data-lang="en">Quality Franke stainless steel appliances</div>
+        <div class="fi-val" data-lang="ko">고급 Franke 스테인리스 스틸 가전</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Outdoor Space</div><div class="fi-label" data-lang="ko">야외 공간</div>
+        <div class="fi-val" data-lang="en">Generous balconies or private courtyard gardens</div>
+        <div class="fi-val" data-lang="ko">넓은 발코니 또는 프라이빗 코트야드 정원</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Views</div><div class="fi-label" data-lang="ko">전망</div>
+        <div class="fi-val" data-lang="en">Parramatta, city skyline or Blue Mountains aspects</div>
+        <div class="fi-val" data-lang="ko">파라마타, 시티 스카이라인, 블루마운틴 전망</div>
+      </div>
+      <div class="finish-item">
+        <div class="fi-label" data-lang="en">Design</div><div class="fi-label" data-lang="ko">디자인</div>
+        <div class="fi-val" data-lang="en">Ambient open-plan living, select unique layouts</div>
+        <div class="fi-val" data-lang="ko">은은한 오픈플랜 거실, 일부 독창적 평면</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+  <div class="amenities-wrap">
+    <div class="amenities-intro fade-in">
+      <div>
+        <div class="section-eyebrow"><span data-lang="en">Amenities & Wellness</span><span data-lang="ko">편의시설 & 웰니스</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">An Alfresco<br><em>Sanctuary</em></span>
+          <span data-lang="ko">알프레스코<br><em>안식처</em></span>
+        </h2>
+      </div>
+      <div>
+        <p class="section-sub" data-lang="en">A beautifully landscaped podium garden sits at the heart of the development — a serene haven of greenery to relax, unwind and connect. Two buildings feature extensively landscaped rooftop terraces: sanctuaries in the sky with sweeping district, city and Blue Mountains views.</p>
+        <p class="section-sub" data-lang="ko">아름답게 조경된 포디움 가든이 단지의 중심에 자리합니다 — 휴식하고 교류할 수 있는 고요한 녹지의 안식처입니다. 두 개의 빌딩에는 광활하게 조경된 루프탑 테라스가 있어, 지역·시티·블루마운틴의 탁 트인 전망을 품은 '하늘 위 안식처'를 선사합니다.</p>
+      </div>
+    </div>
+    <div class="amenities-grid fade-in">
+      <div class="amenity-card">
+        <div class="amenity-icon">🌳</div>
+        <div class="amenity-name" data-lang="en">Podium Garden</div>
+        <div class="amenity-name" data-lang="ko">포디움 가든</div>
+        <div class="amenity-desc" data-lang="en">A beautifully landscaped garden at the heart of the development — a serene green haven to relax and meet neighbours.</div>
+        <div class="amenity-desc" data-lang="ko">단지 중심부의 아름답게 조경된 정원 — 휴식하고 이웃과 교류하는 고요한 녹지 안식처입니다.</div>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🏙️</div>
+        <div class="amenity-name" data-lang="en">Rooftop Terraces</div>
+        <div class="amenity-name" data-lang="ko">루프탑 테라스</div>
+        <div class="amenity-desc" data-lang="en">Two buildings feature landscaped rooftop terraces with sweeping district, city and Blue Mountains views.</div>
+        <div class="amenity-desc" data-lang="ko">두 빌딩의 조경된 루프탑 테라스에서 지역·시티·블루마운틴의 탁 트인 전망을 누립니다.</div>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">💪</div>
+        <div class="amenity-name" data-lang="en">Gym & Pools</div>
+        <div class="amenity-name" data-lang="ko">짐 & 수영장</div>
+        <div class="amenity-desc" data-lang="en">On-site wellness facilities including a gym, plus indoor and outdoor pools for residents.</div>
+        <div class="amenity-desc" data-lang="ko">짐과 실내외 수영장을 포함한 단지 내 웰니스 시설을 입주민에게 제공합니다.</div>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🍽️</div>
+        <div class="amenity-name" data-lang="en">Courtyard Gardens</div>
+        <div class="amenity-name" data-lang="ko">코트야드 정원</div>
+        <div class="amenity-desc" data-lang="en">Private courtyard gardens provide an inviting environment for alfresco entertaining with family and friends.</div>
+        <div class="amenity-desc" data-lang="ko">프라이빗 코트야드 정원이 가족·친구와 함께하는 알프레스코 모임에 완벽한 환경을 제공합니다.</div>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🛍️</div>
+        <div class="amenity-name" data-lang="en">Ground-Level Retail</div>
+        <div class="amenity-name" data-lang="ko">지상층 리테일</div>
+        <div class="amenity-desc" data-lang="en">Café and retail spaces at ground level bring life and convenience right to the precinct's doorstep.</div>
+        <div class="amenity-desc" data-lang="ko">지상층의 카페와 리테일 공간이 단지에 활기와 편리함을 더합니다.</div>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🌿</div>
+        <div class="amenity-name" data-lang="en">Landscaped Surrounds</div>
+        <div class="amenity-name" data-lang="ko">조경된 환경</div>
+        <div class="amenity-desc" data-lang="en">Four buildings set among beautifully landscaped surrounds, with greenery woven throughout the precinct.</div>
+        <div class="amenity-desc" data-lang="ko">아름답게 조경된 환경 속 4개 빌딩, 단지 전체에 녹지가 어우러집니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PODIUM BAND -->
+<div class="podium-band">
+  <img src="assets/evo-fairfield/podium-garden.jpg" alt="EVO Fairfield podium garden — Artist Impression" loading="lazy">
+  <div class="podium-band-overlay"></div>
+  <div class="podium-band-caption">
+    <h3 data-lang="en">A Serene Haven of Greenery</h3>
+    <h3 data-lang="ko">고요한 녹지의 안식처</h3>
+    <p data-lang="en">Landscaped Podium Garden · Artist Impression</p>
+    <p data-lang="ko">조경된 포디움 가든 · 조감도</p>
+  </div>
+</div>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-wrap fade-in">
+    <div class="location-inner">
+      <div class="location-img-wrap">
+        <img src="assets/evo-fairfield/location-aerial.jpg" alt="Fairfield aerial view" loading="lazy">
+      </div>
+      <div class="location-info">
+        <div class="section-eyebrow"><span data-lang="en">The World at Your Feet</span><span data-lang="ko">발 아래 펼쳐진 세상</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">A Strong Sense<br>of <em>Connection</em></span>
+          <span data-lang="ko">강력한<br><em>연결성</em></span>
+        </h2>
+        <p class="section-sub" data-lang="en">Stroll just 350 metres to Fairfield train station and reach Parramatta in 15 minutes. Neeta City Shopping Centre sits directly opposite, with everything you need — transport, shopping, dining and education — within walking distance.</p>
+        <p class="section-sub" data-lang="ko">페어필드 기차역까지 단 350m 도보, 파라마타까지 15분이면 도착합니다. Neeta City 쇼핑센터가 바로 맞은편에 있으며, 교통·쇼핑·다이닝·교육 등 필요한 모든 것이 도보 거리에 있습니다.</p>
+        <div class="location-cards">
+          <div class="location-card">
+            <div class="location-dist">350<small>m</small></div>
+            <div class="location-name" data-lang="en">Fairfield Train Station</div><div class="location-name" data-lang="ko">페어필드 기차역</div>
+            <div class="location-mode" data-lang="en">5 min walk</div><div class="location-mode" data-lang="ko">도보 5분</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">15<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Parramatta</div><div class="location-name" data-lang="ko">파라마타</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">Opposite</div>
+            <div class="location-name" data-lang="en">Neeta City Shopping Centre</div><div class="location-name" data-lang="ko">Neeta City 쇼핑센터</div>
+            <div class="location-mode" data-lang="en">Directly across</div><div class="location-mode" data-lang="ko">바로 맞은편</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">15<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Liverpool</div><div class="location-name" data-lang="ko">리버풀</div>
+            <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">15<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Sydney Olympic Park</div><div class="location-name" data-lang="ko">시드니 올림픽 파크</div>
+            <div class="location-mode" data-lang="en">Nearby</div><div class="location-mode" data-lang="ko">인근</div>
+          </div>
+          <div class="location-card">
+            <div class="location-dist">40<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
+            <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section" id="suburb">
+  <div class="stats-wrap">
+    <div class="stats-header fade-in">
+      <div>
+        <div class="section-eyebrow"><span data-lang="en">A Smart Investment</span><span data-lang="ko">스마트한 투자</span></div>
+        <h2 class="section-title">
+          <span data-lang="en">Fairfield —<br><em>Continuous Growth</em></span>
+          <span data-lang="ko">페어필드 —<br><em>지속적 성장</em></span>
+        </h2>
+      </div>
+      <div>
+        <p class="section-sub" data-lang="en">Statistics over the past decade highlight Fairfield as a suburb undergoing continuous growth and transformation — with rising population, a growing investor market, and an increasingly professional workforce.</p>
+        <p class="section-sub" data-lang="ko">지난 10년간의 통계는 페어필드가 지속적인 성장과 변화를 겪고 있는 지역임을 보여줍니다 — 인구 증가, 투자자 시장 확대, 전문직 인구의 꾸준한 증가가 그 특징입니다.</p>
+      </div>
+    </div>
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-num">+16.7%</div>
+        <div class="stat-label" data-lang="en">Population Growth</div><div class="stat-label" data-lang="ko">인구 증가율</div>
+        <div class="stat-sub" data-lang="en">2006–2016 · 15,483 → 18,081</div><div class="stat-sub" data-lang="ko">2006–2016 · 15,483 → 18,081명</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">55%</div>
+        <div class="stat-label" data-lang="en">Homes Rented (2016)</div><div class="stat-label" data-lang="ko">임대 가구 비율 (2016)</div>
+        <div class="stat-sub" data-lang="en">Up from 46.9% in 2006 — growing investor market</div><div class="stat-sub" data-lang="ko">2006년 46.9% → 투자자 시장 확대</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">13.9%</div>
+        <div class="stat-label" data-lang="en">Professionals</div><div class="stat-label" data-lang="ko">전문직 비율</div>
+        <div class="stat-sub" data-lang="en">Up from 11.1% in 2006</div><div class="stat-sub" data-lang="ko">2006년 11.1%에서 증가</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24<small style="font-size:1.2rem">+</small></div>
+        <div class="stat-label" data-lang="en">Schools in Fairfield</div><div class="stat-label" data-lang="ko">페어필드 내 학교 수</div>
+        <div class="stat-sub" data-lang="en">Private & public institutions</div><div class="stat-sub" data-lang="ko">사립 및 공립 교육기관</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4.4<small style="font-size:1.2rem">km²</small></div>
+        <div class="stat-label" data-lang="en">Suburb Size</div><div class="stat-label" data-lang="ko">지역 면적</div>
+        <div class="stat-sub" data-lang="en">Compact, walkable urban precinct</div><div class="stat-sub" data-lang="ko">콤팩트하고 보행 친화적인 도심</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">¾</div>
+        <div class="stat-label" data-lang="en">Family Households</div><div class="stat-label" data-lang="ko">가족 가구 비중</div>
+        <div class="stat-sub" data-lang="en">Couples & families with children</div><div class="stat-sub" data-lang="ko">자녀가 있는 커플·가족 가구</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER -->
+<section id="developer">
+  <div class="developer-wrap fade-in">
+    <div class="developer-visual">
+      <div class="developer-logo-text">Level 33<small data-lang="en">Developer & Architect</small><small data-lang="ko">디벨로퍼 & 건축가</small></div>
+    </div>
+    <div>
+      <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">Crafted by <em>Level 33</em></span>
+        <span data-lang="ko"><em>Level 33</em>의 작품</span>
+      </h2>
+      <p class="section-sub" data-lang="en">Acclaimed developers and architects, Level 33 specialise in all areas of the construction process — assigning the most experienced, talented professionals to suit every individual project. EVO Fairfield showcases an exceptional calibre of craftsmanship and finishes.</p>
+      <p class="section-sub" data-lang="ko">명망 있는 디벨로퍼이자 건축가인 Level 33은 건설 전 과정을 아우르는 전문성을 갖추고, 각 프로젝트에 가장 경험 많고 재능 있는 전문가를 배치합니다. EVO 페어필드는 탁월한 수준의 장인정신과 마감을 보여줍니다.</p>
+      <div class="developer-stats">
+        <div class="dev-stat">
+          <div class="dev-stat-num">4</div>
+          <div class="dev-stat-label" data-lang="en">Innovatively Designed Buildings</div><div class="dev-stat-label" data-lang="ko">혁신적으로 설계된 빌딩</div>
+        </div>
+        <div class="dev-stat">
+          <div class="dev-stat-num">100%</div>
+          <div class="dev-stat-label" data-lang="en">In-House Construction Expertise</div><div class="dev-stat-label" data-lang="ko">자체 건설 전문성</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-wrap fade-in">
+    <div class="section-eyebrow" style="justify-content:center;color:var(--gold-light)"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <h2 class="section-title">
+      <span data-lang="en">Your New Home<br>at <em>EVO Fairfield</em></span>
+      <span data-lang="ko">EVO 페어필드에서<br><em>새 보금자리</em>를</span>
+    </h2>
+    <p class="section-sub" data-lang="en">Contact Sunny Choi at Forise Group for available apartments, floorplans, and a personalised consultation.</p>
+    <p class="section-sub" data-lang="ko">포라이즈 그룹의 Sunny Choi에게 연락하여 잔여 세대, 평면도, 개인 맞춤 상담을 받으세요.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
+        <span>Sunny Choi — Forise Group</span>
+      </div>
+      <div class="contact-item">
+        <label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label>
+        <a href="tel:0414824225">0414 824 225</a>
+      </div>
+      <div class="contact-item">
+        <label>Email</label>
+        <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
+      </div>
+    </div>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=EVO%20Fairfield%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20EVO%20Fairfield." class="contact-cta">
+      <span data-lang="en">Request Information / 분양 문의</span>
+      <span data-lang="ko">분양 문의하기 →</span>
+    </a>
+    <div class="contact-divider"></div>
+    <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Images are artist impressions only. Pricing information is available upon request. Forise Group acts as selling agent. Developed by Level 33.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 개발사: Level 33.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SunnyApps</div>
+  <div class="footer-copy">Made by SunnyApps. All rights reserved.</div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const b=document.body,dark=b.getAttribute('data-theme')==='dark';
+  b.setAttribute('data-theme',dark?'light':'dark');
+  document.querySelector('.btn-theme').textContent=dark?'☾':'☀';
+  localStorage.setItem('theme',dark?'light':'dark');
+}
+const saved=localStorage.getItem('theme');
+if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
+else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.setAttribute('data-theme','dark');document.querySelector('.btn-theme').textContent='☀';}
+
+let isKo=false;
+function toggleLang(){
+  isKo=!isKo;
+  document.body.classList.toggle('lang-ko',isKo);
+  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+}
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
