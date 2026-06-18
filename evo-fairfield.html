@@ -100,6 +100,23 @@ section{padding:100px 60px}
 .building-band-caption h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;margin-bottom:6px}
 .building-band-caption p{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,232,0.6)}
 
+/* PRICE HIGHLIGHT (one-time 2-bed) */
+.price-section{background:var(--bg2)}
+.price-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center}
+.price-fp{background:#fff;border:1px solid var(--divider);border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+.price-fp img{width:100%;display:block}
+.price-fp-cap{padding:14px 22px;font-size:.72rem;letter-spacing:.06em;color:var(--fg2);border-top:1px solid var(--divider);text-align:center}
+.price-info .section-eyebrow{color:var(--gold)}
+.price-info .section-eyebrow::before{background:var(--gold)}
+.price-badge{display:inline-flex;align-items:baseline;gap:8px;background:var(--gold);color:#15130F;padding:14px 26px;border-radius:4px;margin:6px 0 26px}
+.price-badge .pb-from{font-family:'Jost',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.price-badge .pb-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;line-height:1}
+.price-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:28px 0;background:var(--divider);border:1px solid var(--divider)}
+.price-spec{background:var(--card-bg);padding:20px 18px;text-align:center}
+.price-spec .ps-num{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:500;color:var(--gold);line-height:1}
+.price-spec .ps-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);margin-top:6px}
+.price-note{font-size:.72rem;color:var(--fg2);opacity:.7;line-height:1.6;margin-top:6px}
+
 /* INTERIORS */
 .interiors-section{background:var(--hero-bg)}
 .interiors-wrap{max-width:1280px;margin:0 auto}
@@ -211,6 +228,7 @@ body.lang-ko .hero-cta .en-t{display:none}
   section{padding:70px 24px}
   .hero-content{padding:0 24px 60px}
   .about-wrap,.amenities-intro,.stats-header,.location-inner,.developer-wrap{grid-template-columns:1fr;gap:40px}
+  .price-wrap{grid-template-columns:1fr;gap:36px}
   .interiors-grid{grid-template-columns:1fr}
   .amenities-grid,.stats-grid{grid-template-columns:1fr 1fr}
   .specs-wrap{grid-template-columns:1fr 1fr}
@@ -354,6 +372,47 @@ body.lang-ko .hero-cta .en-t{display:none}
     <p data-lang="ko">호슬리 드라이브, 페어필드 · 조감도</p>
   </div>
 </div>
+
+<!-- PRICE HIGHLIGHT (2-bed) -->
+<section class="price-section" id="value">
+  <div class="price-wrap fade-in">
+    <div class="price-fp">
+      <img src="assets/evo-fairfield/floorplan-2bed.jpg" alt="EVO Fairfield 2-bedroom floorplan — Apartment 235, Building A" loading="lazy">
+      <div class="price-fp-cap" data-lang="en">2 Bedroom · Apartment 235 · Building A · Level 1/2</div>
+      <div class="price-fp-cap" data-lang="ko">2베드룸 · 235호 · A동 · 복층 (Level 1/2)</div>
+    </div>
+    <div class="price-info">
+      <div class="section-eyebrow"><span data-lang="en">Exceptional Value</span><span data-lang="ko">탁월한 가치</span></div>
+      <h2 class="section-title">
+        <span data-lang="en">2-Bedroom Homes<br>from <em>Under $600k</em></span>
+        <span data-lang="ko">2베드룸<br><em>60만 불 미만</em>부터</span>
+      </h2>
+      <div class="price-badge">
+        <span class="pb-from" data-lang="en">From</span>
+        <span class="pb-from" data-lang="ko">시작가</span>
+        <span class="pb-num">$585,000</span>
+      </div>
+      <p class="section-sub" data-lang="en">A rare opportunity to secure a spacious two-bedroom, two-bathroom home with a car space at EVO Fairfield — starting from under $600,000. With Fairfield station just 350m away and Parramatta 15 minutes by train, this is outstanding value in one of Western Sydney's fastest-growing precincts.</p>
+      <p class="section-sub" data-lang="ko">EVO 페어필드에서 주차 공간을 갖춘 넓은 2베드·2배스 주택을 60만 불 미만부터 확보할 수 있는 흔치 않은 기회입니다. 페어필드역까지 단 350m, 파라마타까지 기차로 15분 — 웨스턴 시드니에서 가장 빠르게 성장하는 지역의 탁월한 가치입니다.</p>
+      <div class="price-specs">
+        <div class="price-spec">
+          <div class="ps-num">2</div>
+          <div class="ps-lbl" data-lang="en">Bed / Bath</div><div class="ps-lbl" data-lang="ko">베드 / 배스</div>
+        </div>
+        <div class="price-spec">
+          <div class="ps-num">1</div>
+          <div class="ps-lbl" data-lang="en">Car Space</div><div class="ps-lbl" data-lang="ko">주차</div>
+        </div>
+        <div class="price-spec">
+          <div class="ps-num">92<small style="font-size:.9rem">m²</small></div>
+          <div class="ps-lbl" data-lang="en">Total (74 + 18)</div><div class="ps-lbl" data-lang="ko">전체 (74+18)</div>
+        </div>
+      </div>
+      <p class="price-note" data-lang="en">* Starting price for a select two-bedroom apartment. Price is indicative, subject to availability and change without notice. Contact the agent for current pricing and available stock.</p>
+      <p class="price-note" data-lang="ko">* 일부 2베드룸 세대 시작가 기준입니다. 가격은 참고용이며 공급 상황에 따라 사전 예고 없이 변경될 수 있습니다. 현재 가격과 잔여 세대는 에이전트에게 문의하세요.</p>
+    </div>
+  </div>
+</section>
 
 <!-- INTERIORS -->
 <section class="interiors-section" id="interiors">
