@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Macquarie Collection — Price List</title>
+<title>The Macquarie Collection — Price List Jun 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f7f9;--surface:#fff;--surface2:#edf1f5;--surface3:#e0e6ed;--border:rgba(20,50,90,.09);--border2:rgba(20,50,90,.18);--ink:#0e1e30;--muted:#5a7090;--muted2:#a8bccc;--accent:#1a3d6e;--accent-l:rgba(26,61,110,.07);--gold:#a07020;--gold-l:rgba(160,112,32,.08);--green:#1e6840;--green-l:rgba(30,104,64,.08);--sky:#1a6090;--sky-l:rgba(26,96,144,.07);--net:#1a5a32;}
@@ -119,14 +119,14 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   </div>
 </div>
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">52</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">36</div><div class="s-sub" id="ssub-total">All Available</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-net-from">Net Price From</div><div class="s-val" id="sval-net-from">—</div><div class="s-sub" id="ssub-net-from">After rebate</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-net-avg">Avg Net Price</div><div class="s-val" id="sval-net-avg">—</div><div class="s-sub" id="ssub-net-avg">Filtered</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-contract-from">Contract From</div><div class="s-val" id="sval-contract-from">—</div><div class="s-sub" id="ssub-contract-from">Before rebate</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
 </div>
 <div class="tab-row">
-  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">52</span></button>
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">36</span></button>
   <button class="tab-btn" onclick="setBldg('1')" id="tab-1">Building 1 <span class="tab-cnt" id="tc-1">0</span></button>
   <button class="tab-btn" onclick="setBldg('2')" id="tab-2">Building 2 <span class="tab-cnt" id="tc-2">0</span></button>
 </div>
@@ -193,58 +193,44 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 <script>
 const data=[
-  {apt:'2-101',lot:1,bldg:'2',lvl:1,type:'1B+S',bath:1,int:61,ext:31,total:92,storage:1,parking:0,asp:'W',adapt:'N',contract:945000,rebate:94500,net:850500},
-  {apt:'2-102',lot:2,bldg:'2',lvl:1,type:'1B+S',bath:1,int:60,ext:31,total:91,storage:1,parking:0,asp:'W',adapt:'N',contract:945000,rebate:94500,net:850500},
-  {apt:'2-103',lot:3,bldg:'2',lvl:1,type:'2B',bath:2,int:76,ext:41,total:117,storage:1,parking:1,asp:'W',adapt:'N',contract:1215000,rebate:121500,net:1093500},
-  {apt:'1-105',lot:8,bldg:'1',lvl:1,type:'3B+S',bath:2,int:101,ext:63,total:164,storage:1,parking:1,asp:'N/E',adapt:'N',contract:1575000,rebate:78750,net:1496250},
-  {apt:'2-201',lot:9,bldg:'2',lvl:2,type:'1B+S',bath:1,int:61,ext:15,total:76,storage:1,parking:0,asp:'W',adapt:'N',contract:930000,rebate:93000,net:837000},
-  {apt:'2-202',lot:10,bldg:'2',lvl:2,type:'1B+S',bath:1,int:60,ext:17,total:77,storage:1,parking:0,asp:'W',adapt:'N',contract:930000,rebate:93000,net:837000},
-  {apt:'2-204',lot:12,bldg:'2',lvl:2,type:'1B+S',bath:1,int:56,ext:12,total:68,storage:1,parking:0,asp:'N/E',adapt:'N',contract:880000,rebate:88000,net:792000},
-  {apt:'2-302',lot:23,bldg:'2',lvl:3,type:'1B',bath:1,int:53,ext:8,total:61,storage:1,parking:0,asp:'W',adapt:'N',contract:850000,rebate:85000,net:765000},
-  {apt:'2-305',lot:26,bldg:'2',lvl:3,type:'2B+S',bath:2,int:79,ext:11,total:90,storage:1,parking:1,asp:'E',adapt:'N',contract:1102500,rebate:110250,net:992250},
-  {apt:'2-401',lot:37,bldg:'2',lvl:4,type:'2B',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'Y',contract:1095000,rebate:109500,net:985500},
-  {apt:'2-402',lot:38,bldg:'2',lvl:4,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:855000,rebate:85500,net:769500},
-  {apt:'2-403',lot:39,bldg:'2',lvl:4,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1095000,rebate:109500,net:985500},
-  {apt:'2-404',lot:40,bldg:'2',lvl:4,type:'2B+S',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'N',contract:1112500,rebate:111250,net:1001250},
-  {apt:'2-502',lot:53,bldg:'2',lvl:5,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:860000,rebate:86000,net:774000},
-  {apt:'2-503',lot:54,bldg:'2',lvl:5,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1100000,rebate:110000,net:990000},
-  {apt:'2-601',lot:67,bldg:'2',lvl:6,type:'2B',bath:2,int:82,ext:11,total:93,storage:1,parking:1,asp:'W',adapt:'Y',contract:1107500,rebate:110750,net:996750},
-  {apt:'2-602',lot:68,bldg:'2',lvl:6,type:'1B',bath:1,int:53,ext:9,total:62,storage:1,parking:0,asp:'W',adapt:'N',contract:865000,rebate:86500,net:778500},
-  {apt:'2-603',lot:69,bldg:'2',lvl:6,type:'2B',bath:2,int:77,ext:13,total:90,storage:1,parking:1,asp:'W',adapt:'N',contract:1105000,rebate:110500,net:994500},
-  {apt:'1-1408',lot:157,bldg:'1',lvl:14,type:'1B+S',bath:1,int:57,ext:11,total:68,storage:1,parking:0,asp:'N',adapt:'N',contract:819000,rebate:81900,net:737100},
-  {apt:'1-1707',lot:186,bldg:'1',lvl:17,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1080000,rebate:108000,net:972000},
-  {apt:'1-1807',lot:195,bldg:'1',lvl:18,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1082000,rebate:108200,net:973800},
-  {apt:'1-1903',lot:200,bldg:'1',lvl:19,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1107000,rebate:110700,net:996300},
-  {apt:'1-1904',lot:201,bldg:'1',lvl:19,type:'2B',bath:2,int:80,ext:13,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1119000,rebate:111900,net:1007100},
-  {apt:'1-1907',lot:204,bldg:'1',lvl:19,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1084000,rebate:108400,net:975600},
-  {apt:'1-2003',lot:209,bldg:'1',lvl:20,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1109000,rebate:110900,net:998100},
-  {apt:'1-2004',lot:210,bldg:'1',lvl:20,type:'2B',bath:2,int:80,ext:13,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1121000,rebate:112100,net:1008900},
-  {apt:'1-2006',lot:212,bldg:'1',lvl:20,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1342000,rebate:134200,net:1207800},
-  {apt:'1-2103',lot:218,bldg:'1',lvl:21,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1111000,rebate:111100,net:999900},
-  {apt:'1-2104',lot:219,bldg:'1',lvl:21,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1123000,rebate:112300,net:1010700},
-  {apt:'1-2106',lot:221,bldg:'1',lvl:21,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1344000,rebate:134400,net:1209600},
-  {apt:'1-2107',lot:222,bldg:'1',lvl:21,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1088000,rebate:108800,net:979200},
-  {apt:'1-2203',lot:227,bldg:'1',lvl:22,type:'2B',bath:2,int:76,ext:10,total:86,storage:1,parking:1,asp:'N',adapt:'N',contract:1113000,rebate:111300,net:1001700},
-  {apt:'1-2204',lot:228,bldg:'1',lvl:22,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1125000,rebate:112500,net:1012500},
-  {apt:'1-2207',lot:231,bldg:'1',lvl:22,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1090000,rebate:109000,net:981000},
-  {apt:'1-2303',lot:236,bldg:'1',lvl:23,type:'2B',bath:2,int:77,ext:11,total:88,storage:1,parking:1,asp:'N',adapt:'N',contract:1115000,rebate:111500,net:1003500},
-  {apt:'1-2306',lot:239,bldg:'1',lvl:23,type:'2B+S',bath:2,int:81,ext:22,total:103,storage:1,parking:1,asp:'N',adapt:'N',contract:1348000,rebate:134800,net:1213200},
-  {apt:'1-2307',lot:240,bldg:'1',lvl:23,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1092000,rebate:109200,net:982800},
-  {apt:'1-2407',lot:249,bldg:'1',lvl:24,type:'2B',bath:2,int:81,ext:10,total:91,storage:1,parking:1,asp:'N',adapt:'N',contract:1094000,rebate:109400,net:984600},
-  {apt:'1-2504',lot:255,bldg:'1',lvl:25,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1135000,rebate:113500,net:1021500},
-  {apt:'1-2506',lot:257,bldg:'1',lvl:25,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1500000,rebate:75000,net:1425000},
-  {apt:'1-2604',lot:263,bldg:'1',lvl:26,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1140000,rebate:114000,net:1026000},
-  {apt:'1-2702',lot:269,bldg:'1',lvl:27,type:'1B+S',bath:1,int:64,ext:9,total:73,storage:1,parking:0,asp:'W',adapt:'N',contract:887000,rebate:88700,net:798300},
-  {apt:'1-2705',lot:272,bldg:'1',lvl:27,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
-  {apt:'1-2804',lot:278,bldg:'1',lvl:28,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1150000,rebate:115000,net:1035000},
-  {apt:'1-2806',lot:280,bldg:'1',lvl:28,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1555000,rebate:77750,net:1477250},
-  {apt:'1-2901',lot:283,bldg:'1',lvl:29,type:'2B',bath:2,int:87,ext:11,total:98,storage:1,parking:1,asp:'W',adapt:'N',contract:1215000,rebate:121500,net:1093500},
-  {apt:'1-2904',lot:286,bldg:'1',lvl:29,type:'2B',bath:2,int:81,ext:12,total:93,storage:1,parking:1,asp:'N',adapt:'N',contract:1155000,rebate:115500,net:1039500},
-  {apt:'1-2906',lot:288,bldg:'1',lvl:29,type:'3B',bath:2,int:103,ext:13,total:116,storage:1,parking:1,asp:'N',adapt:'N',contract:1570000,rebate:78500,net:1491500},
-  {apt:'1-3001',lot:291,bldg:'1',lvl:30,type:'4B',bath:2,int:152,ext:30,total:182,storage:1,parking:2,asp:'W',adapt:'N',contract:2550000,rebate:0,net:2550000},
-  {apt:'1-3002',lot:292,bldg:'1',lvl:30,type:'4B',bath:2,int:155,ext:33,total:188,storage:1,parking:2,asp:'N',adapt:'N',contract:2700000,rebate:0,net:2700000},
-  {apt:'1-3003',lot:293,bldg:'1',lvl:30,type:'4B',bath:2,int:125,ext:31,total:156,storage:1,parking:2,asp:'N',adapt:'N',contract:2200000,rebate:0,net:2200000},
-  {apt:'1-3004',lot:294,bldg:'1',lvl:30,type:'4B',bath:2,int:123,ext:19,total:142,storage:1,parking:2,asp:'N',adapt:'N',contract:2000000,rebate:0,net:2000000},
+  // Building 2
+  {apt:'G01',lot:2,bldg:'2',lvl:'G',type:'1B',bath:1,int:61,ext:31,total:92,storage:0,parking:0,asp:'W',adapt:'N',contract:895000,rebate:89500,net:805500},
+  {apt:'G03',lot:4,bldg:'2',lvl:'G',type:'2B',bath:2,int:76,ext:41,total:117,storage:0,parking:1,asp:'W',adapt:'N',contract:1160000,rebate:116000,net:1044000},
+  {apt:'101',lot:5,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:61,ext:15,total:76,storage:0,parking:0,asp:'W',adapt:'N',contract:870000,rebate:87000,net:783000},
+  {apt:'102',lot:6,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:60,ext:17,total:77,storage:0,parking:0,asp:'W',adapt:'N',contract:870000,rebate:87000,net:783000},
+  {apt:'104',lot:8,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:56,ext:12,total:68,storage:0,parking:0,asp:'N/E',adapt:'N',contract:830000,rebate:83000,net:747000},
+  {apt:'205',lot:13,bldg:'2',lvl:'2',type:'2B+S',bath:2,int:79,ext:11,total:90,storage:0,parking:1,asp:'E',adapt:'N',contract:1102500,rebate:110250,net:992250},
+  {apt:'302',lot:15,bldg:'2',lvl:'3',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:803000,rebate:80300,net:722700},
+  {apt:'303',lot:16,bldg:'2',lvl:'3',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1050000,rebate:105000,net:945000},
+  {apt:'402',lot:20,bldg:'2',lvl:'4',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:806000,rebate:80600,net:725400},
+  {apt:'403',lot:21,bldg:'2',lvl:'4',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1055000,rebate:105500,net:949500},
+  {apt:'502',lot:25,bldg:'2',lvl:'5',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:809500,rebate:80950,net:728550},
+  {apt:'503',lot:26,bldg:'2',lvl:'5',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1060000,rebate:106000,net:954000},
+  // Building 1
+  {apt:'G05',lot:30,bldg:'1',lvl:'G',type:'3B',bath:2,int:101,ext:63,total:164,storage:0,parking:2,asp:'N/E',adapt:'N',contract:1495000,rebate:74750,net:1420250},
+  {apt:'1305',lot:166,bldg:'1',lvl:'13',type:'1B',bath:1,int:52,ext:8,total:60,storage:0,parking:0,asp:'N',adapt:'N',contract:839200,rebate:83920,net:755280},
+  {apt:'1804',lot:202,bldg:'1',lvl:'18',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1119000,rebate:111900,net:1007100},
+  {apt:'1904',lot:211,bldg:'1',lvl:'19',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1121000,rebate:112100,net:1008900},
+  {apt:'1906',lot:213,bldg:'1',lvl:'19',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1342000,rebate:134200,net:1207800},
+  {apt:'2004',lot:220,bldg:'1',lvl:'20',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1123000,rebate:112300,net:1010700},
+  {apt:'2006',lot:222,bldg:'1',lvl:'20',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1344000,rebate:134400,net:1209600},
+  {apt:'2103',lot:228,bldg:'1',lvl:'21',type:'2B',bath:2,int:76,ext:10,total:86,storage:0,parking:1,asp:'N',adapt:'N',contract:1113000,rebate:111300,net:1001700},
+  {apt:'2104',lot:229,bldg:'1',lvl:'21',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1125000,rebate:112500,net:1012500},
+  {apt:'2203',lot:237,bldg:'1',lvl:'22',type:'2B',bath:2,int:77,ext:11,total:88,storage:0,parking:1,asp:'N',adapt:'N',contract:1115000,rebate:111500,net:1003500},
+  {apt:'2206',lot:240,bldg:'1',lvl:'22',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1348000,rebate:134800,net:1213200},
+  {apt:'2404',lot:256,bldg:'1',lvl:'24',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1131000,rebate:113100,net:1017900},
+  {apt:'2406',lot:258,bldg:'1',lvl:'24',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1500000,rebate:75000,net:1425000},
+  {apt:'2504',lot:264,bldg:'1',lvl:'25',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1132000,rebate:113200,net:1018800},
+  {apt:'2602',lot:270,bldg:'1',lvl:'26',type:'1B+S',bath:1,int:64,ext:9,total:73,storage:0,parking:0,asp:'W',adapt:'N',contract:887000,rebate:88700,net:798300},
+  {apt:'2605',lot:273,bldg:'1',lvl:'26',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
+  {apt:'2704',lot:279,bldg:'1',lvl:'27',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1135000,rebate:113500,net:1021500},
+  {apt:'2706',lot:281,bldg:'1',lvl:'27',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
+  {apt:'2804',lot:287,bldg:'1',lvl:'28',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1137000,rebate:113700,net:1023300},
+  {apt:'2806',lot:289,bldg:'1',lvl:'28',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1550000,rebate:77500,net:1472500},
+  {apt:'2901',lot:292,bldg:'1',lvl:'29',type:'4B',bath:2,int:152,ext:30,total:182,storage:0,parking:2,asp:'W',adapt:'N',contract:2550000,rebate:0,net:2550000},
+  {apt:'2902',lot:293,bldg:'1',lvl:'29',type:'4B',bath:2,int:155,ext:33,total:188,storage:0,parking:2,asp:'W',adapt:'N',contract:2700000,rebate:0,net:2700000},
+  {apt:'2903',lot:294,bldg:'1',lvl:'29',type:'4B',bath:2,int:125,ext:31,total:156,storage:0,parking:2,asp:'N',adapt:'N',contract:2200000,rebate:0,net:2200000},
+  {apt:'2904',lot:295,bldg:'1',lvl:'29',type:'4B',bath:2,int:123,ext:19,total:142,storage:0,parking:2,asp:'N',adapt:'N',contract:2000000,rebate:0,net:2000000},
 ];
 const i18n={
   en:{'txt-h-center':'5 Halifax St · Macquarie Park','txt-overline':'Apartment · Macquarie Park NSW','lbl-addr':'Address','lbl-rebate':'🏷 Rebate (Special Offer)','reb-1b':'1 Bed / 2 Bed','reb-1b-note':'At settlement','reb-3b':'3 Bed','reb-3b-note':'At settlement','reb-4b':'4 Bed — No rebate','slbl-total':'Total Units','ssub-total':'All Available','slbl-net-from':'Net Price From','ssub-net-from':'After rebate','slbl-net-avg':'Avg Net Price','ssub-net-avg':'Filtered','slbl-contract-from':'Contract From','ssub-contract-from':'Before rebate','slbl-shown':'Showing','ssub-shown':'Current filter','flbl-type':'Unit Type','opt-t-all':'All','flbl-level':'Level','opt-l-all':'All','flbl-asp':'Aspect','opt-a-all':'All','flbl-adapt':'Adaptable','opt-ad-all':'All','opt-ad-yes':'Yes','opt-ad-no':'No','flbl-maxnet':'Max Net Price','opt-p-all':'All','opt-p1':'Under $850K','opt-p2':'Under $1M','opt-p3':'Under $1.2M','opt-p4':'Under $1.5M','flbl-search':'Search','txt-reset':'Reset','txt-shown-lbl':' units shown','th-apt':'Apt #','th-lot':'Lot #','th-bldg':'Bldg','th-level':'Level','th-type':'Type','th-bath':'Bath','th-area':'Area (sqm)','th-parking':'Parking','th-asp':'Aspect','th-contract':'Contract Price','th-rebate':'Rebate','th-net':'Net Price','th-status':'Status','srt-na':'Net Price ↑','srt-nd':'Net Price ↓','srt-ca':'Contract ↑','srt-la':'Level ↑','srt-ld':'Level ↓','srt-sd':'Total Area ↓','srt-aa':'Apt # ↑','txt-empty':'— No units match your criteria —',searchPh:'Apt, lot, level...'},
