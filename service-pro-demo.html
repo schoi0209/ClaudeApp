@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" data-trade="plumbing" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServicePro — Book a callout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C2438; --brand:#16527A; --brand-deep:#0F3A57;
+    --accent:#E0852F; --accent-ink:#2A1606;
+    --bg:#F4F7F9; --surface:#FFFFFF; --text:#11212E; --muted:#5A6B78;
+    --line:#E2E8ED; --on-brand:#FFFFFF;
+    --hero-from:#0C2438; --hero-to:#16527A;
+    --radius:14px; --maxw:1180px;
+    --shadow:0 1px 2px rgba(12,36,56,.06), 0 18px 40px -22px rgba(12,36,56,.45);
+    --kr:'';
+  }
+  html[data-trade="lawn"]{
+    --ink:#0F2A18; --brand:#2C7A3F; --brand-deep:#194D27;
+    --accent:#9FD13B; --accent-ink:#16280A;
+    --bg:#F3F7F0; --surface:#FFFFFF; --text:#16271C; --muted:#5C6E60;
+    --line:#E2EADD; --hero-from:#0F2A18; --hero-to:#2C7A3F;
+  }
+  html[data-trade="electrical"]{
+    --ink:#13172A; --brand:#2E3A78; --brand-deep:#1D2552;
+    --accent:#FFC42E; --accent-ink:#2A2207;
+    --bg:#F5F6FA; --surface:#FFFFFF; --text:#161A28; --muted:#5E6377;
+    --line:#E4E6EF; --hero-from:#13172A; --hero-to:#2E3A78;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.55;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+  html[data-lang="ko"] body{font-family:'Noto Sans KR','Inter',sans-serif}
+  html[data-lang="ko"] h1,html[data-lang="ko"] h2,html[data-lang="ko"] h3{font-family:'Noto Sans KR',sans-serif;font-weight:900;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .mono{font-family:'Space Mono',monospace}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  html[data-lang="ko"] .eyebrow{font-family:'Noto Sans KR';letter-spacing:.06em}
+  h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.04;letter-spacing:-.02em}
+  .section{padding:88px 0}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  .demobar{background:var(--ink);color:#fff;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em}
+  .demobar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:9px 24px}
+  .demobar .tag{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+  .demobar .label{color:#9fb1c0}
+  html[data-lang="ko"] .demobar{font-family:'Noto Sans KR'}
+  .switcher{display:inline-flex;background:rgba(255,255,255,.08);border-radius:999px;padding:3px;gap:2px;margin-left:auto}
+  .switcher button{font-family:inherit;font-size:12px;color:#cdd9e2;background:none;border:0;padding:6px 13px;border-radius:999px;cursor:pointer;transition:.2s}
+  .switcher button:hover{color:#fff}
+  .switcher button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:700}
+
+  header.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:18px;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Archivo';font-weight:800;font-size:18px}
+  html[data-lang="ko"] .brand{font-family:'Noto Sans KR';font-weight:900}
+  .brand .mark{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-deep));color:#fff}
+  .brand .mark svg{width:19px;height:19px}
+  .nav nav{display:flex;gap:26px;margin-left:14px}
+  .nav nav a{font-size:14.5px;font-weight:500;color:var(--muted)}
+  .nav nav a:hover{color:var(--text)}
+  .nav .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .phone{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono';font-weight:700;font-size:15px;color:var(--text)}
+  .phone svg{width:16px;height:16px;color:var(--accent)}
+  .lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;font-family:'Space Mono';font-size:12px}
+  .lang button{background:transparent;border:0;padding:7px 11px;cursor:pointer;color:var(--muted);font-family:inherit;transition:.15s}
+  .lang button[aria-pressed="true"]{background:var(--brand);color:#fff;font-weight:700}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;padding:11px 19px;border-radius:10px;cursor:pointer;border:0;transition:.18s;font-family:inherit}
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--on-brand);border:1.5px solid rgba(255,255,255,.35)}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .btn-dark{background:var(--brand);color:#fff}
+  .btn-dark:hover{background:var(--brand-deep)}
+
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--hero-from),var(--hero-to));color:#fff}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:46px 46px;mask-image:radial-gradient(120% 90% at 80% 0%,#000,transparent 70%)}
+  .hero .wrap{position:relative;padding:78px 24px 86px;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+  .hero h1{font-size:clamp(38px,5.6vw,66px);font-weight:900;margin:18px 0 18px}
+  .hero p.sub{font-size:18.5px;color:#dceaf4;max-width:38ch;margin-bottom:30px}
+  html[data-trade="electrical"] .hero p.sub{color:#d8dcef}
+  html[data-trade="lawn"] .hero p.sub{color:#dcecdd}
+  .hero .cta-row{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:34px}
+  .hero .trust{display:flex;gap:22px;flex-wrap:wrap;font-family:'Space Mono';font-size:13px;color:#cfe0ec}
+  .hero .trust b{color:#fff} .hero .trust .star{color:var(--accent)}
+
+  .slip{background:var(--surface);color:var(--text);border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;position:relative}
+  .slip::after{content:"";position:absolute;left:0;right:0;height:14px;bottom:-7px;background:radial-gradient(circle at 8px 0,transparent 7px,var(--surface) 7px) repeat-x;background-size:16px 14px}
+  .slip-head{background:var(--ink);color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono';font-size:12px;letter-spacing:.08em}
+  .slip-head .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 30%,transparent)}
+  .slip-body{padding:22px 22px 30px}
+  .slip-body .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .slip-body .row span:first-child{color:var(--muted)}
+  .slip-body .row .mono{font-weight:700}
+  .slip-body .avail{margin-top:18px;display:flex;align-items:center;gap:9px;font-family:'Space Mono';font-size:12.5px;color:var(--muted)}
+  .slip-body .avail b{color:var(--brand)}
+  .pulse{width:9px;height:9px;border-radius:50%;background:#2bb673;animation:p 2s infinite}
+  @keyframes p{0%{box-shadow:0 0 0 0 rgba(43,182,115,.5)}70%{box-shadow:0 0 0 9px rgba(43,182,115,0)}100%{box-shadow:0 0 0 0 rgba(43,182,115,0)}}
+
+  .strip{background:var(--ink);color:#fff}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:26px 24px}
+  .strip .it b{font-family:'Archivo';font-size:27px;font-weight:800;display:block}
+  .strip .it span{font-family:'Space Mono';font-size:11.5px;letter-spacing:.08em;color:#9fb4c4;text-transform:uppercase}
+  html[data-lang="ko"] .strip .it span{font-family:'Noto Sans KR';letter-spacing:.02em}
+
+  .head{max-width:640px;margin-bottom:46px}
+  .head h2{font-size:clamp(30px,4vw,44px);font-weight:800;margin:14px 0 12px}
+  .head p{color:var(--muted);font-size:17px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:.2s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--brand) 30%,var(--line))}
+  .card .ic{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;margin-bottom:16px;background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand)}
+  .card .ic svg{width:24px;height:24px}
+  .card h3{font-size:18px;font-weight:700;margin-bottom:7px}
+  .card p{font-size:14.5px;color:var(--muted)}
+
+  #book{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:start}
+  .book-left h2{font-size:clamp(30px,4vw,42px);font-weight:800;margin:14px 0 16px}
+  .book-left p{color:var(--muted);font-size:16.5px;margin-bottom:26px}
+  .book-left ul{list-style:none;display:grid;gap:14px}
+  .book-left li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+  .book-left li svg{width:21px;height:21px;color:var(--brand);flex:none;margin-top:1px}
+  .book-left li span{color:var(--muted)} .book-left li b{font-weight:600;color:var(--text)}
+
+  .booker{background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .booker-head{background:var(--ink);color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono';font-size:12px;letter-spacing:.06em}
+  html[data-lang="ko"] .booker-head{font-family:'Noto Sans KR'}
+  .steps{display:flex;gap:7px}
+  .steps i{width:24px;height:5px;border-radius:3px;background:rgba(255,255,255,.18);transition:.3s}
+  .steps i.on{background:var(--accent)}
+  .booker-body{padding:24px 22px 26px}
+  .step-label{font-family:'Space Mono';font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:13px}
+  html[data-lang="ko"] .step-label{font-family:'Noto Sans KR';letter-spacing:.02em}
+  .step-label b{color:var(--brand)}
+  .opts{display:grid;gap:9px}
+  .chip{font-family:inherit;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;cursor:pointer;font-size:14.5px;font-weight:600;color:var(--text);transition:.16s;display:flex;justify-content:space-between;align-items:center}
+  .chip small{font-weight:400;color:var(--muted);font-family:'Space Mono';font-size:12px}
+  .chip:hover{border-color:var(--brand)}
+  .chip[aria-pressed="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--surface));box-shadow:inset 0 0 0 1px var(--brand)}
+  .days,.times{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .day{text-align:center;background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:11px 6px;cursor:pointer;transition:.16s}
+  .day .dow{font-family:'Space Mono';font-size:11px;color:var(--muted);text-transform:uppercase}
+  .day .dnum{font-family:'Archivo';font-weight:800;font-size:20px;margin:2px 0}
+  .day .mo{font-family:'Space Mono';font-size:10.5px;color:var(--muted)}
+  .day:hover{border-color:var(--brand)}
+  .day[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+  .day[aria-pressed="true"] .dow,.day[aria-pressed="true"] .mo{color:rgba(255,255,255,.8)}
+  .time{font-family:'Space Mono';font-size:13px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:11px 6px;cursor:pointer;text-align:center;transition:.16s}
+  .time:hover:not([disabled]){border-color:var(--brand)}
+  .time[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+  .time[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+  .fields{display:grid;gap:11px}
+  .fields input,.fields textarea{font-family:inherit;font-size:14.5px;width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);transition:.16s}
+  .fields input:focus,.fields textarea:focus{border-color:var(--brand);outline:none}
+  .nav-btns{display:flex;gap:10px;margin-top:20px}
+  .nav-btns .btn{flex:1;justify-content:center}
+  .btn-back{background:transparent;color:var(--muted);border:1.5px solid var(--line)}
+  .btn-back:hover{color:var(--text);border-color:var(--muted)}
+  .hint{font-family:'Space Mono';font-size:11.5px;color:#c0392b;margin-top:10px;min-height:14px;display:none}
+  html[data-lang="ko"] .hint{font-family:'Noto Sans KR'}
+  .hint.show{display:block}
+  .confirm{text-align:center;padding:10px 4px 6px}
+  .confirm .check{width:64px;height:64px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:color-mix(in srgb,#2bb673 16%,transparent);color:#2bb673}
+  .confirm .check svg{width:34px;height:34px}
+  .confirm h3{font-size:24px;font-weight:800;margin-bottom:6px}
+  .confirm p{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+  .ticket{background:var(--surface);border:1px dashed var(--brand);border-radius:12px;padding:16px 18px;text-align:left;font-family:'Space Mono';font-size:13px}
+  .ticket .r{display:flex;justify-content:space-between;padding:6px 0;gap:10px}
+  .ticket .r span:first-child{color:var(--muted);flex:none}
+  .ticket .r span:last-child{text-align:right}
+  .ticket .ref{margin-top:8px;padding-top:12px;border-top:1px dashed var(--line);display:flex;justify-content:space-between}
+  .ticket .ref b{color:var(--brand);font-size:15px}
+
+  .step-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px}
+  .step-card .n{font-family:'Space Mono';font-weight:700;font-size:14px;color:var(--accent)}
+  .step-card h3{font-size:19px;font-weight:700;margin:10px 0 8px}
+  .step-card p{font-size:14.5px;color:var(--muted)}
+
+  .reviews{background:var(--ink);color:#fff}
+  .reviews .head h2{color:#fff} .reviews .head p{color:#a9bccb}
+  .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .review{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px}
+  .review .stars{color:var(--accent);font-size:15px;letter-spacing:2px;margin-bottom:12px}
+  .review p{font-size:15px;color:#e3edf3;margin-bottom:16px}
+  .review .who{font-family:'Space Mono';font-size:12.5px;color:#9fb4c4}
+  .review .who b{color:#fff;font-family:inherit;font-weight:600;display:block;font-size:14px}
+  html[data-lang="ko"] .review .who b{font-family:'Noto Sans KR'}
+
+  .area-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .panel h3{font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .panel h3 svg{width:22px;height:22px;color:var(--brand)}
+  .suburbs{display:flex;flex-wrap:wrap;gap:8px}
+  .suburbs span{font-family:'Space Mono';font-size:12.5px;background:var(--bg);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .hours{font-family:'Space Mono';font-size:14px}
+  html[data-lang="ko"] .hours{font-family:'Noto Sans KR'}
+  .hours .hr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)}
+  .hours .hr.now b{color:#2bb673} .hours .hr span:first-child{color:var(--muted)}
+
+  .final{background:linear-gradient(160deg,var(--hero-from),var(--hero-to));color:#fff;text-align:center}
+  .final .wrap{padding:74px 24px}
+  .final h2{font-size:clamp(30px,4.5vw,46px);font-weight:900;margin-bottom:14px}
+  .final p{color:#cfe0ec;font-size:18px;margin-bottom:28px}
+  .final .cta-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+
+  footer{background:var(--ink);color:#9fb4c4;padding:46px 0 30px;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  footer .brand{color:#fff;margin-bottom:12px}
+  footer .col p{max-width:32ch;line-height:1.6}
+  footer .lic{font-family:'Space Mono';font-size:12px;margin-top:12px;color:#7c91a1}
+  footer .made{font-family:'Space Mono';font-size:12px;color:#7c91a1;border-top:1px solid rgba(255,255,255,.1);margin-top:28px;padding-top:20px;width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer .made a{color:var(--accent)}
+
+  @media(max-width:920px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px}
+    .book-grid,.area-grid{grid-template-columns:1fr;gap:36px}
+    .grid,.rgrid{grid-template-columns:1fr 1fr}
+    .strip .wrap{grid-template-columns:1fr 1fr;gap:20px}
+    .nav nav{display:none}
+  }
+  @media(max-width:620px){
+    .section{padding:60px 0}
+    .grid,.rgrid,.strip .wrap{grid-template-columns:1fr}
+    .nav .phone{display:none}
+    .demobar .switcher{margin-left:0}
+    .fields .two{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="demobar">
+  <div class="wrap">
+    <span class="tag" id="demoTag">Live demo</span>
+    <span class="label" id="demoLabel">Switch the trade to preview →</span>
+    <div class="switcher" role="group" aria-label="Preview a trade">
+      <button data-set="plumbing" aria-pressed="true" data-i="t_plumb">Plumbing</button>
+      <button data-set="lawn" aria-pressed="false" data-i="t_lawn">Lawn &amp; Garden</button>
+      <button data-set="electrical" aria-pressed="false" data-i="t_elec">Electrical</button>
+    </div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark" id="navMark"></span><span id="brandName">ServicePro</span></a>
+    <nav>
+      <a href="#services" data-i="nav_services">Services</a>
+      <a href="#book" data-i="nav_book">Book</a>
+      <a href="#how" data-i="nav_how">How it works</a>
+      <a href="#area" data-i="nav_area">Service area</a>
+    </nav>
+    <div class="right">
+      <a class="phone" id="navPhone" href="tel:0280001234"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span id="navPhoneText">(02) 8000 1234</span></a>
+      <span class="lang" role="group" aria-label="Language">
+        <button data-lang="en" aria-pressed="true">EN</button>
+        <button data-lang="ko" aria-pressed="false">한</button>
+      </span>
+      <a class="btn btn-primary" href="#book" id="navBook">Book now</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" id="heroArea"></div>
+      <h1 id="heroTitle"></h1>
+      <p class="sub" id="heroSub"></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#book" id="heroBook">Book a callout</a>
+        <a class="btn btn-ghost" id="heroCall" href="tel:0280001234">Call</a>
+      </div>
+      <div class="trust" id="heroTrust"></div>
+    </div>
+    <aside class="slip" aria-hidden="true">
+      <div class="slip-head"><span id="slipLabel">CALLOUT · LIVE</span><span class="dot"></span></div>
+      <div class="slip-body">
+        <div class="row"><span id="slipR1">Booked just now</span><span class="mono" id="slipSvc"></span></div>
+        <div class="row"><span id="slipR2">Suburb</span><span class="mono" id="slipSub"></span></div>
+        <div class="row"><span id="slipR3">Window</span><span class="mono" id="slipTime"></span></div>
+        <div class="row"><span id="slipR4">Status</span><span class="mono" id="slipStatus" style="color:#2bb673">Confirmed</span></div>
+        <div class="avail"><span class="pulse"></span><span id="slipNextLabel">Next available:</span> <b id="slipNext"></b></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="strip"><div class="wrap" id="statStrip"></div></section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow" id="svcEy">What we do</div><h2 id="svcTitle"></h2><p id="svcLead"></p></div>
+    <div class="grid" id="serviceGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="book">
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="book-left">
+        <div class="eyebrow" id="bookEy">Book online</div>
+        <h2 id="bookTitle"></h2>
+        <p id="bookLead"></p>
+        <ul id="bookPoints"></ul>
+      </div>
+      <div class="booker">
+        <div class="booker-head"><span id="bookerName"></span>
+          <div class="steps"><i class="on" data-s="1"></i><i data-s="2"></i><i data-s="3"></i><i data-s="4"></i></div>
+        </div>
+        <div class="booker-body">
+          <div class="bstep" data-step="1">
+            <div class="step-label" id="lbl1"></div>
+            <div class="opts" id="bookServices"></div>
+            <div class="hint" id="hint1"></div>
+            <div class="nav-btns"><button class="btn btn-dark" data-next="1" id="next1"></button></div>
+          </div>
+          <div class="bstep" data-step="2" hidden>
+            <div class="step-label" id="lbl2"></div>
+            <div class="days" id="bookDays"></div>
+            <div class="hint" id="hint2"></div>
+            <div class="nav-btns"><button class="btn btn-back" data-back="2" id="back2"></button><button class="btn btn-dark" data-next="2" id="next2"></button></div>
+          </div>
+          <div class="bstep" data-step="3" hidden>
+            <div class="step-label" id="lbl3"></div>
+            <div class="times" id="bookTimes"></div>
+            <div class="hint" id="hint3"></div>
+            <div class="nav-btns"><button class="btn btn-back" data-back="3" id="back3"></button><button class="btn btn-dark" data-next="3" id="next3"></button></div>
+          </div>
+          <div class="bstep" data-step="4" hidden>
+            <div class="step-label" id="lbl4"></div>
+            <div class="fields">
+              <input id="fName" type="text" autocomplete="name">
+              <input id="fPhone" type="tel" autocomplete="tel">
+              <input id="fAddr" type="text" autocomplete="street-address">
+              <textarea id="fNotes" rows="2"></textarea>
+            </div>
+            <div class="hint" id="hint4"></div>
+            <div class="nav-btns"><button class="btn btn-back" data-back="4" id="back4"></button><button class="btn btn-primary" id="confirmBtn"></button></div>
+          </div>
+          <div class="bstep" data-step="5" hidden>
+            <div class="confirm">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <h3 id="confTitle"></h3>
+              <p id="confLead"></p>
+              <div class="ticket">
+                <div class="r"><span id="tSvcL"></span><span id="tSvc"></span></div>
+                <div class="r"><span id="tWhenL"></span><span id="tWhen"></span></div>
+                <div class="r"><span id="tNameL"></span><span id="tName"></span></div>
+                <div class="ref"><span id="tRefL"></span><b id="tRef"></b></div>
+              </div>
+              <div class="nav-btns"><button class="btn btn-back" id="againBtn"></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow" id="howEy"></div><h2 id="howTitle"></h2></div>
+    <div class="grid" id="howGrid"></div>
+  </div>
+</section>
+
+<section class="section reviews">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow" id="revEy">Reviews from Google</div><h2 id="revTitle"></h2><p id="revLead"></p></div>
+    <div class="rgrid" id="reviewGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="area">
+  <div class="wrap">
+    <div class="area-grid">
+      <div class="panel">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="areaTitle"></span></h3>
+        <div class="suburbs" id="suburbList"></div>
+        <p style="color:var(--muted);font-size:14px;margin-top:16px" id="areaNote"></p>
+      </div>
+      <div class="panel">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span id="hoursTitle"></span></h3>
+        <div class="hours">
+          <div class="hr now"><span id="hMon"></span><b>7:00am – 7:00pm</b></div>
+          <div class="hr"><span id="hSat"></span><b>8:00am – 5:00pm</b></div>
+          <div class="hr"><span id="hSun"></span><b>9:00am – 4:00pm</b></div>
+          <div class="hr" style="border:0"><span id="hEmg"></span><b id="emergText"></b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:14px" id="finalEy"></div>
+    <h2 id="finalTitle"></h2>
+    <p id="finalSub"></p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#book" id="finalBook">Book a callout</a>
+      <a class="btn btn-ghost" id="finalCall" href="tel:0280001234">Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <div class="brand"><span class="mark" id="footMark"></span><span id="footName">ServicePro</span></div>
+      <p id="footTag"></p>
+      <p class="lic" id="footLic"></p>
+    </div>
+    <div class="col">
+      <div class="phone" style="color:#fff;margin-bottom:8px"><span id="footPhone"></span></div>
+      <p id="footEmail"></p>
+    </div>
+    <div class="made">
+      <span>© <span id="yr"></span> <span id="footName2"></span>. <span id="rights">All rights reserved.</span></span>
+      <span><span id="madeBy">Website by</span> <a href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">SunnyApps</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================================
+   BOOKING BACKEND — paste a free Web3Forms access key to go live.
+   Get one in 30s at https://web3forms.com (tied to the business email).
+   Leave blank to run in demo mode (shows confirmation, sends nothing).
+   ==================================================================== */
+const WEB3FORMS_KEY = ""; // e.g. "a1b2c3d4-...." 
+
+const IC={drain:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0a4 4 0 0 0 4 4h4M12 8a4 4 0 0 1-4 4H4"/><path d="M12 12v10"/></svg>',water:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7s6 6.3 6 10.3a6 6 0 1 1-12 0c0-4 6-10.3 6-10.3z"/></svg>',leak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',tap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h6v4H3zM9 9h5a3 3 0 0 1 3 3v2"/><path d="M17 18v3M14 21h6"/></svg>',gas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1 3 4 4 4 8a4 4 0 1 1-8 0c0-2 1-3 2-4"/></svg>',emergency:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',mow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18M5 20v-5h6v5M11 15l3-3M14 12h6M17 12V7"/></svg>',hedge:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9 3 6m3 9-3 3m15-12 3-3M18 18l3 3M9 8 6 5m9 0-3 3"/><circle cx="12" cy="12" r="3"/></svg>',cleanup:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2m-1 0v14a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1V6"/></svg>',weed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V8m0 0c-3 0-5-2-5-5 3 0 5 2 5 5zm0 0c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg>',mulch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 16s3-2 5-2 3 2 5 2 3-2 5-2 5 2 5 2M2 20s3-2 5-2 3 2 5 2 3-2 5-2 5 2 5 2M7 12l2-6 2 4 2-5 2 7"/></svg>',waste:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 13a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1L4 7zm5 0V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>',power:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 9v2m6-2v2M9 15h6"/></svg>',light:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>',board:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v4m5-4v4m5-4v4M7 15h10"/></svg>',fault:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>',fan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 1-6 0-8-3 1-3 5-2 6m4 4c4 0 6 1 8 0-1-3-5-3-6-2m-4 4c0 4-1 6 0 8 3-1 3-5 2-6m-4-4c-4 0-6-1-8 0 1 3 5 3 6 2"/></svg>',ev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V3H7v18h7v-6m0-6 4 3v6a2 2 0 0 1-4 0M14 9h4M10 7l-2 4h3l-2 4"/></svg>'};
+
+/* UI strings (chrome) */
+const UI={
+  t_plumb:{en:"Plumbing",ko:"배관"},t_lawn:{en:"Lawn & Garden",ko:"조경·정원"},t_elec:{en:"Electrical",ko:"전기"},
+  demoTag:{en:"Live demo",ko:"라이브 데모"},demoLabel:{en:"Switch the trade to preview →",ko:"업종을 바꿔 미리보기 →"},
+  nav_services:{en:"Services",ko:"서비스"},nav_book:{en:"Book",ko:"예약"},nav_how:{en:"How it works",ko:"이용 방법"},nav_area:{en:"Service area",ko:"서비스 지역"},
+  navBook:{en:"Book now",ko:"예약하기"},heroBook:{en:"Book a callout",ko:"출장 예약"},
+  svcEy:{en:"What we do",ko:"서비스 안내"},bookEy:{en:"Book online",ko:"온라인 예약"},
+  howEy:{en:"Simple from start to finish",ko:"처음부터 끝까지 간단하게"},howTitle:{en:"Three steps, no surprises",ko:"단 3단계, 군더더기 없이"},
+  revEy:{en:"Reviews from Google",ko:"구글 리뷰"},
+  slipLabel:{en:"CALLOUT · LIVE",ko:"출장 · 실시간"},slipR1:{en:"Booked just now",ko:"방금 예약됨"},slipR2:{en:"Suburb",ko:"지역"},slipR3:{en:"Window",ko:"시간대"},slipR4:{en:"Status",ko:"상태"},slipStatus:{en:"Confirmed",ko:"확정"},slipNextLabel:{en:"Next available:",ko:"다음 가능:"},
+  lbl1:{en:"<b>Step 1</b> / 4 — What do you need?",ko:"<b>1단계</b> / 4 — 무엇이 필요하세요?"},
+  lbl2:{en:"<b>Step 2</b> / 4 — Pick a day",ko:"<b>2단계</b> / 4 — 날짜 선택"},
+  lbl3:{en:"<b>Step 3</b> / 4 — Pick a window",ko:"<b>3단계</b> / 4 — 시간대 선택"},
+  lbl4:{en:"<b>Step 4</b> / 4 — Your details",ko:"<b>4단계</b> / 4 — 연락처 정보"},
+  next:{en:"Continue",ko:"다음"},back:{en:"Back",ko:"이전"},confirm:{en:"Confirm booking",ko:"예약 확정"},again:{en:"Book another",ko:"새 예약"},
+  hint1:{en:"Pick a service to continue.",ko:"서비스를 선택하세요."},hint2:{en:"Pick a day to continue.",ko:"날짜를 선택하세요."},hint3:{en:"Pick a time window.",ko:"시간대를 선택하세요."},hint4:{en:"Add your name and mobile to confirm.",ko:"이름과 휴대폰 번호를 입력하세요."},
+  fName:{en:"Full name",ko:"성함"},fPhone:{en:"Mobile number",ko:"휴대폰 번호"},fAddr:{en:"Street address",ko:"주소"},fNotes:{en:"Briefly, what's going on? (optional)",ko:"간단한 상황 설명 (선택)"},
+  confTitle:{en:"You're booked in",ko:"예약이 완료됐습니다"},
+  tSvcL:{en:"Service",ko:"서비스"},tWhenL:{en:"When",ko:"일시"},tNameL:{en:"Name",ko:"성함"},tRefL:{en:"Reference",ko:"예약번호"},
+  badge:{en:"Book",ko:"예약"},urgent:{en:"Urgent",ko:"긴급"},
+  trustG:{en:"Google",ko:"구글"},trustR:{en:"reviews",ko:"리뷰"},trustLic:{en:"Licensed & insured",ko:"면허·보험 완비"},trustSd:{en:"Same-day available",ko:"당일 가능"},
+  areaNote:{en:"Not on the list? Call us — we cover most of Greater Sydney.",ko:"목록에 없으세요? 전화 주세요 — 시드니 전역 대부분 출장 가능합니다."},
+  hoursTitle:{en:"Opening hours",ko:"영업시간"},hMon:{en:"Mon – Fri",ko:"월 – 금"},hSat:{en:"Saturday",ko:"토요일"},hSun:{en:"Sunday",ko:"일요일"},hEmg:{en:"Emergencies",ko:"긴급 출동"},
+  rights:{en:"All rights reserved.",ko:"All rights reserved."},madeBy:{en:"Website by",ko:"제작:"},
+  toast:{en:"Sent to the business — they'll confirm by text.",ko:"업체로 전송됨 — 문자로 확정 연락이 갑니다."}
+};
+
+const TRADES={
+ plumbing:{
+  name:"Harbour City Plumbing",phone:"(02) 8000 1234",tel:"0280001234",mark:IC.water,email:"hello@harbourcityplumbing.com.au",
+  emailTo:"",rating:"4.9",reviews:"612",emergency:{en:"24 / 7",ko:"24시간"},
+  area:{en:"Servicing Greater Sydney",ko:"시드니 전역 출장"},
+  heroTitle:{en:"Burst pipe at 2am? We pick up.",ko:"새벽 2시 누수? 바로 받습니다."},
+  heroSub:{en:"Licensed Sydney plumbers for blocked drains, hot water and emergencies — book a callout online in under a minute.",ko:"막힌 배수구, 온수기, 긴급 출동까지 — 시드니 면허 배관공을 1분 만에 온라인으로 예약하세요."},
+  bookerName:{en:"BOOK A PLUMBER",ko:"배관공 예약"},
+  svcTitle:{en:"Every job, done right the first time",ko:"한 번에 제대로 끝냅니다"},
+  svcLead:{en:"Upfront pricing, fully licensed and insured, and we clean up after ourselves. Pick a service to book in seconds.",ko:"투명한 견적, 면허·보험 완비, 작업 후 깔끔한 마무리. 서비스를 선택해 바로 예약하세요."},
+  bookTitle:{en:"Lock in a time in 30 seconds",ko:"30초 만에 예약 완료"},
+  bookLead:{en:"No phone tag, no waiting on hold. Choose what you need, pick a time, and we confirm by text.",ko:"전화 돌릴 필요 없이, 필요한 작업과 시간을 고르면 문자로 확정해 드립니다."},
+  points:[
+    {en:["Same-day & emergency","windows when you need them fast."],ko:["당일·긴급 출동","급할 때 바로 가능한 시간대."]},
+    {en:["Upfront quote","confirmed before any work starts."],ko:["선견적","작업 전에 금액을 먼저 확정."]},
+    {en:["Text reminder","with your plumber's name and ETA."],ko:["문자 알림","담당 배관공 이름과 도착 시간 안내."]},
+    {en:["Licensed & insured","— every job, every time."],ko:["면허·보험 완비","— 모든 작업, 항상."]}],
+  slip:{en:["Blocked drain","Marrickville","9–11am","today, 1–3pm"],ko:["막힌 배수구","Marrickville","오전 9–11시","오늘 오후 1–3시"]},
+  stats:[["4.9★",{en:"Google rating",ko:"구글 평점"}],["612",{en:"Reviews",ko:"리뷰"}],[{en:"7 days",ko:"주 7일"},{en:"On call",ko:"대기"}],["<60min",{en:"Avg. callout",ko:"평균 출동"}]],
+  services:[
+   [IC.drain,{en:"Blocked drains",ko:"막힌 배수구"},{en:"CCTV diagnosis and high-pressure clearing for sinks, toilets and stormwater.",ko:"CCTV 진단과 고압 세척으로 싱크대·변기·우수관까지 시원하게."}],
+   [IC.water,{en:"Hot water systems",ko:"온수기"},{en:"Repairs and same-day replacement for gas, electric and heat-pump units.",ko:"가스·전기·히트펌프 온수기 수리 및 당일 교체."}],
+   [IC.leak,{en:"Leak detection",ko:"누수 탐지"},{en:"Find hidden leaks fast — before they wreck your floors and your water bill.",ko:"바닥과 수도요금을 망치기 전에 숨은 누수를 빠르게 찾습니다."}],
+   [IC.tap,{en:"Taps & toilets",ko:"수도·변기"},{en:"Drips, running toilets and worn washers sorted in a single visit.",ko:"물 새는 수전, 계속 도는 변기, 닳은 패킹을 한 번에 해결."}],
+   [IC.gas,{en:"Gas fitting",ko:"가스 설비"},{en:"Licensed gas work — cooktops, heaters and certified compliance checks.",ko:"면허 가스 작업 — 쿡탑, 히터, 안전 점검 인증."}],
+   [IC.emergency,{en:"Emergency callouts",ko:"긴급 출동"},{en:"Burst pipes and floods, any hour. We answer and we come.",ko:"터진 배관과 침수, 시간 불문. 전화 받고 바로 갑니다."}]],
+  how:[[{en:"Book online",ko:"온라인 예약"},{en:"Choose your service and a time window. Takes about 30 seconds.",ko:"서비스와 시간대를 선택. 약 30초 소요."}],
+       [{en:"We confirm & arrive",ko:"확정 후 방문"},{en:"You get a text with your plumber's name and ETA. We turn up on time.",ko:"담당 배관공 이름과 도착 시간을 문자로 안내. 정시 방문."}],
+       [{en:"Fixed, then paid",ko:"작업 후 결제"},{en:"We quote upfront, do the job, and clean up. Pay by card or transfer.",ko:"선견적 후 작업·정리. 카드 또는 계좌이체로 결제."}]],
+  revTitle:{en:"Locals keep coming back",ko:"단골이 끊이지 않습니다"},revLead:{en:"Rated 4.9 across 600+ reviews from across Sydney.",ko:"시드니 전역 600+ 리뷰, 평점 4.9."},
+  reviews:[["Hot water died on a Sunday and they had a new unit in by lunch. Lifesavers.","Priya N.","Ashfield","일요일에 온수기가 멈췄는데 점심 전에 새 걸로 교체해줬어요. 은인입니다."],
+           ["Found a slab leak two other plumbers missed. Honest and tidy work.","Dan R.","Mosman","다른 두 업체가 못 찾은 바닥 누수를 찾아냈어요. 정직하고 깔끔합니다."],
+           ["Booked online at 11pm for a blocked drain, sorted before 9am. Brilliant.","Hayley T.","Bondi","밤 11시에 온라인 예약했는데 아침 9시 전에 해결. 최고예요."]],
+  areaTitle:{en:"Where we work",ko:"서비스 지역"},
+  suburbs:["Inner West","North Shore","Eastern Suburbs","Hills District","CBD","Northern Beaches","St George","Ryde"],
+  finalEy:{en:"Ready when you are",ko:"언제든 준비돼 있습니다"},finalTitle:{en:"Book your callout today",ko:"오늘 바로 예약하세요"},finalSub:{en:"Online in 30 seconds, or call and talk to a real person.",ko:"30초 온라인 예약, 또는 전화로 직접 상담."},
+  footTag:{en:"Licensed local plumbers serving Greater Sydney, seven days a week.",ko:"시드니 전역에서 주 7일 운영하는 면허 배관 업체입니다."},
+  lic:{en:"Lic. No. 00001234 · Fully insured",ko:"면허번호 00001234 · 보험 완비"}
+ },
+ lawn:{
+  name:"Greenline Lawn & Garden",phone:"(02) 8000 5678",tel:"0280005678",mark:IC.mow,email:"hello@greenline.com.au",
+  emailTo:"",rating:"4.9",reviews:"418",emergency:{en:"Storm cleanups",ko:"폭풍 정리"},
+  area:{en:"Mowing across Greater Sydney",ko:"시드니 전역 잔디관리"},
+  heroTitle:{en:"A sharp lawn, every fortnight.",ko:"2주마다, 늘 깔끔한 잔디."},
+  heroSub:{en:"Reliable mowing, edging and garden care on a schedule you set — book your first visit online in under a minute.",ko:"원하는 주기에 맞춘 잔디깎기·엣징·정원관리 — 첫 방문을 1분 만에 온라인 예약하세요."},
+  bookerName:{en:"BOOK A VISIT",ko:"방문 예약"},
+  svcTitle:{en:"Your garden, handled",ko:"정원, 저희가 책임집니다"},
+  svcLead:{en:"Same crew each visit, green-waste taken away, and a tidy finish every time. Pick a service to book in seconds.",ko:"매번 같은 팀, 정원 쓰레기 수거, 항상 깔끔한 마무리. 서비스를 선택해 바로 예약하세요."},
+  bookTitle:{en:"Lock in a visit in 30 seconds",ko:"30초 만에 방문 예약"},
+  bookLead:{en:"No phone tag, no waiting. Choose what you need, pick a day, and we confirm by text.",ko:"전화 돌릴 필요 없이, 작업과 날짜를 고르면 문자로 확정해 드립니다."},
+  points:[
+    {en:["Weekly or fortnightly","slots that fit your schedule."],ko:["주간·격주","원하는 주기로 선택."]},
+    {en:["Same crew","every visit, every time."],ko:["같은 팀","매번 동일 인력."]},
+    {en:["Green-waste removed","— nothing left behind."],ko:["정원 쓰레기 수거","— 남기지 않습니다."]},
+    {en:["Fully insured","for total peace of mind."],ko:["보험 완비","마음 편하게."]}],
+  slip:{en:["Mow & edge","Epping","Fortnightly","this week, Thu am"],ko:["잔디깎기","Epping","격주","이번 주 목 오전"]},
+  stats:[["4.9★",{en:"Google rating",ko:"구글 평점"}],["418",{en:"Reviews",ko:"리뷰"}],[{en:"Weekly",ko:"주간"},{en:"or fortnightly",ko:"또는 격주"}],[{en:"Same crew",ko:"같은 팀"},{en:"Every visit",ko:"매 방문"}]],
+  services:[
+   [IC.mow,{en:"Mowing & edging",ko:"잔디깎기·엣징"},{en:"Crisp cut, clean edges and a blown-down finish — paths included.",ko:"깔끔한 절단과 가장자리 정리, 통로까지 블로워 마무리."}],
+   [IC.hedge,{en:"Hedge trimming",ko:"생울타리 정리"},{en:"Shaped hedges and shrubs, kept sharp and even all season.",ko:"생울타리와 관목을 사철 균일하고 단정하게."}],
+   [IC.cleanup,{en:"Garden cleanup",ko:"정원 대청소"},{en:"One-off tidy-ups for overgrown yards, end-of-lease or pre-sale.",ko:"방치된 정원, 퇴거·매매 전 일회성 정리."}],
+   [IC.weed,{en:"Weed control",ko:"잡초 관리"},{en:"Beds and lawns kept clear with safe, targeted treatments.",ko:"화단과 잔디를 안전한 표적 처리로 깨끗하게."}],
+   [IC.mulch,{en:"Mulching",ko:"멀칭"},{en:"Fresh mulch to lock in moisture and keep beds looking sharp.",ko:"수분을 잡아주고 화단을 단정하게 하는 멀칭."}],
+   [IC.waste,{en:"Green-waste removal",ko:"정원 쓰레기 수거"},{en:"We bag it, load it and take it away — nothing left behind.",ko:"담고 싣고 가져갑니다 — 아무것도 남기지 않아요."}]],
+  how:[[{en:"Book online",ko:"온라인 예약"},{en:"Choose your service and a day. Takes about 30 seconds.",ko:"서비스와 날짜 선택. 약 30초 소요."}],
+       [{en:"We confirm & show up",ko:"확정 후 방문"},{en:"A text with your crew and arrival window. Same team each visit.",ko:"담당 팀과 방문 시간 문자 안내. 매번 같은 팀."}],
+       [{en:"Mowed & tidied",ko:"작업 후 정리"},{en:"We finish, blow down and clear the green waste. Set and forget.",ko:"작업·블로워 마무리·쓰레기 수거까지. 신경 쓸 필요 없어요."}]],
+  revTitle:{en:"Tidiest street on the block",ko:"동네에서 제일 깔끔한 마당"},revLead:{en:"Rated 4.9 across 400+ reviews from Sydney homeowners.",ko:"시드니 주택 고객 400+ 리뷰, 평점 4.9."},
+  reviews:[["Set up a fortnightly mow and never think about it. Lawn's never looked better.","Marcus L.","Castle Hill","격주 예약 걸어두고 신경 끊었어요. 잔디 상태 역대 최고."],
+           ["Turned a jungle into a tidy yard for our open home in one visit.","Sophie W.","Concord","집 보여주기 전에 정글 같던 마당을 한 번에 정리해줬어요."],
+           ["Same two guys every time, always on time, always neat.","Raymond K.","Eastwood","매번 같은 두 분, 늘 정시에 오고 깔끔합니다."]],
+  areaTitle:{en:"Where we work",ko:"서비스 지역"},
+  suburbs:["The Hills","North Shore","Inner West","Ryde","Northern Beaches","Hornsby","Parramatta","Sutherland"],
+  finalEy:{en:"Ready when you are",ko:"언제든 준비돼 있습니다"},finalTitle:{en:"Book your first mow today",ko:"오늘 첫 방문을 예약하세요"},finalSub:{en:"Online in 30 seconds, or call and we'll sort a regular slot.",ko:"30초 온라인 예약, 또는 전화로 정기 일정 상담."},
+  footTag:{en:"Local lawn and garden care across Greater Sydney, rain or shine.",ko:"시드니 전역에서 비가 오나 맑으나 함께하는 잔디·정원 관리 업체."},
+  lic:{en:"Fully insured · Green-waste accredited",ko:"보험 완비 · 정원폐기물 인증"}
+ },
+ electrical:{
+  name:"Voltway Electrical",phone:"(02) 8000 9012",tel:"0280009012",mark:IC.fault,email:"hello@voltway.com.au",
+  emailTo:"",rating:"4.9",reviews:"503",emergency:{en:"24 / 7",ko:"24시간"},
+  area:{en:"Licensed sparkies, Greater Sydney",ko:"시드니 전역 면허 전기공"},
+  heroTitle:{en:"Power out? Sorted same day.",ko:"정전? 당일에 해결합니다."},
+  heroSub:{en:"Fully licensed electricians for power, lighting, switchboards and EV chargers — book a callout online in under a minute.",ko:"콘센트·조명·분전반·EV 충전기까지 — 면허 전기공을 1분 만에 온라인 예약하세요."},
+  bookerName:{en:"BOOK A SPARKY",ko:"전기공 예약"},
+  svcTitle:{en:"Safe, certified, on time",ko:"안전하게, 인증받고, 정시에"},
+  svcLead:{en:"Licensed work, compliance certificate on every job, and no mess left behind. Pick a service to book in seconds.",ko:"면허 작업, 모든 건에 안전 인증서, 깔끔한 마무리. 서비스를 선택해 바로 예약하세요."},
+  bookTitle:{en:"Lock in a time in 30 seconds",ko:"30초 만에 예약 완료"},
+  bookLead:{en:"No phone tag, no waiting. Choose what you need, pick a time, and we confirm by text.",ko:"전화 돌릴 필요 없이, 작업과 시간을 고르면 문자로 확정해 드립니다."},
+  points:[
+    {en:["Same-day & emergency","windows when you need them fast."],ko:["당일·긴급 출동","급할 때 바로 가능."]},
+    {en:["Compliance certificate","issued on every job."],ko:["안전 인증서","모든 작업에 발급."]},
+    {en:["Text reminder","with your electrician's name and ETA."],ko:["문자 알림","담당 전기공 이름과 도착 시간."]},
+    {en:["Licensed & insured","— every job, every time."],ko:["면허·보험 완비","— 모든 작업, 항상."]}],
+  slip:{en:["Switchboard","Chatswood","1–3pm","today, 3–5pm"],ko:["분전반","Chatswood","오후 1–3시","오늘 오후 3–5시"]},
+  stats:[["4.9★",{en:"Google rating",ko:"구글 평점"}],["503",{en:"Reviews",ko:"리뷰"}],[{en:"7 days",ko:"주 7일"},{en:"On call",ko:"대기"}],[{en:"Same day",ko:"당일"},{en:"Most jobs",ko:"대부분 작업"}]],
+  services:[
+   [IC.power,{en:"Power points & switches",ko:"콘센트·스위치"},{en:"New outlets, USB points and worn switches replaced and tested.",ko:"새 콘센트·USB 포트 설치, 낡은 스위치 교체·점검."}],
+   [IC.light,{en:"Lighting & downlights",ko:"조명·다운라이트"},{en:"LED upgrades, downlights and dimmers — brighter rooms, lower bills.",ko:"LED 교체·다운라이트·디머 — 더 밝고 전기료는 절감."}],
+   [IC.board,{en:"Switchboard upgrades",ko:"분전반 교체"},{en:"Safer boards with RCD protection to meet current standards.",ko:"현행 기준에 맞춘 RCD 누전차단 분전반으로 안전하게."}],
+   [IC.fault,{en:"Fault finding",ko:"고장 진단"},{en:"Tripping circuits and dead points traced and fixed properly.",ko:"차단기 트립·죽은 콘센트의 원인을 찾아 제대로 수리."}],
+   [IC.fan,{en:"Ceiling fans",ko:"실링팬"},{en:"Supply and install, or swap an old fan for a quiet new one.",ko:"실링팬 공급·설치, 또는 낡은 팬을 조용한 새것으로 교체."}],
+   [IC.ev,{en:"EV charger install",ko:"EV 충전기 설치"},{en:"Home chargers installed and certified for your car and switchboard.",ko:"차량과 분전반에 맞춘 가정용 충전기 설치·인증."}]],
+  how:[[{en:"Book online",ko:"온라인 예약"},{en:"Choose your service and a time window. Takes about 30 seconds.",ko:"서비스와 시간대 선택. 약 30초 소요."}],
+       [{en:"We confirm & arrive",ko:"확정 후 방문"},{en:"A text with your electrician's name and ETA. On time, every time.",ko:"담당 전기공 이름과 도착 시간 문자 안내. 항상 정시."}],
+       [{en:"Certified & paid",ko:"인증 후 결제"},{en:"Compliance certificate issued, area left clean. Pay by card or transfer.",ko:"안전 인증서 발급, 깔끔한 정리. 카드 또는 계좌이체."}]],
+  revTitle:{en:"Trusted by Sydney homes",ko:"시드니 가정이 믿는 전기공"},revLead:{en:"Rated 4.9 across 500+ reviews across Greater Sydney.",ko:"시드니 전역 500+ 리뷰, 평점 4.9."},
+  reviews:[["Whole house tripping at night — traced and fixed in an hour. Proper pro.","Elena M.","Chatswood","밤마다 집 전체가 트립됐는데 한 시간 만에 원인 찾아 수리. 진짜 프로."],
+           ["EV charger installed neat and certified. Explained everything clearly.","Tom B.","Drummoyne","EV 충전기 깔끔하게 설치·인증. 설명도 명확했어요."],
+           ["Switchboard upgrade booked online, done next morning. Spotless work.","Aisha R.","Hurstville","분전반 교체 온라인 예약하고 다음 날 아침 완료. 깔끔합니다."]],
+  areaTitle:{en:"Where we work",ko:"서비스 지역"},
+  suburbs:["North Shore","Inner West","Eastern Suburbs","CBD","Hills District","St George","Ryde","Northern Beaches"],
+  finalEy:{en:"Ready when you are",ko:"언제든 준비돼 있습니다"},finalTitle:{en:"Book your electrician today",ko:"오늘 바로 전기공을 예약하세요"},finalSub:{en:"Online in 30 seconds, or call and talk to a licensed sparky.",ko:"30초 온라인 예약, 또는 전화로 면허 전기공과 상담."},
+  footTag:{en:"Licensed local electricians serving Greater Sydney, seven days a week.",ko:"시드니 전역에서 주 7일 운영하는 면허 전기 업체입니다."},
+  lic:{en:"Lic. No. 00345678 · Fully insured",ko:"면허번호 00345678 · 보험 완비"}
+ }
+};
+
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+let trade="plumbing",lang="en";
+const T=o=>(o&&typeof o==="object"&&("en"in o))?o[lang]:o;
+const booking={service:null,day:null,time:null};
+
+function render(){
+  const d=TRADES[trade];
+  document.documentElement.setAttribute("data-trade",trade);
+  document.documentElement.setAttribute("data-lang",lang);
+  document.documentElement.lang=lang;
+
+  // generic UI strings via data-i
+  $$("[data-i]").forEach(el=>{const k=el.dataset.i; if(UI[k])el.innerHTML=T(UI[k]);});
+
+  // identity
+  $("#brandName").textContent=d.name;$("#footName").textContent=d.name;$("#footName2").textContent=d.name;
+  $("#navMark").innerHTML=d.mark;$("#footMark").innerHTML=d.mark;
+  document.title=d.name+" — "+(lang==="ko"?"출장 예약":"Book a callout");
+
+  // phones
+  $("#navPhoneText").textContent=d.phone;$("#navPhone").href="tel:"+d.tel;
+  $("#heroCall").textContent=(lang==="ko"?"전화 ":"Call ")+d.phone;$("#heroCall").href="tel:"+d.tel;
+  $("#finalCall").textContent=(lang==="ko"?"전화 ":"Call ")+d.phone;$("#finalCall").href="tel:"+d.tel;
+  $("#footPhone").textContent=d.phone;$("#footEmail").textContent=d.email;
+
+  // hero
+  $("#heroArea").textContent=T(d.area);$("#heroTitle").textContent=T(d.heroTitle);$("#heroSub").textContent=T(d.heroSub);
+  $("#heroTrust").innerHTML=`<span class="star">★ <b>${d.rating}</b> ${T(UI.trustG)}</span><span><b>${d.reviews}</b> ${T(UI.trustR)}</span><span>${T(UI.trustLic)}</span><span>${T(UI.trustSd)}</span>`;
+
+  // slip
+  const sl=T(d.slip);
+  $("#slipSvc").textContent=sl[0];$("#slipSub").textContent=sl[1];$("#slipTime").textContent=sl[2];$("#slipNext").textContent=sl[3];
+  $("#slipStatus").textContent=T(UI.slipStatus);
+
+  // stats
+  $("#statStrip").innerHTML=d.stats.map(s=>`<div class="it"><b>${T(s[0])}</b><span>${T(s[1])}</span></div>`).join("");
+
+  // services
+  $("#svcTitle").textContent=T(d.svcTitle);$("#svcLead").textContent=T(d.svcLead);
+  $("#serviceGrid").innerHTML=d.services.map(s=>`<div class="card"><div class="ic">${s[0]}</div><h3>${T(s[1])}</h3><p>${T(s[2])}</p></div>`).join("");
+
+  // booking left
+  $("#bookTitle").textContent=T(d.bookTitle);$("#bookLead").textContent=T(d.bookLead);
+  $("#bookPoints").innerHTML=d.points.map(p=>{const x=T(p);return `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>${x[0]}</b> ${x[1]}</span></li>`;}).join("");
+  $("#bookerName").textContent=T(d.bookerName);
+
+  // booking labels/buttons
+  $("#lbl1").innerHTML=T(UI.lbl1);$("#lbl2").innerHTML=T(UI.lbl2);$("#lbl3").innerHTML=T(UI.lbl3);$("#lbl4").innerHTML=T(UI.lbl4);
+  $("#next1").textContent=T(UI.next);$("#next2").textContent=T(UI.next);$("#next3").textContent=T(UI.next);
+  $("#back2").textContent=T(UI.back);$("#back3").textContent=T(UI.back);$("#back4").textContent=T(UI.back);
+  $("#confirmBtn").textContent=T(UI.confirm);$("#againBtn").textContent=T(UI.again);
+  $("#hint1").textContent=T(UI.hint1);$("#hint2").textContent=T(UI.hint2);$("#hint3").textContent=T(UI.hint3);$("#hint4").textContent=T(UI.hint4);
+  $("#fName").placeholder=T(UI.fName);$("#fPhone").placeholder=T(UI.fPhone);$("#fAddr").placeholder=T(UI.fAddr);$("#fNotes").placeholder=T(UI.fNotes);
+  $("#confTitle").textContent=T(UI.confTitle);
+  $("#tSvcL").textContent=T(UI.tSvcL);$("#tWhenL").textContent=T(UI.tWhenL);$("#tNameL").textContent=T(UI.tNameL);$("#tRefL").textContent=T(UI.tRefL);
+
+  // services chips
+  $("#bookServices").innerHTML=d.services.map((s,i)=>`<button class="chip" aria-pressed="false" data-svc="${T(s[1])}"><span>${T(s[1])}</span><small>${i===d.services.length-1?T(UI.urgent):T(UI.badge)}</small></button>`).join("");
+  $$("#bookServices .chip").forEach(c=>c.onclick=()=>{$$("#bookServices .chip").forEach(x=>x.setAttribute("aria-pressed","false"));c.setAttribute("aria-pressed","true");booking.service=c.dataset.svc;$("#hint1").classList.remove("show");});
+
+  // how
+  $("#howGrid").innerHTML=d.how.map((h,i)=>`<div class="step-card"><div class="n">0${i+1}</div><h3>${T(h[0])}</h3><p>${T(h[1])}</p></div>`).join("");
+
+  // reviews
+  $("#revTitle").textContent=T(d.revTitle);$("#revLead").textContent=T(d.revLead);
+  $("#reviewGrid").innerHTML=d.reviews.map(r=>`<div class="review"><div class="stars">★★★★★</div><p>"${lang==="ko"?r[3]:r[0]}"</p><div class="who"><b>${r[1]}</b>${r[2]}</div></div>`).join("");
+
+  // area + hours
+  $("#areaTitle").textContent=T(d.areaTitle);
+  $("#suburbList").innerHTML=d.suburbs.map(s=>`<span>${s}</span>`).join("");
+  $("#areaNote").textContent=T(UI.areaNote);
+  $("#hoursTitle").textContent=T(UI.hoursTitle);
+  $("#hMon").textContent=T(UI.hMon);$("#hSat").textContent=T(UI.hSat);$("#hSun").textContent=T(UI.hSun);$("#hEmg").textContent=T(UI.hEmg);
+  $("#emergText").textContent=T(d.emergency);
+
+  // final + footer
+  $("#finalEy").textContent=T(d.finalEy);$("#finalTitle").textContent=T(d.finalTitle);$("#finalSub").textContent=T(d.finalSub);
+  $("#footTag").textContent=T(d.footTag);$("#footLic").textContent=T(d.lic);
+  $("#rights").textContent=T(UI.rights);$("#madeBy").textContent=T(UI.madeBy);
+
+  buildDays();
+}
+
+const DOW={en:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],ko:["일","월","화","수","목","금","토"]};
+const MO={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],ko:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"]};
+function buildDays(){
+  const host=$("#bookDays");host.innerHTML="";const today=new Date();
+  for(let i=0;i<6;i++){const dt=new Date(today);dt.setDate(today.getDate()+i);
+    const label=i===0?(lang==="ko"?"오늘":"Today"):i===1?(lang==="ko"?"내일":"Tmrw"):DOW[lang][dt.getDay()];
+    const b=document.createElement("button");b.className="day";b.setAttribute("aria-pressed","false");
+    b.dataset.day=`${label} · ${dt.getDate()} ${MO[lang][dt.getMonth()]}`;
+    b.innerHTML=`<div class="dow">${label}</div><div class="dnum">${dt.getDate()}</div><div class="mo">${MO[lang][dt.getMonth()]}</div>`;
+    host.appendChild(b);}
+}
+const SLOTS=["7–9am","9–11am","11am–1pm","1–3pm","3–5pm","5–7pm"];
+function buildTimes(){
+  const host=$("#bookTimes");host.innerHTML="";
+  const taken=[(new Date().getHours())%6,(new Date().getHours()+3)%6];
+  SLOTS.forEach((s,i)=>{const b=document.createElement("button");b.className="time";b.setAttribute("aria-pressed","false");b.dataset.time=s;b.textContent=s;if(taken.includes(i))b.disabled=true;host.appendChild(b);});
+}
+function show(step){$$(".bstep").forEach(el=>el.hidden=(+el.dataset.step!==step));$$(".steps i").forEach(i=>i.classList.toggle("on",+i.dataset.s<=step));}
+function resetBooking(){booking.service=booking.day=booking.time=null;$$("#bookServices .chip").forEach(c=>c.setAttribute("aria-pressed","false"));["fName","fPhone","fAddr","fNotes"].forEach(id=>$("#"+id).value="");$$(".hint").forEach(h=>h.classList.remove("show"));show(1);}
+
+$$("[data-next]").forEach(b=>b.onclick=()=>{const s=+b.dataset.next;
+  if(s===1&&!booking.service)return $("#hint1").classList.add("show");
+  if(s===2&&!booking.day)return $("#hint2").classList.add("show");
+  if(s===3&&!booking.time)return $("#hint3").classList.add("show");
+  if(s===2)buildTimes();show(s+1);});
+$$("[data-back]").forEach(b=>b.onclick=()=>show(+b.dataset.back-1));
+$("#bookDays").onclick=e=>{const d=e.target.closest(".day");if(!d)return;$$("#bookDays .day").forEach(x=>x.setAttribute("aria-pressed","false"));d.setAttribute("aria-pressed","true");booking.day=d.dataset.day;$("#hint2").classList.remove("show");};
+$("#bookTimes").onclick=e=>{const t=e.target.closest(".time");if(!t||t.disabled)return;$$("#bookTimes .time").forEach(x=>x.setAttribute("aria-pressed","false"));t.setAttribute("aria-pressed","true");booking.time=t.dataset.time;$("#hint3").classList.remove("show");};
+
+async function sendBooking(payload){
+  if(!WEB3FORMS_KEY)return {ok:true,demo:true};
+  try{
+    const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:`New booking — ${payload.service}`,from_name:TRADES[trade].name,...payload})});
+    const j=await r.json();return {ok:j.success===true};
+  }catch(e){return {ok:false,error:e.message};}
+}
+
+$("#confirmBtn").onclick=async()=>{
+  const n=$("#fName").value.trim(),p=$("#fPhone").value.trim();
+  if(!n||!p)return $("#hint4").classList.add("show");
+  $("#hint4").classList.remove("show");
+  const btn=$("#confirmBtn");btn.disabled=true;
+  const ref=trade[0].toUpperCase()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+  const payload={business:TRADES[trade].name,service:booking.service,when:booking.day+" · "+booking.time,name:n,phone:p,address:$("#fAddr").value.trim(),notes:$("#fNotes").value.trim(),reference:ref};
+  await sendBooking(payload);
+  $("#tSvc").textContent=booking.service;$("#tWhen").textContent=booking.day+" · "+booking.time;$("#tName").textContent=n;$("#tRef").textContent=ref;
+  $("#confLead").textContent=lang==="ko"?`${p} 번호로 확정 문자를 보냈습니다. 곧 뵙겠습니다.`:`We've texted ${p} to confirm. See you soon.`;
+  btn.disabled=false;show(5);
+};
+$("#againBtn").onclick=()=>resetBooking();
+
+$$(".switcher button").forEach(b=>b.onclick=()=>{$$(".switcher button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");trade=b.dataset.set;render();resetBooking();window.scrollTo({top:0,behavior:'smooth'});});
+$$(".lang button").forEach(b=>b.onclick=()=>{$$(".lang button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");lang=b.dataset.lang;render();resetBooking();});
+
+$("#yr").textContent=new Date().getFullYear();
+render();resetBooking();
+</script>
+</body>
+</html>
