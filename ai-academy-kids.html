@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Academy — Holiday Curriculum for Kids | SunnyApps</title>
+<meta name="description" content="A 10-day bilingual (EN/KO) AI curriculum for ages 10–15. Concepts, hands-on activities, quizzes and a progress tracker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F7FC; --surface:#FFFFFF; --surface2:#EBEFF8; --ink:#171B2E; --muted:#5A6178;
+  --accent:#4F46E5; --accent-soft:#E4E2FC; --coral:#F97066; --coral-soft:#FEE4E2;
+  --mint:#10B981; --mint-soft:#D1FAE5; --line:#C7CDE4; --shadow:0 10px 30px rgba(23,27,46,.08);
+  --radius:18px;
+}
+[data-theme="dark"]{
+  --bg:#0D1120; --surface:#161B2E; --surface2:#1F2540; --ink:#EDEFF7; --muted:#99A0B8;
+  --accent:#818CF8; --accent-soft:#2A2E5C; --coral:#FF8A7A; --coral-soft:#4A2622;
+  --mint:#34D399; --mint-soft:#0E3B2C; --line:#2C3352; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{
+  font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.65;
+  transition:background .3s,color .3s;
+}
+[data-lang="en"] body, [data-lang="en"] .disp{font-family:'Space Grotesk','Noto Sans KR',sans-serif}
+.disp{font-family:'Space Grotesk','Noto Sans KR',sans-serif}
+.ko{display:none}.en{display:inline}
+[data-lang="ko"] .ko{display:inline}
+[data-lang="ko"] .en{display:none}
+[data-lang="ko"] .ko.block, .en.block{display:block}
+[data-lang="ko"] .en.block{display:none}
+[data-lang="en"] .ko.block{display:none}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;max-width:980px;margin:0 auto;flex-wrap:wrap}
+.bmc{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#111;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:999px;text-decoration:none;font-family:'Space Grotesk',sans-serif;transition:transform .15s}
+.bmc:hover{transform:translateY(-2px)}
+.toggles{display:flex;gap:8px}
+.tgl{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600;font-family:'Space Grotesk','Noto Sans KR',sans-serif;transition:border-color .2s,background .2s}
+.tgl:hover{border-color:var(--accent)}
+.tgl:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ---------- hero ---------- */
+header.hero{max-width:980px;margin:0 auto;padding:36px 20px 10px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.eyebrow{font-family:'Space Grotesk',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:.75rem;color:var(--accent);font-weight:700;margin-bottom:10px}
+h1{font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:clamp(2rem,5.5vw,3.1rem);line-height:1.12;font-weight:700;letter-spacing:-.02em}
+h1 .hl{color:var(--accent)}
+.sub{color:var(--muted);margin-top:14px;max-width:52ch;font-size:1.02rem}
+.meta-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:5px 13px;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* progress ring */
+.ring-wrap{text-align:center}
+.ring{position:relative;width:150px;height:150px}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:11;stroke-linecap:round}
+.ring .track{stroke:var(--surface2)}
+.ring .fill{stroke:var(--accent);transition:stroke-dashoffset .6s ease}
+.ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif}
+.ring-num b{font-size:1.9rem;line-height:1}
+.ring-num span{font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.reset-btn{margin-top:10px;background:none;border:none;color:var(--muted);font-size:.75rem;cursor:pointer;text-decoration:underline;font-family:inherit}
+.reset-btn:hover{color:var(--coral)}
+
+/* ---------- week label ---------- */
+.wk{max-width:980px;margin:34px auto 6px;padding:0 20px;display:flex;align-items:center;gap:14px}
+.wk h2{font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.wk::after{content:"";height:1.5px;background:var(--line);flex:1}
+
+/* ---------- neural path + day cards ---------- */
+.path{max-width:980px;margin:0 auto;padding:8px 20px 10px;position:relative}
+.day{position:relative;padding-left:56px;margin-bottom:14px}
+.day::before{ /* connector */
+  content:"";position:absolute;left:19px;top:44px;bottom:-16px;width:2px;
+  background-image:linear-gradient(var(--line) 55%, transparent 45%);background-size:2px 9px;
+}
+.day:last-child::before{display:none}
+.node{position:absolute;left:6px;top:8px;width:28px;height:28px;border-radius:50%;
+  border:2.5px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.8rem;color:var(--muted);transition:all .3s;z-index:1}
+.day.done .node{background:var(--mint);border-color:var(--mint);color:#fff;box-shadow:0 0 0 5px var(--mint-soft)}
+.day.done .node::after{content:"✓";font-size:.9rem}
+.day.done .node span{display:none}
+
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--accent)}
+.day.done .card{border-color:var(--mint)}
+.card-head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;background:none;border:none;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit}
+.card-head h3{font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:1.08rem;font-weight:700}
+.card-head .dur{font-size:.75rem;color:var(--muted);margin-top:2px}
+.arrow{flex:none;transition:transform .25s;color:var(--muted);font-size:.85rem}
+.card.open .arrow{transform:rotate(180deg)}
+.card-body{display:none;padding:4px 20px 22px;border-top:1.5px solid var(--line)}
+.card.open .card-body{display:block}
+
+.sec{margin-top:18px}
+.sec-tag{display:inline-block;font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:6px;margin-bottom:9px}
+.tag-learn{background:var(--accent-soft);color:var(--accent)}
+.tag-do{background:var(--mint-soft);color:var(--mint)}
+.tag-vocab{background:var(--surface2);color:var(--muted)}
+.tag-quiz{background:var(--accent-soft);color:var(--accent)}
+.tag-up{background:var(--coral-soft);color:var(--coral)}
+.sec p{font-size:.95rem;margin-bottom:9px}
+.sec ol,.sec ul{padding-left:22px;font-size:.95rem}
+.sec li{margin-bottom:7px}
+.sec a{color:var(--accent)}
+
+/* vocab table */
+.vt{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:4px}
+.vt th{text-align:left;font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 10px;border-bottom:1.5px solid var(--line)}
+.vt td{padding:8px 10px;border-bottom:1px solid var(--line)}
+.vt td:first-child{font-weight:600;white-space:nowrap}
+
+/* quiz */
+.q{margin-bottom:16px}
+.q-txt{font-weight:600;font-size:.95rem;margin-bottom:8px}
+.opts{display:grid;gap:7px}
+.opt{border:1.5px solid var(--line);background:var(--surface2);border-radius:11px;padding:9px 14px;text-align:left;cursor:pointer;font-size:.9rem;color:var(--ink);font-family:inherit;transition:border-color .15s}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--mint);background:var(--mint-soft)}
+.opt.wrong{border-color:var(--coral);background:var(--coral-soft)}
+.opt:disabled{cursor:default}
+.q-fb{font-size:.85rem;margin-top:7px;font-weight:600;display:none}
+.q-fb.show{display:block}
+
+/* complete button */
+.done-btn{width:100%;margin-top:22px;padding:14px;border-radius:13px;border:none;cursor:pointer;
+  font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-weight:700;font-size:1rem;
+  background:var(--accent);color:#fff;transition:transform .15s,background .2s}
+.done-btn:hover{transform:translateY(-2px)}
+.day.done .done-btn{background:var(--mint)}
+
+/* footer */
+footer{max-width:980px;margin:40px auto 0;padding:26px 20px 42px;border-top:1.5px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.85rem}
+footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:680px){
+  header.hero{grid-template-columns:1fr;text-align:center}
+  .ring-wrap{margin:0 auto}
+  .sub{margin-left:auto;margin-right:auto}
+  .meta-chips{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  <div class="toggles">
+    <button class="tgl" id="langTgl" aria-label="Toggle language">한국어</button>
+    <button class="tgl" id="themeTgl" aria-label="Toggle theme">🌙</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow disp"><span class="en">Winter Holidays · 10 Days · Ages 10–15</span><span class="ko">겨울방학 · 10일 과정 · 10–15세</span></div>
+    <h1><span class="en block">AI Academy: <span class="hl">learn how machines think</span> — then make them work for you.</span><span class="ko block">AI 아카데미: <span class="hl">기계가 생각하는 법을 배우고</span>, 직접 활용해 보세요.</span></h1>
+    <p class="sub"><span class="en">One 30-minute lesson a day for two school-holiday weeks. Week 1: how AI actually works. Week 2: using it creatively, safely and honestly. Every day has a hands-on activity, vocab, a quick quiz — and a Level-Up challenge for teens.</span><span class="ko">방학 2주 동안 하루 30분씩 한 과. 1주차는 AI의 작동 원리, 2주차는 창의적이고 안전하며 정직한 활용법을 배웁니다. 매일 실습 활동, 용어 정리, 퀴즈, 그리고 청소년을 위한 레벨업 도전 과제가 있어요.</span></p>
+    <div class="meta-chips">
+      <span class="chip">🧠 <span class="en">Concepts</span><span class="ko">개념</span></span>
+      <span class="chip">🛠 <span class="en">Hands-on</span><span class="ko">실습</span></span>
+      <span class="chip">✅ <span class="en">Quizzes</span><span class="ko">퀴즈</span></span>
+      <span class="chip">🚀 <span class="en">Level-Up for 13–15</span><span class="ko">13–15세 레벨업</span></span>
+    </div>
+  </div>
+  <div class="ring-wrap">
+    <div class="ring">
+      <svg width="150" height="150" viewBox="0 0 150 150" aria-hidden="true">
+        <circle class="track" cx="75" cy="75" r="64"></circle>
+        <circle class="fill" id="ringFill" cx="75" cy="75" r="64" stroke-dasharray="402" stroke-dashoffset="402"></circle>
+      </svg>
+      <div class="ring-num"><b id="ringNum">0/10</b><span class="en">neurons lit</span><span class="ko">활성 뉴런</span></div>
+    </div>
+    <button class="reset-btn" id="resetBtn"><span class="en">Reset progress</span><span class="ko">진행 초기화</span></button>
+  </div>
+</header>
+
+<div class="wk"><h2><span class="en">Week 1 — How AI Thinks</span><span class="ko">1주차 — AI는 어떻게 생각할까</span></h2></div>
+<div class="path" id="week1"></div>
+
+<div class="wk"><h2><span class="en">Week 2 — Using AI Well</span><span class="ko">2주차 — AI를 잘 사용하기</span></h2></div>
+<div class="path" id="week2"></div>
+
+<footer>
+  <span>Made by SunnyApps. All rights reserved.</span>
+  <a href="./links.html"><span class="en">← All SunnyApps</span><span class="ko">← 전체 앱 보기</span></a>
+</footer>
+
+<script>
+/* ================= content ================= */
+const DAYS = [
+{
+ n:1, dur:"~30 min",
+ title:{en:"What is AI, really?", ko:"AI란 도대체 무엇일까?"},
+ learn:{en:"Artificial Intelligence means teaching computers to do things that normally need human thinking — recognising faces, understanding language, playing games. AI isn't magic and it isn't a robot brain: it's maths and patterns, running very fast.<br><br>AI has been around longer than you think: a computer beat the world chess champion in 1997, and your phone has used AI for photos and voice for years. What changed recently is <b>generative AI</b> — AI that can create new text, images and music, not just recognise things.",
+       ko:"인공지능(AI)은 얼굴 인식, 언어 이해, 게임처럼 원래 사람의 사고가 필요한 일을 컴퓨터에게 가르치는 것입니다. AI는 마법도, 로봇 두뇌도 아니에요. 아주 빠르게 돌아가는 수학과 패턴일 뿐입니다.<br><br>AI의 역사는 생각보다 깁니다. 1997년에 컴퓨터가 체스 세계 챔피언을 이겼고, 스마트폰은 오래전부터 사진과 음성에 AI를 써 왔어요. 최근 달라진 것은 <b>생성형 AI</b>입니다. 단순히 인식하는 것을 넘어 새로운 글, 그림, 음악을 만들어내는 AI죠."},
+ activity:{en:["<b>AI scavenger hunt (15 min):</b> Walk around the house and list every device or app that might use AI.","For each one, write what it does (e.g. phone camera → blurs background, YouTube → recommends videos).","Sort your list into two piles: AI that <i>recognises</i> things vs AI that <i>creates</i> things.","Family debate: which one surprised you most?"],
+           ko:["<b>AI 보물찾기 (15분):</b> 집안을 돌아다니며 AI를 사용할 것 같은 기기와 앱을 모두 적어 보세요.","각각 무엇을 하는지 쓰세요. (예: 폰 카메라 → 배경 흐리기, 유튜브 → 영상 추천)","목록을 두 그룹으로 나누세요: 무언가를 <i>인식하는</i> AI vs 무언가를 <i>만드는</i> AI.","가족 토론: 가장 놀라웠던 것은?"]},
+ vocab:[["Artificial Intelligence","인공지능","Machines doing tasks that need human-like thinking","사람 같은 사고가 필요한 일을 하는 기계"],
+        ["Generative AI","생성형 AI","AI that creates new content","새로운 콘텐츠를 만드는 AI"],
+        ["Algorithm","알고리즘","A step-by-step recipe for solving a problem","문제를 푸는 단계별 방법"],
+        ["Pattern","패턴","A repeated arrangement AI learns to spot","AI가 찾아내는 반복되는 규칙"],
+        ["Automation","자동화","Machines doing tasks without human help","사람 도움 없이 기계가 일하는 것"]],
+ quiz:[
+  {q:{en:"AI is best described as…",ko:"AI를 가장 잘 설명한 것은?"},
+   o:{en:["Magic inside a computer","Maths and patterns running fast","A robot with feelings"],ko:["컴퓨터 속 마법","빠르게 돌아가는 수학과 패턴","감정을 가진 로봇"]},a:1},
+  {q:{en:"What is special about generative AI?",ko:"생성형 AI의 특별한 점은?"},
+   o:{en:["It only recognises photos","It creates new text, images and music","It works without electricity"],ko:["사진만 인식한다","새로운 글·그림·음악을 만든다","전기 없이 작동한다"]},a:1},
+  {q:{en:"Which is an example of AI you already use?",ko:"이미 사용 중인 AI의 예는?"},
+   o:{en:["YouTube video recommendations","A paper notebook","A bicycle"],ko:["유튜브 영상 추천","종이 공책","자전거"]},a:0}],
+ up:{en:"Research one moment in AI history (Deep Blue 1997, AlphaGo 2016, or ChatGPT 2022) and explain to the family in 2 minutes why it mattered.",
+     ko:"AI 역사의 한 장면(딥블루 1997, 알파고 2016, 챗GPT 2022 중 하나)을 조사해 왜 중요한지 가족에게 2분간 설명해 보세요."}
+},
+{
+ n:2, dur:"~30 min",
+ title:{en:"Machine Learning: learning from examples", ko:"머신러닝: 예시로 배우기"},
+ learn:{en:"Old-style programs follow rules a human wrote: \"IF the light is red, THEN stop.\" Machine learning flips this: instead of writing rules, we show the computer thousands of <b>examples</b> and it figures out the rules itself.<br><br>Show it 10,000 photos labelled \"cat\" or \"dog\" and it slowly discovers what makes a cat a cat — pointy ears, whisker patterns — without anyone typing those rules in. The examples are called <b>training data</b>, and the quality of that data decides how smart the AI becomes.",
+       ko:"옛날 프로그램은 사람이 쓴 규칙을 따릅니다. \"빨간불이면 멈춰라.\" 머신러닝은 반대예요. 규칙을 쓰는 대신 컴퓨터에게 수천 개의 <b>예시</b>를 보여주면, 컴퓨터가 스스로 규칙을 찾아냅니다.<br><br>'고양이', '강아지' 라벨이 붙은 사진 1만 장을 보여주면, 뾰족한 귀나 수염 같은 고양이의 특징을 누가 알려주지 않아도 스스로 발견합니다. 이 예시들을 <b>학습 데이터</b>라고 하며, 데이터의 품질이 AI의 똑똑함을 결정합니다."},
+ activity:{en:["<b>Train your own AI (20 min):</b> Open <a href='https://teachablemachine.withgoogle.com' target='_blank' rel='noopener'>Teachable Machine</a> (free, no account needed).","Create an Image Project and teach it two classes using your webcam — e.g. \"thumbs up\" vs \"thumbs down\", or two different toys.","Give each class 20+ example photos, then train and test it.","Experiment: what happens with only 3 examples per class? What if the lighting changes?"],
+           ko:["<b>나만의 AI 훈련시키기 (20분):</b> <a href='https://teachablemachine.withgoogle.com' target='_blank' rel='noopener'>Teachable Machine</a>을 여세요. (무료, 계정 불필요)","이미지 프로젝트를 만들고 웹캠으로 두 가지 클래스를 가르치세요. 예: \"엄지 척\" vs \"엄지 다운\", 또는 서로 다른 장난감 두 개.","클래스마다 사진을 20장 이상 찍고, 훈련시킨 뒤 테스트해 보세요.","실험: 클래스당 예시가 3장뿐이면? 조명이 바뀌면 어떻게 될까요?"]},
+ vocab:[["Machine Learning","머신러닝","Learning rules from examples instead of being programmed","프로그래밍 대신 예시로 규칙을 배우는 것"],
+        ["Training Data","학습 데이터","The examples an AI learns from","AI가 배우는 예시들"],
+        ["Label","라벨","The correct answer attached to an example","예시에 붙은 정답 표시"],
+        ["Model","모델","The 'brain' produced by training","훈련으로 만들어진 '두뇌'"],
+        ["Accuracy","정확도","How often the AI gets it right","AI가 정답을 맞히는 비율"]],
+ quiz:[
+  {q:{en:"In machine learning, who writes the rules?",ko:"머신러닝에서 규칙은 누가 만들까요?"},
+   o:{en:["A programmer types them all","The computer discovers them from examples","Nobody — there are no rules"],ko:["프로그래머가 전부 입력한다","컴퓨터가 예시에서 스스로 발견한다","아무도 — 규칙이 없다"]},a:1},
+  {q:{en:"What is training data?",ko:"학습 데이터란?"},
+   o:{en:["The examples an AI learns from","The AI's electricity","A type of computer virus"],ko:["AI가 배우는 예시들","AI의 전기","컴퓨터 바이러스의 일종"]},a:0},
+  {q:{en:"Your Teachable Machine model works badly with 3 photos per class. Why?",ko:"클래스당 사진 3장으로 만든 모델이 잘 작동하지 않는 이유는?"},
+   o:{en:["Too few examples to find reliable patterns","The webcam is broken","AI dislikes small numbers"],ko:["패턴을 찾기에 예시가 너무 적어서","웹캠이 고장 나서","AI가 작은 숫자를 싫어해서"]},a:0}],
+ up:{en:"Add a third class to your Teachable Machine model and deliberately try to confuse it (similar objects, weird angles). Write down 3 things that make a model fail.",
+     ko:"모델에 세 번째 클래스를 추가하고 일부러 헷갈리게 해 보세요(비슷한 물건, 이상한 각도). 모델이 실패하는 원인 3가지를 적어 보세요."}
+},
+{
+ n:3, dur:"~30 min",
+ title:{en:"Neural networks: a brain made of maths", ko:"신경망: 수학으로 만든 두뇌"},
+ learn:{en:"Your brain has about 86 billion neurons passing tiny signals to each other. A <b>neural network</b> copies this idea with maths: layers of simple number-crunchers, each passing its result to the next layer.<br><br>Think of ordering a pizza: one layer notices toppings, the next notices combinations (\"pineapple + ham = Hawaiian\"), the final layer decides \"this is a Hawaiian pizza\". Each connection has a <b>weight</b> — a number saying how important that signal is. Training means nudging millions of weights until the answers come out right.",
+       ko:"우리 뇌에는 약 860억 개의 뉴런이 서로 신호를 주고받습니다. <b>신경망</b>은 이 아이디어를 수학으로 흉내 냅니다. 단순한 계산 유닛이 층층이 쌓여, 각 층의 결과를 다음 층으로 넘기죠.<br><br>피자 주문에 비유해 볼까요? 첫 층은 토핑을 알아채고, 다음 층은 조합을 알아챕니다(\"파인애플 + 햄 = 하와이안\"). 마지막 층이 \"이건 하와이안 피자\"라고 결정합니다. 각 연결에는 <b>가중치</b>라는 숫자가 있어 신호의 중요도를 나타내요. 훈련이란 수백만 개의 가중치를 정답이 나올 때까지 조금씩 조정하는 일입니다."},
+ activity:{en:["<b>Quick, Draw! (15 min):</b> Play <a href='https://quickdraw.withgoogle.com' target='_blank' rel='noopener'>quickdraw.withgoogle.com</a> — a neural network tries to guess your doodles in 20 seconds.","After each round, click your drawings to see <i>what the network saw</i> and which other drawings it compared yours to.","Family challenge: who can get 6/6 recognised?","Discuss: why does it guess 'circle' so fast but struggle with 'camouflage'?"],
+           ko:["<b>Quick, Draw! (15분):</b> <a href='https://quickdraw.withgoogle.com' target='_blank' rel='noopener'>quickdraw.withgoogle.com</a>에서 신경망이 20초 안에 여러분의 낙서를 맞힙니다.","라운드가 끝나면 그림을 눌러 <i>신경망이 무엇을 봤는지</i>, 어떤 그림들과 비교했는지 확인해 보세요.","가족 챌린지: 누가 6개 전부 인식시킬 수 있을까요?","토론: 왜 '원'은 빨리 맞히는데 '위장무늬'는 어려워할까요?"]},
+ vocab:[["Neural Network","신경망","Layers of maths units inspired by brain neurons","뇌 뉴런을 본뜬 수학 유닛의 층"],
+        ["Neuron (node)","뉴런(노드)","One small unit that processes a signal","신호를 처리하는 작은 단위"],
+        ["Layer","레이어(층)","A group of neurons working at the same stage","같은 단계에서 일하는 뉴런들의 묶음"],
+        ["Weight","가중치","A number showing how important a connection is","연결의 중요도를 나타내는 숫자"],
+        ["Deep Learning","딥러닝","Neural networks with many layers","층이 많은 신경망"]],
+ quiz:[
+  {q:{en:"A neural network is inspired by…",ko:"신경망이 본뜬 것은?"},
+   o:{en:["The human brain","A car engine","A pizza oven"],ko:["사람의 뇌","자동차 엔진","피자 오븐"]},a:0},
+  {q:{en:"What does 'training' change inside the network?",ko:"'훈련'이 신경망 내부에서 바꾸는 것은?"},
+   o:{en:["The weights on connections","The computer's colour","The keyboard layout"],ko:["연결의 가중치","컴퓨터의 색깔","키보드 배열"]},a:0},
+  {q:{en:"'Deep' in deep learning means…",ko:"딥러닝의 '딥(깊다)'의 의미는?"},
+   o:{en:["The AI thinks about philosophy","The network has many layers","It runs underwater"],ko:["AI가 철학을 생각한다","신경망의 층이 많다","물속에서 작동한다"]},a:1}],
+ up:{en:"Draw a 3-layer neural network on paper that decides 'should I wear a jacket?' Inputs: temperature, rain, wind. Invent your own weights and trace one decision through it.",
+     ko:"'재킷을 입을까?'를 결정하는 3층 신경망을 종이에 그려 보세요. 입력: 기온, 비, 바람. 가중치를 직접 정하고 결정 과정을 따라가 보세요."}
+},
+{
+ n:4, dur:"~30 min",
+ title:{en:"How ChatGPT & Claude actually work", ko:"챗GPT와 Claude의 작동 원리"},
+ learn:{en:"Chatbots like Claude are <b>Large Language Models</b> (LLMs). Their core trick is surprisingly simple: <b>predict the next word</b>. Given \"The cat sat on the…\", the model calculates that \"mat\" is more likely than \"spaceship\".<br><br>Do this billions of times, trained on huge amounts of text, and next-word prediction becomes powerful enough to write essays, translate Korean, and explain maths. But remember: the model predicts what <i>sounds right</i>, which is not always what <i>is right</i>. When it confidently makes something up, that's called a <b>hallucination</b> — always check important facts.",
+       ko:"Claude 같은 챗봇은 <b>대규모 언어 모델(LLM)</b>입니다. 핵심 원리는 의외로 단순해요: <b>다음 단어 예측</b>입니다. \"고양이가 앉은 곳은…\"이 주어지면, 모델은 '우주선'보다 '방석'이 더 그럴듯하다고 계산합니다.<br><br>이걸 방대한 텍스트로 수십억 번 훈련하면, 다음 단어 예측만으로 에세이 쓰기, 한국어 번역, 수학 설명까지 가능해집니다. 단, 모델은 <i>그럴듯한 것</i>을 예측할 뿐, 항상 <i>사실</i>인 것은 아니에요. 자신 있게 지어낸 답을 <b>할루시네이션(환각)</b>이라고 합니다. 중요한 사실은 꼭 확인하세요."},
+ activity:{en:["<b>Human autocomplete (5 min):</b> One person starts a sentence, everyone else guesses the next word. Notice how context changes your guesses — that's exactly what an LLM does.","<b>Chatbot lab (15 min):</b> Open Claude or another chatbot with a parent. Ask it: a maths question, a question about your suburb, and a question about something that happened this week.","Rate each answer: correct / partly correct / made up. Which type of question was most reliable?"],
+           ko:["<b>사람 자동완성 (5분):</b> 한 사람이 문장을 시작하면 나머지가 다음 단어를 맞혀 보세요. 문맥에 따라 예측이 달라지죠? LLM이 하는 일이 바로 이것입니다.","<b>챗봇 실험실 (15분):</b> 부모님과 함께 Claude 같은 챗봇을 열고 질문하세요: 수학 문제, 우리 동네에 관한 질문, 이번 주에 일어난 일.","답변을 평가하세요: 정확함 / 부분 정확 / 지어냄. 어떤 질문이 가장 믿을 만했나요?"]},
+ vocab:[["LLM","대규모 언어 모델","AI trained on huge amounts of text","방대한 텍스트로 훈련된 AI"],
+        ["Token","토큰","A word-piece the model reads and writes","모델이 읽고 쓰는 단어 조각"],
+        ["Prediction","예측","Choosing the most likely next token","가장 그럴듯한 다음 토큰 고르기"],
+        ["Hallucination","할루시네이션","When AI confidently makes things up","AI가 자신 있게 지어내는 것"],
+        ["Context","문맥","The conversation the model uses to predict","모델이 예측에 사용하는 대화 내용"]],
+ quiz:[
+  {q:{en:"An LLM's core trick is…",ko:"LLM의 핵심 원리는?"},
+   o:{en:["Predicting the next word","Searching Google secretly","Copying from one big book"],ko:["다음 단어 예측","몰래 구글 검색","한 권의 책 통째로 베끼기"]},a:0},
+  {q:{en:"A hallucination is when AI…",ko:"할루시네이션이란 AI가…"},
+   o:{en:["Confidently states something false","Refuses to answer","Runs out of battery"],ko:["틀린 내용을 자신 있게 말할 때","답변을 거부할 때","배터리가 없을 때"]},a:0},
+  {q:{en:"The smartest habit when using a chatbot is…",ko:"챗봇 사용 시 가장 현명한 습관은?"},
+   o:{en:["Believe everything — it's a computer","Check important facts elsewhere","Only ask it about pizza"],ko:["컴퓨터니까 전부 믿는다","중요한 사실은 따로 확인한다","피자 얘기만 물어본다"]},a:1}],
+ up:{en:"Try to catch the chatbot hallucinating: ask about a very obscure topic or an invented book title. Screenshot the result and explain why it happened using the word 'prediction'.",
+     ko:"챗봇의 할루시네이션을 잡아 보세요. 아주 희귀한 주제나 지어낸 책 제목을 물어보고, 결과를 캡처한 뒤 '예측'이라는 단어로 이유를 설명해 보세요."}
+},
+{
+ n:5, dur:"~30 min",
+ title:{en:"Prompt engineering: talk so AI listens", ko:"프롬프트 엔지니어링: AI가 알아듣게 말하기"},
+ learn:{en:"A <b>prompt</b> is your instruction to an AI. Vague prompt in, vague answer out. Great prompts share four ingredients:<br><br>1) <b>Role</b> — \"You are a science teacher for 11-year-olds\"<br>2) <b>Task</b> — exactly what you want<br>3) <b>Details</b> — length, format, examples, what to avoid<br>4) <b>Audience</b> — who it's for<br><br>Compare \"write about dogs\" with \"You are a vet. Write 5 fun facts about dog noses for a 10-year-old, each under 20 words.\" Same AI — wildly different results. Prompting well is the most useful AI skill you can learn right now.",
+       ko:"<b>프롬프트</b>는 AI에게 주는 지시문입니다. 애매하게 물으면 애매한 답이 나와요. 좋은 프롬프트의 네 가지 재료:<br><br>1) <b>역할</b> — \"너는 11살 아이를 가르치는 과학 선생님이야\"<br>2) <b>과제</b> — 원하는 것을 정확하게<br>3) <b>세부사항</b> — 길이, 형식, 예시, 피할 것<br>4) <b>대상</b> — 누구를 위한 것인지<br><br>\"강아지에 대해 써줘\"와 \"너는 수의사야. 10살 아이를 위한 강아지 코에 관한 재미있는 사실 5가지를 각각 20단어 이내로 써줘\"를 비교해 보세요. 같은 AI인데 결과는 완전히 다릅니다. 프롬프트 작성은 지금 배울 수 있는 가장 유용한 AI 기술이에요."},
+ activity:{en:["<b>Prompt battle (20 min):</b> Pick one task, e.g. \"a bedtime story about a dragon\".","Round 1: everyone writes a lazy one-line prompt. Compare outputs.","Round 2: rewrite using Role + Task + Details + Audience. Compare again.","Vote on the best output and identify exactly which prompt ingredient made the difference."],
+           ko:["<b>프롬프트 배틀 (20분):</b> 과제를 하나 정하세요. 예: \"용이 나오는 잠자리 동화\".","1라운드: 모두가 대충 한 줄짜리 프롬프트를 씁니다. 결과를 비교하세요.","2라운드: 역할 + 과제 + 세부사항 + 대상을 넣어 다시 씁니다. 다시 비교하세요.","최고의 결과에 투표하고, 어떤 재료가 차이를 만들었는지 찾아보세요."]},
+ vocab:[["Prompt","프롬프트","Your instruction to an AI","AI에게 주는 지시문"],
+        ["Role","역할 지정","Telling the AI who to act as","AI에게 맡기는 역할"],
+        ["Format","형식","The shape of the answer (list, table…)","답변의 모양 (목록, 표 등)"],
+        ["Iteration","반복 개선","Improving a prompt over several tries","여러 번 시도하며 프롬프트 다듬기"],
+        ["Constraint","제약 조건","A limit you set (length, style…)","길이·스타일 등 정해주는 조건"]],
+ quiz:[
+  {q:{en:"Which prompt will get the best result?",ko:"가장 좋은 결과를 얻을 프롬프트는?"},
+   o:{en:["\"write story\"","\"You are a comedy writer. Write a 100-word funny story about my cat for kids.\"","\"story please now\""],ko:["\"이야기 써\"","\"너는 코미디 작가야. 아이들을 위한 우리 고양이 이야기를 100단어로 재미있게 써줘.\"","\"이야기 빨리\""]},a:1},
+  {q:{en:"Giving the AI a role means…",ko:"AI에게 역할을 준다는 것은…"},
+   o:{en:["Telling it who to act as","Paying it money","Giving it a name tag"],ko:["누구처럼 행동할지 정해주는 것","돈을 주는 것","이름표를 달아주는 것"]},a:0},
+  {q:{en:"If the first answer isn't great, you should…",ko:"첫 답변이 별로라면?"},
+   o:{en:["Give up forever","Refine your prompt and try again","Restart the computer"],ko:["영원히 포기한다","프롬프트를 다듬어 다시 시도한다","컴퓨터를 재부팅한다"]},a:1}],
+ up:{en:"Build a 'mega-prompt' that turns the AI into a personal study coach for your hardest school subject. Test it on real homework and refine it 3 times.",
+     ko:"가장 어려운 과목의 개인 학습 코치가 되도록 '메가 프롬프트'를 만들어 보세요. 실제 숙제로 테스트하고 3번 다듬어 보세요."}
+},
+{
+ n:6, dur:"~30 min",
+ title:{en:"AI & creativity: co-pilot, not autopilot", ko:"AI와 창의력: 자동조종이 아닌 부조종사"},
+ learn:{en:"AI can generate images, music and stories in seconds. Does that make human creativity pointless? No — it changes your job. The AI is a fast assistant with no taste; <b>you</b> supply the ideas, the choices and the standards.<br><br>The best creative results come from a loop: you imagine → AI drafts → you judge and redirect → AI revises. Artists who treat AI as a co-pilot make things nobody else could. People who just click 'generate' all make the same thing.",
+       ko:"AI는 몇 초 만에 그림, 음악, 이야기를 만들어냅니다. 그럼 인간의 창의력은 쓸모없어질까요? 아니요 — 여러분의 역할이 바뀌는 것뿐입니다. AI는 빠르지만 취향이 없는 조수예요. 아이디어, 선택, 기준은 <b>여러분</b>이 제공합니다.<br><br>최고의 창작은 이런 순환에서 나옵니다: 내가 상상 → AI가 초안 → 내가 판단하고 방향 수정 → AI가 다시 작업. AI를 부조종사로 대하는 창작자는 아무도 못 만드는 것을 만들고, '생성' 버튼만 누르는 사람은 모두 똑같은 것을 만듭니다."},
+ activity:{en:["<b>Holiday poster studio (25 min):</b> Design a poster for an imaginary holiday event (e.g. 'Robot Winter Festival').","Step 1: do a 5-minute paper sketch first — layout, mood, colours.","Step 2: use an AI image tool (with a parent) to generate versions. Refine your prompt at least 2 times to match YOUR sketch.","Step 3: pick the best output and improve it by hand — add title text, crop, adjust. Compare final vs first generation."],
+           ko:["<b>방학 포스터 스튜디오 (25분):</b> 가상의 방학 행사 포스터를 디자인하세요. (예: '로봇 겨울 축제')","1단계: 먼저 5분간 종이에 스케치 — 구도, 분위기, 색.","2단계: 부모님과 함께 AI 이미지 도구로 여러 버전을 생성하세요. <b>내 스케치</b>와 비슷해질 때까지 프롬프트를 2번 이상 다듬으세요.","3단계: 가장 좋은 결과를 골라 직접 개선하세요 — 제목 넣기, 자르기, 조정. 최종본과 첫 생성본을 비교해 보세요."]},
+ vocab:[["Image Generation","이미지 생성","AI creating pictures from text","텍스트로 그림을 만드는 AI"],
+        ["Style","스타일","The visual mood you ask for","요청하는 시각적 분위기"],
+        ["Draft","초안","A first version to improve on","다듬기 위한 첫 버전"],
+        ["Curation","큐레이션","Choosing the best from many options","여러 결과 중 최고를 고르는 것"],
+        ["Originality","독창성","Ideas that are truly your own","진짜 나만의 아이디어"]],
+ quiz:[
+  {q:{en:"In creative work, AI is best used as…",ko:"창작에서 AI의 가장 좋은 쓰임은?"},
+   o:{en:["A co-pilot you direct","A replacement for imagination","A magic art machine that needs no input"],ko:["내가 지휘하는 부조종사","상상력의 대체품","아무 입력도 필요 없는 마법 기계"]},a:0},
+  {q:{en:"Why did we sketch on paper BEFORE generating?",ko:"생성 전에 종이 스케치를 한 이유는?"},
+   o:{en:["So the AI serves your vision, not the other way round","Paper is cheaper","AI can't start without a fax"],ko:["AI가 내 비전을 따르게 하려고","종이가 더 싸서","팩스 없이는 AI가 못 시작해서"]},a:0},
+  {q:{en:"People who only click 'generate' with no ideas tend to make…",ko:"아이디어 없이 '생성'만 누르는 사람의 결과물은?"},
+   o:{en:["Unique masterpieces","The same generic things as everyone else","Nothing at all"],ko:["독특한 걸작","남들과 똑같은 흔한 것","아무것도 없음"]},a:1}],
+ up:{en:"Make the same poster in 3 completely different art styles (e.g. watercolour, pixel art, 1980s movie poster). Write one sentence on which style fits the event best and why.",
+     ko:"같은 포스터를 완전히 다른 3가지 스타일(수채화, 픽셀아트, 80년대 영화 포스터 등)로 만들어 보세요. 어떤 스타일이 행사에 가장 어울리는지 한 문장으로 써 보세요."}
+},
+{
+ n:7, dur:"~30 min",
+ title:{en:"Data & bias: garbage in, garbage out", ko:"데이터와 편향: 쓰레기가 들어가면 쓰레기가 나온다"},
+ learn:{en:"AI learns from data — and data comes from the world, which isn't always fair. If a face-recognition AI is trained mostly on one skin tone, it works badly on others. If a hiring AI learns from a company that mostly hired men, it may score women lower. This is <b>bias</b>.<br><br>The AI isn't being mean on purpose; it's faithfully copying the patterns in its training data, including the unfair ones. That's why the people who build AI must check <i>whose</i> data is included, whose is missing, and test the results for fairness.",
+       ko:"AI는 데이터로 배우는데, 데이터는 세상에서 옵니다. 그런데 세상은 항상 공정하지 않죠. 얼굴 인식 AI가 한 가지 피부색 위주로 훈련되면 다른 피부색에서는 잘 작동하지 않습니다. 채용 AI가 남성을 주로 뽑던 회사의 데이터로 배우면 여성에게 낮은 점수를 줄 수 있어요. 이것이 <b>편향</b>입니다.<br><br>AI가 일부러 못되게 구는 게 아니라, 학습 데이터 속 패턴을 — 불공정한 것까지 — 충실히 복사하는 것입니다. 그래서 AI를 만드는 사람은 <i>누구의</i> 데이터가 포함되고 빠졌는지 확인하고, 결과의 공정성을 검사해야 합니다."},
+ activity:{en:["<b>The biased survey experiment (20 min):</b> Question: \"What's the best school holiday activity?\"","Survey ONLY the kids in your family → write the 'AI prediction' based on that data.","Now survey the adults too. Did the answer change?","Discussion: your first 'model' was biased because the data only came from kids. Find 2 real examples of who might be missing from AI training data."],
+           ko:["<b>편향된 설문 실험 (20분):</b> 질문: \"최고의 방학 활동은?\"","가족 중 아이들에게만 설문 → 그 데이터로 'AI 예측'을 적어 보세요.","이제 어른들에게도 설문하세요. 답이 달라졌나요?","토론: 첫 '모델'은 아이들 데이터만 있어서 편향됐어요. AI 학습 데이터에서 빠질 수 있는 사람들의 실제 예 2가지를 찾아보세요."]},
+ vocab:[["Bias","편향","Unfair patterns copied from data","데이터에서 복사된 불공정한 패턴"],
+        ["Dataset","데이터셋","A collection of data used for training","훈련에 쓰이는 데이터 모음"],
+        ["Representation","대표성","Whether all groups appear in the data","모든 집단이 데이터에 포함되는지"],
+        ["Fairness","공정성","Treating all groups equally well","모든 집단을 똑같이 잘 대하는 것"],
+        ["Audit","감사(점검)","Testing an AI for problems","AI의 문제를 검사하는 것"]],
+ quiz:[
+  {q:{en:"AI bias usually comes from…",ko:"AI 편향의 주된 원인은?"},
+   o:{en:["The training data","The AI's bad mood","Cosmic rays"],ko:["학습 데이터","AI의 나쁜 기분","우주 광선"]},a:0},
+  {q:{en:"A face AI trained on one skin tone will…",ko:"한 가지 피부색으로 훈련된 얼굴 AI는…"},
+   o:{en:["Work equally well for everyone","Work worse for other skin tones","Refuse to turn on"],ko:["모두에게 똑같이 잘 작동","다른 피부색에서 성능 저하","전원이 안 켜짐"]},a:1},
+  {q:{en:"Your kids-only survey was biased because…",ko:"아이들만 설문한 조사가 편향된 이유는?"},
+   o:{en:["Kids always lie","A whole group (adults) was missing from the data","Surveys are illegal"],ko:["아이들은 늘 거짓말해서","어른이라는 집단이 데이터에서 빠져서","설문은 불법이라서"]},a:1}],
+ up:{en:"Research the real story of an AI bias case (e.g. biased hiring tools or face recognition studies) and present: what went wrong, who was affected, how it was fixed.",
+     ko:"실제 AI 편향 사례(채용 도구, 얼굴 인식 연구 등)를 조사해 발표해 보세요: 무엇이 잘못됐고, 누가 피해를 봤고, 어떻게 고쳐졌는지."}
+},
+{
+ n:8, dur:"~30 min",
+ title:{en:"Deepfakes & truth: trust your checks, not your eyes", ko:"딥페이크와 진실: 눈이 아니라 검증을 믿어라"},
+ learn:{en:"AI can now create photos, voices and videos of things that never happened — called <b>deepfakes</b>. Some are harmless fun; some are used to trick, scam or embarrass people.<br><br>Because fakes keep getting better, 'it looks real' is no longer proof. Instead, build the habit of <b>verification</b>: Who posted this? Do trusted news sources report it? Does a reverse image search find the original? Does the lighting, hands or background look strange? The strongest defence isn't sharper eyes — it's the habit of checking before believing or sharing.",
+       ko:"AI는 이제 일어나지 않은 일의 사진, 목소리, 영상까지 만들 수 있습니다. 이것이 <b>딥페이크</b>예요. 재미로 만든 것도 있지만, 사람을 속이거나 사기 치거나 망신 주는 데 쓰이기도 합니다.<br><br>가짜가 점점 정교해지기 때문에 '진짜처럼 보인다'는 더 이상 증거가 아닙니다. 대신 <b>검증</b>하는 습관을 기르세요: 누가 올렸나? 신뢰할 만한 언론도 보도했나? 이미지 역검색으로 원본이 나오나? 조명, 손, 배경이 이상하지 않나? 최고의 방어는 좋은 눈이 아니라, 믿고 공유하기 전에 확인하는 습관입니다."},
+ activity:{en:["<b>Real or AI? (20 min):</b> With a parent, visit <a href='https://www.whichfaceisreal.com' target='_blank' rel='noopener'>whichfaceisreal.com</a> and play 5 rounds each. Track your scores.","List the clues that helped (ears, glasses, backgrounds, teeth).","Then create a family 'verification checklist' — 4 steps to run before believing a shocking image or video online.","Stick it near the family computer."],
+           ko:["<b>진짜일까 AI일까? (20분):</b> 부모님과 함께 <a href='https://www.whichfaceisreal.com' target='_blank' rel='noopener'>whichfaceisreal.com</a>에서 각자 5라운드씩 해 보세요. 점수를 기록하세요.","도움이 된 단서를 적어 보세요. (귀, 안경, 배경, 치아)","그다음 가족 '검증 체크리스트'를 만드세요 — 충격적인 사진·영상을 믿기 전 거칠 4단계.","가족 컴퓨터 옆에 붙여 두세요."]},
+ vocab:[["Deepfake","딥페이크","AI-made fake photos, voices or videos","AI가 만든 가짜 사진·음성·영상"],
+        ["Verification","검증","Checking if something is true","사실인지 확인하는 것"],
+        ["Source","출처","Where information originally came from","정보가 처음 나온 곳"],
+        ["Reverse Image Search","이미지 역검색","Finding where a photo first appeared","사진이 처음 올라온 곳 찾기"],
+        ["Misinformation","허위 정보","False information that spreads","퍼져나가는 거짓 정보"]],
+ quiz:[
+  {q:{en:"A deepfake is…",ko:"딥페이크란?"},
+   o:{en:["AI-generated fake media of real-seeming events","A very deep swimming pool","A fish that lives in deep water"],ko:["실제처럼 보이는 AI 가짜 미디어","아주 깊은 수영장","심해 물고기"]},a:0},
+  {q:{en:"'It looks real' is…",ko:"'진짜처럼 보인다'는…"},
+   o:{en:["Absolute proof it's real","No longer proof — fakes look real too","Only true on Tuesdays"],ko:["진짜라는 확실한 증거","더 이상 증거가 아님 — 가짜도 진짜 같음","화요일에만 사실"]},a:1},
+  {q:{en:"Before sharing a shocking video you should…",ko:"충격적인 영상을 공유하기 전에 해야 할 일은?"},
+   o:{en:["Share fast before others do","Run your verification checklist","Add more emojis"],ko:["남들보다 빨리 공유한다","검증 체크리스트를 실행한다","이모지를 더 붙인다"]},a:1}],
+ up:{en:"Investigate how news organisations verify viral footage (search 'how journalists verify videos'). Add their 2 best techniques to your family checklist.",
+     ko:"언론사들이 바이럴 영상을 어떻게 검증하는지 조사해 보세요('기자 영상 검증 방법' 검색). 가장 좋은 기법 2가지를 가족 체크리스트에 추가하세요."}
+},
+{
+ n:9, dur:"~30 min",
+ title:{en:"AI safety & privacy: your rules of the road", ko:"AI 안전과 프라이버시: 나만의 규칙 만들기"},
+ learn:{en:"AI tools are powerful, so use them like you'd use a road: with rules. Three that matter most:<br><br>1) <b>Privacy</b> — never share your full name, address, school, passwords or photos of others with an AI tool. Treat every chat as potentially not-private.<br>2) <b>Honesty</b> — using AI for homework you claim as your own work is cheating; using it to explain, quiz you, or check your work is smart studying. Know your school's rules.<br>3) <b>Judgement</b> — AI gives confident answers about health, money and safety that can be wrong. For big decisions, humans decide; AI only assists.",
+       ko:"AI 도구는 강력하니 도로를 이용하듯 규칙을 지키며 사용해야 합니다. 가장 중요한 세 가지:<br><br>1) <b>프라이버시</b> — 실명 전체, 주소, 학교, 비밀번호, 타인의 사진은 절대 AI에 올리지 마세요. 모든 대화가 비공개가 아닐 수 있다고 생각하세요.<br>2) <b>정직</b> — AI가 한 숙제를 내 것처럼 내면 부정행위입니다. 설명을 듣거나, 퀴즈를 내달라 하거나, 검토를 부탁하는 건 똑똑한 공부법이에요. 학교 규칙을 확인하세요.<br>3) <b>판단</b> — AI는 건강, 돈, 안전에 대해 자신 있게 틀린 답을 할 수 있습니다. 큰 결정은 사람이 하고, AI는 돕기만 합니다."},
+ activity:{en:["<b>Family AI agreement (20 min):</b> Together, write your family's AI rules — one page.","Include: what personal info is never shared, how AI can/can't help with homework, what to do if you see something upsetting or fake, and screen-time limits for AI tools.","Everyone (parents too!) signs it.","Bonus: design it as a nice poster — you learned poster skills on Day 6."],
+           ko:["<b>가족 AI 약속 (20분):</b> 가족이 함께 한 페이지짜리 AI 규칙을 만드세요.","포함할 것: 절대 공유하지 않을 개인정보, 숙제에서 AI가 도울 수 있는/없는 범위, 속상하거나 가짜인 콘텐츠를 봤을 때 할 일, AI 도구 사용 시간.","부모님까지 모두 서명!","보너스: 6일차에 배운 실력으로 멋진 포스터로 만들어 보세요."]},
+ vocab:[["Privacy","프라이버시","Keeping personal info safe","개인정보를 안전하게 지키는 것"],
+        ["Personal Data","개인정보","Info that identifies you","나를 특정할 수 있는 정보"],
+        ["Academic Integrity","학업 정직성","Doing your own honest schoolwork","정직하게 자기 공부를 하는 것"],
+        ["Consent","동의","Permission before using someone's data/photo","타인의 정보·사진 사용 전 허락"],
+        ["Digital Footprint","디지털 발자국","The trail your online activity leaves","온라인 활동이 남기는 흔적"]],
+ quiz:[
+  {q:{en:"Which is safe to tell an AI chatbot?",ko:"AI 챗봇에게 말해도 안전한 것은?"},
+   o:{en:["Your home address","Your school's name and class","A general question like 'explain fractions'"],ko:["집 주소","학교 이름과 반","'분수를 설명해줘' 같은 일반 질문"]},a:2},
+  {q:{en:"Smart use of AI for homework is…",ko:"숙제에서 AI의 똑똑한 사용법은?"},
+   o:{en:["Submitting AI's essay as yours","Asking it to explain and quiz you","Asking it to email your teacher excuses"],ko:["AI 에세이를 내 것처럼 제출","설명을 듣고 퀴즈를 내달라고 하기","선생님께 변명 메일 보내달라 하기"]},a:1},
+  {q:{en:"For big health or money decisions…",ko:"건강이나 돈에 관한 큰 결정은…"},
+   o:{en:["AI decides — it's smarter","Humans decide; AI only assists","Flip a coin"],ko:["더 똑똑한 AI가 결정","사람이 결정, AI는 보조","동전 던지기"]},a:1}],
+ up:{en:"Read the privacy settings of one AI tool you use. Find: is your data used for training? Can you delete conversations? Report back to the family.",
+     ko:"사용 중인 AI 도구 하나의 개인정보 설정을 읽어 보세요. 내 데이터가 학습에 쓰이는지, 대화를 삭제할 수 있는지 확인하고 가족에게 알려 주세요."}
+},
+{
+ n:10, dur:"~30 min",
+ title:{en:"Capstone: build something with your AI skills", ko:"최종 프로젝트: AI 실력으로 무언가 만들기"},
+ learn:{en:"Time to combine everything: ideas (yours), prompting (Day 5), creativity loop (Day 6), fact-checking (Days 4 & 8), and honest use (Day 9).<br><br>Pick ONE project: 📖 an illustrated short story (you plot it, AI helps draft and illustrate, you edit), 🧠 a 10-question quiz about a topic you love (AI helps write questions, you verify every answer), 🔬 a mini research report on 'How AI is used in ___' (a sport, music, medicine — AI helps research, you check sources), or 🎨 a poster campaign teaching others one thing from this course.<br><br>The rule: AI drafts, <b>you</b> direct, verify, and finish. Present it to the family tonight!",
+       ko:"이제 배운 것을 모두 합칠 시간입니다: 아이디어(내 것), 프롬프트(5일차), 창작 순환(6일차), 사실 확인(4·8일차), 정직한 사용(9일차).<br><br>프로젝트 하나를 고르세요: 📖 삽화가 있는 단편 동화(줄거리는 내가, AI가 초안·삽화 도움, 편집은 내가), 🧠 좋아하는 주제의 10문항 퀴즈(AI가 문제 작성을 돕고, 정답은 전부 내가 검증), 🔬 'AI는 ___에서 어떻게 쓰일까' 미니 보고서(스포츠, 음악, 의학 등 — AI가 조사를 돕고 출처는 내가 확인), 🎨 이 과정에서 배운 것 하나를 남에게 가르치는 포스터 캠페인.<br><br>규칙: AI는 초안, <b>지휘·검증·완성은 나</b>. 오늘 저녁 가족 앞에서 발표하세요!"},
+ activity:{en:["<b>Plan (5 min):</b> choose a small project and write 3 sentences: what, for whom, what 'great' looks like.","<b>Build (15 min):</b> work in the loop — you direct, AI drafts, you judge and refine. Keep your best prompts.","<b>Verify (5 min):</b> fact-check anything factual; make sure the final work reflects YOUR choices.","<b>Present (5 min):</b> show the family your result AND your favourite prompt. Explain one thing AI got wrong that you fixed."],
+           ko:["<b>계획 (5분):</b> 작은 프로젝트를 고르고 세 문장을 쓰세요: 무엇을, 누구를 위해, '훌륭함'의 기준은.","<b>제작 (15분):</b> 순환 작업 — 내가 지휘, AI가 초안, 내가 판단하고 다듬기. 좋은 프롬프트는 저장해 두세요.","<b>검증 (5분):</b> 사실 정보는 확인하고, 최종 결과물에 나의 선택이 담겼는지 점검하세요.","<b>발표 (5분):</b> 가족에게 결과물과 최고의 프롬프트를 보여 주세요. AI가 틀려서 내가 고친 부분 하나를 설명하세요."]},
+ vocab:[["Capstone","최종 프로젝트","A final project combining all skills","모든 기술을 합치는 마지막 프로젝트"],
+        ["Workflow","작업 흐름","The steps you follow to create","창작을 위한 단계들"],
+        ["Revision","수정","Improving work after feedback","피드백 후 결과물 개선"],
+        ["Attribution","출처 표기","Saying what AI helped with","AI가 도운 부분을 밝히는 것"],
+        ["Presentation","발표","Sharing your work with an audience","작품을 사람들 앞에서 공유"]],
+ quiz:[
+  {q:{en:"In your capstone, AI's job is to…",ko:"최종 프로젝트에서 AI의 역할은?"},
+   o:{en:["Do everything while you watch","Draft and assist while you direct and verify","Present it to the family for you"],ko:["내가 보는 동안 전부 해주기","내가 지휘·검증하는 동안 초안과 보조","나 대신 가족 앞에서 발표"]},a:1},
+  {q:{en:"Why keep your best prompts?",ko:"좋은 프롬프트를 저장하는 이유는?"},
+   o:{en:["Good prompts are reusable tools","Prompts expire in 24 hours","To sell them"],ko:["좋은 프롬프트는 재사용 가능한 도구라서","프롬프트는 24시간 뒤 만료라서","팔기 위해서"]},a:0},
+  {q:{en:"Before presenting factual work you must…",ko:"사실 정보가 담긴 작품을 발표하기 전 해야 할 일은?"},
+   o:{en:["Verify the facts yourself","Assume AI is always right","Delete anything hard"],ko:["직접 사실을 검증한다","AI는 항상 옳다고 믿는다","어려운 건 삭제한다"]},a:0}],
+ up:{en:"Level-Up capstone: build your project as a simple web page (ask AI to teach you basic HTML as you go), or record a 2-minute video explaining how AI works to a younger kid.",
+     ko:"레벨업 프로젝트: 결과물을 간단한 웹페이지로 만들거나(AI에게 HTML 기초를 배우면서), 어린 동생에게 AI 원리를 설명하는 2분 영상을 찍어 보세요."}
+}
+];
+
+/* ================= state ================= */
+const KEY='aiAcademyKids';
+let state = JSON.parse(localStorage.getItem(KEY)||'{"done":[],"theme":null,"lang":"en"}');
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+
+/* theme */
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const root=document.documentElement;
+function applyTheme(t){root.setAttribute('data-theme',t);document.getElementById('themeTgl').textContent = t==='dark'?'☀️':'🌙'}
+applyTheme(state.theme || (sysDark?'dark':'light'));
+document.getElementById('themeTgl').onclick=()=>{state.theme = root.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(state.theme);save()};
+
+/* language */
+function applyLang(l){root.setAttribute('data-lang',l);root.setAttribute('lang',l);document.getElementById('langTgl').textContent = l==='en'?'한국어':'English'}
+applyLang(state.lang||'en');
+document.getElementById('langTgl').onclick=()=>{state.lang = root.getAttribute('data-lang')==='en'?'ko':'en';applyLang(state.lang);save()};
+
+/* ================= render ================= */
+function bi(en,ko,block){return `<span class="en${block?' block':''}">${en}</span><span class="ko${block?' block':''}">${ko}</span>`}
+
+function dayCard(d){
+  const done = state.done.includes(d.n);
+  const acts = i=>d.activity[i].map(s=>`<li>${s}</li>`).join('');
+  const vocab = d.vocab.map(v=>`<tr><td>${bi(v[0],v[1])}</td><td>${bi(v[2],v[3])}</td></tr>`).join('');
+  const quiz = d.quiz.map((q,qi)=>`
+    <div class="q" data-a="${q.a}">
+      <div class="q-txt">Q${qi+1}. ${bi(q.q.en,q.q.ko)}</div>
+      <div class="opts">${q.o.en.map((_,oi)=>`<button class="opt" data-o="${oi}">${bi(q.o.en[oi],q.o.ko[oi])}</button>`).join('')}</div>
+      <div class="q-fb"></div>
+    </div>`).join('');
+  return `
+  <div class="day${done?' done':''}" id="day${d.n}">
+    <div class="node"><span>${d.n}</span></div>
+    <div class="card">
+      <button class="card-head" aria-expanded="false">
+        <div><h3>${bi('Day '+d.n+' — '+d.title.en, d.n+'일차 — '+d.title.ko)}</h3><div class="dur">⏱ ${d.dur}</div></div>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="card-body">
+        <div class="sec"><span class="sec-tag tag-learn">${bi('Learn','배우기')}</span><p>${bi(d.learn.en,d.learn.ko,true)}</p></div>
+        <div class="sec"><span class="sec-tag tag-do">${bi('Hands-on','실습')}</span>
+          <ol class="en block">${acts('en')}</ol><ol class="ko block">${acts('ko')}</ol></div>
+        <div class="sec"><span class="sec-tag tag-vocab">${bi('Vocabulary','용어')}</span>
+          <table class="vt"><tr><th>${bi('Term','용어')}</th><th>${bi('Meaning','뜻')}</th></tr>${vocab}</table></div>
+        <div class="sec"><span class="sec-tag tag-quiz">${bi('Quick quiz','퀴즈')}</span>${quiz}</div>
+        <div class="sec"><span class="sec-tag tag-up">${bi('Level-Up (13–15)','레벨업 (13–15세)')}</span><p>${bi(d.up.en,d.up.ko,true)}</p></div>
+        <button class="done-btn" data-day="${d.n}">${done?bi('✓ Completed — tap to undo','✓ 완료 — 눌러서 취소'):bi('Mark Day '+d.n+' complete','완료 표시하기')}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('week1').innerHTML = DAYS.slice(0,5).map(dayCard).join('');
+document.getElementById('week2').innerHTML = DAYS.slice(5).map(dayCard).join('');
+
+/* progress ring */
+function refreshRing(){
+  const n=state.done.length;
+  document.getElementById('ringNum').textContent=n+'/10';
+  document.getElementById('ringFill').style.strokeDashoffset = 402-(402*n/10);
+}
+refreshRing();
+
+/* interactions (event delegation) */
+document.body.addEventListener('click',e=>{
+  const head=e.target.closest('.card-head');
+  if(head){const c=head.parentElement;c.classList.toggle('open');head.setAttribute('aria-expanded',c.classList.contains('open'));return}
+
+  const opt=e.target.closest('.opt');
+  if(opt){
+    const q=opt.closest('.q'); const a=+q.dataset.a; const chosen=+opt.dataset.o;
+    q.querySelectorAll('.opt').forEach(b=>{b.disabled=true; if(+b.dataset.o===a)b.classList.add('right')});
+    const fb=q.querySelector('.q-fb'); fb.classList.add('show');
+    if(chosen===a){fb.innerHTML=bi('🎉 Correct!','🎉 정답!');fb.style.color='var(--mint)'}
+    else{opt.classList.add('wrong');fb.innerHTML=bi('Not quite — the green one is right.','아쉬워요 — 초록색이 정답이에요.');fb.style.color='var(--coral)'}
+    return;
+  }
+
+  const btn=e.target.closest('.done-btn');
+  if(btn){
+    const n=+btn.dataset.day;
+    const wrap=document.getElementById('day'+n);
+    if(state.done.includes(n)){state.done=state.done.filter(x=>x!==n);wrap.classList.remove('done');btn.innerHTML=bi('Mark Day '+n+' complete','완료 표시하기')}
+    else{state.done.push(n);wrap.classList.add('done');btn.innerHTML=bi('✓ Completed — tap to undo','✓ 완료 — 눌러서 취소')}
+    save();refreshRing();return;
+  }
+});
+
+document.getElementById('resetBtn').onclick=()=>{
+  if(confirm(root.getAttribute('data-lang')==='ko'?'모든 진행 상황을 초기화할까요?':'Reset all progress?')){
+    state.done=[];save();location.reload();
+  }
+};
+</script>
+</body>
+</html>
