@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Kids Camp — Holiday AI Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F8FD; --card:#FFFFFF; --ink:#1B2440; --sub:#5A6480;
+    --violet:#6C5CE7; --violet-soft:#EEEBFF; --sun:#FFD93D; --sun-soft:#FFF6D6;
+    --mint:#3EC98C; --mint-soft:#E3F8EF; --coral:#FF7A6E;
+    --line:#E4E9F4; --shadow:0 6px 24px rgba(27,36,64,.08);
+    --radius:20px;
+  }
+  [data-theme="dark"]{
+    --bg:#13152B; --card:#1C1F3A; --ink:#F0F2FF; --sub:#A6ACD0;
+    --violet:#8B7CFF; --violet-soft:#2A2650; --sun:#FFD93D; --sun-soft:#3A3420;
+    --mint:#4ADE9B; --mint-soft:#173B2E; --coral:#FF8A7E;
+    --line:#2C3054; --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Nunito','Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    line-height:1.6; transition:background .3s,color .3s; padding-bottom:60px;
+  }
+  [lang-mode="ko"] body, body.ko{font-family:'Noto Sans KR','Nunito',sans-serif;}
+  h1,h2,h3,.display{font-family:'Fredoka','Noto Sans KR',sans-serif;}
+
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    padding:14px 20px; max-width:900px; margin:0 auto;
+  }
+  .bmc{
+    display:inline-flex; align-items:center; gap:6px; background:var(--sun); color:#3A2E00;
+    font-weight:800; text-decoration:none; padding:8px 16px; border-radius:999px; font-size:.85rem;
+    box-shadow:var(--shadow); transition:transform .15s;
+  }
+  .bmc:hover{transform:translateY(-2px);}
+  .controls{display:flex; gap:8px;}
+  .ctrl-btn{
+    border:2px solid var(--line); background:var(--card); color:var(--ink); font-weight:800;
+    padding:8px 14px; border-radius:999px; cursor:pointer; font-size:.85rem; font-family:inherit;
+    transition:border-color .15s;
+  }
+  .ctrl-btn:hover{border-color:var(--violet);}
+  .ctrl-btn:focus-visible,.bmc:focus-visible,.session-head:focus-visible,.done-btn:focus-visible,.copy-btn:focus-visible{
+    outline:3px solid var(--violet); outline-offset:2px;
+  }
+
+  .hero{max-width:900px; margin:10px auto 0; padding:30px 20px 10px; text-align:center;}
+  .camp-flag{
+    display:inline-block; background:var(--violet-soft); color:var(--violet); font-weight:800;
+    font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; padding:6px 16px; border-radius:999px;
+  }
+  .hero h1{font-size:clamp(2rem,6vw,3.2rem); font-weight:700; margin:14px 0 8px; line-height:1.15;}
+  .hero h1 .spark{color:var(--violet);}
+  .hero p.lead{color:var(--sub); font-size:1.05rem; max-width:620px; margin:0 auto;}
+
+  .stats{
+    display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin:24px auto 0; max-width:700px;
+  }
+  .stat{
+    background:var(--card); border:2px solid var(--line); border-radius:16px; padding:12px 22px; min-width:130px;
+  }
+  .stat .num{font-family:'Fredoka','Noto Sans KR',sans-serif; font-size:1.5rem; font-weight:600; color:var(--violet);}
+  .stat .lbl{font-size:.78rem; color:var(--sub); font-weight:700; text-transform:uppercase; letter-spacing:.06em;}
+
+  .progress-wrap{max-width:700px; margin:28px auto 0; padding:0 20px;}
+  .badge-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;}
+  .badge{
+    background:var(--sun); color:#3A2E00; font-weight:800; padding:6px 14px; border-radius:999px; font-size:.9rem;
+    box-shadow:var(--shadow);
+  }
+  .pct{font-weight:800; color:var(--sub); font-size:.9rem;}
+  .bar{height:16px; background:var(--card); border:2px solid var(--line); border-radius:999px; overflow:hidden;}
+  .bar-fill{
+    height:100%; width:0%; border-radius:999px;
+    background:linear-gradient(90deg,var(--violet),var(--mint)); transition:width .5s ease;
+  }
+
+  .safety-banner{
+    max-width:860px; margin:32px auto 0; padding:18px 22px; border-radius:var(--radius);
+    background:var(--mint-soft); border:2px solid var(--mint); display:flex; gap:14px; align-items:flex-start;
+    margin-left:20px; margin-right:20px;
+  }
+  @media(min-width:900px){.safety-banner{margin-left:auto; margin-right:auto;}}
+  .safety-banner .icon{font-size:1.6rem; line-height:1;}
+  .safety-banner h3{font-size:1.05rem; margin-bottom:4px;}
+  .safety-banner p{font-size:.92rem; color:var(--sub);}
+  .safety-banner strong{color:var(--ink);}
+
+  .sessions{max-width:860px; margin:36px auto 0; padding:0 20px; display:flex; flex-direction:column; gap:16px;}
+  .session{
+    background:var(--card); border:2px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; transition:border-color .2s; box-shadow:var(--shadow);
+  }
+  .session.done{border-color:var(--mint);}
+  .session-head{
+    display:flex; align-items:center; gap:14px; padding:18px 20px; cursor:pointer; width:100%;
+    background:none; border:none; text-align:left; color:var(--ink); font-family:inherit;
+  }
+  .s-num{
+    flex-shrink:0; width:46px; height:46px; border-radius:14px; background:var(--violet-soft);
+    color:var(--violet); display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka',sans-serif; font-size:1.3rem; font-weight:600;
+  }
+  .session.done .s-num{background:var(--mint-soft); color:var(--mint);}
+  .s-title-wrap{flex:1; min-width:0;}
+  .s-title{font-size:1.15rem; font-weight:600; font-family:'Fredoka','Noto Sans KR',sans-serif;}
+  .s-meta{font-size:.8rem; color:var(--sub); font-weight:700;}
+  .chev{transition:transform .25s; color:var(--sub); flex-shrink:0;}
+  .session.open .chev{transform:rotate(180deg);}
+  .s-check{font-size:1.3rem; flex-shrink:0;}
+
+  .s-body{display:none; padding:0 20px 22px; border-top:2px dashed var(--line);}
+  .session.open .s-body{display:block;}
+  .s-goal{
+    margin-top:16px; background:var(--violet-soft); border-radius:14px; padding:12px 16px;
+    font-size:.95rem;
+  }
+  .s-goal b{color:var(--violet);}
+  .block{margin-top:18px;}
+  .block h4{
+    font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:var(--sub); margin-bottom:8px;
+    font-family:'Nunito','Noto Sans KR',sans-serif; font-weight:800;
+  }
+  .steps{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .steps li{
+    display:flex; gap:10px; align-items:flex-start; font-size:.95rem;
+  }
+  .steps li::before{
+    content:"▸"; color:var(--violet); font-weight:800; flex-shrink:0; margin-top:1px;
+  }
+  .prompts{display:flex; flex-direction:column; gap:8px;}
+  .prompt{
+    display:flex; align-items:center; gap:10px; background:var(--bg); border:2px solid var(--line);
+    border-radius:12px; padding:10px 12px; font-size:.9rem;
+  }
+  .prompt .txt{flex:1;}
+  .copy-btn{
+    flex-shrink:0; border:none; background:var(--violet); color:#fff; font-weight:800; font-size:.75rem;
+    padding:6px 12px; border-radius:999px; cursor:pointer; font-family:inherit; transition:transform .1s;
+  }
+  .copy-btn:hover{transform:scale(1.05);}
+  .copy-btn.copied{background:var(--mint);}
+  .parent-tip{
+    margin-top:18px; background:var(--sun-soft); border:2px solid var(--sun); border-radius:14px;
+    padding:12px 16px; font-size:.9rem;
+  }
+  .parent-tip b{display:block; margin-bottom:2px;}
+  .done-btn{
+    margin-top:20px; width:100%; padding:14px; border-radius:14px; border:none; cursor:pointer;
+    font-family:'Fredoka','Noto Sans KR',sans-serif; font-size:1rem; font-weight:600;
+    background:var(--violet); color:#fff; transition:transform .12s, background .2s;
+  }
+  .done-btn:hover{transform:translateY(-2px);}
+  .session.done .done-btn{background:var(--mint);}
+
+  .finish{
+    max-width:860px; margin:36px auto 0; padding:28px 24px; text-align:center; border-radius:var(--radius);
+    background:linear-gradient(135deg,var(--violet),var(--coral)); color:#fff;
+    margin-left:20px; margin-right:20px; display:none;
+  }
+  @media(min-width:900px){.finish{margin-left:auto; margin-right:auto;}}
+  .finish.show{display:block; animation:pop .5s ease;}
+  @keyframes pop{from{transform:scale(.92); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .finish h2{font-size:1.8rem; margin-bottom:6px;}
+  .finish p{opacity:.95;}
+
+  footer{
+    text-align:center; margin-top:50px; padding:20px; color:var(--sub); font-size:.85rem; font-weight:700;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important; animation:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span data-i18n="bmc">Buy me a coffee</span></a>
+  <div class="controls">
+    <button class="ctrl-btn" id="langBtn" aria-label="Toggle language">🇰🇷 한국어</button>
+    <button class="ctrl-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+  </div>
+</div>
+
+<header class="hero">
+  <span class="camp-flag" data-i18n="flag">School Holiday Program</span>
+  <h1><span data-i18n="title1">Claude Kids</span> <span class="spark" data-i18n="title2">Camp</span> 🏕️</h1>
+  <p class="lead" data-i18n="lead">8 short missions to learn how to use AI the smart way — for ages 10–15, with a parent or guardian. Each session is 30 minutes or less!</p>
+  <div class="stats">
+    <div class="stat"><div class="num">8</div><div class="lbl" data-i18n="statSessions">Sessions</div></div>
+    <div class="stat"><div class="num">≤30<span style="font-size:.9rem">min</span></div><div class="lbl" data-i18n="statTime">Per Session</div></div>
+    <div class="stat"><div class="num">10–15</div><div class="lbl" data-i18n="statAge">Ages</div></div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="badge-row">
+    <span class="badge" id="badgeName">🥚 Newbie</span>
+    <span class="pct" id="pctText">0% complete</span>
+  </div>
+  <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="barOuter"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="safety-banner">
+  <div class="icon">🛡️</div>
+  <div>
+    <h3 data-i18n="safeTitle">Before you start — the Camp Rules</h3>
+    <p data-i18n="safeBody">Claude accounts are for adults, so kids use Claude <strong>together with a parent or guardian, on the adult's account</strong>. Never share your full name, address, school, phone number, or passwords in a chat. And remember: AI can make mistakes — always double-check important facts!</p>
+  </div>
+</div>
+
+<main class="sessions" id="sessions"></main>
+
+<div class="finish" id="finishCard">
+  <h2 data-i18n="finTitle">🎓 Camp Complete!</h2>
+  <p data-i18n="finBody">You finished all 8 missions and earned the AI Captain badge. Show your big project to your family — you did it!</p>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved.</footer>
+
+<script>
+const UI = {
+  en:{
+    bmc:"Buy me a coffee", flag:"School Holiday Program",
+    title1:"Claude Kids", title2:"Camp",
+    lead:"8 short missions to learn how to use AI the smart way — for ages 10–15, with a parent or guardian. Each session is 30 minutes or less!",
+    statSessions:"Sessions", statTime:"Per Session", statAge:"Ages",
+    safeTitle:"Before you start — the Camp Rules",
+    safeBody:"Claude accounts are for adults, so kids use Claude <strong>together with a parent or guardian, on the adult's account</strong>. Never share your full name, address, school, phone number, or passwords in a chat. And remember: AI can make mistakes — always double-check important facts!",
+    finTitle:"🎓 Camp Complete!",
+    finBody:"You finished all 8 missions and earned the AI Captain badge. Show your big project to your family — you did it!",
+    goal:"Mission Goal", steps:"What to do", prompts:"Try these prompts", parentTip:"Parent Tip",
+    markDone:"✅ Mission Complete!", markUndone:"↩️ Mark as not done", copy:"Copy", copied:"Copied!",
+    pct:"% complete", min:"min",
+    badges:["🥚 Newbie","🐣 Explorer","🚀 Navigator","🌟 AI Whiz","🏆 AI Captain"]
+  },
+  ko:{
+    bmc:"커피 한 잔 후원하기", flag:"방학 특별 프로그램",
+    title1:"클로드 키즈", title2:"캠프",
+    lead:"AI를 똑똑하게 사용하는 법을 배우는 8개의 짧은 미션 — 10~15세, 부모님과 함께! 세션당 30분 이내입니다.",
+    statSessions:"세션", statTime:"세션당", statAge:"나이",
+    safeTitle:"시작하기 전에 — 캠프 규칙",
+    safeBody:"클로드 계정은 성인용이므로, 아이들은 <strong>부모님이나 보호자와 함께, 어른의 계정으로</strong> 사용해요. 채팅에서 이름 전체, 주소, 학교, 전화번호, 비밀번호는 절대 알려주지 마세요. 그리고 기억하세요: AI도 실수할 수 있으니 중요한 사실은 꼭 다시 확인하기!",
+    finTitle:"🎓 캠프 수료!",
+    finBody:"8개 미션을 모두 완료하고 AI 캡틴 배지를 획득했어요. 가족에게 프로젝트를 자랑해 보세요 — 해냈어요!",
+    goal:"미션 목표", steps:"할 일", prompts:"이런 프롬프트를 써 보세요", parentTip:"부모님 팁",
+    markDone:"✅ 미션 완료!", markUndone:"↩️ 완료 취소", copy:"복사", copied:"복사됨!",
+    pct:"% 완료", min:"분",
+    badges:["🥚 새싹","🐣 탐험가","🚀 항해사","🌟 AI 능력자","🏆 AI 캡틴"]
+  }
+};
+
+const SESSIONS = [
+  {
+    id:"s1", emoji:"👋", time:20,
+    en:{
+      title:"Meet Claude!",
+      goal:"Find out what an AI assistant is and have your very first conversation.",
+      steps:[
+        "With your parent, open claude.ai and look at the screen together.",
+        "Say hello and ask Claude to introduce itself.",
+        "Ask 5 fun questions about anything you're curious about — dinosaurs, space, football, K-pop!",
+        "Talk together: what surprised you about the answers?"
+      ],
+      prompts:[
+        "Hi Claude! Can you introduce yourself in 3 sentences?",
+        "What are 3 amazing facts about space that most kids don't know?",
+        "If you could visit any place on Earth, what would you want to see and why?"
+      ],
+      tip:"Sit together for this first session. Explain that Claude is a computer program that learned from lots of text — it's smart, but it's not a person and doesn't actually 'know' your child."
+    },
+    ko:{
+      title:"클로드와 인사하기!",
+      goal:"AI 어시스턴트가 무엇인지 알아보고 첫 대화를 나눠 봅니다.",
+      steps:[
+        "부모님과 함께 claude.ai를 열고 화면을 같이 살펴보세요.",
+        "인사하고 클로드에게 자기소개를 부탁해 보세요.",
+        "궁금한 것 5가지를 물어보세요 — 공룡, 우주, 축구, K-pop 뭐든지!",
+        "함께 이야기해 보세요: 답변 중 어떤 게 가장 놀라웠나요?"
+      ],
+      prompts:[
+        "안녕 클로드! 세 문장으로 자기소개해 줄래?",
+        "아이들이 잘 모르는 우주에 관한 놀라운 사실 3가지 알려줘!",
+        "지구에서 아무 곳이나 갈 수 있다면 어디를 보고 싶어? 이유도 알려줘!"
+      ],
+      tip:"첫 세션은 꼭 함께 앉아서 해 주세요. 클로드는 많은 글을 학습한 컴퓨터 프로그램이며, 똑똑하지만 사람이 아니고 아이를 실제로 '아는' 것이 아니라는 점을 설명해 주세요."
+    }
+  },
+  {
+    id:"s2", emoji:"🎯", time:25,
+    en:{
+      title:"The Art of Asking",
+      goal:"Learn the secret to great answers: great questions! Be specific, give context, ask follow-ups.",
+      steps:[
+        "Try a vague prompt first: 'tell me about animals'. Read the answer.",
+        "Now try a specific one: 'Explain how octopuses change color, for a 12-year-old, in 5 fun bullet points'. Compare!",
+        "Learn the magic formula: WHO you are + WHAT you want + HOW you want it.",
+        "Practice: rewrite 3 boring questions into super-specific ones."
+      ],
+      prompts:[
+        "Explain how octopuses change color, for a 12-year-old, in 5 fun bullet points.",
+        "I'm 13 and love soccer. Explain the offside rule using a simple drawing made of text.",
+        "That was good, but can you make it shorter and add one joke?"
+      ],
+      tip:"This is the most important session! The skill of writing clear, specific requests helps kids in school too — it's really the skill of thinking about what you actually want to know."
+    },
+    ko:{
+      title:"질문의 기술",
+      goal:"좋은 답의 비밀은 좋은 질문! 구체적으로, 맥락을 담아서, 이어서 질문하는 법을 배웁니다.",
+      steps:[
+        "먼저 두루뭉술한 질문을 해 보세요: '동물에 대해 알려줘'. 답을 읽어 보세요.",
+        "이번엔 구체적으로: '문어가 색을 바꾸는 원리를 12살 눈높이로, 재미있게 5줄로 설명해줘'. 비교해 보세요!",
+        "마법의 공식을 배워요: 나는 누구 + 무엇을 원해 + 어떤 형식으로.",
+        "연습: 심심한 질문 3개를 아주 구체적인 질문으로 바꿔 보세요."
+      ],
+      prompts:[
+        "문어가 색을 바꾸는 원리를 12살 눈높이로, 재미있게 5줄로 설명해줘.",
+        "나는 13살이고 축구를 좋아해. 오프사이드 규칙을 글자로 만든 간단한 그림으로 설명해줘.",
+        "좋았어! 그런데 더 짧게 만들고 농담 하나만 넣어줄래?"
+      ],
+      tip:"가장 중요한 세션이에요! 명확하고 구체적으로 요청하는 능력은 학교 공부에도 큰 도움이 됩니다 — 결국 '내가 진짜 알고 싶은 게 뭔지' 생각하는 힘이거든요."
+    }
+  },
+  {
+    id:"s3", emoji:"📚", time:30,
+    en:{
+      title:"Super Study Buddy",
+      goal:"Use Claude to LEARN, not to copy. Get explanations, quizzes, and practice — the honest way.",
+      steps:[
+        "Pick one school topic you find tricky (fractions? photosynthesis? grammar?).",
+        "Ask Claude to explain it three ways: simply, with a story, and with an example from your life.",
+        "Ask Claude to quiz you with 5 questions — answer them yourself before checking!",
+        "Golden rule: Claude helps you understand; YOU do your own homework. Talk about why copying cheats yourself."
+      ],
+      prompts:[
+        "Explain fractions to me like I'm learning them for the first time, using pizza examples.",
+        "Give me a 5-question quiz about photosynthesis. Don't show the answers until I try!",
+        "I got question 3 wrong. Can you explain why, without just giving me the answer?"
+      ],
+      tip:"Set the rule together: Claude explains, quizzes, and checks understanding — it never writes assignments. Kids who use AI this way actually learn faster; kids who copy learn nothing."
+    },
+    ko:{
+      title:"최고의 공부 친구",
+      goal:"베끼기가 아니라 배우기! 설명, 퀴즈, 연습을 정직하게 활용하는 법을 익힙니다.",
+      steps:[
+        "어렵게 느껴지는 학교 과목 주제를 하나 고르세요 (분수? 광합성? 문법?).",
+        "클로드에게 세 가지 방법으로 설명해 달라고 하세요: 쉽게, 이야기로, 내 생활 속 예시로.",
+        "5문제 퀴즈를 내 달라고 하고, 답을 보기 전에 스스로 풀어 보세요!",
+        "황금 규칙: 클로드는 이해를 돕고, 숙제는 내가 한다. 베끼면 결국 나만 손해인 이유를 함께 이야기해 보세요."
+      ],
+      prompts:[
+        "분수를 처음 배우는 사람처럼 피자 예시로 설명해줘.",
+        "광합성에 대한 5문제 퀴즈를 내줘. 내가 풀기 전엔 답을 보여주지 마!",
+        "3번 문제를 틀렸어. 답을 바로 알려주지 말고 왜 틀렸는지 설명해 줄래?"
+      ],
+      tip:"함께 규칙을 정하세요: 클로드는 설명하고, 퀴즈 내고, 이해를 확인해 주는 역할 — 숙제를 대신 써 주는 도구가 아닙니다. 이렇게 쓰는 아이는 더 빨리 배우고, 베끼는 아이는 아무것도 배우지 못해요."
+    }
+  },
+  {
+    id:"s4", emoji:"📖", time:25,
+    en:{
+      title:"Story Factory",
+      goal:"Team up with Claude to write stories — you're the director, Claude is your writing partner.",
+      steps:[
+        "Invent a hero: name, age, one special talent, one fear.",
+        "Ask Claude to start a story with your hero — but only 1 paragraph at a time.",
+        "After each paragraph, YOU decide what happens next. You're the boss of the story!",
+        "Finish with a twist ending, then ask Claude to turn your story into a movie poster description."
+      ],
+      prompts:[
+        "Let's write a story together. My hero is [name], a 12-year-old who can talk to cats but is scared of the dark. Write ONLY the first paragraph, then stop and ask me what happens next.",
+        "Plot twist: the cat is actually a spy! Continue the story.",
+        "Now write a dramatic movie-trailer description of our story in 3 sentences."
+      ],
+      tip:"Notice who's being creative here — your child makes every decision; Claude just types fast. That's a great model for creative AI use: the human owns the ideas."
+    },
+    ko:{
+      title:"이야기 공장",
+      goal:"클로드와 팀을 이뤄 이야기를 씁니다 — 감독은 나, 클로드는 작가 파트너!",
+      steps:[
+        "주인공을 만들어요: 이름, 나이, 특별한 재능 하나, 두려워하는 것 하나.",
+        "클로드에게 내 주인공으로 이야기를 시작해 달라고 하세요 — 단, 한 번에 한 문단씩만!",
+        "문단이 끝날 때마다 다음 내용은 내가 결정해요. 이야기의 주인은 나!",
+        "반전 결말로 마무리한 뒤, 이야기를 영화 포스터 설명으로 바꿔 달라고 해 보세요."
+      ],
+      prompts:[
+        "같이 이야기를 쓰자. 주인공은 [이름], 고양이와 대화할 수 있지만 어둠을 무서워하는 12살이야. 첫 문단만 쓰고 멈춘 다음, 다음에 무슨 일이 일어날지 나한테 물어봐줘.",
+        "반전: 그 고양이는 사실 스파이였어! 이야기를 이어서 써줘.",
+        "이제 우리 이야기를 영화 예고편처럼 세 문장으로 멋지게 소개해줘."
+      ],
+      tip:"누가 창의력을 발휘하는지 지켜봐 주세요 — 모든 결정은 아이가 하고, 클로드는 빠르게 받아 적을 뿐입니다. 이것이 건강한 창작 AI 사용법이에요: 아이디어의 주인은 사람!"
+    }
+  },
+  {
+    id:"s5", emoji:"🗣️", time:25,
+    en:{
+      title:"Word Wizard",
+      goal:"Play with languages and words — practice Korean (or any language!), riddles, and word games.",
+      steps:[
+        "Ask Claude to teach you 5 useful phrases in a language you're curious about (Korean is a great choice! 🇰🇷).",
+        "Play a word game: 20 Questions, rhyme battles, or 'guess the animal from 3 clues'.",
+        "Ask for 3 riddles — try to solve them before asking for hints.",
+        "Bonus: ask Claude to explain a funny idiom like 'raining cats and dogs' and its Korean cousin."
+      ],
+      prompts:[
+        "Teach me 5 Korean phrases a kid would actually use with friends, with easy pronunciation guides.",
+        "Let's play 20 Questions! Think of an animal and I'll guess. Only answer yes or no.",
+        "Give me a tricky riddle. If I'm stuck, give me one small hint at a time."
+      ],
+      tip:"Language games are one of the safest, richest ways for kids to use AI. If your family is bilingual, try having Claude switch between both languages mid-conversation — kids love it."
+    },
+    ko:{
+      title:"단어 마법사",
+      goal:"언어와 단어로 놀아요 — 영어(또는 어떤 언어든!) 연습, 수수께끼, 단어 게임까지.",
+      steps:[
+        "배우고 싶은 언어의 유용한 표현 5개를 가르쳐 달라고 하세요 (영어 회화 연습에 딱이에요! 🇦🇺).",
+        "단어 게임을 해 보세요: 스무고개, 라임 배틀, '힌트 3개로 동물 맞히기'.",
+        "수수께끼 3개를 내 달라고 하고, 힌트 없이 먼저 풀어 보세요.",
+        "보너스: 'raining cats and dogs' 같은 재미있는 영어 관용구와 비슷한 한국어 표현을 물어보세요."
+      ],
+      prompts:[
+        "호주 아이들이 친구들이랑 실제로 쓰는 영어 표현 5개를 발음 팁이랑 같이 가르쳐줘.",
+        "스무고개 하자! 동물 하나를 생각해. 내 질문에 예/아니오로만 답해줘.",
+        "어려운 수수께끼 하나 내줘. 내가 막히면 힌트를 한 번에 하나씩만 줘."
+      ],
+      tip:"언어 게임은 아이가 AI를 사용하는 가장 안전하고 유익한 방법 중 하나예요. 이중언어 가정이라면 대화 중간에 한국어와 영어를 번갈아 쓰게 해 보세요 — 아이들이 정말 좋아합니다."
+    }
+  },
+  {
+    id:"s6", emoji:"🕵️", time:25,
+    en:{
+      title:"Fact Detective",
+      goal:"Discover that AI can be wrong — and learn how a smart detective double-checks facts.",
+      steps:[
+        "Learn the big secret: AI sometimes makes mistakes that SOUND very confident. These are called 'hallucinations'.",
+        "Ask Claude a question about something you know really well (your favourite game, team, or K-pop group). Spot anything wrong?",
+        "Pick one 'fact' from any earlier session and verify it together in a book or trusted website.",
+        "Make your Detective Rulebook: 1) Important fact? Check it. 2) Homework fact? Check it. 3) Ask Claude 'how sure are you?'"
+      ],
+      prompts:[
+        "How confident are you about that answer? What parts might you be wrong about?",
+        "What's the difference between something you know for sure and something you're guessing?",
+        "Can you explain what an AI 'hallucination' is, in a funny way a 12-year-old would remember?"
+      ],
+      tip:"This session builds the #1 habit for growing up with AI: healthy scepticism. Praise your child every time they catch a mistake or double-checks something — detectives get rewarded!"
+    },
+    ko:{
+      title:"팩트 탐정",
+      goal:"AI도 틀릴 수 있다는 것을 발견하고, 똑똑한 탐정처럼 사실을 확인하는 법을 배웁니다.",
+      steps:[
+        "큰 비밀을 배워요: AI는 아주 자신 있게 들리는 실수를 하기도 해요. 이걸 '환각(hallucination)'이라고 불러요.",
+        "내가 아주 잘 아는 주제(좋아하는 게임, 팀, K-pop 그룹)에 대해 질문해 보세요. 틀린 부분이 보이나요?",
+        "이전 세션에서 배운 '사실' 하나를 골라 책이나 믿을 만한 사이트에서 함께 확인해 보세요.",
+        "나만의 탐정 규칙 만들기: 1) 중요한 사실? 확인! 2) 숙제에 쓸 사실? 확인! 3) 클로드에게 '얼마나 확실해?'라고 물어보기."
+      ],
+      prompts:[
+        "방금 그 답, 얼마나 확신해? 틀렸을 수도 있는 부분은 어디야?",
+        "네가 확실히 아는 것과 추측하는 것의 차이를 설명해줘.",
+        "AI의 '환각'이 뭔지 12살이 기억할 만큼 웃기게 설명해줘."
+      ],
+      tip:"이 세션은 AI 시대를 살아갈 아이에게 가장 중요한 습관, '건강한 의심'을 길러 줍니다. 아이가 실수를 찾아내거나 사실을 확인할 때마다 칭찬해 주세요 — 탐정에게는 보상을!"
+    }
+  },
+  {
+    id:"s7", emoji:"🛠️", time:30,
+    en:{
+      title:"Maker Session",
+      goal:"Build something real! Ask Claude to create a mini game or quiz app you can actually play.",
+      steps:[
+        "Decide what to build: a quiz about your favourite topic, a simple clicking game, or a random joke machine.",
+        "Describe it to Claude in detail: what it looks like, what buttons it has, what happens when you win.",
+        "Claude can build small apps right in the chat (called Artifacts). Play with what it makes!",
+        "Ask for 2 improvements: new colours, more questions, a score counter, sound-effect emojis — you're the designer!"
+      ],
+      prompts:[
+        "Can you build me a fun 10-question quiz game about the solar system, with a score at the end and happy emojis when I get answers right?",
+        "Awesome! Now make the design more colourful and add a 'play again' button.",
+        "Can you build a simple game where I click a bouncing star to score points, with a 30-second timer?"
+      ],
+      tip:"This is where kids realise they can CREATE with AI, not just chat. If your child gets excited here, that's a signal — this is how many young makers (like SunnyApps!) get started."
+    },
+    ko:{
+      title:"메이커 세션",
+      goal:"진짜 뭔가를 만들어요! 클로드에게 직접 플레이할 수 있는 미니 게임이나 퀴즈 앱을 만들어 달라고 합니다.",
+      steps:[
+        "무엇을 만들지 정하세요: 좋아하는 주제 퀴즈, 간단한 클릭 게임, 랜덤 농담 기계 등.",
+        "클로드에게 자세히 설명하세요: 어떻게 생겼는지, 어떤 버튼이 있는지, 이기면 무슨 일이 일어나는지.",
+        "클로드는 채팅 안에서 작은 앱을 바로 만들 수 있어요 (아티팩트라고 해요). 만든 걸 직접 플레이해 보세요!",
+        "개선점 2가지를 요청하세요: 새로운 색상, 문제 추가, 점수 카운터, 효과음 이모지 — 디자이너는 나!"
+      ],
+      prompts:[
+        "태양계에 관한 10문제 퀴즈 게임을 만들어줘. 마지막에 점수가 나오고, 정답을 맞히면 신나는 이모지가 나오게 해줘!",
+        "멋져! 이제 디자인을 더 알록달록하게 하고 '다시 하기' 버튼을 추가해줘.",
+        "통통 튀는 별을 클릭해서 점수를 얻는 간단한 게임을 만들어줘. 30초 타이머도 넣어줘!"
+      ],
+      tip:"아이가 AI로 대화만 하는 게 아니라 '창작'할 수 있다는 걸 깨닫는 순간이에요. 여기서 아이가 신나 한다면 그건 신호입니다 — 많은 어린 메이커들이 이렇게 시작하거든요 (SunnyApps처럼요!)."
+    }
+  },
+  {
+    id:"s8", emoji:"🎓", time:30,
+    en:{
+      title:"My Big Project + Show & Tell",
+      goal:"Put it ALL together: plan and create one project using every skill from camp, then present it!",
+      steps:[
+        "Choose your project: a story book, a quiz game, a fact poster about a topic you love, or your own idea.",
+        "Plan first (Session 2 skill!): write down WHAT you want, for WHO, and HOW it should look.",
+        "Create it with Claude — remember to direct, verify facts (Session 6!), and improve it twice.",
+        "Show & Tell: present your project to your family. Explain what YOU did and what Claude helped with."
+      ],
+      prompts:[
+        "I want to make [my project]. Help me plan it first: ask me 3 questions to make the plan better before we start.",
+        "Here's my plan. Let's build it step by step — check with me before each big step.",
+        "Help me practise presenting this: what are 3 things I should explain about how I made it?"
+      ],
+      tip:"The Show & Tell matters most: explaining 'what I did vs. what the AI did' builds real ownership and honesty about AI-assisted work — a skill they'll use for the rest of their lives. Take a photo of the presentation! 📸"
+    },
+    ko:{
+      title:"나의 빅 프로젝트 + 발표회",
+      goal:"캠프에서 배운 모든 기술을 모아 프로젝트 하나를 계획하고 만든 뒤, 발표합니다!",
+      steps:[
+        "프로젝트를 고르세요: 이야기책, 퀴즈 게임, 좋아하는 주제의 사실 포스터, 또는 나만의 아이디어.",
+        "먼저 계획! (세션 2 기술!): 무엇을, 누구를 위해, 어떤 모습으로 만들지 적어 보세요.",
+        "클로드와 함께 만들어요 — 내가 지휘하고, 사실은 확인하고 (세션 6!), 두 번 개선하기.",
+        "발표회: 가족 앞에서 프로젝트를 발표하세요. 내가 한 일과 클로드가 도운 일을 설명해 보세요."
+      ],
+      prompts:[
+        "[내 프로젝트]를 만들고 싶어. 시작하기 전에 계획을 더 좋게 만들 질문 3개를 나한테 먼저 물어봐줘.",
+        "여기 내 계획이야. 단계별로 만들자 — 큰 단계마다 나한테 먼저 확인해줘.",
+        "발표 연습을 도와줘: 내가 어떻게 만들었는지 설명할 때 꼭 말해야 할 3가지는 뭘까?"
+      ],
+      tip:"발표회가 가장 중요해요: '내가 한 것 vs AI가 한 것'을 설명하는 과정에서 진짜 주인의식과 AI 활용의 정직함이 자랍니다 — 평생 쓸 기술이에요. 발표 장면은 꼭 사진으로 남기세요! 📸"
+    }
+  }
+];
+
+// ---------- State ----------
+let lang = localStorage.getItem('ckc-lang') || 'en';
+let progress = JSON.parse(localStorage.getItem('ckc-progress') || '[]');
+
+// ---------- Theme ----------
+const themeBtn = document.getElementById('themeBtn');
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('ckc-theme', t);
+}
+setTheme(localStorage.getItem('ckc-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+themeBtn.addEventListener('click', () => {
+  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+// ---------- Render ----------
+function t(key){ return UI[lang][key]; }
+
+function render(){
+  document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? '🇰🇷 한국어' : '🇬🇧 English';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (UI[lang][k] !== undefined) el.innerHTML = UI[lang][k];
+  });
+
+  const wrap = document.getElementById('sessions');
+  const openIds = new Set([...document.querySelectorAll('.session.open')].map(s => s.dataset.id));
+  wrap.innerHTML = '';
+  SESSIONS.forEach((s, i) => {
+    const c = s[lang];
+    const done = progress.includes(s.id);
+    const el = document.createElement('section');
+    el.className = 'session' + (done ? ' done' : '') + (openIds.has(s.id) ? ' open' : '');
+    el.dataset.id = s.id;
+    el.innerHTML = `
+      <button class="session-head" aria-expanded="${openIds.has(s.id)}">
+        <span class="s-num">${done ? '✓' : i + 1}</span>
+        <span class="s-title-wrap">
+          <span class="s-title">${s.emoji} ${c.title}</span><br>
+          <span class="s-meta">⏱ ${s.time} ${t('min')}</span>
+        </span>
+        <span class="s-check">${done ? '🏅' : ''}</span>
+        <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="s-body">
+        <div class="s-goal"><b>🎯 ${t('goal')}:</b> ${c.goal}</div>
+        <div class="block"><h4>📋 ${t('steps')}</h4>
+          <ul class="steps">${c.steps.map(st => `<li>${st}</li>`).join('')}</ul>
+        </div>
+        <div class="block"><h4>💬 ${t('prompts')}</h4>
+          <div class="prompts">${c.prompts.map(p =>
+            `<div class="prompt"><span class="txt">${p}</span><button class="copy-btn" data-copy="${p.replace(/"/g,'&quot;')}">${t('copy')}</button></div>`
+          ).join('')}</div>
+        </div>
+        <div class="parent-tip"><b>👨‍👩‍👧 ${t('parentTip')}</b>${c.tip}</div>
+        <button class="done-btn" data-done="${s.id}">${done ? t('markUndone') : t('markDone')}</button>
+      </div>`;
+    wrap.appendChild(el);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const pct = Math.round(progress.length / SESSIONS.length * 100);
+  document.getElementById('barFill').style.width = pct + '%';
+  document.getElementById('barOuter').setAttribute('aria-valuenow', pct);
+  document.getElementById('pctText').textContent = pct + t('pct');
+  const badges = UI[lang].badges;
+  const idx = progress.length === 0 ? 0 : progress.length <= 2 ? 1 : progress.length <= 4 ? 2 : progress.length <= 7 ? 3 : 4;
+  document.getElementById('badgeName').textContent = badges[idx];
+  document.getElementById('finishCard').classList.toggle('show', progress.length === SESSIONS.length);
+}
+
+// ---------- Events ----------
+document.getElementById('langBtn').addEventListener('click', () => {
+  lang = lang === 'en' ? 'ko' : 'en';
+  localStorage.setItem('ckc-lang', lang);
+  render();
+});
+
+document.getElementById('sessions').addEventListener('click', e => {
+  const head = e.target.closest('.session-head');
+  if (head){
+    const sess = head.closest('.session');
+    sess.classList.toggle('open');
+    head.setAttribute('aria-expanded', sess.classList.contains('open'));
+    return;
+  }
+  const doneBtn = e.target.closest('[data-done]');
+  if (doneBtn){
+    const id = doneBtn.dataset.done;
+    progress = progress.includes(id) ? progress.filter(x => x !== id) : [...progress, id];
+    localStorage.setItem('ckc-progress', JSON.stringify(progress));
+    render();
+    return;
+  }
+  const copyBtn = e.target.closest('.copy-btn');
+  if (copyBtn){
+    navigator.clipboard.writeText(copyBtn.dataset.copy).then(() => {
+      copyBtn.textContent = t('copied');
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500);
+    });
+  }
+});
+
+render();
+</script>
+</body>
+</html>
