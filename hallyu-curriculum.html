@@ -132,6 +132,12 @@
   .col li{font-size:13.5px;line-height:1.45}
   .col li b{font-weight:600}
   .col li span{color:var(--muted)}
+  .col a.yt{color:inherit;text-decoration:none;display:inline-flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .col a.yt b{border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  .col a.yt:hover b{color:var(--magenta);border-bottom-color:var(--magenta)}
+  .ytbadge{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:#ff4b4b;border:1px solid rgba(255,75,75,.45);border-radius:99px;padding:2px 7px;white-space:nowrap;transition:all .2s}
+  .col a.yt:hover .ytbadge{background:#ff2d2d;color:#fff;border-color:#ff2d2d}
   .assign{margin-top:20px;border:1px dashed var(--line);border-radius:12px;padding:16px 18px;
     background:color-mix(in srgb,var(--gold) 8%,transparent)}
   .assign h4{color:var(--gold)}
@@ -210,7 +216,7 @@
     <div>
       <h3>How to play this record</h3>
       <p>This isn't a list of songs to like — it's a way to <em>read</em> a cultural movement. Each track pairs a guiding question with things to <b>listen</b>, <b>watch</b>, and <b>read</b>, then a short assignment that turns input into understanding. Work top to bottom (the order is historical) or jump to whatever's pulling at you.</p>
-      <p class="how">Tap a track to open its liner notes. Tap the <b>circle</b> on the left to mark it done — your progress fills the bar up top. Korean terms appear with glosses so the vocabulary becomes yours, not just the artists'.</p>
+      <p class="how">Tap a track to open its liner notes. Tap the <b>circle</b> on the left to mark it done — your progress fills the bar up top. Korean terms appear with glosses so the vocabulary becomes yours, not just the artists'. Song titles marked <b>▶ YouTube</b> open the official video.</p>
     </div>
   </section>
 
@@ -269,7 +275,7 @@ const tracks = [
   { n:'02', tag:'Origins', tt:'The Big Bang', ko:'서태지와 아이들',
     hook:'1992: the three minutes that broke Korean pop open.',
     q:'What makes a single TV performance the line everyone later draws between \u201cbefore\u201d and \u201cafter\u201d?',
-    listen:[['Seo Taiji and Boys — \u201cNan Arayo (난 알아요)\u201d (1992)','Western hip-hop/new jack swing fused with Korean lyrics']],
+    listen:[['Seo Taiji and Boys — \u201cNan Arayo (난 알아요)\u201d (1992)','Western hip-hop/new jack swing fused with Korean lyrics','https://www.youtube.com/watch?v=OEDHEzs5kyk']],
     watch:[['The legendary panel-judges performance','where critics scored it low and the public made it #1 anyway']],
     read:[['John Lie — <b>K-pop: Popular Music, Nationalism, and the Cultural Imagination</b>','the Seo Taiji chapter'],['Any piece on Korea\u2019s 1990s loosening of broadcast censorship','context for why this could air at all']],
     assign:'Find one song from your own culture that felt like a \u201cbefore/after\u201d line. In a paragraph, compare what rule it broke to what Seo Taiji broke.',
@@ -278,7 +284,7 @@ const tracks = [
   { n:'03', tag:'The Machine', tt:'The Idol System, Gen 1', ko:'1세대 아이돌',
     hook:'Where the trainee model, fan clubs, and \u201ccomebacks\u201d are all invented.',
     q:'If you could design a pop star from scratch — audition, train, package, debut — what do you gain, and what do you quietly give up?',
-    listen:[['H.O.T. — \u201cCandy\u201d (1996)','SM Entertainment\u2019s prototype idol group'],['S.E.S. &amp; Fin.K.L.','the first great girl-group rivalry']],
+    listen:[['H.O.T. — \u201cCandy\u201d (1996)','SM Entertainment\u2019s prototype idol group','https://www.youtube.com/watch?v=3NUaXU1d-NY'],['S.E.S. &amp; Fin.K.L.','the first great girl-group rivalry']],
     watch:[['Early K-drama exports: <b>Winter Sonata</b> (2002)','the Hallyu beachhead in Japan'],['<b>Dae Jang Geum / Jewel in the Palace</b> (2003)','the drama that crossed all of Asia and beyond']],
     read:[['On Lee Soo-man &amp; the SM \u201cculture technology\u201d memo','the manufacturing thesis, stated out loud'],['Any history of official fan clubs &amp; fan colors','the infrastructure fandom is built on']],
     assign:'Sketch a one-page \u201cidol spec sheet\u201d for a fictional Gen-1 group: concept, color, fandom name. Then list two things about real human beings your spec sheet ignores.',
@@ -287,7 +293,7 @@ const tracks = [
   { n:'04', tag:'Going Global', tt:'The Big 3 &amp; Gen 2', ko:'2세대',
     hook:'SM, YG, JYP — and the first time the wave reaches the West.',
     q:'What changes about a movement the moment its distribution shifts from broadcast TV to YouTube?',
-    listen:[['Girls\u2019 Generation — \u201cGee\u201d (2009)','the Gen-2 girl-group high-water mark'],['Big Bang — \u201cFantastic Baby\u201d','YG\u2019s hip-hop-leaning template'],['Wonder Girls — \u201cNobody\u201d','the first real US toe-dip']],
+    listen:[['Girls\u2019 Generation — \u201cGee\u201d (2009)','the Gen-2 girl-group high-water mark','https://www.youtube.com/watch?v=U7mPqycQ0tQ'],['Big Bang — \u201cFantastic Baby\u201d','YG\u2019s hip-hop-leaning template','https://www.youtube.com/watch?v=AAbokV76tkU'],['Wonder Girls — \u201cNobody\u201d','the first real US toe-dip','https://www.youtube.com/watch?v=QZBn1e9pr2Q']],
     watch:[['Early SM/YG/JYP MVs side by side','learn to read each label\u2019s house style'],['2NE1 performance footage','the blueprint for \u201cgirl crush\u201d concepts']],
     read:[['On the \u201cBig 3\u201d agency oligopoly','how three companies shaped a national sound'],['Early Western press on K-pop','watch the \u201cexotic novelty\u201d framing form']],
     assign:'Pick one Gen-2 song and one Gen-4 song. Note three production choices that changed and one that didn\u2019t.',
@@ -296,7 +302,7 @@ const tracks = [
   { n:'05', tag:'Going Global', tt:'Gangnam Style &amp; the Viral Threshold', ko:'강남스타일',
     hook:'2012: the first video to a billion views — blessing and trap.',
     q:'When the whole world watches once, is that a breakthrough or a ceiling?',
-    listen:[['PSY — \u201cGangnam Style\u201d (2012)','and read the satire most Western viewers missed — it mocks Seoul\u2019s wealthy district']],
+    listen:[['PSY — \u201cGangnam Style\u201d (2012)','and read the satire most Western viewers missed — it mocks Seoul\u2019s wealthy district','https://www.youtube.com/watch?v=9bZkp7q19f0']],
     watch:[['The MV as social critique','the joke is on aspirational consumerism, not with it']],
     read:[['Analyses of the \u201cnovelty act\u201d problem','global virality that didn\u2019t open the door for others — yet'],['On YouTube breaking its own view counter','the literal infrastructure couldn\u2019t hold it']],
     assign:'Argue both sides in two short paragraphs: \u201cGangnam Style opened the door for BTS\u201d vs. \u201cit slammed it shut by making K-pop a punchline.\u201d',
@@ -305,7 +311,7 @@ const tracks = [
   { n:'06', tag:'Going Global', tt:'Gen 3 &amp; the BTS Inflection', ko:'방탄소년단',
     hook:'A group from a tiny label rewrites what\u2019s possible.',
     q:'How did BTS convert a fandom into a force that moved Billboard, the UN, and a national economy?',
-    listen:[['BTS — \u201cSpring Day (봄날)\u201d','the songwriting peak'],['BTS — \u201cDynamite\u201d (2020)','first all-English #1; the crossover key'],['BLACKPINK, TWICE, SEVENTEEN','map the rest of Gen 3']],
+    listen:[['BTS — \u201cSpring Day (봄날)\u201d','the songwriting peak','https://www.youtube.com/watch?v=xEeFrLSkMm8'],['BTS — \u201cDynamite\u201d (2020)','first all-English #1; the crossover key','https://www.youtube.com/watch?v=gdZLi9oWNZg'],['BLACKPINK, TWICE, SEVENTEEN','map the rest of Gen 3']],
     watch:[['BTS at the 2017 AMAs','the US arrival moment'],['\u201cBurn the Stage\u201d / docu-content','the para-social engine up close']],
     read:[['On <b>ARMY</b> as organized fandom','translation armies, streaming campaigns, chart strategy'],['Big Hit\u2019s underdog rise vs. the Big 3','why \u201csmall label\u201d became part of the myth']],
     assign:'Diagram the BTS feedback loop: artist \u2192 content \u2192 fandom \u2192 charts \u2192 press \u2192 back to artist. Mark the one link you think matters most.',
@@ -332,7 +338,7 @@ const tracks = [
   { n:'09', tag:'The Machine', tt:'Sound &amp; Vision', ko:'사운드와 비주얼',
     hook:'How a K-pop song — and its universe — is actually built.',
     q:'Why does so much K-pop feel like five songs stitched into one, and why does that work?',
-    listen:[['Any maximalist title track','count the distinct sections — the genre-switch hook is a design choice'],['aespa — songs from the KWANGYA lore','music as franchise world-building']],
+    listen:[['Any maximalist title track','count the distinct sections — the genre-switch hook is a design choice'],['aespa — Next Level (KWANGYA lore)','music as franchise world-building','https://www.youtube.com/watch?v=4TWR90KJl84']],
     watch:[['A \u201cpoint choreography\u201d breakdown','the one move engineered to be copied'],['A concept-trailer / MV with heavy lore','visual grammar as storytelling']],
     read:[['On global songwriting camps','Scandinavian/US writers + Korean A&amp;R = the assembly line of melody'],['On \u201cconcept\u201d and worldbuilding','why groups have mythologies, not just eras']],
     assign:'Pick one title track. Map its structure bar-by-bar (intro / verse / pre / hook / dance break / drop). Mark the exact moment the genre flips.',
@@ -359,7 +365,7 @@ const tracks = [
   { n:'12', tag:'Now Playing', tt:'Hallyu 2026', ko:'지금의 한류',
     hook:'When a fictional group wins an Oscar, what is the wave now?',
     q:'If the most successful \u201cK-pop\u201d act of 2025 doesn\u2019t exist, has the movement transcended its artists — or hollowed out?',
-    listen:[['\u201cGolden\u201d — HUNTR/X (from <i>KPop Demon Hunters</i>)','a fictional group\u2019s song that hit #1 and won at the Grammys &amp; Oscars'],['Ros\u00e9 &amp; Bruno Mars — \u201cAPT.\u201d','a K-pop soloist scoring major Grammy general-field nods'],['CORTIS','a Gen-5 \u201ccreator crew\u201d that self-produces']],
+    listen:[['\u201cGolden\u201d — HUNTR/X (from <i>KPop Demon Hunters</i>)','a fictional group\u2019s song that hit #1 and won at the Grammys &amp; Oscars','https://www.youtube.com/watch?v=yebNIHKAC4A'],['Ros\u00e9 &amp; Bruno Mars — \u201cAPT.\u201d','a K-pop soloist scoring major Grammy general-field nods','https://www.youtube.com/watch?v=ekr2nIex040'],['CORTIS — FaSHioN','a Gen-5 \u201ccreator crew\u201d that self-produces','https://www.youtube.com/watch?v=42wfEs7oIP8']],
     watch:[['<b>KPop Demon Hunters</b> (2025)','then Track-11 it: who made it, and who it\u2019s really about'],['BTS\u2019s 2026 reunion at Gwanghwamun','hanbok + a Joseon palace gate + global pop — tradition as the comeback concept']],
     read:[['On the KPDH tourism &amp; \u201cDuolingo\u201d bumps','culture moving real economic needles'],['On Gen-5 mixed-gender &amp; global groups','KATSEYE, ALLDAY PROJECT — the wave\u2019s next mutation']],
     assign:'Answer the track\u2019s question in 300 words, using at least three of the four \u201cNow Playing\u201d cards below as evidence. Then do the Capstone.',
@@ -384,7 +390,7 @@ gens.forEach(x=>{
 const colDot=['var(--magenta)','var(--violet)','var(--cyan)'];
 function colHTML(title,items,i){
   return `<div class="col"><h4><span class="dot" style="background:${colDot[i]}"></span>${title}</h4><ul>${
-    items.map(it=>`<li><b>${it[0]}</b><br><span>${it[1]}</span></li>`).join('')}</ul></div>`;
+    items.map(it=>{const nm=it[2]?`<a class="yt" href="${it[2]}" target="_blank" rel="noopener"><b>${it[0]}</b> <span class="ytbadge">▶ YouTube</span></a>`:`<b>${it[0]}</b>`;return `<li>${nm}<br><span>${it[1]}</span></li>`;}).join('')}</ul></div>`;
 }
 
 const tEl=document.getElementById('tracks');
