@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>한류 · The Korean Wave — A Field Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --magenta:#ff2d7e; --violet:#7c5cff; --cyan:#2ad2e6; --gold:#f3c44c;
+    --ink:#0e0b16; --ink-2:#16111f; --card:#1b1526; --line:rgba(255,255,255,.10);
+    --text:#ece8f2; --muted:#9a93ad; --glow:radial-gradient(60% 60% at 50% 30%, rgba(124,92,255,.45), transparent 70%);
+    --disp:'Unbounded',system-ui,sans-serif;
+    --body:'Inter','Noto Sans KR',system-ui,sans-serif;
+    --kr:'Noto Sans KR',sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+  }
+  html[data-theme="light"]{
+    --ink:#f6f2ec; --ink-2:#efe9df; --card:#fffdf9; --line:rgba(20,15,30,.12);
+    --text:#1a1521; --muted:#6c6478;
+    --glow:radial-gradient(60% 60% at 50% 30%, rgba(124,92,255,.18), transparent 70%);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--ink);color:var(--text);font-family:var(--body);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    transition:background .4s ease,color .4s ease;
+  }
+  :lang(ko),.kr{font-family:var(--kr)}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- top bar ---------- */
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:color-mix(in srgb,var(--ink) 78%,transparent);
+    border-bottom:1px solid var(--line);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .brand{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .brand b{color:var(--text)}
+  .barprog{flex:1;max-width:240px;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+  .barprog i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--magenta),var(--violet),var(--cyan));transition:width .5s ease}
+  .toggle{font-family:var(--mono);font-size:11px;letter-spacing:.1em;cursor:pointer;
+    border:1px solid var(--line);background:transparent;color:var(--text);
+    padding:8px 12px;border-radius:99px;display:flex;align-items:center;gap:7px}
+  .toggle:hover{border-color:var(--violet)}
+  .bmc{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-decoration:none;
+    border:1px solid var(--line);border-radius:99px;padding:8px 13px;color:var(--text);
+    display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s ease}
+  .bmc:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.bmc .lbl{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:96px 0 64px;text-align:center;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-20% 0 0 0;background:var(--glow);
+    filter:blur(10px);z-index:0;animation:drift 14s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translateX(-6%) translateY(-2%) scale(1)}
+    to{transform:translateX(6%) translateY(3%) scale(1.08)}}
+  .hero>*{position:relative;z-index:1}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+  .hangul{font-family:var(--kr);font-weight:700;line-height:.9;
+    font-size:clamp(88px,22vw,220px);letter-spacing:-.02em;
+    background:linear-gradient(135deg,var(--magenta),var(--violet) 55%,var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 8px 40px rgba(124,92,255,.35))}
+  .h-sub{font-family:var(--disp);font-weight:800;font-size:clamp(22px,4.2vw,40px);margin:6px 0 0;letter-spacing:-.01em}
+  .thesis{max-width:620px;margin:22px auto 0;color:var(--muted);font-size:clamp(15px,2vw,18px)}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:99px;padding:7px 14px;color:var(--muted)}
+  .chip b{color:var(--text)}
+
+  /* ---------- liner note ---------- */
+  .liner{border:1px solid var(--line);border-radius:18px;background:var(--card);
+    padding:28px 30px;margin:48px 0 8px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
+  .liner .disc{width:70px;height:70px;border-radius:50%;flex:none;
+    background:conic-gradient(from 0deg,var(--magenta),var(--violet),var(--cyan),var(--gold),var(--magenta));
+    position:relative;animation:spin 9s linear infinite}
+  .liner .disc::after{content:"";position:absolute;inset:28px;border-radius:50%;background:var(--card);
+    box-shadow:inset 0 0 0 2px var(--line)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .liner h3{font-family:var(--disp);font-weight:600;margin:.1em 0 .4em;font-size:18px}
+  .liner p{margin:0;color:var(--muted);font-size:15px}
+  .liner .how{margin-top:12px;font-size:13.5px;color:var(--text)}
+  .liner .how b{color:var(--violet)}
+
+  /* ---------- generations spine ---------- */
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);margin:64px 0 18px;display:flex;align-items:center;gap:14px}
+  .sec-label::after{content:"";height:1px;flex:1;background:var(--line)}
+  .gens{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .gen{border:1px solid var(--line);border-radius:14px;padding:16px 14px;background:var(--card);position:relative;overflow:hidden}
+  .gen::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--g,var(--violet))}
+  .gen .yr{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .gen .nm{font-family:var(--disp);font-weight:600;font-size:15px;margin:6px 0 4px}
+  .gen .ac{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+  /* ---------- tracklist ---------- */
+  .track{border:1px solid var(--line);border-radius:16px;background:var(--card);margin-bottom:12px;
+    overflow:hidden;transition:border-color .25s ease,transform .25s ease}
+  .track:hover{border-color:color-mix(in srgb,var(--violet) 60%,var(--line))}
+  .track.open{border-color:var(--violet)}
+  .thead{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;
+    padding:18px 22px;cursor:pointer;width:100%;background:none;border:0;color:inherit;text-align:left;font:inherit}
+  .num{font-family:var(--mono);font-size:13px;color:var(--muted);width:30px}
+  .track.done .num{color:var(--gold)}
+  .check{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);flex:none;
+    display:grid;place-items:center;transition:all .2s ease;cursor:pointer;background:transparent}
+  .check:hover{border-color:var(--violet)}
+  .track.done .check{background:linear-gradient(135deg,var(--magenta),var(--violet));border-color:transparent}
+  .check svg{width:13px;height:13px;opacity:0;transition:opacity .2s}
+  .track.done .check svg{opacity:1}
+  .tmain .tt{font-family:var(--disp);font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+  .tmain .tt .ko{font-family:var(--kr);color:var(--muted);font-weight:500;font-size:14px;margin-left:8px}
+  .tmain .hook{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .ttag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--cyan);border:1px solid var(--line);border-radius:99px;padding:5px 10px;white-space:nowrap}
+  .chev{transition:transform .3s ease;color:var(--muted)}
+  .track.open .chev{transform:rotate(180deg)}
+
+  .body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+  .bodyin{padding:4px 22px 26px 70px}
+  .q{font-size:15px;color:var(--text);border-left:3px solid var(--magenta);padding:4px 0 4px 16px;margin:6px 0 20px;font-style:italic}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .col h4,.assign h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 9px;display:flex;align-items:center;gap:7px}
+  .col h4 .dot{width:7px;height:7px;border-radius:50%;background:var(--c,var(--violet))}
+  .col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .col li{font-size:13.5px;line-height:1.45}
+  .col li b{font-weight:600}
+  .col li span{color:var(--muted)}
+  .assign{margin-top:20px;border:1px dashed var(--line);border-radius:12px;padding:16px 18px;
+    background:color-mix(in srgb,var(--gold) 8%,transparent)}
+  .assign h4{color:var(--gold)}
+  .assign p{margin:0;font-size:14px}
+  .reflect{margin-top:14px;font-size:13.5px;color:var(--muted)}
+  .reflect b{color:var(--text);font-weight:600}
+
+  /* ---------- now playing ---------- */
+  .now{margin-top:72px;border-radius:22px;padding:1px;
+    background:linear-gradient(135deg,var(--magenta),var(--violet),var(--cyan))}
+  .now-in{background:var(--ink-2);border-radius:21px;padding:36px 34px}
+  .now h2{font-family:var(--disp);font-weight:800;font-size:clamp(24px,4vw,34px);margin:0 0 6px;letter-spacing:-.01em}
+  .now .live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--magenta);margin-bottom:14px}
+  .now .live .pulse{width:9px;height:9px;border-radius:50%;background:var(--magenta);animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,45,126,.5)}50%{opacity:.6;box-shadow:0 0 0 8px rgba(255,45,126,0)}}
+  .now>.now-in>p.lead{color:var(--muted);max-width:680px;margin:0 0 24px}
+  .nowgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .ncard{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--card)}
+  .ncard .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+  .ncard h5{font-family:var(--disp);font-weight:600;font-size:16px;margin:8px 0 6px}
+  .ncard p{margin:0;font-size:13.5px;color:var(--muted)}
+
+  /* ---------- capstone + footer ---------- */
+  .capstone{margin-top:24px;border:1px solid var(--line);border-radius:18px;padding:30px 32px;background:var(--card)}
+  .capstone h3{font-family:var(--disp);font-weight:600;margin:0 0 10px;font-size:20px}
+  .capstone p{margin:0 0 10px;font-size:14.5px;color:var(--muted)}
+  .capstone ol{margin:10px 0 0;padding-left:20px;font-size:14px}
+  .capstone li{margin-bottom:7px}
+  footer{margin:72px 0 40px;text-align:center;color:var(--muted);font-size:13px}
+  footer .colophon{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
+
+  @media(max-width:780px){
+    .gens{grid-template-columns:repeat(2,1fr)}
+    .grid3{grid-template-columns:1fr}
+    .nowgrid{grid-template-columns:1fr}
+    .liner{grid-template-columns:1fr}
+    .liner .disc{display:none}
+    .bodyin{padding-left:22px}
+    .thead{grid-template-columns:auto auto 1fr;gap:12px}
+    .thead .ttag{display:none}
+    .barprog{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <div class="brand"><b>한류</b> / THE KOREAN WAVE</div>
+  <div class="barprog"><i id="barprog"></i></div>
+  <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span class="lbl">Buy me a coffee</span></a>
+  <button class="toggle" id="themeBtn" aria-label="Switch theme"><span id="themeIcon">◐</span><span id="themeTxt">Light</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">A Field Curriculum · Self-Paced</div>
+    <div class="hangul" aria-hidden="true">한류</div>
+    <h1 class="h-sub">The Korean Wave</h1>
+    <p class="thesis">From a banned-music broadcast in 1992 to a fictional girl group winning an Oscar in 2026 — how a mid-sized nation engineered the most influential pop-culture export of the century, and what it cost.</p>
+    <div class="meta-row">
+      <span class="chip"><b>12</b> tracks</span>
+      <span class="chip"><b>5</b> generations</span>
+      <span class="chip">EN / KO</span>
+      <span class="chip">~<b>8</b> weeks self-paced</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="liner">
+    <div class="disc" aria-hidden="true"></div>
+    <div>
+      <h3>How to play this record</h3>
+      <p>This isn't a list of songs to like — it's a way to <em>read</em> a cultural movement. Each track pairs a guiding question with things to <b>listen</b>, <b>watch</b>, and <b>read</b>, then a short assignment that turns input into understanding. Work top to bottom (the order is historical) or jump to whatever's pulling at you.</p>
+      <p class="how">Tap a track to open its liner notes. Tap the <b>circle</b> on the left to mark it done — your progress fills the bar up top. Korean terms appear with glosses so the vocabulary becomes yours, not just the artists'.</p>
+    </div>
+  </section>
+
+  <div class="sec-label">The five generations · a quick map</div>
+  <div class="gens" id="gens"></div>
+
+  <div class="sec-label">The tracklist</div>
+  <div id="tracks"></div>
+
+  <section class="now">
+    <div class="now-in">
+      <span class="live"><span class="pulse"></span>Now Playing · 2026</span>
+      <h2>The year the fiction outsold the reality</h2>
+      <p class="lead">A curriculum on a living movement has to end in the present tense. As of mid-2026, Hallyu is doing something genuinely strange — and these four data points are the text for Track 12.</p>
+      <div class="nowgrid" id="now"></div>
+    </div>
+  </section>
+
+  <section class="capstone">
+    <h3>🎤 Capstone — Curate your own B-side</h3>
+    <p>You don't truly understand a movement until you can make an argument with it. Pick <b>one</b> of these and produce something a smart friend would actually want to read or watch:</p>
+    <ol>
+      <li><b>The 12-track mixtape essay.</b> Build a playlist of 12 songs that tells the story of Hallyu from 1992 to now. Write one tight paragraph per track explaining why it earns its slot — the argument lives in the sequencing.</li>
+      <li><b>The contradiction piece.</b> Take one tension from the course (manufactured vs. authentic, soft power vs. exploitation, global vs. rooted) and write 800 words that refuses to resolve it cleanly. Hold both sides.</li>
+      <li><b>The explainer reel.</b> Script a 60–90 second video that explains <em>why KPop Demon Hunters mattered</em> to someone who thinks it's "just a cartoon." Use three facts from Track 12 and one idea from Track 11.</li>
+    </ol>
+  </section>
+
+  <footer>
+    A self-study syllabus on the Korean Wave · built to be argued with, not memorized.
+    <div class="colophon">한류 · Side A → Side B · 1992 — 2026</div>
+    <div class="colophon" style="margin-top:10px">Made by SunnyApps. All rights reserved.</div>
+  </footer>
+</main>
+
+<script>
+/* ---------------- data ---------------- */
+const gens = [
+  {g:'var(--magenta)', yr:'1996–2003', nm:'Gen 1', ac:'H.O.T., S.E.S., Fin.K.L., g.o.d — the idol system is invented'},
+  {g:'var(--violet)',  yr:'2003–2011', nm:'Gen 2', ac:'TVXQ, Big Bang, Girls\u2019 Generation, Wonder Girls, 2NE1 — the YouTube years'},
+  {g:'#b15cff',        yr:'2012–2018', nm:'Gen 3', ac:'BTS, EXO, TWICE, BLACKPINK, SEVENTEEN — the global break'},
+  {g:'var(--cyan)',    yr:'2018–2024', nm:'Gen 4', ac:'aespa, Stray Kids, IVE, NewJeans, LE SSERAFIM — born global'},
+  {g:'var(--gold)',    yr:'2025– ',    nm:'Gen 5', ac:'CORTIS, ALLDAY PROJECT, KATSEYE — self-producing creator crews'},
+];
+
+const tracks = [
+  { n:'01', tag:'Origins', tt:'Before the Wave', ko:'한류 이전',
+    hook:'Why a country bet its future on pop culture.',
+    q:'How does a nation recovering from dictatorship and financial collapse decide that culture is an export industry?',
+    listen:[['The sound of pre-K-pop','trot &amp; 1980s Korean ballads — what idol pop replaced']],
+    watch:[['Footage of the 1988 Seoul Olympics','Korea announcing itself to the world'],['1997 IMF crisis explainers','the shock that reframed culture as economic strategy']],
+    read:[['Euny Hong — <b>The Birth of Korean Cool</b> (2014)','intro + ch. 1'],['On the coining of 한류 / <i>Hallyu</i>','a term Chinese media used in the late 1990s for the inflow of Korean content']],
+    assign:'Write 150 words finishing this sentence: \u201cKorea chose to invest in culture because\u2026\u201d — using at least one cause that is economic and one that is political.',
+    reflect:'<b>Term:</b> 한류 (<i>Hallyu</i>) literally = \u201cKorean flow/wave.\u201d Notice it was named from the <i>outside</i> first.' },
+
+  { n:'02', tag:'Origins', tt:'The Big Bang', ko:'서태지와 아이들',
+    hook:'1992: the three minutes that broke Korean pop open.',
+    q:'What makes a single TV performance the line everyone later draws between \u201cbefore\u201d and \u201cafter\u201d?',
+    listen:[['Seo Taiji and Boys — \u201cNan Arayo (난 알아요)\u201d (1992)','Western hip-hop/new jack swing fused with Korean lyrics']],
+    watch:[['The legendary panel-judges performance','where critics scored it low and the public made it #1 anyway']],
+    read:[['John Lie — <b>K-pop: Popular Music, Nationalism, and the Cultural Imagination</b>','the Seo Taiji chapter'],['Any piece on Korea\u2019s 1990s loosening of broadcast censorship','context for why this could air at all']],
+    assign:'Find one song from your own culture that felt like a \u201cbefore/after\u201d line. In a paragraph, compare what rule it broke to what Seo Taiji broke.',
+    reflect:'The blueprint here isn\u2019t a sound — it\u2019s <b>fusion + youth address</b>. Every generation after re-runs that move.' },
+
+  { n:'03', tag:'The Machine', tt:'The Idol System, Gen 1', ko:'1세대 아이돌',
+    hook:'Where the trainee model, fan clubs, and \u201ccomebacks\u201d are all invented.',
+    q:'If you could design a pop star from scratch — audition, train, package, debut — what do you gain, and what do you quietly give up?',
+    listen:[['H.O.T. — \u201cCandy\u201d (1996)','SM Entertainment\u2019s prototype idol group'],['S.E.S. &amp; Fin.K.L.','the first great girl-group rivalry']],
+    watch:[['Early K-drama exports: <b>Winter Sonata</b> (2002)','the Hallyu beachhead in Japan'],['<b>Dae Jang Geum / Jewel in the Palace</b> (2003)','the drama that crossed all of Asia and beyond']],
+    read:[['On Lee Soo-man &amp; the SM \u201cculture technology\u201d memo','the manufacturing thesis, stated out loud'],['Any history of official fan clubs &amp; fan colors','the infrastructure fandom is built on']],
+    assign:'Sketch a one-page \u201cidol spec sheet\u201d for a fictional Gen-1 group: concept, color, fandom name. Then list two things about real human beings your spec sheet ignores.',
+    reflect:'<b>Term:</b> 컴백 (<i>keombaek</i> / \u201ccomeback\u201d) — not a return from absence, but the scheduled release cycle. The vocabulary itself is industrial.' },
+
+  { n:'04', tag:'Going Global', tt:'The Big 3 &amp; Gen 2', ko:'2세대',
+    hook:'SM, YG, JYP — and the first time the wave reaches the West.',
+    q:'What changes about a movement the moment its distribution shifts from broadcast TV to YouTube?',
+    listen:[['Girls\u2019 Generation — \u201cGee\u201d (2009)','the Gen-2 girl-group high-water mark'],['Big Bang — \u201cFantastic Baby\u201d','YG\u2019s hip-hop-leaning template'],['Wonder Girls — \u201cNobody\u201d','the first real US toe-dip']],
+    watch:[['Early SM/YG/JYP MVs side by side','learn to read each label\u2019s house style'],['2NE1 performance footage','the blueprint for \u201cgirl crush\u201d concepts']],
+    read:[['On the \u201cBig 3\u201d agency oligopoly','how three companies shaped a national sound'],['Early Western press on K-pop','watch the \u201cexotic novelty\u201d framing form']],
+    assign:'Pick one Gen-2 song and one Gen-4 song. Note three production choices that changed and one that didn\u2019t.',
+    reflect:'YouTube did to Gen 2 what TikTok later did to Gen 4: collapsed the distance between Seoul and everywhere else.' },
+
+  { n:'05', tag:'Going Global', tt:'Gangnam Style &amp; the Viral Threshold', ko:'강남스타일',
+    hook:'2012: the first video to a billion views — blessing and trap.',
+    q:'When the whole world watches once, is that a breakthrough or a ceiling?',
+    listen:[['PSY — \u201cGangnam Style\u201d (2012)','and read the satire most Western viewers missed — it mocks Seoul\u2019s wealthy district']],
+    watch:[['The MV as social critique','the joke is on aspirational consumerism, not with it']],
+    read:[['Analyses of the \u201cnovelty act\u201d problem','global virality that didn\u2019t open the door for others — yet'],['On YouTube breaking its own view counter','the literal infrastructure couldn\u2019t hold it']],
+    assign:'Argue both sides in two short paragraphs: \u201cGangnam Style opened the door for BTS\u201d vs. \u201cit slammed it shut by making K-pop a punchline.\u201d',
+    reflect:'Hold this tension — it returns, transformed, in Track 12 with <i>KPop Demon Hunters</i>.' },
+
+  { n:'06', tag:'Going Global', tt:'Gen 3 &amp; the BTS Inflection', ko:'방탄소년단',
+    hook:'A group from a tiny label rewrites what\u2019s possible.',
+    q:'How did BTS convert a fandom into a force that moved Billboard, the UN, and a national economy?',
+    listen:[['BTS — \u201cSpring Day (봄날)\u201d','the songwriting peak'],['BTS — \u201cDynamite\u201d (2020)','first all-English #1; the crossover key'],['BLACKPINK, TWICE, SEVENTEEN','map the rest of Gen 3']],
+    watch:[['BTS at the 2017 AMAs','the US arrival moment'],['\u201cBurn the Stage\u201d / docu-content','the para-social engine up close']],
+    read:[['On <b>ARMY</b> as organized fandom','translation armies, streaming campaigns, chart strategy'],['Big Hit\u2019s underdog rise vs. the Big 3','why \u201csmall label\u201d became part of the myth']],
+    assign:'Diagram the BTS feedback loop: artist \u2192 content \u2192 fandom \u2192 charts \u2192 press \u2192 back to artist. Mark the one link you think matters most.',
+    reflect:'<b>Term:</b> 떡밥 (<i>tteokbap</i>) — \u201cbait,\u201d the steady drip of behind-the-scenes content that keeps a fandom fed between comebacks.' },
+
+  { n:'07', tag:'The Machine', tt:'Anatomy of an Idol', ko:'연습생 시스템',
+    hook:'The trainee pipeline, the audition shows, and the ethics.',
+    q:'Where exactly is the line between professional development and exploitation — and who gets to draw it?',
+    listen:[['Audition-show debut singles','e.g. tracks from <i>Produce 101</i> / <i>Boys Planet</i> winners — pop built by public vote']],
+    watch:[['Survival-show format episodes','watch how ranking turns trainees into contestants'],['Documentaries on trainee life','years of training before a single debut stage']],
+    read:[['On \u201cslave contract\u201d litigation (the 2009 TVXQ case)','the legal turning point for idol rights'],['Reporting on idol mental health','the human cost beneath the polish']],
+    assign:'Draft a 5-point \u201cidol bill of rights\u201d you\u2019d want an agency to sign. Then mark which points would make the current system less profitable.',
+    reflect:'This is the course\u2019s hinge: you can love the output and still indict the process. Keep both in hand.' },
+
+  { n:'08', tag:'The Machine', tt:'The Fandom Economy', ko:'팬덤 경제',
+    hook:'Comebacks, music shows, fancams, lightsticks, photocards.',
+    q:'Are fans the customers of K-pop, the labor force, or the actual product?',
+    listen:[['A full comeback \u201ctitle track\u201d + its B-sides','hear how an album is engineered as an event']],
+    watch:[['A 직캠 (fancam)','single-member camera — the form fans built, then the industry adopted'],['A 음방 (music-show) stage + the win announcement','the weekly ritual that structures the whole calendar']],
+    read:[['On Weverse &amp; fan platforms','the move to owning the fan relationship directly'],['On photocard &amp; album-bundling economics','why one \u201calbum\u201d sells many copies']],
+    assign:'Track one comeback for a week. Log every monetizable touchpoint you can spot (versions, photocards, streams, fan-sign entries). Tally the asks.',
+    reflect:'<b>Glossary:</b> 음방 music show · 직캠 fancam · 응원봉 lightstick · 막내 maknae (youngest) · 최애 your favorite member.' },
+
+  { n:'09', tag:'The Machine', tt:'Sound &amp; Vision', ko:'사운드와 비주얼',
+    hook:'How a K-pop song — and its universe — is actually built.',
+    q:'Why does so much K-pop feel like five songs stitched into one, and why does that work?',
+    listen:[['Any maximalist title track','count the distinct sections — the genre-switch hook is a design choice'],['aespa — songs from the KWANGYA lore','music as franchise world-building']],
+    watch:[['A \u201cpoint choreography\u201d breakdown','the one move engineered to be copied'],['A concept-trailer / MV with heavy lore','visual grammar as storytelling']],
+    read:[['On global songwriting camps','Scandinavian/US writers + Korean A&amp;R = the assembly line of melody'],['On \u201cconcept\u201d and worldbuilding','why groups have mythologies, not just eras']],
+    assign:'Pick one title track. Map its structure bar-by-bar (intro / verse / pre / hook / dance break / drop). Mark the exact moment the genre flips.',
+    reflect:'The \u201cpoint\u201d move is built for <i>your</i> phone camera. The choreography is a distribution strategy.' },
+
+  { n:'10', tag:'Wider Wave', tt:'Beyond Music', ko:'드라마·영화·웹툰',
+    hook:'K-drama, film, webtoons, beauty, food — the whole wave.',
+    q:'Is \u201cK-pop\u201d the movement, or just its loudest instrument?',
+    listen:[['K-drama OSTs','the soft-power soundtrack most people never label as Hallyu']],
+    watch:[['Bong Joon-ho — <b>Parasite</b> (2019)','first non-English Best Picture'],['<b>Squid Game</b> (2021)','Netflix\u2019s biggest series launch'],['A webtoon-to-drama adaptation','see the IP pipeline run']],
+    read:[['On webtoons as Korea\u2019s IP engine','the source code for dramas, films, and games'],['On K-beauty &amp; K-food as lifestyle Hallyu','the wave you can wear and eat']],
+    assign:'Pick a non-music Korean export you already consume (a show, a skincare step, a snack). Trace one concrete way it reached you and who profited along the chain.',
+    reflect:'Soft power travels best when you don\u2019t notice it\u2019s foreign policy.' },
+
+  { n:'11', tag:'Critique', tt:'Soft Power, Critique &amp; Contradiction', ko:'소프트파워와 비판',
+    hook:'Cultural diplomacy, beauty standards, and the cost of the machine.',
+    q:'Can something be genuine artistry, national strategy, and a labor problem all at once? (Yes. Now what?)',
+    listen:[['Songs about the industry itself','idols occasionally narrate their own pressure — listen for it']],
+    watch:[['Reporting on Korea\u2019s cultural ministry &amp; KOCCA','government as co-producer of the wave'],['Critical video essays on beauty standards','the narrow visual template and its reach']],
+    read:[['On Hallyu as soft power / nation branding','culture as foreign policy'],['Diaspora &amp; identity writing','what the wave means to Korean communities abroad — including your own'],['On appropriation debates','Black American music\u2019s foundational, often uncredited, role in K-pop']],
+    assign:'Write the course\u2019s hardest paragraph: a defense of K-pop that a sharp critic couldn\u2019t dismiss, followed by a critique a devoted fan couldn\u2019t wave away.',
+    reflect:'<b>Term:</b> 정 (<i>jeong</i>) — a deep relational attachment. Some scholars argue it\u2019s the real engine under the \u201cmanufactured\u201d surface.' },
+
+  { n:'12', tag:'Now Playing', tt:'Hallyu 2026', ko:'지금의 한류',
+    hook:'When a fictional group wins an Oscar, what is the wave now?',
+    q:'If the most successful \u201cK-pop\u201d act of 2025 doesn\u2019t exist, has the movement transcended its artists — or hollowed out?',
+    listen:[['\u201cGolden\u201d — HUNTR/X (from <i>KPop Demon Hunters</i>)','a fictional group\u2019s song that hit #1 and won at the Grammys &amp; Oscars'],['Ros\u00e9 &amp; Bruno Mars — \u201cAPT.\u201d','a K-pop soloist scoring major Grammy general-field nods'],['CORTIS','a Gen-5 \u201ccreator crew\u201d that self-produces']],
+    watch:[['<b>KPop Demon Hunters</b> (2025)','then Track-11 it: who made it, and who it\u2019s really about'],['BTS\u2019s 2026 reunion at Gwanghwamun','hanbok + a Joseon palace gate + global pop — tradition as the comeback concept']],
+    read:[['On the KPDH tourism &amp; \u201cDuolingo\u201d bumps','culture moving real economic needles'],['On Gen-5 mixed-gender &amp; global groups','KATSEYE, ALLDAY PROJECT — the wave\u2019s next mutation']],
+    assign:'Answer the track\u2019s question in 300 words, using at least three of the four \u201cNow Playing\u201d cards below as evidence. Then do the Capstone.',
+    reflect:'End where you started: a thing the world watched once (Track 5) vs. a thing it can\u2019t stop watching. What changed?' },
+];
+
+const now = [
+  {tag:'Animation · Records', h:'A fictional group, a real Oscar', p:'KPop Demon Hunters became Netflix\u2019s most-watched film ever (1B+ viewing hours), and its song \u201cGolden\u201d won at the Academy Awards — the first K-pop track to take an Oscar. The idols don\u2019t exist; the wave does.'},
+  {tag:'Tourism · Soft Power', h:'The Netflix effect, measured', p:'In the film\u2019s wake, Korea-bound flight reservations spiked, Seoul logged record monthly tourist arrivals, and Duolingo reported a ~22% jump in Korean learners. Culture as quantifiable foreign policy.'},
+  {tag:'Legacy Acts · Return', h:'BTS comes back as tradition', p:'After military service, BTS reunited in March 2026 with the album \u201cArirang\u201d and a concert at Gwanghwamun — hanbok, a king\u2019s pathway, a Joseon palace gate. The most global act chose the most rooted comeback.'},
+  {tag:'Gen 5 · Crossover', h:'The new shapes of the wave', p:'Ros\u00e9\u2019s \u201cAPT.\u201d pulled K-pop deep into Western general-field awards, while self-producing \u201ccreator crews\u201d (CORTIS) and global/mixed-gender groups (KATSEYE, ALLDAY PROJECT) redraw what a K-pop act even is.'},
+];
+
+/* ---------------- render ---------------- */
+const gensEl = document.getElementById('gens');
+gens.forEach(x=>{
+  const d=document.createElement('div');d.className='gen';d.style.setProperty('--g',x.g);
+  d.innerHTML=`<div class="yr">${x.yr}</div><div class="nm">${x.nm}</div><div class="ac">${x.ac}</div>`;
+  gensEl.appendChild(d);
+});
+
+const colDot=['var(--magenta)','var(--violet)','var(--cyan)'];
+function colHTML(title,items,i){
+  return `<div class="col"><h4><span class="dot" style="background:${colDot[i]}"></span>${title}</h4><ul>${
+    items.map(it=>`<li><b>${it[0]}</b><br><span>${it[1]}</span></li>`).join('')}</ul></div>`;
+}
+
+const tEl=document.getElementById('tracks');
+tracks.forEach((t,idx)=>{
+  const el=document.createElement('div');el.className='track';el.dataset.i=idx;
+  el.innerHTML=`
+    <button class="thead" aria-expanded="false">
+      <span class="num">${t.n}</span>
+      <span class="check" role="checkbox" aria-checked="false" tabindex="0" aria-label="Mark track done">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="tmain">
+        <span class="tt">${t.tt}<span class="ko">${t.ko}</span></span>
+        <span class="hook">${t.hook}</span>
+      </span>
+      <span class="ttag">${t.tag}</span>
+      <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="body"><div class="bodyin">
+      <div class="q">${t.q}</div>
+      <div class="grid3">
+        ${colHTML('Listen',t.listen,0)}
+        ${colHTML('Watch',t.watch,1)}
+        ${colHTML('Read',t.read,2)}
+      </div>
+      <div class="assign"><h4>✎ Assignment</h4><p>${t.assign}</p></div>
+      <div class="reflect">${t.reflect}</div>
+    </div></div>`;
+  tEl.appendChild(el);
+});
+
+const nowEl=document.getElementById('now');
+now.forEach(x=>{
+  const c=document.createElement('div');c.className='ncard';
+  c.innerHTML=`<div class="tag">${x.tag}</div><h5>${x.h}</h5><p>${x.p}</p>`;
+  nowEl.appendChild(c);
+});
+
+/* ---------------- behavior ---------------- */
+const STORE='hallyu_done_v1';
+let done = (()=>{try{return JSON.parse(localStorage.getItem(STORE))||{}}catch(e){return {}}})();
+function save(){try{localStorage.setItem(STORE,JSON.stringify(done))}catch(e){}}
+function syncProgress(){
+  const total=tracks.length, n=Object.values(done).filter(Boolean).length;
+  document.getElementById('barprog').style.width=(n/total*100)+'%';
+}
+document.querySelectorAll('.track').forEach(tr=>{
+  const i=tr.dataset.i, head=tr.querySelector('.thead'), body=tr.querySelector('.body'), check=tr.querySelector('.check');
+  if(done[i]){tr.classList.add('done');check.setAttribute('aria-checked','true');}
+  head.addEventListener('click',e=>{
+    if(e.target.closest('.check'))return;
+    const open=tr.classList.toggle('open');
+    head.setAttribute('aria-expanded',open);
+    body.style.maxHeight=open?body.scrollHeight+'px':0;
+  });
+  function toggleDone(){
+    const d=tr.classList.toggle('done');done[i]=d;
+    check.setAttribute('aria-checked',d);save();syncProgress();
+  }
+  check.addEventListener('click',e=>{e.stopPropagation();toggleDone();});
+  check.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggleDone();}});
+});
+syncProgress();
+
+/* theme */
+const root=document.documentElement, tBtn=document.getElementById('themeBtn'),
+      tIcon=document.getElementById('themeIcon'), tTxt=document.getElementById('themeTxt');
+function applyTheme(mode){
+  root.dataset.theme=mode;
+  tIcon.textContent = mode==='dark'?'◐':'◑';
+  tTxt.textContent  = mode==='dark'?'Light':'Dark';
+  try{localStorage.setItem('hallyu_theme',mode)}catch(e){}
+}
+(function initTheme(){
+  let saved;try{saved=localStorage.getItem('hallyu_theme')}catch(e){}
+  if(!saved) saved = matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  applyTheme(saved);
+})();
+tBtn.addEventListener('click',()=>applyTheme(root.dataset.theme==='dark'?'light':'dark'));
+</script>
+</body>
+</html>
