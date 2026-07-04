@@ -174,11 +174,11 @@ footer strong{color:var(--text2);}
 <header>
   <div class="badges">
     <div class="logo-badge">🇦🇺 Australia Powerball</div>
-    <div class="live-badge"><div class="live-dot"></div>DRAW #1567 · 28 MAY 2026</div>
+    <div class="live-badge"><div class="live-dot"></div>DRAW #1572 · 02 JUL 2026</div>
   </div>
   <h1>Number Oracle</h1>
   <p class="subtitle">Statistical Analysis &amp; Smart Recommendations</p>
-  <p class="data-info">📊 <strong id="drawCount">0</strong> verified official draws · 2024–2026 · Latest: 5, 10, 12, 16, 26, 30, 34 + PB 11</p>
+  <p class="data-info">📊 <strong id="drawCount">0</strong> verified official draws · 2024–2026 · Latest: 6, 12, 17, 22, 24, 30, 32 + PB 2</p>
   <p class="disclaimer">⚠ For entertainment only — lottery outcomes are entirely random. Please gamble responsibly.</p>
 </header>
 
@@ -264,7 +264,7 @@ footer strong{color:var(--text2);}
 
 <footer>
   Data verified from <strong>powerball.net</strong> · <strong>lotto.net</strong> · <strong>au.lottonumbers.com</strong><br>
-  Latest: <strong>Draw #1567 · Thu 28 May 2026</strong> · 5, 10, 12, 16, 26, 30, 34 + Powerball 11<br>
+  Latest: <strong>Draw #1572 · Thu 02 Jul 2026</strong> · 6, 12, 17, 22, 24, 30, 32 + Powerball 2<br>
   Pool: 7 numbers from 1–35 + 1 Powerball from 1–20 · Every Thursday 7:30pm AEST
 </footer>
 
@@ -273,6 +273,11 @@ footer strong{color:var(--text2);}
 document.getElementById('themeToggle').addEventListener('click',()=>{const h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeIcon').textContent=n==='dark'?'☀️':'🌙';localStorage.setItem('pb-theme',n);});
 
 const DRAWS_RAW=[
+  {draw:1572,date:"02 Jul 2026",nums:[6,12,17,22,24,30,32],pb:2},
+  {draw:1571,date:"25 Jun 2026",nums:[7,17,18,23,25,26,29],pb:16},
+  {draw:1570,date:"18 Jun 2026",nums:[1,6,20,21,26,28,29],pb:19},
+  {draw:1569,date:"11 Jun 2026",nums:[2,8,9,11,17,24,25],pb:18},
+  {draw:1568,date:"04 Jun 2026",nums:[3,5,12,27,32,33,34],pb:10},
   {draw:1567,date:"28 May 2026",nums:[5,10,12,16,26,30,34],pb:11},
   {draw:1566,date:"21 May 2026",nums:[1,13,15,16,29,32,34],pb:6},
   {draw:1565,date:"14 May 2026",nums:[1,2,3,16,19,22,25],pb:18},
@@ -415,7 +420,7 @@ function selectCount(el,n){document.querySelectorAll('.count-btn').forEach(b=>b.
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function wS(items,weights,n){const r=[],p=items.map((v,i)=>({v,w:weights[i]}));while(r.length<n&&p.length>0){const t=p.reduce((s,x)=>s+x.w,0);let rnd=Math.random()*t;for(let i=0;i<p.length;i++){rnd-=p[i].w;if(rnd<=0){r.push(p[i].v);p.splice(i,1);break;}}}return r;}
 function genT(strategy){const all=Array.from({length:MAIN_MAX},(_,i)=>i+1),allPB=Array.from({length:PB_MAX},(_,i)=>i+1);let nums,pb;if(strategy==='hot'){const w=all.map(n=>Math.pow(S.freq[n]||.5,2.2));nums=wS(all,w,7).sort((a,b)=>a-b);pb=wS(allPB,allPB.map(n=>Math.pow(S.pbFreq[n]||.5,2)),1)[0];}else if(strategy==='balanced'){const h=shuffle(S.hotNums).slice(0,3),c=shuffle(S.coldNums).slice(0,2),m=shuffle(all.filter(n=>!h.includes(n)&&!c.includes(n))).slice(0,2);nums=[...h,...c,...m].sort((a,b)=>a-b);pb=wS(allPB,allPB.map(n=>S.pbFreq[n]||.5),1)[0];}else if(strategy==='overdue'){const od=S.overdueList.map(x=>x.num),p=shuffle(od).slice(0,4),e=shuffle(all.filter(n=>!p.includes(n))).slice(0,3);nums=[...p,...e].sort((a,b)=>a-b);pb=+Object.entries(S.pbFreq).sort((a,b)=>a[1]-b[1])[Math.floor(Math.random()*4)][0];}else{nums=shuffle(all).slice(0,7).sort((a,b)=>a-b);pb=shuffle(allPB)[0];}return{nums,pb,score:score(nums,pb)};}
-function insight(strategy,tickets){const all=tickets.flatMap(t=>t.nums),hc=all.filter(n=>S.hotNums.includes(n)).length,top5=S.sorted.slice(0,5).map(x=>x[0]).join(', '),top5pb=Object.entries(S.pbFreq).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]).join(', '),od5=S.overdueList.slice(0,5).map(x=>`${x.num} (${x.drawsAgo} draws)`).join(', ');return{hot:`Weighted toward most frequent numbers (${top5}) across ${DRAWS_RAW.length} verified draws through Draw #1559. Top Powerball numbers: ${top5pb}. Your ${hc} hot picks reflect statistical momentum — though every draw is fully independent.`,balanced:`Hybrid ticket: ${hc} hot picks for frequency, cold numbers for range coverage, mid-tier picks for balance. A "covered bases" strategy that avoids over-weighting any single trend.`,overdue:`Contrarian picks targeting numbers absent from recent draws: ${od5}. No number is statistically "due" — but this popular approach ensures picks span historically under-represented values.`,random:`Pure random — all ${MAIN_MAX} main numbers and ${PB_MAX} Powerball numbers have equal probability per draw. Division 1 odds: ~1 in 134,490,400. Sometimes luck is the only algorithm.`}[strategy]||'';}
+function insight(strategy,tickets){const all=tickets.flatMap(t=>t.nums),hc=all.filter(n=>S.hotNums.includes(n)).length,top5=S.sorted.slice(0,5).map(x=>x[0]).join(', '),top5pb=Object.entries(S.pbFreq).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]).join(', '),od5=S.overdueList.slice(0,5).map(x=>`${x.num} (${x.drawsAgo} draws)`).join(', ');return{hot:`Weighted toward most frequent numbers (${top5}) across ${DRAWS_RAW.length} verified draws through Draw #1572. Top Powerball numbers: ${top5pb}. Your ${hc} hot picks reflect statistical momentum — though every draw is fully independent.`,balanced:`Hybrid ticket: ${hc} hot picks for frequency, cold numbers for range coverage, mid-tier picks for balance. A "covered bases" strategy that avoids over-weighting any single trend.`,overdue:`Contrarian picks targeting numbers absent from recent draws: ${od5}. No number is statistically "due" — but this popular approach ensures picks span historically under-represented values.`,random:`Pure random — all ${MAIN_MAX} main numbers and ${PB_MAX} Powerball numbers have equal probability per draw. Division 1 odds: ~1 in 134,490,400. Sometimes luck is the only algorithm.`}[strategy]||'';}
 function generateTickets(){const btn=document.getElementById('genBtn');btn.disabled=true;const tickets=Array.from({length:tc},()=>genT(sel));const labels={hot:'🔥 Hot Numbers',balanced:'⚖️ Balanced Mix',overdue:'⏳ Overdue Strategy',random:'🎲 Quick Pick'};document.getElementById('resultsSubtitle').textContent=`Strategy: ${labels[sel]}`;document.getElementById('resultsArea').innerHTML=tickets.map((t,i)=>`<div class="ticket" style="animation-delay:${i*.1}s"><div class="ticket-header"><div class="ticket-label">Ticket ${i+1}</div><div class="score-badge ${sTier(t.score)}">SCORE ${t.score}</div></div><div class="balls-row">${t.nums.map(n=>`<div class="ball-wrap"><div class="ball ${bClass(n)}">${n}</div></div>`).join('')}<div class="plus-sep">+</div><div class="ball-wrap"><div class="ball ball-powerball">${t.pb}</div><div class="pb-label">PB</div></div></div></div>`).join('');document.getElementById('aiInsightText').textContent=insight(sel,tickets);document.getElementById('aiInsight').style.display='block';btn.disabled=false;}
 
 function renderHotBalls(){document.getElementById('hotBalls').innerHTML=S.sorted.slice(0,10).map(([n,c])=>`<div class="freq-ball"><div class="freq-num ball-hot">${n}</div><div class="freq-count">${c}×</div></div>`).join('');}
