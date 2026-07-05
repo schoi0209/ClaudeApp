@@ -138,6 +138,13 @@
   .ytbadge{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
     color:#ff4b4b;border:1px solid rgba(255,75,75,.45);border-radius:99px;padding:2px 7px;white-space:nowrap;transition:all .2s}
   .col a.yt:hover .ytbadge{background:#ff2d2d;color:#fff;border-color:#ff2d2d}
+  .ytbadge.book{color:var(--violet);border-color:rgba(124,92,255,.45)}
+  .col a.yt:hover .ytbadge.book{background:var(--violet);color:#fff;border-color:var(--violet)}
+  .playall{display:inline-flex;align-items:center;gap:9px;margin-top:16px;text-decoration:none;
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;font-weight:700;color:#fff;
+    padding:11px 18px;border-radius:99px;background:linear-gradient(135deg,var(--magenta),var(--violet),var(--cyan));
+    box-shadow:0 6px 20px rgba(124,92,255,.35);transition:transform .2s,box-shadow .2s}
+  .playall:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,92,255,.5)}
   .assign{margin-top:20px;border:1px dashed var(--line);border-radius:12px;padding:16px 18px;
     background:color-mix(in srgb,var(--gold) 8%,transparent)}
   .assign h4{color:var(--gold)}
@@ -217,6 +224,7 @@
       <h3>How to play this record</h3>
       <p>This isn't a list of songs to like — it's a way to <em>read</em> a cultural movement. Each track pairs a guiding question with things to <b>listen</b>, <b>watch</b>, and <b>read</b>, then a short assignment that turns input into understanding. Work top to bottom (the order is historical) or jump to whatever's pulling at you.</p>
       <p class="how">Tap a track to open its liner notes. Tap the <b>circle</b> on the left to mark it done — your progress fills the bar up top. Korean terms appear with glosses so the vocabulary becomes yours, not just the artists'. Song titles marked <b>▶ YouTube</b> open the official video.</p>
+      <a class="playall" href="https://www.youtube.com/watch_videos?video_ids=OEDHEzs5kyk,3NUaXU1d-NY,U7mPqycQ0tQ,AAbokV76tkU,QZBn1e9pr2Q,9bZkp7q19f0,xEeFrLSkMm8,gdZLi9oWNZg,4TWR90KJl84,yebNIHKAC4A,ekr2nIex040,42wfEs7oIP8" target="_blank" rel="noopener">▶ Play all 12 songs on YouTube</a>
     </div>
   </section>
 
@@ -268,7 +276,7 @@ const tracks = [
     q:'How does a nation recovering from dictatorship and financial collapse decide that culture is an export industry?',
     listen:[['The sound of pre-K-pop','trot &amp; 1980s Korean ballads — what idol pop replaced']],
     watch:[['Footage of the 1988 Seoul Olympics','Korea announcing itself to the world'],['1997 IMF crisis explainers','the shock that reframed culture as economic strategy']],
-    read:[['Euny Hong — <b>The Birth of Korean Cool</b> (2014)','intro + ch. 1'],['On the coining of 한류 / <i>Hallyu</i>','a term Chinese media used in the late 1990s for the inflow of Korean content']],
+    read:[['Euny Hong — <b>The Birth of Korean Cool</b> (2014)','intro + ch. 1','https://us.macmillan.com/books/9781250353276/thebirthofkoreancool/','↗ Book'],['On the coining of 한류 / <i>Hallyu</i>','a term Chinese media used in the late 1990s for the inflow of Korean content']],
     assign:'Write 150 words finishing this sentence: \u201cKorea chose to invest in culture because\u2026\u201d — using at least one cause that is economic and one that is political.',
     reflect:'<b>Term:</b> 한류 (<i>Hallyu</i>) literally = \u201cKorean flow/wave.\u201d Notice it was named from the <i>outside</i> first.' },
 
@@ -277,7 +285,7 @@ const tracks = [
     q:'What makes a single TV performance the line everyone later draws between \u201cbefore\u201d and \u201cafter\u201d?',
     listen:[['Seo Taiji and Boys — \u201cNan Arayo (난 알아요)\u201d (1992)','Western hip-hop/new jack swing fused with Korean lyrics','https://www.youtube.com/watch?v=OEDHEzs5kyk']],
     watch:[['The legendary panel-judges performance','where critics scored it low and the public made it #1 anyway']],
-    read:[['John Lie — <b>K-pop: Popular Music, Nationalism, and the Cultural Imagination</b>','the Seo Taiji chapter'],['Any piece on Korea\u2019s 1990s loosening of broadcast censorship','context for why this could air at all']],
+    read:[['John Lie — <b>K-Pop: Popular Music, Cultural Amnesia, and Economic Innovation in South Korea</b>','the Seo Taiji chapter','https://www.ucpress.edu/books/k-pop/paper','↗ Book'],['Any piece on Korea\u2019s 1990s loosening of broadcast censorship','context for why this could air at all']],
     assign:'Find one song from your own culture that felt like a \u201cbefore/after\u201d line. In a paragraph, compare what rule it broke to what Seo Taiji broke.',
     reflect:'The blueprint here isn\u2019t a sound — it\u2019s <b>fusion + youth address</b>. Every generation after re-runs that move.' },
 
@@ -348,7 +356,7 @@ const tracks = [
     hook:'K-drama, film, webtoons, beauty, food — the whole wave.',
     q:'Is \u201cK-pop\u201d the movement, or just its loudest instrument?',
     listen:[['K-drama OSTs','the soft-power soundtrack most people never label as Hallyu']],
-    watch:[['Bong Joon-ho — <b>Parasite</b> (2019)','first non-English Best Picture'],['<b>Squid Game</b> (2021)','Netflix\u2019s biggest series launch'],['A webtoon-to-drama adaptation','see the IP pipeline run']],
+    watch:[['Bong Joon-ho — <b>Parasite</b> (2019)','first non-English Best Picture','https://www.youtube.com/watch?v=isOGD_7hNIY'],['<b>Squid Game</b> (2021)','Netflix\u2019s biggest series launch','https://www.youtube.com/watch?v=oqxAJKy0ii4'],['A webtoon-to-drama adaptation','see the IP pipeline run']],
     read:[['On webtoons as Korea\u2019s IP engine','the source code for dramas, films, and games'],['On K-beauty &amp; K-food as lifestyle Hallyu','the wave you can wear and eat']],
     assign:'Pick a non-music Korean export you already consume (a show, a skincare step, a snack). Trace one concrete way it reached you and who profited along the chain.',
     reflect:'Soft power travels best when you don\u2019t notice it\u2019s foreign policy.' },
@@ -366,7 +374,7 @@ const tracks = [
     hook:'When a fictional group wins an Oscar, what is the wave now?',
     q:'If the most successful \u201cK-pop\u201d act of 2025 doesn\u2019t exist, has the movement transcended its artists — or hollowed out?',
     listen:[['\u201cGolden\u201d — HUNTR/X (from <i>KPop Demon Hunters</i>)','a fictional group\u2019s song that hit #1 and won at the Grammys &amp; Oscars','https://www.youtube.com/watch?v=yebNIHKAC4A'],['Ros\u00e9 &amp; Bruno Mars — \u201cAPT.\u201d','a K-pop soloist scoring major Grammy general-field nods','https://www.youtube.com/watch?v=ekr2nIex040'],['CORTIS — FaSHioN','a Gen-5 \u201ccreator crew\u201d that self-produces','https://www.youtube.com/watch?v=42wfEs7oIP8']],
-    watch:[['<b>KPop Demon Hunters</b> (2025)','then Track-11 it: who made it, and who it\u2019s really about'],['BTS\u2019s 2026 reunion at Gwanghwamun','hanbok + a Joseon palace gate + global pop — tradition as the comeback concept']],
+    watch:[['<b>KPop Demon Hunters</b> (2025)','then Track-11 it: who made it, and who it\u2019s really about','https://www.youtube.com/watch?v=AzCAwdp1uIQ'],['BTS\u2019s 2026 reunion at Gwanghwamun','hanbok + a Joseon palace gate + global pop — tradition as the comeback concept']],
     read:[['On the KPDH tourism &amp; \u201cDuolingo\u201d bumps','culture moving real economic needles'],['On Gen-5 mixed-gender &amp; global groups','KATSEYE, ALLDAY PROJECT — the wave\u2019s next mutation']],
     assign:'Answer the track\u2019s question in 300 words, using at least three of the four \u201cNow Playing\u201d cards below as evidence. Then do the Capstone.',
     reflect:'End where you started: a thing the world watched once (Track 5) vs. a thing it can\u2019t stop watching. What changed?' },
@@ -390,7 +398,7 @@ gens.forEach(x=>{
 const colDot=['var(--magenta)','var(--violet)','var(--cyan)'];
 function colHTML(title,items,i){
   return `<div class="col"><h4><span class="dot" style="background:${colDot[i]}"></span>${title}</h4><ul>${
-    items.map(it=>{const nm=it[2]?`<a class="yt" href="${it[2]}" target="_blank" rel="noopener"><b>${it[0]}</b> <span class="ytbadge">▶ YouTube</span></a>`:`<b>${it[0]}</b>`;return `<li>${nm}<br><span>${it[1]}</span></li>`;}).join('')}</ul></div>`;
+    items.map(it=>{if(!it[2])return `<li><b>${it[0]}</b><br><span>${it[1]}</span></li>`;const bd=it[3]||'▶ YouTube';const bc=it[3]?'ytbadge book':'ytbadge';return `<li><a class="yt" href="${it[2]}" target="_blank" rel="noopener"><b>${it[0]}</b> <span class="${bc}">${bd}</span></a><br><span>${it[1]}</span></li>`;}).join('')}</ul></div>`;
 }
 
 const tEl=document.getElementById('tracks');
