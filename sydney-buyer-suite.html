@@ -894,8 +894,9 @@ function update(){
 function ctx2d(id){
   const c = $(id);
   if(!c || c.offsetParent===null) return null; /* hidden panel */
+  if(!c.dataset.h) c.dataset.h = c.getAttribute('height'); /* cache design height once — c.height mutates the attribute */
   const dpr = window.devicePixelRatio||1;
-  const w = c.clientWidth, h = +c.getAttribute('height');
+  const w = c.clientWidth, h = +c.dataset.h;
   c.width = w*dpr; c.height = h*dpr;
   c.style.height = h+'px';
   const x = c.getContext('2d');
@@ -1043,6 +1044,7 @@ function drawEquity(){
 
 function drawAll(){ drawDonut(); drawAmort(); drawEquity(); }
 let rT; window.addEventListener('resize', ()=>{ clearTimeout(rT); rT=setTimeout(drawAll,150); });
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(drawAll); }
 
 /* ---------- fade in ---------- */
 const obs = new IntersectionObserver(es=>{
