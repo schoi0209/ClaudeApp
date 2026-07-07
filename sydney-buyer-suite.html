@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sydney Buyer Suite — 시드니 부동산 토탈 계산기 | SunnyApps</title>
+<meta name="description" content="NSW stamp duty, loan repayments and investment analysis in one bilingual tool. FY2026/27 Revenue NSW rates. Made by SunnyApps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#F0F3F2; --bg2:#E5EAE8; --card:#FFFFFF; --ink:#12211F; --ink2:#51625F;
+  --line:#D6DDDA; --tide:#1E8074; --tide-soft:rgba(30,128,116,.10); --tide-line:rgba(30,128,116,.35);
+  --ember:#C05F32; --ember-soft:rgba(192,95,50,.10); --ember-line:rgba(192,95,50,.35);
+  --sand:#CDBB92; --gold:#B8892A;
+  --shadow:0 10px 30px rgba(18,33,31,.08), 0 2px 8px rgba(18,33,31,.05);
+  --radius:18px;
+}
+[data-theme="dark"]{
+  --bg:#0C1514; --bg2:#101B1A; --card:#152220; --ink:#E8EFEC; --ink2:#8FA39E;
+  --line:#24332F; --tide:#3BB3A4; --tide-soft:rgba(59,179,164,.12); --tide-line:rgba(59,179,164,.4);
+  --ember:#E08653; --ember-soft:rgba(224,134,83,.12); --ember-line:rgba(224,134,83,.4);
+  --sand:#8A7B58; --gold:#D4A94A;
+  --shadow:0 10px 30px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Instrument Sans','Noto Sans KR',sans-serif;
+  background:var(--bg); color:var(--ink);
+  transition:background .35s ease, color .35s ease;
+  font-feature-settings:"tnum";
+  -webkit-font-smoothing:antialiased;
+}
+.disp{font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif}
+body.lang-ko{font-family:'Noto Sans KR','Instrument Sans',sans-serif}
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:revert}
+
+/* ============ NAV ============ */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto}
+.brand-mark{font-weight:800;font-size:17px;letter-spacing:-.02em}
+.brand-mark em{font-style:normal;color:var(--tide)}
+.brand-sub{font-size:11px;color:var(--ink2);letter-spacing:.08em;text-transform:uppercase}
+.nav-btn{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;
+  transition:transform .15s ease, border-color .2s;
+  font-family:inherit;
+}
+.nav-btn:hover{transform:translateY(-1px);border-color:var(--tide)}
+.bmac{
+  background:#FFDD00;color:#111;border:none;border-radius:999px;
+  padding:8px 14px;font-size:13px;font-weight:700;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:transform .15s ease;
+}
+.bmac:hover{transform:translateY(-1px)}
+@media(max-width:560px){.brand-sub{display:none}.bmac span.bm-t{display:none}}
+
+/* ============ HERO / CONTROL DECK ============ */
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+header.hero{padding:52px 0 8px;text-align:left}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--tide);
+  margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--tide);display:inline-block}
+h1{font-size:clamp(30px,5.4vw,52px);line-height:1.06;letter-spacing:-.025em;font-weight:800}
+h1 .thin{font-weight:300;color:var(--ink2)}
+.hero-sub{margin-top:14px;color:var(--ink2);font-size:15px;max-width:620px;line-height:1.65}
+.rates-chip{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+  font-size:12px;font-weight:600;color:var(--ink2);
+  border:1px dashed var(--line);border-radius:999px;padding:6px 13px;
+}
+.rates-chip b{color:var(--tide)}
+
+/* control deck */
+.deck{
+  margin-top:30px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:26px;
+}
+.deck-row{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end}
+.price-block{flex:1 1 340px}
+.field-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px;display:block}
+.price-display{display:flex;align-items:baseline;gap:4px;margin-bottom:10px}
+.price-display .cur{font-size:22px;font-weight:600;color:var(--ink2)}
+.price-display input{
+  font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif;
+  font-size:clamp(34px,6vw,46px);font-weight:800;letter-spacing:-.02em;
+  border:none;background:transparent;color:var(--ink);width:100%;
+  border-bottom:2px solid transparent;outline:none;font-feature-settings:"tnum";
+}
+.price-display input:focus{border-bottom-color:var(--tide)}
+input[type=range]{
+  width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--tide) var(--fill,50%),var(--line) var(--fill,50%));
+  outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  background:var(--card);border:3px solid var(--tide);
+  box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:grab;transition:transform .1s;
+}
+input[type=range]::-webkit-slider-thumb:active{cursor:grabbing;transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--card);border:3px solid var(--tide);cursor:grab}
+.range-marks{display:flex;justify-content:space-between;font-size:11px;color:var(--ink2);margin-top:6px}
+
+.buyer-block{flex:1 1 300px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  border:1.5px solid var(--line);background:transparent;color:var(--ink2);
+  border-radius:12px;padding:10px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  transition:all .2s ease;font-family:inherit;display:flex;flex-direction:column;gap:2px;align-items:flex-start;
+}
+.chip small{font-size:10.5px;font-weight:500;opacity:.75}
+.chip:hover{border-color:var(--tide)}
+.chip.on{border-color:var(--tide);background:var(--tide-soft);color:var(--ink)}
+.chip.on small{color:var(--tide)}
+
+/* ============ FLOW BAR (signature) ============ */
+.flow-sec{margin-top:26px}
+.flow-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.flow-title{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.flow-total{font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif;font-size:20px;font-weight:800}
+.flow-total b{color:var(--ember)}
+.flowbar{
+  display:flex;height:52px;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+}
+.fseg{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  min-width:0;transition:width .6s cubic-bezier(.22,1,.36,1);
+  font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;
+}
+.fseg .fl{padding:0 8px;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.fseg.deposit{background:linear-gradient(135deg,#1E8074,#2AA593)}
+.fseg.loan{background:linear-gradient(135deg,#28504B,#3A6B64)}
+[data-theme="dark"] .fseg.loan{background:linear-gradient(135deg,#1D3E3A,#2E5751)}
+.fseg.duty{background:linear-gradient(135deg,#C05F32,#D97A4A)}
+.fseg.fees{background:linear-gradient(135deg,#8A6A3B,#A5834E)}
+.flow-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12px;color:var(--ink2)}
+.flow-legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+.dot.d1{background:#1E8074}.dot.d2{background:#28504B}[data-theme="dark"] .dot.d2{background:#2E5751}
+.dot.d3{background:#C05F32}.dot.d4{background:#A5834E}
+
+/* ============ TABS ============ */
+.tabs{
+  display:flex;gap:8px;margin:40px 0 22px;position:sticky;top:60px;z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);padding:8px 0;
+}
+.tab{
+  flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink2);
+  border-radius:14px;padding:13px 10px;font-size:14px;font-weight:700;cursor:pointer;
+  transition:all .25s ease;font-family:inherit;text-align:center;
+}
+.tab .t-num{display:block;font-size:10px;letter-spacing:.12em;opacity:.6;margin-bottom:3px}
+.tab.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+[data-theme="dark"] .tab.on{background:var(--tide);color:#08211D;border-color:var(--tide)}
+@media(max-width:560px){.tab{font-size:12px;padding:10px 6px}}
+
+.panel{display:none;animation:fadeUp .45s ease}
+.panel.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ CARDS / GRIDS ============ */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);
+}
+.card h3{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card h3 .ico{font-size:17px}
+.stat-hero{font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif;font-size:clamp(28px,4.4vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1}
+.stat-hero.pos{color:var(--tide)}
+.stat-hero.neg{color:var(--ember)}
+.stat-sub{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--ink2)}
+.kv .v{font-weight:700;font-feature-settings:"tnum"}
+.kv .v.out{color:var(--ember)}
+.kv .v.in{color:var(--tide)}
+.kv.total{border-top:2px solid var(--ink);border-bottom:none;margin-top:6px;padding-top:12px;font-size:15px}
+.kv.total .v{font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif;font-size:19px}
+.badge{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+  padding:3px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+.badge.save{background:var(--tide-soft);color:var(--tide);border:1px solid var(--tide-line)}
+.badge.warn{background:var(--ember-soft);color:var(--ember);border:1px solid var(--ember-line)}
+
+/* inputs */
+.inp-row{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.inp-row label{font-size:12px;font-weight:600;color:var(--ink2)}
+.inp-row .iw{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:11px;padding:10px 13px;background:var(--bg);transition:border-color .2s}
+.inp-row .iw:focus-within{border-color:var(--tide)}
+.inp-row .iw .u{font-size:13px;color:var(--ink2);font-weight:600;flex-shrink:0}
+.inp-row input,.inp-row select{
+  border:none;background:transparent;color:var(--ink);font-size:15px;font-weight:600;width:100%;outline:none;font-family:inherit;font-feature-settings:"tnum";
+}
+.inp-row select{cursor:pointer}
+.inp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:480px){.inp-grid{grid-template-columns:1fr}}
+.mini-range{margin:2px 0 14px}
+.mini-range .mr-head{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+.mini-range .mr-head b{color:var(--ink);font-size:14px}
+
+canvas{width:100%;display:block}
+.chart-wrap{margin-top:8px}
+.note{
+  font-size:11.5px;color:var(--ink2);line-height:1.6;margin-top:14px;
+  padding:12px 14px;background:var(--bg);border-radius:11px;border:1px solid var(--line);
+}
+.note b{color:var(--ink)}
+
+/* summary */
+.summary{
+  margin-top:36px;border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(150deg,#0F1D24,#173430);color:#E8EFEC;
+  border:1px solid #24413C;box-shadow:var(--shadow);
+}
+.summary-in{padding:30px 26px}
+.summary h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.summary .s-sub{font-size:12.5px;color:#8FB5AD;margin-bottom:22px}
+.s-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.s-item .s-l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7FA69E;font-weight:700;margin-bottom:5px}
+.s-item .s-v{font-family:'Bricolage Grotesque','Noto Sans KR',sans-serif;font-size:22px;font-weight:800}
+.s-item .s-v.em{color:#F0A97E}
+.s-item .s-v.td{color:#6FD8C8}
+
+/* footer */
+.disclaimer{margin:30px 0 0;font-size:11px;color:var(--ink2);line-height:1.7}
+footer{
+  margin-top:44px;padding:26px 20px 34px;border-top:1px solid var(--line);
+  text-align:center;font-size:12.5px;color:var(--ink2);
+}
+footer .f-brand{font-weight:700;color:var(--ink)}
+footer a{color:var(--tide);text-decoration:none}
+
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+.fade-in.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+:focus-visible{outline:2px solid var(--tide);outline-offset:2px}
+</style>
+</head>
+<body class="lang-ko">
+
+<nav>
+  <div class="brand">
+    <span class="brand-mark disp">Sydney <em>Buyer Suite</em></span>
+    <span class="brand-sub">by SunnyApps</span>
+  </div>
+  <button class="nav-btn" id="langBtn" aria-label="Toggle language">EN / 한국어</button>
+  <button class="nav-btn" id="themeBtn" aria-label="Toggle theme">☀︎ / ☾</button>
+  <a class="bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span class="bm-t">Buy me a coffee</span></a>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">
+    <span data-lang="en">NSW · FY 2026/27 Rates</span>
+    <span data-lang="ko">NSW · 2026/27 회계연도 세율</span>
+  </span>
+  <h1 class="disp">
+    <span data-lang="en">Every dollar of your<br>Sydney purchase. <span class="thin">Live.</span></span>
+    <span data-lang="ko">시드니 내 집 마련,<br>모든 비용을 <span class="thin">한눈에.</span></span>
+  </h1>
+  <p class="hero-sub">
+    <span data-lang="en">Stamp duty, first-home exemptions, foreign buyer surcharge, loan repayments and investment returns — one interactive tool, updated with official Revenue NSW 2026/27 thresholds.</span>
+    <span data-lang="ko">인지세부터 첫 주택 구매자 면제, 해외 구매자 서차지, 대출 상환, 투자 수익률까지 — Revenue NSW 2026/27 공식 세율이 반영된 올인원 인터랙티브 계산기입니다.</span>
+  </p>
+  <div class="rates-chip">
+    <span data-lang="en">✓ Revenue NSW rates effective <b>1 July 2026</b> · FHB exemption ≤ $800k · Foreign surcharge <b>9%</b></span>
+    <span data-lang="ko">✓ <b>2026년 7월 1일</b>자 Revenue NSW 세율 · 첫 주택 $80만 이하 면제 · 해외 구매자 서차지 <b>9%</b></span>
+  </div>
+</header>
+
+<!-- CONTROL DECK -->
+<section class="deck fade-in">
+  <div class="deck-row">
+    <div class="price-block">
+      <label class="field-label" for="priceInput">
+        <span data-lang="en">Property price</span>
+        <span data-lang="ko">매매 가격</span>
+      </label>
+      <div class="price-display">
+        <span class="cur">A$</span>
+        <input id="priceInput" type="text" inputmode="numeric" value="1,200,000" aria-label="Property price">
+      </div>
+      <input id="priceRange" type="range" min="400000" max="5000000" step="10000" value="1200000" aria-label="Property price slider">
+      <div class="range-marks"><span>$400k</span><span>$1.5M</span><span>$3M</span><span>$5M</span></div>
+    </div>
+    <div class="buyer-block">
+      <span class="field-label">
+        <span data-lang="en">Buyer profile</span>
+        <span data-lang="ko">구매자 유형</span>
+      </span>
+      <div class="chips" id="buyerChips" role="radiogroup">
+        <button class="chip" data-buyer="fhb" role="radio" aria-checked="false">
+          <span><span data-lang="en">First home</span><span data-lang="ko">첫 주택 구매</span></span>
+          <small><span data-lang="en">FHBAS eligible</span><span data-lang="ko">FHBAS 대상</span></small>
+        </button>
+        <button class="chip on" data-buyer="owner" role="radio" aria-checked="true">
+          <span><span data-lang="en">Owner-occupier</span><span data-lang="ko">실거주</span></span>
+          <small><span data-lang="en">Standard duty</span><span data-lang="ko">일반 인지세</span></small>
+        </button>
+        <button class="chip" data-buyer="investor" role="radio" aria-checked="false">
+          <span><span data-lang="en">Investor</span><span data-lang="ko">투자자</span></span>
+          <small><span data-lang="en">+ tax analysis</span><span data-lang="ko">+ 세금 분석</span></small>
+        </button>
+        <button class="chip" data-buyer="foreign" role="radio" aria-checked="false">
+          <span><span data-lang="en">Foreign buyer</span><span data-lang="ko">해외 구매자</span></span>
+          <small><span data-lang="en">+9% surcharge</span><span data-lang="ko">서차지 9% 추가</span></small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNATURE FLOW BAR -->
+  <div class="flow-sec">
+    <div class="flow-head">
+      <span class="flow-title">
+        <span data-lang="en">Where every dollar goes</span>
+        <span data-lang="ko">내 돈은 어디로 가나</span>
+      </span>
+      <span class="flow-total">
+        <span data-lang="en">Total project cost</span><span data-lang="ko">총 소요 비용</span>
+        <b id="flowTotal">$0</b>
+      </span>
+    </div>
+    <div class="flowbar" id="flowbar" aria-hidden="true">
+      <div class="fseg deposit" id="segDep"><span class="fl"></span></div>
+      <div class="fseg loan" id="segLoan"><span class="fl"></span></div>
+      <div class="fseg duty" id="segDuty"><span class="fl"></span></div>
+      <div class="fseg fees" id="segFees"><span class="fl"></span></div>
+    </div>
+    <div class="flow-legend">
+      <span><i class="dot d1"></i><span data-lang="en">Deposit</span><span data-lang="ko">계약금(디파짓)</span></span>
+      <span><i class="dot d2"></i><span data-lang="en">Loan</span><span data-lang="ko">대출</span></span>
+      <span><i class="dot d3"></i><span data-lang="en">Duty & surcharge</span><span data-lang="ko">인지세·서차지</span></span>
+      <span><i class="dot d4"></i><span data-lang="en">Fees & LMI</span><span data-lang="ko">수수료·LMI</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tabs" role="tablist">
+  <button class="tab on disp" data-tab="costs" role="tab" aria-selected="true">
+    <span class="t-num">01</span>
+    <span data-lang="en">Purchase costs</span><span data-lang="ko">구매 비용</span>
+  </button>
+  <button class="tab disp" data-tab="loan" role="tab" aria-selected="false">
+    <span class="t-num">02</span>
+    <span data-lang="en">Loan simulator</span><span data-lang="ko">대출 시뮬레이터</span>
+  </button>
+  <button class="tab disp" data-tab="invest" role="tab" aria-selected="false">
+    <span class="t-num">03</span>
+    <span data-lang="en">Investment</span><span data-lang="ko">투자 분석</span>
+  </button>
+</div>
+
+<!-- PANEL 1 : COSTS -->
+<section class="panel on" id="panel-costs">
+  <div class="grid g2">
+    <div class="card fade-in">
+      <h3><span class="ico">🧾</span><span data-lang="en">Transfer duty (stamp duty)</span><span data-lang="ko">인지세 (Transfer Duty)</span></h3>
+      <div class="stat-hero neg" id="dutyHero">$0</div>
+      <div class="stat-sub" id="dutySub"></div>
+      <div style="margin-top:18px">
+        <div class="kv"><span class="k"><span data-lang="en">Base transfer duty</span><span data-lang="ko">기본 인지세</span></span><span class="v out" id="kvBase">$0</span></div>
+        <div class="kv" id="rowFhb" style="display:none"><span class="k"><span data-lang="en">FHBAS saving</span><span data-lang="ko">FHBAS 첫 주택 감면</span></span><span class="v in" id="kvFhb">−$0</span></div>
+        <div class="kv" id="rowSurcharge" style="display:none"><span class="k"><span data-lang="en">Foreign surcharge (9%)</span><span data-lang="ko">해외 구매자 서차지 (9%)</span></span><span class="v out" id="kvSurcharge">$0</span></div>
+        <div class="kv" id="rowPremium" style="display:none"><span class="k"><span data-lang="en">Incl. premium duty (>$3.87M)</span><span data-lang="ko">프리미엄 듀티 포함 ($3.87M 초과)</span></span><span class="v" id="kvPremium">✓</span></div>
+        <div class="kv total"><span class="k"><span data-lang="en">Total duty payable</span><span data-lang="ko">납부할 인지세 합계</span></span><span class="v out" id="kvDutyTotal">$0</span></div>
+      </div>
+      <div class="note">
+        <span data-lang="en"><b>FY2026/27 official brackets:</b> $387k–$1.29M → $11,602 + 4.5% of excess · over $1.29M → $52,237 + 5.5% · premium over $3.87M → $194,137 + 7%. FHB: full exemption ≤ $800k, sliding concession to $1M.</span>
+        <span data-lang="ko"><b>2026/27 공식 구간:</b> $38.7만–$129만 → $11,602 + 초과분 4.5% · $129만 초과 → $52,237 + 5.5% · $387만 초과 프리미엄 → $194,137 + 7%. 첫 주택: $80만 이하 전액 면제, $100만까지 슬라이딩 감면.</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <h3><span class="ico">💼</span><span data-lang="en">Upfront cash required</span><span data-lang="ko">필요 초기 자금</span></h3>
+      <div class="stat-hero" id="upfrontHero">$0</div>
+      <div class="stat-sub"><span data-lang="en">Deposit + duty + fees (excl. loan)</span><span data-lang="ko">계약금 + 인지세 + 제반 비용 (대출 제외)</span></div>
+      <div style="margin-top:18px">
+        <div class="mini-range">
+          <div class="mr-head">
+            <span><span data-lang="en">Deposit</span><span data-lang="ko">계약금 비율</span></span>
+            <b id="depLabel">20%</b>
+          </div>
+          <input type="range" id="depRange" min="5" max="50" step="1" value="20">
+        </div>
+        <div class="kv"><span class="k"><span data-lang="en">Deposit amount</span><span data-lang="ko">계약금</span></span><span class="v" id="kvDep">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Duty & surcharge</span><span data-lang="ko">인지세·서차지</span></span><span class="v out" id="kvDuty2">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Legal / conveyancing</span><span data-lang="ko">법무 비용 (컨베이언싱)</span></span><span class="v"><span class="u">$</span><input id="feeLegal" type="text" inputmode="numeric" value="2,200" style="width:74px;text-align:right;border:none;background:transparent;color:inherit;font:inherit;font-weight:700;outline:none;border-bottom:1px dashed var(--line)"></span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Inspections & registration</span><span data-lang="ko">건물 검사·등기 수수료</span></span><span class="v"><span class="u">$</span><input id="feeOther" type="text" inputmode="numeric" value="1,100" style="width:74px;text-align:right;border:none;background:transparent;color:inherit;font:inherit;font-weight:700;outline:none;border-bottom:1px dashed var(--line)"></span></div>
+        <div class="kv" id="rowLmi"><span class="k"><span data-lang="en">LMI estimate</span><span data-lang="ko">LMI (모기지 보험) 추정</span><span class="badge warn" id="lmiBadge" style="display:none">LVR &gt; 80%</span></span><span class="v out" id="kvLmi">$0</span></div>
+        <div class="kv total"><span class="k"><span data-lang="en">Cash to complete</span><span data-lang="ko">초기 자금 합계</span></span><span class="v" id="kvUpfront">$0</span></div>
+      </div>
+      <div class="note" id="foreignNote" style="display:none">
+        <span data-lang="en"><b>Foreign buyers:</b> a FIRB application fee also applies (tiered by price — confirm the current fee schedule with your solicitor). Foreign purchasers are not eligible for FHBAS and typically face lower maximum LVRs.</span>
+        <span data-lang="ko"><b>해외 구매자 안내:</b> FIRB 신청 수수료가 별도로 부과됩니다 (가격 구간별 — 최신 수수료는 변호사와 확인 필요). 해외 구매자는 FHBAS 대상이 아니며, 대출 한도(LVR)도 일반적으로 낮게 적용됩니다.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card fade-in" style="margin-top:18px">
+    <h3><span class="ico">◔</span><span data-lang="en">Cost composition</span><span data-lang="ko">비용 구성 차트</span></h3>
+    <div class="chart-wrap"><canvas id="donutChart" height="240"></canvas></div>
+  </div>
+</section>
+
+<!-- PANEL 2 : LOAN -->
+<section class="panel" id="panel-loan">
+  <div class="grid g2">
+    <div class="card fade-in">
+      <h3><span class="ico">🏦</span><span data-lang="en">Loan settings</span><span data-lang="ko">대출 조건</span></h3>
+      <div class="mini-range">
+        <div class="mr-head">
+          <span><span data-lang="en">Interest rate</span><span data-lang="ko">금리 (연)</span></span>
+          <b id="rateLabel">5.60%</b>
+        </div>
+        <input type="range" id="rateRange" min="3" max="9" step="0.05" value="5.6">
+      </div>
+      <div class="mini-range">
+        <div class="mr-head">
+          <span><span data-lang="en">Loan term</span><span data-lang="ko">대출 기간</span></span>
+          <b id="termLabel">30<span data-lang="en">yr</span><span data-lang="ko">년</span></b>
+        </div>
+        <input type="range" id="termRange" min="10" max="30" step="1" value="30">
+      </div>
+      <div class="mini-range">
+        <div class="mr-head">
+          <span><span data-lang="en">Extra repayment / month</span><span data-lang="ko">월 추가 상환</span></span>
+          <b id="extraLabel">$0</b>
+        </div>
+        <input type="range" id="extraRange" min="0" max="3000" step="100" value="0">
+      </div>
+      <div class="kv"><span class="k"><span data-lang="en">Loan amount</span><span data-lang="ko">대출 원금</span></span><span class="v" id="kvLoanAmt">$0</span></div>
+      <div class="kv"><span class="k">LVR</span><span class="v" id="kvLvr">80%</span></div>
+    </div>
+
+    <div class="card fade-in">
+      <h3><span class="ico">📆</span><span data-lang="en">Your repayments</span><span data-lang="ko">상환액</span></h3>
+      <div class="stat-hero" id="repayHero">$0</div>
+      <div class="stat-sub"><span data-lang="en">per month, principal & interest</span><span data-lang="ko">월 상환액 (원리금 균등)</span></div>
+      <div style="margin-top:18px">
+        <div class="kv"><span class="k"><span data-lang="en">Weekly equivalent</span><span data-lang="ko">주당 환산</span></span><span class="v" id="kvWeekly">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Total interest over term</span><span data-lang="ko">총 이자 (전체 기간)</span></span><span class="v out" id="kvTotInt">$0</span></div>
+        <div class="kv" id="rowExtraSave" style="display:none"><span class="k"><span data-lang="en">Interest saved by extra payments</span><span data-lang="ko">추가 상환으로 아끼는 이자</span></span><span class="v in" id="kvExtraSave">$0</span></div>
+        <div class="kv" id="rowTimeSave" style="display:none"><span class="k"><span data-lang="en">Loan paid off early by</span><span data-lang="ko">단축되는 상환 기간</span></span><span class="v in" id="kvTimeSave">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card fade-in" style="margin-top:18px">
+    <h3><span class="ico">📉</span><span data-lang="en">Loan balance over time</span><span data-lang="ko">대출 잔액 추이</span></h3>
+    <div class="chart-wrap"><canvas id="amortChart" height="260"></canvas></div>
+  </div>
+</section>
+
+<!-- PANEL 3 : INVEST -->
+<section class="panel" id="panel-invest">
+  <div class="grid g2">
+    <div class="card fade-in">
+      <h3><span class="ico">🔑</span><span data-lang="en">Rental assumptions</span><span data-lang="ko">임대 조건</span></h3>
+      <div class="mini-range">
+        <div class="mr-head">
+          <span><span data-lang="en">Weekly rent</span><span data-lang="ko">주당 임대료</span></span>
+          <b id="rentLabel">$850</b>
+        </div>
+        <input type="range" id="rentRange" min="300" max="3000" step="10" value="850">
+      </div>
+      <div class="inp-grid">
+        <div class="inp-row">
+          <label><span data-lang="en">Annual costs (strata, council, insurance)</span><span data-lang="ko">연간 비용 (관리비·카운슬·보험)</span></label>
+          <div class="iw"><span class="u">$</span><input id="invCosts" type="text" inputmode="numeric" value="9,500"></div>
+        </div>
+        <div class="inp-row">
+          <label><span data-lang="en">Property management</span><span data-lang="ko">임대 관리 수수료</span></label>
+          <div class="iw"><input id="invMgmt" type="text" inputmode="numeric" value="5.5"><span class="u">%</span></div>
+        </div>
+        <div class="inp-row">
+          <label><span data-lang="en">Depreciation (new builds)</span><span data-lang="ko">감가상각 (신축)</span></label>
+          <div class="iw"><span class="u">$</span><input id="invDep" type="text" inputmode="numeric" value="10,000"></div>
+        </div>
+        <div class="inp-row">
+          <label><span data-lang="en">Your marginal tax rate</span><span data-lang="ko">한계 소득세율</span></label>
+          <div class="iw">
+            <select id="taxRate">
+              <option value="0">0% — ≤ $18,200</option>
+              <option value="0.15">15% — $18k–$45k</option>
+              <option value="0.30">30% — $45k–$135k</option>
+              <option value="0.37" selected>37% — $135k–$190k</option>
+              <option value="0.45">45% — $190k+</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="mini-range">
+        <div class="mr-head">
+          <span><span data-lang="en">Assumed capital growth</span><span data-lang="ko">예상 연간 시세 상승률</span></span>
+          <b id="growthLabel">4.5%</b>
+        </div>
+        <input type="range" id="growthRange" min="0" max="10" step="0.5" value="4.5">
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <h3><span class="ico">📈</span><span data-lang="en">Yield & cash flow</span><span data-lang="ko">수익률 & 현금 흐름</span></h3>
+      <div class="grid g2" style="gap:12px">
+        <div>
+          <div class="stat-hero pos" id="grossYield" style="font-size:30px">0%</div>
+          <div class="stat-sub"><span data-lang="en">Gross yield</span><span data-lang="ko">총 수익률 (Gross)</span></div>
+        </div>
+        <div>
+          <div class="stat-hero" id="netYield" style="font-size:30px">0%</div>
+          <div class="stat-sub"><span data-lang="en">Net yield</span><span data-lang="ko">순 수익률 (Net)</span></div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="kv"><span class="k"><span data-lang="en">Annual rent</span><span data-lang="ko">연간 임대 수입</span></span><span class="v in" id="kvRentYr">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Interest (year 1)</span><span data-lang="ko">이자 비용 (1년차)</span></span><span class="v out" id="kvIntYr">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Operating costs + mgmt</span><span data-lang="ko">운영 비용 + 관리 수수료</span></span><span class="v out" id="kvCostYr">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Pre-tax cash flow</span><span data-lang="ko">세전 현금 흐름</span></span><span class="v" id="kvPreTax">$0</span></div>
+        <div class="kv"><span class="k"><span data-lang="en">Negative gearing tax benefit</span><span data-lang="ko">네거티브 기어링 절세 효과</span></span><span class="v in" id="kvTaxBen">$0</span></div>
+        <div class="kv total"><span class="k"><span data-lang="en">After-tax cash flow / week</span><span data-lang="ko">세후 현금 흐름 (주당)</span></span><span class="v" id="kvAfterTax">$0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card fade-in" style="margin-top:18px">
+    <h3><span class="ico">🏔</span><span data-lang="en">10-year equity projection</span><span data-lang="ko">10년 자산(에쿼티) 전망</span></h3>
+    <div class="chart-wrap"><canvas id="equityChart" height="260"></canvas></div>
+    <div class="stat-sub" style="margin-top:10px" id="equityCaption"></div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary fade-in">
+  <div class="summary-in">
+    <h2 class="disp"><span data-lang="en">Consultation snapshot</span><span data-lang="ko">상담 요약 스냅샷</span></h2>
+    <p class="s-sub"><span data-lang="en">Everything on one line — screenshot this for your client.</span><span data-lang="ko">핵심 숫자 한 줄 정리 — 고객에게 이 화면을 캡처해 보내세요.</span></p>
+    <div class="s-grid">
+      <div class="s-item"><div class="s-l"><span data-lang="en">Price</span><span data-lang="ko">매매가</span></div><div class="s-v" id="sPrice">—</div></div>
+      <div class="s-item"><div class="s-l"><span data-lang="en">Total duty</span><span data-lang="ko">인지세 합계</span></div><div class="s-v em" id="sDuty">—</div></div>
+      <div class="s-item"><div class="s-l"><span data-lang="en">Cash needed</span><span data-lang="ko">초기 자금</span></div><div class="s-v" id="sCash">—</div></div>
+      <div class="s-item"><div class="s-l"><span data-lang="en">Monthly repayment</span><span data-lang="ko">월 상환액</span></div><div class="s-v" id="sRepay">—</div></div>
+      <div class="s-item"><div class="s-l"><span data-lang="en">10-yr equity</span><span data-lang="ko">10년 후 에쿼티</span></div><div class="s-v td" id="sEquity">—</div></div>
+    </div>
+  </div>
+</section>
+
+<p class="disclaimer">
+  <span data-lang="en">Estimates only, based on Revenue NSW FY2026/27 published thresholds and general assumptions. LMI, fees, tax outcomes and lending terms vary by lender and circumstance. This tool is general information, not financial, legal or tax advice — confirm figures with Revenue NSW, your conveyancer, accountant and lender before acting.</span>
+  <span data-lang="ko">본 계산기는 Revenue NSW 2026/27 회계연도 공시 세율과 일반적인 가정에 기반한 추정치입니다. LMI·수수료·세금·대출 조건은 개인 상황과 금융기관에 따라 달라집니다. 본 내용은 일반 정보이며 금융·법률·세무 자문이 아닙니다. 실행 전 Revenue NSW, 변호사, 회계사, 대출 기관과 반드시 확인하세요.</span>
+</p>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="f-brand">Made by SunnyApps. All rights reserved.</div>
+  <div style="margin-top:6px">
+    <span data-lang="en">Sydney Buyer Suite · NSW FY2026/27 · </span>
+    <span data-lang="ko">시드니 바이어 스위트 · NSW 2026/27 · </span>
+    <a href="./links.html">All Projects →</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+/* ---------- storage (safe) ---------- */
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+/* ---------- theme ---------- */
+const root = document.documentElement;
+function applyTheme(t){ root.setAttribute('data-theme', t); store.set('sbs-theme', t); drawAll(); }
+const savedTheme = store.get('sbs-theme');
+if(savedTheme){ root.setAttribute('data-theme', savedTheme); }
+else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){ root.setAttribute('data-theme','dark'); }
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  applyTheme(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+});
+
+/* ---------- language ---------- */
+function applyLang(l){
+  document.body.classList.toggle('lang-ko', l==='ko');
+  document.documentElement.lang = l;
+  store.set('sbs-lang', l);
+  update();
+}
+const savedLang = store.get('sbs-lang');
+if(savedLang){ applyLang(savedLang); }
+document.getElementById('langBtn').addEventListener('click', ()=>{
+  applyLang(document.body.classList.contains('lang-ko') ? 'en' : 'ko');
+});
+const KO = ()=> document.body.classList.contains('lang-ko');
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + Math.round(n).toLocaleString('en-AU');
+const fmtK = n => {
+  if(Math.abs(n) >= 1e6) return '$' + (n/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
+  if(Math.abs(n) >= 1e3) return '$' + Math.round(n/1e3) + 'k';
+  return '$' + Math.round(n);
+};
+function parseMoney(el){
+  const v = parseFloat(String(el.value).replace(/[^0-9.]/g,''));
+  return isNaN(v) ? 0 : v;
+}
+function bindMoneyInput(el, cb){
+  el.addEventListener('input', cb);
+  el.addEventListener('blur', ()=>{ const v = parseMoney(el); el.value = v.toLocaleString('en-AU'); cb(); });
+}
+
+/* ---------- NSW duty engine — FY2026/27 (Revenue NSW, eff. 1 Jul 2026) ---------- */
+function transferDuty(v){
+  if(v<=0) return 0;
+  if(v<=18000)   return Math.max(20, v*0.0125);
+  if(v<=38000)   return 225  + (v-18000)*0.015;
+  if(v<=103000)  return 525  + (v-38000)*0.0175;
+  if(v<=387000)  return 1662 + (v-103000)*0.035;
+  if(v<=1290000) return 11602 + (v-387000)*0.045;
+  if(v<=3870000) return 52237 + (v-1290000)*0.055;
+  return 194137 + (v-3870000)*0.07; /* premium duty (residential) */
+}
+function fhbDuty(v){
+  if(v<=800000) return 0;
+  if(v<1000000) return transferDuty(v) * (v-800000)/200000; /* sliding concession */
+  return transferDuty(v);
+}
+function lmiEstimate(loan, lvr){
+  if(lvr<=80) return 0;
+  let r;
+  if(lvr<=85) r = 0.010;
+  else if(lvr<=90) r = 0.020;
+  else r = 0.038;
+  return loan * r;
+}
+
+/* ---------- state ---------- */
+let buyer = 'owner';
+
+/* buyer chips */
+document.querySelectorAll('#buyerChips .chip').forEach(ch=>{
+  ch.addEventListener('click', ()=>{
+    document.querySelectorAll('#buyerChips .chip').forEach(c=>{c.classList.remove('on');c.setAttribute('aria-checked','false');});
+    ch.classList.add('on'); ch.setAttribute('aria-checked','true');
+    buyer = ch.dataset.buyer;
+    update();
+  });
+});
+
+/* price sync */
+const priceInput = $('priceInput'), priceRange = $('priceRange');
+priceRange.addEventListener('input', ()=>{
+  priceInput.value = Number(priceRange.value).toLocaleString('en-AU');
+  update();
+});
+priceInput.addEventListener('input', ()=>{
+  const v = parseMoney(priceInput);
+  if(v>=priceRange.min && v<=priceRange.max) priceRange.value = v;
+  update();
+});
+priceInput.addEventListener('blur', ()=>{ priceInput.value = parseMoney(priceInput).toLocaleString('en-AU'); });
+
+/* other controls */
+['depRange','rateRange','termRange','extraRange','rentRange','growthRange'].forEach(id=>{
+  $(id).addEventListener('input', update);
+});
+['feeLegal','feeOther','invCosts','invDep'].forEach(id=> bindMoneyInput($(id), update));
+$('invMgmt').addEventListener('input', update);
+$('taxRate').addEventListener('change', update);
+
+/* range fill */
+function paintRange(el){
+  const min=+el.min, max=+el.max, v=+el.value;
+  el.style.setProperty('--fill', ((v-min)/(max-min)*100)+'%');
+}
+
+/* tabs */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    t.classList.add('on'); t.setAttribute('aria-selected','true');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    $('panel-'+t.dataset.tab).classList.add('on');
+    drawAll();
+  });
+});
+
+/* ---------- core update ---------- */
+let R = {}; /* results cache for charts */
+
+function update(){
+  const price = Math.max(0, parseMoney(priceInput));
+  const depPct = +$('depRange').value;
+  const rate = +$('rateRange').value;
+  const termYr = +$('termRange').value;
+  const extra = +$('extraRange').value;
+
+  document.querySelectorAll('input[type=range]').forEach(paintRange);
+  $('depLabel').textContent = depPct + '%';
+  $('rateLabel').textContent = rate.toFixed(2) + '%';
+  $('termLabel').innerHTML = termYr + (KO() ? '년' : 'yr');
+  $('extraLabel').textContent = fmt(extra);
+
+  /* duty */
+  const base = transferDuty(price);
+  let duty = base, fhbSave = 0, surcharge = 0;
+  if(buyer==='fhb'){ duty = fhbDuty(price); fhbSave = base - duty; }
+  if(buyer==='foreign'){ surcharge = price * 0.09; }
+  const dutyTotal = duty + surcharge;
+
+  $('dutyHero').textContent = fmt(dutyTotal);
+  $('kvBase').textContent = fmt(base);
+  $('kvDutyTotal').textContent = fmt(dutyTotal);
+  $('kvDuty2').textContent = fmt(dutyTotal);
+
+  $('rowFhb').style.display = (buyer==='fhb' && fhbSave>0) || (buyer==='fhb' && price<=800000) ? 'flex' : 'none';
+  $('kvFhb').textContent = '−' + fmt(fhbSave);
+  $('rowSurcharge').style.display = buyer==='foreign' ? 'flex' : 'none';
+  $('kvSurcharge').textContent = fmt(surcharge);
+  $('rowPremium').style.display = price>3870000 ? 'flex' : 'none';
+  $('foreignNote').style.display = buyer==='foreign' ? 'block' : 'none';
+
+  const dutySub = $('dutySub');
+  if(buyer==='fhb' && price<=800000){
+    dutySub.innerHTML = KO()
+      ? '🎉 첫 주택 <b>전액 면제</b> — ' + fmt(base) + ' 절약!'
+      : '🎉 First home <b>full exemption</b> — you save ' + fmt(base) + '!';
+  } else if(buyer==='fhb' && price<1000000){
+    dutySub.textContent = KO()
+      ? 'FHBAS 슬라이딩 감면 적용 (' + fmt(fhbSave) + ' 절약)'
+      : 'FHBAS sliding concession applied (saving ' + fmt(fhbSave) + ')';
+  } else if(buyer==='foreign'){
+    dutySub.textContent = KO()
+      ? '일반 인지세 + 서차지 9% 합산'
+      : 'Standard duty plus 9% surcharge purchaser duty';
+  } else {
+    dutySub.textContent = KO()
+      ? '매매가의 ' + (price>0 ? (dutyTotal/price*100).toFixed(1) : 0) + '% 수준'
+      : 'Effective rate ' + (price>0 ? (dutyTotal/price*100).toFixed(1) : 0) + '% of price';
+  }
+
+  /* upfront */
+  const deposit = price * depPct/100;
+  const loan = price - deposit;
+  const lvr = price>0 ? loan/price*100 : 0;
+  const legal = parseMoney($('feeLegal'));
+  const other = parseMoney($('feeOther'));
+  const lmi = lmiEstimate(loan, lvr);
+  $('lmiBadge').style.display = lvr>80 ? 'inline-block' : 'none';
+  $('kvLmi').textContent = lmi>0 ? fmt(lmi) : '$0';
+  $('kvDep').textContent = fmt(deposit);
+  const upfront = deposit + dutyTotal + legal + other; /* LMI usually capitalised */
+  $('upfrontHero').textContent = fmt(upfront);
+  $('kvUpfront').textContent = fmt(upfront);
+  $('kvLoanAmt').textContent = fmt(loan);
+  $('kvLvr').textContent = lvr.toFixed(0) + '%';
+
+  /* flow bar */
+  const fees = legal + other + lmi;
+  const total = price + dutyTotal + fees;
+  $('flowTotal').textContent = fmt(total);
+  const segs = [
+    ['segDep', deposit, KO()?'계약금':'Deposit'],
+    ['segLoan', loan, KO()?'대출':'Loan'],
+    ['segDuty', dutyTotal, KO()?'인지세':'Duty'],
+    ['segFees', fees, KO()?'수수료':'Fees']
+  ];
+  segs.forEach(([id,val,label])=>{
+    const el = $(id);
+    const pct = total>0 ? val/total*100 : 0;
+    el.style.width = pct + '%';
+    el.querySelector('.fl').textContent = pct>7 ? label+' '+fmtK(val) : (pct>3.5 ? fmtK(val) : '');
+  });
+
+  /* loan */
+  const n = termYr*12, mr = rate/100/12;
+  const pay = mr>0 ? loan*mr/(1-Math.pow(1+mr,-n)) : loan/n;
+  $('repayHero').textContent = fmt(pay);
+  $('kvWeekly').textContent = fmt(pay*12/52);
+
+  function amortize(extraPm){
+    let bal = loan, ti = 0, months = 0;
+    const series = [bal];
+    while(bal>0 && months<n+1){
+      const interest = bal*mr;
+      ti += interest;
+      bal = bal + interest - pay - extraPm;
+      months++;
+      if(months%12===0 || bal<=0) series.push(Math.max(0,bal));
+      if(bal<=0) break;
+    }
+    return {ti, months, series};
+  }
+  const baseAm = amortize(0);
+  const extraAm = extra>0 ? amortize(extra) : baseAm;
+  $('kvTotInt').textContent = fmt(extraAm.ti);
+  const saved = baseAm.ti - extraAm.ti;
+  const monthsSaved = baseAm.months - extraAm.months;
+  $('rowExtraSave').style.display = extra>0 ? 'flex' : 'none';
+  $('rowTimeSave').style.display = extra>0 ? 'flex' : 'none';
+  if(extra>0){
+    $('kvExtraSave').textContent = fmt(saved);
+    const y = Math.floor(monthsSaved/12), m = monthsSaved%12;
+    $('kvTimeSave').textContent = KO() ? (y+'년 '+m+'개월') : (y+'y '+m+'m');
+  }
+
+  /* invest */
+  const rent = +$('rentRange').value;
+  $('rentLabel').textContent = fmt(rent);
+  const rentYr = rent*52;
+  const mgmtPct = parseFloat($('invMgmt').value)||0;
+  const costs = parseMoney($('invCosts')) + rentYr*mgmtPct/100;
+  const dep = parseMoney($('invDep'));
+  const intYr1 = loan*rate/100;
+  const growth = +$('growthRange').value;
+  $('growthLabel').textContent = growth.toFixed(1)+'%';
+
+  const grossY = price>0 ? rentYr/price*100 : 0;
+  const netY = price>0 ? (rentYr-costs)/price*100 : 0;
+  $('grossYield').textContent = grossY.toFixed(2)+'%';
+  $('netYield').textContent = netY.toFixed(2)+'%';
+  $('kvRentYr').textContent = fmt(rentYr);
+  $('kvIntYr').textContent = fmt(intYr1);
+  $('kvCostYr').textContent = fmt(costs);
+  const preTax = rentYr - costs - intYr1;
+  $('kvPreTax').textContent = (preTax<0?'−':'') + fmt(Math.abs(preTax));
+  $('kvPreTax').className = 'v ' + (preTax<0?'out':'in');
+  const taxRate = parseFloat($('taxRate').value) + 0.02; /* + Medicare levy */
+  const taxableLoss = Math.max(0, -(preTax - dep));
+  const taxBen = taxableLoss * taxRate;
+  $('kvTaxBen').textContent = fmt(taxBen);
+  const afterTaxWk = (preTax + taxBen)/52;
+  $('kvAfterTax').textContent = (afterTaxWk<0?'−':'+') + fmt(Math.abs(afterTaxWk));
+  $('kvAfterTax').className = 'v ' + (afterTaxWk<0?'out':'in');
+
+  /* equity projection */
+  const eq = [];
+  let val = price;
+  for(let y=0; y<=10; y++){
+    const balIdx = Math.min(y, extraAm.series.length-1);
+    const bal = extraAm.series[balIdx] !== undefined ? extraAm.series[balIdx] : 0;
+    eq.push({year:y, value:val, balance:bal, equity:val-bal});
+    val *= (1+growth/100);
+  }
+  const eq10 = eq[10].equity;
+  $('equityCaption').innerHTML = KO()
+    ? '연 '+growth.toFixed(1)+'% 상승 가정 시, 10년 후 예상 에쿼티는 <b style="color:var(--tide)">'+fmt(eq10)+'</b> 입니다 (시세 '+fmt(eq[10].value)+' − 잔여 대출 '+fmt(eq[10].balance)+').'
+    : 'At '+growth.toFixed(1)+'% p.a. growth, projected equity in 10 years is <b style="color:var(--tide)">'+fmt(eq10)+'</b> (value '+fmt(eq[10].value)+' − remaining loan '+fmt(eq[10].balance)+').';
+
+  /* summary */
+  $('sPrice').textContent = fmtK(price);
+  $('sDuty').textContent = fmtK(dutyTotal);
+  $('sCash').textContent = fmtK(upfront);
+  $('sRepay').textContent = fmt(pay) + (KO()?'/월':'/mo');
+  $('sEquity').textContent = fmtK(eq10);
+
+  R = {price, deposit, loan, dutyTotal, fees, lmi, legal, other,
+       amortBase: baseAm.series, amortExtra: extraAm.series, extra, termYr, eq};
+  drawAll();
+}
+
+/* ---------- charts (pure canvas) ---------- */
+function ctx2d(id){
+  const c = $(id);
+  if(!c || c.offsetParent===null) return null; /* hidden panel */
+  const dpr = window.devicePixelRatio||1;
+  const w = c.clientWidth, h = +c.getAttribute('height');
+  c.width = w*dpr; c.height = h*dpr;
+  c.style.height = h+'px';
+  const x = c.getContext('2d');
+  x.setTransform(dpr,0,0,dpr,0,0);
+  return {x,w,h};
+}
+function cssVar(name){
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function drawDonut(){
+  const c = ctx2d('donutChart'); if(!c) return;
+  const {x,w,h} = c;
+  x.clearRect(0,0,w,h);
+  const items = [
+    [R.deposit, '#1E8074', KO()?'계약금':'Deposit'],
+    [R.loan, root.getAttribute('data-theme')==='dark' ? '#2E5751' : '#28504B', KO()?'대출':'Loan'],
+    [R.dutyTotal, '#C05F32', KO()?'인지세·서차지':'Duty & surcharge'],
+    [R.fees, '#A5834E', KO()?'수수료·LMI':'Fees & LMI']
+  ].filter(i=>i[0]>0);
+  const total = items.reduce((s,i)=>s+i[0],0);
+  if(total<=0) return;
+  const cx = Math.min(w*0.28, 150), cy = h/2, r = Math.min(h/2-16, 92), ir = r*0.62;
+  let a = -Math.PI/2;
+  items.forEach(([v,col])=>{
+    const sweep = v/total*Math.PI*2;
+    x.beginPath();
+    x.arc(cx,cy,r,a,a+sweep);
+    x.arc(cx,cy,ir,a+sweep,a,true);
+    x.closePath();
+    x.fillStyle = col; x.fill();
+    x.strokeStyle = cssVar('--card'); x.lineWidth = 2; x.stroke();
+    a += sweep;
+  });
+  /* centre */
+  x.fillStyle = cssVar('--ink');
+  x.font = '800 17px "Bricolage Grotesque","Noto Sans KR",sans-serif';
+  x.textAlign='center'; x.textBaseline='middle';
+  x.fillText(fmtK(total), cx, cy-8);
+  x.fillStyle = cssVar('--ink2');
+  x.font = '600 10px "Instrument Sans","Noto Sans KR",sans-serif';
+  x.fillText(KO()?'총 비용':'total', cx, cy+11);
+  /* legend */
+  const lx = cx + r + 30;
+  let ly = cy - (items.length*26)/2 + 8;
+  x.textAlign='left';
+  items.forEach(([v,col,label])=>{
+    x.fillStyle = col;
+    x.beginPath(); x.roundRect ? x.roundRect(lx, ly-8, 12, 12, 3) : x.rect(lx, ly-8, 12, 12); x.fill();
+    x.fillStyle = cssVar('--ink');
+    x.font = '600 12.5px "Instrument Sans","Noto Sans KR",sans-serif';
+    x.fillText(label + '  ' + fmtK(v) + '  (' + (v/total*100).toFixed(1) + '%)', lx+20, ly-1);
+    ly += 26;
+  });
+}
+
+function drawAmort(){
+  const c = ctx2d('amortChart'); if(!c || !R.amortBase) return;
+  const {x,w,h} = c;
+  x.clearRect(0,0,w,h);
+  const padL=54, padR=14, padT=14, padB=28;
+  const iw = w-padL-padR, ih = h-padT-padB;
+  const yearsB = R.amortBase.length-1;
+  const maxY = R.loan || 1;
+  const X = i => padL + i/Math.max(yearsB,1)*iw;
+  const Y = v => padT + (1-v/maxY)*ih;
+  /* grid */
+  x.strokeStyle = cssVar('--line'); x.lineWidth=1;
+  x.fillStyle = cssVar('--ink2');
+  x.font = '500 10.5px "Instrument Sans",sans-serif';
+  x.textAlign='right';
+  for(let g=0; g<=4; g++){
+    const v = maxY*g/4, yy = Y(v);
+    x.beginPath(); x.moveTo(padL,yy); x.lineTo(w-padR,yy); x.stroke();
+    x.fillText(fmtK(v), padL-8, yy+3);
+  }
+  x.textAlign='center';
+  for(let yr=0; yr<=yearsB; yr+=Math.ceil(yearsB/6)){
+    x.fillText(yr+(KO()?'년':'y'), X(yr), h-8);
+  }
+  function line(series, col, fill){
+    x.beginPath();
+    series.forEach((v,i)=>{ i===0 ? x.moveTo(X(i),Y(v)) : x.lineTo(X(i),Y(v)); });
+    if(fill){
+      x.lineTo(X(series.length-1), Y(0)); x.lineTo(X(0), Y(0)); x.closePath();
+      x.fillStyle = fill; x.fill();
+      x.beginPath();
+      series.forEach((v,i)=>{ i===0 ? x.moveTo(X(i),Y(v)) : x.lineTo(X(i),Y(v)); });
+    }
+    x.strokeStyle = col; x.lineWidth=2.5; x.lineJoin='round'; x.stroke();
+  }
+  const tide = cssVar('--tide'), ember = cssVar('--ember');
+  line(R.amortBase, ember, cssVar('--ember-soft'));
+  if(R.extra>0) line(R.amortExtra, tide, null);
+  /* legend */
+  x.textAlign='left'; x.font='600 11.5px "Instrument Sans","Noto Sans KR",sans-serif';
+  x.fillStyle = ember; x.fillRect(padL, padT, 16, 3);
+  x.fillStyle = cssVar('--ink'); x.fillText(KO()?'기본 상환':'Standard', padL+22, padT+5);
+  if(R.extra>0){
+    x.fillStyle = tide; x.fillRect(padL+110, padT, 16, 3);
+    x.fillStyle = cssVar('--ink'); x.fillText((KO()?'추가 상환 +':'Extra +')+fmt(R.extra)+(KO()?'/월':'/mo'), padL+132, padT+5);
+  }
+}
+
+function drawEquity(){
+  const c = ctx2d('equityChart'); if(!c || !R.eq) return;
+  const {x,w,h} = c;
+  x.clearRect(0,0,w,h);
+  const padL=58, padR=14, padT=16, padB=28;
+  const iw = w-padL-padR, ih = h-padT-padB;
+  const maxY = Math.max(...R.eq.map(e=>e.value)) * 1.05 || 1;
+  const X = i => padL + i/10*iw;
+  const Y = v => padT + (1-v/maxY)*ih;
+  x.strokeStyle = cssVar('--line'); x.lineWidth=1;
+  x.fillStyle = cssVar('--ink2'); x.font='500 10.5px "Instrument Sans",sans-serif'; x.textAlign='right';
+  for(let g=0; g<=4; g++){
+    const v=maxY*g/4, yy=Y(v);
+    x.beginPath(); x.moveTo(padL,yy); x.lineTo(w-padR,yy); x.stroke();
+    x.fillText(fmtK(v), padL-8, yy+3);
+  }
+  x.textAlign='center';
+  for(let yr=0; yr<=10; yr+=2) x.fillText(yr+(KO()?'년':'y'), X(yr), h-8);
+  /* equity area = between value line and balance line */
+  const tide = cssVar('--tide');
+  x.beginPath();
+  R.eq.forEach((e,i)=>{ i===0 ? x.moveTo(X(i),Y(e.value)) : x.lineTo(X(i),Y(e.value)); });
+  for(let i=10;i>=0;i--){ x.lineTo(X(i), Y(R.eq[i].balance)); }
+  x.closePath();
+  x.fillStyle = cssVar('--tide-soft'); x.fill();
+  /* value line */
+  x.beginPath(); R.eq.forEach((e,i)=>{ i===0 ? x.moveTo(X(i),Y(e.value)) : x.lineTo(X(i),Y(e.value)); });
+  x.strokeStyle = tide; x.lineWidth=2.5; x.stroke();
+  /* balance line */
+  x.beginPath(); R.eq.forEach((e,i)=>{ i===0 ? x.moveTo(X(i),Y(e.balance)) : x.lineTo(X(i),Y(e.balance)); });
+  x.strokeStyle = cssVar('--ember'); x.lineWidth=2; x.setLineDash([5,4]); x.stroke(); x.setLineDash([]);
+  /* labels */
+  x.textAlign='left'; x.font='600 11.5px "Instrument Sans","Noto Sans KR",sans-serif';
+  x.fillStyle=tide; x.fillText((KO()?'시세 ':'Value ')+fmtK(R.eq[10].value), X(10)-90, Y(R.eq[10].value)-8);
+  x.fillStyle=cssVar('--ember'); x.fillText((KO()?'대출 잔액 ':'Loan ')+fmtK(R.eq[10].balance), X(10)-90, Y(R.eq[10].balance)+16);
+  /* equity annotation mid */
+  x.fillStyle=tide; x.font='800 13px "Bricolage Grotesque","Noto Sans KR",sans-serif';
+  const midY = (Y(R.eq[7].value)+Y(R.eq[7].balance))/2;
+  x.fillText((KO()?'에쿼티 ▲':'Equity ▲'), X(6.4), midY);
+}
+
+function drawAll(){ drawDonut(); drawAmort(); drawEquity(); }
+let rT; window.addEventListener('resize', ()=>{ clearTimeout(rT); rT=setTimeout(drawAll,150); });
+
+/* ---------- fade in ---------- */
+const obs = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+update();
+})();
+</script>
+</body>
+</html>
