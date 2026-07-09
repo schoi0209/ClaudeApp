@@ -135,6 +135,18 @@
     padding: 72px 32px 100px;
     overflow: hidden;
   }
+  .hero-photo {
+    position: absolute; inset: -20px;
+    width: calc(100% + 40px); height: calc(100% + 40px);
+    object-fit: cover; object-position: center 38%;
+    filter: blur(4px) brightness(0.92);
+    transform: scale(1.04);
+  }
+  .hero-photo-veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, color-mix(in srgb, var(--bg) 96%, transparent) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 45%, color-mix(in srgb, var(--bg) 62%, transparent) 100%);
+  }
+  [data-theme="dark"] .hero-photo { filter: blur(4px) brightness(0.5); }
   .hero-bg {
     position: absolute; inset: 0;
     background:
@@ -1130,6 +1142,18 @@
     transition: filter .4s;
   }
   [data-theme="dark"] .media-bleed img { filter: saturate(0.85) brightness(0.78); }
+  /* Amenity & interior photo grids */
+  .photo-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:36px; }
+  .photo-grid.thirds { grid-template-columns:repeat(3,1fr); }
+  .pg-card { position:relative; border-radius:14px; overflow:hidden; background:var(--bg-card); box-shadow:0 8px 30px rgba(0,0,0,.08); }
+  .pg-card img { display:block; width:100%; height:300px; object-fit:cover; transition:transform .55s; }
+  .pg-card:hover img { transform:scale(1.035); }
+  .pg-card figcaption { position:absolute; left:0; right:0; bottom:0; padding:40px 22px 16px; background:linear-gradient(to top, rgba(10,14,20,.82), transparent); color:#fff; }
+  .pg-card figcaption strong { display:block; font-size:1.02rem; font-weight:600; letter-spacing:.01em; }
+  .pg-card figcaption span { font-size:.72rem; opacity:.75; letter-spacing:.06em; text-transform:uppercase; }
+  .pg-card.tall img { height:420px; }
+  [data-theme="dark"] .pg-card img { filter: brightness(.82); }
+  @media(max-width:860px){ .photo-grid,.photo-grid.thirds{grid-template-columns:1fr;} .pg-card img{height:240px;} }
   .media-bleed figcaption {
     position: absolute;
     left: 32px; bottom: 32px; right: 32px;
@@ -1254,6 +1278,8 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero">
+  <img class="hero-photo" src="./assets/concord-central/hero-skyline.jpg" alt="Concord Central twin towers with Sydney Harbour Bridge and city skyline at golden hour — Artist Impression" loading="eager" />
+  <div class="hero-photo-veil"></div>
   <div class="hero-bg"></div>
   <div class="hero-towers"></div>
   <div class="hero-inner">
@@ -1408,12 +1434,12 @@
   </div>
 </section>
 
-<!-- ============ MEDIA · EXTERIOR ============ -->
+<!-- ============ MEDIA · AERIAL ============ -->
 <figure class="media-bleed">
-  <img src="./assets/concord-central/exterior.jpg" alt="Sunset exterior rendering of Concord Central showing the 37-storey B1 tower with its signature green wall, and the 27-storey A1 tower, with Concord West Station at the base" loading="lazy" />
+  <img src="./assets/concord-central/aerial.jpg" alt="Aerial view of the full Concord Central masterplan — four towers rising above Concord West Station with landscaped grounds" loading="lazy" />
   <figcaption>
-    <span class="mc-tag" data-lang-section="en">B1 + A1 Towers · Golden Hour</span>
-    <span class="mc-tag" data-lang-section="ko">B1·A1 타워 · 일몰</span>
+    <span class="mc-tag" data-lang-section="en">The Masterplan · Aerial View</span>
+    <span class="mc-tag" data-lang-section="ko">마스터플랜 · 항공 뷰</span>
     <span class="mc-cap" data-lang-section="en">"A new village in the sky, anchored at Concord West Station."</span>
     <span class="mc-cap" data-lang-section="ko">"콩코드 웨스트역 위에 솟아오른 하늘의 마을."</span>
   </figcaption>
@@ -1707,8 +1733,51 @@
         </ul>
       </div>
     </div>
+
+    <!-- Amenity render gallery -->
+    <div class="photo-grid">
+      <figure class="pg-card">
+        <img src="./assets/concord-central/pool.jpg" alt="Concord Central Sky Village indoor pool with tropical planting — Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Sky Village Pool</strong><strong data-lang-section="ko">스카이 빌리지 수영장</strong>
+          <span data-lang-section="en">Indoor resort pool · Artist Impression</span><span data-lang-section="ko">실내 리조트 풀 · 조감도</span>
+        </figcaption>
+      </figure>
+      <figure class="pg-card">
+        <img src="./assets/concord-central/spa.jpg" alt="Concord Central spa, sauna and steam room — Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Spa · Sauna · Steam</strong><strong data-lang-section="ko">스파 · 사우나 · 스팀룸</strong>
+          <span data-lang-section="en">Wellness retreat · Artist Impression</span><span data-lang-section="ko">웰니스 공간 · 조감도</span>
+        </figcaption>
+      </figure>
+      <figure class="pg-card">
+        <img src="./assets/concord-central/gym.jpg" alt="Outdoor yoga deck and fully equipped gym — Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Gym & Yoga Deck</strong><strong data-lang-section="ko">헬스장 & 요가 데크</strong>
+          <span data-lang-section="en">Indoor–outdoor training · Artist Impression</span><span data-lang-section="ko">실내외 트레이닝 · 조감도</span>
+        </figcaption>
+      </figure>
+      <figure class="pg-card">
+        <img src="./assets/concord-central/pavilion-lookdown.jpg" alt="Cutaway of the amenity pavilion — gym above, pool and cabanas below — Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">The Amenity Pavilion</strong><strong data-lang-section="ko">어메니티 파빌리온</strong>
+          <span data-lang-section="en">Pool, cabanas & gym levels · Artist Impression</span><span data-lang-section="ko">풀·카바나·짐 레벨 · 조감도</span>
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </section>
+
+<!-- ============ MEDIA · PARK ============ -->
+<figure class="media-bleed">
+  <img src="./assets/concord-central/park.jpg" alt="Concord Central Park — families on the village green between the towers, with the pavilion gym beyond" loading="lazy" />
+  <figcaption>
+    <span class="mc-tag" data-lang-section="en">Concord Central Park · Village Green</span>
+    <span class="mc-tag" data-lang-section="ko">콩코드 센트럴 파크 · 빌리지 그린</span>
+    <span class="mc-cap" data-lang-section="en">"An entire park at your doorstep — soccer field, picnic lawns and the pavilion beyond."</span>
+    <span class="mc-cap" data-lang-section="ko">"문 앞에 펼쳐진 공원 — 축구장, 피크닉 잔디, 그리고 파빌리온까지."</span>
+  </figcaption>
+</figure>
 
 <!-- ============ APARTMENT FEATURES ============ -->
 <section id="interiors">
@@ -1821,6 +1890,31 @@
         <p data-lang-block="en">Dedicated storage cages in the basement.</p>
         <p data-lang-block="ko">지하 전용 스토리지 케이지 제공.</p>
       </div>
+    </div>
+
+    <!-- Residence 36 render gallery -->
+    <div class="photo-grid thirds">
+      <figure class="pg-card tall">
+        <img src="./assets/concord-central/int-bar.jpg" alt="Kitchen, dining and bar with Sydney Harbour Bridge view — Residence 36, Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Kitchen & Bar</strong><strong data-lang-section="ko">주방 & 바</strong>
+          <span data-lang-section="en">Harbour Bridge outlook · Artist Impression</span><span data-lang-section="ko">하버브리지 전망 · 조감도</span>
+        </figcaption>
+      </figure>
+      <figure class="pg-card tall">
+        <img src="./assets/concord-central/int-living.jpg" alt="Living room with oak joinery entertainment wall — Residence 36, Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Living</strong><strong data-lang-section="ko">거실</strong>
+          <span data-lang-section="en">Oak joinery · stone hearth · Artist Impression</span><span data-lang-section="ko">오크 조이너리 · 스톤 · 조감도</span>
+        </figcaption>
+      </figure>
+      <figure class="pg-card tall">
+        <img src="./assets/concord-central/int-study.jpg" alt="Built-in study nook with stone desk — Residence 36, Artist Impression" loading="lazy" />
+        <figcaption>
+          <strong data-lang-section="en">Study Nook</strong><strong data-lang-section="ko">스터디 누크</strong>
+          <span data-lang-section="en">Built-in work-from-home zone · Artist Impression</span><span data-lang-section="ko">빌트인 재택근무 공간 · 조감도</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1983,6 +2077,17 @@
     </div>
   </div>
 </section>
+
+<!-- ============ MEDIA · RETAIL PAVILION ============ -->
+<figure class="media-bleed">
+  <img src="./assets/concord-central/retail-dusk.jpg" alt="The retail pavilion at dusk — ground-floor café dining with the yoga terrace above" loading="lazy" />
+  <figcaption>
+    <span class="mc-tag" data-lang-section="en">The Pavilion · Dusk</span>
+    <span class="mc-tag" data-lang-section="ko">파빌리온 · 황혼</span>
+    <span class="mc-cap" data-lang-section="en">"Cafés below, wellness above — the village comes alive at golden hour."</span>
+    <span class="mc-cap" data-lang-section="ko">"아래는 카페, 위는 웰니스 — 황혼에 살아나는 마을."</span>
+  </figcaption>
+</figure>
 
 <!-- ============ DEVELOPER ============ -->
 <section id="developer" class="alt">
