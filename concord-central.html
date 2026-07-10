@@ -1154,6 +1154,24 @@
   .pg-card.tall img { height:420px; }
   [data-theme="dark"] .pg-card img { filter: brightness(.82); }
   @media(max-width:860px){ .photo-grid,.photo-grid.thirds{grid-template-columns:1fr;} .pg-card img{height:240px;} }
+  /* Zeroo finance highlight */
+  .finance-section { background: linear-gradient(150deg, #123B2E 0%, #1E5C46 55%, #2A7A5B 100%); color:#fff; padding:96px 32px; position:relative; overflow:hidden; }
+  .finance-section::before { content:'0%'; position:absolute; right:-40px; top:50%; transform:translateY(-50%); font-family:'Cormorant Garamond',Georgia,serif; font-size:26rem; font-weight:600; color:rgba(255,255,255,.05); line-height:1; pointer-events:none; }
+  .finance-inner { max-width:1180px; margin:0 auto; position:relative; z-index:1; }
+  .finance-tag { font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:#8FE0BC; margin-bottom:18px; }
+  .finance-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:500; line-height:1.15; margin-bottom:16px; }
+  .finance-title em { font-style:italic; color:#8FE0BC; }
+  .finance-lede { max-width:640px; font-size:15.5px; line-height:1.75; color:rgba(255,255,255,.78); margin-bottom:40px; }
+  .finance-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; margin-bottom:36px; }
+  .fin-cell { background:rgba(10,30,22,.35); padding:26px 22px; backdrop-filter:blur(4px); }
+  .fin-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.2rem; color:#8FE0BC; line-height:1; margin-bottom:8px; }
+  .fin-lbl { font-size:13px; line-height:1.5; color:rgba(255,255,255,.75); }
+  .finance-cta-row { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .finance-btn { display:inline-flex; align-items:center; gap:10px; background:#8FE0BC; color:#0E2E22; font-weight:700; font-size:14px; letter-spacing:.04em; padding:15px 30px; border-radius:8px; text-decoration:none; transition:transform .2s, background .2s; }
+  .finance-btn:hover { background:#A8EDCD; transform:translateY(-2px); }
+  .finance-note { font-size:11.5px; line-height:1.6; color:rgba(255,255,255,.45); margin-top:34px; max-width:860px; }
+  @media(max-width:900px){ .finance-grid{grid-template-columns:1fr 1fr;} .finance-section::before{font-size:14rem; right:-30px;} }
+  @media(max-width:560px){ .finance-grid{grid-template-columns:1fr;} }
   .media-bleed figcaption {
     position: absolute;
     left: 32px; bottom: 32px; right: 32px;
@@ -1355,6 +1373,8 @@
     <a href="#b1" data-lang-section="ko">B1 분양</a>
     <a href="#developer" data-lang-section="en">Developer</a>
     <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#finance" data-lang-section="en">0% Deposit</a>
+    <a href="#finance" data-lang-section="ko">0% 디파짓</a>
     <a href="#enquire" data-lang-section="en">Enquire</a>
     <a href="#enquire" data-lang-section="ko">분양 문의</a>
   </div>
@@ -2193,6 +2213,56 @@
 </section>
 
 <!-- ============ ENQUIRE CTA ============ -->
+<!-- ============ FINANCE · ZEROO ============ -->
+<section id="finance" class="finance-section">
+  <div class="finance-inner">
+    <div class="finance-tag" data-lang-section="en">Flexible Finance · Zeroo Partnership</div>
+    <div class="finance-tag" data-lang-section="ko">유연한 파이낸스 · Zeroo 연계</div>
+    <h2 class="finance-title">
+      <span data-lang-section="en">No 10% deposit saved?<br>You can <em>still buy.</em></span>
+      <span data-lang-section="ko">10% 디파짓이 없어도<br><em>구매할 수 있습니다.</em></span>
+    </h2>
+    <p class="finance-lede" data-lang-section="en">Through Zeroo's 0% deposit, shared-equity home loan, eligible buyers can secure a home at Concord Central without years of saving. Zeroo lends 100% of the purchase price — no Lenders Mortgage Insurance — and you own your home from day one, needing only a small settlement fee to get started.</p>
+    <p class="finance-lede" data-lang-section="ko">Zeroo의 0% 디파짓 공유지분(shared-equity) 홈론을 통해, 자격을 갖춘 구매자는 수년간 저축하지 않아도 콩코드 센트럴의 집을 확보할 수 있습니다. Zeroo가 구매가의 100%를 대출하며 — LMI(대출보증보험) 없이 — 첫날부터 100% 내 소유가 됩니다. 시작에 필요한 것은 소액의 정산 수수료뿐입니다.</p>
+    <div class="finance-grid">
+      <div class="fin-cell">
+        <div class="fin-num">0%</div>
+        <div class="fin-lbl" data-lang-section="en">Deposit required — Zeroo lends 100% of the purchase price</div>
+        <div class="fin-lbl" data-lang-section="ko">디파짓 불필요 — 구매가 100% 대출</div>
+      </div>
+      <div class="fin-cell">
+        <div class="fin-num">1.5–2.2%</div>
+        <div class="fin-lbl" data-lang-section="en">Settlement fee is all you need upfront (finance options available)</div>
+        <div class="fin-lbl" data-lang-section="ko">선불로 필요한 건 정산 수수료뿐 (파이낸스 옵션 가능)</div>
+      </div>
+      <div class="fin-cell">
+        <div class="fin-num">No LMI</div>
+        <div class="fin-lbl" data-lang-section="en">No Lenders Mortgage Insurance despite the 100% loan</div>
+        <div class="fin-lbl" data-lang-section="ko">100% 대출인데도 LMI(대출보증보험) 없음</div>
+      </div>
+      <div class="fin-cell">
+        <div class="fin-num">Day 1</div>
+        <div class="fin-lbl" data-lang-section="en">You own 100% of your home from day one & build equity as it grows</div>
+        <div class="fin-lbl" data-lang-section="ko">첫날부터 100% 소유 — 가치 상승분으로 에퀴티 축적</div>
+      </div>
+    </div>
+    <div class="finance-cta-row">
+      <a href="https://www.zeroo.com.au/" target="_blank" rel="noopener" class="finance-btn">
+        <span data-lang-section="en">Learn More at Zeroo →</span>
+        <span data-lang-section="ko">Zeroo에서 자세히 보기 →</span>
+      </a>
+      <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Concord%20Central%20%2B%20Zeroo%20Finance%20Enquiry" class="finance-btn" style="background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;">
+        <span data-lang-section="en">Ask Sunny About Eligibility</span>
+        <span data-lang-section="ko">자격 조건 문의하기</span>
+      </a>
+    </div>
+    <p class="finance-note">
+      <span data-lang-section="en">Zeroo Home Loans is a third-party credit provider (Mondus Capital Pty Ltd, Authorised Representative under Australian Credit Licence 509175) and is not affiliated with Billbergia or Forise Group. All loans are subject to Zeroo's eligibility and credit assessment criteria. When you later refinance, Zeroo shares in a portion of your property's growth (10% of the new property value). This is general information only, not financial advice — consider your own circumstances and refer to Zeroo's Credit Guide.</span>
+      <span data-lang-section="ko">Zeroo Home Loans는 제3자 신용 제공사(Mondus Capital Pty Ltd, 호주 신용 라이선스 509175의 공인 대리인)이며 Billbergia 및 포라이즈 그룹과 무관합니다. 모든 대출은 Zeroo의 자격 및 신용 심사 기준을 따릅니다. 추후 재융자 시 Zeroo가 부동산 가치 상승분의 일부(새 부동산 가치의 10%)를 공유합니다. 본 내용은 일반 정보이며 금융 자문이 아닙니다 — 본인의 상황을 고려하시고 Zeroo의 Credit Guide를 참고하세요.</span>
+    </p>
+  </div>
+</section>
+
 <section id="enquire" class="enquire-cta">
   <div class="enquire-cta-inner">
     <div class="sec-tag">09 — Next Steps</div>
