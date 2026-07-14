@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silo Oran Park — Micro-Warehouse Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f4;--surface:#fff;--surface2:#f4efe9;--surface3:#e9e1d7;
+  --border:rgba(60,40,20,.09);--border2:rgba(60,40,20,.18);
+  --ink:#1c1408;--muted:#7a6a55;--muted2:#c0b0a0;
+  --silo:#f07f26;--silo-l:rgba(240,127,38,.09);--silo-d:#c05f10;
+  --green:#1e7048;--green-l:rgba(30,112,72,.09);
+  --amber:#c07820;--amber-l:rgba(192,120,32,.09);
+  --blue:#2a5f9e;--blue-l:rgba(42,95,158,.09);
+  --grey:#8a8378;--grey-l:rgba(138,131,120,.09);
+}
+[data-theme="dark"]{
+  --bg:#0f0c08;--surface:#1a1510;--surface2:#241d16;--surface3:#2e261c;
+  --border:rgba(240,180,120,.08);--border2:rgba(240,180,120,.16);
+  --ink:#f4e8dc;--muted:#8a7862;--muted2:#3a3228;
+  --silo:#ff9440;--silo-l:rgba(255,148,64,.10);--silo-d:#f07f26;
+  --green:#48b880;--green-l:rgba(72,184,128,.09);
+  --amber:#d89840;--amber-l:rgba(216,152,64,.09);
+  --blue:#5a95d8;--blue-l:rgba(90,149,216,.09);
+  --grey:#8a8378;--grey-l:rgba(138,131,120,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--silo-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--silo-d);}
+.bmc-top a{color:var(--silo-d);font-weight:600;text-decoration:none;}
+.bmc-top a:hover{text-decoration:underline;}
+
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-logo{width:34px;height:34px;border-radius:9px;background:var(--silo);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;letter-spacing:-.02em;}
+.h-txt{display:flex;flex-direction:column;}
+.h-name{font-size:16px;font-weight:600;letter-spacing:.03em;line-height:1;}
+.h-sub{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+.h-center{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--silo);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.theme-btn:hover{border-color:var(--silo);}
+
+.masthead{padding:48px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1320px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--silo);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:22px;height:2px;background:var(--silo);border-radius:2px;}
+.masthead h1{font-size:clamp(40px,5vw,68px);font-weight:600;line-height:.98;letter-spacing:-.025em;}
+.masthead h1 em{font-style:normal;color:var(--silo);}
+.m-tagline{font-size:13px;color:var(--muted);margin-top:10px;}
+.m-right{text-align:right;}
+.gst-box{background:var(--silo-l);border:1px solid rgba(240,127,38,.22);border-radius:9px;padding:13px 16px;text-align:left;margin-bottom:10px;}
+.gst-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--silo-d);margin-bottom:5px;font-weight:500;}
+.gst-txt{font-size:11px;color:var(--ink);line-height:1.65;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;display:inline-block;}
+
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1320px;margin:0 auto;}
+.s-cell{flex:1;padding:15px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.s-val{font-size:22px;font-weight:600;color:var(--silo);letter-spacing:-.02em;}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;padding:10px 32px;border-bottom:1px solid var(--border);max-width:1320px;margin:0 auto;}
+.leg{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1320px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:11px 20px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--silo);border-bottom-color:var(--silo);}
+.tab-cnt{display:inline-block;margin-left:5px;font-size:9px;background:var(--silo-l);color:var(--silo-d);border-radius:20px;padding:1px 7px;font-weight:600;}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1320px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:5px;font-family:'Outfit',sans-serif;font-size:12px;min-width:110px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--silo);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:5px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--silo);color:var(--silo);}
+
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1320px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+.tbl-wrap{max-width:1320px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:11px 12px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;}
+tbody tr:hover{background:var(--silo-l);}
+td{padding:13px 12px;white-space:nowrap;}
+
+.site-badge{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 9px;border-radius:4px;border:1px solid;}
+.sb-op1{color:var(--silo-d);border-color:rgba(240,127,38,.28);background:var(--silo-l);}
+.sb-op2{color:var(--blue);border-color:rgba(42,95,158,.28);background:var(--blue-l);}
+
+.unit-num{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.unit-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+
+.floor-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:4px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
+.floor-upper{color:var(--green);border-color:rgba(30,112,72,.28);background:var(--green-l);}
+
+.area-val{font-size:15px;font-weight:600;}
+.area-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+
+.height-chip{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+
+.price-val{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.price-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--silo-d);margin-top:1px;letter-spacing:.04em;}
+.psm-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+
+.outgoing{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);line-height:1.5;}
+.outgoing b{color:var(--ink);font-weight:500;}
+
+.status{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.06em;padding:4px 9px;border-radius:4px;text-transform:uppercase;white-space:nowrap;border:1px solid;}
+.st-available{background:var(--green-l);color:var(--green);border-color:rgba(30,112,72,.25);}
+.st-deposit{background:var(--amber-l);color:var(--amber);border-color:rgba(192,120,32,.25);}
+.st-contract{background:var(--blue-l);color:var(--blue);border-color:rgba(42,95,158,.25);}
+.st-sold{background:var(--grey-l);color:var(--grey);border-color:rgba(138,131,120,.22);}
+
+.note-bar{max-width:1320px;margin:0 auto;padding:16px 32px 0;}
+.note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);line-height:1.9;}
+.note b{color:var(--silo-d);}
+
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){
+  header,.masthead,.stats,.legend,.tab-row,.filters,.rbar,.tbl-wrap,.note-bar{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:18px;}.m-right{text-align:left;}
+  .h-center{display:none;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="bmc-top">
+  ☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps
+  <a href="./forise-pricelists.html" style="margin-left:auto;color:var(--silo-d);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px">← <span>All Price Lists</span></a>
+</div>
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">S</div>
+    <div class="h-txt">
+      <div class="h-name">Silo</div>
+      <div class="h-sub">Your smarter storage solution</div>
+    </div>
+  </div>
+  <div class="h-center" id="txt-h-center">Oran Park · Price List</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Micro-Warehouses & Storage Units · Oran Park NSW</div>
+    <h1>Oran Park<br><em>Silo</em></h1>
+    <div class="m-tagline" id="txt-tagline">Oran Park 1 (104 Southwell Rd) · Oran Park 2 (98 Southwell Rd)</div>
+  </div>
+  <div class="m-right">
+    <div class="gst-box">
+      <div class="gst-lbl" id="lbl-gst">⚠ Pricing Note</div>
+      <div class="gst-txt" id="txt-gst">
+        All prices shown are <b>Ex-GST</b>.<br>
+        Strata &amp; Council fees are approximate p.a.
+      </div>
+    </div>
+    <div class="date-chip">Updated: 10 July 2026</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">17</div><div class="s-sub" id="ssub-total">Both Sites</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Ready to Buy</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Ex-GST</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Ex-GST</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current Filter</div></div>
+</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:var(--green)"></div><span id="leg-av">Available</span></div>
+  <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div><span id="leg-dep">Deposit Taken</span></div>
+  <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div><span id="leg-con">Contract Issued</span></div>
+</div>
+
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setSite('all')" id="tab-all">All Sites <span class="tab-cnt" id="tc-all">17</span></button>
+  <button class="tab-btn" onclick="setSite('op1')" id="tab-op1">Oran Park 1 <span class="tab-cnt" id="tc-op1">5</span></button>
+  <button class="tab-btn" onclick="setSite('op2')" id="tab-op2">Oran Park 2 <span class="tab-cnt" id="tc-op2">12</span></button>
+</div>
+
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-status">Status</span>
+    <select id="fStatus" onchange="go()">
+      <option value="" id="opt-st-all">All</option>
+      <option value="available" id="opt-st-av">Available</option>
+      <option value="deposit" id="opt-st-dep">Deposit Taken</option>
+      <option value="contract" id="opt-st-con">Contract Issued</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-floor">Floor</span>
+    <select id="fFloor" onchange="go()">
+      <option value="" id="opt-fl-all">All</option>
+      <option value="Lower Ground" id="opt-fl-lg">Lower Ground</option>
+      <option value="Upper" id="opt-fl-up">Upper</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-size">Size Range</span>
+    <select id="fSize" onchange="go()">
+      <option value="" id="opt-sz-all">All</option>
+      <option value="small" id="opt-sz1">Small (≤15 m²)</option>
+      <option value="mid" id="opt-sz2">Mid (16–30 m²)</option>
+      <option value="large" id="opt-sz3">Large (31+ m²)</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="go()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="120000" id="opt-px1">Under $120K</option>
+      <option value="250000" id="opt-px2">Under $250K</option>
+      <option value="350000" id="opt-px3">Under $350K</option>
+      <option value="500000" id="opt-px4">Under $500K</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:130px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSrch" placeholder="Unit number..." oninput="go()"></div>
+  </div>
+  <button class="reset-btn" onclick="rst()" id="txt-reset">Reset</button>
+</div>
+
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="go()">
+    <option value="price-asc" id="srt-pa">Price ↑</option>
+    <option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="area-asc" id="srt-aa">Area ↑</option>
+    <option value="area-desc" id="srt-ad">Area ↓</option>
+    <option value="psm-asc" id="srt-psa">$/m² ↑</option>
+    <option value="unit-asc" id="srt-ua">Unit # ↑</option>
+  </select>
+</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-site">Site</th>
+        <th id="th-unit">Unit</th>
+        <th id="th-floor">Floor</th>
+        <th id="th-area">Area</th>
+        <th id="th-height">Height (Int/Door)</th>
+        <th id="th-price">Price (Ex-GST)</th>
+        <th id="th-psm">$/m²</th>
+        <th id="th-outgoing">Outgoings p.a.</th>
+        <th id="th-status">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
+</div>
+
+<div class="note-bar">
+  <div class="note" id="txt-notes">
+    <b>*</b> More stock available at Oran Park 2 — settlements in July.<br>
+    <b>*</b> "Hold" means a deposit is expected. Contact for latest status if you have a keen buyer.
+  </div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved. · Silo Oran Park — 10 July 2026</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+const DATA = [
+  // Oran Park 1 — 104 Southwell Road
+  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'3',  floor:'Lower Ground',area:9,  height:'3.9m / 3.5m',price:86667, strata:456, council:710,status:'contract'},
+  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'18', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
+  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'19', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
+  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'20', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
+  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'80', floor:'Upper',       area:12, height:'4m / 5m',    price:115556,strata:608, council:710,status:'available'},
+  // Oran Park 2 — 98 Southwell Road
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'18', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'19', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'20', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'21', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'34', floor:'Lower Ground',area:27, height:'3.9m / 3.5m',price:319871,strata:1236,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'35', floor:'Lower Ground',area:27, height:'3.9m / 3.5m',price:319871,strata:1236,council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'36', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'deposit'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'37', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'38', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'42', floor:'Lower Ground',area:21, height:'3.9m / 3.5m',price:237112,strata:960, council:710,status:'contract'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'44', floor:'Lower Ground',area:21, height:'3.9m / 3.5m',price:237112,strata:960, council:710,status:'deposit'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'105',floor:'Lower Ground',area:10, height:'3.9m / 3.5m',price:104000,strata:460, council:710,status:'available'},
+];
+
+const i18n = {
+  en:{
+    'txt-h-center':'Oran Park · Price List',
+    'txt-overline':'Micro-Warehouses & Storage Units · Oran Park NSW',
+    'txt-tagline':'Oran Park 1 (104 Southwell Rd) · Oran Park 2 (98 Southwell Rd)',
+    'lbl-gst':'⚠ Pricing Note',
+    'txt-gst':'All prices shown are <b>Ex-GST</b>.<br>Strata &amp; Council fees are approximate p.a.',
+    'slbl-total':'Total Units','ssub-total':'Both Sites',
+    'slbl-avail':'Available','ssub-avail':'Ready to Buy',
+    'slbl-from':'From','ssub-from':'Ex-GST',
+    'slbl-psm':'Avg $/m²','ssub-psm':'Ex-GST',
+    'slbl-shown':'Showing','ssub-shown':'Current Filter',
+    'leg-av':'Available','leg-dep':'Deposit Taken','leg-con':'Contract Issued',
+    'flbl-status':'Status','flbl-floor':'Floor','flbl-size':'Size Range','flbl-maxpx':'Max Price','flbl-search':'Search',
+    'opt-st-all':'All','opt-st-av':'Available','opt-st-dep':'Deposit Taken','opt-st-con':'Contract Issued',
+    'opt-fl-all':'All','opt-fl-lg':'Lower Ground','opt-fl-up':'Upper',
+    'opt-sz-all':'All','opt-sz1':'Small (≤15 m²)','opt-sz2':'Mid (16–30 m²)','opt-sz3':'Large (31+ m²)',
+    'opt-px-all':'All','opt-px1':'Under $120K','opt-px2':'Under $250K','opt-px3':'Under $350K','opt-px4':'Under $500K',
+    'txt-reset':'Reset','txt-shown-lbl':' units shown',
+    'th-site':'Site','th-unit':'Unit','th-floor':'Floor','th-area':'Area','th-height':'Height (Int/Door)',
+    'th-price':'Price (Ex-GST)','th-psm':'$/m²','th-outgoing':'Outgoings p.a.','th-status':'Status',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-aa':'Area ↑','srt-ad':'Area ↓','srt-psa':'$/m² ↑','srt-ua':'Unit # ↑',
+    'txt-empty':'— No units match your criteria —',
+    'txt-notes':'<b>*</b> More stock available at Oran Park 2 — settlements in July.<br><b>*</b> "Hold" means a deposit is expected. Contact for latest status if you have a keen buyer.',
+    searchPh:'Unit number...',
+    stLabel:{available:'Available',deposit:'Deposit Taken',contract:'Contract Issued'},
+    exGst:'Ex-GST', strataLbl:'Strata', councilLbl:'Council',
+  },
+  ko:{
+    'txt-h-center':'오란 파크 · 분양가',
+    'txt-overline':'마이크로 창고 & 스토리지 유닛 · 오란 파크 NSW',
+    'txt-tagline':'오란 파크 1 (104 Southwell Rd) · 오란 파크 2 (98 Southwell Rd)',
+    'lbl-gst':'⚠ 가격 안내',
+    'txt-gst':'표시된 모든 가격은 <b>GST 별도</b>입니다.<br>스트라타 및 카운슬 비용은 연간 예상액입니다.',
+    'slbl-total':'총 유닛','ssub-total':'양쪽 사이트',
+    'slbl-avail':'분양 가능','ssub-avail':'즉시 구매',
+    'slbl-from':'최저가','ssub-from':'GST 별도',
+    'slbl-psm':'평균 $/m²','ssub-psm':'GST 별도',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'leg-av':'분양 가능','leg-dep':'예약금 납부','leg-con':'계약서 발행',
+    'flbl-status':'상태','flbl-floor':'층','flbl-size':'면적 범위','flbl-maxpx':'최대 가격','flbl-search':'검색',
+    'opt-st-all':'전체','opt-st-av':'분양 가능','opt-st-dep':'예약금 납부','opt-st-con':'계약서 발행',
+    'opt-fl-all':'전체','opt-fl-lg':'로어 그라운드','opt-fl-up':'어퍼',
+    'opt-sz-all':'전체','opt-sz1':'소형 (15m² 이하)','opt-sz2':'중형 (16–30m²)','opt-sz3':'대형 (31m² 이상)',
+    'opt-px-all':'전체','opt-px1':'$120K 이하','opt-px2':'$250K 이하','opt-px3':'$350K 이하','opt-px4':'$500K 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 유닛 표시 중',
+    'th-site':'사이트','th-unit':'유닛','th-floor':'층','th-area':'면적','th-height':'높이 (내부/도어)',
+    'th-price':'분양가 (GST 별도)','th-psm':'m²당','th-outgoing':'연간 관리비','th-status':'상태',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-aa':'면적 작은 순','srt-ad':'면적 큰 순','srt-psa':'단가 낮은 순','srt-ua':'유닛 번호 순',
+    'txt-empty':'— 조건에 맞는 유닛이 없습니다 —',
+    'txt-notes':'<b>*</b> 오란 파크 2에 추가 재고 있음 — 7월 정산 예정.<br><b>*</b> "Hold"는 예약금 입금 예정을 의미합니다. 관심 있는 구매자가 있으면 최신 상태를 문의하세요.',
+    searchPh:'유닛 번호 검색...',
+    stLabel:{available:'분양 가능',deposit:'예약금 납부',contract:'계약서 발행'},
+    exGst:'GST 별도', strataLbl:'스트라타', councilLbl:'카운슬',
+  }
+};
+
+let lang='en', curSite='all', fil=[];
+
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});
+  document.getElementById('fSrch').placeholder=t.searchPh;
+  render(); upStats();
+}
+
+function setSite(s){
+  curSite=s;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+s).classList.add('active');
+  go();
+}
+
+function $c(n){return n?'$'+n.toLocaleString():'—';}
+function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(2).replace(/\.?0+$/,'')+'M';return'$'+Math.round(n/1e3)+'K';}
+
+function go(){
+  const st=document.getElementById('fStatus').value;
+  const fl=document.getElementById('fFloor').value;
+  const sz=document.getElementById('fSize').value;
+  const px=document.getElementById('fMaxPx').value;
+  const sr=document.getElementById('fSrch').value.toLowerCase().trim();
+  const srt=document.getElementById('sortSel').value;
+
+  fil=DATA.filter(d=>{
+    if(curSite!=='all'&&d.site!==curSite) return false;
+    if(st&&d.status!==st) return false;
+    if(fl&&d.floor!==fl) return false;
+    if(sz==='small'&&d.area>15) return false;
+    if(sz==='mid'&&!(d.area>=16&&d.area<=30)) return false;
+    if(sz==='large'&&d.area<31) return false;
+    if(px&&d.price>+px) return false;
+    if(sr&&!d.unit.toLowerCase().includes(sr)) return false;
+    return true;
+  });
+
+  fil.sort((a,b)=>{
+    if(srt==='price-asc')  return a.price-b.price;
+    if(srt==='price-desc') return b.price-a.price;
+    if(srt==='area-asc')   return a.area-b.area;
+    if(srt==='area-desc')  return b.area-a.area;
+    if(srt==='psm-asc')    return (a.price/a.area)-(b.price/b.area);
+    if(srt==='unit-asc')   return (+a.unit)-(+b.unit);
+    return 0;
+  });
+
+  document.getElementById('tc-all').textContent=DATA.length;
+  document.getElementById('tc-op1').textContent=DATA.filter(d=>d.site==='op1').length;
+  document.getElementById('tc-op2').textContent=DATA.filter(d=>d.site==='op2').length;
+
+  render(); upStats();
+}
+
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=fil.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tb=document.getElementById('tBody'), em=document.getElementById('emptyMsg');
+  if(!fil.length){tb.innerHTML='';em.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  em.style.display='none';
+  tb.innerHTML=fil.map(d=>{
+    const psm=Math.round(d.price/d.area);
+    return `<tr>
+      <td><span class="site-badge sb-${d.site}">${d.siteName}</span><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:3px">${d.addr}</div></td>
+      <td><div class="unit-num">${d.unit}</div><div class="unit-lbl">UNIT</div></td>
+      <td><span class="floor-chip ${d.floor==='Upper'?'floor-upper':''}">${d.floor}</span></td>
+      <td><div class="area-val">${d.area} m²</div></td>
+      <td><span class="height-chip">${d.height}</span></td>
+      <td><div class="price-val">$${d.price.toLocaleString()}</div><div class="price-sub">${t.exGst}</div></td>
+      <td><div class="psm-val">$${psm.toLocaleString()}</div></td>
+      <td><div class="outgoing">${t.strataLbl}: <b>$${d.strata.toLocaleString()}</b><br>${t.councilLbl}: <b>$${d.council.toLocaleString()}</b></div></td>
+      <td><span class="status st-${d.status}">${t.stLabel[d.status]}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function upStats(){
+  const avail=fil.filter(d=>d.status==='available');
+  const px=fil.map(d=>d.price);
+  const psms=fil.map(d=>Math.round(d.price/d.area));
+  document.getElementById('sval-total').textContent=DATA.length;
+  document.getElementById('sval-avail').textContent=avail.length;
+  document.getElementById('sval-from').textContent=px.length?$f(Math.min(...px)):'—';
+  document.getElementById('sval-psm').textContent=psms.length?'$'+Math.round(psms.reduce((a,b)=>a+b,0)/psms.length).toLocaleString():'—';
+  document.getElementById('sval-shown').textContent=fil.length;
+}
+
+function rst(){
+  ['fStatus','fFloor','fSize','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSrch').value='';
+  document.getElementById('sortSel').value='price-asc';
+  curSite='all';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-all').classList.add('active');
+  go();
+}
+
+function toggleTheme(){
+  const b=document.body, btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
+}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';
+}
+go();
+</script>
+</body>
+</html>
