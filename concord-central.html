@@ -1172,6 +1172,25 @@
   .finance-note { font-size:11.5px; line-height:1.6; color:rgba(255,255,255,.45); margin-top:34px; max-width:860px; }
   @media(max-width:900px){ .finance-grid{grid-template-columns:1fr 1fr;} .finance-section::before{font-size:14rem; right:-30px;} }
   @media(max-width:560px){ .finance-grid{grid-template-columns:1fr;} }
+  /* Current offers / promotions */
+  .offers-section { background: linear-gradient(160deg,#5C1212 0%,#7E1E1E 55%,#96382B 100%); color:#fff; padding:96px 32px; position:relative; overflow:hidden; }
+  .offers-section::before { content:'𝒮'; position:absolute; left:-30px; bottom:-80px; font-family:'Cormorant Garamond',Georgia,serif; font-size:24rem; color:rgba(255,255,255,.05); pointer-events:none; }
+  .offers-inner { max-width:1180px; margin:0 auto; position:relative; z-index:1; }
+  .offers-ribbon { display:inline-block; background:#F3C77B; color:#4A1010; font-size:11.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; padding:8px 18px; border-radius:999px; margin-bottom:20px; }
+  .offers-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:500; line-height:1.15; margin-bottom:14px; }
+  .offers-title em { font-style:italic; color:#F3C77B; }
+  .offers-lede { max-width:640px; font-size:15px; line-height:1.75; color:rgba(255,255,255,.78); margin-bottom:44px; }
+  .offers-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .offer-card { background:rgba(255,255,255,.06); border:1px solid rgba(243,199,123,.3); border-radius:16px; padding:34px 30px; backdrop-filter:blur(4px); display:flex; flex-direction:column; }
+  .offer-badge { font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#F3C77B; margin-bottom:14px; }
+  .offer-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.5rem; line-height:1.05; margin-bottom:12px; }
+  .offer-num em { font-style:italic; color:#F3C77B; }
+  .offer-desc { font-size:13.5px; line-height:1.7; color:rgba(255,255,255,.75); }
+  .offer-list { margin:14px 0 0; padding:0; list-style:none; columns:2; column-gap:14px; }
+  .offer-list li { font-size:12px; line-height:1.9; color:rgba(255,255,255,.68); break-inside:avoid; }
+  .offer-list li::before { content:'—'; color:#F3C77B; margin-right:6px; }
+  .offers-note { font-size:11.5px; line-height:1.6; color:rgba(255,255,255,.42); margin-top:36px; max-width:880px; }
+  @media(max-width:900px){ .offers-grid{grid-template-columns:1fr;} .offer-list{columns:2;} }
   .media-bleed figcaption {
     position: absolute;
     left: 32px; bottom: 32px; right: 32px;
@@ -1373,6 +1392,8 @@
     <a href="#b1" data-lang-section="ko">B1 분양</a>
     <a href="#developer" data-lang-section="en">Developer</a>
     <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#offers" data-lang-section="en">Offers</a>
+    <a href="#offers" data-lang-section="ko">프로모션</a>
     <a href="#finance" data-lang-section="en">0% Deposit</a>
     <a href="#finance" data-lang-section="ko">0% 디파짓</a>
     <a href="#enquire" data-lang-section="en">Enquire</a>
@@ -1570,8 +1591,8 @@
         </h2>
       </div>
       <p class="sec-lede">
-        <span data-lang-section="en">Walking distance to Concord West Station on the T9 Northern Line — express services to the Sydney CBD, Strathfield interchange, and the Inner West dining scene.</span>
-        <span data-lang-section="ko">T9 노던 라인 콩코드 웨스트역까지 도보 거리 — 시드니 CBD, 스트라스필드 환승역, 이너 웨스트 다이닝 명소까지 급행 서비스.</span>
+        <span data-lang-section="en">Just 150 metres to Concord West Station on the T9 Northern Line — express services to the Sydney CBD, Strathfield interchange and the Inner West. From 2032, the future North Strathfield Metro (1.3km) adds high-frequency Sydney Metro West connections.</span>
+        <span data-lang-section="ko">T9 노던 라인 콩코드 웨스트역까지 단 150m — 시드니 CBD, 스트라스필드 환승역, 이너 웨스트까지 급행으로 연결됩니다. 2032년부터는 1.3km 거리의 노스 스트라스필드 메트로가 개통되어 시드니 메트로 웨스트 고빈도 노선이 더해집니다.</span>
       </p>
     </div>
 
@@ -2121,8 +2142,8 @@
         </h2>
       </div>
       <p class="sec-lede">
-        <span data-lang-section="en">Billbergia delivers projects through in-house development and construction teams — ensuring architectural excellence and the highest quality standards across every home.</span>
-        <span data-lang-section="ko">Billbergia는 자체 개발 및 시공 팀을 통해 프로젝트를 진행 — 모든 주택에 건축적 우수성과 최고 수준의 품질을 보장합니다.</span>
+        <span data-lang-section="en">Billbergia delivers projects through in-house development and construction teams — ensuring architectural excellence and the highest quality standards across every home. At Concord Central, Billbergia partners with Metrics Credit Partners (~$20bn AUM) and an award-winning alliance: Group GSA as executive architect, Lachlan Seegers Architect, Fitzpatrick + Partners, Carter Williamson, and landscape architects McGregor Coxall.</span>
+        <span data-lang-section="ko">Billbergia는 자체 개발 및 시공 팀을 통해 프로젝트를 진행 — 모든 주택에 건축적 우수성과 최고 수준의 품질을 보장합니다. 콩코드 센트럴에서는 금융 파트너 Metrics Credit Partners(운용자산 약 200억 달러)와 수상 경력의 건축 얼라이언스가 함께합니다 — 총괄 건축 Group GSA, Lachlan Seegers Architect, Fitzpatrick + Partners, Carter Williamson, 조경 McGregor Coxall.</span>
       </p>
     </div>
 
@@ -2213,6 +2234,57 @@
 </section>
 
 <!-- ============ ENQUIRE CTA ============ -->
+<!-- ============ CURRENT OFFERS ============ -->
+<section id="offers" class="offers-section">
+  <div class="offers-inner">
+    <div class="offers-ribbon" data-lang-section="en">Limited-Time Promotion · Now On</div>
+    <div class="offers-ribbon" data-lang-section="ko">기간 한정 프로모션 · 진행 중</div>
+    <h2 class="offers-title">
+      <span data-lang-section="en">Three reasons to<br>buy <em>right now.</em></span>
+      <span data-lang-section="ko">지금 사야 하는<br><em>세 가지 이유.</em></span>
+    </h2>
+    <p class="offers-lede" data-lang-section="en">Billbergia is currently offering an exceptional launch package at Concord Central — whether you're buying your forever home or building your portfolio.</p>
+    <p class="offers-lede" data-lang-section="ko">빌버지아가 콩코드 센트럴 론칭을 맞아 특별 패키지를 제공하고 있습니다 — 실거주 내 집 마련이든, 포트폴리오 투자든 모두에게 혜택이 있습니다.</p>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-badge" data-lang-section="en">For All Buyers</div>
+        <div class="offer-badge" data-lang-section="ko">모든 구매자</div>
+        <div class="offer-num"><em data-lang-section="en">Free</em><em data-lang-section="ko">무료</em> <span data-lang-section="en">Prestige Upgrades</span><span data-lang-section="ko">프레스티지 업그레이드</span></div>
+        <p class="offer-desc" data-lang-section="en">Billbergia's Prestige Optional Upgrades package — normally a paid extra — is currently included free. Customise your home with:</p>
+        <p class="offer-desc" data-lang-section="ko">유상 옵션인 빌버지아 프레스티지 업그레이드 패키지가 현재 무료로 포함됩니다. 다음 항목으로 내 집을 커스터마이즈하세요:</p>
+        <ul class="offer-list">
+          <li data-lang-block="en">Mineral stone kitchen</li><li data-lang-block="ko">미네랄 스톤 주방</li>
+          <li data-lang-block="en">Cocktail bar</li><li data-lang-block="ko">칵테일 바</li>
+          <li data-lang-block="en">Pendant lighting</li><li data-lang-block="ko">펜던트 조명</li>
+          <li data-lang-block="en">Study joinery unit</li><li data-lang-block="ko">스터디 조이너리</li>
+          <li data-lang-block="en">Integrated fridge/freezer</li><li data-lang-block="ko">빌트인 냉장/냉동고</li>
+          <li data-lang-block="en">Timber-look flooring</li><li data-lang-block="ko">팀버룩 바닥재</li>
+          <li data-lang-block="en">Full-wall TV joinery</li><li data-lang-block="ko">풀월 TV 조이너리</li>
+          <li data-lang-block="en">EV charging station</li><li data-lang-block="ko">EV 충전 스테이션</li>
+        </ul>
+      </div>
+      <div class="offer-card">
+        <div class="offer-badge" data-lang-section="en">For Owner-Occupiers</div>
+        <div class="offer-badge" data-lang-section="ko">실거주자</div>
+        <div class="offer-num"><span data-lang-section="en">Exclusive <em>Discount</em></span><span data-lang-section="ko">전용 <em>할인 혜택</em></span></div>
+        <p class="offer-desc" data-lang-section="en">Buying to live in? Owner-occupiers receive a dedicated purchase discount on top of the free upgrades package. Discount amount varies by apartment — enquire for your personalised figure.</p>
+        <p class="offer-desc" data-lang-section="ko">실거주 목적으로 구매하시나요? 실거주 구매자에게는 무료 업그레이드에 더해 전용 구매 할인이 제공됩니다. 할인 폭은 세대별로 다르니 문의 시 맞춤 견적을 받아보세요.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-badge" data-lang-section="en">For Investors</div>
+        <div class="offer-badge" data-lang-section="ko">투자자</div>
+        <div class="offer-num"><em>6%</em> <span data-lang-section="en">Rental Guarantee</span><span data-lang-section="ko">렌트 개런티</span></div>
+        <p class="offer-desc" data-lang-section="en">Investors can secure a 6% rental guarantee — locking in strong, predictable income from settlement regardless of market vacancy. Terms and duration provided on enquiry.</p>
+        <p class="offer-desc" data-lang-section="ko">투자자에게는 6% 렌트 개런티가 제공됩니다 — 시장 공실률과 무관하게 잔금일부터 안정적이고 예측 가능한 임대 수익을 확보하세요. 조건 및 기간은 문의 시 안내됩니다.</p>
+      </div>
+    </div>
+    <p class="offers-note">
+      <span data-lang-section="en">Promotional offers are available for a limited time on selected apartments, subject to availability and developer terms; upgrade items subject to apartment layout. Offers may be varied or withdrawn without notice. Contact Sunny Choi for current eligibility, inclusions and full terms.</span>
+      <span data-lang-section="ko">프로모션은 일부 세대에 한해 기간 한정으로 제공되며, 잔여 세대 상황 및 시행사 조건이 적용됩니다. 업그레이드 항목은 세대 평면에 따라 달라질 수 있습니다. 프로모션은 사전 예고 없이 변경·종료될 수 있습니다. 현재 자격 요건, 포함 내역, 전체 조건은 Sunny Choi에게 문의하세요.</span>
+    </p>
+  </div>
+</section>
+
 <!-- ============ FINANCE · ZEROO ============ -->
 <section id="finance" class="finance-section">
   <div class="finance-inner">
@@ -2301,8 +2373,8 @@
     </a>
 
     <p style="margin-top:48px; max-width:740px; font-size:14px; color:rgba(255,255,255,.6); line-height:1.6;">
-      <span data-lang-section="en">Detailed apartment availability, current incentives, floorplans by typology and unit-specific information are provided privately on enquiry. Get in touch for the complete information package.</span>
-      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브, 평면별 도면, 세대별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지를 받으시려면 연락 주세요.</span>
+      <span data-lang-section="en">Detailed apartment availability, current incentives — including free Prestige Upgrades, owner-occupier discounts and the 6% investor rental guarantee — floorplans by typology and unit-specific information are provided privately on enquiry. Get in touch for the complete information package.</span>
+      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브 — 무료 프레스티지 업그레이드, 실거주자 할인, 투자자 6% 렌트 개런티 포함 — 평면별 도면, 세대별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지를 받으시려면 연락 주세요.</span>
     </p>
   </div>
 </section>
