@@ -67,7 +67,22 @@ section{padding:100px 60px}
 .dark-sec{background:var(--hero-bg);color:var(--hero-tx)}
 .dark-sec .eyebrow{color:var(--acc2)}.dark-sec .eyebrow::before{background:var(--acc2)}
 .dark-sec .title{color:var(--hero-tx)}.dark-sec .sub{color:rgba(246,241,231,.5)}
-.igrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:50px;max-width:1280px;margin-left:auto;margin-right:auto}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:50px;max-width:1280px;margin-left:auto;margin-right:auto}
+.igrid.thirds{grid-template-columns:1fr 1fr 1fr}
+.fp-sec{background:var(--bg2)}
+.fp-w{max-width:1280px;margin:0 auto}
+.fp-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.fp-c{background:#fff;border:1px solid var(--divider);border-radius:6px;overflow:hidden;box-shadow:0 4px 22px rgba(25,23,20,.07);display:flex;flex-direction:column}
+.fp-c img{width:100%;display:block;background:#fff}
+.fp-meta{padding:18px 20px;border-top:1px solid var(--divider)}
+.fp-t{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#191714;margin-bottom:4px}
+.fp-s{font-size:.72rem;letter-spacing:.06em;color:#45413A}
+.fp-a{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.fp-a span{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-weight:600}
+.fp-note{font-size:.72rem;color:var(--fg2);opacity:.65;margin-top:22px;line-height:1.6}
+.lobby-w{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center}
+.lobby-img{border-radius:2px;overflow:hidden;box-shadow:0 8px 34px rgba(0,0,0,.18)}
+.lobby-img img{width:100%;display:block}
 .icard{position:relative;height:430px;overflow:hidden}
 .icard img{width:100%;height:100%;object-fit:cover;transition:.6s}
 .icard:hover img{transform:scale(1.04)}
@@ -128,7 +143,8 @@ body.lang-ko [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
 body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:none}.hero-cta .kt{display:none}
 @media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hero-content{padding:0 24px 60px}
-.grid2,.loc-inner,.dev-w{grid-template-columns:1fr;gap:38px}.igrid{grid-template-columns:1fr}.icard{height:340px}
+.grid2,.loc-inner,.dev-w,.lobby-w{grid-template-columns:1fr;gap:38px}.igrid,.igrid.thirds{grid-template-columns:1fr}.icard{height:340px}
+.fp-g{grid-template-columns:1fr}
 .amen-g{grid-template-columns:1fr 1fr}.strip-w{grid-template-columns:1fr 1fr}.sp:nth-child(2){border-right:none}
 .of-g{grid-template-columns:1fr}.band{height:300px}.band-cap{left:24px;bottom:24px}.vis,.loc-img{height:320px}
 .hero-badge{display:none}footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
@@ -224,6 +240,26 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
       <div class="icard"><img src="assets/the-carling/int-living.jpg" alt="Living — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Living</h4><h4 data-lang="ko">거실</h4><p data-lang="en">City vistas · Artist Impression</p><p data-lang="ko">시티 전망 · 조감도</p></div></div>
       <div class="icard"><img src="assets/the-carling/int-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4><p data-lang="en">FRANKE appliances · Artist Impression</p><p data-lang="ko">FRANKE 가전 · 조감도</p></div></div>
       <div class="icard"><img src="assets/the-carling/int-wide.jpg" alt="Interior — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Panoramic Outlook</h4><h4 data-lang="ko">파노라마 조망</h4><p data-lang="en">Corner positions · Artist Impression</p><p data-lang="ko">코너 배치 · 조감도</p></div></div>
+      <div class="icard"><img src="assets/the-carling/int-bedroom.jpg" alt="Bedroom — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Bedroom</h4><h4 data-lang="ko">침실</h4><p data-lang="en">Built-in robes · Double glazing · Artist Impression</p><p data-lang="ko">빌트인 옷장 · 이중 유리 · 조감도</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOBBY -->
+<section id="lobby">
+  <div class="lobby-w fade">
+    <div class="lobby-img"><img src="assets/the-carling/lobby.jpg" alt="Building B lobby — Artist Impression" loading="lazy"></div>
+    <div>
+      <div class="eyebrow"><span data-lang="en">The Arrival</span><span data-lang="ko">웰컴 로비</span></div>
+      <h2 class="title"><span data-lang="en">A Grand <em>Arrival</em></span><span data-lang="ko">품격 있는 <em>첫인상</em></span></h2>
+      <p class="body-t" data-lang="en">An impressive high-ceiling lobby heralds a grand arrival for you and your guests. Beyond the entry, the majority of apartments enjoy direct lift access to secure underground parking with separate lock-up storage — a rare commodity in the Sydney apartment market.</p>
+      <p class="body-t" data-lang="ko">높은 층고의 인상적인 로비가 입주민과 방문객을 품격 있게 맞이합니다. 대다수 세대는 지하 안전 주차장까지 직통 엘리베이터로 연결되며, 별도의 잠금형 창고가 제공됩니다 — 시드니 아파트 시장에서 보기 드문 장점입니다.</p>
+      <div class="tags">
+        <span class="tag" data-lang="en">High-Ceiling Lobby</span><span class="tag" data-lang="ko">고층고 로비</span>
+        <span class="tag" data-lang="en">Direct Lift Access</span><span class="tag" data-lang="ko">직통 엘리베이터</span>
+        <span class="tag" data-lang="en">Lock-Up Storage</span><span class="tag" data-lang="ko">잠금형 창고</span>
+        <span class="tag" data-lang="en">Bike & Motorcycle Parking</span><span class="tag" data-lang="ko">자전거·오토바이 주차</span>
+      </div>
     </div>
   </div>
 </section>
@@ -255,9 +291,19 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   </div>
 </div>
 
+<div class="band">
+  <img src="assets/the-carling/feature-a.jpg" alt="The Carling — Artist Impression" loading="lazy">
+  <div class="band-ov"></div>
+  <div class="band-cap">
+    <h3 data-lang="en">Central Park & Retail Plaza</h3><h3 data-lang="ko">센트럴 파크 & 리테일 플라자</h3>
+    <p data-lang="en">Carlingford's new civic heart · Artist Impression</p>
+    <p data-lang="ko">칼링포드의 새로운 civic 중심 · 조감도</p>
+  </div>
+</div>
+
 <section class="dark-sec" id="location">
   <div class="loc-inner fade">
-    <div class="loc-img"><img src="assets/the-carling/aerial-map.jpg" alt="Carlingford aerial location map" loading="lazy"></div>
+    <div class="loc-img"><img src="assets/the-carling/map-parks.jpg" alt="The Carling neighbourhood map — light rail, parks and reserves" loading="lazy"></div>
     <div>
       <div class="eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
       <h2 class="title"><span data-lang="en">Exceptionally<br><em>Connected</em></span><span data-lang="ko">탁월한<br><em>연결성</em></span></h2>
@@ -273,6 +319,46 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
         <div class="lc" style="grid-column:1/-1"><div class="lc-n" style="font-size:1.25rem;color:#EDC98A">★ <span data-lang="en" style="display:inline">Top NSW Schools</span><span data-lang="ko">NSW 최상위 학군</span></div><div class="lc-t" data-lang="en">James Ruse Agricultural High · Carlingford West Public — walking distance</div><div class="lc-t" data-lang="ko">제임스 루즈 농업고 · 칼링포드 웨스트 공립초 — 도보권</div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- FLOORPLANS -->
+<section class="fp-sec" id="floorplans">
+  <div class="fp-w">
+    <div class="fade">
+      <div class="eyebrow"><span data-lang="en">Sample Floorplans</span><span data-lang="ko">샘플 평면도</span></div>
+      <h2 class="title"><span data-lang="en">Larger-Than-Average <em>Layouts</em></span><span data-lang="ko">평균보다 <em>넓은 평면</em></span></h2>
+      <p class="sub" data-lang="en">Generous proportions make furniture placement effortless. Most homes enjoy corner positions, level access to balconies, and a fully functional multi-purpose room (MPR) with operable window, air conditioning and built-in robe.</p>
+      <p class="sub" data-lang="ko">넉넉한 규모로 가구 배치가 자유롭습니다. 대부분의 세대가 코너 배치로 조망과 채광을 확보하며, 발코니 단차 없는 진입과 창문·에어컨·빌트인 옷장을 갖춘 다목적룸(MPR)이 제공됩니다.</p>
+    </div>
+    <div class="fp-g fade">
+      <figure class="fp-c">
+        <img src="assets/the-carling/fp-1bed.jpg" alt="1 Bedroom + MPR floorplan — Building D" loading="lazy">
+        <figcaption class="fp-meta">
+          <div class="fp-t" data-lang="en">1 Bedroom + MPR</div><div class="fp-t" data-lang="ko">1베드룸 + MPR</div>
+          <div class="fp-s" data-lang="en">Building D · Apartments 201–601</div><div class="fp-s" data-lang="ko">빌딩 D · 201~601호</div>
+          <div class="fp-a"><span>53m² <span data-lang="en">int</span><span data-lang="ko">내부</span></span><span>7m² <span data-lang="en">ext</span></span><span>60m² <span data-lang="en">total</span></span></div>
+        </figcaption>
+      </figure>
+      <figure class="fp-c">
+        <img src="assets/the-carling/fp-2bed.jpg" alt="2 Bedroom floorplan — Building B" loading="lazy">
+        <figcaption class="fp-meta">
+          <div class="fp-t" data-lang="en">2 Bedroom</div><div class="fp-t" data-lang="ko">2베드룸</div>
+          <div class="fp-s" data-lang="en">Building B · Apartments 224, 326–626</div><div class="fp-s" data-lang="ko">빌딩 B · 224, 326~626호</div>
+          <div class="fp-a"><span>78m² <span data-lang="en">int</span></span><span>10m² <span data-lang="en">ext</span></span><span>88m² <span data-lang="en">total</span></span></div>
+        </figcaption>
+      </figure>
+      <figure class="fp-c">
+        <img src="assets/the-carling/fp-3bed.jpg" alt="3 Bedroom floorplan — Building D" loading="lazy">
+        <figcaption class="fp-meta">
+          <div class="fp-t" data-lang="en">3 Bedroom</div><div class="fp-t" data-lang="ko">3베드룸</div>
+          <div class="fp-s" data-lang="en">Building D · Apartments 703–1603</div><div class="fp-s" data-lang="ko">빌딩 D · 703~1603호</div>
+          <div class="fp-a"><span>105m² <span data-lang="en">int</span></span><span>12m² <span data-lang="en">ext</span></span><span>117m² <span data-lang="en">total</span></span></div>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="fp-note" data-lang="en">Floorplans are indicative only and do not form part of the contract for sale. Descriptions, layouts and areas are subject to change and may not reflect the final design. A full range of 1, 1+MPR, 2, 2+MPR, 3, 3+MPR and 4 bedroom layouts is available — contact the agent for the complete floorplan package.</p>
+    <p class="fp-note" data-lang="ko">평면도는 참고용이며 매매 계약의 일부를 구성하지 않습니다. 설명·배치·면적은 변경될 수 있으며 최종 설계와 다를 수 있습니다. 1, 1+MPR, 2, 2+MPR, 3, 3+MPR, 4베드룸 전체 평면이 제공되니 전체 도면 패키지는 에이전트에게 문의하세요.</p>
   </div>
 </section>
 
@@ -299,6 +385,16 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
     <p class="of-note" data-lang="ko">혜택은 Meriton 조건 및 자격 요건이 적용되며 사전 예고 없이 변경될 수 있습니다. 파이낸스는 Meriton Property Finance가 제공 — 조건과 본인 상황을 고려하세요. 금융 자문이 아닙니다. 현재 조건은 Sunny Choi에게 문의하세요.</p>
   </div>
 </section>
+
+<div class="band">
+  <img src="assets/the-carling/feature-b.jpg" alt="The Carling — Artist Impression" loading="lazy">
+  <div class="band-ov"></div>
+  <div class="band-cap">
+    <h3 data-lang="en">Rooftop & Podium Gardens</h3><h3 data-lang="ko">루프탑 & 포디움 가든</h3>
+    <p data-lang="en">District views · BBQ pavilions · Artist Impression</p>
+    <p data-lang="ko">지역 조망 · BBQ 파빌리온 · 조감도</p>
+  </div>
+</div>
 
 <section id="developer">
   <div class="dev-w fade">
