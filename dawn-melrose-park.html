@@ -622,6 +622,14 @@
     font-weight: 600;
   }
   .unit-body { padding: 32px 28px; }
+  .unit-fp { display:block; width:100%; background:#fff; border-bottom:1px solid var(--line); }
+  .unit-fp img { width:100%; display:block; }
+  .unit-specs { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin:16px 0 18px; }
+  .unit-specs div { background:var(--bg-card); padding:10px 6px; text-align:center; }
+  .unit-specs b { display:block; font-family:'Fraunces',serif; font-size:19px; font-weight:500; line-height:1; }
+  .unit-specs span { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); }
+  .unit-area { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-mute); letter-spacing:.04em; margin-bottom:14px; }
+  .unit-area b { color:var(--ink); font-size:14px; }
   .unit-id {
     font-family: 'Fraunces', serif;
     font-size: 32px;
@@ -1500,69 +1508,117 @@
         </h2>
       </div>
       <p class="section-lede">
-        <span data-lang-section="en">Hand-picked from the current release — three units that offer the strongest value across 1-bed, 2-bed, and 3-bed types. Prices and availability subject to change.</span>
-        <span data-lang-section="ko">현재 분양 중인 매물 중에서 1베드, 2베드, 3베드 각 타입별로 가장 가치 있는 세 가구를 선별했습니다. 가격 및 분양 가능 여부는 변동될 수 있습니다.</span>
+        <span data-lang-section="en">Hand-picked from the current release — four standout floorplans across 1-, 2- and 3-bedroom types, each with a car space included. Full floorplans shown; current pricing and availability provided on enquiry.</span>
+        <span data-lang-section="ko">현재 분양 중인 매물 중에서 1베드·2베드·3베드 타입별로 선별한 네 가지 평면입니다. 모두 주차 공간이 포함되어 있습니다. 전체 평면도를 확인하시고, 현재 가격과 분양 가능 여부는 문의 시 안내해 드립니다.</span>
       </p>
     </div>
 
     <div class="units-grid">
       <div class="unit-card">
+        <figure class="unit-fp"><img src="./assets/dawn-melrose-park/fp-d0108.jpg" alt="DAWN Unit D0108 floorplan — 1 bedroom" loading="lazy" /></figure>
         <div class="unit-banner">
-          <div class="unit-type">1 Bedroom</div>
+          <div class="unit-type">1 Bedroom · Type 1B-A2</div>
         </div>
         <div class="unit-body">
-          <div class="unit-id">Unit B010x</div>
-          <div class="unit-price">$649,000</div>
+          <div class="unit-id">D0108</div>
+          <div class="unit-specs">
+            <div><b>1</b><span data-lang-section="en">Bed</span><span data-lang-section="ko">베드</span></div>
+            <div><b>1</b><span data-lang-section="en">Bath</span><span data-lang-section="ko">배스</span></div>
+            <div><b>1</b><span data-lang-section="en">Car</span><span data-lang-section="ko">주차</span></div>
+            <div><b>W</b><span data-lang-section="en">Aspect</span><span data-lang-section="ko">향</span></div>
+          </div>
+          <div class="unit-area"><b>61 m²</b> total &nbsp;·&nbsp; 52 internal + 9 external</div>
           <ul class="unit-features">
-            <li data-lang-block="en">Car parking included</li>
-            <li data-lang-block="en">Smart home features</li>
-            <li data-lang-block="en">Strong rental potential</li>
+            <li data-lang-block="en">Building D · west-facing balcony</li>
+            <li data-lang-block="en">Car space included</li>
+            <li data-lang-block="en">Efficient single-bedroom layout</li>
+            <li data-lang-block="ko">D동 · 서향 발코니</li>
             <li data-lang-block="ko">주차 공간 포함</li>
-            <li data-lang-block="ko">스마트홈 시설</li>
-            <li data-lang-block="ko">강력한 임대 수익 잠재력</li>
+            <li data-lang-block="ko">효율적인 원베드 평면</li>
           </ul>
-          <span class="unit-tag" data-lang-section="en">Best Entry Price</span>
-          <span class="unit-tag" data-lang-section="ko">최저가 진입</span>
+          <span class="unit-tag" data-lang-section="en">Best Entry Option</span>
+          <span class="unit-tag" data-lang-section="ko">엔트리 추천</span>
         </div>
       </div>
 
       <div class="unit-card">
+        <figure class="unit-fp"><img src="./assets/dawn-melrose-park/fp-d0003.jpg" alt="DAWN Unit D0003 floorplan — 2 bedroom with terrace" loading="lazy" /></figure>
         <div class="unit-banner">
-          <div class="unit-type">2 Bedroom</div>
+          <div class="unit-type">2 Bedroom · Type 2B-F2</div>
         </div>
         <div class="unit-body">
-          <div class="unit-id">Unit D0205</div>
-          <div class="unit-price">$899,000</div>
+          <div class="unit-id">D0003</div>
+          <div class="unit-specs">
+            <div><b>2</b><span data-lang-section="en">Bed</span><span data-lang-section="ko">베드</span></div>
+            <div><b>2</b><span data-lang-section="en">Bath</span><span data-lang-section="ko">배스</span></div>
+            <div><b>1</b><span data-lang-section="en">Car</span><span data-lang-section="ko">주차</span></div>
+            <div><b>S</b><span data-lang-section="en">Aspect</span><span data-lang-section="ko">향</span></div>
+          </div>
+          <div class="unit-area"><b>92 m²</b> total &nbsp;·&nbsp; 80 internal + 12 external</div>
           <ul class="unit-features">
-            <li data-lang-block="en">Last 2-bedroom under $900K</li>
-            <li data-lang-block="en">Spacious layout</li>
-            <li data-lang-block="en">Smart home features</li>
-            <li data-lang-block="ko">90만 달러 이하 마지막 2베드</li>
-            <li data-lang-block="ko">넓은 평면</li>
-            <li data-lang-block="ko">스마트홈 시설</li>
+            <li data-lang-block="en">Ground floor with private terrace</li>
+            <li data-lang-block="en">Largest internal area of the 2-bed picks</li>
+            <li data-lang-block="en">Ensuite to main bedroom</li>
+            <li data-lang-block="ko">지상층 · 프라이빗 테라스</li>
+            <li data-lang-block="ko">2베드 추천 중 가장 넓은 내부 면적</li>
+            <li data-lang-block="ko">마스터룸 전용 욕실</li>
           </ul>
-          <span class="unit-tag" data-lang-section="en">Last One</span>
-          <span class="unit-tag" data-lang-section="ko">마지막 한 세대</span>
+          <span class="unit-tag" data-lang-section="en">Terrace Living</span>
+          <span class="unit-tag" data-lang-section="ko">테라스 세대</span>
         </div>
       </div>
 
       <div class="unit-card">
+        <figure class="unit-fp"><img src="./assets/dawn-melrose-park/fp-b0404.jpg" alt="DAWN Unit B0404 floorplan — 2 bedroom with balcony" loading="lazy" /></figure>
         <div class="unit-banner">
-          <div class="unit-type">3 Bedroom</div>
+          <div class="unit-type">2 Bedroom · Type 2B-F</div>
         </div>
         <div class="unit-body">
-          <div class="unit-id">Unit A604</div>
-          <div class="unit-price">$1,599,000</div>
+          <div class="unit-id">B0404</div>
+          <div class="unit-specs">
+            <div><b>2</b><span data-lang-section="en">Bed</span><span data-lang-section="ko">베드</span></div>
+            <div><b>2</b><span data-lang-section="en">Bath</span><span data-lang-section="ko">배스</span></div>
+            <div><b>1</b><span data-lang-section="en">Car</span><span data-lang-section="ko">주차</span></div>
+            <div><b>N</b><span data-lang-section="en">Aspect</span><span data-lang-section="ko">향</span></div>
+          </div>
+          <div class="unit-area"><b>92 m²</b> total &nbsp;·&nbsp; 79 internal + 13 external</div>
           <ul class="unit-features">
-            <li data-lang-block="en">Parkside view</li>
-            <li data-lang-block="en">Big balcony</li>
-            <li data-lang-block="en">2 car spaces</li>
-            <li data-lang-block="ko">파크사이드 뷰</li>
-            <li data-lang-block="ko">대형 발코니</li>
-            <li data-lang-block="ko">주차 공간 2대</li>
+            <li data-lang-block="en">North-facing — best natural light</li>
+            <li data-lang-block="en">Wide balcony off living &amp; bedroom</li>
+            <li data-lang-block="en">Building B, level 4</li>
+            <li data-lang-block="ko">북향 — 최상의 채광</li>
+            <li data-lang-block="ko">거실·침실과 연결된 넓은 발코니</li>
+            <li data-lang-block="ko">B동 4층</li>
           </ul>
-          <span class="unit-tag" data-lang-section="en">Premium Pick</span>
-          <span class="unit-tag" data-lang-section="ko">프리미엄 추천</span>
+          <span class="unit-tag" data-lang-section="en">North Aspect</span>
+          <span class="unit-tag" data-lang-section="ko">북향 추천</span>
+        </div>
+      </div>
+
+      <div class="unit-card">
+        <figure class="unit-fp"><img src="./assets/dawn-melrose-park/fp-b0101.jpg" alt="DAWN Unit B0101 floorplan — 3 bedroom" loading="lazy" /></figure>
+        <div class="unit-banner">
+          <div class="unit-type">3 Bedroom · Type 3B-D1</div>
+        </div>
+        <div class="unit-body">
+          <div class="unit-id">B0101</div>
+          <div class="unit-specs">
+            <div><b>3</b><span data-lang-section="en">Bed</span><span data-lang-section="ko">베드</span></div>
+            <div><b>2</b><span data-lang-section="en">Bath</span><span data-lang-section="ko">배스</span></div>
+            <div><b>2</b><span data-lang-section="en">Car</span><span data-lang-section="ko">주차</span></div>
+            <div><b>N</b><span data-lang-section="en">Aspect</span><span data-lang-section="ko">향</span></div>
+          </div>
+          <div class="unit-area"><b>115 m²</b> total &nbsp;·&nbsp; 99 internal + 16 external</div>
+          <ul class="unit-features">
+            <li data-lang-block="en">Two car spaces included</li>
+            <li data-lang-block="en">North-facing with large balcony</li>
+            <li data-lang-block="en">Family layout — bedrooms zoned apart</li>
+            <li data-lang-block="ko">주차 공간 2대 포함</li>
+            <li data-lang-block="ko">북향 · 대형 발코니</li>
+            <li data-lang-block="ko">침실 분리 배치의 가족형 평면</li>
+          </ul>
+          <span class="unit-tag" data-lang-section="en">Family Pick</span>
+          <span class="unit-tag" data-lang-section="ko">가족형 추천</span>
         </div>
       </div>
     </div>
