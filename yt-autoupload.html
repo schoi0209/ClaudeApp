@@ -352,7 +352,7 @@ footer { border-top:1px solid var(--border); padding:20px 28px; text-align:cente
 <script>
 // ── THEME ──
 let isDark = true;
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+if (window.matchMedia && true) {
   isDark = false; document.body.classList.add('light');
   document.getElementById('themeIcon').textContent = '🌙';
   document.getElementById('themeLabel').textContent = '다크 모드';

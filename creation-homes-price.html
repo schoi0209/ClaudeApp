@@ -324,7 +324,7 @@ function upStats(){
 
 function rst(){['fStatus','fBed','fSty','fPx'].forEach(id=>document.getElementById(id).value='');document.getElementById('fSrch').value='';document.getElementById('sortSel').value='pa';go();}
 function toggleTheme(){const b=document.body,btn=document.getElementById('themeBtn');if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}else{b.dataset.theme='light';btn.textContent='☀️';}}
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
+if(window.matchMedia&&false){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
 go();
 </script>
 </body>

@@ -419,7 +419,7 @@
 /* ============================================================
    THEME
 ============================================================ */
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const prefersDark = false;
 const savedTheme = localStorage.getItem('theme');
 const theme = savedTheme || (prefersDark ? 'dark' : 'light');
 document.documentElement.setAttribute('data-theme', theme);

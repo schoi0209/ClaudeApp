@@ -2437,7 +2437,7 @@
   function getInitTheme() {
     const s = localStorage.getItem('cc-theme');
     if (s) return s;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return false ? 'dark' : 'light';
   }
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
@@ -2448,9 +2448,6 @@
   themeToggle.addEventListener('click', () => {
     const cur = root.getAttribute('data-theme');
     applyTheme(cur === 'dark' ? 'light' : 'dark');
-  });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('cc-theme')) applyTheme(e.matches ? 'dark' : 'light');
   });
 
   // ============ LANGUAGE ============

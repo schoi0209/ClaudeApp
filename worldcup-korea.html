@@ -275,7 +275,7 @@ footer{margin-top:56px;padding:26px 18px;text-align:center;border-top:1px solid 
 const root=document.documentElement, themeBtn=document.getElementById('themeBtn');
 function setTheme(t){root.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('wc-theme',t)}catch(e){}}
 let savedT=null;try{savedT=localStorage.getItem('wc-theme')}catch(e){}
-setTheme(savedT||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+setTheme(savedT||(false?'dark':'light'));
 themeBtn.onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
 
 /* ---------- language ---------- */

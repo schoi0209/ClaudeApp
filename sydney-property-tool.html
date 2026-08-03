@@ -994,7 +994,7 @@ function toggleLang() {
 }
 
 // ─── THEME ───────────────────────────────────────────────────────
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const prefersDark = false;
 document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
 document.getElementById('themeBtn').textContent = prefersDark ? '☀️' : '🌙';
 

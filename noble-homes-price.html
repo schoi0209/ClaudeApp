@@ -689,7 +689,7 @@ function toggleTheme(){
   else{b.dataset.theme='dark';btn.textContent='🌙';}
 }
 
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){
+if(window.matchMedia&&true){
   document.body.dataset.theme='light';document.getElementById('themeBtn').textContent='☀️';
 }
 applyFilters();

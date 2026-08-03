@@ -817,23 +817,22 @@ function resetFilters() {
   render();
 }
 
+function applyTheme(t) {
+  document.body.setAttribute('data-theme', t);
+  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀ Light' : '🌙 Dark';
+  try { localStorage.setItem('canopy-theme', t); } catch (e) {}
+}
 function toggleTheme() {
-  const body = document.body;
-  const btn = document.getElementById('themeBtn');
-  if (body.getAttribute('data-theme') === 'dark') {
-    body.setAttribute('data-theme', 'light');
-    btn.textContent = '🌙 Dark';
-  } else {
-    body.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀ Light';
-  }
+  applyTheme(document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 }
 
-// System preference
-if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-  document.body.setAttribute('data-theme', 'light');
-  document.getElementById('themeBtn').textContent = '🌙 Dark';
-}
+// Default is always light; only a saved user choice can change it
+(function () {
+  let saved = null;
+  try { saved = localStorage.getItem('canopy-theme'); } catch (e) {}
+  document.body.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+  document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀ Light' : '🌙 Dark';
+})();
 
 // Event listeners
 document.getElementById('searchBox').addEventListener('input', render);

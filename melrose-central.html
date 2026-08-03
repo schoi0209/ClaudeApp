@@ -359,7 +359,7 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='dark';b.setAttribute('data-theme',d?'light':'dark');document.querySelector('.bt').textContent=d?'☾':'☀';localStorage.setItem('theme',d?'light':'dark');}
 const sv=localStorage.getItem('theme');
 if(sv){document.body.setAttribute('data-theme',sv);document.querySelector('.bt').textContent=sv==='dark'?'☀':'☾';}
-else if(matchMedia('(prefers-color-scheme: dark)').matches){document.body.setAttribute('data-theme','dark');document.querySelector('.bt').textContent='☀';}
+else if(false){document.body.setAttribute('data-theme','dark');document.querySelector('.bt').textContent='☀';}
 let ko=false;
 function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.bl').textContent=ko?'English':'한국어';}
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});

@@ -936,7 +936,7 @@ function toggleTheme() {
 
 (function(){
   const saved = localStorage.getItem('theme');
-  const pref = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const pref = saved || (true ? 'light' : 'dark');
   document.documentElement.dataset.theme = pref;
   document.querySelector('.theme-btn').textContent = pref === 'dark' ? '☀' : '🌙';
 })();

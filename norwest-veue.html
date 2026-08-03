@@ -694,7 +694,7 @@ function toggleTheme(){
   b.setAttribute('data-theme',dark?'light':'dark');
   document.querySelector('.btn-theme').textContent=dark?'☾':'☀';
 }
-if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+if(false){
   document.body.setAttribute('data-theme','dark');
   document.querySelector('.btn-theme').textContent='☀';
 }

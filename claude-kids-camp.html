@@ -551,7 +551,7 @@ function setTheme(t){
   themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
   localStorage.setItem('ckc-theme', t);
 }
-setTheme(localStorage.getItem('ckc-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+setTheme(localStorage.getItem('ckc-theme') || (false ? 'dark' : 'light'));
 themeBtn.addEventListener('click', () => {
   setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });

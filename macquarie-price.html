@@ -253,7 +253,7 @@ tbody.innerHTML=filtered.map(d=>{const is4B=d.type.startsWith('4B');const rebPct
 function updateStats(){const nets=filtered.map(d=>d.net),contracts=filtered.map(d=>d.contract);document.getElementById('sval-total').textContent=data.length;document.getElementById('sval-shown').textContent=filtered.length;document.getElementById('sval-net-from').textContent=nets.length?$f(Math.min(...nets)):'—';document.getElementById('sval-net-avg').textContent=nets.length?$f(Math.round(nets.reduce((a,b)=>a+b,0)/nets.length)):'—';document.getElementById('sval-contract-from').textContent=contracts.length?$f(Math.min(...contracts)):'—';}
 function resetFilters(){['fType','fLevel','fAsp','fAdapt','fMaxNet'].forEach(id=>document.getElementById(id).value='');document.getElementById('fSearch').value='';document.getElementById('sortSel').value='net-asc';applyFilters();}
 function toggleTheme(){const b=document.body,btn=document.getElementById('themeBtn');if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}else{b.dataset.theme='light';btn.textContent='☀️';}}
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
+if(window.matchMedia&&false){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
 populateLevelFilter();applyFilters();
 </script>
 </body>

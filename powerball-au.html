@@ -269,7 +269,7 @@ footer strong{color:var(--text2);}
 </footer>
 
 <script>
-(function(){const s=localStorage.getItem('pb-theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',s);document.getElementById('themeIcon').textContent=s==='dark'?'☀️':'🌙';})();
+(function(){const s=localStorage.getItem('pb-theme')||(false?'dark':'light');document.documentElement.setAttribute('data-theme',s);document.getElementById('themeIcon').textContent=s==='dark'?'☀️':'🌙';})();
 document.getElementById('themeToggle').addEventListener('click',()=>{const h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeIcon').textContent=n==='dark'?'☀️':'🌙';localStorage.setItem('pb-theme',n);});
 
 const DRAWS_RAW=[

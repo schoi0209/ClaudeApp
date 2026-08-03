@@ -424,7 +424,7 @@ let state = JSON.parse(localStorage.getItem(KEY)||'{"done":[],"theme":null,"lang
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 
 /* theme */
-const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const sysDark = false;
 const root=document.documentElement;
 function applyTheme(t){root.setAttribute('data-theme',t);document.getElementById('themeTgl').textContent = t==='dark'?'☀️':'🌙'}
 applyTheme(state.theme || (sysDark?'dark':'light'));

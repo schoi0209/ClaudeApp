@@ -385,7 +385,7 @@ function render(){
 function setTheme(t){document.documentElement.setAttribute("data-theme",t);$("#themeBtn").innerHTML=t==="dark"?I.sun:I.moon;}
 
 $$(".toggle button").forEach(b=>b.onclick=()=>{$$(".toggle button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");lang=b.dataset.lang;render();});
-let theme=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";
+let theme=(window.matchMedia&&false)?"dark":"light";
 $("#themeBtn").onclick=()=>{theme=theme==="dark"?"light":"dark";setTheme(theme);};
 $("#yr").textContent=new Date().getFullYear();
 setTheme(theme);render();

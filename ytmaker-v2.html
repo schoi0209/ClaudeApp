@@ -302,7 +302,7 @@ function toggleGeminiVis() {
 // Init on DOM ready: system theme + saved key restore
 window.addEventListener('DOMContentLoaded', function() {
   // System theme detection (must run after DOM ready)
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  if (window.matchMedia && true) {
     isDark = false;
     document.body.classList.add('light');
     document.getElementById('themeIcon').textContent = '🌙';

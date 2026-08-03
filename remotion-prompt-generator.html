@@ -1087,7 +1087,7 @@ function applyI18N() {
     document.body.dataset.theme = th;
     document.getElementById('themeToggle')?.replaceChildren(document.createTextNode(th === 'light' ? '◐ DARK' : '◑ LIGHT'));
   } else {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (false) {
       document.body.dataset.theme = 'dark';
     }
   }

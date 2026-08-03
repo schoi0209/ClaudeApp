@@ -148,7 +148,7 @@ body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);mi
 .footer{text-align:center;padding:28px 24px;color:var(--text-muted);font-size:13px;border-top:1px solid rgba(240,192,48,.1);}
 </style>
 </head>
-<body data-theme="dark">
+<body data-theme="light">
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:12px;">
     <span class="logo">SunnyApps</span>
@@ -297,7 +297,10 @@ let selPos='ST', b64=null, mtype='image/jpeg', curStats=null;
 
 function toast(msg,ok=false){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+(ok?'ok':'err');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
 
-function toggleTheme(){const d=document.body.dataset.theme==='dark';document.body.dataset.theme=d?'light':'dark';document.querySelector('.theme-toggle').textContent=d?'☀️ Light':'🌙 Dark';}
+function applyTheme(t){document.body.dataset.theme=t;const b=document.querySelector('.theme-toggle');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';try{localStorage.setItem('fifa-theme',t);}catch(e){}}
+function toggleTheme(){applyTheme(document.body.dataset.theme==='dark'?'light':'dark');}
+/* Default is always light; only a saved user choice can change it */
+(function(){let sv=null;try{sv=localStorage.getItem('fifa-theme');}catch(e){}applyTheme(sv==='dark'?'dark':'light');})();
 
 function isMember(){return gs().tier!=='trial';}
 

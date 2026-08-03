@@ -548,7 +548,7 @@ function toggleTheme(){
   if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
   else{b.dataset.theme='light';btn.textContent='☀️';}
 }
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+if(window.matchMedia&&false){
   document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';
 }
 go();

@@ -1837,7 +1837,7 @@
   function getInitialTheme() {
     const saved = localStorage.getItem('dawn-theme');
     if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return false ? 'dark' : 'light';
   }
 
   function applyTheme(t) {
@@ -1853,12 +1853,6 @@
     applyTheme(cur === 'dark' ? 'light' : 'dark');
   });
 
-  // listen for system change
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('dawn-theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
 
   // ============ LANGUAGE TOGGLE ============
   const langToggle = document.getElementById('langToggle');

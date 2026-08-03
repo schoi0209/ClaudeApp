@@ -389,7 +389,7 @@ function upStats(){
 }
 function rst(){['fAsp','fMedia','fAdapt','fFloor','fMaxPx'].forEach(id=>document.getElementById(id).value='');document.getElementById('fSrch').value='';document.getElementById('sortSel').value='price-asc';curBed='all';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-all').classList.add('active');go();}
 function toggleTheme(){const b=document.body,btn=document.getElementById('themeBtn');if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}else{b.dataset.theme='light';btn.textContent='☀️';}}
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
+if(window.matchMedia&&false){document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';}
 go();
 </script>
 </body>

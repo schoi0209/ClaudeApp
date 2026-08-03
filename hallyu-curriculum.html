@@ -474,7 +474,7 @@ function applyTheme(mode){
 }
 (function initTheme(){
   let saved;try{saved=localStorage.getItem('hallyu_theme')}catch(e){}
-  if(!saved) saved = matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  if(!saved) saved = true?'light':'dark';
   applyTheme(saved);
 })();
 tBtn.addEventListener('click',()=>applyTheme(root.dataset.theme==='dark'?'light':'dark'));

@@ -807,13 +807,9 @@ function setTheme(mode){
 }
 (function initTheme(){
   let saved=null; try{ saved=localStorage.getItem('slideStudioTheme'); }catch(e){}
-  if(!saved) saved = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light';
+  if(!saved) saved = false ? 'dark':'light';
   setTheme(saved);
 })();
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
-  let saved=null; try{ saved=localStorage.getItem('slideStudioTheme'); }catch(_){}
-  if(!saved) setTheme(e.matches?'dark':'light');
-});
 
 /* ---------- 언어 ---------- */
 (function initLang(){

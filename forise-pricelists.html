@@ -1025,14 +1025,20 @@ function setLang(l){
   const t=i18n[l];
   Object.keys(t).forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=t[id];});
 }
+function applyTheme(t){
+  document.body.dataset.theme=t;
+  document.getElementById('themeBtn').textContent = t==='dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem('forise-theme',t); }catch(e){}
+}
 function toggleTheme(){
-  const b=document.body,btn=document.getElementById('themeBtn');
-  if(b.dataset.theme==='dark'){b.dataset.theme='light';btn.textContent='🌙';}
-  else{b.dataset.theme='dark';btn.textContent='☀️';}
+  applyTheme(document.body.dataset.theme==='dark' ? 'light' : 'dark');
 }
-if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){
-  document.body.dataset.theme='light';document.getElementById('themeBtn').textContent='🌙';
-}
+/* Default is always light; only a saved user choice can change it */
+(function(){
+  let saved=null; try{ saved=localStorage.getItem('forise-theme'); }catch(e){}
+  document.body.dataset.theme = saved==='dark' ? 'dark' : 'light';
+  document.getElementById('themeBtn').textContent = saved==='dark' ? '☀️' : '🌙';
+})();
 </script>
 </body>
 </html>
