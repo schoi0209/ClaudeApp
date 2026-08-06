@@ -172,8 +172,8 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <div class="masthead">
   <div>
     <div class="m-overline" id="txt-overline">Micro-Warehouses & Storage Units · Oran Park NSW</div>
-    <h1>Oran Park<br><em>Silo</em></h1>
-    <div class="m-tagline" id="txt-tagline">Oran Park 1 (104 Southwell Rd) · Oran Park 2 (98 Southwell Rd)</div>
+    <h1>Oran Park <em>2</em></h1>
+    <div class="m-tagline" id="txt-tagline">98 Southwell Road, Oran Park NSW · All units available</div>
   </div>
   <div class="m-right">
     <div class="gst-box">
@@ -183,12 +183,12 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
         Strata &amp; Council fees are approximate p.a.
       </div>
     </div>
-    <div class="date-chip">Updated: 10 July 2026</div>
+    <div class="date-chip">Updated: 5 Aug 2026</div>
   </div>
 </div>
 
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">17</div><div class="s-sub" id="ssub-total">Both Sites</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">36</div><div class="s-sub" id="ssub-total">Available Now</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Ready to Buy</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Ex-GST</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Ex-GST</div></div>
@@ -202,9 +202,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 </div>
 
 <div class="tab-row">
-  <button class="tab-btn active" onclick="setSite('all')" id="tab-all">All Sites <span class="tab-cnt" id="tc-all">17</span></button>
-  <button class="tab-btn" onclick="setSite('op1')" id="tab-op1">Oran Park 1 <span class="tab-cnt" id="tc-op1">5</span></button>
-  <button class="tab-btn" onclick="setSite('op2')" id="tab-op2">Oran Park 2 <span class="tab-cnt" id="tc-op2">12</span></button>
+  <button class="tab-btn active" onclick="setFloor2('all')" id="tab-all">All Units <span class="tab-cnt" id="tc-all">36</span></button>
+  <button class="tab-btn" onclick="setFloor2('Lower Ground')" id="tab-lower">Lower Floor <span class="tab-cnt" id="tc-lower">24</span></button>
+  <button class="tab-btn" onclick="setFloor2('Upper')" id="tab-upper">Upper Floor <span class="tab-cnt" id="tc-upper">12</span></button>
 </div>
 
 <div class="filters">
@@ -267,12 +267,13 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   <table>
     <thead>
       <tr>
-        <th id="th-site">Site</th>
+        <th id="th-lot">Lot</th>
         <th id="th-unit">Unit</th>
         <th id="th-floor">Floor</th>
         <th id="th-area">Area</th>
         <th id="th-height">Height (Int/Door)</th>
         <th id="th-price">Price (Ex-GST)</th>
+        <th id="th-gst">Incl. GST</th>
         <th id="th-psm">$/m²</th>
         <th id="th-outgoing">Outgoings p.a.</th>
         <th id="th-status">Status</th>
@@ -285,42 +286,60 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="note-bar">
   <div class="note" id="txt-notes">
-    <b>*</b> More stock available at Oran Park 2 — settlements in July.<br>
-    <b>*</b> "Hold" means a deposit is expected. Contact for latest status if you have a keen buyer.
+    <b>*</b> Rental guarantee: <b>7%</b> · All units currently available.<br>
+    <b>*</b> Prices shown Ex-GST; Incl. GST column adds 10%. Strata &amp; Council are approximate.
   </div>
 </div>
 
-<footer>Made by SunnyApps. All rights reserved. · Silo Oran Park — 10 July 2026</footer>
+<footer>Made by SunnyApps. All rights reserved. · Silo Oran Park 2 — 5 Aug 2026</footer>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 
 <script>
 const DATA = [
-  // Oran Park 1 — 104 Southwell Road
-  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'3',  floor:'Lower Ground',area:9,  height:'3.9m / 3.5m',price:86667, strata:456, council:710,status:'contract'},
-  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'18', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
-  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'19', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
-  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'20', floor:'Lower Ground',area:26, height:'3.9m / 3.5m',price:299888,strata:1320,council:710,status:'contract'},
-  {site:'op1',siteName:'Oran Park 1',addr:'104 Southwell Rd',unit:'80', floor:'Upper',       area:12, height:'4m / 5m',    price:115556,strata:608, council:710,status:'available'},
-  // Oran Park 2 — 98 Southwell Road
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'18', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'19', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'20', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'21', floor:'Lower Ground',area:40, height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'34', floor:'Lower Ground',area:27, height:'3.9m / 3.5m',price:319871,strata:1236,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'35', floor:'Lower Ground',area:27, height:'3.9m / 3.5m',price:319871,strata:1236,council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'36', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'deposit'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'37', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'38', floor:'Lower Ground',area:46, height:'3.9m / 3.5m',price:489000,strata:2104,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'42', floor:'Lower Ground',area:21, height:'3.9m / 3.5m',price:237112,strata:960, council:710,status:'contract'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'44', floor:'Lower Ground',area:21, height:'3.9m / 3.5m',price:237112,strata:960, council:710,status:'deposit'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd', unit:'105',floor:'Lower Ground',area:10, height:'3.9m / 3.5m',price:104000,strata:460, council:710,status:'available'},
+  // Silo Oran Park 2 — 98 Southwell Road — Available Stock (5 Aug 2026)
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'8',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'9',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'10',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'17',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'18',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'19',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'20',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'21',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'22',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'29',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'30',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'31',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'39',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'40',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'41',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'42',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'43',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'44',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'48',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'49',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'50',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'51',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'52',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'53',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'90',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'91',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'92',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'93',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'94',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'95',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'99',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'100',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'101',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'102',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'103',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'104',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
 ];
 
 const i18n = {
   en:{
     'txt-h-center':'Oran Park · Price List',
     'txt-overline':'Micro-Warehouses & Storage Units · Oran Park NSW',
-    'txt-tagline':'Oran Park 1 (104 Southwell Rd) · Oran Park 2 (98 Southwell Rd)',
+    'txt-tagline':'98 Southwell Road, Oran Park NSW · All units available',
     'lbl-gst':'⚠ Pricing Note',
     'txt-gst':'All prices shown are <b>Ex-GST</b>.<br>Strata &amp; Council fees are approximate p.a.',
     'slbl-total':'Total Units','ssub-total':'Both Sites',
@@ -335,14 +354,14 @@ const i18n = {
     'opt-sz-all':'All','opt-sz1':'Small (≤15 m²)','opt-sz2':'Mid (16–30 m²)','opt-sz3':'Large (31+ m²)',
     'opt-px-all':'All','opt-px1':'Under $120K','opt-px2':'Under $250K','opt-px3':'Under $350K','opt-px4':'Under $500K',
     'txt-reset':'Reset','txt-shown-lbl':' units shown',
-    'th-site':'Site','th-unit':'Unit','th-floor':'Floor','th-area':'Area','th-height':'Height (Int/Door)',
-    'th-price':'Price (Ex-GST)','th-psm':'$/m²','th-outgoing':'Outgoings p.a.','th-status':'Status',
+    'th-lot':'Lot','th-unit':'Unit','th-floor':'Floor','th-area':'Area','th-height':'Height (Int/Door)',
+    'th-price':'Price (Ex-GST)','th-gst':'Incl. GST','th-psm':'$/m²','th-outgoing':'Outgoings p.a.','th-status':'Status',
     'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-aa':'Area ↑','srt-ad':'Area ↓','srt-psa':'$/m² ↑','srt-ua':'Unit # ↑',
     'txt-empty':'— No units match your criteria —',
-    'txt-notes':'<b>*</b> More stock available at Oran Park 2 — settlements in July.<br><b>*</b> "Hold" means a deposit is expected. Contact for latest status if you have a keen buyer.',
+    'txt-notes':'<b>*</b> Rental guarantee: <b>7%</b> · All units currently available.<br><b>*</b> Prices shown Ex-GST; Incl. GST column adds 10%. Strata &amp; Council are approximate.',
     searchPh:'Unit number...',
     stLabel:{available:'Available',deposit:'Deposit Taken',contract:'Contract Issued'},
-    exGst:'Ex-GST', strataLbl:'Strata', councilLbl:'Council',
+    exGst:'Ex-GST', inclGst:'incl GST', strataLbl:'Strata', councilLbl:'Council',
   },
   ko:{
     'txt-h-center':'오란 파크 · 분양가',
@@ -362,18 +381,18 @@ const i18n = {
     'opt-sz-all':'전체','opt-sz1':'소형 (15m² 이하)','opt-sz2':'중형 (16–30m²)','opt-sz3':'대형 (31m² 이상)',
     'opt-px-all':'전체','opt-px1':'$120K 이하','opt-px2':'$250K 이하','opt-px3':'$350K 이하','opt-px4':'$500K 이하',
     'txt-reset':'초기화','txt-shown-lbl':'개 유닛 표시 중',
-    'th-site':'사이트','th-unit':'유닛','th-floor':'층','th-area':'면적','th-height':'높이 (내부/도어)',
-    'th-price':'분양가 (GST 별도)','th-psm':'m²당','th-outgoing':'연간 관리비','th-status':'상태',
+    'th-lot':'Lot','th-unit':'유닛','th-floor':'층','th-area':'면적','th-height':'높이 (내부/도어)',
+    'th-price':'분양가 (GST 별도)','th-gst':'GST 포함','th-psm':'m²당','th-outgoing':'연간 관리비','th-status':'상태',
     'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-aa':'면적 작은 순','srt-ad':'면적 큰 순','srt-psa':'단가 낮은 순','srt-ua':'유닛 번호 순',
     'txt-empty':'— 조건에 맞는 유닛이 없습니다 —',
-    'txt-notes':'<b>*</b> 오란 파크 2에 추가 재고 있음 — 7월 정산 예정.<br><b>*</b> "Hold"는 예약금 입금 예정을 의미합니다. 관심 있는 구매자가 있으면 최신 상태를 문의하세요.',
+    'txt-notes':'<b>*</b> 렌탈 개런티: <b>7%</b> · 전 유닛 현재 분양 가능.<br><b>*</b> 표시가는 GST 별도이며, GST 포함 컬럼은 10% 추가. 스트라타·카운슬은 예상액입니다.',
     searchPh:'유닛 번호 검색...',
     stLabel:{available:'분양 가능',deposit:'예약금 납부',contract:'계약서 발행'},
-    exGst:'GST 별도', strataLbl:'스트라타', councilLbl:'카운슬',
+    exGst:'GST 별도', inclGst:'GST 포함', strataLbl:'스트라타', councilLbl:'카운슬',
   }
 };
 
-let lang='en', curSite='all', fil=[];
+let lang='en', curFloor='all', fil=[];
 
 function setLang(l){
   lang=l;
@@ -385,10 +404,11 @@ function setLang(l){
   render(); upStats();
 }
 
-function setSite(s){
-  curSite=s;
+function setFloor2(f){
+  curFloor=f;
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+s).classList.add('active');
+  const id = f==='all'?'tab-all':(f==='Upper'?'tab-upper':'tab-lower');
+  document.getElementById(id).classList.add('active');
   go();
 }
 
@@ -404,14 +424,14 @@ function go(){
   const srt=document.getElementById('sortSel').value;
 
   fil=DATA.filter(d=>{
-    if(curSite!=='all'&&d.site!==curSite) return false;
+    if(curFloor!=='all'&&d.floor!==curFloor) return false;
     if(st&&d.status!==st) return false;
     if(fl&&d.floor!==fl) return false;
     if(sz==='small'&&d.area>15) return false;
     if(sz==='mid'&&!(d.area>=16&&d.area<=30)) return false;
     if(sz==='large'&&d.area<31) return false;
     if(px&&d.price>+px) return false;
-    if(sr&&!d.unit.toLowerCase().includes(sr)) return false;
+    if(sr&&!(d.unit.toLowerCase().includes(sr)||('lot '+d.lot).toLowerCase().includes(sr))) return false;
     return true;
   });
 
@@ -426,8 +446,8 @@ function go(){
   });
 
   document.getElementById('tc-all').textContent=DATA.length;
-  document.getElementById('tc-op1').textContent=DATA.filter(d=>d.site==='op1').length;
-  document.getElementById('tc-op2').textContent=DATA.filter(d=>d.site==='op2').length;
+  document.getElementById('tc-lower').textContent=DATA.filter(d=>d.floor==='Lower Ground').length;
+  document.getElementById('tc-upper').textContent=DATA.filter(d=>d.floor==='Upper').length;
 
   render(); upStats();
 }
@@ -441,13 +461,15 @@ function render(){
   em.style.display='none';
   tb.innerHTML=fil.map(d=>{
     const psm=Math.round(d.price/d.area);
+    const gstIncl=Math.round(d.price*1.1);
     return `<tr>
-      <td><span class="site-badge sb-${d.site}">${d.siteName}</span><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:3px">${d.addr}</div></td>
+      <td><span class="site-badge sb-op2">Lot ${d.lot}</span></td>
       <td><div class="unit-num">${d.unit}</div><div class="unit-lbl">UNIT</div></td>
       <td><span class="floor-chip ${d.floor==='Upper'?'floor-upper':''}">${d.floor}</span></td>
       <td><div class="area-val">${d.area} m²</div></td>
       <td><span class="height-chip">${d.height}</span></td>
       <td><div class="price-val">$${d.price.toLocaleString()}</div><div class="price-sub">${t.exGst}</div></td>
+      <td><div class="psm-val" style="font-size:13px;color:var(--ink);font-weight:600">$${gstIncl.toLocaleString()}</div><div class="price-sub">${t.inclGst}</div></td>
       <td><div class="psm-val">$${psm.toLocaleString()}</div></td>
       <td><div class="outgoing">${t.strataLbl}: <b>$${d.strata.toLocaleString()}</b><br>${t.councilLbl}: <b>$${d.council.toLocaleString()}</b></div></td>
       <td><span class="status st-${d.status}">${t.stLabel[d.status]}</span></td>
@@ -470,7 +492,7 @@ function rst(){
   ['fStatus','fFloor','fSize','fMaxPx'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('fSrch').value='';
   document.getElementById('sortSel').value='price-asc';
-  curSite='all';
+  curFloor='all';
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-all').classList.add('active');
   go();
