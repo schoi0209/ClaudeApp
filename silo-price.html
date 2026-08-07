@@ -188,7 +188,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 </div>
 
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">36</div><div class="s-sub" id="ssub-total">Available Now</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">36</div><div class="s-sub" id="ssub-total">Released</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Ready to Buy</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Ex-GST</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Ex-GST</div></div>
@@ -197,8 +197,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="legend">
   <div class="leg"><div class="leg-dot" style="background:var(--green)"></div><span id="leg-av">Available</span></div>
-  <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div><span id="leg-dep">Deposit Taken</span></div>
-  <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div><span id="leg-con">Contract Issued</span></div>
+  <div class="leg"><div class="leg-dot" style="background:var(--grey)"></div><span id="leg-sold">Sold</span></div>
 </div>
 
 <div class="tab-row">
@@ -213,8 +212,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
     <select id="fStatus" onchange="go()">
       <option value="" id="opt-st-all">All</option>
       <option value="available" id="opt-st-av">Available</option>
-      <option value="deposit" id="opt-st-dep">Deposit Taken</option>
-      <option value="contract" id="opt-st-con">Contract Issued</option>
+      <option value="sold" id="opt-st-sold">Sold</option>
     </select>
   </div>
   <div class="f-grp">
@@ -286,7 +284,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="note-bar">
   <div class="note" id="txt-notes">
-    <b>*</b> Rental guarantee: <b>7%</b> · All units currently available.<br>
+    <b>*</b> Rental guarantee: <b>7%</b> · 4 units remaining — all others sold.<br>
     <b>*</b> Prices shown Ex-GST; Incl. GST column adds 10%. Strata &amp; Council are approximate.
   </div>
 </div>
@@ -297,42 +295,42 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <script>
 const DATA = [
   // Silo Oran Park 2 — 98 Southwell Road — Available Stock (5 Aug 2026)
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'8',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'9',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'10',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'17',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'18',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'8',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'9',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'10',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'17',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'18',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'sold'},
   {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'19',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'20',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'21',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'22',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'29',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'20',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'21',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'19',unit:'22',floor:'Lower Ground',area:40,height:'3.9m / 3.5m',price:464123,strata:1828,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'29',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'sold'},
   {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'30',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'31',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'39',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'40',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'41',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'42',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'43',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'30',unit:'31',floor:'Lower Ground',area:22,height:'3.9m / 3.5m',price:251000,strata:1004,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'39',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'40',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'41',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'42',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'43',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
   {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'44',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'48',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'49',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'50',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'51',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'52',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'53',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'90',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'91',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'92',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'93',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'94',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'48',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'49',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'50',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'51',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'52',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'44',unit:'53',floor:'Lower Ground',area:21,height:'3.9m / 3.5m',price:237112,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'90',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'91',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'92',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'93',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'94',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
   {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'95',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'99',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'100',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'101',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'102',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'103',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
-  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'104',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'available'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'99',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'100',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'101',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'102',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'103',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
+  {site:'op2',siteName:'Oran Park 2',addr:'98 Southwell Rd',lot:'95',unit:'104',floor:'Upper',area:21,height:'3.5m / 5.6m avg',price:246600,strata:960,council:710,status:'sold'},
 ];
 
 const i18n = {
@@ -342,14 +340,14 @@ const i18n = {
     'txt-tagline':'98 Southwell Road, Oran Park NSW · All units available',
     'lbl-gst':'⚠ Pricing Note',
     'txt-gst':'All prices shown are <b>Ex-GST</b>.<br>Strata &amp; Council fees are approximate p.a.',
-    'slbl-total':'Total Units','ssub-total':'Both Sites',
+    'slbl-total':'Total Units','ssub-total':'Released',
     'slbl-avail':'Available','ssub-avail':'Ready to Buy',
     'slbl-from':'From','ssub-from':'Ex-GST',
     'slbl-psm':'Avg $/m²','ssub-psm':'Ex-GST',
     'slbl-shown':'Showing','ssub-shown':'Current Filter',
-    'leg-av':'Available','leg-dep':'Deposit Taken','leg-con':'Contract Issued',
+    'leg-av':'Available','leg-sold':'Sold',
     'flbl-status':'Status','flbl-floor':'Floor','flbl-size':'Size Range','flbl-maxpx':'Max Price','flbl-search':'Search',
-    'opt-st-all':'All','opt-st-av':'Available','opt-st-dep':'Deposit Taken','opt-st-con':'Contract Issued',
+    'opt-st-all':'All','opt-st-av':'Available','opt-st-sold':'Sold',
     'opt-fl-all':'All','opt-fl-lg':'Lower Ground','opt-fl-up':'Upper',
     'opt-sz-all':'All','opt-sz1':'Small (≤15 m²)','opt-sz2':'Mid (16–30 m²)','opt-sz3':'Large (31+ m²)',
     'opt-px-all':'All','opt-px1':'Under $120K','opt-px2':'Under $250K','opt-px3':'Under $350K','opt-px4':'Under $500K',
@@ -358,9 +356,9 @@ const i18n = {
     'th-price':'Price (Ex-GST)','th-gst':'Incl. GST','th-psm':'$/m²','th-outgoing':'Outgoings p.a.','th-status':'Status',
     'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-aa':'Area ↑','srt-ad':'Area ↓','srt-psa':'$/m² ↑','srt-ua':'Unit # ↑',
     'txt-empty':'— No units match your criteria —',
-    'txt-notes':'<b>*</b> Rental guarantee: <b>7%</b> · All units currently available.<br><b>*</b> Prices shown Ex-GST; Incl. GST column adds 10%. Strata &amp; Council are approximate.',
+    'txt-notes':'<b>*</b> Rental guarantee: <b>7%</b> · 4 units remaining — all others sold.<br><b>*</b> Prices shown Ex-GST; Incl. GST column adds 10%. Strata &amp; Council are approximate.',
     searchPh:'Unit number...',
-    stLabel:{available:'Available',deposit:'Deposit Taken',contract:'Contract Issued'},
+    stLabel:{available:'Available',sold:'Sold'},
     exGst:'Ex-GST', inclGst:'incl GST', strataLbl:'Strata', councilLbl:'Council',
   },
   ko:{
@@ -374,9 +372,9 @@ const i18n = {
     'slbl-from':'최저가','ssub-from':'GST 별도',
     'slbl-psm':'평균 $/m²','ssub-psm':'GST 별도',
     'slbl-shown':'표시 중','ssub-shown':'현재 필터',
-    'leg-av':'분양 가능','leg-dep':'예약금 납부','leg-con':'계약서 발행',
+    'leg-av':'분양 가능','leg-sold':'판매 완료',
     'flbl-status':'상태','flbl-floor':'층','flbl-size':'면적 범위','flbl-maxpx':'최대 가격','flbl-search':'검색',
-    'opt-st-all':'전체','opt-st-av':'분양 가능','opt-st-dep':'예약금 납부','opt-st-con':'계약서 발행',
+    'opt-st-all':'전체','opt-st-av':'분양 가능','opt-st-sold':'판매 완료',
     'opt-fl-all':'전체','opt-fl-lg':'로어 그라운드','opt-fl-up':'어퍼',
     'opt-sz-all':'전체','opt-sz1':'소형 (15m² 이하)','opt-sz2':'중형 (16–30m²)','opt-sz3':'대형 (31m² 이상)',
     'opt-px-all':'전체','opt-px1':'$120K 이하','opt-px2':'$250K 이하','opt-px3':'$350K 이하','opt-px4':'$500K 이하',
@@ -385,9 +383,9 @@ const i18n = {
     'th-price':'분양가 (GST 별도)','th-gst':'GST 포함','th-psm':'m²당','th-outgoing':'연간 관리비','th-status':'상태',
     'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-aa':'면적 작은 순','srt-ad':'면적 큰 순','srt-psa':'단가 낮은 순','srt-ua':'유닛 번호 순',
     'txt-empty':'— 조건에 맞는 유닛이 없습니다 —',
-    'txt-notes':'<b>*</b> 렌탈 개런티: <b>7%</b> · 전 유닛 현재 분양 가능.<br><b>*</b> 표시가는 GST 별도이며, GST 포함 컬럼은 10% 추가. 스트라타·카운슬은 예상액입니다.',
+    'txt-notes':'<b>*</b> 렌탈 개런티: <b>7%</b> · 4유닛 남음 — 나머지 판매 완료.<br><b>*</b> 표시가는 GST 별도이며, GST 포함 컬럼은 10% 추가. 스트라타·카운슬은 예상액입니다.',
     searchPh:'유닛 번호 검색...',
-    stLabel:{available:'분양 가능',deposit:'예약금 납부',contract:'계약서 발행'},
+    stLabel:{available:'분양 가능',sold:'판매 완료'},
     exGst:'GST 별도', inclGst:'GST 포함', strataLbl:'스트라타', councilLbl:'카운슬',
   }
 };
@@ -435,7 +433,9 @@ function go(){
     return true;
   });
 
+  const availRank=x=>x.status==='available'?0:1;
   fil.sort((a,b)=>{
+    const ar=availRank(a)-availRank(b); if(ar!==0) return ar;
     if(srt==='price-asc')  return a.price-b.price;
     if(srt==='price-desc') return b.price-a.price;
     if(srt==='area-asc')   return a.area-b.area;
@@ -479,11 +479,11 @@ function render(){
 
 function upStats(){
   const avail=fil.filter(d=>d.status==='available');
-  const px=fil.map(d=>d.price);
+  const availPx=avail.map(d=>d.price);
   const psms=fil.map(d=>Math.round(d.price/d.area));
   document.getElementById('sval-total').textContent=DATA.length;
   document.getElementById('sval-avail').textContent=avail.length;
-  document.getElementById('sval-from').textContent=px.length?$f(Math.min(...px)):'—';
+  document.getElementById('sval-from').textContent=availPx.length?$f(Math.min(...availPx)):'—';
   document.getElementById('sval-psm').textContent=psms.length?'$'+Math.round(psms.reduce((a,b)=>a+b,0)/psms.length).toLocaleString():'—';
   document.getElementById('sval-shown').textContent=fil.length;
 }
