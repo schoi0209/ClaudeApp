@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Macquarie Collection — Price List Jun 2026</title>
+<title>The Macquarie Collection — Price List Aug 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f7f9;--surface:#fff;--surface2:#edf1f5;--surface3:#e0e6ed;--border:rgba(20,50,90,.09);--border2:rgba(20,50,90,.18);--ink:#0e1e30;--muted:#5a7090;--muted2:#a8bccc;--accent:#1a3d6e;--accent-l:rgba(26,61,110,.07);--gold:#a07020;--gold-l:rgba(160,112,32,.08);--green:#1e6840;--green-l:rgba(30,104,64,.08);--sky:#1a6090;--sky-l:rgba(26,96,144,.07);--net:#1a5a32;}
@@ -119,14 +119,14 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   </div>
 </div>
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">36</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">30</div><div class="s-sub" id="ssub-total">All Available</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-net-from">Net Price From</div><div class="s-val" id="sval-net-from">—</div><div class="s-sub" id="ssub-net-from">After rebate</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-net-avg">Avg Net Price</div><div class="s-val" id="sval-net-avg">—</div><div class="s-sub" id="ssub-net-avg">Filtered</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-contract-from">Contract From</div><div class="s-val" id="sval-contract-from">—</div><div class="s-sub" id="ssub-contract-from">Before rebate</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
 </div>
 <div class="tab-row">
-  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">36</span></button>
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">30</span></button>
   <button class="tab-btn" onclick="setBldg('1')" id="tab-1">Building 1 <span class="tab-cnt" id="tc-1">0</span></button>
   <button class="tab-btn" onclick="setBldg('2')" id="tab-2">Building 2 <span class="tab-cnt" id="tc-2">0</span></button>
 </div>
@@ -193,44 +193,36 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 <script>
 const data=[
-  // Building 2
-  {apt:'G01',lot:2,bldg:'2',lvl:'G',type:'1B',bath:1,int:61,ext:31,total:92,storage:0,parking:0,asp:'W',adapt:'N',contract:895000,rebate:89500,net:805500},
-  {apt:'G03',lot:4,bldg:'2',lvl:'G',type:'2B',bath:2,int:76,ext:41,total:117,storage:0,parking:1,asp:'W',adapt:'N',contract:1160000,rebate:116000,net:1044000},
-  {apt:'101',lot:5,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:61,ext:15,total:76,storage:0,parking:0,asp:'W',adapt:'N',contract:870000,rebate:87000,net:783000},
-  {apt:'102',lot:6,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:60,ext:17,total:77,storage:0,parking:0,asp:'W',adapt:'N',contract:870000,rebate:87000,net:783000},
-  {apt:'104',lot:8,bldg:'2',lvl:'1',type:'1B+S',bath:1,int:56,ext:12,total:68,storage:0,parking:0,asp:'N/E',adapt:'N',contract:830000,rebate:83000,net:747000},
-  {apt:'205',lot:13,bldg:'2',lvl:'2',type:'2B+S',bath:2,int:79,ext:11,total:90,storage:0,parking:1,asp:'E',adapt:'N',contract:1102500,rebate:110250,net:992250},
-  {apt:'302',lot:15,bldg:'2',lvl:'3',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:803000,rebate:80300,net:722700},
-  {apt:'303',lot:16,bldg:'2',lvl:'3',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1050000,rebate:105000,net:945000},
-  {apt:'402',lot:20,bldg:'2',lvl:'4',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:806000,rebate:80600,net:725400},
-  {apt:'403',lot:21,bldg:'2',lvl:'4',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1055000,rebate:105500,net:949500},
-  {apt:'502',lot:25,bldg:'2',lvl:'5',type:'1B',bath:1,int:53,ext:9,total:62,storage:0,parking:0,asp:'W',adapt:'N',contract:809500,rebate:80950,net:728550},
-  {apt:'503',lot:26,bldg:'2',lvl:'5',type:'2B',bath:2,int:77,ext:13,total:90,storage:0,parking:1,asp:'W',adapt:'N',contract:1060000,rebate:106000,net:954000},
-  // Building 1
-  {apt:'G05',lot:30,bldg:'1',lvl:'G',type:'3B',bath:2,int:101,ext:63,total:164,storage:0,parking:2,asp:'N/E',adapt:'N',contract:1495000,rebate:74750,net:1420250},
-  {apt:'1305',lot:166,bldg:'1',lvl:'13',type:'1B',bath:1,int:52,ext:8,total:60,storage:0,parking:0,asp:'N',adapt:'N',contract:839200,rebate:83920,net:755280},
-  {apt:'1804',lot:202,bldg:'1',lvl:'18',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1119000,rebate:111900,net:1007100},
-  {apt:'1904',lot:211,bldg:'1',lvl:'19',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1121000,rebate:112100,net:1008900},
-  {apt:'1906',lot:213,bldg:'1',lvl:'19',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1342000,rebate:134200,net:1207800},
-  {apt:'2004',lot:220,bldg:'1',lvl:'20',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1123000,rebate:112300,net:1010700},
-  {apt:'2006',lot:222,bldg:'1',lvl:'20',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1344000,rebate:134400,net:1209600},
-  {apt:'2103',lot:228,bldg:'1',lvl:'21',type:'2B',bath:2,int:76,ext:10,total:86,storage:0,parking:1,asp:'N',adapt:'N',contract:1113000,rebate:111300,net:1001700},
-  {apt:'2104',lot:229,bldg:'1',lvl:'21',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1125000,rebate:112500,net:1012500},
-  {apt:'2203',lot:237,bldg:'1',lvl:'22',type:'2B',bath:2,int:77,ext:11,total:88,storage:0,parking:1,asp:'N',adapt:'N',contract:1115000,rebate:111500,net:1003500},
-  {apt:'2206',lot:240,bldg:'1',lvl:'22',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1348000,rebate:134800,net:1213200},
-  {apt:'2404',lot:256,bldg:'1',lvl:'24',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1131000,rebate:113100,net:1017900},
-  {apt:'2406',lot:258,bldg:'1',lvl:'24',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1500000,rebate:75000,net:1425000},
-  {apt:'2504',lot:264,bldg:'1',lvl:'25',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1132000,rebate:113200,net:1018800},
-  {apt:'2602',lot:270,bldg:'1',lvl:'26',type:'1B+S',bath:1,int:64,ext:9,total:73,storage:0,parking:0,asp:'W',adapt:'N',contract:887000,rebate:88700,net:798300},
-  {apt:'2605',lot:273,bldg:'1',lvl:'26',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
-  {apt:'2704',lot:279,bldg:'1',lvl:'27',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1135000,rebate:113500,net:1021500},
-  {apt:'2706',lot:281,bldg:'1',lvl:'27',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000},
-  {apt:'2804',lot:287,bldg:'1',lvl:'28',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1137000,rebate:113700,net:1023300},
-  {apt:'2806',lot:289,bldg:'1',lvl:'28',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1550000,rebate:77500,net:1472500},
-  {apt:'2901',lot:292,bldg:'1',lvl:'29',type:'4B',bath:2,int:152,ext:30,total:182,storage:0,parking:2,asp:'W',adapt:'N',contract:2550000,rebate:0,net:2550000},
-  {apt:'2902',lot:293,bldg:'1',lvl:'29',type:'4B',bath:2,int:155,ext:33,total:188,storage:0,parking:2,asp:'W',adapt:'N',contract:2700000,rebate:0,net:2700000},
-  {apt:'2903',lot:294,bldg:'1',lvl:'29',type:'4B',bath:2,int:125,ext:31,total:156,storage:0,parking:2,asp:'N',adapt:'N',contract:2200000,rebate:0,net:2200000},
-  {apt:'2904',lot:295,bldg:'1',lvl:'29',type:'4B',bath:2,int:123,ext:19,total:142,storage:0,parking:2,asp:'N',adapt:'N',contract:2000000,rebate:0,net:2000000},
+  {apt:'G01',lot:2,bldg:'2',lvl:'G',type:'1B+S',bath:1,int:61,ext:31,total:92,storage:0,parking:0,asp:'W',adapt:'N',contract:895000,rebate:89500,net:805500,olddesc:'Old Apt 2-101; Old Lot 1'},
+  {apt:'G02',lot:3,bldg:'2',lvl:'G',type:'1B+S',bath:1,int:60,ext:31,total:91,storage:0,parking:0,asp:'W',adapt:'N',contract:895000,rebate:89500,net:805500,olddesc:'Old Apt 2-102; Old Lot 2'},
+  {apt:'G03',lot:4,bldg:'2',lvl:'G',type:'2B',bath:2,int:76,ext:41,total:117,storage:0,parking:1,asp:'W',adapt:'N',contract:1160000,rebate:116000,net:1044000,olddesc:'Old Apt 2-103; Old Lot 3'},
+  {apt:'G05',lot:30,bldg:'1',lvl:'G',type:'3B+S',bath:2,int:101,ext:63,total:164,storage:0,parking:2,asp:'N/E',adapt:'N',contract:1495000,rebate:74750,net:1420250,olddesc:'Old Apt 1-105; Old Lot 9'},
+  {apt:'1308',lot:117,bldg:'1',lvl:'13',type:'1B+S',bath:1,int:57,ext:11,total:68,storage:0,parking:0,asp:'N',adapt:'N',contract:819000,rebate:81900,net:737100,olddesc:''},
+  {apt:'1305',lot:166,bldg:'1',lvl:'13',type:'1B+S',bath:1,int:52,ext:8,total:60,storage:0,parking:0,asp:'N',adapt:'N',contract:803000,rebate:80300,net:722700,olddesc:'Old Apt 1-1405; Old Lot 148'},
+  {apt:'1804',lot:202,bldg:'1',lvl:'18',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1119000,rebate:111900,net:1007100,olddesc:'Old Apt 1-1904; Old Lot 197'},
+  {apt:'1904',lot:211,bldg:'1',lvl:'19',type:'2B',bath:2,int:80,ext:13,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1121000,rebate:112100,net:1008900,olddesc:'Old Apt 1-2004; Old Lot 207'},
+  {apt:'1906',lot:213,bldg:'1',lvl:'19',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1342000,rebate:134200,net:1207800,olddesc:'Old Apt 1-2006; Old Lot 210'},
+  {apt:'2004',lot:220,bldg:'1',lvl:'20',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1123000,rebate:112300,net:1010700,olddesc:'Old Apt 1-2104; Old Lot 217'},
+  {apt:'2006',lot:222,bldg:'1',lvl:'20',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1344000,rebate:134400,net:1209600,olddesc:'Old Apt 1-2106; Old Lot 220'},
+  {apt:'2103',lot:228,bldg:'1',lvl:'21',type:'2B',bath:2,int:76,ext:10,total:86,storage:0,parking:1,asp:'N',adapt:'N',contract:1113000,rebate:111300,net:1001700,olddesc:'Old Apt 1-2203; Old Lot 226'},
+  {apt:'2104',lot:229,bldg:'1',lvl:'21',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1125000,rebate:112500,net:1012500,olddesc:'Old Apt 1-2204; Old Lot 227'},
+  {apt:'2203',lot:237,bldg:'1',lvl:'22',type:'2B',bath:2,int:77,ext:11,total:88,storage:0,parking:1,asp:'N',adapt:'N',contract:1115000,rebate:111500,net:1003500,olddesc:'Old Apt 1-2303; Old Lot 236'},
+  {apt:'2206',lot:240,bldg:'1',lvl:'22',type:'2B+S',bath:2,int:81,ext:22,total:103,storage:0,parking:1,asp:'N',adapt:'N',contract:1348000,rebate:134800,net:1213200,olddesc:'Old Apt 1-2306; Old Lot 240'},
+  {apt:'2308',lot:251,bldg:'1',lvl:'23',type:'2B+S',bath:2,int:84,ext:11,total:95,storage:0,parking:1,asp:'N',adapt:'N',contract:1145500,rebate:114550,net:1030950,olddesc:''},
+  {apt:'2404',lot:256,bldg:'1',lvl:'24',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1131000,rebate:113100,net:1017900,olddesc:'Old Apt 1-2504; Old Lot 257'},
+  {apt:'2406',lot:258,bldg:'1',lvl:'24',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1500000,rebate:75000,net:1425000,olddesc:'Old Apt 1-2506; Old Lot 259'},
+  {apt:'2504',lot:264,bldg:'1',lvl:'25',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1132000,rebate:113200,net:1018800,olddesc:'Old Apt 1-2604; Old Lot 265'},
+  {apt:'2602',lot:270,bldg:'1',lvl:'26',type:'1B+S',bath:1,int:64,ext:9,total:73,storage:0,parking:0,asp:'W',adapt:'N',contract:887000,rebate:88700,net:798300,olddesc:'Old Apt 1-2702; Old Lot 271'},
+  {apt:'2605',lot:273,bldg:'1',lvl:'26',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000,olddesc:'Old Apt 1-2705; Old Lot 275'},
+  {apt:'2704',lot:279,bldg:'1',lvl:'27',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1135000,rebate:113500,net:1021500,olddesc:'Old Apt 1-2804; Old Lot 281'},
+  {apt:'2706',lot:281,bldg:'1',lvl:'27',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1540000,rebate:77000,net:1463000,olddesc:'Old Apt 1-2806; Old Lot 283'},
+  {apt:'2801',lot:284,bldg:'1',lvl:'28',type:'2B',bath:2,int:87,ext:11,total:98,storage:0,parking:1,asp:'W',adapt:'N',contract:1215000,rebate:121500,net:1093500,olddesc:'Old Apt 1-2901; Old Lot 283'},
+  {apt:'2804',lot:287,bldg:'1',lvl:'28',type:'2B',bath:2,int:81,ext:12,total:93,storage:0,parking:1,asp:'N',adapt:'N',contract:1137000,rebate:113700,net:1023300,olddesc:'Old Apt 1-N/A; Old Lot N/A'},
+  {apt:'2806',lot:289,bldg:'1',lvl:'28',type:'3B',bath:2,int:103,ext:13,total:116,storage:0,parking:1,asp:'N',adapt:'N',contract:1550000,rebate:77500,net:1472500,olddesc:'Old Apt 1-2906; Old Lot 287'},
+  {apt:'2901',lot:292,bldg:'1',lvl:'29',type:'4B+S',bath:2,int:152,ext:30,total:182,storage:0,parking:2,asp:'W',adapt:'N',contract:2550000,rebate:0,net:2550000,olddesc:'Old Apt N/A; Old Lot N/A'},
+  {apt:'2902',lot:293,bldg:'1',lvl:'29',type:'4B+S',bath:2,int:155,ext:33,total:188,storage:0,parking:2,asp:'W',adapt:'N',contract:2700000,rebate:0,net:2700000,olddesc:'Old Apt N/A; Old Lot N/A'},
+  {apt:'2903',lot:294,bldg:'1',lvl:'29',type:'4B',bath:2,int:125,ext:31,total:156,storage:0,parking:2,asp:'N',adapt:'N',contract:2200000,rebate:0,net:2200000,olddesc:'Old Apt N/A; Old Lot N/A'},
+  {apt:'2904',lot:295,bldg:'1',lvl:'29',type:'4B',bath:2,int:123,ext:19,total:142,storage:0,parking:2,asp:'N',adapt:'N',contract:2000000,rebate:0,net:2000000,olddesc:'Old Apt N/A; Old Lot N/A'},
 ];
 const i18n={
   en:{'txt-h-center':'5 Halifax St · Macquarie Park','txt-overline':'Apartment · Macquarie Park NSW','lbl-addr':'Address','lbl-rebate':'🏷 Rebate (Special Offer)','reb-1b':'1 Bed / 2 Bed','reb-1b-note':'At settlement','reb-3b':'3 Bed','reb-3b-note':'At settlement','reb-4b':'4 Bed — No rebate','slbl-total':'Total Units','ssub-total':'All Available','slbl-net-from':'Net Price From','ssub-net-from':'After rebate','slbl-net-avg':'Avg Net Price','ssub-net-avg':'Filtered','slbl-contract-from':'Contract From','ssub-contract-from':'Before rebate','slbl-shown':'Showing','ssub-shown':'Current filter','flbl-type':'Unit Type','opt-t-all':'All','flbl-level':'Level','opt-l-all':'All','flbl-asp':'Aspect','opt-a-all':'All','flbl-adapt':'Adaptable','opt-ad-all':'All','opt-ad-yes':'Yes','opt-ad-no':'No','flbl-maxnet':'Max Net Price','opt-p-all':'All','opt-p1':'Under $850K','opt-p2':'Under $1M','opt-p3':'Under $1.2M','opt-p4':'Under $1.5M','flbl-search':'Search','txt-reset':'Reset','txt-shown-lbl':' units shown','th-apt':'Apt #','th-lot':'Lot #','th-bldg':'Bldg','th-level':'Level','th-type':'Type','th-bath':'Bath','th-area':'Area (sqm)','th-parking':'Parking','th-asp':'Aspect','th-contract':'Contract Price','th-rebate':'Rebate','th-net':'Net Price','th-status':'Status','srt-na':'Net Price ↑','srt-nd':'Net Price ↓','srt-ca':'Contract ↑','srt-la':'Level ↑','srt-ld':'Level ↓','srt-sd':'Total Area ↓','srt-aa':'Apt # ↑','txt-empty':'— No units match your criteria —',searchPh:'Apt, lot, level...'},
