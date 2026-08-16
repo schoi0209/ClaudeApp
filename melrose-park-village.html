@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melrose Park Village — Live Well at the Village · Sekisui House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F7F3;--bg2:#ECEDE5;--fg:#171A16;--fg2:#454B42;--acc:#4C6B3C;--acc2:#6B8F55;--acc3:#9BBE83;--div:#D8DBCC;--card:#FFF;--hbg:#131610;--htx:#F4F7EE;--tag:rgba(76,107,60,.12)}
+[data-theme="dark"]{--bg:#0E110C;--bg2:#161A12;--fg:#E8EEE1;--fg2:#8E9686;--acc:#6B8F55;--acc2:#9BBE83;--acc3:#B8D4A3;--div:#232A1D;--card:#161A12;--hbg:#080A06;--htx:#F4F7EE;--tag:rgba(155,190,131,.12)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transition:.3s;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;background:rgba(19,22,16,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(155,190,131,.15)}
+.nl{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;letter-spacing:.14em;color:var(--acc3);text-decoration:none}
+.nl span{font-family:'Jost',sans-serif;font-size:.62rem;letter-spacing:.2em;color:rgba(184,212,163,.5);margin-left:9px}
+.na{display:flex;gap:10px;align-items:center}
+.bl,.bt{background:rgba(255,255,255,.06);border:1px solid rgba(155,190,131,.25);color:var(--acc3);cursor:pointer;border-radius:3px;font-size:.72rem;font-weight:600;letter-spacing:.1em;padding:6px 14px;transition:.2s}
+.bl:hover,.bt:hover{background:rgba(155,190,131,.12)}
+.bm{display:flex;gap:6px;align-items:center;background:linear-gradient(135deg,#FFDD00,#FFC400);color:#1a1200;border-radius:3px;font-size:.72rem;font-weight:700;padding:7px 14px;text-decoration:none}
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:var(--hbg)}
+.hi{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;object-position:center 32%;filter:blur(5px);transform:scale(1.04)}
+.ho{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,6,.96) 0%,rgba(8,10,6,.72) 45%,rgba(8,10,6,.46) 100%)}
+.ha{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--acc),var(--acc3),transparent)}
+.hb{position:absolute;top:100px;right:48px;border:1px solid rgba(155,190,131,.35);color:rgba(184,212,163,.75);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
+.hc{position:relative;z-index:2;padding:0 60px 80px;max-width:960px}
+.he{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--acc3);margin-bottom:24px;display:flex;gap:12px;align-items:center}
+.he::before{content:'';width:36px;height:2px;background:var(--acc3)}
+.ht{font-family:'Cormorant Garamond',serif;font-size:clamp(2.9rem,6.8vw,5.8rem);font-weight:300;line-height:1.0;color:var(--htx);margin-bottom:10px}
+.ht em{font-style:italic;color:var(--acc3)}
+.hs{font-size:clamp(.9rem,1.5vw,1.12rem);font-weight:300;color:rgba(244,247,238,.55);margin-bottom:42px}
+.hm{display:flex;gap:38px;flex-wrap:wrap;border-top:1px solid rgba(155,190,131,.2);padding-top:26px}
+.hmi label{display:block;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(155,190,131,.65);margin-bottom:4px}
+.hmi span{font-family:'Cormorant Garamond',serif;font-size:1.66rem;color:var(--htx)}
+.hmi small{font-size:.72rem;color:rgba(244,247,238,.4);margin-left:3px}
+.hcta{margin-top:42px;display:inline-flex;gap:12px;align-items:center;background:var(--acc);color:#fff;padding:16px 36px;border-radius:3px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:.25s}
+.hcta:hover{background:var(--acc2);transform:translateY(-2px)}
+section{padding:100px 60px}
+.eb{font-size:.63rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--acc);margin-bottom:18px;display:flex;gap:12px;align-items:center}
+.eb::before{content:'';width:28px;height:2px;background:var(--acc)}
+.ti{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:400;line-height:1.14;margin-bottom:18px}
+.ti em{font-style:italic;color:var(--acc)}
+.su{font-size:.9rem;line-height:1.76;color:var(--fg2);max-width:580px}
+.fade{opacity:0;transform:translateY(20px);transition:.7s}.fade.visible{opacity:1;transform:none}
+.wrap{max-width:1280px;margin:0 auto}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1280px;margin:0 auto}
+.vis{position:relative;height:560px;overflow:hidden;border-radius:2px}
+.vis img{width:100%;height:100%;object-fit:cover}
+.vo{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,6,.8),transparent 55%)}
+.vb{position:absolute;top:24px;left:24px;background:var(--acc);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px}
+.vc{position:absolute;bottom:24px;left:26px;right:26px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(244,247,238,.85)}
+.bt2{font-size:.92rem;line-height:1.85;color:var(--fg2);margin-bottom:22px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tag{background:var(--tag);border:1px solid rgba(76,107,60,.2);color:var(--acc);font-size:.66rem;letter-spacing:.1em;padding:6px 14px;font-weight:500}
+.strip{background:var(--acc);color:#fff}
+.sw{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.sp{padding:34px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.18)}
+.sp:last-child{border-right:none}
+.sn{font-family:'Cormorant Garamond',serif;font-size:2.7rem;line-height:1;margin-bottom:6px}
+.sl{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.band{width:100%;height:480px;position:relative;overflow:hidden}
+.band img{width:100%;height:100%;object-fit:cover;object-position:center 50%}
+.bo{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,10,6,.62),transparent 55%)}
+.bc{position:absolute;bottom:38px;left:60px;color:var(--htx)}
+.bc h3{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:400;margin-bottom:5px}
+.bc p{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,247,238,.6)}
+.dk{background:var(--hbg);color:var(--htx)}
+.dk .eb{color:var(--acc3)}.dk .eb::before{background:var(--acc3)}
+.dk .ti{color:var(--htx)}.dk .su{color:rgba(244,247,238,.5)}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:48px}
+.ic{position:relative;height:420px;overflow:hidden}
+.ic img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.ic:hover img{transform:scale(1.04)}
+.il{position:absolute;bottom:0;left:0;right:0;padding:24px 28px;background:linear-gradient(to top,rgba(8,10,6,.88),transparent)}
+.il h4{font-family:'Cormorant Garamond',serif;font-size:1.32rem;color:var(--htx);margin-bottom:3px}
+.il p{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(184,212,163,.8)}
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
+.am{background:var(--card);padding:38px 34px;border-top:3px solid transparent;transition:.3s}
+.am:hover{border-top-color:var(--acc);background:var(--bg2)}
+.ai{font-size:1.85rem;margin-bottom:16px}
+.am h5{font-family:'Cormorant Garamond',serif;font-size:1.24rem;font-weight:600;margin-bottom:8px}
+.am p{font-size:.8rem;color:var(--fg2);line-height:1.65}
+/* floorplans */
+.fpsec{background:var(--bg2)}
+.fpg{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.fpc{background:#fff;border:1px solid var(--div);border-radius:5px;overflow:hidden;box-shadow:0 4px 22px rgba(23,26,22,.07);display:flex;flex-direction:column}
+.fpc img{width:100%;display:block;background:#fff}
+.fpm{padding:20px 24px;border-top:1px solid var(--div)}
+.fpt{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#171A16;margin-bottom:3px}
+.fps{font-size:.72rem;letter-spacing:.05em;color:#454B42;margin-bottom:14px}
+.fpspecs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--div);border:1px solid var(--div)}
+.fpspecs div{background:#fff;padding:11px 6px;text-align:center}
+.fpspecs b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--acc);line-height:1}
+.fpspecs span{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#454B42}
+.fparea{font-size:.76rem;color:#454B42;margin-top:12px;letter-spacing:.03em}
+.fparea b{color:#171A16}
+.fpnote{font-size:.72rem;color:var(--fg2);opacity:.68;margin-top:22px;line-height:1.6}
+.li{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;max-width:1280px;margin:0 auto}
+.lim{position:relative;height:520px;overflow:hidden;border-radius:2px;background:#fff}
+.lim img{width:100%;height:100%;object-fit:contain;background:#fff}
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:34px;background:rgba(155,190,131,.12)}
+.lc{background:rgba(255,255,255,.03);padding:22px 20px;transition:.3s}
+.lc:hover{background:rgba(155,190,131,.07)}
+.ln{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--acc3);line-height:1;margin-bottom:4px}
+.ln small{font-size:.85rem;color:rgba(155,190,131,.6)}
+.lt{font-size:.78rem;color:rgba(244,247,238,.72);margin-bottom:2px}
+.lm{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,247,238,.3)}
+.dw{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.dv{height:400px;background:var(--bg2);display:flex;align-items:center;justify-content:center;border:1px solid var(--div);position:relative;overflow:hidden}
+.dv::before{content:'S';position:absolute;font-family:'Cormorant Garamond',serif;font-size:17rem;color:var(--div);opacity:.45}
+.dlg{font-family:'Cormorant Garamond',serif;font-size:2.1rem;position:relative;z-index:1;text-align:center;line-height:1.2}
+.dlg small{display:block;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);margin-top:8px}
+.dst{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.ds{padding:22px;background:var(--tag);border:1px solid rgba(76,107,60,.15)}
+.dsn{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--acc);line-height:1;margin-bottom:4px}
+.dsl{font-size:.7rem;color:var(--fg2)}
+.ct{background:var(--hbg);color:var(--htx);text-align:center}
+.cw{max-width:680px;margin:0 auto}
+.cw .ti{color:var(--htx)}
+.ci{display:flex;justify-content:center;gap:38px;flex-wrap:wrap;margin:36px 0 42px}
+.cii label{display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(155,190,131,.65);margin-bottom:6px;font-weight:600}
+.cii a,.cii span{font-size:.9rem;color:rgba(244,247,238,.85);text-decoration:none}
+.cii a:hover{color:var(--acc3)}
+.cc{display:inline-block;background:var(--acc);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:3px;transition:.25s}
+.cc:hover{background:var(--acc2);transform:translateY(-2px)}
+.cd{font-size:.7rem;color:rgba(244,247,238,.28);line-height:1.65;margin-top:32px}
+footer{background:#080A06;border-top:1px solid rgba(155,190,131,.1);padding:34px 60px;display:flex;justify-content:space-between;align-items:center}
+.fb{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--acc3)}
+.fc{font-size:.7rem;color:rgba(244,247,238,.28)}
+[data-lang="ko"]{display:none}
+body.lang-ko [data-lang="en"]{display:none}
+body.lang-ko [data-lang="ko"]{display:block}
+body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta .kt{display:none}
+@media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hc{padding:0 24px 60px}
+.g2,.li,.dw{grid-template-columns:1fr;gap:38px}.ig,.fpg{grid-template-columns:1fr}.ic{height:300px}
+.ag{grid-template-columns:1fr 1fr}.sw{grid-template-columns:1fr 1fr}.sp:nth-child(2){border-right:none}
+.band{height:300px}.bc{left:24px;bottom:24px}.vis,.lim{height:340px}.hb{display:none}
+footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
+@media(max-width:600px){.ag,.lg,.sw,.hm,.dst{grid-template-columns:1fr}.sp{border-right:none;border-bottom:1px solid rgba(255,255,255,.18)}}
+</style>
+</head>
+<body data-theme="light">
+<nav>
+  <a href="#" class="nl">Melrose Park<span>VILLAGE</span></a>
+  <div class="na">
+    <button class="bl" onclick="toggleLang()">한국어</button>
+    <button class="bt" onclick="toggleTheme()">☾</button>
+    <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bm">☕ Buy Me a Coffee</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <img class="hi" src="assets/melrose-park-village/hero.jpg" alt="Melrose Park Village — Artist Impression" loading="eager">
+  <div class="ho"></div><div class="ha"></div>
+  <div class="hb" data-lang="en">MELROSE PARK NSW 2114</div>
+  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div>
+  <div class="hc">
+    <div class="he" data-lang="en">Melrose Park Village · by Sekisui House</div>
+    <div class="he" data-lang="ko">멜로즈 파크 빌리지 · by 세키스이 하우스</div>
+    <h1 class="ht"><span data-lang="en">Live Well<br>at the <em>Village.</em></span><span data-lang="ko">빌리지에서<br><em>잘 사는 법.</em></span></h1>
+    <p class="hs" data-lang="en">A thriving village built around 4,000sqm of private green space — the northern completion of the Melrose Park masterplan</p>
+    <p class="hs" data-lang="ko">4,000㎡ 전용 녹지를 중심으로 조성되는 활기찬 빌리지 — 멜로즈 파크 마스터플랜의 북측을 완성합니다</p>
+    <div class="hm">
+      <div class="hmi"><label data-lang="en">Private Open Space</label><label data-lang="ko">전용 녹지</label><span>4,000<small>m²</small></span></div>
+      <div class="hmi"><label data-lang="en">Masterplan Parkland</label><label data-lang="ko">마스터플랜 공원</label><span>50,000<small>m²</small></span></div>
+      <div class="hmi"><label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label><span>5.4<small>km</small></span></div>
+      <div class="hmi"><label data-lang="en">Central Park</label><label data-lang="ko">센트럴 파크</label><span data-lang="en">Due 2027</span><span data-lang="ko">2027년 완공</span></div>
+    </div>
+    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span> →</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="g2 fade">
+    <div class="vis">
+      <img src="assets/melrose-park-village/village.jpg" alt="Melrose Park Village community — Artist Impression" loading="lazy">
+      <div class="vo"></div>
+      <div class="vb" data-lang="en">The Village Life</div>
+      <div class="vb" data-lang="ko">빌리지 라이프</div>
+      <div class="vc" data-lang="en">Built around almost 4,000sqm of green space, private to residents</div>
+      <div class="vc" data-lang="ko">입주민 전용 4,000㎡ 녹지를 중심으로 조성</div>
+    </div>
+    <div>
+      <div class="eb"><span data-lang="en">Space to Grow</span><span data-lang="ko">성장할 공간</span></div>
+      <h2 class="ti"><span data-lang="en">Melrose Park <em>Village</em></span><span data-lang="ko">멜로즈 파크 <em>빌리지</em></span></h2>
+      <p class="bt2" data-lang="en">Welcome to the Village — a growing community at the heart of Melrose Park and a thriving hub for urban life. Built around almost 4,000sqm of green space private to residents, this place is designed for the little interactions that make your day, with all the retail and lifestyle offerings of city living at your doorstep.</p>
+      <p class="bt2" data-lang="ko">빌리지에 오신 것을 환영합니다 — 멜로즈 파크 중심부에서 성장하는 커뮤니티이자 도시 생활의 활기찬 허브입니다. 입주민 전용 약 4,000㎡ 녹지를 중심으로 조성되어 일상의 소소한 교류를 담아내며, 도심의 리테일과 라이프스타일이 문 앞에 펼쳐집니다.</p>
+      <p class="bt2" data-lang="en">Melrose Park Village completes the northern stage of the Melrose Park masterplan. Relax in oversized, adaptable spaces designed to grow with you — with green spaces at your door and a landmark Central Park due in 2027.</p>
+      <p class="bt2" data-lang="ko">멜로즈 파크 빌리지는 마스터플랜의 북측 단계를 완성합니다. 삶의 변화에 맞춰 유연하게 쓸 수 있는 넉넉한 공간에서 여유를 누리세요 — 문 앞의 녹지와 2027년 완공 예정인 랜드마크 센트럴 파크가 함께합니다.</p>
+      <div class="tags">
+        <span class="tag" data-lang="en">Oversized Layouts</span><span class="tag" data-lang="ko">넓은 평면</span>
+        <span class="tag" data-lang="en">Wintergarden</span><span class="tag" data-lang="ko">윈터가든</span>
+        <span class="tag" data-lang="en">Smart Home</span><span class="tag" data-lang="ko">스마트홈</span>
+        <span class="tag" data-lang="en">European Appliances</span><span class="tag" data-lang="ko">유럽산 가전</span>
+        <span class="tag" data-lang="en">Pet-Friendly</span><span class="tag" data-lang="ko">반려동물 친화</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><div class="sw">
+  <div class="sp"><div class="sn">4,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Private Open Space</div><div class="sl" data-lang="ko">전용 녹지</div></div>
+  <div class="sp"><div class="sn">20,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Grand Central Park</div><div class="sl" data-lang="ko">그랜드 센트럴 파크</div></div>
+  <div class="sp"><div class="sn">25<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">Specialty Stores</div><div class="sl" data-lang="ko">전문 매장</div></div>
+  <div class="sp"><div class="sn">1,500<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">New Trees Planted</div><div class="sl" data-lang="ko">신규 식재 수목</div></div>
+</div></div>
+
+<div class="band">
+  <img src="assets/melrose-park-village/park.jpg" alt="4,000sqm communal private open space — Artist Impression" loading="lazy">
+  <div class="bo"></div>
+  <div class="bc">
+    <h3 data-lang="en">More Than Green Space</h3><h3 data-lang="ko">녹지 그 이상</h3>
+    <p data-lang="en">Rooftop garden · Wild play · Fruit trees · Artist Impression</p>
+    <p data-lang="ko">루프탑 가든 · 와일드 플레이 · 과실수 · 조감도</p>
+  </div>
+</div>
+
+<section id="amenities">
+  <div class="wrap">
+    <div class="fade">
+      <div class="eb"><span data-lang="en">A Place to Thrive</span><span data-lang="ko">성장하는 공간</span></div>
+      <h2 class="ti"><span data-lang="en">Space to relax,<br>work-out &amp; <em>recover</em></span><span data-lang="ko">쉬고, 운동하고,<br><em>회복하는</em> 공간</span></h2>
+    </div>
+    <div class="ag fade">
+      <div class="am"><div class="ai">🧘</div><h5 data-lang="en">Yoga &amp; Meditation</h5><h5 data-lang="ko">요가 & 명상</h5><p data-lang="en">A designated yoga studio and meditation room give you every opportunity to thrive — mentally and physically.</p><p data-lang="ko">전용 요가 스튜디오와 명상룸이 신체적·정신적 웰빙을 뒷받침합니다.</p></div>
+      <div class="am"><div class="ai">🔥</div><h5 data-lang="en">Gym &amp; Infrared Sauna</h5><h5 data-lang="ko">짐 & 적외선 사우나</h5><p data-lang="en">A residents' gym paired with an infrared sauna for recovery after every session.</p><p data-lang="ko">입주민 전용 짐과 운동 후 회복을 위한 적외선 사우나를 갖췄습니다.</p></div>
+      <div class="am"><div class="ai">🌿</div><h5 data-lang="en">Rooftop Garden</h5><h5 data-lang="ko">루프탑 가든</h5><p data-lang="en">A rooftop garden with wild play area, open naturescapes and productive fruit trees honouring the site's orchard history.</p><p data-lang="ko">와일드 플레이 공간, 자연 경관, 부지의 과수원 역사를 기리는 과실수가 어우러진 루프탑 가든.</p></div>
+      <div class="am"><div class="ai">💼</div><h5 data-lang="en">Co-Working Space</h5><h5 data-lang="ko">코워킹 스페이스</h5><p data-lang="en">Flexible co-working with individual workspaces, fast internet and printers — work from home without staying home.</p><p data-lang="ko">개인 업무 공간, 고속 인터넷, 프린터를 갖춘 유연한 코워킹 공간.</p></div>
+      <div class="am"><div class="ai">🎱</div><h5 data-lang="en">Activities Room</h5><h5 data-lang="ko">액티비티 룸</h5><p data-lang="en">An indoor activities room — the perfect spot to meet neighbours for chess or a game of pool.</p><p data-lang="ko">체스나 당구로 이웃과 어울릴 수 있는 실내 액티비티 룸.</p></div>
+      <div class="am"><div class="ai">🐾</div><h5 data-lang="en">Pet Wash &amp; Grooming</h5><h5 data-lang="ko">펫 워시 & 그루밍</h5><p data-lang="en">Plenty of green space for long walks, plus a pet wash bay and grooming facilities.</p><p data-lang="ko">산책하기 좋은 녹지와 함께 펫 워시 베이·그루밍 시설을 제공합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <img src="assets/melrose-park-village/retail.jpg" alt="Retail entrance — Artist Impression" loading="lazy">
+  <div class="bo"></div>
+  <div class="bc">
+    <h3 data-lang="en">All the Essentials</h3><h3 data-lang="ko">필요한 모든 것</h3>
+    <p data-lang="en">Supermarket · Select retail · Village Green café · Artist Impression</p>
+    <p data-lang="ko">슈퍼마켓 · 리테일 · 빌리지 그린 카페 · 조감도</p>
+  </div>
+</div>
+
+<section class="dk" id="residences">
+  <div class="wrap fade">
+    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span></div>
+    <h2 class="ti"><span data-lang="en">Life-Sized <em>Proportions</em></span><span data-lang="ko">삶에 꼭 맞는 <em>규모</em></span></h2>
+    <p class="su" data-lang="en">All floorplans are designed to maximise Sydney's natural light, air flow and views. The Three Bedroom offers the comfort of a freestanding home with the practicality of apartment living — generous kitchens with premium European appliances, and a wintergarden that works as both balcony and living space.</p>
+    <p class="su" data-lang="ko">모든 평면은 시드니의 자연 채광, 통풍, 조망을 극대화하도록 설계되었습니다. 3베드룸은 단독주택의 여유와 아파트의 편리함을 동시에 제공하며, 프리미엄 유럽산 가전을 갖춘 넉넉한 주방과 발코니이자 거실이 되는 윈터가든을 갖췄습니다.</p>
+    <div class="ig">
+      <div class="ic"><img src="assets/melrose-park-village/int-living.jpg" alt="Three bedroom living — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Live at Scale</h4><h4 data-lang="ko">넉넉한 스케일</h4><p data-lang="en">Three Bedroom living · Artist Impression</p><p data-lang="ko">3베드룸 거실 · 조감도</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/wintergarden.jpg" alt="Wintergarden — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">The Wintergarden</h4><h4 data-lang="ko">윈터가든</h4><p data-lang="en">Indoors, outdoors · Artist Impression</p><p data-lang="ko">실내와 실외의 경계 · 조감도</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="fpsec" id="floorplans">
+  <div class="wrap">
+    <div class="fade">
+      <div class="eb"><span data-lang="en">Three Bedroom Floorplans</span><span data-lang="ko">3베드룸 평면도</span></div>
+      <h2 class="ti"><span data-lang="en">Room for <em>everyone</em></span><span data-lang="ko">모두를 위한 <em>공간</em></span></h2>
+      <p class="su" data-lang="en">Two currently available three-bedroom layouts at Four Melrose. Both include two bathrooms and two car spaces — with space for the kids as well as a grandparent.</p>
+      <p class="su" data-lang="ko">Four Melrose에서 현재 선택 가능한 두 가지 3베드룸 평면입니다. 두 세대 모두 욕실 2개와 주차 2대를 갖춰, 자녀는 물론 부모님까지 함께 지낼 수 있습니다.</p>
+    </div>
+    <div class="fpg fade">
+      <figure class="fpc">
+        <img src="assets/melrose-park-village/fp-c301.jpg" alt="Four Melrose C301 three-bedroom floorplan" loading="lazy">
+        <figcaption class="fpm">
+          <div class="fpt">C301</div>
+          <div class="fps" data-lang="en">Four Melrose · East Building (B &amp; C) · Level 3 · North aspect</div>
+          <div class="fps" data-lang="ko">Four Melrose · 이스트 빌딩(B&amp;C) · 3층 · 북향</div>
+          <div class="fpspecs">
+            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span></div>
+            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span></div>
+            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span></div>
+            <div><b>N</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span></div>
+          </div>
+          <div class="fparea"><b>112 m²</b> total &nbsp;·&nbsp; 96 internal + 16 external</div>
+        </figcaption>
+      </figure>
+      <figure class="fpc">
+        <img src="assets/melrose-park-village/fp-a502.jpg" alt="Four Melrose A502 three-bedroom floorplan" loading="lazy">
+        <figcaption class="fpm">
+          <div class="fpt">A502</div>
+          <div class="fps" data-lang="en">Four Melrose · North-East Building (A) · Level 5 · West aspect · Adaptable</div>
+          <div class="fps" data-lang="ko">Four Melrose · 노스이스트 빌딩(A) · 5층 · 서향 · 어댑터블 설계</div>
+          <div class="fpspecs">
+            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span></div>
+            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span></div>
+            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span></div>
+            <div><b>W</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span></div>
+          </div>
+          <div class="fparea"><b>115 m²</b> total &nbsp;·&nbsp; 103 internal + 12 external</div>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="fpnote" data-lang="en">Floorplans are indicative and intended as a guide only. Dimensions and areas are approximate, subject to change without notice, and do not form part of the contract for sale. Current availability and pricing are provided on enquiry.</p>
+    <p class="fpnote" data-lang="ko">평면도는 참고용이며, 치수와 면적은 근사치로 사전 예고 없이 변경될 수 있고 매매 계약의 일부를 구성하지 않습니다. 현재 분양 가능 여부와 가격은 문의 시 안내해 드립니다.</p>
+  </div>
+</section>
+
+<section class="dk" id="location">
+  <div class="li fade">
+    <div class="lim"><img src="assets/melrose-park-village/location-map.jpg" alt="Melrose Park location map" loading="lazy"></div>
+    <div>
+      <div class="eb"><span data-lang="en">Location &amp; Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
+      <h2 class="ti"><span data-lang="en">An Evolving<br><em>Community</em></span><span data-lang="ko">성장하는<br><em>커뮤니티</em></span></h2>
+      <p class="su" data-lang="en">A fleet of free shuttle services runs to Meadowbank train station and ferry wharf, and the proposed Melrose Park station is included in Stage 2 of the Parramatta Light Rail project.</p>
+      <p class="su" data-lang="ko">메도우뱅크 기차역과 페리 선착장까지 무료 셔틀버스가 운행되며, 멜로즈 파크역 신설이 파라마타 라이트레일 2단계 사업에 포함되어 있습니다.</p>
+      <div class="lg">
+        <div class="lc"><div class="ln">5.4<small>km</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lm" data-lang="en">Second CBD</div><div class="lm" data-lang="ko">시드니 제2 CBD</div></div>
+        <div class="lc"><div class="ln">1.6<small>km</small></div><div class="lt" data-lang="en">Sydney Olympic Park</div><div class="lt" data-lang="ko">시드니 올림픽 파크</div><div class="lm" data-lang="en">Across the river</div><div class="lm" data-lang="ko">강 건너편</div></div>
+        <div class="lc"><div class="ln" style="font-size:1.4rem" data-lang="en">Free</div><div class="ln" style="font-size:1.4rem" data-lang="ko">무료</div><div class="lt" data-lang="en">Shuttle to Meadowbank</div><div class="lt" data-lang="ko">메도우뱅크행 셔틀</div><div class="lm" data-lang="en">Train &amp; ferry wharf</div><div class="lm" data-lang="ko">기차 & 페리 선착장</div></div>
+        <div class="lc"><div class="ln" style="font-size:1.4rem">LRT</div><div class="lt" data-lang="en">Parramatta Light Rail Stage 2</div><div class="lt" data-lang="ko">파라마타 라이트레일 2단계</div><div class="lm" data-lang="en">Melrose Park station proposed</div><div class="lm" data-lang="ko">멜로즈 파크역 신설 예정</div></div>
+        <div class="lc"><div class="ln">50,000<small>m²</small></div><div class="lt" data-lang="en">Parkland in the Masterplan</div><div class="lt" data-lang="ko">마스터플랜 공원 면적</div><div class="lm" data-lang="en">4× the size of the SCG</div><div class="lm" data-lang="ko">SCG의 4배 규모</div></div>
+        <div class="lc"><div class="ln">1,500<small data-lang="en"> jobs</small><small data-lang="ko">개</small></div><div class="lt" data-lang="en">New Full-Time Jobs</div><div class="lt" data-lang="ko">신규 정규직 일자리</div><div class="lm" data-lang="en">Upon completion</div><div class="lm" data-lang="ko">준공 시점 기준</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="developer">
+  <div class="dw fade">
+    <div class="dv"><div class="dlg">SEKISUI HOUSE<small data-lang="en">iCIRT 4 Gold Star (2024)</small><small data-lang="ko">iCIRT 4 골드스타 (2024)</small></div></div>
+    <div>
+      <div class="eb"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
+      <h2 class="ti"><span data-lang="en">Built to <em>Last</em></span><span data-lang="ko">오래도록 <em>지속되는 집</em></span></h2>
+      <p class="su" data-lang="en">Melrose Park is delivered by Sekisui House Australia — one of the world's largest homebuilders, founded in Japan in 1960 and holding a 4 Gold Star iCIRT rating (2024). The masterplan combines a community-focused vision with future-proof technology and health-conscious design, including Smart Home technology and energy/water monitoring.</p>
+      <p class="su" data-lang="ko">멜로즈 파크는 1960년 일본에서 설립된 세계 최대 규모의 주택 건설사 중 하나인 세키스이 하우스 오스트레일리아가 공급하며, iCIRT 4 골드스타 등급(2024)을 보유하고 있습니다. 커뮤니티 중심의 비전에 미래 지향적 기술과 건강을 고려한 설계, 스마트홈 및 에너지·수도 모니터링을 결합했습니다.</p>
+      <div class="dst">
+        <div class="ds"><div class="dsn">1960</div><div class="dsl" data-lang="en">Founded in Japan</div><div class="dsl" data-lang="ko">일본 설립</div></div>
+        <div class="ds"><div class="dsn">4★</div><div class="dsl" data-lang="en">iCIRT Gold Rating (2024)</div><div class="dsl" data-lang="ko">iCIRT 골드 등급 (2024)</div></div>
+        <div class="ds"><div class="dsn">2027</div><div class="dsl" data-lang="en">Grand Central Park Due</div><div class="dsl" data-lang="ko">그랜드 센트럴 파크 완공</div></div>
+        <div class="ds"><div class="dsn">Smart</div><div class="dsl" data-lang="en">Home Tech &amp; Monitoring</div><div class="dsl" data-lang="ko">스마트홈 & 모니터링</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ct" id="contact">
+  <div class="cw fade">
+    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Melrose Park</em></span><span data-lang="ko">멜로즈 파크에서<br><em>새 보금자리</em>를</span></h2>
+    <p class="su" style="margin:0 auto" data-lang="en">Contact Sunny Choi at Forise Group for current availability, full floorplans and a personalised consultation.</p>
+    <p class="su" style="margin:0 auto" data-lang="ko">포라이즈 그룹의 Sunny Choi에게 잔여 세대, 전체 평면도, 맞춤 상담을 문의하세요.</p>
+    <div class="ci">
+      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><span>Sunny Choi — Forise Group</span></div>
+      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><a href="tel:0414824225">0414 824 225</a></div>
+      <div class="cii"><label>Email</label><a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a></div>
+    </div>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Melrose%20Park%20Village%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span></a>
+    <p class="cd" data-lang="en">All information is for marketing purposes only and subject to change without notice. Images are artist impressions. Pricing available upon request. Forise Group acts as selling agent. Developed by Sekisui House Australia.</p>
+    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: 세키스이 하우스 오스트레일리아.</p>
+  </div>
+</section>
+
+<footer><div class="fb">SunnyApps</div><div class="fc">Made by SunnyApps. All rights reserved.</div></footer>
+
+<script>
+function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='dark';b.setAttribute('data-theme',d?'light':'dark');document.querySelector('.bt').textContent=d?'☾':'☀';localStorage.setItem('mpv-theme',d?'light':'dark');}
+(function(){let s=null;try{s=localStorage.getItem('mpv-theme');}catch(e){}
+document.body.setAttribute('data-theme',s==='dark'?'dark':'light');
+document.querySelector('.bt').textContent=s==='dark'?'☀':'☾';})();
+let ko=false;
+function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.bl').textContent=ko?'English':'한국어';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
