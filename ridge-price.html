@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ridge — Price List · Sekisui House</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f3;--surface:#fff;--surface2:#efeae6;--surface3:#e5ded8;
+  --border:rgba(40,30,25,.09);--border2:rgba(40,30,25,.18);
+  --ink:#1a1310;--muted:#7a6c60;--muted2:#c0b4a8;
+  --accent:#c8102e;--accent-l:rgba(200,16,46,.06);
+  --navy:#1a2b4a;--navy-l:rgba(26,43,74,.07);
+  --gold:#a07818;--gold-l:rgba(160,120,24,.08);
+  --green:#1e6840;--green-l:rgba(30,104,64,.08);
+}
+[data-theme="dark"]{
+  --bg:#0e0b0a;--surface:#171210;--surface2:#201a16;--surface3:#2a221c;
+  --border:rgba(230,200,180,.08);--border2:rgba(230,200,180,.15);
+  --ink:#f0e8e0;--muted:#8a7a6c;--muted2:#3a302a;
+  --accent:#f0455f;--accent-l:rgba(240,69,95,.08);
+  --navy:#6a90c8;--navy-l:rgba(106,144,200,.08);
+  --gold:#c8a040;--gold-l:rgba(200,160,64,.08);
+  --green:#48b880;--green-l:rgba(72,184,128,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;transition:background .35s,color .35s;}
+
+.bmc-top{display:flex;align-items:center;gap:6px;background:var(--gold-l);border-bottom:1px solid var(--border);padding:6px 32px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.bmc-top a{color:var(--gold);font-weight:600;text-decoration:none;}
+
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;}
+.h-brand{display:flex;align-items:center;gap:12px;}
+.h-logo{display:flex;align-items:center;gap:7px;}
+.h-mark{display:flex;gap:2px;}
+.h-mark span{width:9px;height:14px;border-radius:2px;}
+.h-mark .m1{background:var(--navy);}
+.h-mark .m2{background:var(--accent);}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;letter-spacing:.1em;color:var(--ink);text-transform:uppercase;}
+.h-center{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:var(--muted);}
+.h-right{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.lang-pill{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+.lang-btn{padding:4px 12px;border:none;background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.theme-btn{background:none;border:1px solid var(--border2);color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+
+.masthead{padding:52px 32px 32px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;max-width:1360px;margin:0 auto;}
+.m-overline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.m-overline::before{content:'';width:22px;height:1px;background:var(--accent);}
+.masthead h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,6vw,86px);font-weight:300;line-height:.9;letter-spacing:-.01em;}
+.masthead h1 i{font-style:italic;color:var(--accent);}
+.m-right{text-align:right;}
+.rel-box{background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:16px 20px;text-align:left;margin-bottom:10px;}
+.rel-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500;}
+.rel-val{font-size:14px;font-weight:500;line-height:1.5;}
+.rel-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px;}
+.date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;display:inline-block;}
+
+.stats{display:flex;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;}
+.s-cell{flex:1;padding:15px 20px;border-right:1px solid var(--border);}
+.s-cell:last-child{border-right:none;}
+.s-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.s-val{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--accent);}
+.s-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+.tab-row{display:flex;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tab-row::-webkit-scrollbar{display:none;}
+.tab-btn{padding:11px 20px;border:none;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-cnt{display:inline-block;margin-left:5px;font-size:9px;background:var(--accent-l);color:var(--accent);border-radius:20px;padding:1px 7px;font-weight:600;}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:12px 32px;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;}
+.f-grp{display:flex;flex-direction:column;gap:3px;}
+.f-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+select,input[type=text]{background:var(--surface);border:1px solid var(--border2);color:var(--ink);padding:6px 10px;border-radius:5px;font-family:'Outfit',sans-serif;font-size:12px;min-width:105px;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+.sw{position:relative;flex:1;min-width:140px;}
+.sw input{width:100%;padding-left:28px;}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 14px;border-radius:5px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;transition:all .2s;}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+.rbar{display:flex;align-items:center;justify-content:space-between;padding:8px 32px;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;}
+.rtxt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.rtxt b{color:var(--ink);font-weight:600;}
+.sort-s{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;padding:0;}
+
+.tbl-wrap{max-width:1360px;margin:0 auto;padding:0 32px 80px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:11px 12px;border-bottom:2px solid var(--border2);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s;}
+tbody tr:hover{background:var(--accent-l);}
+td{padding:14px 12px;white-space:nowrap;}
+
+.prop-id{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--ink);}
+.prop-lot{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+.bldg-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:4px;}
+.bb-F{background:rgba(26,43,74,.08);color:#1a2b4a;border:1px solid rgba(26,43,74,.25);}
+.lvl-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
+.bed-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;border:1px solid var(--border2);background:var(--surface2);}
+.study-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;padding:1px 6px;border-radius:2px;background:var(--gold-l);color:var(--gold);border:1px solid rgba(160,120,24,.2);margin-left:4px;}
+.asp{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:4px;border:1px solid;}
+.asp-N{color:#4a7ab0;border-color:rgba(74,122,176,.25);background:rgba(74,122,176,.06);}
+.asp-S{color:#c07030;border-color:rgba(192,112,48,.25);background:rgba(192,112,48,.06);}
+.asp-E{color:#907020;border-color:rgba(144,112,32,.25);background:rgba(144,112,32,.06);}
+.asp-W{color:#b05828;border-color:rgba(176,88,40,.25);background:rgba(176,88,40,.06);}
+.sz-main{font-size:12px;font-weight:500;}
+.sz-detail{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--ink);}
+.price-psm{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+.strata-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+.avail-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 9px;border-radius:4px;background:var(--green-l);color:var(--green);border:1px solid rgba(30,104,64,.2);}
+
+.empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
+.bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s;z-index:500;}
+.bmc-fixed:hover{transform:translateY(-2px);}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:768px){
+  header,.masthead,.stats,.tab-row,.filters,.rbar,.tbl-wrap{padding-left:16px;padding-right:16px;}
+  .masthead{grid-template-columns:1fr;padding-top:32px;gap:16px;}.m-right{text-align:left;}
+  .h-name{display:none;}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="bmc-top">☕ &nbsp;<a href="https://buymeacoffee.com/schoi0209" target="_blank">Buy me a coffee</a> &nbsp;— SunnyApps
+  <a href="./forise-pricelists.html" style="margin-left:auto;color:var(--gold);font-weight:600;text-decoration:none">← All Price Lists</a>
+</div>
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">
+      <div class="h-mark"><span class="m1"></span><span class="m2"></span></div>
+      <div class="h-name">Sekisui House</div>
+    </div>
+  </div>
+  <div class="h-center" id="txt-h-center">Ridge · Sekisui House</div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnKO" onclick="setLang('ko')">한국어</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☀️</button>
+  </div>
+</header>
+
+<div class="masthead">
+  <div>
+    <div class="m-overline" id="txt-overline">Sekisui House · Ridge NSW · Aug 2026</div>
+    <h1>Ridge<br><i>Residences</i></h1>
+  </div>
+  <div class="m-right">
+    <div class="rel-box">
+      <div class="rel-lbl" id="rel-lbl">◆ Ridge</div>
+      <div class="rel-val">Premium apartments in<br>Building F</div>
+      <div class="rel-sub" id="rel-sub">2–2 Bed · Building F</div>
+    </div>
+    <div class="date-chip">Updated: 30 Aug 2026</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">60</div><div class="s-sub" id="ssub-total">Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">For Sale</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">List Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Internal area</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
+</div>
+
+<div class="tab-row">
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">60</span></button>
+  <button class="tab-btn" onclick="setBldg('F')" id="tab-F">Building F <span class="tab-cnt" id="tc-F">60</span></button>
+</div>
+
+<div class="filters">
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-bed">Bedrooms</span>
+    <select id="fBed" onchange="go()">
+      <option value="" id="opt-bed-all">All</option>
+      <option value="2">2 Bed</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-study">Study</span>
+    <select id="fStudy" onchange="go()">
+      <option value="" id="opt-sty-all">All</option>
+      <option value="yes" id="opt-sty-yes">With Study</option>
+      <option value="no" id="opt-sty-no">No Study</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-asp">Aspect</span>
+    <select id="fAsp" onchange="go()">
+      <option value="" id="opt-asp-all">All</option>
+      <option value="N">N (North)</option>
+      <option value="S">S (South)</option>
+      <option value="E">E (East)</option>
+      <option value="W">W (West)</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-maxpx">Max Price</span>
+    <select id="fMaxPx" onchange="go()">
+      <option value="" id="opt-px-all">All</option>
+      <option value="1100000" id="opt-px1">Under $1.1M</option>
+      <option value="1200000" id="opt-px2">Under $1.2M</option>
+      <option value="1300000" id="opt-px3">Under $1.3M</option>
+    </select>
+  </div>
+  <div class="f-grp" style="flex:1;min-width:140px">
+    <span class="f-lbl" id="flbl-search">Search</span>
+    <div class="sw"><span class="si">⌕</span><input type="text" id="fSrch" placeholder="Property ID, lot..." oninput="go()"></div>
+  </div>
+  <button class="reset-btn" onclick="rst()" id="txt-reset">Reset</button>
+</div>
+
+<div class="rbar">
+  <div class="rtxt"><b id="rCount">0</b><span id="txt-shown-lbl"> units shown</span></div>
+  <select class="sort-s" id="sortSel" onchange="go()">
+    <option value="price-asc" id="srt-pa">Price ↑</option>
+    <option value="price-desc" id="srt-pd">Price ↓</option>
+    <option value="level-asc" id="srt-lva">Level ↑</option>
+    <option value="size-desc" id="srt-sd">Size ↓</option>
+    <option value="psm-asc" id="srt-psa">$/m² ↑</option>
+  </select>
+</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th id="th-prop">Property ID</th>
+        <th id="th-bldg">Bldg</th>
+        <th id="th-level">Level</th>
+        <th id="th-type">Type</th>
+        <th id="th-car">Car</th>
+        <th id="th-size">Area (sqm)</th>
+        <th id="th-asp">Aspect</th>
+        <th id="th-price">Price</th>
+        <th id="th-psm">$/m²</th>
+        <th id="th-strata">Strata/qtr</th>
+        <th id="th-status">Status</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
+</div>
+
+<footer>Made by SunnyApps. All rights reserved. · Ridge Price List — 30 Aug 2026 · Sekisui House</footer>
+<a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
+
+<script>
+const DATA = [
+  {id:"Ridge F0314",unit:"F0314",bldg:"F",level:3,lot:26,bed:2,study:0,car:1,parking:"Standard",int:94,ext:13,total:107,price:977000,strata:1125,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0514",unit:"F0514",bldg:"F",level:5,lot:58,bed:2,study:0,car:1,parking:"Standard",int:86,ext:26,total:112,price:1143000,strata:1178,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1516",unit:"F1516",bldg:"F",level:15,lot:218,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1151000,strata:1344,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1013",unit:"F1013",bldg:"F",level:10,lot:135,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1154000,strata:1195,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1616",unit:"F1616",bldg:"F",level:16,lot:234,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1160000,strata:1350,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F0715",unit:"F0715",bldg:"F",level:7,lot:89,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1162000,strata:1248,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0616",unit:"F0616",bldg:"F",level:6,lot:74,bed:2,study:0,car:1,parking:"Standard",int:87,ext:26,total:113,price:1165000,strata:1227,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1716",unit:"F1716",bldg:"F",level:17,lot:250,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1168000,strata:1355,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1816",unit:"F1816",bldg:"F",level:18,lot:266,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1177000,strata:1361,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1313",unit:"F1313",bldg:"F",level:13,lot:183,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1180000,strata:1211,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F0816",unit:"F0816",bldg:"F",level:8,lot:106,bed:2,study:0,car:1,parking:"Standard",int:87,ext:26,total:113,price:1184000,strata:1232,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1916",unit:"F1916",bldg:"F",level:19,lot:282,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1186000,strata:1366,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F2016",unit:"F2016",bldg:"F",level:20,lot:298,bed:2,study:0,car:1,parking:"Standard",int:80,ext:20,total:100,price:1194000,strata:1371,asp:"W",stamp:0,status:'available'},
+  {id:"Ridge F1513",unit:"F1513",bldg:"F",level:15,lot:215,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1197000,strata:1221,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1613",unit:"F1613",bldg:"F",level:16,lot:231,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1205000,strata:1227,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1713",unit:"F1713",bldg:"F",level:17,lot:247,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1214000,strata:1232,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1913",unit:"F1913",bldg:"F",level:19,lot:279,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1231000,strata:1243,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1515",unit:"F1515",bldg:"F",level:15,lot:217,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1237000,strata:1344,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F2013",unit:"F2013",bldg:"F",level:20,lot:295,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1240000,strata:1248,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F0612",unit:"F0612",bldg:"F",level:6,lot:70,bed:2,study:0,car:1,parking:"Standard",int:87,ext:46,total:133,price:1240000,strata:1312,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F2113",unit:"F2113",bldg:"F",level:21,lot:311,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1248000,strata:1253,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1715",unit:"F1715",bldg:"F",level:17,lot:249,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1256000,strata:1355,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F2213",unit:"F2213",bldg:"F",level:22,lot:327,bed:2,study:0,car:1,parking:"Standard",int:78,ext:16,total:94,price:1257000,strata:1259,asp:"SE",stamp:0,status:'available'},
+  {id:"Ridge F1815",unit:"F1815",bldg:"F",level:18,lot:265,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1265000,strata:1361,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0313",unit:"F0313",bldg:"F",level:3,lot:25,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1271000,strata:1141,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1915",unit:"F1915",bldg:"F",level:19,lot:281,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1274000,strata:1366,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0611",unit:"F0611",bldg:"F",level:6,lot:69,bed:2,study:0,car:1,parking:"Standard",int:85,ext:60,total:145,price:1282000,strata:1312,asp:"NE",stamp:0,status:'available'},
+  {id:"Ridge F2015",unit:"F2015",bldg:"F",level:20,lot:297,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1284000,strata:1371,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0609",unit:"F0609",bldg:"F",level:6,lot:67,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1287000,strata:1259,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2115",unit:"F2115",bldg:"F",level:21,lot:313,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1293000,strata:1382,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F0811",unit:"F0811",bldg:"F",level:8,lot:101,bed:2,study:0,car:1,parking:"Standard",int:85,ext:17,total:102,price:1298000,strata:1302,asp:"NE",stamp:0,status:'available'},
+  {id:"Ridge F0610",unit:"F0610",bldg:"F",level:6,lot:68,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1300000,strata:1232,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F2215",unit:"F2215",bldg:"F",level:22,lot:329,bed:2,study:0,car:1,parking:"Standard",int:86,ext:12,total:98,price:1303000,strata:1393,asp:"SW",stamp:0,status:'available'},
+  {id:"Ridge F1412",unit:"F1412",bldg:"F",level:14,lot:198,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1314000,strata:1323,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F1009",unit:"F1009",bldg:"F",level:10,lot:131,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1329000,strata:1302,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F1612",unit:"F1612",bldg:"F",level:16,lot:230,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1333000,strata:1334,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F1211",unit:"F1211",bldg:"F",level:12,lot:165,bed:2,study:0,car:1,parking:"Standard",int:85,ext:17,total:102,price:1335000,strata:1339,asp:"NE",stamp:0,status:'available'},
+  {id:"Ridge F1712",unit:"F1712",bldg:"F",level:17,lot:246,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1342000,strata:1339,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F1209",unit:"F1209",bldg:"F",level:12,lot:163,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1348000,strata:1323,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F1812",unit:"F1812",bldg:"F",level:18,lot:262,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1351000,strata:1344,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1210",unit:"F1210",bldg:"F",level:12,lot:164,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1358000,strata:1302,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1912",unit:"F1912",bldg:"F",level:19,lot:278,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1361000,strata:1350,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F2012",unit:"F2012",bldg:"F",level:20,lot:294,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1370000,strata:1355,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F1511",unit:"F1511",bldg:"F",level:15,lot:213,bed:2,study:0,car:1,parking:"Standard",int:85,ext:17,total:102,price:1374000,strata:1377,asp:"NE",stamp:0,status:'available'},
+  {id:"Ridge F1509",unit:"F1509",bldg:"F",level:15,lot:211,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1377000,strata:1377,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2212",unit:"F2212",bldg:"F",level:22,lot:326,bed:2,study:0,car:1,parking:"Standard",int:87,ext:15,total:102,price:1390000,strata:1366,asp:"E",stamp:0,status:'available'},
+  {id:"Ridge F1510",unit:"F1510",bldg:"F",level:15,lot:212,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1391000,strata:1366,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1709",unit:"F1709",bldg:"F",level:17,lot:243,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1398000,strata:1387,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F1610",unit:"F1610",bldg:"F",level:16,lot:228,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1400000,strata:1371,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1809",unit:"F1809",bldg:"F",level:18,lot:259,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1407000,strata:1393,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F1710",unit:"F1710",bldg:"F",level:17,lot:244,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1409000,strata:1377,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F1911",unit:"F1911",bldg:"F",level:19,lot:277,bed:2,study:0,car:1,parking:"Standard",int:85,ext:17,total:102,price:1412000,strata:1398,asp:"NE",stamp:0,status:'available'},
+  {id:"Ridge F1909",unit:"F1909",bldg:"F",level:19,lot:275,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1417000,strata:1398,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2009",unit:"F2009",bldg:"F",level:20,lot:291,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1427000,strata:1403,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2109",unit:"F2109",bldg:"F",level:21,lot:307,bed:2,study:0,car:1,parking:"Standard",int:89,ext:16,total:105,price:1436000,strata:1409,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2010",unit:"F2010",bldg:"F",level:20,lot:292,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1437000,strata:1393,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F2209",unit:"F2209",bldg:"F",level:22,lot:323,bed:2,study:0,car:1,parking:"Standard",int:89,ext:17,total:106,price:1446000,strata:1414,asp:"NW",stamp:0,status:'available'},
+  {id:"Ridge F2110",unit:"F2110",bldg:"F",level:21,lot:308,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1447000,strata:1398,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F2310",unit:"F2310",bldg:"F",level:23,lot:340,bed:2,study:0,car:1,parking:"Standard",int:86,ext:16,total:102,price:1466000,strata:1403,asp:"N",stamp:0,status:'available'},
+  {id:"Ridge F2309",unit:"F2309",bldg:"F",level:23,lot:339,bed:2,study:0,car:1,parking:"Standard",int:90,ext:16,total:106,price:1473000,strata:1419,asp:"NW",stamp:0,status:'available'},
+];
+
+const i18n = {
+  en:{
+    'txt-h-center':'Ridge · Sekisui House','txt-overline':'Sekisui House · Ridge NSW · Aug 2026',
+    'rel-lbl':'◆ Ridge','rel-sub':'2–2 Bed · Building F',
+    'slbl-total':'Total Units','ssub-total':'Available',
+    'slbl-avail':'Available','ssub-avail':'For Sale',
+    'slbl-from':'From','ssub-from':'List Price',
+    'slbl-psm':'Avg $/m²','ssub-psm':'Internal area',
+    'slbl-shown':'Showing','ssub-shown':'Current filter',
+    'flbl-bed':'Bedrooms','flbl-study':'Study','flbl-asp':'Aspect','flbl-maxpx':'Max Price','flbl-search':'Search',
+    'opt-bed-all':'All','opt-sty-all':'All','opt-sty-yes':'With Study','opt-sty-no':'No Study','opt-asp-all':'All',
+    'opt-px-all':'All','opt-px1':'Under $1.1M','opt-px2':'Under $1.2M','opt-px3':'Under $1.3M',
+    'txt-reset':'Reset','txt-shown-lbl':' units shown',
+    'th-prop':'Property ID','th-bldg':'Bldg','th-level':'Level','th-type':'Type','th-car':'Car',
+    'th-size':'Area (sqm)','th-asp':'Aspect','th-price':'Price','th-psm':'$/m²','th-strata':'Strata/qtr','th-status':'Status',
+    'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-lva':'Level ↑','srt-sd':'Size ↓','srt-psa':'$/m² ↑',
+    'txt-empty':'— No units match your criteria —',
+    searchPh:'Property ID, lot...',
+    lBed:'Bed',lStudy:'Study',
+  },
+  ko:{
+    'txt-h-center':"\ub9bf\uc9c0 \u00b7 \uc138\ud0a4\uc2a4\uc774 \ud558\uc6b0\uc2a4",'txt-overline':"\uc138\ud0a4\uc2a4\uc774 \ud558\uc6b0\uc2a4 \u00b7 \ub9bf\uc9c0 NSW \u00b7 2026\ub144 8\uc6d4",
+    'rel-lbl':"\u25c6 \ub9bf\uc9c0",'rel-sub':"2\u20132\ubca0\ub4dc \u00b7 Building F",
+    'slbl-total':'총 세대','ssub-total':'분양 가능',
+    'slbl-avail':'분양 가능','ssub-avail':'판매 중',
+    'slbl-from':'최저가','ssub-from':'분양가',
+    'slbl-psm':'평균 $/m²','ssub-psm':'내부 면적',
+    'slbl-shown':'표시 중','ssub-shown':'현재 필터',
+    'flbl-bed':'침실 수','flbl-study':'서재','flbl-asp':'방향','flbl-maxpx':'최대 가격','flbl-search':'검색',
+    'opt-bed-all':'전체','opt-sty-all':'전체','opt-sty-yes':'서재 포함','opt-sty-no':'서재 없음','opt-asp-all':'전체',
+    'opt-px-all':'전체','opt-px1':'$1.1M 이하','opt-px2':'$1.2M 이하','opt-px3':'$1.3M 이하',
+    'txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중',
+    'th-prop':'프로퍼티 ID','th-bldg':'빌딩','th-level':'층','th-type':'타입','th-car':'주차',
+    'th-size':'면적 (sqm)','th-asp':'방향','th-price':'분양가','th-psm':'m²당','th-strata':'스트라타/분기','th-status':'상태',
+    'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-lva':'층수 낮은 순','srt-sd':'면적 큰 순','srt-psa':'단가 낮은 순',
+    'txt-empty':'— 조건에 맞는 세대가 없습니다 —',
+    searchPh:'프로퍼티 ID, Lot 검색...',
+    lBed:'베드',lStudy:'서재',
+  }
+};
+
+let lang='en', curBldg='all', fil=[];
+
+function setLang(l){
+  lang=l;
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnKO').classList.toggle('active',l==='ko');
+  const t=i18n[l];
+  Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});
+  document.getElementById('fSrch').placeholder=t.searchPh;
+  render(); upStats();
+}
+
+function setBldg(b){
+  curBldg=b;
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById('tab-'+b).classList.add('active');
+  go();
+}
+
+function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+'M';return'$'+(n/1e3).toFixed(0)+'K';}
+
+function go(){
+  const bed=document.getElementById('fBed').value;
+  const study=document.getElementById('fStudy').value;
+  const asp=document.getElementById('fAsp').value;
+  const maxPx=document.getElementById('fMaxPx').value;
+  const sr=document.getElementById('fSrch').value.toLowerCase().trim();
+  const srt=document.getElementById('sortSel').value;
+
+  fil=DATA.filter(d=>{
+    if(curBldg!=='all'&&d.bldg!==curBldg) return false;
+    if(bed&&d.bed!==+bed) return false;
+    if(study==='yes'&&d.study===0) return false;
+    if(study==='no'&&d.study>0) return false;
+    if(asp&&d.asp!==asp) return false;
+    if(maxPx&&d.price>+maxPx) return false;
+    if(sr){const h=[d.id,d.unit,String(d.lot),d.asp].join(' ').toLowerCase();if(!h.includes(sr))return false;}
+    return true;
+  });
+
+  fil.sort((a,b)=>{
+    if(srt==='price-asc')  return a.price-b.price;
+    if(srt==='price-desc') return b.price-a.price;
+    if(srt==='level-asc')  return a.level-b.level;
+    if(srt==='size-desc')  return b.total-a.total;
+    if(srt==='psm-asc')    return (a.price/a.int)-(b.price/b.int);
+    return 0;
+  });
+
+  ['F'].forEach(b=>{document.getElementById('tc-'+b).textContent=DATA.filter(d=>d.bldg===b).length;});
+  document.getElementById('tc-all').textContent=DATA.length;
+
+  render(); upStats();
+}
+
+function render(){
+  const t=i18n[lang];
+  document.getElementById('rCount').textContent=fil.length;
+  document.getElementById('txt-shown-lbl').textContent=t['txt-shown-lbl'];
+  const tb=document.getElementById('tBody'), em=document.getElementById('emptyMsg');
+  if(!fil.length){tb.innerHTML='';em.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
+  em.style.display='none';
+  tb.innerHTML=fil.map(d=>{
+    const psm=Math.round(d.price/d.int);
+    return `<tr>
+      <td><div class="prop-id">${d.unit}</div><div class="prop-lot">Lot ${d.lot}</div></td>
+      <td><span class="bldg-badge bb-${d.bldg}">${d.bldg}</span></td>
+      <td><span class="lvl-chip">L${d.level}</span></td>
+      <td><span class="bed-chip">🛏 ${d.bed} ${t.lBed}${d.study>0?`<span class="study-tag">+${d.study} ${t.lStudy}</span>`:''}</span></td>
+      <td style="font-size:12px;text-align:center">🚗 ${d.car}</td>
+      <td><div class="sz-main">${d.total} sqm</div><div class="sz-detail">Int ${d.int} + Ext ${d.ext}</div></td>
+      <td><span class="asp asp-${d.asp}">${d.asp}</span></td>
+      <td><div class="price-val">$${d.price.toLocaleString()}</div></td>
+      <td><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">$${psm.toLocaleString()}</div></td>
+      <td><div class="strata-val">${d.strata?'$'+d.strata.toLocaleString():'—'}</div></td>
+      <td><span class="avail-badge">Available</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function upStats(){
+  const px=fil.map(d=>d.price);
+  const psms=fil.map(d=>Math.round(d.price/d.int));
+  document.getElementById('sval-total').textContent=DATA.length;
+  document.getElementById('sval-avail').textContent=fil.filter(d=>d.status==='available').length;
+  document.getElementById('sval-from').textContent=px.length?$f(Math.min(...px)):'—';
+  document.getElementById('sval-psm').textContent=psms.length?'$'+Math.round(psms.reduce((a,b)=>a+b,0)/psms.length).toLocaleString():'—';
+  document.getElementById('sval-shown').textContent=fil.length;
+}
+
+function rst(){
+  ['fBed','fStudy','fAsp','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSrch').value='';
+  document.getElementById('sortSel').value='price-asc';
+  curBldg='all';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-all').classList.add('active');
+  go();
+}
+
+function toggleTheme(){
+  const b=document.body, btn=document.getElementById('themeBtn');
+  if(b.dataset.theme==='light'){b.dataset.theme='dark';btn.textContent='🌙';}
+  else{b.dataset.theme='light';btn.textContent='☀️';}
+}
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+  document.body.dataset.theme='dark';document.getElementById('themeBtn').textContent='🌙';
+}
+go();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Willow — Price List May 2026</title>
+<title>Willow — Price List Aug 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -148,7 +148,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
     <div class="h-name">Willow</div>
     <div class="h-sub">Residences · Sydney</div>
   </div>
-  <div class="h-center" id="txt-h-center">Price List · May 2026</div>
+  <div class="h-center" id="txt-h-center">Price List · Aug 2026</div>
   <div class="h-right">
     <div class="lang-pill">
       <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
@@ -160,7 +160,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="masthead">
   <div>
-    <div class="m-overline" id="txt-overline">Apartment · Sydney NSW · May 2026</div>
+    <div class="m-overline" id="txt-overline">Apartment · Sydney NSW · Aug 2026</div>
     <h1>Willow<br><i>Residences</i></h1>
   </div>
   <div class="m-right">
@@ -168,7 +168,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
       <div class="info-lbl" id="lbl-addr">Address</div>
       <div class="info-val">Sydney, NSW</div>
     </div>
-    <div class="date-chip">Updated: 25 May 2026</div>
+    <div class="date-chip">Updated: 30 Aug 2026</div>
     <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.7" id="txt-note">
       Building H · Building I · Building J<br>
       87 apartments · 2–4 Bedrooms
@@ -178,7 +178,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <!-- STATS -->
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Apts</div><div class="s-val" id="sval-total">87</div><div class="s-sub" id="ssub-total">All Available</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Apts</div><div class="s-val" id="sval-total">38</div><div class="s-sub" id="ssub-total">All Available</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">List Price</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avg">Avg Price</div><div class="s-val" id="sval-avg">—</div><div class="s-sub" id="ssub-avg">Filtered</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avg-psm">Avg $/m²</div><div class="s-val" id="sval-avg-psm">—</div><div class="s-sub" id="ssub-avg-psm">Internal area</div></div>
@@ -187,9 +187,8 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <!-- BUILDING TABS -->
 <div class="tab-row">
-  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">87</span></button>
+  <button class="tab-btn active" onclick="setBldg('all')" id="tab-all">All <span class="tab-cnt" id="tc-all">38</span></button>
   <button class="tab-btn" onclick="setBldg('H')" id="tab-H">Building H <span class="tab-cnt" id="tc-H">0</span></button>
-  <button class="tab-btn" onclick="setBldg('I')" id="tab-I">Building I <span class="tab-cnt" id="tc-I">0</span></button>
   <button class="tab-btn" onclick="setBldg('J')" id="tab-J">Building J <span class="tab-cnt" id="tc-J">0</span></button>
 </div>
 
@@ -287,103 +286,54 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   <div class="empty" id="emptyMsg" style="display:none"><p id="txt-empty">— No units match your criteria —</p></div>
 </div>
 
-<footer>Made by SunnyApps. All rights reserved. · Willow Residences Price List — 25 May 2026</footer>
+<footer>Made by SunnyApps. All rights reserved. · Willow Residences Price List — 30 Aug 2026</footer>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 
 <script>
 const DATA = [
-  {id:'Willow J0721',lot:102,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:975000,strata:1206.12,asp:'W',bldg:'J',level:7},
-  {id:'Willow I0215',lot:18,bed:2,study:0,car:1,parking:'Standard',int:78,ext:13,total:91,price:990000,strata:1113.34,asp:'W',bldg:'I',level:2},
-  {id:'Willow J0330',lot:63,bed:2,study:0,car:1,parking:'Standard',int:75,ext:26,total:101,price:995000,strata:1329.82,asp:'SE',bldg:'J',level:3},
-  {id:'Willow H0308',lot:133,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1010000,strata:1360.75,asp:'NE',bldg:'H',level:3},
-  {id:'Willow J0430',lot:75,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1030000,strata:1360.75,asp:'SE',bldg:'J',level:4},
-  {id:'Willow J0530',lot:87,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1035000,strata:1366.93,asp:'SE',bldg:'J',level:5},
-  {id:'Willow J0630',lot:99,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1035000,strata:1373.12,asp:'SE',bldg:'J',level:6},
-  {id:'Willow J0432',lot:77,bed:2,study:0,car:1,parking:'Standard',int:82,ext:10,total:92,price:1040000,strata:1298.9,asp:'W',bldg:'J',level:4},
-  {id:'Willow H0408',lot:141,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1050000,strata:1360.75,asp:'NE',bldg:'H',level:4},
-  {id:'Willow J0730',lot:111,bed:2,study:0,car:1,parking:'Standard',int:75,ext:10,total:85,price:1050000,strata:1379.3,asp:'SE',bldg:'J',level:7},
-  {id:'Willow H0508',lot:149,bed:2,study:0,car:1,parking:'Standard',int:75,ext:17,total:92,price:1060000,strata:1404.04,asp:'NE',bldg:'H',level:5},
-  {id:'Willow J0628',lot:97,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1060000,strata:1311.27,asp:'E',bldg:'J',level:6},
-  {id:'Willow J0732',lot:113,bed:2,study:0,car:1,parking:'Standard',int:82,ext:10,total:92,price:1070000,strata:1360.75,asp:'W',bldg:'J',level:7},
-  {id:'Willow J0428',lot:73,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1085000,strata:1298.9,asp:'E',bldg:'J',level:4},
-  {id:'Willow J0828',lot:121,bed:2,study:0,car:1,parking:'Standard',int:81,ext:11,total:92,price:1090000,strata:1329.82,asp:'E',bldg:'J',level:8},
-  {id:'Willow H1203',lot:200,bed:2,study:0,car:1,parking:'Standard',int:77,ext:16,total:93,price:1165000,strata:1453.53,asp:'SE',bldg:'H',level:12},
-  {id:'Willow J0623',lot:92,bed:2,study:0,car:1,parking:'Standard',int:76,ext:21,total:97,price:1175000,strata:1478.27,asp:'NW',bldg:'J',level:6},
-  {id:'Willow H1503',lot:224,bed:2,study:0,car:1,parking:'Standard',int:77,ext:16,total:93,price:1200000,strata:1608.16,asp:'SE',bldg:'H',level:15},
-  {id:'Willow H1403',lot:216,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1270000,strata:1577.23,asp:'SE',bldg:'H',level:14},
-  {id:'Willow H1108',lot:197,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1290000,strata:1577.23,asp:'NE',bldg:'H',level:11},
-  {id:'Willow H1208',lot:205,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1290000,strata:1608.16,asp:'NE',bldg:'H',level:12},
-  {id:'Willow H1308',lot:213,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1300000,strata:1670.01,asp:'NE',bldg:'H',level:13},
-  {id:'Willow H1703',lot:240,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1300000,strata:1676.19,asp:'SE',bldg:'H',level:17},
-  {id:'Willow H1404',lot:217,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1310000,strata:1781.34,asp:'SW',bldg:'H',level:14},
-  {id:'Willow H1408',lot:221,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1310000,strata:1694.75,asp:'NE',bldg:'H',level:14},
-  {id:'Willow H1508',lot:229,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1320000,strata:1700.93,asp:'NE',bldg:'H',level:15},
-  {id:'Willow H1608',lot:237,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1330000,strata:1731.86,asp:'NE',bldg:'H',level:16},
-  {id:'Willow H1604',lot:233,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1345000,strata:1793.71,asp:'SW',bldg:'H',level:16},
-  {id:'Willow H1704',lot:241,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1355000,strata:1799.9,asp:'SW',bldg:'H',level:17},
-  {id:'Willow H1307',lot:212,bed:2,study:1,car:2,parking:'Tandem',int:84,ext:17,total:101,price:1365000,strata:1775.16,asp:'NW',bldg:'H',level:13},
-  {id:'Willow H1804',lot:249,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1365000,strata:1806.08,asp:'SW',bldg:'H',level:18},
-  {id:'Willow H1808',lot:253,bed:2,study:0,car:2,parking:'Tandem',int:75,ext:17,total:92,price:1370000,strata:1744.23,asp:'NE',bldg:'H',level:18},
-  {id:'Willow H1407',lot:220,bed:2,study:1,car:2,parking:'Tandem',int:84,ext:17,total:101,price:1375000,strata:1781.34,asp:'NW',bldg:'H',level:14},
-  {id:'Willow H2004',lot:265,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1415000,strata:1818.45,asp:'SW',bldg:'H',level:20},
-  {id:'Willow H2104',lot:271,bed:2,study:0,car:2,parking:'Tandem + Adaptable',int:84,ext:12,total:96,price:1425000,strata:1824.64,asp:'SW',bldg:'H',level:21},
-  {id:'Willow H2204',lot:277,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1435000,strata:1830.82,asp:'SW',bldg:'H',level:22},
-  {id:'Willow H2003',lot:264,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1440000,strata:1694.75,asp:'SE',bldg:'H',level:20},
-  {id:'Willow J0424',lot:69,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1440000,strata:1768.97,asp:'NE',bldg:'J',level:4},
-  {id:'Willow H2304',lot:283,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1445000,strata:1837.01,asp:'SW',bldg:'H',level:23},
-  {id:'Willow H2103',lot:270,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1450000,strata:1700.93,asp:'SE',bldg:'H',level:21},
-  {id:'Willow H2404',lot:289,bed:2,study:0,car:2,parking:'Standard',int:84,ext:12,total:96,price:1455000,strata:1843.19,asp:'SW',bldg:'H',level:24},
-  {id:'Willow H2203',lot:276,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1460000,strata:1707.12,asp:'SE',bldg:'H',level:22},
-  {id:'Willow H2504',lot:295,bed:2,study:0,car:2,parking:'Standard + Adaptable',int:84,ext:12,total:96,price:1465000,strata:1849.38,asp:'SW',bldg:'H',level:25},
-  {id:'Willow J0624',lot:93,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1465000,strata:1855.56,asp:'NE',bldg:'J',level:6},
-  {id:'Willow H2303',lot:282,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1470000,strata:1713.3,asp:'SE',bldg:'H',level:23},
-  {id:'Willow H2403',lot:288,bed:2,study:0,car:2,parking:'Side by Side',int:77,ext:16,total:93,price:1480000,strata:1719.49,asp:'SE',bldg:'H',level:24},
-  {id:'Willow H2503',lot:294,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1490000,strata:1725.68,asp:'SE',bldg:'H',level:25},
-  {id:'Willow H2603',lot:300,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1500000,strata:1731.86,asp:'SE',bldg:'H',level:26},
-  {id:'Willow H2702',lot:305,bed:2,study:0,car:2,parking:'Tandem',int:77,ext:16,total:93,price:1510000,strata:1756.6,asp:'SE',bldg:'H',level:27},
-  {id:'Willow J0524',lot:81,bed:2,study:0,car:2,parking:'Tandem',int:80,ext:15,total:95,price:1510000,strata:1849.38,asp:'NE',bldg:'J',level:5},
-  {id:'Willow H2301',lot:280,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1611000,strata:1960.71,asp:'NE',bldg:'H',level:23},
-  {id:'Willow H2401',lot:286,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1620000,strata:1966.9,asp:'NE',bldg:'H',level:24},
-  {id:'Willow H2501',lot:292,bed:2,study:0,car:2,parking:'Tandem',int:83,ext:23,total:106,price:1625000,strata:1973.08,asp:'NE',bldg:'H',level:25},
-  {id:'Willow J0102',lot:2,bed:2,study:1,car:2,parking:'Tandem',int:115,ext:37,total:152,price:1720000,strata:2226.68,asp:'E',bldg:'J',level:1},
-  {id:'Willow J0103',lot:3,bed:2,study:1,car:2,parking:'Tandem',int:114,ext:55,total:169,price:1720000,strata:2226.68,asp:'E',bldg:'J',level:1},
-  {id:'Willow J0104',lot:4,bed:2,study:1,car:2,parking:'Tandem',int:114,ext:46,total:160,price:1720000,strata:2257.6,asp:'E',bldg:'J',level:1},
-  {id:'Willow J0107',lot:7,bed:2,study:1,car:2,parking:'Tandem',int:110,ext:32,total:142,price:1870000,strata:2412.23,asp:'N',bldg:'J',level:1},
-  {id:'Willow J0108',lot:8,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:37,total:154,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
-  {id:'Willow J0109',lot:9,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:36,total:153,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
-  {id:'Willow J0110',lot:10,bed:2,study:1,car:2,parking:'Tandem',int:117,ext:38,total:155,price:1870000,strata:2350.38,asp:'N',bldg:'J',level:1},
-  {id:'Willow H2105',lot:272,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1855000,strata:2535.94,asp:'W',bldg:'H',level:21},
-  {id:'Willow H2205',lot:278,bed:3,study:1,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1875000,strata:2566.86,asp:'W',bldg:'H',level:22},
-  {id:'Willow H2305',lot:284,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1900000,strata:2597.79,asp:'W',bldg:'H',level:23},
-  {id:'Willow H2005',lot:266,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1905000,strata:2505.01,asp:'W',bldg:'H',level:20},
-  {id:'Willow H2405',lot:290,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1925000,strata:2628.72,asp:'W',bldg:'H',level:24},
-  {id:'Willow H2505',lot:296,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1950000,strata:2659.64,asp:'W',bldg:'H',level:25},
-  {id:'Willow H2605',lot:302,bed:3,study:1,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:1975000,strata:2690.57,asp:'W',bldg:'H',level:26},
-  {id:'Willow H2704',lot:307,bed:3,study:0,car:3,parking:'Tandem + Standard',int:108,ext:17,total:125,price:2000000,strata:2721.5,asp:'W',bldg:'H',level:27},
-  {id:'Willow H2701',lot:304,bed:3,study:0,car:3,parking:'Standard',int:122,ext:49,total:171,price:2685000,strata:3463.72,asp:'NE',bldg:'H',level:27},
-  {id:'Willow H2106',lot:273,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2780000,strata:3525.57,asp:'N',bldg:'H',level:21},
-  {id:'Willow H2006',lot:267,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2805000,strata:3494.65,asp:'N',bldg:'H',level:20},
-  {id:'Willow H2206',lot:279,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2830000,strata:3556.5,asp:'N',bldg:'H',level:22},
-  {id:'Willow H2306',lot:285,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2880000,strata:3587.43,asp:'N',bldg:'H',level:23},
-  {id:'Willow H0111',lot:11,bed:3,study:1,car:3,parking:'Tandem + Standard',int:162,ext:85,total:247,price:2925000,strata:3092.61,asp:'NW',bldg:'H',level:1},
-  {id:'Willow H2406',lot:291,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2930000,strata:3618.35,asp:'N',bldg:'H',level:24},
-  {id:'Willow J0106',lot:6,bed:3,study:1,car:3,parking:'Standard',int:149,ext:92,total:241,price:2935000,strata:4020.39,asp:'NE',bldg:'J',level:1},
-  {id:'Willow H2506',lot:297,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:2980000,strata:3649.28,asp:'N',bldg:'H',level:25},
-  {id:'Willow H2606',lot:303,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:3030000,strata:3680.2,asp:'N',bldg:'H',level:26},
-  {id:'Willow H2705',lot:308,bed:3,study:1,car:3,parking:'Tandem + Standard',int:137,ext:63,total:200,price:3085000,strata:3711.13,asp:'N',bldg:'H',level:27},
-  {id:'Willow J0105',lot:5,bed:4,study:0,car:3,parking:'Standard',int:145,ext:53,total:198,price:2215000,strata:4020.39,asp:'E',bldg:'J',level:1},
-  {id:'Willow J0827',lot:120,bed:4,study:0,car:3,parking:'Standard',int:129,ext:90,total:219,price:2585000,strata:3587.43,asp:'W',bldg:'J',level:8},
-  {id:'Willow J0826',lot:119,bed:4,study:0,car:3,parking:'Standard',int:141,ext:90,total:231,price:2685000,strata:3587.43,asp:'E',bldg:'J',level:8},
-  {id:'Willow J0832',lot:125,bed:4,study:0,car:3,parking:'Standard',int:149,ext:81,total:230,price:2760000,strata:3711.13,asp:'W',bldg:'J',level:8},
-  {id:'Willow J0830',lot:123,bed:4,study:0,car:3,parking:'Standard',int:137,ext:92,total:229,price:2810000,strata:3834.83,asp:'SE',bldg:'J',level:8},
-  {id:'Willow J0825',lot:118,bed:4,study:0,car:3,parking:'Standard',int:138,ext:92,total:230,price:2985000,strata:4020.39,asp:'NE',bldg:'J',level:8},
-  {id:'Willow J0824',lot:117,bed:4,study:0,car:3,parking:'Standard',int:147,ext:132,total:279,price:3030000,strata:4020.39,asp:'NE',bldg:'J',level:8},
-  {id:'Willow H2801',lot:309,bed:4,study:1,car:3,parking:'Standard',int:179,ext:147,total:326,price:4545000,strata:5566.69,asp:'NW',bldg:'H',level:28},
+  {id:"Willow J0721",lot:102,bed:2,study:0,car:1,parking:"Standard",int:75,ext:10,total:85,price:980000,strata:1206,asp:"W",bldg:"J",level:7},
+  {id:"Willow J0821",lot:114,bed:2,study:0,car:1,parking:"Standard",int:75,ext:10,total:85,price:985000,strata:1231,asp:"W",bldg:"J",level:8},
+  {id:"Willow J0430",lot:75,bed:2,study:0,car:1,parking:"Standard",int:75,ext:10,total:85,price:1030000,strata:1361,asp:"SE",bldg:"J",level:4},
+  {id:"Willow J0530",lot:87,bed:2,study:0,car:1,parking:"Standard",int:75,ext:10,total:85,price:1035000,strata:1367,asp:"SE",bldg:"J",level:5},
+  {id:"Willow J0432",lot:77,bed:2,study:0,car:1,parking:"Standard",int:82,ext:10,total:92,price:1040000,strata:1299,asp:"W",bldg:"J",level:4},
+  {id:"Willow J0630",lot:99,bed:2,study:0,car:2,parking:"Standard",int:75,ext:10,total:85,price:1085000,strata:1373,asp:"SE",bldg:"J",level:6},
+  {id:"Willow J0428",lot:73,bed:2,study:0,car:1,parking:"Standard",int:81,ext:11,total:92,price:1085000,strata:1299,asp:"E",bldg:"J",level:4},
+  {id:"Willow J0828",lot:121,bed:2,study:0,car:1,parking:"Standard",int:81,ext:11,total:92,price:1090000,strata:1330,asp:"E",bldg:"J",level:8},
+  {id:"Willow J0730",lot:111,bed:2,study:0,car:2,parking:"Standard",int:75,ext:10,total:85,price:1100000,strata:1379,asp:"SE",bldg:"J",level:7},
+  {id:"Willow J0628",lot:97,bed:2,study:0,car:2,parking:"Standard",int:81,ext:11,total:92,price:1110000,strata:1311,asp:"E",bldg:"J",level:6},
+  {id:"Willow J0623",lot:92,bed:2,study:0,car:1,parking:"Standard",int:76,ext:21,total:97,price:1175000,strata:1478,asp:"NW",bldg:"J",level:6},
+  {id:"Willow J0424",lot:69,bed:2,study:0,car:2,parking:"Tandem",int:80,ext:15,total:95,price:1440000,strata:1769,asp:"NE",bldg:"J",level:4},
+  {id:"Willow H2304",lot:283,bed:2,study:0,car:2,parking:"Standard + Adaptable",int:84,ext:12,total:96,price:1445000,strata:1837,asp:"SW",bldg:"H",level:23},
+  {id:"Willow H2404",lot:289,bed:2,study:0,car:2,parking:"Standard",int:84,ext:12,total:96,price:1455000,strata:1843,asp:"SW",bldg:"H",level:24},
+  {id:"Willow J0624",lot:93,bed:2,study:0,car:2,parking:"Tandem",int:80,ext:15,total:95,price:1465000,strata:1856,asp:"NE",bldg:"J",level:6},
+  {id:"Willow H2303",lot:282,bed:2,study:0,car:2,parking:"Tandem",int:77,ext:16,total:93,price:1470000,strata:1713,asp:"SE",bldg:"H",level:23},
+  {id:"Willow H2503",lot:294,bed:2,study:0,car:2,parking:"Tandem",int:77,ext:16,total:93,price:1470000,strata:1726,asp:"SE",bldg:"H",level:25},
+  {id:"Willow H2403",lot:288,bed:2,study:0,car:2,parking:"Side by Side",int:77,ext:16,total:93,price:1480000,strata:1719,asp:"SE",bldg:"H",level:24},
+  {id:"Willow H2603",lot:300,bed:2,study:0,car:2,parking:"Tandem",int:77,ext:16,total:93,price:1485000,strata:1732,asp:"SE",bldg:"H",level:26},
+  {id:"Willow H2702",lot:305,bed:2,study:0,car:2,parking:"Tandem",int:77,ext:16,total:93,price:1495000,strata:1757,asp:"SE",bldg:"H",level:27},
+  {id:"Willow J0524",lot:81,bed:2,study:0,car:2,parking:"Tandem",int:80,ext:15,total:95,price:1510000,strata:1849,asp:"NE",bldg:"J",level:5},
+  {id:"Willow H2301",lot:280,bed:2,study:0,car:2,parking:"Tandem",int:83,ext:23,total:106,price:1611000,strata:1961,asp:"NE",bldg:"H",level:23},
+  {id:"Willow H2401",lot:286,bed:2,study:0,car:2,parking:"Tandem",int:83,ext:23,total:106,price:1620000,strata:1967,asp:"NE",bldg:"H",level:24},
+  {id:"Willow J0102",lot:2,bed:2,study:1,car:2,parking:"Tandem",int:115,ext:37,total:152,price:1720000,strata:2227,asp:"E",bldg:"J",level:1},
+  {id:"Willow J0103",lot:3,bed:2,study:1,car:2,parking:"Tandem",int:114,ext:55,total:169,price:1720000,strata:2227,asp:"E",bldg:"J",level:1},
+  {id:"Willow J0110",lot:10,bed:2,study:1,car:2,parking:"Tandem",int:117,ext:38,total:155,price:1870000,strata:2350,asp:"N",bldg:"J",level:1},
+  {id:"Willow J0109",lot:9,bed:2,study:1,car:2,parking:"Tandem",int:117,ext:36,total:153,price:1870000,strata:2350,asp:"N",bldg:"J",level:1},
+  {id:"Willow J0108",lot:8,bed:2,study:1,car:2,parking:"Tandem",int:117,ext:37,total:154,price:1870000,strata:2350,asp:"N",bldg:"J",level:1},
+  {id:"Willow H2305",lot:284,bed:3,study:0,car:3,parking:"Tandem + Standard",int:108,ext:17,total:125,price:1900000,strata:2598,asp:"W",bldg:"H",level:23},
+  {id:"Willow H2405",lot:290,bed:3,study:0,car:3,parking:"Tandem + Standard",int:108,ext:17,total:125,price:1925000,strata:2629,asp:"W",bldg:"H",level:24},
+  {id:"Willow H2701",lot:304,bed:3,study:0,car:3,parking:"Standard",int:122,ext:49,total:171,price:2655000,strata:3464,asp:"NE",bldg:"H",level:27},
+  {id:"Willow J0826",lot:119,bed:4,study:0,car:3,parking:"Standard",int:141,ext:90,total:231,price:2685000,strata:3587,asp:"E",bldg:"J",level:8},
+  {id:"Willow J0830",lot:123,bed:4,study:0,car:3,parking:"Standard",int:137,ext:92,total:229,price:2810000,strata:3835,asp:"SE",bldg:"J",level:8},
+  {id:"Willow H2206",lot:279,bed:3,study:1,car:3,parking:"Tandem + Standard",int:137,ext:63,total:200,price:2830000,strata:3557,asp:"N",bldg:"H",level:22},
+  {id:"Willow H2306",lot:285,bed:3,study:1,car:3,parking:"Tandem + Standard",int:137,ext:63,total:200,price:2880000,strata:3587,asp:"N",bldg:"H",level:23},
+  {id:"Willow H2406",lot:291,bed:3,study:1,car:3,parking:"Tandem + Standard",int:137,ext:63,total:200,price:2930000,strata:3618,asp:"N",bldg:"H",level:24},
+  {id:"Willow H2606",lot:303,bed:3,study:1,car:3,parking:"Tandem + Standard",int:137,ext:63,total:200,price:2980000,strata:3680,asp:"N",bldg:"H",level:26},
+  {id:"Willow J0825",lot:118,bed:4,study:0,car:3,parking:"Standard",int:138,ext:92,total:230,price:2985000,strata:4020,asp:"NE",bldg:"J",level:8},
 ];
 
 const i18n = {
   en:{
-    'txt-h-center':'Price List · May 2026','txt-overline':'Apartment · Sydney NSW · May 2026',
+    'txt-h-center':'Price List · Aug 2026','txt-overline':'Apartment · Sydney NSW · Aug 2026',
     'lbl-addr':'Address','txt-note':'Building H · Building I · Building J<br>87 apartments · 2–4 Bedrooms',
     'slbl-total':'Total Apts','ssub-total':'All Available',
     'slbl-from':'From','ssub-from':'List Price',
@@ -483,7 +433,7 @@ function go(){
   });
 
   // Update tab counts
-  ['H','I','J'].forEach(b=>{
+  ['H','J'].forEach(b=>{
     document.getElementById('tc-'+b).textContent=DATA.filter(d=>d.bldg===b).length;
   });
   document.getElementById('tc-all').textContent=DATA.length;
