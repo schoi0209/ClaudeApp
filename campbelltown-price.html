@@ -128,6 +128,13 @@ td{padding:13px 12px;white-space:nowrap;}
 .note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);line-height:1.9;}
 .note b{color:var(--silo-d);}
 
+.level-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:4px;border:1px solid;}
+.lv-B2{color:#2a5f9e;border-color:rgba(42,95,158,.28);background:rgba(42,95,158,.08);}
+.lv-B1{color:#1e7048;border-color:rgba(30,112,72,.28);background:rgba(30,112,72,.08);}
+.lv-LGF{color:#c07820;border-color:rgba(192,120,32,.28);background:rgba(192,120,32,.08);}
+.lv-L3{color:#8a3ca0;border-color:rgba(138,60,160,.28);background:rgba(138,60,160,.08);}
+.tb-lift{color:#8a3ca0;border-color:rgba(138,60,160,.28);background:rgba(138,60,160,.08);}
+.excl-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--silo);color:#fff;margin-left:6px;letter-spacing:.06em;vertical-align:middle;}
 .empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
 footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;}
 .bmc-fixed{position:fixed;bottom:20px;right:20px;background:#FFDD00;color:#000;padding:9px 18px;border-radius:22px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .2s;z-index:500;}
@@ -169,7 +176,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   <div>
     <div class="m-overline" id="txt-overline">Micro-Warehouses & Storage Units · Campbelltown NSW</div>
     <h1>Campbelltown <em>Silo</em></h1>
-    <div class="m-tagline" id="txt-tagline">6 Grange Road, Campbelltown NSW · Building B2</div>
+    <div class="m-tagline" id="txt-tagline">6 Grange Road, Campbelltown NSW · B2 · B1 · LGF · L3</div>
   </div>
   <div class="m-right">
     <div class="gst-box">
@@ -179,12 +186,12 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
         Outgoings (strata + council) are approximate p.a.
       </div>
     </div>
-    <div class="date-chip">External Agent Price List</div>
+    <div class="date-chip">Updated: 2 Sept 2026</div>
   </div>
 </div>
 
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">45</div><div class="s-sub" id="ssub-total">Building B2</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">110</div><div class="s-sub" id="ssub-total">4 Levels</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Ready to Buy</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Ex-GST</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Ex-GST</div></div>
@@ -192,9 +199,11 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 </div>
 
 <div class="tab-row">
-  <button class="tab-btn active" onclick="setType('all')" id="tab-all">All Units <span class="tab-cnt" id="tc-all">45</span></button>
-  <button class="tab-btn" onclick="setType('Drive up')" id="tab-drive">Drive Up <span class="tab-cnt" id="tc-drive">29</span></button>
-  <button class="tab-btn" onclick="setType('Ground Floor')" id="tab-ground">Ground Floor <span class="tab-cnt" id="tc-ground">16</span></button>
+  <button class="tab-btn active" onclick="setLevel('all')" id="tab-all">All Units <span class="tab-cnt" id="tc-all">110</span></button>
+  <button class="tab-btn" onclick="setLevel('B2')" id="tab-B2">Basement 2 <span class="tab-cnt" id="tc-B2">29</span></button>
+  <button class="tab-btn" onclick="setLevel('B1')" id="tab-B1">Basement 1 <span class="tab-cnt" id="tc-B1">23</span></button>
+  <button class="tab-btn" onclick="setLevel('LGF')" id="tab-LGF">Lower Ground <span class="tab-cnt" id="tc-LGF">28</span></button>
+  <button class="tab-btn" onclick="setLevel('L3')" id="tab-L3">Level 3 <span class="tab-cnt" id="tc-L3">30</span></button>
 </div>
 
 <div class="filters">
@@ -203,6 +212,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
     <select id="fStatus" onchange="go()">
       <option value="" id="opt-st-all">All</option>
       <option value="available" id="opt-st-av">Available</option>
+      <option value="deposit" id="opt-st-dep">Deposit Taken</option>
       <option value="sold" id="opt-st-sold">Sold</option>
     </select>
   </div>
@@ -223,6 +233,22 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
       <option value="250000" id="opt-px2">Under $250K</option>
       <option value="350000" id="opt-px3">Under $350K</option>
       <option value="500000" id="opt-px4">Under $500K</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-type">Access Type</span>
+    <select id="fType" onchange="go()">
+      <option value="" id="opt-ty-all">All</option>
+      <option value="Drive up">Drive Up</option>
+      <option value="Walk up">Walk Up</option>
+      <option value="Lift Access">Lift Access</option>
+    </select>
+  </div>
+  <div class="f-grp">
+    <span class="f-lbl" id="flbl-excl">Availability</span>
+    <select id="fExcl" onchange="go()">
+      <option value="" id="opt-ex-all">All Stock</option>
+      <option value="yes" id="opt-ex-yes">Forise Exclusive</option>
     </select>
   </div>
   <div class="f-grp" style="flex:1;min-width:130px">
@@ -250,6 +276,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
       <tr>
         <th id="th-lot">Lot</th>
         <th id="th-unit">Unit</th>
+        <th id="th-level">Level</th>
         <th id="th-type">Type</th>
         <th id="th-area">Area</th>
         <th id="th-height">Height</th>
@@ -267,119 +294,184 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="note-bar">
   <div class="note" id="txt-notes">
-    <b>*</b> "Drive up" = direct vehicle access · "Ground Floor" = walk-in units (some sold as multi-unit lots).<br>
+    <b>*</b> Drive Up = vehicle access · Walk Up = walk-in · Lift Access (L3). Some lots sold as multi-unit bundles.<br>
     <b>*</b> Prices Ex-GST; Incl. GST column adds 10%. Outgoings combine strata &amp; council (approx p.a.).
   </div>
 </div>
 
-<footer>Made by SunnyApps. All rights reserved. · Silo Campbelltown — Micro-Warehouse Price List</footer>
+<footer>Made by SunnyApps. All rights reserved. · Silo Campbelltown — Micro-Warehouse Price List · 2 Sept 2026</footer>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 
 <script>
 const DATA = [
-  {lot:1,unit:'B2-001',level:'B2',area:32,type:'Drive up',height:'2.9m',price:261059,outgoings:2012,subUnits:null,status:'available'},
-  {lot:2,unit:'B2-002',level:'B2',area:33,type:'Drive up',height:'2.9m',price:269780,outgoings:2050,subUnits:null,status:'available'},
-  {lot:3,unit:'B2-003',level:'B2',area:33,type:'Drive up',height:'2.9m',price:269780,outgoings:2050,subUnits:null,status:'available'},
-  {lot:4,unit:'B2-004',level:'B2',area:34,type:'Drive up',height:'2.9m',price:278500,outgoings:2087,subUnits:null,status:'available'},
-  {lot:5,unit:'B2-005',level:'B2',area:34,type:'Drive up',height:'2.9m',price:278500,outgoings:2087,subUnits:null,status:'available'},
-  {lot:6,unit:'B2-006',level:'B2',area:34,type:'Drive up',height:'2.9m',price:278500,outgoings:2087,subUnits:null,status:'available'},
-  {lot:7,unit:'B2-007',level:'B2',area:39,type:'Drive up',height:'2.9m',price:322103,outgoings:2275,subUnits:null,status:'available'},
-  {lot:8,unit:'B2-008',level:'B2',area:51,type:'Ground Floor',height:'2.9m',price:336084,outgoings:2726,subUnits:[15,17,19],status:'available'},
-  {lot:9,unit:'B2-011',level:'B2',area:71,type:'Drive up',height:'2.9m',price:585384,outgoings:3478,subUnits:null,status:'available'},
-  {lot:10,unit:'B2-012',level:'B2',area:54,type:'Drive up',height:'2.9m',price:452912,outgoings:2839,subUnits:null,status:'available'},
-  {lot:11,unit:'B2-013',level:'B2',area:63,type:'Drive up',height:'2.9m',price:517397,outgoings:3177,subUnits:null,status:'available'},
-  {lot:12,unit:'B2-014',level:'B2',area:58,type:'Drive up',height:'2.9m',price:487794,outgoings:2989,subUnits:null,status:'available'},
-  {lot:13,unit:'B2-015',level:'B2',area:28,type:'Ground Floor',height:'2.9m',price:176399,outgoings:1862,subUnits:[14,14],status:'available'},
-  {lot:14,unit:'B2-017',level:'B2',area:41,type:'Drive up',height:'2.9m',price:339544,outgoings:2351,subUnits:null,status:'available'},
-  {lot:15,unit:'B2-018',level:'B2',area:30,type:'Ground Floor',height:'2.9m',price:190284,outgoings:1937,subUnits:[15,15],status:'available'},
-  {lot:16,unit:'B2-019',level:'B2',area:39,type:'Drive up',height:'2.9m',price:321667,outgoings:2273,subUnits:null,status:'available'},
-  {lot:17,unit:'B2-021',level:'B2',area:43,type:'Drive up',height:'2.9m',price:359427,outgoings:2436,subUnits:null,status:'available'},
-  {lot:18,unit:'B2-022',level:'B2',area:42,type:'Drive up',height:'2.9m',price:348265,outgoings:2388,subUnits:null,status:'available'},
-  {lot:19,unit:'B2-023',level:'B2',area:43,type:'Drive up',height:'2.9m',price:356985,outgoings:2426,subUnits:null,status:'available'},
-  {lot:20,unit:'B2-024',level:'B2',area:41,type:'Drive up',height:'2.9m',price:339544,outgoings:2351,subUnits:null,status:'available'},
-  {lot:21,unit:'B2-025',level:'B2',area:44,type:'Ground Floor',height:'2.9m',price:288039,outgoings:2466,subUnits:[13,16,15],status:'available'},
-  {lot:22,unit:'B2-028',level:'B2',area:44,type:'Ground Floor',height:'2.9m',price:288942,outgoings:2471,subUnits:[16,15,13],status:'available'},
-  {lot:23,unit:'B2-031',level:'B2',area:37,type:'Ground Floor',height:'2.9m',price:237079,outgoings:2190,subUnits:[13,9,14],status:'available'},
-  {lot:24,unit:'B2-032',level:'B2',area:25,type:'Ground Floor',height:'2.9m',price:158000,outgoings:1762,subUnits:[16,9],status:'available'},
-  {lot:25,unit:'B2-036',level:'B2',area:49,type:'Ground Floor',height:'2.9m',price:322198,outgoings:2651,subUnits:[16,16,17],status:'available'},
-  {lot:26,unit:'B2-039',level:'B2',area:51,type:'Ground Floor',height:'2.9m',price:336084,outgoings:2726,subUnits:[17,17,17],status:'available'},
-  {lot:27,unit:'B2-042',level:'B2',area:43,type:'Ground Floor',height:'2.9m',price:282832,outgoings:2438,subUnits:[15,11,17],status:'available'},
-  {lot:28,unit:'B2-045',level:'B2',area:35,type:'Ground Floor',height:'2.9m',price:222499,outgoings:2112,subUnits:[17,17],status:'available'},
-  {lot:29,unit:'B2-047',level:'B2',area:42,type:'Ground Floor',height:'2.9m',price:275889,outgoings:2400,subUnits:[14,16,12],status:'available'},
-  {lot:30,unit:'B2-050',level:'B2',area:76,type:'Drive up',height:'2.9m',price:644765,outgoings:3666,subUnits:null,status:'available'},
-  {lot:31,unit:'B2-052',level:'B2',area:48,type:'Drive up',height:'2.9m',price:400588,outgoings:2614,subUnits:null,status:'available'},
-  {lot:32,unit:'B2-053',level:'B2',area:52,type:'Drive up',height:'2.9m',price:435471,outgoings:2764,subUnits:null,status:'available'},
-  {lot:33,unit:'B2-054',level:'B2',area:41,type:'Ground Floor',height:'2.9m',price:268461,outgoings:2360,subUnits:[19,11,11],status:'available'},
-  {lot:34,unit:'B2-057',level:'B2',area:47,type:'Ground Floor',height:'2.9m',price:311159,outgoings:2591,subUnits:[15,17,15],status:'available'},
-  {lot:35,unit:'B2-060',level:'B2',area:45,type:'Ground Floor',height:'2.9m',price:294080,outgoings:2499,subUnits:[15,15,15],status:'available'},
-  {lot:36,unit:'B2-063',level:'B2',area:49,type:'Ground Floor',height:'2.9m',price:322198,outgoings:2651,subUnits:[17,16,16],status:'available'},
-  {lot:37,unit:'B2-066',level:'B2',area:36,type:'Drive up',height:'2.9m',price:298034,outgoings:2172,subUnits:null,status:'available'},
-  {lot:38,unit:'B2-067',level:'B2',area:36,type:'Drive up',height:'2.9m',price:296813,outgoings:2166,subUnits:null,status:'available'},
-  {lot:39,unit:'B2-068',level:'B2',area:13,type:'Drive up',height:'2.9m',price:96501,outgoings:1303,subUnits:null,status:'available'},
-  {lot:40,unit:'B2-069',level:'B2',area:44,type:'Drive up',height:'2.9m',price:365880,outgoings:2464,subUnits:null,status:'available'},
-  {lot:41,unit:'B2-070',level:'B2',area:11,type:'Drive up',height:'2.9m',price:77927,outgoings:1223,subUnits:null,status:'available'},
-  {lot:42,unit:'B2-071',level:'B2',area:48,type:'Drive up',height:'2.9m',price:402943,outgoings:2624,subUnits:null,status:'available'},
-  {lot:43,unit:'B2-072',level:'B2',area:16,type:'Drive up',height:'2.9m',price:123099,outgoings:1418,subUnits:null,status:'available'},
-  {lot:44,unit:'B2-073',level:'B2',area:28,type:'Drive up',height:'2.9m',price:229142,outgoings:1875,subUnits:null,status:'available'},
-  {lot:45,unit:'B2-074',level:'B2',area:11,type:'Drive up',height:'2.9m',price:75310,outgoings:1212,subUnits:null,status:'available'},
+  {lot:1,unit:"B2-001",level:"B2",area:33,type:"Drive up",height:"2.9m",price:269766,outgoings:2008,subUnits:null,status:'available',excl:true},
+  {lot:2,unit:"B2-002",level:"B2",area:34,type:"Drive up",height:"2.9m",price:277638,outgoings:2040,subUnits:null,status:'available',excl:true},
+  {lot:3,unit:"B2-003",level:"B2",area:34,type:"Drive up",height:"2.9m",price:276764,outgoings:2037,subUnits:null,status:'available',excl:false},
+  {lot:4,unit:"B2-004",level:"B2",area:35,type:"Drive up",height:"2.9m",price:285510,outgoings:2073,subUnits:null,status:'available',excl:false},
+  {lot:5,unit:"B2-005",level:"B2",area:35,type:"Drive up",height:"2.9m",price:285510,outgoings:2073,subUnits:null,status:'available',excl:true},
+  {lot:6,unit:"B2-006",level:"B2",area:35,type:"Drive up",height:"2.9m",price:285510,outgoings:2073,subUnits:null,status:'available',excl:false},
+  {lot:7,unit:"B2-007",level:"B2",area:40,type:"Drive up",height:"2.9m",price:332743,outgoings:2270,subUnits:null,status:'available',excl:false},
+  {lot:8,unit:"B2-008",level:"B2",area:53,type:"Walk up",height:"2.9m",price:352050,outgoings:2743,subUnits:[16,18,20],status:'available',excl:false},
+  {lot:9,unit:"B2-011",level:"B2",area:72,type:"Drive up",height:"2.9m",price:597467,outgoings:3438,subUnits:null,status:'available',excl:false},
+  {lot:10,unit:"B2-012",level:"B2",area:55,type:"Drive up",height:"2.9m",price:461319,outgoings:2805,subUnits:null,status:'available',excl:false},
+  {lot:11,unit:"B2-013",level:"B2",area:64,type:"Drive up",height:"2.9m",price:525009,outgoings:3129,subUnits:null,status:'available',excl:false},
+  {lot:12,unit:"B2-014",level:"B2",area:59,type:"Drive up",height:"2.9m",price:495431,outgoings:2947,subUnits:null,status:'available',excl:false},
+  {lot:13,unit:"B2-015",level:"B2",area:28,type:"Walk up",height:"2.9m",price:177130,outgoings:1829,subUnits:[14,14],status:'available',excl:false},
+  {lot:14,unit:"B2-017",level:"B2",area:42,type:"Drive up",height:"2.9m",price:349361,outgoings:2339,subUnits:null,status:'available',excl:false},
+  {lot:15,unit:"B2-018",level:"B2",area:31,type:"Walk up",height:"2.9m",price:198733,outgoings:1942,subUnits:[16,15],status:'available',excl:false},
+  {lot:16,unit:"B2-019",level:"B2",area:40,type:"Drive up",height:"2.9m",price:329244,outgoings:2255,subUnits:null,status:'available',excl:false},
+  {lot:17,unit:"B2-021",level:"B2",area:45,type:"Drive up",height:"2.9m",price:372977,outgoings:2437,subUnits:null,status:'available',excl:false},
+  {lot:18,unit:"B2-022",level:"B2",area:43,type:"Drive up",height:"2.9m",price:356359,outgoings:2368,subUnits:null,status:'available',excl:false},
+  {lot:19,unit:"B2-023",level:"B2",area:44,type:"Drive up",height:"2.9m",price:364231,outgoings:2401,subUnits:null,status:'available',excl:false},
+  {lot:20,unit:"B2-024",level:"B2",area:42,type:"Drive up",height:"2.9m",price:348487,outgoings:2335,subUnits:null,status:'available',excl:false},
+  {lot:21,unit:"B2-025",level:"B2",area:45,type:"Walk up",height:"2.9m",price:296298,outgoings:2452,subUnits:[14,17,15],status:'available',excl:false},
+  {lot:22,unit:"B2-028",level:"B2",area:47,type:"Walk up",height:"2.9m",price:306055,outgoings:2503,subUnits:[17,16,14],status:'available',excl:false},
+  {lot:23,unit:"B2-031",level:"B2",area:39,type:"Walk up",height:"2.9m",price:250303,outgoings:2211,subUnits:[14,10,15],status:'available',excl:false},
+  {lot:24,unit:"B2-032",level:"B2",area:26,type:"Walk up",height:"2.9m",price:164586,outgoings:1764,subUnits:[17,9],status:'available',excl:false},
+  {lot:25,unit:"B2-036",level:"B2",area:50,type:"Walk up",height:"2.9m",price:333233,outgoings:2644,subUnits:[17,17,17],status:'available',excl:false},
+  {lot:26,unit:"B2-039",level:"B2",area:52,type:"Walk up",height:"2.9m",price:343687,outgoings:2699,subUnits:[18,17,17],status:'available',excl:false},
+  {lot:27,unit:"B2-042",level:"B2",area:45,type:"Walk up",height:"2.9m",price:293511,outgoings:2437,subUnits:[16,11,18],status:'available',excl:false},
+  {lot:28,unit:"B2-045",level:"B2",area:36,type:"Walk up",height:"2.9m",price:231487,outgoings:2113,subUnits:[18,18],status:'available',excl:false},
+  {lot:29,unit:"B2-047",level:"B2",area:44,type:"Walk up",height:"2.9m",price:290026,outgoings:2419,subUnits:[15,17,13],status:'available',excl:false},
+  {lot:46,unit:"B1-001",level:"B1",area:44,type:"Drive up",height:"3.2m",price:388799,outgoings:2415,subUnits:null,status:'available',excl:false},
+  {lot:47,unit:"B1-002",level:"B1",area:42,type:"Drive up",height:"3.2m",price:366661,outgoings:2328,subUnits:null,status:'available',excl:true},
+  {lot:48,unit:"B1-003",level:"B1",area:49,type:"Drive up",height:"3.2m",price:433077,outgoings:2590,subUnits:null,status:'available',excl:false},
+  {lot:49,unit:"B1-004",level:"B1",area:31,type:"Drive up",height:"3.2m",price:267959,outgoings:1938,subUnits:null,status:'available',excl:true},
+  {lot:50,unit:"B1-005",level:"B1",area:32,type:"Drive up",height:"3.2m",price:278106,outgoings:1978,subUnits:null,status:'available',excl:true},
+  {lot:51,unit:"B1-006",level:"B1",area:70,type:"Drive up",height:"3.2m",price:582911,outgoings:3369,subUnits:null,status:'available',excl:false},
+  {lot:52,unit:"B1-007",level:"B1",area:40,type:"Drive up",height:"3.2m",price:351901,outgoings:2270,subUnits:null,status:'available',excl:true},
+  {lot:53,unit:"B1-008",level:"B1",area:34,type:"Drive up",height:"3.2m",price:297477,outgoings:2055,subUnits:null,status:'available',excl:true},
+  {lot:54,unit:"B1-009",level:"B1",area:35,type:"Drive up",height:"3.2m",price:303012,outgoings:2077,subUnits:null,status:'available',excl:false},
+  {lot:55,unit:"B1-010",level:"B1",area:34,type:"Drive up",height:"3.2m",price:293787,outgoings:2040,subUnits:null,status:'available',excl:false},
+  {lot:56,unit:"B1-011",level:"B1",area:49,type:"Walk up",height:"3.2m",price:344004,outgoings:2601,subUnits:[20,17,13],status:'available',excl:false},
+  {lot:57,unit:"B1-014",level:"B1",area:34,type:"Walk up",height:"3.2m",price:229222,outgoings:2033,subUnits:[13,12,8],status:'available',excl:false},
+  {lot:58,unit:"B1-017",level:"B1",area:48,type:"Drive up",height:"3.2m",price:425697,outgoings:2561,subUnits:null,status:'available',excl:false},
+  {lot:59,unit:"B1-018",level:"B1",area:27,type:"Drive up",height:"3.2m",price:228293,outgoings:1782,subUnits:null,status:'available',excl:false},
+  {lot:60,unit:"B1-019",level:"B1",area:27,type:"Drive up",height:"3.2m",price:229216,outgoings:1785,subUnits:null,status:'available',excl:false},
+  {lot:61,unit:"B1-020",level:"B1",area:37,type:"Drive up",height:"3.2m",price:324228,outgoings:2160,subUnits:null,status:'available',excl:false},
+  {lot:62,unit:"B1-021",level:"B1",area:48,type:"Drive up",height:"3.2m",price:423852,outgoings:2553,subUnits:null,status:'available',excl:false},
+  {lot:63,unit:"B1-022",level:"B1",area:32,type:"Walk up",height:"3.2m",price:217450,outgoings:1975,subUnits:[32],status:'available',excl:false},
+  {lot:64,unit:"B1-023",level:"B1",area:53,type:"Drive up",height:"3.2m",price:470897,outgoings:2739,subUnits:null,status:'available',excl:false},
+  {lot:65,unit:"B1-024",level:"B1",area:28,type:"Drive up",height:"3.2m",price:237518,outgoings:1818,subUnits:null,status:'available',excl:false},
+  {lot:66,unit:"B1-025",level:"B1",area:43,type:"Drive up",height:"3.2m",price:379575,outgoings:2379,subUnits:null,status:'available',excl:false},
+  {lot:67,unit:"B1-026",level:"B1",area:50,type:"Walk up",height:"3.2m",price:346211,outgoings:2612,subUnits:[15],status:'available',excl:false},
+  {lot:68,unit:"B1-027",level:"B1",area:50,type:"Walk up",height:"3.2m",price:352098,outgoings:2641,subUnits:[8,20,23],status:'available',excl:false},
+  {lot:84,unit:"LG-001",level:"LGF",area:29,type:"Walk up",height:"3.7m",price:208978,outgoings:1876,subUnits:[15,14],status:'available',excl:false},
+  {lot:85,unit:"LG-002",level:"LGF",area:51,type:"Drive up",height:"3.7m",price:476815,outgoings:2666,subUnits:null,status:'available',excl:false},
+  {lot:86,unit:"LG-004",level:"LGF",area:28,type:"Walk up",height:"3.7m",price:196583,outgoings:1818,subUnits:[14,14],status:'available',excl:false},
+  {lot:87,unit:"LG-006",level:"LGF",area:50,type:"Walk up",height:"3.7m",price:365461,outgoings:2612,subUnits:[7,7,20,7,8],status:'available',excl:false},
+  {lot:90,unit:"LG-013",level:"LGF",area:35,type:"Walk up",height:"3.7m",price:253134,outgoings:2084,subUnits:[18,17],status:'available',excl:false},
+  {lot:91,unit:"LG-015",level:"LGF",area:28,type:"Drive up",height:"3.7m",price:250752,outgoings:1818,subUnits:[28],status:'available',excl:true},
+  {lot:92,unit:"LG-016",level:"LGF",area:52,type:"Drive up",height:"3.7m",price:483606,outgoings:2692,subUnits:[52],status:'available',excl:true},
+  {lot:93,unit:"LG-017",level:"LGF",area:36,type:"Drive up",height:"3.7m",price:328370,outgoings:2109,subUnits:[36],status:'available',excl:true},
+  {lot:94,unit:"LG-018",level:"LGF",area:38,type:"Drive up",height:"3.7m",price:347775,outgoings:2182,subUnits:[38],status:'deposit',excl:false},
+  {lot:95,unit:"LG-019",level:"LGF",area:52,type:"Drive up",height:"3.7m",price:485547,outgoings:2699,subUnits:[52],status:'available',excl:false},
+  {lot:96,unit:"LG-020",level:"LGF",area:51,type:"Drive up",height:"3.7m",price:474874,outgoings:2659,subUnits:[51],status:'available',excl:false},
+  {lot:97,unit:"LG-021",level:"LGF",area:30,type:"Drive up",height:"3.7m",price:274038,outgoings:1906,subUnits:[30],status:'available',excl:false},
+  {lot:98,unit:"LG-022",level:"LGF",area:25,type:"Drive up",height:"3.7m",price:222616,outgoings:1713,subUnits:[25],status:'available',excl:false},
+  {lot:99,unit:"LG-023",level:"LGF",area:32,type:"Drive up",height:"3.7m",price:295383,outgoings:1986,subUnits:[32],status:'available',excl:false},
+  {lot:100,unit:"LG-024",level:"LGF",area:33,type:"Drive up",height:"3.7m",price:300234,outgoings:2004,subUnits:[33],status:'available',excl:false},
+  {lot:102,unit:"LG-026",level:"LGF",area:21,type:"Drive up",height:"3.7m",price:186718,outgoings:1578,subUnits:[21],status:'available',excl:false},
+  {lot:103,unit:"LG-027",level:"LGF",area:22,type:"Drive up",height:"3.7m",price:192539,outgoings:1600,subUnits:[22],status:'deposit',excl:false},
+  {lot:104,unit:"LG-028",level:"LGF",area:38,type:"Drive up",height:"3.7m",price:347775,outgoings:2182,subUnits:[38],status:'available',excl:true},
+  {lot:105,unit:"LG-029",level:"LGF",area:39,type:"Drive up",height:"3.7m",price:363298,outgoings:2240,subUnits:[39],status:'available',excl:true},
+  {lot:106,unit:"LG-030",level:"LGF",area:38,type:"Walk up",height:"3.7m",price:276374,outgoings:2193,subUnits:[16,11,11],status:'available',excl:false},
+  {lot:107,unit:"LG-033",level:"LGF",area:20,type:"Walk up",height:"3.7m",price:133835,outgoings:1523,subUnits:[11,9],status:'available',excl:false},
+  {lot:108,unit:"LG-035",level:"LGF",area:18,type:"Drive up",height:"3.7m",price:159551,outgoings:1476,subUnits:[18],status:'available',excl:false},
+  {lot:109,unit:"LG-036",level:"LGF",area:27,type:"Walk up",height:"3.7m",price:192710,outgoings:1800,subUnits:[12,15],status:'available',excl:false},
+  {lot:110,unit:"LG-038",level:"LGF",area:32,type:"Drive up",height:"3.7m",price:289561,outgoings:1964,subUnits:[32],status:'available',excl:false},
+  {lot:116,unit:"LG-044",level:"LGF",area:26,type:"Drive up",height:"3.7m",price:236199,outgoings:1764,subUnits:[26],status:'available',excl:false},
+  {lot:117,unit:"LG-045",level:"LGF",area:27,type:"Walk up",height:"3.7m",price:194182,outgoings:1807,subUnits:[27],status:'available',excl:false},
+  {lot:118,unit:"LG-046",level:"LGF",area:53,type:"Walk up",height:"3.7m",price:null,outgoings:2739,subUnits:[14,12,13,14],status:'available',excl:false},
+  {lot:119,unit:"LG-050",level:"LGF",area:53,type:"Walk up",height:"3.7m",price:null,outgoings:2735,subUnits:[11,10,11,21],status:'available',excl:false},
+  {lot:164,unit:"L3-001",level:"L3",area:38,type:"Lift Access",height:"2.4m",price:246122,outgoings:2190,subUnits:[14,12,12],status:'available',excl:false},
+  {lot:165,unit:"L3-004",level:"L3",area:24,type:"Lift Access",height:"2.4m",price:147860,outgoings:1676,subUnits:[11,13],status:'available',excl:false},
+  {lot:166,unit:"L3-006",level:"L3",area:42,type:"Lift Access",height:"2.4m",price:271907,outgoings:2324,subUnits:[17,12,13],status:'available',excl:false},
+  {lot:167,unit:"L3-009",level:"L3",area:46,type:"Lift Access",height:"2.4m",price:301176,outgoings:2477,subUnits:[24,12,10],status:'available',excl:false},
+  {lot:168,unit:"L3-012",level:"L3",area:30,type:"Lift Access",height:"2.4m",price:192461,outgoings:1909,subUnits:[11,10,10],status:'available',excl:false},
+  {lot:169,unit:"L3-015",level:"L3",area:31,type:"Lift Access",height:"2.4m",price:195946,outgoings:1927,subUnits:[10,11,10],status:'available',excl:false},
+  {lot:170,unit:"L3-018",level:"L3",area:39,type:"Lift Access",height:"2.4m",price:251697,outgoings:2219,subUnits:[10,14,14],status:'available',excl:false},
+  {lot:171,unit:"L3-021",level:"L3",area:24,type:"Lift Access",height:"2.4m",price:152042,outgoings:1698,subUnits:[9,8,8],status:'available',excl:false},
+  {lot:172,unit:"L3-024",level:"L3",area:31,type:"Lift Access",height:"2.4m",price:196643,outgoings:1931,subUnits:[8,7,8,8],status:'available',excl:false},
+  {lot:173,unit:"L3-028",level:"L3",area:31,type:"Lift Access",height:"2.4m",price:200127,outgoings:1949,subUnits:[11,11,10],status:'available',excl:false},
+  {lot:174,unit:"L3-031",level:"L3",area:22,type:"Lift Access",height:"2.4m",price:132529,outgoings:1596,subUnits:[11,11],status:'available',excl:false},
+  {lot:175,unit:"L3-033",level:"L3",area:31,type:"Lift Access",height:"2.4m",price:200824,outgoings:1953,subUnits:[11,10,11],status:'available',excl:false},
+  {lot:176,unit:"L3-036",level:"L3",area:30,type:"Lift Access",height:"2.4m",price:187583,outgoings:1884,subUnits:[10,10,10],status:'available',excl:false},
+  {lot:177,unit:"L3-039",level:"L3",area:33,type:"Lift Access",height:"2.4m",price:212671,outgoings:2015,subUnits:[11,12,10],status:'available',excl:false},
+  {lot:178,unit:"L3-042",level:"L3",area:32,type:"Lift Access",height:"2.4m",price:207793,outgoings:1989,subUnits:[11,10,12],status:'available',excl:false},
+  {lot:179,unit:"L3-045",level:"L3",area:32,type:"Lift Access",height:"2.4m",price:202218,outgoings:1960,subUnits:[11,10,11],status:'available',excl:false},
+  {lot:180,unit:"L3-048",level:"L3",area:40,type:"Lift Access",height:"2.4m",price:260060,outgoings:2262,subUnits:[10,11,10,9],status:'available',excl:false},
+  {lot:181,unit:"L3-053",level:"L3",area:23,type:"Lift Access",height:"2.4m",price:null,outgoings:null,subUnits:[13,10],status:'available',excl:false},
+  {lot:182,unit:"L3-055",level:"L3",area:28,type:"Lift Access",height:"2.4m",price:175736,outgoings:1822,subUnits:[9,9,10],status:'available',excl:false},
+  {lot:183,unit:"L3-058",level:"L3",area:41,type:"Lift Access",height:"2.4m",price:264938,outgoings:2288,subUnits:[14,14,13],status:'available',excl:false},
+  {lot:184,unit:"L3-061",level:"L3",area:33,type:"Lift Access",height:"2.4m",price:210581,outgoings:2004,subUnits:[13,10,9],status:'available',excl:false},
+  {lot:185,unit:"L3-064",level:"L3",area:39,type:"Lift Access",height:"2.4m",price:251000,outgoings:2215,subUnits:[14,13,12],status:'available',excl:false},
+  {lot:186,unit:"L3-067",level:"L3",area:28,type:"Lift Access",height:"2.4m",price:174342,outgoings:1815,subUnits:[10,10,8],status:'available',excl:false},
+  {lot:187,unit:"L3-070",level:"L3",area:40,type:"Lift Access",height:"2.4m",price:262151,outgoings:2273,subUnits:[10,10,11,9],status:'available',excl:false},
+  {lot:188,unit:"L3-074",level:"L3",area:49,type:"Lift Access",height:"2.4m",price:322083,outgoings:2586,subUnits:[16,13,19],status:'available',excl:false},
+  {lot:189,unit:"L3-077",level:"L3",area:31,type:"Lift Access",height:"2.4m",price:198733,outgoings:1942,subUnits:[19,12],status:'available',excl:false},
+  {lot:190,unit:"L3-079",level:"L3",area:40,type:"Lift Access",height:"2.4m",price:260060,outgoings:2262,subUnits:[17,13,10],status:'available',excl:false},
+  {lot:191,unit:"L3-082",level:"L3",area:27,type:"Lift Access",height:"2.4m",price:166676,outgoings:1775,subUnits:[10,8,9],status:'available',excl:false},
+  {lot:192,unit:"L3-085",level:"L3",area:28,type:"Lift Access",height:"2.4m",price:175736,outgoings:1822,subUnits:[9,10,9],status:'available',excl:false},
+  {lot:193,unit:"L3-088",level:"L3",area:44,type:"Lift Access",height:"2.4m",price:290026,outgoings:2419,subUnits:[11],status:'available',excl:false},
 ];
 
 const i18n = {
   en:{
     'txt-h-center':'Campbelltown · Price List',
     'txt-overline':'Micro-Warehouses & Storage Units · Campbelltown NSW',
-    'txt-tagline':'6 Grange Road, Campbelltown NSW · Building B2',
+    'txt-tagline':'6 Grange Road, Campbelltown NSW · B2 · B1 · LGF · L3',
     'lbl-gst':'⚠ Pricing Note',
     'txt-gst':'All prices shown are <b>Ex-GST</b>.<br>Outgoings (strata + council) are approximate p.a.',
-    'slbl-total':'Total Units','ssub-total':'Building B2',
+    'slbl-total':'Total Units','ssub-total':'4 Levels',
     'slbl-avail':'Available','ssub-avail':'Ready to Buy',
     'slbl-from':'From','ssub-from':'Ex-GST',
     'slbl-psm':'Avg $/m²','ssub-psm':'Ex-GST',
     'slbl-shown':'Showing','ssub-shown':'Current Filter',
     'flbl-status':'Status','flbl-size':'Size Range','flbl-maxpx':'Max Price','flbl-search':'Search',
-    'opt-st-all':'All','opt-st-av':'Available','opt-st-sold':'Sold',
+    'opt-st-all':'All','opt-st-av':'Available','opt-st-dep':'Deposit Taken','opt-st-sold':'Sold','flbl-type':'Access Type','opt-ty-all':'All','flbl-excl':'Availability','opt-ex-all':'All Stock','opt-ex-yes':'Forise Exclusive',
     'opt-sz-all':'All','opt-sz1':'Small (≤20 m²)','opt-sz2':'Mid (21–45 m²)','opt-sz3':'Large (46+ m²)',
     'opt-px-all':'All','opt-px1':'Under $150K','opt-px2':'Under $250K','opt-px3':'Under $350K','opt-px4':'Under $500K',
     'txt-reset':'Reset','txt-shown-lbl':' units shown',
-    'th-lot':'Lot','th-unit':'Unit','th-type':'Type','th-area':'Area','th-height':'Height',
+    'th-lot':'Lot','th-unit':'Unit','th-level':'Level','th-type':'Type','th-area':'Area','th-height':'Height',
     'th-price':'Price (Ex-GST)','th-gst':'Incl. GST','th-psm':'$/m²','th-outgoing':'Outgoings p.a.','th-status':'Status',
     'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-aa':'Area ↑','srt-ad':'Area ↓','srt-psa':'$/m² ↑','srt-la':'Lot # ↑',
     'txt-empty':'— No units match your criteria —',
-    'txt-notes':'<b>*</b> "Drive up" = direct vehicle access · "Ground Floor" = walk-in units (some sold as multi-unit lots).<br><b>*</b> Prices Ex-GST; Incl. GST column adds 10%. Outgoings combine strata &amp; council (approx p.a.).',
+    'txt-notes':'<b>*</b> Drive Up = vehicle access · Walk Up = walk-in · Lift Access (L3). Some lots sold as multi-unit bundles.<br><b>*</b> Prices Ex-GST; Incl. GST column adds 10%. Outgoings combine strata &amp; council (approx p.a.).',
     searchPh:'Unit or lot #...',
-    stLabel:{available:'Available',sold:'Sold'},
+    stLabel:{available:'Available',deposit:'Deposit Taken',sold:'Sold'},
     exGst:'Ex-GST', inclGst:'incl GST', subLbl:'sub-units',
-    driveType:'Drive Up', groundType:'Ground Floor',
+    typeLabel:{'Drive up':'Drive Up','Walk up':'Walk Up','Lift Access':'Lift Access'}, exclLbl:'FORISE',
   },
   ko:{
     'txt-h-center':'캠벨타운 · 분양가',
     'txt-overline':'마이크로 창고 & 스토리지 유닛 · 캠벨타운 NSW',
-    'txt-tagline':'6 Grange Road, 캠벨타운 NSW · Building B2',
+    'txt-tagline':'6 Grange Road, 캠벨타운 NSW · B2 · B1 · LGF · L3',
     'lbl-gst':'⚠ 가격 안내',
     'txt-gst':'표시된 모든 가격은 <b>GST 별도</b>입니다.<br>관리비(스트라타+카운슬)는 연간 예상액입니다.',
-    'slbl-total':'총 유닛','ssub-total':'Building B2',
+    'slbl-total':'총 유닛','ssub-total':'4 Levels',
     'slbl-avail':'분양 가능','ssub-avail':'즉시 구매',
     'slbl-from':'최저가','ssub-from':'GST 별도',
     'slbl-psm':'평균 $/m²','ssub-psm':'GST 별도',
     'slbl-shown':'표시 중','ssub-shown':'현재 필터',
     'flbl-status':'상태','flbl-size':'면적 범위','flbl-maxpx':'최대 가격','flbl-search':'검색',
-    'opt-st-all':'전체','opt-st-av':'분양 가능','opt-st-sold':'판매 완료',
+    'opt-st-all':'전체','opt-st-av':'분양 가능','opt-st-dep':'예약금 납부','opt-st-sold':'판매 완료','flbl-type':'접근 방식','opt-ty-all':'전체','flbl-excl':'재고 구분','opt-ex-all':'전체 재고','opt-ex-yes':'포라이즈 전용',
     'opt-sz-all':'전체','opt-sz1':'소형 (20m² 이하)','opt-sz2':'중형 (21–45m²)','opt-sz3':'대형 (46m² 이상)',
     'opt-px-all':'전체','opt-px1':'$150K 이하','opt-px2':'$250K 이하','opt-px3':'$350K 이하','opt-px4':'$500K 이하',
     'txt-reset':'초기화','txt-shown-lbl':'개 유닛 표시 중',
-    'th-lot':'Lot','th-unit':'유닛','th-type':'타입','th-area':'면적','th-height':'높이',
+    'th-lot':'Lot','th-unit':'유닛','th-level':'레벨','th-type':'타입','th-area':'면적','th-height':'높이',
     'th-price':'분양가 (GST 별도)','th-gst':'GST 포함','th-psm':'m²당','th-outgoing':'연간 관리비','th-status':'상태',
     'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-aa':'면적 작은 순','srt-ad':'면적 큰 순','srt-psa':'단가 낮은 순','srt-la':'Lot 순',
     'txt-empty':'— 조건에 맞는 유닛이 없습니다 —',
-    'txt-notes':'<b>*</b> "Drive up" = 차량 직접 진입 · "Ground Floor" = 워크인 유닛 (일부는 멀티유닛 Lot으로 판매).<br><b>*</b> 가격은 GST 별도이며, GST 포함 컬럼은 10% 추가. 관리비는 스트라타+카운슬 합산 (연간 예상).',
+    'txt-notes':'<b>*</b> 드라이브업 = 차량 진입 · 워크업 = 도보 · 리프트(L3). 일부는 멀티유닛 묶음 판매.<br><b>*</b> 가격은 GST 별도이며, GST 포함 컬럼은 10% 추가. 관리비는 스트라타+카운슬 합산 (연간 예상).',
     searchPh:'유닛 또는 Lot 번호...',
-    stLabel:{available:'분양 가능',sold:'판매 완료'},
+    stLabel:{available:'분양 가능',deposit:'예약금 납부',sold:'판매 완료'},
     exGst:'GST 별도', inclGst:'GST 포함', subLbl:'서브유닛',
-    driveType:'드라이브업', groundType:'그라운드 플로어',
+    typeLabel:{'Drive up':'드라이브업','Walk up':'워크업','Lift Access':'리프트'}, exclLbl:'포라이즈',
   }
 };
 
-let lang='en', curType='all', fil=[];
+let lang='en', curLevel='all', fil=[];
 
 function setLang(l){
   lang=l;
@@ -391,11 +483,10 @@ function setLang(l){
   render(); upStats();
 }
 
-function setType(ty){
-  curType=ty;
+function setLevel(lv){
+  curLevel=lv;
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const id = ty==='all'?'tab-all':(ty==='Drive up'?'tab-drive':'tab-ground');
-  document.getElementById(id).classList.add('active');
+  document.getElementById(lv==='all'?'tab-all':'tab-'+lv).classList.add('active');
   go();
 }
 
@@ -404,18 +495,22 @@ function $f(n){if(!n&&n!==0)return'—';if(n>=1e6)return'$'+(n/1e6).toFixed(2).r
 
 function go(){
   const st=document.getElementById('fStatus').value;
+  const ty=document.getElementById('fType').value;
+  const ex=document.getElementById('fExcl').value;
   const sz=document.getElementById('fSize').value;
   const px=document.getElementById('fMaxPx').value;
   const sr=document.getElementById('fSrch').value.toLowerCase().trim();
   const srt=document.getElementById('sortSel').value;
 
   fil=DATA.filter(d=>{
-    if(curType!=='all'&&d.type!==curType) return false;
+    if(curLevel!=='all'&&d.level!==curLevel) return false;
+    if(ty&&d.type!==ty) return false;
+    if(ex==='yes'&&!d.excl) return false;
     if(st&&d.status!==st) return false;
     if(sz==='small'&&d.area>20) return false;
     if(sz==='mid'&&!(d.area>=21&&d.area<=45)) return false;
     if(sz==='large'&&d.area<46) return false;
-    if(px&&d.price>+px) return false;
+    if(px&&(d.price==null||d.price>+px)) return false;
     if(sr&&!(d.unit.toLowerCase().includes(sr)||('lot '+d.lot).toLowerCase().includes(sr)||String(d.lot)===sr)) return false;
     return true;
   });
@@ -423,18 +518,17 @@ function go(){
   const availRank=x=>x.status==='available'?0:1;
   fil.sort((a,b)=>{
     const ar=availRank(a)-availRank(b); if(ar!==0) return ar;
-    if(srt==='price-asc')  return a.price-b.price;
-    if(srt==='price-desc') return b.price-a.price;
+    if(srt==='price-asc')  return (a.price??9e9)-(b.price??9e9);
+    if(srt==='price-desc') return (b.price??0)-(a.price??0);
     if(srt==='area-asc')   return a.area-b.area;
     if(srt==='area-desc')  return b.area-a.area;
-    if(srt==='psm-asc')    return (a.price/a.area)-(b.price/b.area);
+    if(srt==='psm-asc')    return ((a.price??9e9)/a.area)-((b.price??9e9)/b.area);
     if(srt==='lot-asc')    return a.lot-b.lot;
     return 0;
   });
 
   document.getElementById('tc-all').textContent=DATA.length;
-  document.getElementById('tc-drive').textContent=DATA.filter(d=>d.type==='Drive up').length;
-  document.getElementById('tc-ground').textContent=DATA.filter(d=>d.type==='Ground Floor').length;
+  ['B2','B1','LGF','L3'].forEach(L=>{const e=document.getElementById('tc-'+L);if(e)e.textContent=DATA.filter(d=>d.level===L).length;});
 
   render(); upStats();
 }
@@ -447,21 +541,24 @@ function render(){
   if(!fil.length){tb.innerHTML='';em.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
   em.style.display='none';
   tb.innerHTML=fil.map(d=>{
-    const psm=Math.round(d.price/d.area);
-    const gstIncl=Math.round(d.price*1.1);
-    const isGround=d.type==='Ground Floor';
-    const typeLabel=isGround?t.groundType:t.driveType;
-    const subInfo=d.subUnits?`<div class="unit-subs">+${d.subUnits.length-1} ${t.subLbl} (${d.subUnits.join('/')}m²)</div>`:'';
+    const hasPx = d.price!=null;
+    const psm = hasPx?Math.round(d.price/d.area):null;
+    const gstIncl = hasPx?Math.round(d.price*1.1):null;
+    const typeCls = d.type==='Drive up'?'tb-drive':(d.type==='Walk up'?'tb-ground':'tb-lift');
+    const typeLabel = t.typeLabel[d.type]||d.type;
+    const subInfo=(d.subUnits&&d.subUnits.length>1)?`<div class="unit-subs">+${d.subUnits.length-1} ${t.subLbl} (${d.subUnits.join('/')}m²)</div>`:'';
+    const exclTag=d.excl?`<span class="excl-tag">${t.exclLbl}</span>`:'';
     return `<tr>
       <td><span class="lot-badge">${d.lot}</span></td>
-      <td><div class="unit-num">${d.unit}</div>${subInfo}</td>
-      <td><span class="type-badge ${isGround?'tb-ground':'tb-drive'}">${typeLabel}</span></td>
-      <td><div class="area-val">${d.area} m²</div>${d.subUnits?`<div class="area-sub">total</div>`:''}</td>
+      <td><div class="unit-num">${d.unit}${exclTag}</div>${subInfo}</td>
+      <td><span class="level-badge lv-${d.level}">${d.level}</span></td>
+      <td><span class="type-badge ${typeCls}">${typeLabel}</span></td>
+      <td><div class="area-val">${d.area} m²</div>${(d.subUnits&&d.subUnits.length>1)?`<div class="area-sub">total</div>`:''}</td>
       <td><span class="height-chip">${d.height}</span></td>
-      <td><div class="price-val">$${d.price.toLocaleString()}</div><div class="price-sub">${t.exGst}</div></td>
-      <td><div class="gst-incl-val">$${gstIncl.toLocaleString()}</div><div class="price-sub">${t.inclGst}</div></td>
-      <td><div class="psm-val">$${psm.toLocaleString()}</div></td>
-      <td><div class="outgoing">$${d.outgoings.toLocaleString()}</div></td>
+      <td><div class="price-val">${hasPx?'$'+d.price.toLocaleString():'TBC'}</div><div class="price-sub">${hasPx?t.exGst:''}</div></td>
+      <td><div class="gst-incl-val">${hasPx?'$'+gstIncl.toLocaleString():'—'}</div><div class="price-sub">${hasPx?t.inclGst:''}</div></td>
+      <td><div class="psm-val">${hasPx?'$'+psm.toLocaleString():'—'}</div></td>
+      <td><div class="outgoing">${d.outgoings?'$'+d.outgoings.toLocaleString():'—'}</div></td>
       <td><span class="status st-${d.status}">${t.stLabel[d.status]}</span></td>
     </tr>`;
   }).join('');
@@ -469,8 +566,8 @@ function render(){
 
 function upStats(){
   const avail=fil.filter(d=>d.status==='available');
-  const availPx=avail.map(d=>d.price);
-  const psms=fil.map(d=>Math.round(d.price/d.area));
+  const availPx=avail.map(d=>d.price).filter(p=>p!=null);
+  const psms=fil.filter(d=>d.price!=null).map(d=>Math.round(d.price/d.area));
   document.getElementById('sval-total').textContent=DATA.length;
   document.getElementById('sval-avail').textContent=avail.length;
   document.getElementById('sval-from').textContent=availPx.length?$f(Math.min(...availPx)):'—';
@@ -479,10 +576,10 @@ function upStats(){
 }
 
 function rst(){
-  ['fStatus','fSize','fMaxPx'].forEach(id=>document.getElementById(id).value='');
+  ['fStatus','fType','fExcl','fSize','fMaxPx'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('fSrch').value='';
   document.getElementById('sortSel').value='price-asc';
-  curType='all';
+  curLevel='all';
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-all').classList.add('active');
   go();
