@@ -1,0 +1,12 @@
+# SunnyApps / Forise Group — schoi0209.github.io/ClaudeApp
+#
+# Crawling is intentionally permitted here.
+# Pages that must stay out of search results carry a per-page
+# <meta name="robots" content="noindex"> tag instead.
+#
+# Those URLs are deliberately NOT listed below: robots.txt is public,
+# and a Disallow rule would both advertise their location and stop
+# crawlers from ever reading the noindex tag that removes them.
+
+User-agent: *
+Allow: /
