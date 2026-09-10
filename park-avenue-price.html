@@ -55,6 +55,7 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
 .addr-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500;}
 .addr-val{font-size:14px;font-weight:500;line-height:1.5;}
 .addr-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:5px;}
+.disc-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--plum);background:var(--plum-l);border:1px solid rgba(106,58,90,.25);border-radius:5px;padding:6px 10px;margin-top:8px;letter-spacing:.02em;}
 .date-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border2);padding:3px 10px;border-radius:3px;display:inline-block;}
 .draft-chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--brass);border:1px solid rgba(154,123,46,.35);background:var(--brass-l);padding:3px 10px;border-radius:3px;display:inline-block;margin-left:6px;font-weight:600;}
 
@@ -114,6 +115,9 @@ td{padding:13px 12px;white-space:nowrap;}
 .street-chip{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
 .avail-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.07em;padding:3px 9px;border-radius:4px;background:var(--green-l);color:var(--green);border:1px solid rgba(30,104,64,.2);}
 
+.list-price{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:line-through;}
+.disc-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--plum-l);color:var(--plum);border:1px solid rgba(106,58,90,.28);}
+.disc-amt{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
 .empty{text-align:center;padding:80px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;}
 .note-bar{max-width:1400px;margin:0 auto;padding:16px 32px 0;}
 .note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);line-height:1.9;}
@@ -163,6 +167,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
       <div class="addr-lbl" id="addr-lbl">◆ Building B</div>
       <div class="addr-val">45 &amp; 47 Berry Road<br>St Leonards NSW</div>
       <div class="addr-sub" id="addr-sub">94 apartments · 1–4 Bedrooms · Levels B1–L9</div>
+      <div class="disc-note" id="disc-note">◆ Discount: 1 Bed <b>5%</b> · 2–4 Bed <b>17%</b></div>
     </div>
     <div class="date-chip">4 Sep 2026</div><span class="draft-chip">DRAFT</span>
   </div>
@@ -171,7 +176,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <div class="stats">
   <div class="s-cell"><div class="s-lbl" id="slbl-total">Total Units</div><div class="s-val" id="sval-total">94</div><div class="s-sub" id="ssub-total">Building B</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">For Sale</div></div>
-  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">List Price</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-from">From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Net Price</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-psm">Avg $/m²</div><div class="s-val" id="sval-psm">—</div><div class="s-sub" id="ssub-psm">Internal area</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-shown">Showing</div><div class="s-val" id="sval-shown">—</div><div class="s-sub" id="ssub-shown">Current filter</div></div>
 </div>
@@ -256,7 +261,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
         <th id="th-car">Car</th>
         <th id="th-area">Area (sqm)</th>
         <th id="th-sptotal">SP Total</th>
-        <th id="th-price">Price</th>
+        <th id="th-price">List Price</th>
+        <th id="th-disc">Discount</th>
+        <th id="th-net">Net Price</th>
         <th id="th-psm">$/m²</th>
         <th id="th-street">Address</th>
         <th id="th-status">Status</th>
@@ -270,7 +277,8 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 <div class="note-bar">
   <div class="note" id="txt-notes">
     <b>*</b> DRAFT stocklist — prices and availability subject to change.<br>
-    <b>*</b> SP Total = Internal + External + Carspace + Storage. $/m² calculated on internal area.
+    <b>*</b> Net Price = List Price less discount (1 Bed 5%, 2–4 Bed 17%). $/m² is based on Net Price ÷ internal area.<br>
+    <b>*</b> SP Total = Internal + External + Carspace + Storage.
   </div>
 </div>
 
@@ -279,100 +287,100 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <script>
 const DATA = [
-  {lot:1,unit:"B306",level:"B3",type:"3B T",bed:3,tandem:true,asp:"S",car:3,int:185,ext:75,spTotal:274,price:3260000,street:"47 Berry Road",status:'available'},
-  {lot:79,unit:"B301",level:"B3",type:"2B",bed:2,tandem:false,asp:"S+E",car:1,int:91,ext:45,spTotal:151,price:1600000,street:"47 Berry Road",status:'available'},
-  {lot:80,unit:"B302",level:"B3",type:"4B T",bed:4,tandem:true,asp:"S+E",car:3,int:200,ext:32,spTotal:280,price:3960000,street:"47 Berry Road",status:'available'},
-  {lot:81,unit:"B303",level:"B3",type:"3B T",bed:3,tandem:true,asp:"S",car:3,int:181,ext:21,spTotal:246,price:3450000,street:"47 Berry Road",status:'available'},
-  {lot:83,unit:"B201",level:"B2",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:104,ext:34,spTotal:170,price:2310000,street:"47 Berry Road",status:'available'},
-  {lot:84,unit:"B202",level:"B2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:85,ext:28,spTotal:129,price:1600000,street:"45 Berry Road",status:'available'},
-  {lot:85,unit:"B203",level:"B2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:48,ext:10,spTotal:73,price:890000,street:"45 Berry Road",status:'available'},
-  {lot:87,unit:"B205",level:"B2",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:64,ext:23,spTotal:104,price:1040000,street:"45 Berry Road",status:'available'},
-  {lot:88,unit:"B206",level:"B2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:88,ext:32,spTotal:136,price:1800000,street:"45 Berry Road",status:'available'},
-  {lot:89,unit:"B101",level:"B1",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:104,ext:15,spTotal:155,price:2310000,street:"47 Berry Road",status:'available'},
-  {lot:90,unit:"B102",level:"B1",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:119,ext:13,spTotal:165,price:2580000,street:"47 Berry Road",status:'available'},
-  {lot:91,unit:"B103",level:"B1",type:"1B",bed:1,tandem:false,asp:"S",car:1,int:85,ext:11,spTotal:113,price:1480000,street:"47 Berry Road",status:'available'},
-  {lot:92,unit:"B104",level:"B1",type:"3B",bed:3,tandem:false,asp:"E+W",car:2,int:108,ext:12,spTotal:151,price:2000000,street:"47 Berry Road",status:'available'},
-  {lot:93,unit:"B105",level:"B1",type:"2B",bed:2,tandem:false,asp:"E+W",car:1,int:81,ext:12,spTotal:108,price:1500000,street:"45 Berry Road",status:'available'},
-  {lot:94,unit:"B106",level:"B1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:920000,street:"45 Berry Road",status:'available'},
-  {lot:95,unit:"B107",level:"B1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:74,price:920000,street:"45 Berry Road",status:'available'},
-  {lot:96,unit:"B108",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:132,ext:23,spTotal:184,price:2660000,street:"45 Berry Road",status:'available'},
-  {lot:97,unit:"B109",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+E",car:2,int:108,ext:58,spTotal:197,price:2400000,street:"45 Berry Road",status:'available'},
-  {lot:98,unit:"B110",level:"B1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:60,ext:32,spTotal:107,price:1010000,street:"45 Berry Road",status:'available'},
-  {lot:99,unit:"B111",level:"B1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:10,spTotal:104,price:1640000,street:"45 Berry Road",status:'available'},
-  {lot:100,unit:"B112",level:"B1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:58,ext:8,spTotal:83,price:1000000,street:"45 Berry Road",status:'available'},
-  {lot:101,unit:"B113",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+S",car:2,int:136,ext:29,spTotal:197,price:2910000,street:"47 Berry Road",status:'available'},
-  {lot:102,unit:"101",level:"L1",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:147,ext:39,spTotal:219,price:3050000,street:"47 Berry Road",status:'available'},
-  {lot:104,unit:"103",level:"L1",type:"3B",bed:3,tandem:false,asp:"E+W",car:2,int:108,ext:14,spTotal:152,price:2020000,street:"47 Berry Road",status:'available'},
-  {lot:105,unit:"104",level:"L1",type:"2B",bed:2,tandem:false,asp:"E+W",car:1,int:80,ext:13,spTotal:109,price:1510000,street:"45 Berry Road",status:'available'},
-  {lot:106,unit:"105",level:"L1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:9,spTotal:75,price:930000,street:"45 Berry Road",status:'available'},
-  {lot:107,unit:"106",level:"L1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:930000,street:"45 Berry Road",status:'available'},
-  {lot:108,unit:"107",level:"L1",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:116,ext:13,spTotal:158,price:2410000,street:"45 Berry Road",status:'available'},
-  {lot:109,unit:"108",level:"L1",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:81,ext:11,spTotal:126,price:1930000,street:"45 Berry Road",status:'available'},
-  {lot:110,unit:"109",level:"L1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:12,spTotal:114,price:1650000,street:"45 Berry Road",status:'available'},
-  {lot:111,unit:"110",level:"L1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:13,spTotal:108,price:1650000,street:"45 Berry Road",status:'available'},
-  {lot:112,unit:"111",level:"L1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:58,ext:9,spTotal:82,price:1010000,street:"45 Berry Road",status:'available'},
-  {lot:113,unit:"112",level:"L1",type:"3B",bed:3,tandem:false,asp:"N+S",car:2,int:90,ext:30,spTotal:152,price:2120000,street:"47 Berry Road",status:'available'},
-  {lot:114,unit:"201",level:"L2",type:"3B",bed:3,tandem:false,asp:"S+W",car:2,int:120,ext:20,spTotal:170,price:2760000,street:"45 Berry Road",status:'available'},
-  {lot:115,unit:"202",level:"L2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:117,price:1600000,street:"45 Berry Road",status:'available'},
-  {lot:116,unit:"203",level:"L2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1640000,street:"45 Berry Road",status:'available'},
-  {lot:117,unit:"204",level:"L2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:930000,street:"45 Berry Road",status:'available'},
-  {lot:118,unit:"205",level:"L2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:8,spTotal:74,price:920000,street:"45 Berry Road",status:'available'},
-  {lot:119,unit:"206",level:"L2",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:103,price:1700000,street:"45 Berry Road",status:'available'},
-  {lot:120,unit:"207",level:"L2",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:81,ext:11,spTotal:121,price:1940000,street:"45 Berry Road",status:'available'},
-  {lot:121,unit:"208",level:"L2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:10,spTotal:107,price:1660000,street:"45 Berry Road",status:'available'},
-  {lot:122,unit:"209",level:"L2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:12,spTotal:108,price:1660000,street:"45 Berry Road",status:'available'},
-  {lot:123,unit:"210",level:"L2",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:99,ext:20,spTotal:150,price:2250000,street:"45 Berry Road",status:'available'},
-  {lot:124,unit:"211",level:"L2",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:135,ext:17,spTotal:180,price:2910000,street:"45 Berry Road",status:'available'},
-  {lot:125,unit:"301",level:"L3",type:"2B",bed:2,tandem:false,asp:"S+W",car:2,int:73,ext:54,spTotal:163,price:1930000,street:"45 Berry Road",status:'available'},
-  {lot:126,unit:"302",level:"L3",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:108,price:1630000,street:"45 Berry Road",status:'available'},
-  {lot:127,unit:"303",level:"L3",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1660000,street:"45 Berry Road",status:'available'},
-  {lot:128,unit:"304",level:"L3",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:9,spTotal:75,price:940000,street:"45 Berry Road",status:'available'},
-  {lot:129,unit:"305",level:"L3",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:7,spTotal:74,price:930000,street:"45 Berry Road",status:'available'},
-  {lot:130,unit:"306",level:"L3",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:103,price:1710000,street:"45 Berry Road",status:'available'},
-  {lot:131,unit:"307",level:"L3",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:82,ext:11,spTotal:125,price:1950000,street:"45 Berry Road",status:'available'},
-  {lot:132,unit:"308",level:"L3",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:80,ext:10,spTotal:106,price:1670000,street:"45 Berry Road",status:'available'},
-  {lot:133,unit:"309",level:"L3",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:12,spTotal:107,price:1670000,street:"45 Berry Road",status:'available'},
-  {lot:134,unit:"310",level:"L3",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:100,ext:20,spTotal:151,price:2260000,street:"45 Berry Road",status:'available'},
-  {lot:135,unit:"311",level:"L3",type:"2B",bed:2,tandem:false,asp:"S+E",car:2,int:88,ext:46,spTotal:163,price:2120000,street:"45 Berry Road",status:'available'},
-  {lot:136,unit:"401",level:"L4",type:"4B",bed:4,tandem:false,asp:"S+E+W",car:3,int:141,ext:22,spTotal:206,price:3320000,street:"45 Berry Road",status:'available'},
-  {lot:137,unit:"402",level:"L4",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:108,price:1640000,street:"45 Berry Road",status:'available'},
-  {lot:138,unit:"403",level:"L4",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1670000,street:"45 Berry Road",status:'available'},
-  {lot:139,unit:"404",level:"L4",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:950000,street:"45 Berry Road",status:'available'},
-  {lot:140,unit:"405",level:"L4",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:7,spTotal:76,price:930000,street:"45 Berry Road",status:'available'},
-  {lot:141,unit:"406",level:"L4",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:102,price:1720000,street:"45 Berry Road",status:'available'},
-  {lot:142,unit:"407",level:"L4",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:82,ext:11,spTotal:122,price:1960000,street:"45 Berry Road",status:'available'},
-  {lot:143,unit:"408",level:"L4",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:80,ext:10,spTotal:107,price:1680000,street:"45 Berry Road",status:'available'},
-  {lot:144,unit:"409",level:"L4",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:11,spTotal:106,price:1680000,street:"45 Berry Road",status:'available'},
-  {lot:145,unit:"410",level:"L4",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:100,ext:19,spTotal:148,price:2280000,street:"45 Berry Road",status:'available'},
-  {lot:147,unit:"502",level:"L5",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:81,price:950000,street:"45 Berry Road",status:'available'},
-  {lot:148,unit:"503",level:"L5",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1680000,street:"45 Berry Road",status:'available'},
-  {lot:149,unit:"504",level:"L5",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:950000,street:"45 Berry Road",status:'available'},
-  {lot:150,unit:"505",level:"L5",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:101,ext:22,spTotal:153,price:2430000,street:"45 Berry Road",status:'available'},
-  {lot:151,unit:"506",level:"L5",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:86,ext:64,spTotal:179,price:2140000,street:"45 Berry Road",status:'available'},
-  {lot:152,unit:"507",level:"L5",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:85,ext:34,spTotal:152,price:1870000,street:"45 Berry Road",status:'available'},
-  {lot:153,unit:"508",level:"L5",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:68,ext:34,spTotal:117,price:1440000,street:"45 Berry Road",status:'available'},
-  {lot:155,unit:"601",level:"L6",type:"3B",bed:3,tandem:false,asp:"S+W",car:2,int:95,ext:11,spTotal:135,price:2350000,street:"45 Berry Road",status:'available'},
-  {lot:156,unit:"602",level:"L6",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:79,price:960000,street:"45 Berry Road",status:'available'},
-  {lot:157,unit:"603",level:"L6",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1690000,street:"45 Berry Road",status:'available'},
-  {lot:158,unit:"604",level:"L6",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:74,price:960000,street:"45 Berry Road",status:'available'},
-  {lot:159,unit:"605",level:"L6",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:10,spTotal:131,price:2140000,street:"45 Berry Road",status:'available'},
-  {lot:160,unit:"606",level:"L6",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:103,price:1720000,street:"45 Berry Road",status:'available'},
-  {lot:161,unit:"607",level:"L6",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:84,ext:11,spTotal:110,price:1820000,street:"45 Berry Road",status:'available'},
-  {lot:162,unit:"608",level:"L6",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:63,ext:8,spTotal:86,price:1410000,street:"45 Berry Road",status:'available'},
-  {lot:165,unit:"702",level:"L7",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:80,price:960000,street:"45 Berry Road",status:'available'},
-  {lot:166,unit:"703",level:"L7",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1700000,street:"45 Berry Road",status:'available'},
-  {lot:167,unit:"704",level:"L7",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:9,spTotal:74,price:960000,street:"45 Berry Road",status:'available'},
-  {lot:168,unit:"705",level:"L7",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:11,spTotal:134,price:2150000,street:"45 Berry Road",status:'available'},
-  {lot:169,unit:"706",level:"L7",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:77,ext:10,spTotal:103,price:1730000,street:"45 Berry Road",status:'available'},
-  {lot:170,unit:"707",level:"L7",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:84,ext:11,spTotal:111,price:1830000,street:"45 Berry Road",status:'available'},
-  {lot:174,unit:"802",level:"L8",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:74,ext:9,spTotal:99,price:1700000,street:"45 Berry Road",status:'available'},
-  {lot:175,unit:"803",level:"L8",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:10,spTotal:130,price:2160000,street:"45 Berry Road",status:'available'},
-  {lot:176,unit:"804",level:"L8",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:104,price:1740000,street:"45 Berry Road",status:'available'},
-  {lot:177,unit:"805",level:"L8",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:84,ext:11,spTotal:126,price:1870000,street:"45 Berry Road",status:'available'},
-  {lot:180,unit:"902",level:"L9",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:74,ext:9,spTotal:98,price:1710000,street:"45 Berry Road",status:'available'},
-  {lot:181,unit:"903",level:"L9",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:93,ext:11,spTotal:133,price:2170000,street:"45 Berry Road",status:'available'},
-  {lot:182,unit:"904",level:"L9",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:102,price:1750000,street:"45 Berry Road",status:'available'},
-  {lot:183,unit:"905",level:"L9",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:84,ext:11,spTotal:124,price:1880000,street:"45 Berry Road",status:'available'},
+  {lot:1,unit:"B306",level:"B3",type:"3B T",bed:3,tandem:true,asp:"S",car:3,int:185,ext:75,spTotal:274,price:3260000,street:"47 Berry Road",discPct:0.17,disc:554200,net:2705800,status:'available'},
+  {lot:79,unit:"B301",level:"B3",type:"2B",bed:2,tandem:false,asp:"S+E",car:1,int:91,ext:45,spTotal:151,price:1600000,street:"47 Berry Road",discPct:0.17,disc:272000,net:1328000,status:'available'},
+  {lot:80,unit:"B302",level:"B3",type:"4B T",bed:4,tandem:true,asp:"S+E",car:3,int:200,ext:32,spTotal:280,price:3960000,street:"47 Berry Road",discPct:0.17,disc:673200,net:3286800,status:'available'},
+  {lot:81,unit:"B303",level:"B3",type:"3B T",bed:3,tandem:true,asp:"S",car:3,int:181,ext:21,spTotal:246,price:3450000,street:"47 Berry Road",discPct:0.17,disc:586500,net:2863500,status:'available'},
+  {lot:83,unit:"B201",level:"B2",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:104,ext:34,spTotal:170,price:2310000,street:"47 Berry Road",discPct:0.17,disc:392700,net:1917300,status:'available'},
+  {lot:84,unit:"B202",level:"B2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:85,ext:28,spTotal:129,price:1600000,street:"45 Berry Road",discPct:0.17,disc:272000,net:1328000,status:'available'},
+  {lot:85,unit:"B203",level:"B2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:48,ext:10,spTotal:73,price:890000,street:"45 Berry Road",discPct:0.05,disc:44500,net:845500,status:'available'},
+  {lot:87,unit:"B205",level:"B2",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:64,ext:23,spTotal:104,price:1040000,street:"45 Berry Road",discPct:0.05,disc:52000,net:988000,status:'available'},
+  {lot:88,unit:"B206",level:"B2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:88,ext:32,spTotal:136,price:1800000,street:"45 Berry Road",discPct:0.17,disc:306000,net:1494000,status:'available'},
+  {lot:89,unit:"B101",level:"B1",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:104,ext:15,spTotal:155,price:2310000,street:"47 Berry Road",discPct:0.17,disc:392700,net:1917300,status:'available'},
+  {lot:90,unit:"B102",level:"B1",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:119,ext:13,spTotal:165,price:2580000,street:"47 Berry Road",discPct:0.17,disc:438600,net:2141400,status:'available'},
+  {lot:91,unit:"B103",level:"B1",type:"1B",bed:1,tandem:false,asp:"S",car:1,int:85,ext:11,spTotal:113,price:1480000,street:"47 Berry Road",discPct:0.05,disc:74000,net:1406000,status:'available'},
+  {lot:92,unit:"B104",level:"B1",type:"3B",bed:3,tandem:false,asp:"E+W",car:2,int:108,ext:12,spTotal:151,price:2000000,street:"47 Berry Road",discPct:0.17,disc:340000,net:1660000,status:'available'},
+  {lot:93,unit:"B105",level:"B1",type:"2B",bed:2,tandem:false,asp:"E+W",car:1,int:81,ext:12,spTotal:108,price:1500000,street:"45 Berry Road",discPct:0.17,disc:255000,net:1245000,status:'available'},
+  {lot:94,unit:"B106",level:"B1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:920000,street:"45 Berry Road",discPct:0.05,disc:46000,net:874000,status:'available'},
+  {lot:95,unit:"B107",level:"B1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:74,price:920000,street:"45 Berry Road",discPct:0.05,disc:46000,net:874000,status:'available'},
+  {lot:96,unit:"B108",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:132,ext:23,spTotal:184,price:2660000,street:"45 Berry Road",discPct:0.17,disc:452200,net:2207800,status:'available'},
+  {lot:97,unit:"B109",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+E",car:2,int:108,ext:58,spTotal:197,price:2400000,street:"45 Berry Road",discPct:0.17,disc:408000,net:1992000,status:'available'},
+  {lot:98,unit:"B110",level:"B1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:60,ext:32,spTotal:107,price:1010000,street:"45 Berry Road",discPct:0.05,disc:50500,net:959500,status:'available'},
+  {lot:99,unit:"B111",level:"B1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:10,spTotal:104,price:1640000,street:"45 Berry Road",discPct:0.17,disc:278800,net:1361200,status:'available'},
+  {lot:100,unit:"B112",level:"B1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:58,ext:8,spTotal:83,price:1000000,street:"45 Berry Road",discPct:0.05,disc:50000,net:950000,status:'available'},
+  {lot:101,unit:"B113",level:"B1",type:"3B",bed:3,tandem:false,asp:"N+S",car:2,int:136,ext:29,spTotal:197,price:2910000,street:"47 Berry Road",discPct:0.17,disc:494700,net:2415300,status:'available'},
+  {lot:102,unit:"101",level:"L1",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:147,ext:39,spTotal:219,price:3050000,street:"47 Berry Road",discPct:0.17,disc:518500,net:2531500,status:'available'},
+  {lot:104,unit:"103",level:"L1",type:"3B",bed:3,tandem:false,asp:"E+W",car:2,int:108,ext:14,spTotal:152,price:2020000,street:"47 Berry Road",discPct:0.17,disc:343400,net:1676600,status:'available'},
+  {lot:105,unit:"104",level:"L1",type:"2B",bed:2,tandem:false,asp:"E+W",car:1,int:80,ext:13,spTotal:109,price:1510000,street:"45 Berry Road",discPct:0.17,disc:256700,net:1253300,status:'available'},
+  {lot:106,unit:"105",level:"L1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:9,spTotal:75,price:930000,street:"45 Berry Road",discPct:0.05,disc:46500,net:883500,status:'available'},
+  {lot:107,unit:"106",level:"L1",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:930000,street:"45 Berry Road",discPct:0.05,disc:46500,net:883500,status:'available'},
+  {lot:108,unit:"107",level:"L1",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:116,ext:13,spTotal:158,price:2410000,street:"45 Berry Road",discPct:0.17,disc:409700,net:2000300,status:'available'},
+  {lot:109,unit:"108",level:"L1",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:81,ext:11,spTotal:126,price:1930000,street:"45 Berry Road",discPct:0.17,disc:328100,net:1601900,status:'available'},
+  {lot:110,unit:"109",level:"L1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:12,spTotal:114,price:1650000,street:"45 Berry Road",discPct:0.17,disc:280500,net:1369500,status:'available'},
+  {lot:111,unit:"110",level:"L1",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:13,spTotal:108,price:1650000,street:"45 Berry Road",discPct:0.17,disc:280500,net:1369500,status:'available'},
+  {lot:112,unit:"111",level:"L1",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:58,ext:9,spTotal:82,price:1010000,street:"45 Berry Road",discPct:0.05,disc:50500,net:959500,status:'available'},
+  {lot:113,unit:"112",level:"L1",type:"3B",bed:3,tandem:false,asp:"N+S",car:2,int:90,ext:30,spTotal:152,price:2120000,street:"47 Berry Road",discPct:0.17,disc:360400,net:1759600,status:'available'},
+  {lot:114,unit:"201",level:"L2",type:"3B",bed:3,tandem:false,asp:"S+W",car:2,int:120,ext:20,spTotal:170,price:2760000,street:"45 Berry Road",discPct:0.17,disc:469200,net:2290800,status:'available'},
+  {lot:115,unit:"202",level:"L2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:117,price:1600000,street:"45 Berry Road",discPct:0.17,disc:272000,net:1328000,status:'available'},
+  {lot:116,unit:"203",level:"L2",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1640000,street:"45 Berry Road",discPct:0.17,disc:278800,net:1361200,status:'available'},
+  {lot:117,unit:"204",level:"L2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:930000,street:"45 Berry Road",discPct:0.05,disc:46500,net:883500,status:'available'},
+  {lot:118,unit:"205",level:"L2",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:8,spTotal:74,price:920000,street:"45 Berry Road",discPct:0.05,disc:46000,net:874000,status:'available'},
+  {lot:119,unit:"206",level:"L2",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:103,price:1700000,street:"45 Berry Road",discPct:0.17,disc:289000,net:1411000,status:'available'},
+  {lot:120,unit:"207",level:"L2",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:81,ext:11,spTotal:121,price:1940000,street:"45 Berry Road",discPct:0.17,disc:329800,net:1610200,status:'available'},
+  {lot:121,unit:"208",level:"L2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:79,ext:10,spTotal:107,price:1660000,street:"45 Berry Road",discPct:0.17,disc:282200,net:1377800,status:'available'},
+  {lot:122,unit:"209",level:"L2",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:12,spTotal:108,price:1660000,street:"45 Berry Road",discPct:0.17,disc:282200,net:1377800,status:'available'},
+  {lot:123,unit:"210",level:"L2",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:99,ext:20,spTotal:150,price:2250000,street:"45 Berry Road",discPct:0.17,disc:382500,net:1867500,status:'available'},
+  {lot:124,unit:"211",level:"L2",type:"3B",bed:3,tandem:false,asp:"S+E",car:2,int:135,ext:17,spTotal:180,price:2910000,street:"45 Berry Road",discPct:0.17,disc:494700,net:2415300,status:'available'},
+  {lot:125,unit:"301",level:"L3",type:"2B",bed:2,tandem:false,asp:"S+W",car:2,int:73,ext:54,spTotal:163,price:1930000,street:"45 Berry Road",discPct:0.17,disc:328100,net:1601900,status:'available'},
+  {lot:126,unit:"302",level:"L3",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:108,price:1630000,street:"45 Berry Road",discPct:0.17,disc:277100,net:1352900,status:'available'},
+  {lot:127,unit:"303",level:"L3",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1660000,street:"45 Berry Road",discPct:0.17,disc:282200,net:1377800,status:'available'},
+  {lot:128,unit:"304",level:"L3",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:9,spTotal:75,price:940000,street:"45 Berry Road",discPct:0.05,disc:47000,net:893000,status:'available'},
+  {lot:129,unit:"305",level:"L3",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:7,spTotal:74,price:930000,street:"45 Berry Road",discPct:0.05,disc:46500,net:883500,status:'available'},
+  {lot:130,unit:"306",level:"L3",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:103,price:1710000,street:"45 Berry Road",discPct:0.17,disc:290700,net:1419300,status:'available'},
+  {lot:131,unit:"307",level:"L3",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:82,ext:11,spTotal:125,price:1950000,street:"45 Berry Road",discPct:0.17,disc:331500,net:1618500,status:'available'},
+  {lot:132,unit:"308",level:"L3",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:80,ext:10,spTotal:106,price:1670000,street:"45 Berry Road",discPct:0.17,disc:283900,net:1386100,status:'available'},
+  {lot:133,unit:"309",level:"L3",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:12,spTotal:107,price:1670000,street:"45 Berry Road",discPct:0.17,disc:283900,net:1386100,status:'available'},
+  {lot:134,unit:"310",level:"L3",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:100,ext:20,spTotal:151,price:2260000,street:"45 Berry Road",discPct:0.17,disc:384200,net:1875800,status:'available'},
+  {lot:135,unit:"311",level:"L3",type:"2B",bed:2,tandem:false,asp:"S+E",car:2,int:88,ext:46,spTotal:163,price:2120000,street:"45 Berry Road",discPct:0.17,disc:360400,net:1759600,status:'available'},
+  {lot:136,unit:"401",level:"L4",type:"4B",bed:4,tandem:false,asp:"S+E+W",car:3,int:141,ext:22,spTotal:206,price:3320000,street:"45 Berry Road",discPct:0.17,disc:564400,net:2755600,status:'available'},
+  {lot:137,unit:"402",level:"L4",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:80,ext:12,spTotal:108,price:1640000,street:"45 Berry Road",discPct:0.17,disc:278800,net:1361200,status:'available'},
+  {lot:138,unit:"403",level:"L4",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1670000,street:"45 Berry Road",discPct:0.17,disc:283900,net:1386100,status:'available'},
+  {lot:139,unit:"404",level:"L4",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:950000,street:"45 Berry Road",discPct:0.05,disc:47500,net:902500,status:'available'},
+  {lot:140,unit:"405",level:"L4",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:7,spTotal:76,price:930000,street:"45 Berry Road",discPct:0.05,disc:46500,net:883500,status:'available'},
+  {lot:141,unit:"406",level:"L4",type:"2B",bed:2,tandem:false,asp:"N+W",car:1,int:77,ext:10,spTotal:102,price:1720000,street:"45 Berry Road",discPct:0.17,disc:292400,net:1427600,status:'available'},
+  {lot:142,unit:"407",level:"L4",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:82,ext:11,spTotal:122,price:1960000,street:"45 Berry Road",discPct:0.17,disc:333200,net:1626800,status:'available'},
+  {lot:143,unit:"408",level:"L4",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:80,ext:10,spTotal:107,price:1680000,street:"45 Berry Road",discPct:0.17,disc:285600,net:1394400,status:'available'},
+  {lot:144,unit:"409",level:"L4",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:78,ext:11,spTotal:106,price:1680000,street:"45 Berry Road",discPct:0.17,disc:285600,net:1394400,status:'available'},
+  {lot:145,unit:"410",level:"L4",type:"3B",bed:3,tandem:false,asp:"E",car:2,int:100,ext:19,spTotal:148,price:2280000,street:"45 Berry Road",discPct:0.17,disc:387600,net:1892400,status:'available'},
+  {lot:147,unit:"502",level:"L5",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:81,price:950000,street:"45 Berry Road",discPct:0.05,disc:47500,net:902500,status:'available'},
+  {lot:148,unit:"503",level:"L5",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1680000,street:"45 Berry Road",discPct:0.17,disc:285600,net:1394400,status:'available'},
+  {lot:149,unit:"504",level:"L5",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:75,price:950000,street:"45 Berry Road",discPct:0.05,disc:47500,net:902500,status:'available'},
+  {lot:150,unit:"505",level:"L5",type:"3B",bed:3,tandem:false,asp:"N+W",car:2,int:101,ext:22,spTotal:153,price:2430000,street:"45 Berry Road",discPct:0.17,disc:413100,net:2016900,status:'available'},
+  {lot:151,unit:"506",level:"L5",type:"2B",bed:2,tandem:false,asp:"N+E",car:2,int:86,ext:64,spTotal:179,price:2140000,street:"45 Berry Road",discPct:0.17,disc:363800,net:1776200,status:'available'},
+  {lot:152,unit:"507",level:"L5",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:85,ext:34,spTotal:152,price:1870000,street:"45 Berry Road",discPct:0.17,disc:317900,net:1552100,status:'available'},
+  {lot:153,unit:"508",level:"L5",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:68,ext:34,spTotal:117,price:1440000,street:"45 Berry Road",discPct:0.05,disc:72000,net:1368000,status:'available'},
+  {lot:155,unit:"601",level:"L6",type:"3B",bed:3,tandem:false,asp:"S+W",car:2,int:95,ext:11,spTotal:135,price:2350000,street:"45 Berry Road",discPct:0.17,disc:399500,net:1950500,status:'available'},
+  {lot:156,unit:"602",level:"L6",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:79,price:960000,street:"45 Berry Road",discPct:0.05,disc:48000,net:912000,status:'available'},
+  {lot:157,unit:"603",level:"L6",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:103,price:1690000,street:"45 Berry Road",discPct:0.17,disc:287300,net:1402700,status:'available'},
+  {lot:158,unit:"604",level:"L6",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:8,spTotal:74,price:960000,street:"45 Berry Road",discPct:0.05,disc:48000,net:912000,status:'available'},
+  {lot:159,unit:"605",level:"L6",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:10,spTotal:131,price:2140000,street:"45 Berry Road",discPct:0.17,disc:363800,net:1776200,status:'available'},
+  {lot:160,unit:"606",level:"L6",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:103,price:1720000,street:"45 Berry Road",discPct:0.17,disc:292400,net:1427600,status:'available'},
+  {lot:161,unit:"607",level:"L6",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:84,ext:11,spTotal:110,price:1820000,street:"45 Berry Road",discPct:0.17,disc:309400,net:1510600,status:'available'},
+  {lot:162,unit:"608",level:"L6",type:"1B",bed:1,tandem:false,asp:"E",car:1,int:63,ext:8,spTotal:86,price:1410000,street:"45 Berry Road",discPct:0.05,disc:70500,net:1339500,status:'available'},
+  {lot:165,unit:"702",level:"L7",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:50,ext:12,spTotal:80,price:960000,street:"45 Berry Road",discPct:0.05,disc:48000,net:912000,status:'available'},
+  {lot:166,unit:"703",level:"L7",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:77,ext:10,spTotal:102,price:1700000,street:"45 Berry Road",discPct:0.17,disc:289000,net:1411000,status:'available'},
+  {lot:167,unit:"704",level:"L7",type:"1B",bed:1,tandem:false,asp:"W",car:1,int:51,ext:9,spTotal:74,price:960000,street:"45 Berry Road",discPct:0.05,disc:48000,net:912000,status:'available'},
+  {lot:168,unit:"705",level:"L7",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:11,spTotal:134,price:2150000,street:"45 Berry Road",discPct:0.17,disc:365500,net:1784500,status:'available'},
+  {lot:169,unit:"706",level:"L7",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:77,ext:10,spTotal:103,price:1730000,street:"45 Berry Road",discPct:0.17,disc:294100,net:1435900,status:'available'},
+  {lot:170,unit:"707",level:"L7",type:"2B",bed:2,tandem:false,asp:"E",car:1,int:84,ext:11,spTotal:111,price:1830000,street:"45 Berry Road",discPct:0.17,disc:311100,net:1518900,status:'available'},
+  {lot:174,unit:"802",level:"L8",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:74,ext:9,spTotal:99,price:1700000,street:"45 Berry Road",discPct:0.17,disc:289000,net:1411000,status:'available'},
+  {lot:175,unit:"803",level:"L8",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:92,ext:10,spTotal:130,price:2160000,street:"45 Berry Road",discPct:0.17,disc:367200,net:1792800,status:'available'},
+  {lot:176,unit:"804",level:"L8",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:104,price:1740000,street:"45 Berry Road",discPct:0.17,disc:295800,net:1444200,status:'available'},
+  {lot:177,unit:"805",level:"L8",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:84,ext:11,spTotal:126,price:1870000,street:"45 Berry Road",discPct:0.17,disc:317900,net:1552100,status:'available'},
+  {lot:180,unit:"902",level:"L9",type:"2B",bed:2,tandem:false,asp:"W",car:1,int:74,ext:9,spTotal:98,price:1710000,street:"45 Berry Road",discPct:0.17,disc:290700,net:1419300,status:'available'},
+  {lot:181,unit:"903",level:"L9",type:"2B",bed:2,tandem:false,asp:"N+W",car:2,int:93,ext:11,spTotal:133,price:2170000,street:"45 Berry Road",discPct:0.17,disc:368900,net:1801100,status:'available'},
+  {lot:182,unit:"904",level:"L9",type:"2B",bed:2,tandem:false,asp:"N+E",car:1,int:76,ext:11,spTotal:102,price:1750000,street:"45 Berry Road",discPct:0.17,disc:297500,net:1452500,status:'available'},
+  {lot:183,unit:"905",level:"L9",type:"2B",bed:2,tandem:false,asp:"E",car:2,int:84,ext:11,spTotal:124,price:1880000,street:"45 Berry Road",discPct:0.17,disc:319600,net:1560400,status:'available'},
 ];
 
 const LEVELS = ['B1','B2','B3','L1','L2','L3','L4','L5','L6','L7','L8','L9'];
@@ -380,10 +388,10 @@ const LEVELS = ['B1','B2','B3','L1','L2','L3','L4','L5','L6','L7','L8','L9'];
 const i18n = {
   en:{
     'txt-h-center':'Building B · Stocklist','txt-overline':'JQZ · St Leonards NSW · Sep 2026',
-    'addr-lbl':'◆ Building B','addr-sub':'94 apartments · 1–4 Bedrooms · Levels B1–L9',
+    'addr-lbl':'◆ Building B','addr-sub':'94 apartments · 1–4 Bedrooms · Levels B1–L9','disc-note':'◆ Discount: 1 Bed <b>5%</b> · 2–4 Bed <b>17%</b>',
     'slbl-total':'Total Units','ssub-total':'Building B',
     'slbl-avail':'Available','ssub-avail':'For Sale',
-    'slbl-from':'From','ssub-from':'List Price',
+    'slbl-from':'From','ssub-from':'Net Price',
     'slbl-psm':'Avg $/m²','ssub-psm':'Internal area',
     'slbl-shown':'Showing','ssub-shown':'Current filter',
     'flbl-bed':'Bedrooms','flbl-asp':'Aspect','flbl-car':'Carspaces','flbl-street':'Address','flbl-maxpx':'Max Price','flbl-search':'Search',
@@ -391,18 +399,18 @@ const i18n = {
     'opt-px-all':'All','opt-px1':'Under $1M','opt-px2':'Under $1.5M','opt-px3':'Under $2M','opt-px4':'Under $3M',
     'txt-reset':'Reset','txt-shown-lbl':' units shown',
     'th-unit':'Unit','th-level':'Level','th-type':'Type','th-asp':'Aspect','th-car':'Car',
-    'th-area':'Area (sqm)','th-sptotal':'SP Total','th-price':'Price','th-psm':'$/m²','th-street':'Address','th-status':'Status',
+    'th-area':'Area (sqm)','th-sptotal':'SP Total','th-price':'List Price','th-disc':'Discount','th-net':'Net Price','th-psm':'$/m²','th-street':'Address','th-status':'Status',
     'srt-pa':'Price ↑','srt-pd':'Price ↓','srt-lva':'Level ↑','srt-lvd':'Level ↓','srt-sd':'Size ↓','srt-psa':'$/m² ↑',
     'txt-empty':'— No units match your criteria —',
-    'txt-notes':'<b>*</b> DRAFT stocklist — prices and availability subject to change.<br><b>*</b> SP Total = Internal + External + Carspace + Storage. $/m² calculated on internal area.',
+    'txt-notes':'<b>*</b> DRAFT stocklist — prices and availability subject to change.<br><b>*</b> Net Price = List Price less discount (1 Bed 5%, 2–4 Bed 17%). $/m² is based on Net Price ÷ internal area.<br><b>*</b> SP Total = Internal + External + Carspace + Storage.',
     searchPh:'Unit, lot, aspect...', allTab:'All Levels', availLbl:'Available',
   },
   ko:{
     'txt-h-center':'빌딩 B · 재고 리스트','txt-overline':'JQZ · 세인트 레너즈 NSW · 2026년 9월',
-    'addr-lbl':'◆ 빌딩 B','addr-sub':'94세대 · 1–4베드룸 · B1–L9층',
+    'addr-lbl':'◆ 빌딩 B','addr-sub':'94세대 · 1–4베드룸 · B1–L9층','disc-note':'◆ 할인: 1베드 <b>5%</b> · 2–4베드 <b>17%</b>',
     'slbl-total':'총 세대','ssub-total':'빌딩 B',
     'slbl-avail':'분양 가능','ssub-avail':'판매 중',
-    'slbl-from':'최저가','ssub-from':'분양가',
+    'slbl-from':'최저가','ssub-from':'실구매가',
     'slbl-psm':'평균 $/m²','ssub-psm':'내부 면적',
     'slbl-shown':'표시 중','ssub-shown':'현재 필터',
     'flbl-bed':'침실 수','flbl-asp':'방향','flbl-car':'주차','flbl-street':'주소','flbl-maxpx':'최대 가격','flbl-search':'검색',
@@ -410,10 +418,10 @@ const i18n = {
     'opt-px-all':'전체','opt-px1':'$1M 이하','opt-px2':'$1.5M 이하','opt-px3':'$2M 이하','opt-px4':'$3M 이하',
     'txt-reset':'초기화','txt-shown-lbl':'개 세대 표시 중',
     'th-unit':'유닛','th-level':'층','th-type':'타입','th-asp':'방향','th-car':'주차',
-    'th-area':'면적 (sqm)','th-sptotal':'SP 총면적','th-price':'분양가','th-psm':'m²당','th-street':'주소','th-status':'상태',
+    'th-area':'면적 (sqm)','th-sptotal':'SP 총면적','th-price':'리스트가','th-disc':'할인','th-net':'실구매가','th-psm':'m²당','th-street':'주소','th-status':'상태',
     'srt-pa':'가격 낮은 순','srt-pd':'가격 높은 순','srt-lva':'층수 낮은 순','srt-lvd':'층수 높은 순','srt-sd':'면적 큰 순','srt-psa':'단가 낮은 순',
     'txt-empty':'— 조건에 맞는 세대가 없습니다 —',
-    'txt-notes':'<b>*</b> 초안(DRAFT) 재고 리스트 — 가격 및 분양 가능 여부 변경될 수 있음.<br><b>*</b> SP 총면적 = 내부+외부+주차+창고. m²당 가격은 내부 면적 기준.',
+    'txt-notes':'<b>*</b> 초안(DRAFT) 재고 리스트 — 가격 및 분양 가능 여부 변경될 수 있음.<br><b>*</b> 실구매가 = 리스트가에서 할인 적용 (1베드 5%, 2–4베드 17%). m²당 가격은 실구매가 ÷ 내부면적 기준.<br><b>*</b> SP 총면적 = 내부+외부+주차+창고.',
     searchPh:'유닛, Lot, 방향 검색...', allTab:'전체 층', availLbl:'분양 가능',
   }
 };
@@ -461,18 +469,18 @@ function go(){
     if(asp&&!d.asp.includes(asp)) return false;
     if(car&&d.car!==+car) return false;
     if(street&&d.street!==street) return false;
-    if(maxPx&&d.price>+maxPx) return false;
+    if(maxPx&&d.net>+maxPx) return false;
     if(sr){const h=[d.unit,String(d.lot),d.asp,d.type,d.street].join(' ').toLowerCase();if(!h.includes(sr))return false;}
     return true;
   });
 
   fil.sort((a,b)=>{
-    if(srt==='price-asc')  return a.price-b.price;
-    if(srt==='price-desc') return b.price-a.price;
-    if(srt==='level-asc')  return lvlOrder(a.level)-lvlOrder(b.level)||a.price-b.price;
-    if(srt==='level-desc') return lvlOrder(b.level)-lvlOrder(a.level)||a.price-b.price;
+    if(srt==='price-asc')  return a.net-b.net;
+    if(srt==='price-desc') return b.net-a.net;
+    if(srt==='level-asc')  return lvlOrder(a.level)-lvlOrder(b.level)||a.net-b.net;
+    if(srt==='level-desc') return lvlOrder(b.level)-lvlOrder(a.level)||a.net-b.net;
     if(srt==='size-desc')  return b.int-a.int;
-    if(srt==='psm-asc')    return (a.price/a.int)-(b.price/b.int);
+    if(srt==='psm-asc')    return (a.net/a.int)-(b.net/b.int);
     return 0;
   });
 
@@ -487,7 +495,7 @@ function render(){
   if(!fil.length){tb.innerHTML='';em.style.display='block';document.getElementById('txt-empty').textContent=t['txt-empty'];return;}
   em.style.display='none';
   tb.innerHTML=fil.map(d=>{
-    const psm=Math.round(d.price/d.int);
+    const psm=Math.round(d.net/d.int);
     const lvCls=d.level.startsWith('B')?'lv-B':'lv-L';
     return `<tr>
       <td><div class="unit-num">${d.unit}</div><div class="unit-lot">Lot ${d.lot}</div></td>
@@ -497,7 +505,9 @@ function render(){
       <td style="font-size:12px;text-align:center">🚗 ${d.car}</td>
       <td><div class="sz-main">${d.int} m²</div><div class="sz-detail">+ Ext ${d.ext}</div></td>
       <td><div class="sz-main">${d.spTotal} m²</div></td>
-      <td><div class="price-val">$${d.price.toLocaleString()}</div></td>
+      <td><div class="list-price">$${d.price.toLocaleString()}</div></td>
+      <td><span class="disc-badge">-${(d.discPct*100).toFixed(0)}%</span><div class="disc-amt">-$${d.disc.toLocaleString()}</div></td>
+      <td><div class="price-val">$${d.net.toLocaleString()}</div></td>
       <td><div class="psm-val">$${psm.toLocaleString()}</div></td>
       <td><span class="street-chip">${d.street.replace(' Berry Road','')} Berry Rd</span></td>
       <td><span class="avail-badge">${t.availLbl}</span></td>
@@ -506,8 +516,8 @@ function render(){
 }
 
 function upStats(){
-  const px=fil.map(d=>d.price);
-  const psms=fil.map(d=>Math.round(d.price/d.int));
+  const px=fil.map(d=>d.net);
+  const psms=fil.map(d=>Math.round(d.net/d.int));
   document.getElementById('sval-total').textContent=DATA.length;
   document.getElementById('sval-avail').textContent=fil.filter(d=>d.status==='available').length;
   document.getElementById('sval-from').textContent=px.length?$f(Math.min(...px)):'—';
