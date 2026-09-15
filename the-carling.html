@@ -138,9 +138,11 @@ section{padding:100px 60px}
 footer{background:#0A0806;border-top:1px solid rgba(176,138,85,.1);padding:34px 60px;display:flex;justify-content:space-between;align-items:center}
 .f-b{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--acc2)}
 .f-c{font-size:.7rem;color:rgba(246,241,231,.28)}
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:none}.hero-cta .kt{display:none}
 @media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hero-content{padding:0 24px 60px}
 .grid2,.loc-inner,.dev-w,.lobby-w{grid-template-columns:1fr;gap:38px}.igrid,.igrid.thirds{grid-template-columns:1fr}.icard{height:340px}
@@ -149,13 +151,24 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
 .of-g{grid-template-columns:1fr}.band{height:300px}.band-cap{left:24px;bottom:24px}.vis,.loc-img{height:320px}
 .hero-badge{display:none}footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 @media(max-width:600px){.amen-g,.lc-g,.strip-w,.hero-meta,.dev-stats{grid-template-columns:1fr}.sp{border-right:none;border-bottom:1px solid rgba(255,255,255,.18)}}
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--acc);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 <nav>
   <a href="#" class="nav-logo">THE CARLING<span>MERITON</span></a>
   <div class="nav-actions">
-    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="btn-theme" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
   </div>
@@ -165,23 +178,23 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <img class="hero-img" src="assets/the-carling/hero.jpg" alt="The Carling towers — Artist Impression" loading="eager">
   <div class="hero-ov"></div><div class="hero-acc"></div>
   <div class="hero-badge" data-lang="en">CARLINGFORD NSW 2118</div>
-  <div class="hero-badge" data-lang="ko">칼링포드 NSW 2118</div>
+  <div class="hero-badge" data-lang="ko">칼링포드 NSW 2118</div><div class="hero-badge" data-lang="zh">Carlingford NSW 2118</div><div class="hero-badge" data-lang="zt">Carlingford NSW 2118</div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-lang="en">The Carling · by Meriton</div>
-    <div class="hero-eyebrow" data-lang="ko">더 칼링 · by Meriton</div>
+    <div class="hero-eyebrow" data-lang="ko">더 칼링 · by Meriton</div><div class="hero-eyebrow" data-lang="zh">The Carling · by Meriton</div><div class="hero-eyebrow" data-lang="zt">The Carling · by Meriton</div>
     <h1 class="hero-title">
       <span data-lang="en">The New Heart<br>of <em>Carlingford</em></span>
-      <span data-lang="ko">칼링포드의<br><em>새로운 심장</em></span>
+      <span data-lang="ko">칼링포드의<br><em>새로운 심장</em></span><span data-lang="zh">Carlingford 的<br><em>全新核心</em></span><span data-lang="zt">Carlingford 的<br><em>全新核心</em></span>
     </h1>
     <p class="hero-sub" data-lang="en">Seven Luxury Towers · The Tallest in the Area · 263–281 Pennant Hills Road</p>
-    <p class="hero-sub" data-lang="ko">7개 럭셔리 타워 · 지역 최고층 · 페넌트 힐스 로드 263–281</p>
+    <p class="hero-sub" data-lang="ko">7개 럭셔리 타워 · 지역 최고층 · 페넌트 힐스 로드 263–281</p><p class="hero-sub" data-lang="zh">七座豪华塔楼 · 本区最高 · Pennant Hills Road 263–281</p><p class="hero-sub" data-lang="zt">七座豪華塔樓 · 本區最高 · Pennant Hills Road 263–281</p>
     <div class="hero-meta">
-      <div class="hm"><label data-lang="en">Towers</label><label data-lang="ko">타워</label><span>7</span></div>
-      <div class="hm"><label data-lang="en">Levels (Tallest)</label><label data-lang="ko">최고층</label><span>29</span></div>
-      <div class="hm"><label data-lang="en">Central Park</label><label data-lang="ko">센트럴 파크</label><span>4,700<small>m²</small></span></div>
-      <div class="hm"><label data-lang="en">Light Rail</label><label data-lang="ko">라이트레일</label><span>200<small>m</small></span></div>
+      <div class="hm"><label data-lang="en">Towers</label><label data-lang="ko">타워</label><label data-lang="zh">塔楼</label><label data-lang="zt">塔樓</label><span>7</span></div>
+      <div class="hm"><label data-lang="en">Levels (Tallest)</label><label data-lang="ko">최고층</label><label data-lang="zh">最高楼层</label><label data-lang="zt">最高樓層</label><span>29</span></div>
+      <div class="hm"><label data-lang="en">Central Park</label><label data-lang="ko">센트럴 파크</label><label data-lang="zh">中央公园</label><label data-lang="zt">中央公園</label><span>4,700<small>m²</small></span></div>
+      <div class="hm"><label data-lang="en">Light Rail</label><label data-lang="ko">라이트레일</label><label data-lang="zh">轻轨</label><label data-lang="zt">輕軌</label><span>200<small>m</small></span></div>
     </div>
-    <a href="#contact" class="hero-cta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span> →</a>
+    <a href="#contact" class="hero-cta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span><span class="kt" data-lang="zh">咨询详情</span><span class="kt" data-lang="zt">諮詢詳情</span> →</a>
   </div>
 </section>
 
@@ -191,56 +204,56 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
       <img src="assets/the-carling/masterplan.jpg" alt="The Carling masterplan" loading="lazy">
       <div class="vis-ov"></div>
       <div class="vis-badge" data-lang="en">263–281 Pennant Hills Rd</div>
-      <div class="vis-badge" data-lang="ko">페넌트 힐스 로드 263–281</div>
+      <div class="vis-badge" data-lang="ko">페넌트 힐스 로드 263–281</div><div class="vis-badge" data-lang="zh">Pennant Hills Road 263–281</div><div class="vis-badge" data-lang="zt">Pennant Hills Road 263–281</div>
       <div class="vis-cap" data-lang="en">Seven towers around a 4,700m² Central Park</div>
-      <div class="vis-cap" data-lang="ko">4,700m² 센트럴 파크를 둘러싼 7개 타워</div>
+      <div class="vis-cap" data-lang="ko">4,700m² 센트럴 파크를 둘러싼 7개 타워</div><div class="vis-cap" data-lang="zh">环抱 4,700 平方米中央公园的七座塔楼</div><div class="vis-cap" data-lang="zt">環抱 4,700 平方米中央公園的七座塔樓</div>
     </div>
     <div>
-      <div class="eyebrow"><span data-lang="en">Masterplanned Community</span><span data-lang="ko">마스터플랜 커뮤니티</span></div>
-      <h2 class="title"><span data-lang="en">The <em>Carling</em></span><span data-lang="ko">더 <em>칼링</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">Masterplanned Community</span><span data-lang="ko">마스터플랜 커뮤니티</span><span data-lang="zh">总体规划社区</span><span data-lang="zt">總體規劃社區</span></div>
+      <h2 class="title"><span data-lang="en">The <em>Carling</em></span><span data-lang="ko">더 <em>칼링</em></span><span data-lang="zh">The <em>Carling</em></span><span data-lang="zt">The <em>Carling</em></span></h2>
       <p class="body-t" data-lang="en">The Carling is a stunning master-planned community featuring seven luxury residential towers — the tallest in the area — along with a vibrant new retail precinct built around an enchanting Central Park. Soaring 29 levels, The Carling boasts never-to-be-built-out panoramic views towards Sydney's glittering CBD, Rhodes, Macquarie Park and Parramatta.</p>
-      <p class="body-t" data-lang="ko">더 칼링은 지역 최고층인 7개의 럭셔리 레지던스 타워와 매혹적인 센트럴 파크를 중심으로 조성되는 활기찬 리테일 단지를 갖춘 마스터플랜 커뮤니티입니다. 29층 높이에서 시드니 CBD, 로즈, 맥쿼리 파크, 파라마타를 향한 영구 조망 파노라마 뷰를 자랑합니다.</p>
+      <p class="body-t" data-lang="ko">더 칼링은 지역 최고층인 7개의 럭셔리 레지던스 타워와 매혹적인 센트럴 파크를 중심으로 조성되는 활기찬 리테일 단지를 갖춘 마스터플랜 커뮤니티입니다. 29층 높이에서 시드니 CBD, 로즈, 맥쿼리 파크, 파라마타를 향한 영구 조망 파노라마 뷰를 자랑합니다.</p><p class="body-t" data-lang="zh">The Carling 是一个总体规划社区，拥有本区最高的七座豪华住宅塔楼，以及围绕迷人中央公园打造的活力商业街区。高达 29 层的 The Carling，坐拥朝向悉尼璀璨 CBD、Rhodes、Macquarie Park 与 Parramatta 的永久全景视野。</p><p class="body-t" data-lang="zt">The Carling 是一個總體規劃社區，擁有本區最高的七座豪華住宅塔樓，以及圍繞迷人中央公園打造的活力商業街區。高達 29 層的 The Carling，坐擁朝向悉尼璀璨 CBD、Rhodes、Macquarie Park 與 Parramatta 的永久全景視野。</p>
       <p class="body-t" data-lang="en">A collaboration between Meriton and award-winning architects Fender Katsalidis and Crone Architecture, offering spacious 1, 1+MPR, 2, 2+MPR, 3, 3+MPR and 4 bedroom residences — most in desirable corner positions.</p>
-      <p class="body-t" data-lang="ko">Meriton과 수상 경력의 건축사 Fender Katsalidis, Crone Architecture의 협업으로, 넓은 1·1+MPR·2·2+MPR·3·3+MPR·4베드룸 레지던스를 선보이며 대부분 코너 배치로 조망·채광·프라이버시를 극대화했습니다.</p>
+      <p class="body-t" data-lang="ko">Meriton과 수상 경력의 건축사 Fender Katsalidis, Crone Architecture의 협업으로, 넓은 1·1+MPR·2·2+MPR·3·3+MPR·4베드룸 레지던스를 선보이며 대부분 코너 배치로 조망·채광·프라이버시를 극대화했습니다.</p><p class="body-t" data-lang="zh">由 Meriton 携手屡获殊荣的建筑事务所 Fender Katsalidis 与 Crone Architecture 共同打造，提供宽敞的 1、1+MPR、2、2+MPR、3、3+MPR 及 4 房住宅，多数位于转角，将景观、采光与私密性发挥至极致。</p><p class="body-t" data-lang="zt">由 Meriton 攜手屢獲殊榮的建築事務所 Fender Katsalidis 與 Crone Architecture 共同打造，提供寬敞的 1、1+MPR、2、2+MPR、3、3+MPR 及 4 房住宅，多數位於轉角，將景觀、採光與私密性發揮至極致。</p>
       <div class="tags">
-        <span class="tag" data-lang="en">7 Towers</span><span class="tag" data-lang="ko">7개 타워</span>
-        <span class="tag" data-lang="en">1–4 Bed + MPR</span><span class="tag" data-lang="ko">1~4베드 + MPR</span>
-        <span class="tag" data-lang="en">Double Glazing</span><span class="tag" data-lang="ko">이중 유리</span>
-        <span class="tag" data-lang="en">FRANKE Kitchen</span><span class="tag" data-lang="ko">FRANKE 주방</span>
-        <span class="tag" data-lang="en">EV Ready</span><span class="tag" data-lang="ko">EV 대응</span>
+        <span class="tag" data-lang="en">7 Towers</span><span class="tag" data-lang="ko">7개 타워</span><span class="tag" data-lang="zh">七座塔楼</span><span class="tag" data-lang="zt">七座塔樓</span>
+        <span class="tag" data-lang="en">1–4 Bed + MPR</span><span class="tag" data-lang="ko">1~4베드 + MPR</span><span class="tag" data-lang="zh">1 至 4 房 + MPR</span><span class="tag" data-lang="zt">1 至 4 房 + MPR</span>
+        <span class="tag" data-lang="en">Double Glazing</span><span class="tag" data-lang="ko">이중 유리</span><span class="tag" data-lang="zh">双层玻璃</span><span class="tag" data-lang="zt">雙層玻璃</span>
+        <span class="tag" data-lang="en">FRANKE Kitchen</span><span class="tag" data-lang="ko">FRANKE 주방</span><span class="tag" data-lang="zh">FRANKE 厨房</span><span class="tag" data-lang="zt">FRANKE 廚房</span>
+        <span class="tag" data-lang="en">EV Ready</span><span class="tag" data-lang="ko">EV 대응</span><span class="tag" data-lang="zh">支持电动车</span><span class="tag" data-lang="zt">支持電動車</span>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip"><div class="strip-w">
-  <div class="sp"><div class="sp-n">7</div><div class="sp-l" data-lang="en">Luxury Towers</div><div class="sp-l" data-lang="ko">럭셔리 타워</div></div>
-  <div class="sp"><div class="sp-n">29</div><div class="sp-l" data-lang="en">Levels — Tallest in Area</div><div class="sp-l" data-lang="ko">층 — 지역 최고층</div></div>
-  <div class="sp"><div class="sp-n">4,700<span style="font-size:1.3rem">m²</span></div><div class="sp-l" data-lang="en">Central Park</div><div class="sp-l" data-lang="ko">센트럴 파크</div></div>
-  <div class="sp"><div class="sp-n">3,000<span style="font-size:1.3rem">m²</span></div><div class="sp-l" data-lang="en">Community Centre & Library</div><div class="sp-l" data-lang="ko">커뮤니티센터 & 도서관</div></div>
+  <div class="sp"><div class="sp-n">7</div><div class="sp-l" data-lang="en">Luxury Towers</div><div class="sp-l" data-lang="ko">럭셔리 타워</div><div class="sp-l" data-lang="zh">豪华塔楼</div><div class="sp-l" data-lang="zt">豪華塔樓</div></div>
+  <div class="sp"><div class="sp-n">29</div><div class="sp-l" data-lang="en">Levels — Tallest in Area</div><div class="sp-l" data-lang="ko">층 — 지역 최고층</div><div class="sp-l" data-lang="zh">层 —— 本区最高</div><div class="sp-l" data-lang="zt">層 —— 本區最高</div></div>
+  <div class="sp"><div class="sp-n">4,700<span style="font-size:1.3rem">m²</span></div><div class="sp-l" data-lang="en">Central Park</div><div class="sp-l" data-lang="ko">센트럴 파크</div><div class="sp-l" data-lang="zh">中央公园</div><div class="sp-l" data-lang="zt">中央公園</div></div>
+  <div class="sp"><div class="sp-n">3,000<span style="font-size:1.3rem">m²</span></div><div class="sp-l" data-lang="en">Community Centre & Library</div><div class="sp-l" data-lang="ko">커뮤니티센터 & 도서관</div><div class="sp-l" data-lang="zh">社区中心与图书馆</div><div class="sp-l" data-lang="zt">社區中心與圖書館</div></div>
 </div></div>
 
 <div class="band">
   <img src="assets/the-carling/towers-band.jpg" alt="The Carling towers panorama — Artist Impression" loading="lazy">
   <div class="band-ov"></div>
   <div class="band-cap">
-    <h3 data-lang="en">Never-To-Be-Built-Out Views</h3><h3 data-lang="ko">영구 조망 파노라마</h3>
+    <h3 data-lang="en">Never-To-Be-Built-Out Views</h3><h3 data-lang="ko">영구 조망 파노라마</h3><h3 data-lang="zh">永久全景视野</h3><h3 data-lang="zt">永久全景視野</h3>
     <p data-lang="en">CBD · Rhodes · Macquarie Park · Parramatta · Artist Impression</p>
-    <p data-lang="ko">CBD · 로즈 · 맥쿼리 파크 · 파라마타 · 조감도</p>
+    <p data-lang="ko">CBD · 로즈 · 맥쿼리 파크 · 파라마타 · 조감도</p><p data-lang="zh">CBD · Rhodes · Macquarie Park · Parramatta · 效果图</p><p data-lang="zt">CBD · Rhodes · Macquarie Park · Parramatta · 效果圖</p>
   </div>
 </div>
 
 <section class="dark-sec" id="interiors">
   <div class="amen-w fade">
-    <div class="eyebrow"><span data-lang="en">Residences</span><span data-lang="ko">레지던스</span></div>
-    <h2 class="title"><span data-lang="en">Quality Built <em>for a Lifetime</em></span><span data-lang="ko">평생을 위한 <em>품질</em></span></h2>
+    <div class="eyebrow"><span data-lang="en">Residences</span><span data-lang="ko">레지던스</span><span data-lang="zh">住宅</span><span data-lang="zt">住宅</span></div>
+    <h2 class="title"><span data-lang="en">Quality Built <em>for a Lifetime</em></span><span data-lang="ko">평생을 위한 <em>품질</em></span><span data-lang="zh">经得起一生的<em>品质</em></span><span data-lang="zt">經得起一生的<em>品質</em></span></h2>
     <p class="sub" data-lang="en">Larger-than-average layouts, designer tiling, abundant storage, premium FRANKE kitchen appliances and double-glazed glass in every room. Many apartments include a fully functional multi-purpose room with window, A/C and built-in robe.</p>
-    <p class="sub" data-lang="ko">평균보다 넓은 평면, 디자이너 타일, 풍부한 수납, 프리미엄 FRANKE 주방 가전, 전 객실 이중 유리. 다수 세대에 창문·에어컨·빌트인 옷장을 갖춘 다목적룸(MPR)이 포함됩니다.</p>
+    <p class="sub" data-lang="ko">평균보다 넓은 평면, 디자이너 타일, 풍부한 수납, 프리미엄 FRANKE 주방 가전, 전 객실 이중 유리. 다수 세대에 창문·에어컨·빌트인 옷장을 갖춘 다목적룸(MPR)이 포함됩니다.</p><p class="sub" data-lang="zh">高于平均的户型面积、设计师瓷砖、充裕收纳、高端 FRANKE 厨房家电，全屋双层玻璃。多数户型设有配窗户、空调与嵌入式衣柜的多功能房（MPR）。</p><p class="sub" data-lang="zt">高於平均的戶型面積、設計師瓷磚、充裕收納、高端 FRANKE 廚房家電，全屋雙層玻璃。多數戶型設有配窗戶、空調與嵌入式衣櫃的多功能房（MPR）。</p>
     <div class="igrid">
-      <div class="icard"><img src="assets/the-carling/int-living.jpg" alt="Living — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Living</h4><h4 data-lang="ko">거실</h4><p data-lang="en">City vistas · Artist Impression</p><p data-lang="ko">시티 전망 · 조감도</p></div></div>
-      <div class="icard"><img src="assets/the-carling/int-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4><p data-lang="en">FRANKE appliances · Artist Impression</p><p data-lang="ko">FRANKE 가전 · 조감도</p></div></div>
-      <div class="icard"><img src="assets/the-carling/int-bedroom.jpg" alt="Bedroom — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Bedroom</h4><h4 data-lang="ko">침실</h4><p data-lang="en">Built-in robes · Double glazing · Artist Impression</p><p data-lang="ko">빌트인 옷장 · 이중 유리 · 조감도</p></div></div>
-      <div class="icard"><img src="assets/the-carling/int-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Bathroom</h4><h4 data-lang="ko">욕실</h4><p data-lang="en">Freestanding bath · Brushed nickel · Artist Impression</p><p data-lang="ko">독립형 욕조 · 브러시드 니켈 · 조감도</p></div></div>
+      <div class="icard"><img src="assets/the-carling/int-living.jpg" alt="Living — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Living</h4><h4 data-lang="ko">거실</h4><h4 data-lang="zh">起居空间</h4><h4 data-lang="zt">起居空間</h4><p data-lang="en">City vistas · Artist Impression</p><p data-lang="ko">시티 전망 · 조감도</p><p data-lang="zh">城市景观 · 效果图</p><p data-lang="zt">城市景觀 · 效果圖</p></div></div>
+      <div class="icard"><img src="assets/the-carling/int-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4><h4 data-lang="zh">厨房</h4><h4 data-lang="zt">廚房</h4><p data-lang="en">FRANKE appliances · Artist Impression</p><p data-lang="ko">FRANKE 가전 · 조감도</p><p data-lang="zh">FRANKE 家电 · 效果图</p><p data-lang="zt">FRANKE 家電 · 效果圖</p></div></div>
+      <div class="icard"><img src="assets/the-carling/int-bedroom.jpg" alt="Bedroom — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Bedroom</h4><h4 data-lang="ko">침실</h4><h4 data-lang="zh">卧室</h4><h4 data-lang="zt">臥室</h4><p data-lang="en">Built-in robes · Double glazing · Artist Impression</p><p data-lang="ko">빌트인 옷장 · 이중 유리 · 조감도</p><p data-lang="zh">嵌入式衣柜 · 双层玻璃 · 效果图</p><p data-lang="zt">嵌入式衣櫃 · 雙層玻璃 · 效果圖</p></div></div>
+      <div class="icard"><img src="assets/the-carling/int-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy"><div class="ic-lab"><h4 data-lang="en">Bathroom</h4><h4 data-lang="ko">욕실</h4><h4 data-lang="zh">浴室</h4><h4 data-lang="zt">浴室</h4><p data-lang="en">Freestanding bath · Brushed nickel · Artist Impression</p><p data-lang="ko">독립형 욕조 · 브러시드 니켈 · 조감도</p><p data-lang="zh">独立浴缸 · 拉丝镍 · 效果图</p><p data-lang="zt">獨立浴缸 · 拉絲鎳 · 效果圖</p></div></div>
     </div>
   </div>
 </section>
@@ -250,15 +263,15 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <div class="lobby-w fade">
     <div class="lobby-img"><img src="assets/the-carling/lobby.jpg" alt="Building B lobby — Artist Impression" loading="lazy"></div>
     <div>
-      <div class="eyebrow"><span data-lang="en">The Arrival</span><span data-lang="ko">웰컴 로비</span></div>
-      <h2 class="title"><span data-lang="en">A Grand <em>Arrival</em></span><span data-lang="ko">품격 있는 <em>첫인상</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">The Arrival</span><span data-lang="ko">웰컴 로비</span><span data-lang="zh">迎宾大堂</span><span data-lang="zt">迎賓大堂</span></div>
+      <h2 class="title"><span data-lang="en">A Grand <em>Arrival</em></span><span data-lang="ko">품격 있는 <em>첫인상</em></span><span data-lang="zh">格调十足的<em>第一印象</em></span><span data-lang="zt">格調十足的<em>第一印象</em></span></h2>
       <p class="body-t" data-lang="en">An impressive high-ceiling lobby heralds a grand arrival for you and your guests. Beyond the entry, the majority of apartments enjoy direct lift access to secure underground parking with separate lock-up storage — a rare commodity in the Sydney apartment market.</p>
-      <p class="body-t" data-lang="ko">높은 층고의 인상적인 로비가 입주민과 방문객을 품격 있게 맞이합니다. 대다수 세대는 지하 안전 주차장까지 직통 엘리베이터로 연결되며, 별도의 잠금형 창고가 제공됩니다 — 시드니 아파트 시장에서 보기 드문 장점입니다.</p>
+      <p class="body-t" data-lang="ko">높은 층고의 인상적인 로비가 입주민과 방문객을 품격 있게 맞이합니다. 대다수 세대는 지하 안전 주차장까지 직통 엘리베이터로 연결되며, 별도의 잠금형 창고가 제공됩니다 — 시드니 아파트 시장에서 보기 드문 장점입니다.</p><p class="body-t" data-lang="zh">挑高大堂气派迎接住户与访客。多数户型可由专属电梯直达地下安全停车场，并配独立上锁储藏间 —— 这在悉尼公寓市场颇为难得。</p><p class="body-t" data-lang="zt">挑高大堂氣派迎接住戶與訪客。多數戶型可由專屬電梯直達地下安全停車場，並配獨立上鎖儲藏間 —— 這在悉尼公寓市場頗爲難得。</p>
       <div class="tags">
-        <span class="tag" data-lang="en">High-Ceiling Lobby</span><span class="tag" data-lang="ko">고층고 로비</span>
-        <span class="tag" data-lang="en">Direct Lift Access</span><span class="tag" data-lang="ko">직통 엘리베이터</span>
-        <span class="tag" data-lang="en">Lock-Up Storage</span><span class="tag" data-lang="ko">잠금형 창고</span>
-        <span class="tag" data-lang="en">Bike & Motorcycle Parking</span><span class="tag" data-lang="ko">자전거·오토바이 주차</span>
+        <span class="tag" data-lang="en">High-Ceiling Lobby</span><span class="tag" data-lang="ko">고층고 로비</span><span class="tag" data-lang="zh">挑高大堂</span><span class="tag" data-lang="zt">挑高大堂</span>
+        <span class="tag" data-lang="en">Direct Lift Access</span><span class="tag" data-lang="ko">직통 엘리베이터</span><span class="tag" data-lang="zh">直达电梯</span><span class="tag" data-lang="zt">直達電梯</span>
+        <span class="tag" data-lang="en">Lock-Up Storage</span><span class="tag" data-lang="ko">잠금형 창고</span><span class="tag" data-lang="zh">上锁储藏间</span><span class="tag" data-lang="zt">上鎖儲藏間</span>
+        <span class="tag" data-lang="en">Bike & Motorcycle Parking</span><span class="tag" data-lang="ko">자전거·오토바이 주차</span><span class="tag" data-lang="zh">自行车与摩托车停放</span><span class="tag" data-lang="zt">自行車與摩托車停放</span>
       </div>
     </div>
   </div>
@@ -267,16 +280,16 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
 <section id="amenities">
   <div class="amen-w">
     <div class="fade">
-      <div class="eyebrow"><span data-lang="en">Amenities & Precinct</span><span data-lang="ko">편의시설 & 단지</span></div>
-      <h2 class="title"><span data-lang="en">A Vibrant Precinct<br>on Your <em>Doorstep</em></span><span data-lang="ko">문 앞에 펼쳐지는<br><em>활기찬 단지</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">Amenities & Precinct</span><span data-lang="ko">편의시설 & 단지</span><span data-lang="zh">配套与街区</span><span data-lang="zt">配套與街區</span></div>
+      <h2 class="title"><span data-lang="en">A Vibrant Precinct<br>on Your <em>Doorstep</em></span><span data-lang="ko">문 앞에 펼쳐지는<br><em>활기찬 단지</em></span><span data-lang="zh">家门口的<br><em>活力街区</em></span><span data-lang="zt">家門口的<br><em>活力街區</em></span></h2>
     </div>
     <div class="amen-g fade">
-      <div class="am"><div class="am-i">🏊</div><h5 data-lang="en">Indoor Wellness Centre</h5><h5 data-lang="ko">실내 웰니스 센터</h5><p data-lang="en">Lap pool, spa, sauna and fully equipped gym — exclusive to residents.</p><p data-lang="ko">랩풀, 스파, 사우나, 짐 — 입주민 전용 시설.</p></div>
-      <div class="am"><div class="am-i">🌇</div><h5 data-lang="en">Rooftop & Podium Gardens</h5><h5 data-lang="ko">루프탑 & 포디움 가든</h5><p data-lang="en">District-view rooftop terrace, podium gardens and BBQ pavilions.</p><p data-lang="ko">지역 전망 루프탑 테라스, 포디움 가든, BBQ 파빌리온.</p></div>
-      <div class="am"><div class="am-i">🌳</div><h5 data-lang="en">4,700m² Central Park</h5><h5 data-lang="ko">4,700m² 센트럴 파크</h5><p data-lang="en">Interactive playgrounds, outdoor gym and calming green spaces.</p><p data-lang="ko">인터랙티브 놀이터, 야외 짐, 힐링 녹지 공간.</p></div>
-      <div class="am"><div class="am-i">🛍️</div><h5 data-lang="en">Retail Plaza</h5><h5 data-lang="ko">리테일 플라자</h5><p data-lang="en">Lively cafés and essential services — Carlingford's new civic hub.</p><p data-lang="ko">활기찬 카페와 생활 편의 시설 — 칼링포드의 새 중심지.</p></div>
-      <div class="am"><div class="am-i">📚</div><h5 data-lang="en">Community Centre & Library</h5><h5 data-lang="ko">커뮤니티센터 & 도서관</h5><p data-lang="en">3,000m² community centre and public library, plus on-site childcare.</p><p data-lang="ko">3,000m² 커뮤니티센터·공공 도서관, 단지 내 차일드케어.</p></div>
-      <div class="am"><div class="am-i">🛡️</div><h5 data-lang="en">Managed & Secure</h5><h5 data-lang="ko">관리 & 보안</h5><p data-lang="en">On-site building manager and after-hours security.</p><p data-lang="ko">상주 빌딩 매니저와 야간 보안 서비스.</p></div>
+      <div class="am"><div class="am-i">🏊</div><h5 data-lang="en">Indoor Wellness Centre</h5><h5 data-lang="ko">실내 웰니스 센터</h5><h5 data-lang="zh">室内康体中心</h5><h5 data-lang="zt">室內康體中心</h5><p data-lang="en">Lap pool, spa, sauna and fully equipped gym — exclusive to residents.</p><p data-lang="ko">랩풀, 스파, 사우나, 짐 — 입주민 전용 시설.</p><p data-lang="zh">泳道池、水疗、桑拿与健身房 —— 住户专属设施。</p><p data-lang="zt">泳道池、水療、桑拿與健身房 —— 住戶專屬設施。</p></div>
+      <div class="am"><div class="am-i">🌇</div><h5 data-lang="en">Rooftop & Podium Gardens</h5><h5 data-lang="ko">루프탑 & 포디움 가든</h5><h5 data-lang="zh">屋顶与裙楼花园</h5><h5 data-lang="zt">屋頂與裙樓花園</h5><p data-lang="en">District-view rooftop terrace, podium gardens and BBQ pavilions.</p><p data-lang="ko">지역 전망 루프탑 테라스, 포디움 가든, BBQ 파빌리온.</p><p data-lang="zh">可眺本区的屋顶露台、裙楼花园与烧烤凉亭。</p><p data-lang="zt">可眺本區的屋頂露臺、裙樓花園與燒烤涼亭。</p></div>
+      <div class="am"><div class="am-i">🌳</div><h5 data-lang="en">4,700m² Central Park</h5><h5 data-lang="ko">4,700m² 센트럴 파크</h5><h5 data-lang="zh">4,700 平方米中央公园</h5><h5 data-lang="zt">4,700 平方米中央公園</h5><p data-lang="en">Interactive playgrounds, outdoor gym and calming green spaces.</p><p data-lang="ko">인터랙티브 놀이터, 야외 짐, 힐링 녹지 공간.</p><p data-lang="zh">互动游乐场、户外健身器材与疗愈绿地。</p><p data-lang="zt">互動遊樂場、戶外健身器材與療愈綠地。</p></div>
+      <div class="am"><div class="am-i">🛍️</div><h5 data-lang="en">Retail Plaza</h5><h5 data-lang="ko">리테일 플라자</h5><h5 data-lang="zh">商业广场</h5><h5 data-lang="zt">商業廣場</h5><p data-lang="en">Lively cafés and essential services — Carlingford's new civic hub.</p><p data-lang="ko">활기찬 카페와 생활 편의 시설 — 칼링포드의 새 중심지.</p><p data-lang="zh">充满活力的咖啡馆与生活便利设施 —— Carlingford 的全新中心。</p><p data-lang="zt">充滿活力的咖啡館與生活便利設施 —— Carlingford 的全新中心。</p></div>
+      <div class="am"><div class="am-i">📚</div><h5 data-lang="en">Community Centre & Library</h5><h5 data-lang="ko">커뮤니티센터 & 도서관</h5><h5 data-lang="zh">社区中心与图书馆</h5><h5 data-lang="zt">社區中心與圖書館</h5><p data-lang="en">3,000m² community centre and public library, plus on-site childcare.</p><p data-lang="ko">3,000m² 커뮤니티센터·공공 도서관, 단지 내 차일드케어.</p><p data-lang="zh">3,000 平方米社区中心与公共图书馆，并设区内托儿中心。</p><p data-lang="zt">3,000 平方米社區中心與公共圖書館，並設區內托兒中心。</p></div>
+      <div class="am"><div class="am-i">🛡️</div><h5 data-lang="en">Managed & Secure</h5><h5 data-lang="ko">관리 & 보안</h5><h5 data-lang="zh">物业与安保</h5><h5 data-lang="zt">物業與安保</h5><p data-lang="en">On-site building manager and after-hours security.</p><p data-lang="ko">상주 빌딩 매니저와 야간 보안 서비스.</p><p data-lang="zh">驻场物业经理与夜间安保服务。</p><p data-lang="zt">駐場物業經理與夜間安保服務。</p></div>
     </div>
   </div>
 </section>
@@ -285,9 +298,9 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <img src="assets/the-carling/pool.jpg" alt="Indoor wellness centre pool — Artist Impression" loading="lazy" style="object-position:center 50%">
   <div class="band-ov"></div>
   <div class="band-cap">
-    <h3 data-lang="en">The Wellness Centre</h3><h3 data-lang="ko">웰니스 센터</h3>
+    <h3 data-lang="en">The Wellness Centre</h3><h3 data-lang="ko">웰니스 센터</h3><h3 data-lang="zh">康体中心</h3><h3 data-lang="zt">康體中心</h3>
     <p data-lang="en">Lap pool · Spa · Sauna · Gym · Artist Impression</p>
-    <p data-lang="ko">랩풀 · 스파 · 사우나 · 짐 · 조감도</p>
+    <p data-lang="ko">랩풀 · 스파 · 사우나 · 짐 · 조감도</p><p data-lang="zh">泳道池 · 水疗 · 桑拿 · 健身房 · 效果图</p><p data-lang="zt">泳道池 · 水療 · 桑拿 · 健身房 · 效果圖</p>
   </div>
 </div>
 
@@ -295,9 +308,9 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <img src="assets/the-carling/central-park.jpg" alt="The Carling Central Park — Artist Impression" loading="lazy">
   <div class="band-ov"></div>
   <div class="band-cap">
-    <h3 data-lang="en">The 4,700m² Central Park</h3><h3 data-lang="ko">4,700m² 센트럴 파크</h3>
+    <h3 data-lang="en">The 4,700m² Central Park</h3><h3 data-lang="ko">4,700m² 센트럴 파크</h3><h3 data-lang="zh">4,700 平方米中央公园</h3><h3 data-lang="zt">4,700 平方米中央公園</h3>
     <p data-lang="en">Playgrounds · Outdoor gym · Green space · Artist Impression</p>
-    <p data-lang="ko">놀이터 · 야외 짐 · 녹지 공간 · 조감도</p>
+    <p data-lang="ko">놀이터 · 야외 짐 · 녹지 공간 · 조감도</p><p data-lang="zh">游乐场 · 户外健身器材 · 绿地 · 效果图</p><p data-lang="zt">遊樂場 · 戶外健身器材 · 綠地 · 效果圖</p>
   </div>
 </div>
 
@@ -305,18 +318,18 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <div class="loc-inner fade">
     <div class="loc-img"><img src="assets/the-carling/map-parks.jpg" alt="The Carling neighbourhood map — light rail, parks and reserves" loading="lazy"></div>
     <div>
-      <div class="eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
-      <h2 class="title"><span data-lang="en">Exceptionally<br><em>Connected</em></span><span data-lang="ko">탁월한<br><em>연결성</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span><span data-lang="zh">位置与交通</span><span data-lang="zt">位置與交通</span></div>
+      <h2 class="title"><span data-lang="en">Exceptionally<br><em>Connected</em></span><span data-lang="ko">탁월한<br><em>연결성</em></span><span data-lang="zh">卓越的<br><em>连通性</em></span><span data-lang="zt">卓越的<br><em>連通性</em></span></h2>
       <p class="sub" data-lang="en">A direct 200m link to Carlingford Light Rail — services to Parramatta & Westmead every 9 minutes, with Stage 2 extending to Sydney Olympic Park. Minutes to the M2 and Australia's top-ranked schools including James Ruse Agricultural High.</p>
-      <p class="sub" data-lang="ko">칼링포드 라이트레일까지 200m 직결 — 파라마타·웨스트미드행 9분 간격 운행, 2단계는 시드니 올림픽 파크까지 연장 예정. M2 고속도로와 제임스 루즈 농업고 등 호주 최상위 학군까지 몇 분 거리입니다.</p>
+      <p class="sub" data-lang="ko">칼링포드 라이트레일까지 200m 직결 — 파라마타·웨스트미드행 9분 간격 운행, 2단계는 시드니 올림픽 파크까지 연장 예정. M2 고속도로와 제임스 루즈 농업고 등 호주 최상위 학군까지 몇 분 거리입니다.</p><p class="sub" data-lang="zh">直达 Carlingford 轻轨仅 200 米 —— 往返 Parramatta 与 Westmead 每 9 分钟一班，二期将延伸至悉尼奥林匹克公园。距 M2 高速公路及 James Ruse 农业中学等澳洲顶尖学区仅数分钟。</p><p class="sub" data-lang="zt">直達 Carlingford 輕軌僅 200 米 —— 往返 Parramatta 與 Westmead 每 9 分鐘一班，二期將延伸至悉尼奧林匹克公園。距 M2 高速公路及 James Ruse 農業中學等澳洲頂尖學區僅數分鐘。</p>
       <div class="lc-g">
-        <div class="lc"><div class="lc-n">200<small>m</small></div><div class="lc-t" data-lang="en">Carlingford Light Rail</div><div class="lc-t" data-lang="ko">칼링포드 라이트레일</div><div class="lc-m" data-lang="en">Every 9 min</div><div class="lc-m" data-lang="ko">9분 간격</div></div>
-        <div class="lc"><div class="lc-n">300<small>m</small></div><div class="lc-t" data-lang="en">Carlingford Court</div><div class="lc-t" data-lang="ko">칼링포드 코트 쇼핑센터</div><div class="lc-m" data-lang="en">Shopping centre</div><div class="lc-m" data-lang="ko">쇼핑센터</div></div>
-        <div class="lc"><div class="lc-n">4<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lc-t" data-lang="en">M2 Motorway</div><div class="lc-t" data-lang="ko">M2 고속도로</div><div class="lc-m" data-lang="en">By car</div><div class="lc-m" data-lang="ko">차량</div></div>
-        <div class="lc"><div class="lc-n">7<small>km</small></div><div class="lc-t" data-lang="en">Parramatta CBD</div><div class="lc-t" data-lang="ko">파라마타 CBD</div><div class="lc-m" data-lang="en">Light rail direct</div><div class="lc-m" data-lang="ko">라이트레일 직결</div></div>
-        <div class="lc"><div class="lc-n">8<small>km</small></div><div class="lc-t" data-lang="en">Macquarie Park</div><div class="lc-t" data-lang="ko">맥쿼리 파크</div><div class="lc-m" data-lang="en">Bus every 15 min</div><div class="lc-m" data-lang="ko">버스 15분 간격</div></div>
-        <div class="lc"><div class="lc-n">10<small>km</small></div><div class="lc-t" data-lang="en">Westmead Health Precinct</div><div class="lc-t" data-lang="ko">웨스트미드 헬스</div><div class="lc-m" data-lang="en">Light rail</div><div class="lc-m" data-lang="ko">라이트레일</div></div>
-        <div class="lc" style="grid-column:1/-1"><div class="lc-n" style="font-size:1.25rem;color:#EDC98A">★ <span data-lang="en" style="display:inline">Top NSW Schools</span><span data-lang="ko">NSW 최상위 학군</span></div><div class="lc-t" data-lang="en">James Ruse Agricultural High · Carlingford West Public — walking distance</div><div class="lc-t" data-lang="ko">제임스 루즈 농업고 · 칼링포드 웨스트 공립초 — 도보권</div></div>
+        <div class="lc"><div class="lc-n">200<small>m</small></div><div class="lc-t" data-lang="en">Carlingford Light Rail</div><div class="lc-t" data-lang="ko">칼링포드 라이트레일</div><div class="lc-t" data-lang="zh">Carlingford 轻轨</div><div class="lc-t" data-lang="zt">Carlingford 輕軌</div><div class="lc-m" data-lang="en">Every 9 min</div><div class="lc-m" data-lang="ko">9분 간격</div><div class="lc-m" data-lang="zh">每 9 分钟一班</div><div class="lc-m" data-lang="zt">每 9 分鐘一班</div></div>
+        <div class="lc"><div class="lc-n">300<small>m</small></div><div class="lc-t" data-lang="en">Carlingford Court</div><div class="lc-t" data-lang="ko">칼링포드 코트 쇼핑센터</div><div class="lc-t" data-lang="zh">Carlingford Court 购物中心</div><div class="lc-t" data-lang="zt">Carlingford Court 購物中心</div><div class="lc-m" data-lang="en">Shopping centre</div><div class="lc-m" data-lang="ko">쇼핑센터</div><div class="lc-m" data-lang="zh">购物中心</div><div class="lc-m" data-lang="zt">購物中心</div></div>
+        <div class="lc"><div class="lc-n">4<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lc-t" data-lang="en">M2 Motorway</div><div class="lc-t" data-lang="ko">M2 고속도로</div><div class="lc-t" data-lang="zh">M2 高速公路</div><div class="lc-t" data-lang="zt">M2 高速公路</div><div class="lc-m" data-lang="en">By car</div><div class="lc-m" data-lang="ko">차량</div><div class="lc-m" data-lang="zh">驾车</div><div class="lc-m" data-lang="zt">駕車</div></div>
+        <div class="lc"><div class="lc-n">7<small>km</small></div><div class="lc-t" data-lang="en">Parramatta CBD</div><div class="lc-t" data-lang="ko">파라마타 CBD</div><div class="lc-t" data-lang="zh">Parramatta CBD</div><div class="lc-t" data-lang="zt">Parramatta CBD</div><div class="lc-m" data-lang="en">Light rail direct</div><div class="lc-m" data-lang="ko">라이트레일 직결</div><div class="lc-m" data-lang="zh">轻轨直达</div><div class="lc-m" data-lang="zt">輕軌直達</div></div>
+        <div class="lc"><div class="lc-n">8<small>km</small></div><div class="lc-t" data-lang="en">Macquarie Park</div><div class="lc-t" data-lang="ko">맥쿼리 파크</div><div class="lc-t" data-lang="zh">Macquarie Park</div><div class="lc-t" data-lang="zt">Macquarie Park</div><div class="lc-m" data-lang="en">Bus every 15 min</div><div class="lc-m" data-lang="ko">버스 15분 간격</div><div class="lc-m" data-lang="zh">巴士每 15 分钟一班</div><div class="lc-m" data-lang="zt">巴士每 15 分鐘一班</div></div>
+        <div class="lc"><div class="lc-n">10<small>km</small></div><div class="lc-t" data-lang="en">Westmead Health Precinct</div><div class="lc-t" data-lang="ko">웨스트미드 헬스</div><div class="lc-t" data-lang="zh">Westmead 医疗区</div><div class="lc-t" data-lang="zt">Westmead 醫療區</div><div class="lc-m" data-lang="en">Light rail</div><div class="lc-m" data-lang="ko">라이트레일</div><div class="lc-m" data-lang="zh">轻轨</div><div class="lc-m" data-lang="zt">輕軌</div></div>
+        <div class="lc" style="grid-column:1/-1"><div class="lc-n" style="font-size:1.25rem;color:#EDC98A">★ <span data-lang="en" style="display:inline">Top NSW Schools</span><span data-lang="ko">NSW 최상위 학군</span><span data-lang="zh">NSW 顶尖学区</span><span data-lang="zt">NSW 頂尖學區</span></div><div class="lc-t" data-lang="en">James Ruse Agricultural High · Carlingford West Public — walking distance</div><div class="lc-t" data-lang="ko">제임스 루즈 농업고 · 칼링포드 웨스트 공립초 — 도보권</div><div class="lc-t" data-lang="zh">James Ruse 农业中学 · Carlingford West 公立小学 —— 步行可达</div><div class="lc-t" data-lang="zt">James Ruse 農業中學 · Carlingford West 公立小學 —— 步行可達</div></div>
       </div>
     </div>
   </div>
@@ -326,63 +339,63 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
 <section class="fp-sec" id="floorplans">
   <div class="fp-w">
     <div class="fade">
-      <div class="eyebrow"><span data-lang="en">Sample Floorplans</span><span data-lang="ko">샘플 평면도</span></div>
-      <h2 class="title"><span data-lang="en">Larger-Than-Average <em>Layouts</em></span><span data-lang="ko">평균보다 <em>넓은 평면</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">Sample Floorplans</span><span data-lang="ko">샘플 평면도</span><span data-lang="zh">样板户型图</span><span data-lang="zt">樣板戶型圖</span></div>
+      <h2 class="title"><span data-lang="en">Larger-Than-Average <em>Layouts</em></span><span data-lang="ko">평균보다 <em>넓은 평면</em></span><span data-lang="zh">高于平均的<em>宽敞户型</em></span><span data-lang="zt">高於平均的<em>寬敞戶型</em></span></h2>
       <p class="sub" data-lang="en">Generous proportions make furniture placement effortless. Most homes enjoy corner positions, level access to balconies, and a fully functional multi-purpose room (MPR) with operable window, air conditioning and built-in robe.</p>
-      <p class="sub" data-lang="ko">넉넉한 규모로 가구 배치가 자유롭습니다. 대부분의 세대가 코너 배치로 조망과 채광을 확보하며, 발코니 단차 없는 진입과 창문·에어컨·빌트인 옷장을 갖춘 다목적룸(MPR)이 제공됩니다.</p>
+      <p class="sub" data-lang="ko">넉넉한 규모로 가구 배치가 자유롭습니다. 대부분의 세대가 코너 배치로 조망과 채광을 확보하며, 발코니 단차 없는 진입과 창문·에어컨·빌트인 옷장을 갖춘 다목적룸(MPR)이 제공됩니다.</p><p class="sub" data-lang="zh">尺度宽裕，家具布置自由。多数户型位于转角，确保景观与采光；阳台采无高差进入，并设配窗户、空调与嵌入式衣柜的多功能房（MPR）。</p><p class="sub" data-lang="zt">尺度寬裕，傢俱佈置自由。多數戶型位於轉角，確保景觀與採光；陽臺採無高差進入，並設配窗戶、空調與嵌入式衣櫃的多功能房（MPR）。</p>
     </div>
     <div class="fp-g fade">
       <figure class="fp-c">
         <img src="assets/the-carling/fp-1bed.jpg" alt="1 Bedroom + MPR floorplan — Building D" loading="lazy">
         <figcaption class="fp-meta">
-          <div class="fp-t" data-lang="en">1 Bedroom + MPR</div><div class="fp-t" data-lang="ko">1베드룸 + MPR</div>
-          <div class="fp-s" data-lang="en">Building D · Apartments 201–601</div><div class="fp-s" data-lang="ko">빌딩 D · 201~601호</div>
-          <div class="fp-a"><span>53m² <span data-lang="en">int</span><span data-lang="ko">내부</span></span><span>7m² <span data-lang="en">ext</span></span><span>60m² <span data-lang="en">total</span></span></div>
+          <div class="fp-t" data-lang="en">1 Bedroom + MPR</div><div class="fp-t" data-lang="ko">1베드룸 + MPR</div><div class="fp-t" data-lang="zh">1 房 + MPR</div><div class="fp-t" data-lang="zt">1 房 + MPR</div>
+          <div class="fp-s" data-lang="en">Building D · Apartments 201–601</div><div class="fp-s" data-lang="ko">빌딩 D · 201~601호</div><div class="fp-s" data-lang="zh">D 座 · 201–601 号</div><div class="fp-s" data-lang="zt">D 座 · 201–601 號</div>
+          <div class="fp-a"><span>53m² <span data-lang="en">int</span><span data-lang="ko">내부</span><span data-lang="zh">室内</span><span data-lang="zt">室內</span></span><span>7m² <span data-lang="en">ext</span><span data-lang="ko">외부</span><span data-lang="zh">室外</span><span data-lang="zt">室外</span></span><span>60m² <span data-lang="en">total</span><span data-lang="ko">합계</span><span data-lang="zh">合计</span><span data-lang="zt">合計</span></span></div>
         </figcaption>
       </figure>
       <figure class="fp-c">
         <img src="assets/the-carling/fp-2bed.jpg" alt="2 Bedroom floorplan — Building B" loading="lazy">
         <figcaption class="fp-meta">
-          <div class="fp-t" data-lang="en">2 Bedroom</div><div class="fp-t" data-lang="ko">2베드룸</div>
-          <div class="fp-s" data-lang="en">Building B · Apartments 224, 326–626</div><div class="fp-s" data-lang="ko">빌딩 B · 224, 326~626호</div>
-          <div class="fp-a"><span>78m² <span data-lang="en">int</span></span><span>10m² <span data-lang="en">ext</span></span><span>88m² <span data-lang="en">total</span></span></div>
+          <div class="fp-t" data-lang="en">2 Bedroom</div><div class="fp-t" data-lang="ko">2베드룸</div><div class="fp-t" data-lang="zh">2 房</div><div class="fp-t" data-lang="zt">2 房</div>
+          <div class="fp-s" data-lang="en">Building B · Apartments 224, 326–626</div><div class="fp-s" data-lang="ko">빌딩 B · 224, 326~626호</div><div class="fp-s" data-lang="zh">B 座 · 224、326–626 号</div><div class="fp-s" data-lang="zt">B 座 · 224、326–626 號</div>
+          <div class="fp-a"><span>78m² <span data-lang="en">int</span><span data-lang="ko">내부</span><span data-lang="zh">室内</span><span data-lang="zt">室內</span></span><span>10m² <span data-lang="en">ext</span><span data-lang="ko">외부</span><span data-lang="zh">室外</span><span data-lang="zt">室外</span></span><span>88m² <span data-lang="en">total</span><span data-lang="ko">합계</span><span data-lang="zh">合计</span><span data-lang="zt">合計</span></span></div>
         </figcaption>
       </figure>
       <figure class="fp-c">
         <img src="assets/the-carling/fp-3bed.jpg" alt="3 Bedroom floorplan — Building D" loading="lazy">
         <figcaption class="fp-meta">
-          <div class="fp-t" data-lang="en">3 Bedroom</div><div class="fp-t" data-lang="ko">3베드룸</div>
-          <div class="fp-s" data-lang="en">Building D · Apartments 703–1603</div><div class="fp-s" data-lang="ko">빌딩 D · 703~1603호</div>
-          <div class="fp-a"><span>105m² <span data-lang="en">int</span></span><span>12m² <span data-lang="en">ext</span></span><span>117m² <span data-lang="en">total</span></span></div>
+          <div class="fp-t" data-lang="en">3 Bedroom</div><div class="fp-t" data-lang="ko">3베드룸</div><div class="fp-t" data-lang="zh">3 房</div><div class="fp-t" data-lang="zt">3 房</div>
+          <div class="fp-s" data-lang="en">Building D · Apartments 703–1603</div><div class="fp-s" data-lang="ko">빌딩 D · 703~1603호</div><div class="fp-s" data-lang="zh">D 座 · 703–1603 号</div><div class="fp-s" data-lang="zt">D 座 · 703–1603 號</div>
+          <div class="fp-a"><span>105m² <span data-lang="en">int</span><span data-lang="ko">내부</span><span data-lang="zh">室内</span><span data-lang="zt">室內</span></span><span>12m² <span data-lang="en">ext</span><span data-lang="ko">외부</span><span data-lang="zh">室外</span><span data-lang="zt">室外</span></span><span>117m² <span data-lang="en">total</span><span data-lang="ko">합계</span><span data-lang="zh">合计</span><span data-lang="zt">合計</span></span></div>
         </figcaption>
       </figure>
     </div>
     <p class="fp-note" data-lang="en">Floorplans are indicative only and do not form part of the contract for sale. Descriptions, layouts and areas are subject to change and may not reflect the final design. A full range of 1, 1+MPR, 2, 2+MPR, 3, 3+MPR and 4 bedroom layouts is available — contact the agent for the complete floorplan package.</p>
-    <p class="fp-note" data-lang="ko">평면도는 참고용이며 매매 계약의 일부를 구성하지 않습니다. 설명·배치·면적은 변경될 수 있으며 최종 설계와 다를 수 있습니다. 1, 1+MPR, 2, 2+MPR, 3, 3+MPR, 4베드룸 전체 평면이 제공되니 전체 도면 패키지는 에이전트에게 문의하세요.</p>
+    <p class="fp-note" data-lang="ko">평면도는 참고용이며 매매 계약의 일부를 구성하지 않습니다. 설명·배치·면적은 변경될 수 있으며 최종 설계와 다를 수 있습니다. 1, 1+MPR, 2, 2+MPR, 3, 3+MPR, 4베드룸 전체 평면이 제공되니 전체 도면 패키지는 에이전트에게 문의하세요.</p><p class="fp-note" data-lang="zh">户型图仅供参考，不构成买卖合同的一部分。说明、布局与面积可能变更，并可能与最终设计有所不同。1、1+MPR、2、2+MPR、3、3+MPR 及 4 房全系列户型均有提供，完整图纸包请咨询代理。</p><p class="fp-note" data-lang="zt">戶型圖僅供參考，不構成買賣合同的一部分。說明、佈局與面積可能變更，並可能與最終設計有所不同。1、1+MPR、2、2+MPR、3、3+MPR 及 4 房全系列戶型均有提供，完整圖紙包請諮詢代理。</p>
   </div>
 </section>
 
 <section class="offer-strip" id="offers">
   <div class="of-w fade">
     <div class="of-rib" data-lang="en">Meriton Purchaser Benefits</div>
-    <div class="of-rib" data-lang="ko">Meriton 구매자 혜택</div>
-    <h2 class="title" style="color:#fff"><span data-lang="en">Buy with <em style="color:#EDC98A">Confidence</em></span><span data-lang="ko"><em style="color:#EDC98A">확신</em>을 갖고 구매하세요</span></h2>
+    <div class="of-rib" data-lang="ko">Meriton 구매자 혜택</div><div class="of-rib" data-lang="zh">Meriton 购房礼遇</div><div class="of-rib" data-lang="zt">Meriton 購房禮遇</div>
+    <h2 class="title" style="color:#fff"><span data-lang="en">Buy with <em style="color:#EDC98A">Confidence</em></span><span data-lang="ko"><em style="color:#EDC98A">확신</em>을 갖고 구매하세요</span><span data-lang="zh"><em style="color:#EDC98A">安心</em>置业</span><span data-lang="zt"><em style="color:#EDC98A">安心</em>置業</span></h2>
     <div class="of-g">
       <div class="of-c">
-        <div class="of-b" data-lang="en">Meriton Property Finance</div><div class="of-b" data-lang="ko">Meriton 프로퍼티 파이낸스</div>
-        <div class="of-n"><em>4.75%</em> <span data-lang="en">2-Yr Fixed · Up to 90% Lend</span><span data-lang="ko">2년 고정 · 최대 90% 대출</span></div>
+        <div class="of-b" data-lang="en">Meriton Property Finance</div><div class="of-b" data-lang="ko">Meriton 프로퍼티 파이낸스</div><div class="of-b" data-lang="zh">Meriton Property Finance</div><div class="of-b" data-lang="zt">Meriton Property Finance</div>
+        <div class="of-n"><em>4.75%</em> <span data-lang="en">2-Yr Fixed · Up to 90% Lend</span><span data-lang="ko">2년 고정 · 최대 90% 대출</span><span data-lang="zh">两年固定 · 最高九成贷款</span><span data-lang="zt">兩年固定 · 最高九成貸款</span></div>
         <p class="of-d" data-lang="en">Exclusive to Meriton purchasers: 2-year fixed rate of 4.75%, lending up to 90% of the purchase price. Loans are approved before buying — guaranteeing finance upon completion.</p>
-        <p class="of-d" data-lang="ko">Meriton 구매자 전용: 2년 고정금리 4.75%, 구매가의 최대 90% 대출. 구매 전 대출 승인이 이루어져 준공 시 파이낸스가 보장됩니다.</p>
+        <p class="of-d" data-lang="ko">Meriton 구매자 전용: 2년 고정금리 4.75%, 구매가의 최대 90% 대출. 구매 전 대출 승인이 이루어져 준공 시 파이낸스가 보장됩니다.</p><p class="of-d" data-lang="zh">Meriton 购房者专享：两年固定利率 4.75%，最高可贷购房价的 90%。购房前即完成贷款审批，竣工时融资有保障。</p><p class="of-d" data-lang="zt">Meriton 購房者專享：兩年固定利率 4.75%，最高可貸購房價的 90%。購房前即完成貸款審批，竣工時融資有保障。</p>
       </div>
       <div class="of-c">
-        <div class="of-b" data-lang="en">For Investors</div><div class="of-b" data-lang="ko">투자자 혜택</div>
-        <div class="of-n"><span data-lang="en">Guaranteed <em>Tenant</em></span><span data-lang="ko"><em>임차인 보장</em></span></div>
+        <div class="of-b" data-lang="en">For Investors</div><div class="of-b" data-lang="ko">투자자 혜택</div><div class="of-b" data-lang="zh">投资者礼遇</div><div class="of-b" data-lang="zt">投資者禮遇</div>
+        <div class="of-n"><span data-lang="en">Guaranteed <em>Tenant</em></span><span data-lang="ko"><em>임차인 보장</em></span><span data-lang="zh"><em>租客保证</em></span><span data-lang="zt"><em>租客保證</em></span></div>
         <p class="of-d" data-lang="en">Every investor receives a guaranteed tenant upon settlement, backed by Meriton's in-house management at Australia's most competitive rate of 4%.</p>
-        <p class="of-d" data-lang="ko">모든 투자자는 잔금 시 임차인을 보장받으며, 호주 최저 수준인 4% 수수료의 Meriton 자체 임대 관리가 뒷받침합니다.</p>
+        <p class="of-d" data-lang="ko">모든 투자자는 잔금 시 임차인을 보장받으며, 호주 최저 수준인 4% 수수료의 Meriton 자체 임대 관리가 뒷받침합니다.</p><p class="of-d" data-lang="zh">所有投资者于交割时即获租客保证，并由 Meriton 自营租赁管理提供支持，佣金 4%，为澳洲最低水平之一。</p><p class="of-d" data-lang="zt">所有投資者於交割時即獲租客保證，並由 Meriton 自營租賃管理提供支持，佣金 4%，爲澳洲最低水平之一。</p>
       </div>
     </div>
     <p class="of-note" data-lang="en">Offers subject to Meriton terms, eligibility and change without notice. Finance provided by Meriton Property Finance — consider terms and your circumstances; not financial advice. Contact Sunghoon Choi (Sunny) for current conditions.</p>
-    <p class="of-note" data-lang="ko">혜택은 Meriton 조건 및 자격 요건이 적용되며 사전 예고 없이 변경될 수 있습니다. 파이낸스는 Meriton Property Finance가 제공 — 조건과 본인 상황을 고려하세요. 금융 자문이 아닙니다. 현재 조건은 최성훈에게 문의하세요.</p>
+    <p class="of-note" data-lang="ko">혜택은 Meriton 조건 및 자격 요건이 적용되며 사전 예고 없이 변경될 수 있습니다. 파이낸스는 Meriton Property Finance가 제공 — 조건과 본인 상황을 고려하세요. 금융 자문이 아닙니다. 현재 조건은 최성훈에게 문의하세요.</p><p class="of-note" data-lang="zh">礼遇须符合 Meriton 条款与资格要求，并可能恕不另行通知而变更。融资由 Meriton Property Finance 提供 —— 请结合条款与自身情况考量。此非金融建议。当前条款请咨询 Sunny。</p><p class="of-note" data-lang="zt">禮遇須符合 Meriton 條款與資格要求，並可能恕不另行通知而變更。融資由 Meriton Property Finance 提供 —— 請結合條款與自身情況考量。此非金融建議。當前條款請諮詢 Sunny。</p>
   </div>
 </section>
 
@@ -390,25 +403,25 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
   <img src="assets/the-carling/retail.jpg" alt="The Carling retail plaza and village forecourt — Artist Impression" loading="lazy">
   <div class="band-ov"></div>
   <div class="band-cap">
-    <h3 data-lang="en">The Retail Plaza</h3><h3 data-lang="ko">리테일 플라자</h3>
+    <h3 data-lang="en">The Retail Plaza</h3><h3 data-lang="ko">리테일 플라자</h3><h3 data-lang="zh">商业广场</h3><h3 data-lang="zt">商業廣場</h3>
     <p data-lang="en">Cafés · Village forecourt · Community centre · Artist Impression</p>
-    <p data-lang="ko">카페 · 빌리지 광장 · 커뮤니티센터 · 조감도</p>
+    <p data-lang="ko">카페 · 빌리지 광장 · 커뮤니티센터 · 조감도</p><p data-lang="zh">咖啡馆 · 村落广场 · 社区中心 · 效果图</p><p data-lang="zt">咖啡館 · 村落廣場 · 社區中心 · 效果圖</p>
   </div>
 </div>
 
 <section id="developer">
   <div class="dev-w fade">
-    <div class="dev-vis"><div class="dev-logo">MERITON<small data-lang="en">iCIRT 4.5★ Gold · Since 1963</small><small data-lang="ko">iCIRT 4.5★ 골드 · 1963년 설립</small></div></div>
+    <div class="dev-vis"><div class="dev-logo">MERITON<small data-lang="en">iCIRT 4.5★ Gold · Since 1963</small><small data-lang="ko">iCIRT 4.5★ 골드 · 1963년 설립</small><small data-lang="zh">iCIRT 4.5★ 金级 · 创立于 1963 年</small><small data-lang="zt">iCIRT 4.5★ 金級 · 創立於 1963 年</small></div></div>
     <div>
-      <div class="eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
-      <h2 class="title"><span data-lang="en">60+ Years.<br><em>100% Delivered.</em></span><span data-lang="ko">60년의 역사.<br><em>100% 준공 기록.</em></span></h2>
+      <div class="eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span><span data-lang="zh">开发商</span><span data-lang="zt">開發商</span></div>
+      <h2 class="title"><span data-lang="en">60+ Years.<br><em>100% Delivered.</em></span><span data-lang="ko">60년의 역사.<br><em>100% 준공 기록.</em></span><span data-lang="zh">六十年历程。<br><em>100% 竣工纪录。</em></span><span data-lang="zt">六十年曆程。<br><em>100% 竣工紀錄。</em></span></h2>
       <p class="sub" data-lang="en">Meriton is a 4.5 Gold Star iCIRT-rated developer with over 60 years under the same name and founder, a 100% construction completion record, and in-house architects, engineers and building management on every project.</p>
-      <p class="sub" data-lang="ko">Meriton은 iCIRT 4.5 골드스타 등급의 디벨로퍼로, 60년 이상 동일한 이름과 창업자 아래 100% 준공 기록을 유지하며 전 프로젝트에 자체 건축가·엔지니어·빌딩 관리팀을 운영합니다.</p>
+      <p class="sub" data-lang="ko">Meriton은 iCIRT 4.5 골드스타 등급의 디벨로퍼로, 60년 이상 동일한 이름과 창업자 아래 100% 준공 기록을 유지하며 전 프로젝트에 자체 건축가·엔지니어·빌딩 관리팀을 운영합니다.</p><p class="sub" data-lang="zh">Meriton 是持有 iCIRT 4.5 金星评级的开发商，逾六十年来以同一名号、由同一创办人带领，保持 100% 竣工纪录，并为所有项目配置自有建筑师、工程师与物业管理团队。</p><p class="sub" data-lang="zt">Meriton 是持有 iCIRT 4.5 金星評級的開發商，逾六十年來以同一名號、由同一創辦人帶領，保持 100% 竣工紀錄，併爲所有項目配置自有建築師、工程師與物業管理團隊。</p>
       <div class="dev-stats">
-        <div class="ds"><div class="ds-n">80,000+</div><div class="ds-l" data-lang="en">Apartments Built</div><div class="ds-l" data-lang="ko">누적 건설 세대</div></div>
-        <div class="ds"><div class="ds-n">100%</div><div class="ds-l" data-lang="en">Completion Record</div><div class="ds-l" data-lang="ko">준공 완료 기록</div></div>
-        <div class="ds"><div class="ds-n">$3B+</div><div class="ds-l" data-lang="en">Sales Over 3 Years</div><div class="ds-l" data-lang="ko">최근 3년 판매액</div></div>
-        <div class="ds"><div class="ds-n">4.5★</div><div class="ds-l" data-lang="en">iCIRT Gold Rating</div><div class="ds-l" data-lang="ko">iCIRT 골드 등급</div></div>
+        <div class="ds"><div class="ds-n">80,000+</div><div class="ds-l" data-lang="en">Apartments Built</div><div class="ds-l" data-lang="ko">누적 건설 세대</div><div class="ds-l" data-lang="zh">累计建成住宅</div><div class="ds-l" data-lang="zt">累計建成住宅</div></div>
+        <div class="ds"><div class="ds-n">100%</div><div class="ds-l" data-lang="en">Completion Record</div><div class="ds-l" data-lang="ko">준공 완료 기록</div><div class="ds-l" data-lang="zh">竣工完成纪录</div><div class="ds-l" data-lang="zt">竣工完成紀錄</div></div>
+        <div class="ds"><div class="ds-n">$3B+</div><div class="ds-l" data-lang="en">Sales Over 3 Years</div><div class="ds-l" data-lang="ko">최근 3년 판매액</div><div class="ds-l" data-lang="zh">近三年销售额</div><div class="ds-l" data-lang="zt">近三年銷售額</div></div>
+        <div class="ds"><div class="ds-n">4.5★</div><div class="ds-l" data-lang="en">iCIRT Gold Rating</div><div class="ds-l" data-lang="ko">iCIRT 골드 등급</div><div class="ds-l" data-lang="zh">iCIRT 金级评级</div><div class="ds-l" data-lang="zt">iCIRT 金級評級</div></div>
       </div>
     </div>
   </div>
@@ -416,18 +429,18 @@ body.lang-ko .hero-cta .kt{display:inline}body.lang-ko .hero-cta .et{display:non
 
 <section class="contact-sec" id="contact">
   <div class="ct-w fade">
-    <div class="eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
-    <h2 class="title"><span data-lang="en">Your Home at<br><em>The Carling</em></span><span data-lang="ko">더 칼링에서<br><em>새 보금자리</em>를</span></h2>
+    <div class="eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
+    <h2 class="title"><span data-lang="en">Your Home at<br><em>The Carling</em></span><span data-lang="ko">더 칼링에서<br><em>새 보금자리</em>를</span><span data-lang="zh">在 The Carling<br>开启<em>新家</em></span><span data-lang="zt">在 The Carling<br>開啓<em>新家</em></span></h2>
     <p class="sub" style="margin:0 auto" data-lang="en">Building D (17 levels) est. mid-2027 · Building B (29 levels) est. late-2027. Contact Sunghoon Choi (Sunny) at Forise Group for availability, floorplans and a personalised consultation.</p>
-    <p class="sub" style="margin:0 auto" data-lang="ko">빌딩 D(17층) 2027년 중반 준공 예정 · 빌딩 B(29층) 2027년 말 준공 예정. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p>
+    <p class="sub" style="margin:0 auto" data-lang="ko">빌딩 D(17층) 2027년 중반 준공 예정 · 빌딩 B(29층) 2027년 말 준공 예정. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p><p class="sub" style="margin:0 auto" data-lang="zh">D 座（17 层）预计 2027 年年中竣工 · B 座（29 层）预计 2027 年年底竣工。欢迎向 Forise Group 的 Sunny 咨询剩余房源、户型图与专属建议。</p><p class="sub" style="margin:0 auto" data-lang="zt">D 座（17 層）預計 2027 年年中竣工 · B 座（29 層）預計 2027 年年底竣工。歡迎向 Forise Group 的 Sunny 諮詢剩餘房源、戶型圖與專屬建議。</p>
     <div class="ct-info">
-      <div class="ci"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span></div>
-      <div class="ci"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><a href="tel:0414824225">0414 824 225</a></div>
+      <div class="ci"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span></div>
+      <div class="ci"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><label data-lang="zh">电话 / KakaoTalk</label><label data-lang="zt">電話 / KakaoTalk</label><a href="tel:0414824225">0414 824 225</a></div>
       <div class="ci"><label>Email</label><a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a></div>
     </div>
-    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=The%20Carling%20Enquiry" class="ct-cta"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span></a>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=The%20Carling%20Enquiry" class="ct-cta"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span></a>
     <p class="ct-disc" data-lang="en">All information is for marketing purposes only and subject to change without notice. Images are artist impressions. Pricing available upon request. Forise Group acts as selling agent. Developer: Karimbla Properties (Meriton Group).</p>
-    <p class="ct-disc" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: Karimbla Properties (Meriton 그룹).</p>
+    <p class="ct-disc" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: Karimbla Properties (Meriton 그룹).</p><p class="ct-disc" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像为效果图。价格于咨询时提供。Forise Group 为销售代理。开发商：Karimbla Properties（Meriton 集团）。</p><p class="ct-disc" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像爲效果圖。價格於諮詢時提供。Forise Group 爲銷售代理。開發商：Karimbla Properties（Meriton 集團）。</p>
   </div>
 </section>
 
@@ -438,8 +451,22 @@ function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='d
 const sv=localStorage.getItem('theme');
 if(sv){document.body.setAttribute('data-theme',sv);document.querySelector('.btn-theme').textContent=sv==='dark'?'☀':'☾';}
 else if(false){document.body.setAttribute('data-theme','dark');document.querySelector('.btn-theme').textContent='☀';}
-let ko=false;
-function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.btn-lang').textContent=ko?'English':'한국어';}
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('the-carling-lang', l); }catch(e){}
+}
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('the-carling-lang'); }catch(e){ return null; } })() || 'en');
 new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08}).observe&&document.querySelectorAll('.fade').forEach(el=>new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08}).observe(el));
 </script>
 </body>
