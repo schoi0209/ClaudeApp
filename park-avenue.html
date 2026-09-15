@@ -27,6 +27,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transition:background .3s,color .3s;overflow-x:hidden}
 body.lang-zh{font-family:'Noto Sans SC','Jost',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC','Jost',sans-serif}
 img{display:block}
 
 /* LANG — three-way */
@@ -34,9 +35,11 @@ img{display:block}
 body.lang-en [data-l~="en"]{display:block}
 body.lang-ko [data-l~="ko"]{display:block}
 body.lang-zh [data-l~="zh"]{display:block}
+body.lang-zt [data-l~="zt"]{display:block}
 body.lang-en [data-l~="en"].i,
 body.lang-ko [data-l~="ko"].i,
 body.lang-zh [data-l~="zh"].i{display:inline}
+body.lang-zt [data-l~="zt"].i{display:inline}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;background:rgba(20,22,28,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(168,135,79,0.18)}
@@ -82,7 +85,7 @@ section{padding:104px 60px}
 .section-eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);flex-shrink:0}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,4vw,3.2rem);font-weight:300;line-height:1.18;color:var(--fg);letter-spacing:.02em;margin-bottom:18px}
 .section-title em{font-style:italic;color:var(--gold)}
-body.lang-zh .section-title,body.lang-zh .hero-title{font-family:'Noto Sans SC',serif;font-weight:300;letter-spacing:.04em}
+body.lang-zh .section-title,body.lang-zt .section-title,body.lang-zh .hero-title,body.lang-zt .hero-title{font-family:'Noto Sans SC',serif;font-weight:300;letter-spacing:.04em}
 .section-sub{font-size:.88rem;line-height:1.85;color:var(--fg2);max-width:620px}
 .fade-in{opacity:0;transform:translateY(18px);transition:opacity .75s,transform .75s}
 .fade-in.visible{opacity:1;transform:none}
@@ -102,7 +105,7 @@ body.lang-zh .section-title,body.lang-zh .hero-title{font-family:'Noto Sans SC',
 .band>img{width:100%;display:block;max-height:520px;object-fit:cover;object-position:center 58%;filter:brightness(0.4)}
 .band-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px}
 .band-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.4vw,2.7rem);color:#FAF8F4;font-weight:300;font-style:italic;letter-spacing:.03em;margin-bottom:14px;max-width:900px;line-height:1.3}
-body.lang-zh .band-title{font-family:'Noto Sans SC',serif;font-style:normal}
+body.lang-zh .band-title,body.lang-zt .band-title{font-family:'Noto Sans SC',serif;font-style:normal}
 .band-sub{font-size:.82rem;color:rgba(250,248,244,0.55);max-width:620px;line-height:1.85}
 .band-cap{position:absolute;bottom:12px;right:18px;font-size:.53rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,248,244,0.3)}
 
@@ -128,7 +131,7 @@ body.lang-zh .band-title{font-family:'Noto Sans SC',serif;font-style:normal}
 .amen{background:var(--card);padding:28px 24px}
 .amen-ico{font-size:1.4rem;margin-bottom:12px}
 .amen h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;margin-bottom:8px;color:var(--fg)}
-body.lang-zh .amen h4{font-family:'Noto Sans SC',sans-serif;font-size:1rem;font-weight:500}
+body.lang-zh .amen h4,body.lang-zt .amen h4{font-family:'Noto Sans SC',sans-serif;font-size:1rem;font-weight:500}
 .amen p{font-size:.78rem;line-height:1.7;color:var(--fg2)}
 
 /* LOCATION */
@@ -209,7 +212,8 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
     <div class="lang-group">
       <button class="on" data-set="en" onclick="setLang('en')">EN</button>
       <button data-set="ko" onclick="setLang('ko')">한국어</button>
-      <button data-set="zh" onclick="setLang('zh')">中文</button>
+      <button data-set="zh" onclick="setLang('zh')">简体</button>
+      <button data-set="zt" onclick="setLang('zt')">繁體</button>
     </div>
     <button class="btn-theme" onclick="toggleTheme()">☾</button>
   </div>
@@ -223,41 +227,41 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
   <div class="hero-badge">
     <span data-l="en" class="i">Now Complete · Move in Now</span>
     <span data-l="ko" class="i">완공 완료 · 즉시 입주 가능</span>
-    <span data-l="zh" class="i">现已竣工 · 即可入住</span>
+    <span data-l="zh" class="i">现已竣工 · 即可入住</span><span data-l="zt" class="i">現已竣工 · 即可入住</span>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span data-l="en" class="i">Park Road &amp; Berry Road, St Leonards</span>
       <span data-l="ko" class="i">Park Road &amp; Berry Road, 세인트 레너즈</span>
-      <span data-l="zh" class="i">Park Road 与 Berry Road，圣伦纳兹</span>
+      <span data-l="zh" class="i">Park Road 与 Berry Road，圣伦纳兹</span><span data-l="zt" class="i">Park Road 與 Berry Road，聖倫納茲</span>
     </div>
     <h1 class="hero-title">Park <em>Avenue</em></h1>
     <div class="hero-kicker">Residences</div>
     <p class="hero-sub" data-l="en">A collection of 306 residences across four mid-rise buildings, where the natural, old and new worlds live in harmony on Sydney's Lower North Shore.</p>
     <p class="hero-sub" data-l="ko">시드니 로어 노스쇼어에 들어서는 4개 중층 건물, 306세대 규모의 주거 단지. 자연과 전통, 그리고 현대가 조화를 이루는 곳입니다.</p>
-    <p class="hero-sub" data-l="zh">位于悉尼下北岸的四栋中层建筑，共 306 户住宅。在这里，自然、传统与现代和谐共存。</p>
+    <p class="hero-sub" data-l="zh">位于悉尼下北岸的四栋中层建筑，共 306 户住宅。在这里，自然、传统与现代和谐共存。</p><p class="hero-sub" data-l="zt">位於悉尼下北岸的四棟中層建築，共 306 戶住宅。在這裏，自然、傳統與現代和諧共存。</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <label><span data-l="en" class="i">Residences</span><span data-l="ko" class="i">총 세대수</span><span data-l="zh" class="i">住宅总数</span></label>
+        <label><span data-l="en" class="i">Residences</span><span data-l="ko" class="i">총 세대수</span><span data-l="zh" class="i">住宅总数</span><span data-l="zt" class="i">住宅總數</span></label>
         <span>306</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-l="en" class="i">Buildings</span><span data-l="ko" class="i">건물</span><span data-l="zh" class="i">楼栋</span></label>
+        <label><span data-l="en" class="i">Buildings</span><span data-l="ko" class="i">건물</span><span data-l="zh" class="i">楼栋</span><span data-l="zt" class="i">樓棟</span></label>
         <span>4</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-l="en" class="i">Configurations</span><span data-l="ko" class="i">타입</span><span data-l="zh" class="i">户型</span></label>
-        <span data-l="en" class="i">Studio – 5 Bed</span><span data-l="ko" class="i">스튜디오–5베드</span><span data-l="zh" class="i">开间–5房</span>
+        <label><span data-l="en" class="i">Configurations</span><span data-l="ko" class="i">타입</span><span data-l="zh" class="i">户型</span><span data-l="zt" class="i">戶型</span></label>
+        <span data-l="en" class="i">Studio – 5 Bed</span><span data-l="ko" class="i">스튜디오–5베드</span><span data-l="zh" class="i">开间–5房</span><span data-l="zt" class="i">開間–5房</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-l="en" class="i">Status</span><span data-l="ko" class="i">진행 상태</span><span data-l="zh" class="i">项目状态</span></label>
-        <span data-l="en" class="i">Complete</span><span data-l="ko" class="i">완공</span><span data-l="zh" class="i">已竣工</span>
+        <label><span data-l="en" class="i">Status</span><span data-l="ko" class="i">진행 상태</span><span data-l="zh" class="i">项目状态</span><span data-l="zt" class="i">項目狀態</span></label>
+        <span data-l="en" class="i">Complete</span><span data-l="ko" class="i">완공</span><span data-l="zh" class="i">已竣工</span><span data-l="zt" class="i">已竣工</span>
       </div>
     </div>
     <a class="hero-cta" href="#contact">
       <span data-l="en" class="i">Request Information</span>
       <span data-l="ko" class="i">분양 문의하기 →</span>
-      <span data-l="zh" class="i">咨询详情 →</span>
+      <span data-l="zh" class="i">咨询详情 →</span><span data-l="zt" class="i">諮詢詳情 →</span>
     </a>
   </div>
   <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
@@ -272,17 +276,17 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
     </div>
     <div>
       <div class="section-eyebrow">
-        <span data-l="en" class="i">The Project</span><span data-l="ko" class="i">프로젝트 소개</span><span data-l="zh" class="i">项目简介</span>
+        <span data-l="en" class="i">The Project</span><span data-l="ko" class="i">프로젝트 소개</span><span data-l="zh" class="i">项目简介</span><span data-l="zt" class="i">項目簡介</span>
       </div>
       <h2 class="section-title" data-l="en">An address inspired by<br><em>grand New York architecture</em></h2>
       <h2 class="section-title" data-l="ko">뉴욕의 클래식 건축에서<br><em>영감을 얻은 주소</em></h2>
-      <h2 class="section-title" data-l="zh">灵感源自<br><em>纽约经典建筑的住址</em></h2>
+      <h2 class="section-title" data-l="zh">灵感源自<br><em>纽约经典建筑的住址</em></h2><h2 class="section-title" data-l="zt">靈感源自<br><em>紐約經典建築的住址</em></h2>
       <p class="body-text" data-l="en">Following the completion of Eighty-Eight — St Leonards' tallest residential tower — JQZ presents Park Avenue Residences. A village of dignified low-rise buildings takes inspiration from the substantial heritage homes that have graced this area for more than a century.</p>
       <p class="body-text" data-l="ko">세인트 레너즈에서 가장 높은 주거 타워인 Eighty-Eight를 완공한 JQZ가 선보이는 Park Avenue Residences입니다. 한 세기 넘게 이 지역을 지켜온 헤리티지 주택에서 영감을 받은, 품격 있는 중저층 건물들로 구성됩니다.</p>
-      <p class="body-text" data-l="zh">继完成圣伦纳兹最高住宅塔楼 Eighty-Eight 之后，JQZ 呈献 Park Avenue Residences。项目由数栋典雅的中低层建筑组成，灵感取自逾百年来点缀本区的历史宅邸。</p>
+      <p class="body-text" data-l="zh">继完成圣伦纳兹最高住宅塔楼 Eighty-Eight 之后，JQZ 呈献 Park Avenue Residences。项目由数栋典雅的中低层建筑组成，灵感取自逾百年来点缀本区的历史宅邸。</p><p class="body-text" data-l="zt">繼完成聖倫納茲最高住宅塔樓 Eighty-Eight 之後，JQZ 呈獻 Park Avenue Residences。項目由數棟典雅的中低層建築組成，靈感取自逾百年來點綴本區的歷史宅邸。</p>
       <p class="body-text" data-l="en">In a cascade of natural sandstone and brick, the architecture channels views to the harbour while forging intimate connections with the garden landscapes below. Interiors are curated by international design luminary David Hicks, with architecture by DKO and landscaping by Clouston Associates.</p>
       <p class="body-text" data-l="ko">천연 사암과 벽돌이 층층이 이어지는 건축은 하버 조망을 끌어들이는 동시에 아래 정원 조경과 긴밀하게 연결됩니다. 인테리어는 국제적 디자이너 David Hicks가, 건축은 DKO가, 조경은 Clouston Associates가 맡았습니다.</p>
-      <p class="body-text" data-l="zh">天然砂岩与砖材层叠而下，建筑既引入海港景观，又与下方花园景观紧密相连。室内由国际设计大师 David Hicks 主理，建筑设计由 DKO 操刀，景观则出自 Clouston Associates。</p>
+      <p class="body-text" data-l="zh">天然砂岩与砖材层叠而下，建筑既引入海港景观，又与下方花园景观紧密相连。室内由国际设计大师 David Hicks 主理，建筑设计由 DKO 操刀，景观则出自 Clouston Associates。</p><p class="body-text" data-l="zt">天然砂岩與磚材層疊而下，建築既引入海港景觀，又與下方花園景觀緊密相連。室內由國際設計大師 David Hicks 主理，建築設計由 DKO 操刀，景觀則出自 Clouston Associates。</p>
       <div class="tags">
         <span class="tag">JQZ</span>
         <span class="tag">DKO Architects</span>
@@ -299,11 +303,11 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section style="background:var(--bg2);padding-top:70px;padding-bottom:70px">
   <div class="wrap fade-in">
     <div class="stat-grid" style="margin-top:0">
-      <div class="stat"><div class="sv">306</div><div class="sl"><span data-l="en" class="i">Residences across the estate</span><span data-l="ko" class="i">단지 총 세대수</span><span data-l="zh" class="i">全区住宅总数</span></div></div>
-      <div class="stat"><div class="sv">4</div><div class="sl"><span data-l="en" class="i">Mid-rise buildings (A–D)</span><span data-l="ko" class="i">중층 건물 (A–D동)</span><span data-l="zh" class="i">中层楼栋（A–D座）</span></div></div>
-      <div class="stat"><div class="sv">542</div><div class="sl"><span data-l="en" class="i">Basement car spaces</span><span data-l="ko" class="i">지하 주차 대수</span><span data-l="zh" class="i">地下车位</span></div></div>
-      <div class="stat"><div class="sv">3,500m²</div><div class="sl"><span data-l="en" class="i">Communal open space</span><span data-l="ko" class="i">공용 오픈스페이스</span><span data-l="zh" class="i">公共开放空间</span></div></div>
-      <div class="stat"><div class="sv">25m</div><div class="sl"><span data-l="en" class="i">Resort-style heated pool</span><span data-l="ko" class="i">리조트형 온수 수영장</span><span data-l="zh" class="i">度假式恒温泳池</span></div></div>
+      <div class="stat"><div class="sv">306</div><div class="sl"><span data-l="en" class="i">Residences across the estate</span><span data-l="ko" class="i">단지 총 세대수</span><span data-l="zh" class="i">全区住宅总数</span><span data-l="zt" class="i">全區住宅總數</span></div></div>
+      <div class="stat"><div class="sv">4</div><div class="sl"><span data-l="en" class="i">Mid-rise buildings (A–D)</span><span data-l="ko" class="i">중층 건물 (A–D동)</span><span data-l="zh" class="i">中层楼栋（A–D座）</span><span data-l="zt" class="i">中層樓棟（A–D座）</span></div></div>
+      <div class="stat"><div class="sv">542</div><div class="sl"><span data-l="en" class="i">Basement car spaces</span><span data-l="ko" class="i">지하 주차 대수</span><span data-l="zh" class="i">地下车位</span><span data-l="zt" class="i">地下車位</span></div></div>
+      <div class="stat"><div class="sv">3,500m²</div><div class="sl"><span data-l="en" class="i">Communal open space</span><span data-l="ko" class="i">공용 오픈스페이스</span><span data-l="zh" class="i">公共开放空间</span><span data-l="zt" class="i">公共開放空間</span></div></div>
+      <div class="stat"><div class="sv">25m</div><div class="sl"><span data-l="en" class="i">Resort-style heated pool</span><span data-l="ko" class="i">리조트형 온수 수영장</span><span data-l="zh" class="i">度假式恒温泳池</span><span data-l="zt" class="i">度假式恆溫泳池</span></div></div>
     </div>
   </div>
 </section>
@@ -314,10 +318,10 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
   <div class="band-content">
     <h3 class="band-title" data-l="en">A place where the natural, old and new worlds live in perfect harmony</h3>
     <h3 class="band-title" data-l="ko">자연과 전통, 그리고 현대가 완벽한 조화를 이루는 곳</h3>
-    <h3 class="band-title" data-l="zh">自然、传统与现代完美交融之地</h3>
+    <h3 class="band-title" data-l="zh">自然、传统与现代完美交融之地</h3><h3 class="band-title" data-l="zt">自然、傳統與現代完美交融之地</h3>
     <p class="band-sub" data-l="en">Park Avenue sits front and centre in St Leonards' coveted southern residential quarter — a quality of architecture which exists in harmony with the local heritage yet is thoroughly modern.</p>
     <p class="band-sub" data-l="ko">Park Avenue는 세인트 레너즈 남측 주거 구역의 중심에 자리합니다. 지역의 헤리티지와 조화를 이루면서도 완전히 현대적인 건축입니다.</p>
-    <p class="band-sub" data-l="zh">Park Avenue 坐落于圣伦纳兹备受青睐的南部住宅区核心地段——建筑既与本地历史风貌相融，又极具现代感。</p>
+    <p class="band-sub" data-l="zh">Park Avenue 坐落于圣伦纳兹备受青睐的南部住宅区核心地段——建筑既与本地历史风貌相融，又极具现代感。</p><p class="band-sub" data-l="zt">Park Avenue 坐落於聖倫納茲備受青睞的南部住宅區核心地段——建築既與本地歷史風貌相融，又極具現代感。</p>
   </div>
   <div class="band-cap">Artist's Impression</div>
 </div>
@@ -331,21 +335,21 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
       </div>
       <div>
         <div class="section-eyebrow">
-          <span data-l="en" class="i">The Residences</span><span data-l="ko" class="i">주거 공간</span><span data-l="zh" class="i">住宅空间</span>
+          <span data-l="en" class="i">The Residences</span><span data-l="ko" class="i">주거 공간</span><span data-l="zh" class="i">住宅空间</span><span data-l="zt" class="i">住宅空間</span>
         </div>
         <h2 class="section-title" data-l="en">Interiors by <em>David Hicks</em></h2>
         <h2 class="section-title" data-l="ko"><em>David Hicks</em>의 인테리어</h2>
-        <h2 class="section-title" data-l="zh"><em>David Hicks</em> 室内设计</h2>
+        <h2 class="section-title" data-l="zh"><em>David Hicks</em> 室内设计</h2><h2 class="section-title" data-l="zt"><em>David Hicks</em> 室內設計</h2>
         <p class="section-sub" data-l="en">Layered interiors that are glamorous, functional and enhanced by decorative detail — light-filled spaces offering impeccable detailing and a very special living experience.</p>
         <p class="section-sub" data-l="ko">화려하면서도 기능적이고, 장식적 디테일이 더해진 층위 있는 인테리어. 빛이 가득한 공간이 정교한 마감과 특별한 주거 경험을 제공합니다.</p>
-        <p class="section-sub" data-l="zh">层次丰富的室内空间兼具华丽与实用，辅以精致装饰细节；采光充沛的空间带来无可挑剔的工艺与独特的居住体验。</p>
+        <p class="section-sub" data-l="zh">层次丰富的室内空间兼具华丽与实用，辅以精致装饰细节；采光充沛的空间带来无可挑剔的工艺与独特的居住体验。</p><p class="section-sub" data-l="zt">層次豐富的室內空間兼具華麗與實用，輔以精緻裝飾細節；採光充沛的空間帶來無可挑剔的工藝與獨特的居住體驗。</p>
         <ul class="feat-list">
-          <li><span data-l="en" class="i">Rich wide-plank timber floors with cream and dark grey stonework</span><span data-l="ko" class="i">넓은 폭의 원목 마루와 크림·다크 그레이 석재 마감</span><span data-l="zh" class="i">宽幅实木地板，搭配奶油色与深灰色石材</span></li>
-          <li><span data-l="en" class="i">Premium Miele kitchens with stone benchtops</span><span data-l="ko" class="i">스톤 벤치탑의 프리미엄 Miele 주방</span><span data-l="zh" class="i">配备石材台面的 Miele 高端厨房</span></li>
-          <li><span data-l="en" class="i">Ensuites with separate wet and dry areas, full-height tiling</span><span data-l="ko" class="i">건식·습식 분리 욕실, 천장 높이 타일 마감</span><span data-l="zh" class="i">干湿分离主卫，通顶墙砖铺贴</span></li>
-          <li><span data-l="en" class="i">Generous private terraces facing the CBD skyline and harbour</span><span data-l="ko" class="i">CBD 스카이라인과 하버를 향한 넓은 전용 테라스</span><span data-l="zh" class="i">面向 CBD 天际线与海港的宽敞私人露台</span></li>
-          <li><span data-l="en" class="i">New York style lobbies blending contemporary and vintage detail</span><span data-l="ko" class="i">현대와 빈티지가 어우러진 뉴욕 스타일 로비</span><span data-l="zh" class="i">融合现代与复古细节的纽约风格大堂</span></li>
-          <li><span data-l="en" class="i">Terrace-style homes with house-like proportions and apartment ease</span><span data-l="ko" class="i">단독주택 같은 규모에 아파트의 편리함을 더한 테라스형 주거</span><span data-l="zh" class="i">露台式住宅，兼具别墅尺度与公寓便利</span></li>
+          <li><span data-l="en" class="i">Rich wide-plank timber floors with cream and dark grey stonework</span><span data-l="ko" class="i">넓은 폭의 원목 마루와 크림·다크 그레이 석재 마감</span><span data-l="zh" class="i">宽幅实木地板，搭配奶油色与深灰色石材</span><span data-l="zt" class="i">寬幅實木地板，搭配奶油色與深灰色石材</span></li>
+          <li><span data-l="en" class="i">Premium Miele kitchens with stone benchtops</span><span data-l="ko" class="i">스톤 벤치탑의 프리미엄 Miele 주방</span><span data-l="zh" class="i">配备石材台面的 Miele 高端厨房</span><span data-l="zt" class="i">配備石材檯面的 Miele 高端廚房</span></li>
+          <li><span data-l="en" class="i">Ensuites with separate wet and dry areas, full-height tiling</span><span data-l="ko" class="i">건식·습식 분리 욕실, 천장 높이 타일 마감</span><span data-l="zh" class="i">干湿分离主卫，通顶墙砖铺贴</span><span data-l="zt" class="i">乾溼分離主衛，通頂牆磚鋪貼</span></li>
+          <li><span data-l="en" class="i">Generous private terraces facing the CBD skyline and harbour</span><span data-l="ko" class="i">CBD 스카이라인과 하버를 향한 넓은 전용 테라스</span><span data-l="zh" class="i">面向 CBD 天际线与海港的宽敞私人露台</span><span data-l="zt" class="i">面向 CBD 天際線與海港的寬敞私人露臺</span></li>
+          <li><span data-l="en" class="i">New York style lobbies blending contemporary and vintage detail</span><span data-l="ko" class="i">현대와 빈티지가 어우러진 뉴욕 스타일 로비</span><span data-l="zh" class="i">融合现代与复古细节的纽约风格大堂</span><span data-l="zt" class="i">融合現代與復古細節的紐約風格大堂</span></li>
+          <li><span data-l="en" class="i">Terrace-style homes with house-like proportions and apartment ease</span><span data-l="ko" class="i">단독주택 같은 규모에 아파트의 편리함을 더한 테라스형 주거</span><span data-l="zh" class="i">露台式住宅，兼具别墅尺度与公寓便利</span><span data-l="zt" class="i">露臺式住宅，兼具別墅尺度與公寓便利</span></li>
         </ul>
       </div>
     </div>
@@ -363,24 +367,24 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
     <div class="split rev">
       <div>
         <div class="section-eyebrow">
-          <span data-l="en" class="i">Smart Home</span><span data-l="ko" class="i">스마트홈</span><span data-l="zh" class="i">智能家居</span>
+          <span data-l="en" class="i">Smart Home</span><span data-l="ko" class="i">스마트홈</span><span data-l="zh" class="i">智能家居</span><span data-l="zt" class="i">智能家居</span>
         </div>
         <h2 class="section-title" data-l="en">Comfort at <em>a touch</em></h2>
         <h2 class="section-title" data-l="ko">터치 한 번의 <em>편안함</em></h2>
-        <h2 class="section-title" data-l="zh">一触即享的<em>舒适</em></h2>
+        <h2 class="section-title" data-l="zh">一触即享的<em>舒适</em></h2><h2 class="section-title" data-l="zt">一觸即享的<em>舒適</em></h2>
         <p class="section-sub" data-l="en">Each home includes an integrated smart system for effortless control of lighting, climate and window furnishings.</p>
         <p class="section-sub" data-l="ko">각 세대에는 조명, 냉난방, 창호를 손쉽게 제어하는 통합 스마트 시스템이 적용됩니다.</p>
-        <p class="section-sub" data-l="zh">每户均配备集成智能系统，轻松控制照明、温控与窗帘。</p>
+        <p class="section-sub" data-l="zh">每户均配备集成智能系统，轻松控制照明、温控与窗帘。</p><p class="section-sub" data-l="zt">每戶均配備集成智能系統，輕鬆控制照明、溫控與窗簾。</p>
         <ul class="feat-list">
-          <li><span data-l="en" class="i">Smart light switch — remote and local control, dimming, timing</span><span data-l="ko" class="i">스마트 조명 스위치 — 원격·현장 제어, 디밍, 타이머</span><span data-l="zh" class="i">智能灯控——远程与本地控制、调光、定时</span></li>
-          <li><span data-l="en" class="i">Smart curtains with precise adjustment (20% / 50% / 100%)</span><span data-l="ko" class="i">정밀 조절 스마트 커튼 (20% / 50% / 100%)</span><span data-l="zh" class="i">智能窗帘，可精准调节（20% / 50% / 100%）</span></li>
-          <li><span data-l="en" class="i">Air conditioning control — overall temperature and function</span><span data-l="ko" class="i">에어컨 제어 — 전체 온도 및 기능 조절</span><span data-l="zh" class="i">空调控制——整体温度与功能调节</span></li>
-          <li><span data-l="en" class="i">Smart parcel locker for 24/7 package collection</span><span data-l="ko" class="i">24시간 택배 수령이 가능한 스마트 택배함</span><span data-l="zh" class="i">智能包裹柜，24 小时随时取件</span></li>
-          <li><span data-l="en" class="i">Residence app for building services, updates and amenities</span><span data-l="ko" class="i">건물 서비스·공지·커뮤니티 시설 연동 레지던스 앱</span><span data-l="zh" class="i">住户 App，一站式接入楼宇服务、通知与设施</span></li>
+          <li><span data-l="en" class="i">Smart light switch — remote and local control, dimming, timing</span><span data-l="ko" class="i">스마트 조명 스위치 — 원격·현장 제어, 디밍, 타이머</span><span data-l="zh" class="i">智能灯控——远程与本地控制、调光、定时</span><span data-l="zt" class="i">智能燈控——遠程與本地控制、調光、定時</span></li>
+          <li><span data-l="en" class="i">Smart curtains with precise adjustment (20% / 50% / 100%)</span><span data-l="ko" class="i">정밀 조절 스마트 커튼 (20% / 50% / 100%)</span><span data-l="zh" class="i">智能窗帘，可精准调节（20% / 50% / 100%）</span><span data-l="zt" class="i">智能窗簾，可精準調節（20% / 50% / 100%）</span></li>
+          <li><span data-l="en" class="i">Air conditioning control — overall temperature and function</span><span data-l="ko" class="i">에어컨 제어 — 전체 온도 및 기능 조절</span><span data-l="zh" class="i">空调控制——整体温度与功能调节</span><span data-l="zt" class="i">空調控制——整體溫度與功能調節</span></li>
+          <li><span data-l="en" class="i">Smart parcel locker for 24/7 package collection</span><span data-l="ko" class="i">24시간 택배 수령이 가능한 스마트 택배함</span><span data-l="zh" class="i">智能包裹柜，24 小时随时取件</span><span data-l="zt" class="i">智能包裹櫃，24 小時隨時取件</span></li>
+          <li><span data-l="en" class="i">Residence app for building services, updates and amenities</span><span data-l="ko" class="i">건물 서비스·공지·커뮤니티 시설 연동 레지던스 앱</span><span data-l="zh" class="i">住户 App，一站式接入楼宇服务、通知与设施</span><span data-l="zt" class="i">住戶 App，一站式接入樓宇服務、通知與設施</span></li>
         </ul>
         <p class="cap" data-l="en">Dimming function is provided to the master bedroom only. Air conditioning control supports overall temperature and function only.</p>
         <p class="cap" data-l="ko">디밍 기능은 마스터 베드룸에만 적용되며, 에어컨 제어는 전체 온도 및 기능 제어만 지원됩니다.</p>
-        <p class="cap" data-l="zh">调光功能仅限主卧；空调控制仅支持整体温度与功能调节。</p>
+        <p class="cap" data-l="zh">调光功能仅限主卧；空调控制仅支持整体温度与功能调节。</p><p class="cap" data-l="zt">調光功能僅限主臥；空調控制僅支持整體溫度與功能調節。</p>
       </div>
       <div class="split-img">
         <img src="./assets/park-avenue/courtyard.jpg" alt="Landscaped courtyard between residences — Artist's Impression" loading="lazy">
@@ -393,86 +397,86 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section>
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">Amenities</span><span data-l="ko" class="i">커뮤니티 시설</span><span data-l="zh" class="i">配套设施</span>
+      <span data-l="en" class="i">Amenities</span><span data-l="ko" class="i">커뮤니티 시설</span><span data-l="zh" class="i">配套设施</span><span data-l="zt" class="i">配套設施</span>
     </div>
     <h2 class="section-title" data-l="en">Resort living, <em>every day</em></h2>
     <h2 class="section-title" data-l="ko">매일이 <em>리조트</em>인 일상</h2>
-    <h2 class="section-title" data-l="zh">日日皆是<em>度假时光</em></h2>
+    <h2 class="section-title" data-l="zh">日日皆是<em>度假时光</em></h2><h2 class="section-title" data-l="zt">日日皆是<em>度假時光</em></h2>
     <p class="section-sub" data-l="en">More than 3,500m² of communal open space, designed by award-winning landscape architects Clouston Associates.</p>
     <p class="section-sub" data-l="ko">수상 경력의 조경 설계사 Clouston Associates가 설계한 3,500m² 이상의 공용 오픈스페이스.</p>
-    <p class="section-sub" data-l="zh">超过 3,500 平方米的公共开放空间，由屡获殊荣的景观设计事务所 Clouston Associates 打造。</p>
+    <p class="section-sub" data-l="zh">超过 3,500 平方米的公共开放空间，由屡获殊荣的景观设计事务所 Clouston Associates 打造。</p><p class="section-sub" data-l="zt">超過 3,500 平方米的公共開放空間，由屢獲殊榮的景觀設計事務所 Clouston Associates 打造。</p>
     <div class="amen-grid">
       <div class="amen"><div class="amen-ico">🏊</div>
-        <h4 data-l="en">Swimming Pool</h4><h4 data-l="ko">수영장</h4><h4 data-l="zh">游泳池</h4>
+        <h4 data-l="en">Swimming Pool</h4><h4 data-l="ko">수영장</h4><h4 data-l="zh">游泳池</h4><h4 data-l="zt">游泳池</h4>
         <p data-l="en">Resort-style 25-metre heated pool and sun-kissed lounge deck, exclusively for residents and guests.</p>
         <p data-l="ko">리조트 스타일 25m 온수 수영장과 라운지 데크. 입주민과 게스트 전용입니다.</p>
-        <p data-l="zh">度假式 25 米恒温泳池与日光休闲平台，住户及访客专属。</p>
+        <p data-l="zh">度假式 25 米恒温泳池与日光休闲平台，住户及访客专属。</p><p data-l="zt">度假式 25 米恆溫泳池與日光休閒平臺，住戶及訪客專屬。</p>
       </div>
       <div class="amen"><div class="amen-ico">🏋️</div>
-        <h4 data-l="en">Gymnasium</h4><h4 data-l="ko">피트니스 센터</h4><h4 data-l="zh">健身房</h4>
+        <h4 data-l="en">Gymnasium</h4><h4 data-l="ko">피트니스 센터</h4><h4 data-l="zh">健身房</h4><h4 data-l="zt">健身房</h4>
         <p data-l="en">Fully equipped indoor residents' gym overlooking the landscaped pool terrace.</p>
         <p data-l="ko">조경된 풀 테라스를 바라보는 실내 입주민 전용 피트니스 센터.</p>
-        <p data-l="zh">设备齐全的室内住户健身房，俯瞰景观泳池平台。</p>
+        <p data-l="zh">设备齐全的室内住户健身房，俯瞰景观泳池平台。</p><p data-l="zt">設備齊全的室內住戶健身房，俯瞰景觀泳池平臺。</p>
       </div>
       <div class="amen"><div class="amen-ico">🌿</div>
-        <h4 data-l="en">Communal Garden</h4><h4 data-l="ko">공용 정원</h4><h4 data-l="zh">公共花园</h4>
+        <h4 data-l="en">Communal Garden</h4><h4 data-l="ko">공용 정원</h4><h4 data-l="zh">公共花园</h4><h4 data-l="zt">公共花園</h4>
         <p data-l="en">An elegantly landscaped green spine with tranquil spaces and inviting seating areas.</p>
         <p data-l="ko">고요한 공간과 편안한 좌석이 어우러진 그린 스파인 조경.</p>
-        <p data-l="zh">精心打造的绿色景观轴线，设有静谧空间与舒适座席。</p>
+        <p data-l="zh">精心打造的绿色景观轴线，设有静谧空间与舒适座席。</p><p data-l="zt">精心打造的綠色景觀軸線，設有靜謐空間與舒適座席。</p>
       </div>
       <div class="amen"><div class="amen-ico">🔥</div>
-        <h4 data-l="en">BBQ Area</h4><h4 data-l="ko">바비큐 공간</h4><h4 data-l="zh">烧烤区</h4>
+        <h4 data-l="en">BBQ Area</h4><h4 data-l="ko">바비큐 공간</h4><h4 data-l="zh">烧烤区</h4><h4 data-l="zt">燒烤區</h4>
         <p data-l="en">Outdoor cooking and alfresco dining spaces for gathering with family and friends.</p>
         <p data-l="ko">가족·지인과 함께하는 야외 조리 및 알프레스코 다이닝 공간.</p>
-        <p data-l="zh">户外烹饪与露天用餐空间，尽享亲友聚会时光。</p>
+        <p data-l="zh">户外烹饪与露天用餐空间，尽享亲友聚会时光。</p><p data-l="zt">戶外烹飪與露天用餐空間，盡享親友聚會時光。</p>
       </div>
       <div class="amen"><div class="amen-ico">🏙️</div>
-        <h4 data-l="en">Private Rooftop Garden</h4><h4 data-l="ko">전용 루프탑 가든</h4><h4 data-l="zh">专属屋顶花园</h4>
+        <h4 data-l="en">Private Rooftop Garden</h4><h4 data-l="ko">전용 루프탑 가든</h4><h4 data-l="zh">专属屋顶花园</h4><h4 data-l="zt">專屬屋頂花園</h4>
         <p data-l="en">Exclusive to Building C &amp; D residents — city and harbour views, lush greenery and premium BBQ facilities.</p>
         <p data-l="ko">C·D동 입주민 전용. 시티·하버 조망과 풍성한 녹지, 프리미엄 바비큐 시설.</p>
-        <p data-l="zh">C、D 座住户专属，坐拥城市与海港景观，绿意盎然并配高端烧烤设施。</p>
+        <p data-l="zh">C、D 座住户专属，坐拥城市与海港景观，绿意盎然并配高端烧烤设施。</p><p data-l="zt">C、D 座住戶專屬，坐擁城市與海港景觀，綠意盎然並配高端燒烤設施。</p>
       </div>
       <div class="amen"><div class="amen-ico">🛝</div>
-        <h4 data-l="en">Kids' Playground</h4><h4 data-l="ko">어린이 놀이터</h4><h4 data-l="zh">儿童游乐场</h4>
+        <h4 data-l="en">Kids' Playground</h4><h4 data-l="ko">어린이 놀이터</h4><h4 data-l="zh">儿童游乐场</h4><h4 data-l="zt">兒童遊樂場</h4>
         <p data-l="en">A secure and private playground designed for safe, sun-kissed adventures.</p>
         <p data-l="ko">안전하게 설계된 프라이빗 어린이 놀이 공간.</p>
-        <p data-l="zh">安全私密的游乐场，专为孩子的户外探索而设计。</p>
+        <p data-l="zh">安全私密的游乐场，专为孩子的户外探索而设计。</p><p data-l="zt">安全私密的遊樂場，專爲孩子的戶外探索而設計。</p>
       </div>
       <div class="amen"><div class="amen-ico">🔌</div>
-        <h4 data-l="en">EV Charging</h4><h4 data-l="ko">전기차 충전</h4><h4 data-l="zh">电动车充电</h4>
+        <h4 data-l="en">EV Charging</h4><h4 data-l="ko">전기차 충전</h4><h4 data-l="zh">电动车充电</h4><h4 data-l="zt">電動車充電</h4>
         <p data-l="en">Convenient EV charging stations for sustainable, hassle-free electric vehicle use.</p>
         <p data-l="ko">편리한 전기차 충전 스테이션.</p>
-        <p data-l="zh">便捷的电动车充电桩，绿色出行无忧。</p>
+        <p data-l="zh">便捷的电动车充电桩，绿色出行无忧。</p><p data-l="zt">便捷的電動車充電樁，綠色出行無憂。</p>
       </div>
       <div class="amen"><div class="amen-ico">🚿</div>
-        <h4 data-l="en">Car &amp; Pet Wash Bay</h4><h4 data-l="ko">세차·반려동물 목욕 공간</h4><h4 data-l="zh">洗车与宠物清洗区</h4>
+        <h4 data-l="en">Car &amp; Pet Wash Bay</h4><h4 data-l="ko">세차·반려동물 목욕 공간</h4><h4 data-l="zh">洗车与宠物清洗区</h4><h4 data-l="zt">洗車與寵物清洗區</h4>
         <p data-l="en">A dedicated car wash bay, plus a pet wash bay for your four-legged family.</p>
         <p data-l="ko">전용 세차 공간과 반려동물 목욕 공간을 함께 마련했습니다.</p>
-        <p data-l="zh">设有专用洗车位，以及为毛孩子准备的宠物清洗区。</p>
+        <p data-l="zh">设有专用洗车位，以及为毛孩子准备的宠物清洗区。</p><p data-l="zt">設有專用洗車位，以及爲毛孩子準備的寵物清洗區。</p>
       </div>
       <div class="amen"><div class="amen-ico">📦</div>
-        <h4 data-l="en">Parcel Locker</h4><h4 data-l="ko">스마트 택배함</h4><h4 data-l="zh">智能包裹柜</h4>
+        <h4 data-l="en">Parcel Locker</h4><h4 data-l="ko">스마트 택배함</h4><h4 data-l="zh">智能包裹柜</h4><h4 data-l="zt">智能包裹櫃</h4>
         <p data-l="en">Secure parcel lockers for easy 24/7 package collection.</p>
         <p data-l="ko">24시간 간편하게 수령 가능한 안전한 택배함.</p>
-        <p data-l="zh">安全包裹柜，24 小时轻松取件。</p>
+        <p data-l="zh">安全包裹柜，24 小时轻松取件。</p><p data-l="zt">安全包裹櫃，24 小時輕鬆取件。</p>
       </div>
       <div class="amen"><div class="amen-ico">🛎️</div>
-        <h4 data-l="en">Onsite Building Manager</h4><h4 data-l="ko">상주 빌딩 매니저</h4><h4 data-l="zh">驻场物业经理</h4>
+        <h4 data-l="en">Onsite Building Manager</h4><h4 data-l="ko">상주 빌딩 매니저</h4><h4 data-l="zh">驻场物业经理</h4><h4 data-l="zt">駐場物業經理</h4>
         <p data-l="en">Onsite building manager for seamless assistance and property maintenance.</p>
         <p data-l="ko">단지 관리와 입주민 지원을 담당하는 상주 빌딩 매니저.</p>
-        <p data-l="zh">驻场物业经理，提供顺畅的协助与物业维护。</p>
+        <p data-l="zh">驻场物业经理，提供顺畅的协助与物业维护。</p><p data-l="zt">駐場物業經理，提供順暢的協助與物業維護。</p>
       </div>
       <div class="amen"><div class="amen-ico">🌳</div>
-        <h4 data-l="en">Nature Connection</h4><h4 data-l="ko">자연 연결성</h4><h4 data-l="zh">亲近自然</h4>
+        <h4 data-l="en">Nature Connection</h4><h4 data-l="ko">자연 연결성</h4><h4 data-l="zh">亲近自然</h4><h4 data-l="zt">親近自然</h4>
         <p data-l="en">Newlands Park, Gore Creek Reserve, Berry Island Reserve, Coal Loader, Balls Head Reserve and Greenwich Baths nearby.</p>
         <p data-l="ko">Newlands Park, Gore Creek Reserve, Berry Island Reserve, Coal Loader, Balls Head Reserve, Greenwich Baths가 인근에 있습니다.</p>
-        <p data-l="zh">周边有 Newlands Park、Gore Creek Reserve、Berry Island Reserve、Coal Loader、Balls Head Reserve 及 Greenwich Baths。</p>
+        <p data-l="zh">周边有 Newlands Park、Gore Creek Reserve、Berry Island Reserve、Coal Loader、Balls Head Reserve 及 Greenwich Baths。</p><p data-l="zt">周邊有 Newlands Park、Gore Creek Reserve、Berry Island Reserve、Coal Loader、Balls Head Reserve 及 Greenwich Baths。</p>
       </div>
       <div class="amen"><div class="amen-ico">🌱</div>
-        <h4 data-l="en">Sustainability</h4><h4 data-l="ko">친환경 설계</h4><h4 data-l="zh">可持续设计</h4>
+        <h4 data-l="en">Sustainability</h4><h4 data-l="ko">친환경 설계</h4><h4 data-l="zh">可持续设计</h4><h4 data-l="zt">可持續設計</h4>
         <p data-l="en">Minimum NatHERS 6-star energy rating, rainwater harvesting for irrigation and landscaping designed to foster biodiversity.</p>
         <p data-l="ko">최소 NatHERS 6성 에너지 등급, 관개용 빗물 저류, 생물다양성을 고려한 조경.</p>
-        <p data-l="zh">最低 NatHERS 六星能效评级，雨水收集用于灌溉，景观设计促进生物多样性。</p>
+        <p data-l="zh">最低 NatHERS 六星能效评级，雨水收集用于灌溉，景观设计促进生物多样性。</p><p data-l="zt">最低 NatHERS 六星能效評級，雨水收集用於灌溉，景觀設計促進生物多樣性。</p>
       </div>
     </div>
     <div class="duo">
@@ -487,20 +491,20 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section style="background:var(--bg2)">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">Masterplan</span><span data-l="ko" class="i">단지 배치</span><span data-l="zh" class="i">总体规划</span>
+      <span data-l="en" class="i">Masterplan</span><span data-l="ko" class="i">단지 배치</span><span data-l="zh" class="i">总体规划</span><span data-l="zt" class="i">總體規劃</span>
     </div>
     <h2 class="section-title" data-l="en">Four buildings, <em>one garden village</em></h2>
     <h2 class="section-title" data-l="ko">네 개의 건물, <em>하나의 가든 빌리지</em></h2>
-    <h2 class="section-title" data-l="zh">四栋楼宇，<em>一座花园社区</em></h2>
+    <h2 class="section-title" data-l="zh">四栋楼宇，<em>一座花园社区</em></h2><h2 class="section-title" data-l="zt">四棟樓宇，<em>一座花園社區</em></h2>
     <p class="section-sub" data-l="en">Buildings A and B frame the central pool and gym terrace; Buildings C and D open onto the playground, BBQ area and their own private rooftop gardens. The site is bounded by Park Road, Berry Road, River Road and a new internal road, with a proposed future park adjoining the eastern edge.</p>
     <p class="section-sub" data-l="ko">A·B동은 중앙 수영장과 짐 테라스를 감싸고, C·D동은 놀이터와 바비큐 공간, 그리고 전용 루프탑 가든으로 이어집니다. 부지는 Park Road, Berry Road, River Road와 신설 내부 도로로 둘러싸이며, 동측에는 향후 공원이 계획되어 있습니다.</p>
-    <p class="section-sub" data-l="zh">A、B 座环绕中央泳池与健身平台；C、D 座则毗邻儿童游乐场、烧烤区及各自的专属屋顶花园。地块由 Park Road、Berry Road、River Road 及一条新建内部道路围合，东侧规划有未来公园。</p>
+    <p class="section-sub" data-l="zh">A、B 座环绕中央泳池与健身平台；C、D 座则毗邻儿童游乐场、烧烤区及各自的专属屋顶花园。地块由 Park Road、Berry Road、River Road 及一条新建内部道路围合，东侧规划有未来公园。</p><p class="section-sub" data-l="zt">A、B 座環繞中央泳池與健身平臺；C、D 座則毗鄰兒童遊樂場、燒烤區及各自的專屬屋頂花園。地塊由 Park Road、Berry Road、River Road 及一條新建內部道路圍合，東側規劃有未來公園。</p>
     <div class="loc-img" style="margin-bottom:0">
       <img src="./assets/park-avenue/masterplan.jpg" alt="Park Avenue Residences masterplan showing Buildings A to D, pool, gym, BBQ area and playground — Artist's Impression" loading="lazy">
     </div>
     <p class="cap" data-l="en">Artist's Impression. Proposed future park subject to council approval.</p>
     <p class="cap" data-l="ko">작가 상상도. 향후 공원 계획은 카운슬 승인 대상입니다.</p>
-    <p class="cap" data-l="zh">作家想象图。未来公园规划须经市政府批准。</p>
+    <p class="cap" data-l="zh">作家想象图。未来公园规划须经市政府批准。</p><p class="cap" data-l="zt">作家想象圖。未來公園規劃須經市政府批准。</p>
   </div>
 </section>
 
@@ -508,30 +512,30 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section class="loc-sec">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">Location</span><span data-l="ko" class="i">입지</span><span data-l="zh" class="i">地理位置</span>
+      <span data-l="en" class="i">Location</span><span data-l="ko" class="i">입지</span><span data-l="zh" class="i">地理位置</span><span data-l="zt" class="i">地理位置</span>
     </div>
     <h2 class="section-title" data-l="en">Where the natural, old<br>and <em>new worlds meet</em></h2>
     <h2 class="section-title" data-l="ko">자연과 전통,<br>그리고 <em>현대가 만나는 곳</em></h2>
-    <h2 class="section-title" data-l="zh">自然、传统<br>与<em>现代交汇之处</em></h2>
+    <h2 class="section-title" data-l="zh">自然、传统<br>与<em>现代交汇之处</em></h2><h2 class="section-title" data-l="zt">自然、傳統<br>與<em>現代交匯之處</em></h2>
     <p class="section-sub" data-l="en">On the edge of a vibrant city hub, yet worlds away from the bustle — nestled amongst heritage homes and tree-lined streets on Sydney's Lower North Shore.</p>
     <p class="section-sub" data-l="ko">활기찬 도심 바로 옆에 있으면서도 번잡함과는 거리가 먼 곳. 시드니 로어 노스쇼어의 헤리티지 주택과 가로수길 사이에 자리합니다.</p>
-    <p class="section-sub" data-l="zh">紧邻充满活力的城市中心，却远离喧嚣——坐落于悉尼下北岸的历史宅邸与林荫街道之间。</p>
+    <p class="section-sub" data-l="zh">紧邻充满活力的城市中心，却远离喧嚣——坐落于悉尼下北岸的历史宅邸与林荫街道之间。</p><p class="section-sub" data-l="zt">緊鄰充滿活力的城市中心，卻遠離喧囂——坐落於悉尼下北岸的歷史宅邸與林蔭街道之間。</p>
     <div class="loc-img">
       <img src="./assets/park-avenue/aerial.jpg" alt="Aerial view showing Park Avenue's position relative to St Leonards, North Sydney and the Sydney CBD" loading="lazy">
     </div>
     <div class="loc-grid">
-      <div class="loc-item"><div class="lv">5 min</div><div class="ll"><span data-l="en" class="i">Walk to Mall 88</span><span data-l="ko" class="i">도보 Mall 88</span><span data-l="zh" class="i">步行至 Mall 88</span></div></div>
-      <div class="loc-item"><div class="lv">6 min</div><div class="ll"><span data-l="en" class="i">Walk to Crows Nest Metro</span><span data-l="ko" class="i">도보 크로우스 네스트 메트로</span><span data-l="zh" class="i">步行至 Crows Nest 地铁站</span></div></div>
-      <div class="loc-item"><div class="lv">6 min</div><div class="ll"><span data-l="en" class="i">Walk to Royal North Shore Hospital</span><span data-l="ko" class="i">도보 로열 노스쇼어 병원</span><span data-l="zh" class="i">步行至皇家北岸医院</span></div></div>
-      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-l="en" class="i">Walk to St Leonards Station</span><span data-l="ko" class="i">도보 세인트 레너즈 역</span><span data-l="zh" class="i">步行至圣伦纳兹火车站</span></div></div>
-      <div class="loc-item"><div class="lv">7 min</div><div class="ll"><span data-l="en" class="i">Drive to North Sydney</span><span data-l="ko" class="i">차량 노스 시드니</span><span data-l="zh" class="i">驾车至北悉尼</span></div></div>
-      <div class="loc-item"><div class="lv">9 min</div><div class="ll"><span data-l="en" class="i">Drive to Chatswood</span><span data-l="ko" class="i">차량 채스우드</span><span data-l="zh" class="i">驾车至 Chatswood</span></div></div>
-      <div class="loc-item"><div class="lv">15 min</div><div class="ll"><span data-l="en" class="i">Drive to Sydney CBD</span><span data-l="ko" class="i">차량 시드니 CBD</span><span data-l="zh" class="i">驾车至悉尼 CBD</span></div></div>
-      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-l="en" class="i">Drive to The Coal Loader</span><span data-l="ko" class="i">차량 콜 로더</span><span data-l="zh" class="i">驾车至 Coal Loader</span></div></div>
+      <div class="loc-item"><div class="lv">5 min</div><div class="ll"><span data-l="en" class="i">Walk to Mall 88</span><span data-l="ko" class="i">도보 Mall 88</span><span data-l="zh" class="i">步行至 Mall 88</span><span data-l="zt" class="i">步行至 Mall 88</span></div></div>
+      <div class="loc-item"><div class="lv">6 min</div><div class="ll"><span data-l="en" class="i">Walk to Crows Nest Metro</span><span data-l="ko" class="i">도보 크로우스 네스트 메트로</span><span data-l="zh" class="i">步行至 Crows Nest 地铁站</span><span data-l="zt" class="i">步行至 Crows Nest 地鐵站</span></div></div>
+      <div class="loc-item"><div class="lv">6 min</div><div class="ll"><span data-l="en" class="i">Walk to Royal North Shore Hospital</span><span data-l="ko" class="i">도보 로열 노스쇼어 병원</span><span data-l="zh" class="i">步行至皇家北岸医院</span><span data-l="zt" class="i">步行至皇家北岸醫院</span></div></div>
+      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-l="en" class="i">Walk to St Leonards Station</span><span data-l="ko" class="i">도보 세인트 레너즈 역</span><span data-l="zh" class="i">步行至圣伦纳兹火车站</span><span data-l="zt" class="i">步行至聖倫納茲火車站</span></div></div>
+      <div class="loc-item"><div class="lv">7 min</div><div class="ll"><span data-l="en" class="i">Drive to North Sydney</span><span data-l="ko" class="i">차량 노스 시드니</span><span data-l="zh" class="i">驾车至北悉尼</span><span data-l="zt" class="i">駕車至北悉尼</span></div></div>
+      <div class="loc-item"><div class="lv">9 min</div><div class="ll"><span data-l="en" class="i">Drive to Chatswood</span><span data-l="ko" class="i">차량 채스우드</span><span data-l="zh" class="i">驾车至 Chatswood</span><span data-l="zt" class="i">駕車至 Chatswood</span></div></div>
+      <div class="loc-item"><div class="lv">15 min</div><div class="ll"><span data-l="en" class="i">Drive to Sydney CBD</span><span data-l="ko" class="i">차량 시드니 CBD</span><span data-l="zh" class="i">驾车至悉尼 CBD</span><span data-l="zt" class="i">駕車至悉尼 CBD</span></div></div>
+      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-l="en" class="i">Drive to The Coal Loader</span><span data-l="ko" class="i">차량 콜 로더</span><span data-l="zh" class="i">驾车至 Coal Loader</span><span data-l="zt" class="i">駕車至 Coal Loader</span></div></div>
     </div>
     <div class="near-grid">
       <div class="near">
-        <h4><span data-l="en" class="i">Learning</span><span data-l="ko" class="i">교육</span><span data-l="zh" class="i">教育</span></h4>
+        <h4><span data-l="en" class="i">Learning</span><span data-l="ko" class="i">교육</span><span data-l="zh" class="i">教育</span><span data-l="zt" class="i">教育</span></h4>
         <ul>
           <li>North Sydney Boys High School</li>
           <li>North Sydney Girls High School</li>
@@ -544,7 +548,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
         </ul>
       </div>
       <div class="near">
-        <h4><span data-l="en" class="i">Stocking Up</span><span data-l="ko" class="i">쇼핑</span><span data-l="zh" class="i">购物</span></h4>
+        <h4><span data-l="en" class="i">Stocking Up</span><span data-l="ko" class="i">쇼핑</span><span data-l="zh" class="i">购物</span><span data-l="zt" class="i">購物</span></h4>
         <ul>
           <li>Mall 88 — Coles, Yaochii, Vintage Cellars</li>
           <li>QE Foodstore</li>
@@ -555,7 +559,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
         </ul>
       </div>
       <div class="near">
-        <h4><span data-l="en" class="i">Wining &amp; Dining</span><span data-l="ko" class="i">다이닝</span><span data-l="zh" class="i">餐饮</span></h4>
+        <h4><span data-l="en" class="i">Wining &amp; Dining</span><span data-l="ko" class="i">다이닝</span><span data-l="zh" class="i">餐饮</span><span data-l="zt" class="i">餐飲</span></h4>
         <ul>
           <li>Mall 88 Dining Precinct</li>
           <li>St Leonards Square</li>
@@ -563,7 +567,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
         </ul>
       </div>
       <div class="near">
-        <h4><span data-l="en" class="i">Health &amp; Wellbeing</span><span data-l="ko" class="i">의료·웰빙</span><span data-l="zh" class="i">医疗与健康</span></h4>
+        <h4><span data-l="en" class="i">Health &amp; Wellbeing</span><span data-l="ko" class="i">의료·웰빙</span><span data-l="zh" class="i">医疗与健康</span><span data-l="zt" class="i">醫療與健康</span></h4>
         <ul>
           <li>Royal North Shore Hospital</li>
           <li>North Shore Private Hospital</li>
@@ -579,39 +583,39 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section>
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">The Team</span><span data-l="ko" class="i">참여 팀</span><span data-l="zh" class="i">项目团队</span>
+      <span data-l="en" class="i">The Team</span><span data-l="ko" class="i">참여 팀</span><span data-l="zh" class="i">项目团队</span><span data-l="zt" class="i">項目團隊</span>
     </div>
     <h2 class="section-title" data-l="en">Collaboration <em>creates perfection</em></h2>
     <h2 class="section-title" data-l="ko">협업이 만들어낸 <em>완성도</em></h2>
-    <h2 class="section-title" data-l="zh">协作<em>成就臻善</em></h2>
+    <h2 class="section-title" data-l="zh">协作<em>成就臻善</em></h2><h2 class="section-title" data-l="zt">協作<em>成就臻善</em></h2>
     <div class="team-grid">
       <div class="team">
-        <div class="role"><span data-l="en" class="i">Developer</span><span data-l="ko" class="i">시행사</span><span data-l="zh" class="i">开发商</span></div>
+        <div class="role"><span data-l="en" class="i">Developer</span><span data-l="ko" class="i">시행사</span><span data-l="zh" class="i">开发商</span><span data-l="zt" class="i">開發商</span></div>
         <h4>JQZ</h4>
         <p data-l="en">Founded in 2010, JQZ has delivered some of Sydney's most significant projects, including the $1.6 billion Eighty-Eight — St Leonards' tallest residential tower — and Mall 88.</p>
         <p data-l="ko">2010년 설립된 JQZ는 세인트 레너즈에서 가장 높은 주거 타워인 16억 달러 규모의 Eighty-Eight와 Mall 88 등 시드니의 주요 프로젝트를 완공해 왔습니다.</p>
-        <p data-l="zh">JQZ 成立于 2010 年，已交付多个悉尼重要项目，包括造价 16 亿澳元、圣伦纳兹最高住宅塔楼 Eighty-Eight 以及 Mall 88。</p>
+        <p data-l="zh">JQZ 成立于 2010 年，已交付多个悉尼重要项目，包括造价 16 亿澳元、圣伦纳兹最高住宅塔楼 Eighty-Eight 以及 Mall 88。</p><p data-l="zt">JQZ 成立於 2010 年，已交付多個悉尼重要項目，包括造價 16 億澳元、聖倫納茲最高住宅塔樓 Eighty-Eight 以及 Mall 88。</p>
       </div>
       <div class="team">
-        <div class="role"><span data-l="en" class="i">Architecture</span><span data-l="ko" class="i">건축</span><span data-l="zh" class="i">建筑设计</span></div>
+        <div class="role"><span data-l="en" class="i">Architecture</span><span data-l="ko" class="i">건축</span><span data-l="zh" class="i">建筑设计</span><span data-l="zt" class="i">建築設計</span></div>
         <h4>DKO</h4>
         <p data-l="en">Multi award-winning architects who approached Park Avenue with a sense of timeless elegance, inspired by the grand buildings of New York's Central Park.</p>
         <p data-l="ko">뉴욕 센트럴파크의 클래식 건축에서 영감을 받아 시대를 초월한 우아함으로 Park Avenue를 설계한 다수 수상 경력의 건축사무소입니다.</p>
-        <p data-l="zh">屡获殊荣的建筑事务所，以纽约中央公园周边经典建筑为灵感，为 Park Avenue 注入隽永优雅气质。</p>
+        <p data-l="zh">屡获殊荣的建筑事务所，以纽约中央公园周边经典建筑为灵感，为 Park Avenue 注入隽永优雅气质。</p><p data-l="zt">屢獲殊榮的建築事務所，以紐約中央公園周邊經典建築爲靈感，爲 Park Avenue 注入雋永優雅氣質。</p>
       </div>
       <div class="team">
-        <div class="role"><span data-l="en" class="i">Interiors</span><span data-l="ko" class="i">인테리어</span><span data-l="zh" class="i">室内设计</span></div>
+        <div class="role"><span data-l="en" class="i">Interiors</span><span data-l="ko" class="i">인테리어</span><span data-l="zh" class="i">室内设计</span><span data-l="zt" class="i">室內設計</span></div>
         <h4>David Hicks</h4>
         <p data-l="en">International design luminary bringing his award-winning signature style and impeccable taste to Park Avenue's interiors and terrace-style residences.</p>
         <p data-l="ko">국제적으로 인정받는 디자이너로, 수상 경력의 시그니처 스타일을 Park Avenue의 인테리어와 테라스형 주거에 담아냈습니다.</p>
-        <p data-l="zh">国际知名设计大师，将其屡获奖项的标志性风格与卓越品味融入 Park Avenue 的室内与露台式住宅。</p>
+        <p data-l="zh">国际知名设计大师，将其屡获奖项的标志性风格与卓越品味融入 Park Avenue 的室内与露台式住宅。</p><p data-l="zt">國際知名設計大師，將其屢獲獎項的標誌性風格與卓越品味融入 Park Avenue 的室內與露臺式住宅。</p>
       </div>
       <div class="team">
-        <div class="role"><span data-l="en" class="i">Landscape</span><span data-l="ko" class="i">조경</span><span data-l="zh" class="i">景观设计</span></div>
+        <div class="role"><span data-l="en" class="i">Landscape</span><span data-l="ko" class="i">조경</span><span data-l="zh" class="i">景观设计</span><span data-l="zt" class="i">景觀設計</span></div>
         <h4>Clouston Associates</h4>
         <p data-l="en">Award-winning landscape architects creating immersive outdoor environments, with work spanning Australia and the globe.</p>
         <p data-l="ko">호주와 전 세계에서 활동하며 몰입감 있는 외부 환경을 만들어 온 수상 경력의 조경 설계사입니다.</p>
-        <p data-l="zh">屡获殊荣的景观设计事务所，作品遍及澳洲与全球，擅长营造沉浸式户外环境。</p>
+        <p data-l="zh">屡获殊荣的景观设计事务所，作品遍及澳洲与全球，擅长营造沉浸式户外环境。</p><p data-l="zt">屢獲殊榮的景觀設計事務所，作品遍及澳洲與全球，擅長營造沉浸式戶外環境。</p>
       </div>
     </div>
   </div>
@@ -621,59 +625,59 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section style="background:var(--bg2)">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">FAQ</span><span data-l="ko" class="i">자주 묻는 질문</span><span data-l="zh" class="i">常见问题</span>
+      <span data-l="en" class="i">FAQ</span><span data-l="ko" class="i">자주 묻는 질문</span><span data-l="zh" class="i">常见问题</span><span data-l="zt" class="i">常見問題</span>
     </div>
     <h2 class="section-title" data-l="en">Good to <em>know</em></h2>
     <h2 class="section-title" data-l="ko">미리 알아두면 <em>좋은 것</em></h2>
-    <h2 class="section-title" data-l="zh"><em>值得了解</em>的信息</h2>
+    <h2 class="section-title" data-l="zh"><em>值得了解</em>的信息</h2><h2 class="section-title" data-l="zt"><em>值得了解</em>的信息</h2>
     <div class="faq-grid">
       <div class="faq">
         <div class="q" data-l="en">Where exactly is the project?</div>
         <div class="q" data-l="ko">프로젝트 위치가 정확히 어디인가요?</div>
-        <div class="q" data-l="zh">项目具体位置在哪里？</div>
+        <div class="q" data-l="zh">项目具体位置在哪里？</div><div class="q" data-l="zt">項目具體位置在哪裏？</div>
         <div class="a" data-l="en">St Leonards South, NSW 2065, spanning 26–50 Park Road, 27–47 Berry Road and 48–54 River Road. The local government area is Lane Cove Council.</div>
         <div class="a" data-l="ko">NSW 2065 세인트 레너즈 사우스로, 26–50 Park Road, 27–47 Berry Road, 48–54 River Road에 걸쳐 있습니다. 관할 지자체는 Lane Cove Council입니다.</div>
-        <div class="a" data-l="zh">位于 NSW 2065 圣伦纳兹南区，横跨 26–50 Park Road、27–47 Berry Road 及 48–54 River Road，所属地方政府为 Lane Cove Council。</div>
+        <div class="a" data-l="zh">位于 NSW 2065 圣伦纳兹南区，横跨 26–50 Park Road、27–47 Berry Road 及 48–54 River Road，所属地方政府为 Lane Cove Council。</div><div class="a" data-l="zt">位於 NSW 2065 聖倫納茲南區，橫跨 26–50 Park Road、27–47 Berry Road 及 48–54 River Road，所屬地方政府爲 Lane Cove Council。</div>
       </div>
       <div class="faq">
         <div class="q" data-l="en">What configurations are available?</div>
         <div class="q" data-l="ko">어떤 타입이 있나요?</div>
-        <div class="q" data-l="zh">有哪些户型？</div>
+        <div class="q" data-l="zh">有哪些户型？</div><div class="q" data-l="zt">有哪些戶型？</div>
         <div class="a" data-l="en">The collection spans studio, 1-, 2-, 3-, 4- and 5-bedroom residences, including terrace-style homes. Availability changes — please enquire for the current stock list.</div>
         <div class="a" data-l="ko">스튜디오부터 1·2·3·4·5베드룸까지 구성되며, 테라스형 주거도 포함됩니다. 재고는 수시로 변동되므로 현재 물량은 문의해 주세요.</div>
-        <div class="a" data-l="zh">涵盖开间及 1、2、3、4、5 房住宅，并包含露台式户型。房源随时变动，请来电咨询最新可售清单。</div>
+        <div class="a" data-l="zh">涵盖开间及 1、2、3、4、5 房住宅，并包含露台式户型。房源随时变动，请来电咨询最新可售清单。</div><div class="a" data-l="zt">涵蓋開間及 1、2、3、4、5 房住宅，幷包含露臺式戶型。房源隨時變動，請來電諮詢最新可售清單。</div>
       </div>
       <div class="faq">
         <div class="q" data-l="en">Is the building complete?</div>
         <div class="q" data-l="ko">건물은 완공되었나요?</div>
-        <div class="q" data-l="zh">楼盘是否已竣工？</div>
+        <div class="q" data-l="zh">楼盘是否已竣工？</div><div class="q" data-l="zt">樓盤是否已竣工？</div>
         <div class="a" data-l="en">Yes. Construction is complete and the residences are finished, so you can inspect the actual apartment rather than buying off the plan. Settlement and move-in timing can be arranged — please enquire.</div>
         <div class="a" data-l="ko">네. 공사가 완료되어 실물 세대를 직접 보고 확인하실 수 있습니다. 도면만 보고 구매하는 오프더플랜이 아닙니다. 결제 및 입주 일정은 문의해 주시면 안내해 드립니다.</div>
-        <div class="a" data-l="zh">是的。项目已竣工交付，可实地看房，而非凭图纸预购。交割与入住时间可另行安排，欢迎咨询。</div>
+        <div class="a" data-l="zh">是的。项目已竣工交付，可实地看房，而非凭图纸预购。交割与入住时间可另行安排，欢迎咨询。</div><div class="a" data-l="zt">是的。項目已竣工交付，可實地看房，而非憑圖紙預購。交割與入住時間可另行安排，歡迎諮詢。</div>
       </div>
       <div class="faq">
         <div class="q" data-l="en">Is there resident parking?</div>
         <div class="q" data-l="ko">주차는 어떻게 되나요?</div>
-        <div class="q" data-l="zh">停车配置如何？</div>
+        <div class="q" data-l="zh">停车配置如何？</div><div class="q" data-l="zt">停車配置如何？</div>
         <div class="a" data-l="en">Secure basement parking is provided, with 542 car spaces across the estate. Allocation varies by residence type.</div>
         <div class="a" data-l="ko">보안 지하 주차장이 제공되며 단지 전체 542면 규모입니다. 세대별 배정은 타입에 따라 다릅니다.</div>
-        <div class="a" data-l="zh">项目设有安全的地下停车场，全区共 542 个车位，具体配比因户型而异。</div>
+        <div class="a" data-l="zh">项目设有安全的地下停车场，全区共 542 个车位，具体配比因户型而异。</div><div class="a" data-l="zt">項目設有安全的地下停車場，全區共 542 個車位，具體配比因戶型而異。</div>
       </div>
       <div class="faq">
         <div class="q" data-l="en">Can overseas buyers purchase?</div>
         <div class="q" data-l="ko">해외 거주자도 매입할 수 있나요?</div>
-        <div class="q" data-l="zh">海外买家可以购买吗？</div>
+        <div class="q" data-l="zh">海外买家可以购买吗？</div><div class="q" data-l="zt">海外買家可以購買嗎？</div>
         <div class="a" data-l="en">Rules for non-resident purchasers of Australian residential property change from time to time and include FIRB approval and additional duties and surcharges. Please seek independent legal and tax advice for your circumstances.</div>
         <div class="a" data-l="ko">호주 주거용 부동산의 비거주자 매입 규정은 수시로 바뀌며, FIRB 승인과 추가 세금·부가세가 적용됩니다. 개인 상황에 맞는 법률·세무 자문을 반드시 받으시기 바랍니다.</div>
-        <div class="a" data-l="zh">澳洲住宅物业的非居民购买规定不时调整，涉及 FIRB 审批及额外印花税与附加费。请就自身情况寻求独立的法律与税务意见。</div>
+        <div class="a" data-l="zh">澳洲住宅物业的非居民购买规定不时调整，涉及 FIRB 审批及额外印花税与附加费。请就自身情况寻求独立的法律与税务意见。</div><div class="a" data-l="zt">澳洲住宅物業的非居民購買規定不時調整，涉及 FIRB 審批及額外印花稅與附加費。請就自身情況尋求獨立的法律與稅務意見。</div>
       </div>
       <div class="faq">
         <div class="q" data-l="en">Is there a display centre?</div>
         <div class="q" data-l="ko">전시관이 있나요?</div>
-        <div class="q" data-l="zh">是否设有展示中心？</div>
+        <div class="q" data-l="zh">是否设有展示中心？</div><div class="q" data-l="zt">是否設有展示中心？</div>
         <div class="a" data-l="en">The project display centre has operated at Shop LG03, 88 Christie Street, St Leonards. Opening hours can change, so please confirm before visiting.</div>
         <div class="a" data-l="ko">전시관은 Shop LG03, 88 Christie Street, St Leonards에서 운영되어 왔습니다. 운영 시간은 변경될 수 있으니 방문 전 확인해 주세요.</div>
-        <div class="a" data-l="zh">项目展示中心设于 Shop LG03, 88 Christie Street, St Leonards。开放时间可能变动，前往前请先确认。</div>
+        <div class="a" data-l="zh">项目展示中心设于 Shop LG03, 88 Christie Street, St Leonards。开放时间可能变动，前往前请先确认。</div><div class="a" data-l="zt">項目展示中心設於 Shop LG03, 88 Christie Street, St Leonards。開放時間可能變動，前往前請先確認。</div>
       </div>
     </div>
   </div>
@@ -683,42 +687,42 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 <section class="contact" id="contact">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-l="en" class="i">Enquire</span><span data-l="ko" class="i">문의</span><span data-l="zh" class="i">咨询</span>
+      <span data-l="en" class="i">Enquire</span><span data-l="ko" class="i">문의</span><span data-l="zh" class="i">咨询</span><span data-l="zt" class="i">諮詢</span>
     </div>
     <h2 class="section-title" data-l="en">Request <em>Information</em></h2>
     <h2 class="section-title" data-l="ko"><em>분양 문의</em>하기</h2>
-    <h2 class="section-title" data-l="zh"><em>咨询</em>详情</h2>
+    <h2 class="section-title" data-l="zh"><em>咨询</em>详情</h2><h2 class="section-title" data-l="zt"><em>諮詢</em>詳情</h2>
     <p class="contact-sub" data-l="en">The building is complete, so inspections of the actual residences can be arranged. For current availability, floorplans and pricing, please get in touch. Consultation available in English, Korean and Mandarin.</p>
     <p class="contact-sub" data-l="ko">건물이 완공되어 실제 세대 내부를 직접 보실 수 있습니다. 현재 재고, 평면도, 가격은 문의해 주시면 안내해 드립니다. 한국어·영어·중국어 상담 모두 가능합니다.</p>
-    <p class="contact-sub" data-l="zh">项目已竣工，可安排实地看房。如需了解当前房源、户型图与价格，欢迎与我联系。提供中文、英文及韩文咨询服务。</p>
+    <p class="contact-sub" data-l="zh">项目已竣工，可安排实地看房。如需了解当前房源、户型图与价格，欢迎与我联系。提供中文、英文及韩文咨询服务。</p><p class="contact-sub" data-l="zt">項目已竣工，可安排實地看房。如需瞭解當前房源、戶型圖與價格，歡迎與我聯繫。提供中文、英文及韓文諮詢服務。</p>
     <div class="contact-card">
       <div class="agent-name" data-l="en">Sunghoon Choi (Sunny)</div>
       <div class="agent-name" data-l="ko">최성훈</div>
-      <div class="agent-name" data-l="zh">Sunny</div>
+      <div class="agent-name" data-l="zh">Sunny</div><div class="agent-name" data-l="zt">Sunny</div>
       <div class="agent-role" data-l="en">Forise Group · Licensed Real Estate Agent</div>
       <div class="agent-role" data-l="ko">포라이즈 그룹 · 공인 부동산 중개사</div>
-      <div class="agent-role" data-l="zh">Forise Group · 持牌房地产中介</div>
+      <div class="agent-role" data-l="zh">Forise Group · 持牌房地产中介</div><div class="agent-role" data-l="zt">Forise Group · 持牌房地產中介</div>
       <div class="agent-line">
-        <label><span data-l="en" class="i">Mobile</span><span data-l="ko" class="i">휴대폰</span><span data-l="zh" class="i">手机</span></label>
+        <label><span data-l="en" class="i">Mobile</span><span data-l="ko" class="i">휴대폰</span><span data-l="zh" class="i">手机</span><span data-l="zt" class="i">手機</span></label>
         <a href="tel:0414824225">0414 824 225</a>
       </div>
       <div class="agent-line">
-        <label><span data-l="en" class="i">Email</span><span data-l="ko" class="i">이메일</span><span data-l="zh" class="i">邮箱</span></label>
+        <label><span data-l="en" class="i">Email</span><span data-l="ko" class="i">이메일</span><span data-l="zh" class="i">邮箱</span><span data-l="zt" class="i">郵箱</span></label>
         <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
       </div>
       <div class="agent-line">
-        <label><span data-l="en" class="i">Project</span><span data-l="ko" class="i">프로젝트</span><span data-l="zh" class="i">项目</span></label>
+        <label><span data-l="en" class="i">Project</span><span data-l="ko" class="i">프로젝트</span><span data-l="zh" class="i">项目</span><span data-l="zt" class="i">項目</span></label>
         <span>Park Road &amp; Berry Road, St Leonards NSW 2065</span>
       </div>
       <a class="contact-cta" href="mailto:sunghoon.choi@forisegroup.com.au?subject=Park%20Avenue%20Residences%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Park%20Avenue%20Residences%20at%20St%20Leonards.">
         <span data-l="en" class="i">Send an Enquiry</span>
         <span data-l="ko" class="i">문의 보내기 →</span>
-        <span data-l="zh" class="i">发送咨询 →</span>
+        <span data-l="zh" class="i">发送咨询 →</span><span data-l="zt" class="i">發送諮詢 →</span>
       </a>
     </div>
     <p class="disclaimer" data-l="en">This page has been prepared for marketing purposes only and is not an offer or contract. All images are artist's impressions; actual views and final finishes will differ and depend on factors including level, aspect and future surrounding development. Details including residence mix, completion timing and availability are indicative and subject to change without notice. Figures cited are drawn from developer and public sources current at the time of publication and should be independently verified. This page is not financial, legal or taxation advice — please obtain independent advice before making any decision. Developed by JQZ. Forise Group acts as an agent.</p>
     <p class="disclaimer" data-l="ko">본 페이지는 마케팅 목적으로만 제작되었으며 청약이나 계약을 구성하지 않습니다. 모든 이미지는 작가 상상도이며, 실제 조망과 최종 마감은 층·향·향후 주변 개발 등에 따라 달라집니다. 세대 구성, 완공 시기, 재고 등 세부 사항은 참고용이며 사전 통보 없이 변경될 수 있습니다. 인용된 수치는 게시 시점의 시행사 및 공개 자료를 기준으로 하며 별도 확인이 필요합니다. 본 페이지는 금융·법률·세무 자문이 아니므로, 결정 전 반드시 독립적인 전문가 자문을 받으시기 바랍니다. 시행 JQZ. 포라이즈 그룹은 에이전트로 활동합니다.</p>
-    <p class="disclaimer" data-l="zh">本页面仅为市场推广之用，不构成要约或合同。所有图像均为作家想象图；实际景观与最终饰面将有所不同，并取决于楼层、朝向及未来周边开发等因素。户型配比、竣工时间及房源等细节仅供参考，可能恕不另行通知而变更。文中数据引自发布时的开发商及公开资料，请自行核实。本页面不构成金融、法律或税务建议，决策前请寻求独立专业意见。开发商：JQZ。Forise Group 为代理方。</p>
+    <p class="disclaimer" data-l="zh">本页面仅为市场推广之用，不构成要约或合同。所有图像均为作家想象图；实际景观与最终饰面将有所不同，并取决于楼层、朝向及未来周边开发等因素。户型配比、竣工时间及房源等细节仅供参考，可能恕不另行通知而变更。文中数据引自发布时的开发商及公开资料，请自行核实。本页面不构成金融、法律或税务建议，决策前请寻求独立专业意见。开发商：JQZ。Forise Group 为代理方。</p><p class="disclaimer" data-l="zt">本頁面僅爲市場推廣之用，不構成要約或合同。所有圖像均爲作家想象圖；實際景觀與最終飾面將有所不同，並取決於樓層、朝向及未來周邊開發等因素。戶型配比、竣工時間及房源等細節僅供參考，可能恕不另行通知而變更。文中數據引自發布時的開發商及公開資料，請自行覈實。本頁面不構成金融、法律或稅務建議，決策前請尋求獨立專業意見。開發商：JQZ。Forise Group 爲代理方。</p>
   </div>
 </section>
 
@@ -738,9 +742,9 @@ const saved=localStorage.getItem('theme');
 if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
 
 function setLang(l){
-  document.body.classList.remove('lang-en','lang-ko','lang-zh');
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
   document.body.classList.add('lang-'+l);
-  document.documentElement.lang = l==='zh' ? 'zh-CN' : l;
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
   document.querySelectorAll('.lang-group button').forEach(function(b){
     b.classList.toggle('on', b.dataset.set===l);
   });
