@@ -203,9 +203,11 @@ footer{background:var(--bg2);border-top:1px solid var(--divider);padding:40px 60
 .fade-in.visible{opacity:1;transform:none}
 
 /* LANG */
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hero-cta .en-text{display:none}
 body.lang-ko .hero-cta .ko-text{display:inline}
 .hero-cta .ko-text{display:none}
@@ -236,15 +238,26 @@ body.lang-ko .hero-cta .ko-text{display:inline}
   .hero-meta{gap:24px}
   .contact-info{gap:20px}
 }
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--gold);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">NORWEST <span>/</span> VEUE</a>
   <div class="nav-actions">
-    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="btn-theme" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
   </div>
@@ -256,31 +269,31 @@ body.lang-ko .hero-cta .ko-text{display:inline}
   <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
   <div class="hero-badge" data-lang="en">NORWEST NSW 2153</div>
-  <div class="hero-badge" data-lang="ko">노스웨스트 NSW 2153</div>
+  <div class="hero-badge" data-lang="ko">노스웨스트 NSW 2153</div><div class="hero-badge" data-lang="zh">Norwest NSW 2153</div><div class="hero-badge" data-lang="zt">Norwest NSW 2153</div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-lang="en">The Orchards Norwest · Sekisui House</div>
-    <div class="hero-eyebrow" data-lang="ko">더 오차드 노스웨스트 · 세키스이 하우스</div>
+    <div class="hero-eyebrow" data-lang="ko">더 오차드 노스웨스트 · 세키스이 하우스</div><div class="hero-eyebrow" data-lang="zh">The Orchard Norwest · 积水住宅</div><div class="hero-eyebrow" data-lang="zt">The Orchard Norwest · 積水住宅</div>
     <h1 class="hero-title">
       <span data-lang="en">Where Nature<br>Meets <em>Refined</em><br>Modern Living</span>
-      <span data-lang="ko">자연과<br><em>세련된</em> 현대적<br>삶이 만나는 곳</span>
+      <span data-lang="ko">자연과<br><em>세련된</em> 현대적<br>삶이 만나는 곳</span><span data-lang="zh">自然与<br><em>精致</em>现代生活<br>交汇之处</span><span data-lang="zt">自然與<br><em>精緻</em>現代生活<br>交匯之處</span>
     </h1>
     <p class="hero-sub" data-lang="en">Norwest's Premier Masterplanned Apartment Community</p>
-    <p class="hero-sub" data-lang="ko">노스웨스트 프리미어 마스터플랜 아파트 커뮤니티</p>
+    <p class="hero-sub" data-lang="ko">노스웨스트 프리미어 마스터플랜 아파트 커뮤니티</p><p class="hero-sub" data-lang="zh">Norwest 首屈一指的总体规划公寓社区</p><p class="hero-sub" data-lang="zt">Norwest 首屈一指的總體規劃公寓社區</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <label data-lang="en">Total Homes</label><label data-lang="ko">총 세대수</label>
-        <span>1,300<small data-lang="en"> units</small><small data-lang="ko"> 세대</small></span>
+        <label data-lang="en">Total Homes</label><label data-lang="ko">총 세대수</label><label data-lang="zh">住宅总数</label><label data-lang="zt">住宅總數</label>
+        <span>1,300<small data-lang="en"> units</small><small data-lang="ko"> 세대</small><small data-lang="zh">户</small><small data-lang="zt">戶</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Development Area</label><label data-lang="ko">개발 면적</label>
+        <label data-lang="en">Development Area</label><label data-lang="ko">개발 면적</label><label data-lang="zh">开发面积</label><label data-lang="zt">開發面積</label>
         <span>8.1<small> ha</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Project Value</label><label data-lang="ko">프로젝트 가치</label>
-        <span>$1<small data-lang="en"> Billion</small><small data-lang="ko"> 십억</small></span>
+        <label data-lang="en">Project Value</label><label data-lang="ko">프로젝트 가치</label><label data-lang="zh">项目价值</label><label data-lang="zt">項目價值</label>
+        <span>$1<small data-lang="en"> Billion</small><small data-lang="ko"> 십억</small><small data-lang="zh">十亿</small><small data-lang="zt">十億</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Metro Station</label><label data-lang="ko">메트로역</label>
+        <label data-lang="en">Metro Station</label><label data-lang="ko">메트로역</label><label data-lang="zh">地铁站</label><label data-lang="zt">地鐵站</label>
         <span>600<small>m</small></span>
       </div>
     </div>
@@ -291,7 +304,7 @@ body.lang-ko .hero-cta .ko-text{display:inline}
     </a>
   </div>
   <div class="hero-scroll">
-    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span><span data-lang="zh">向下滚动</span><span data-lang="zt">向下滾動</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
@@ -305,27 +318,27 @@ body.lang-ko .hero-cta .ko-text{display:inline}
       <div class="about-floater">
         <div class="about-floater-num">2017</div>
         <div class="about-floater-label" data-lang="en">Project Commenced</div>
-        <div class="about-floater-label" data-lang="ko">프로젝트 시작</div>
+        <div class="about-floater-label" data-lang="ko">프로젝트 시작</div><div class="about-floater-label" data-lang="zh">项目启动</div><div class="about-floater-label" data-lang="zt">項目啓動</div>
       </div>
       <div class="about-visual-caption">
         <p data-lang="en">The Orchards Masterplan — Spurway Drive, Norwest</p>
-        <p data-lang="ko">더 오차드 마스터플랜 — 노스웨스트, 스퍼웨이 드라이브</p>
+        <p data-lang="ko">더 오차드 마스터플랜 — 노스웨스트, 스퍼웨이 드라이브</p><p data-lang="zh">The Orchard 总体规划 —— Norwest, Solent Circuit</p><p data-lang="zt">The Orchard 總體規劃 —— Norwest, Solent Circuit</p>
       </div>
     </div>
     <div class="about-right">
-      <div class="section-eyebrow"><span data-lang="en">About the Project</span><span data-lang="ko">프로젝트 소개</span></div>
+      <div class="section-eyebrow"><span data-lang="en">About the Project</span><span data-lang="ko">프로젝트 소개</span><span data-lang="zh">项目简介</span><span data-lang="zt">項目簡介</span></div>
       <h2 class="section-title">
         <span data-lang="en">The Orchards<br><em>Norwest</em></span>
-        <span data-lang="ko">오차드<br><em>노스웨스트</em></span>
+        <span data-lang="ko">오차드<br><em>노스웨스트</em></span><span data-lang="zh">Orchard<br><em>Norwest</em></span><span data-lang="zt">Orchard<br><em>Norwest</em></span>
       </h2>
       <p class="about-body" data-lang="en">The Orchards is a beautiful masterplanned community growing in the heart of Norwest. Inspired by nature and the rich history of Sydney's Hills District, Sekisui House introduces a community that balances modern luxury with organic living.<br><br>Comprising 1, 2, 3 and 4 bedroom apartments across five distinct stages, The Orchards offers a complete lifestyle — from vibrant streetscapes and landscaped parklands to resort-style amenities.</p>
-      <p class="about-body" data-lang="ko">더 오차드는 노스웨스트 중심부에 조성되는 아름다운 마스터플랜 커뮤니티입니다. 시드니 힐스 지구의 자연과 역사에서 영감을 받아, 현대적 럭셔리와 자연이 조화를 이루는 커뮤니티입니다.<br><br>5단계로 구성된 1~4베드룸 아파트로 이루어지며, 조경된 공원부터 리조트 스타일의 편의시설까지 완전한 라이프스타일을 제공합니다.</p>
+      <p class="about-body" data-lang="ko">더 오차드는 노스웨스트 중심부에 조성되는 아름다운 마스터플랜 커뮤니티입니다. 시드니 힐스 지구의 자연과 역사에서 영감을 받아, 현대적 럭셔리와 자연이 조화를 이루는 커뮤니티입니다.<br><br>5단계로 구성된 1~4베드룸 아파트로 이루어지며, 조경된 공원부터 리조트 스타일의 편의시설까지 완전한 라이프스타일을 제공합니다.</p><p class="about-body" data-lang="zh">The Orchard 是坐落于 Norwest 核心的精美总体规划社区。灵感取自悉尼 Hills 区的自然与历史，让现代奢华与自然和谐共存。<br><br>项目由五期 1 至 4 房公寓组成，从景观公园到度假式配套设施，呈现完整的生活方式。</p><p class="about-body" data-lang="zt">The Orchard 是坐落於 Norwest 核心的精美總體規劃社區。靈感取自悉尼 Hills 區的自然與歷史，讓現代奢華與自然和諧共存。<br><br>項目由五期 1 至 4 房公寓組成，從景觀公園到度假式配套設施，呈現完整的生活方式。</p>
       <div class="about-tags">
-        <span class="tag" data-lang="en">Masterplanned Community</span><span class="tag" data-lang="ko">마스터플랜 커뮤니티</span>
-        <span class="tag" data-lang="en">1–4 Bedroom Apartments</span><span class="tag" data-lang="ko">1~4베드룸 아파트</span>
-        <span class="tag" data-lang="en">1.4ha Linear Park</span><span class="tag" data-lang="ko">1.4ha 리니어 파크</span>
-        <span class="tag" data-lang="en">Metro Connected</span><span class="tag" data-lang="ko">메트로 연결</span>
-        <span class="tag" data-lang="en">Resort Amenities</span><span class="tag" data-lang="ko">리조트 편의시설</span>
+        <span class="tag" data-lang="en">Masterplanned Community</span><span class="tag" data-lang="ko">마스터플랜 커뮤니티</span><span class="tag" data-lang="zh">总体规划社区</span><span class="tag" data-lang="zt">總體規劃社區</span>
+        <span class="tag" data-lang="en">1–4 Bedroom Apartments</span><span class="tag" data-lang="ko">1~4베드룸 아파트</span><span class="tag" data-lang="zh">1 至 4 房公寓</span><span class="tag" data-lang="zt">1 至 4 房公寓</span>
+        <span class="tag" data-lang="en">1.4ha Linear Park</span><span class="tag" data-lang="ko">1.4ha 리니어 파크</span><span class="tag" data-lang="zh">1.4 公顷带状公园</span><span class="tag" data-lang="zt">1.4 公頃帶狀公園</span>
+        <span class="tag" data-lang="en">Metro Connected</span><span class="tag" data-lang="ko">메트로 연결</span><span class="tag" data-lang="zh">连通地铁</span><span class="tag" data-lang="zt">連通地鐵</span>
+        <span class="tag" data-lang="en">Resort Amenities</span><span class="tag" data-lang="ko">리조트 편의시설</span><span class="tag" data-lang="zh">度假式配套</span><span class="tag" data-lang="zt">度假式配套</span>
       </div>
     </div>
   </div>
@@ -335,10 +348,10 @@ body.lang-ko .hero-cta .ko-text{display:inline}
 <section class="stages-section" id="stages">
   <div class="stages-wrap">
     <div class="fade-in">
-      <div class="section-eyebrow"><span data-lang="en">Development Stages</span><span data-lang="ko">개발 단계</span></div>
+      <div class="section-eyebrow"><span data-lang="en">Development Stages</span><span data-lang="ko">개발 단계</span><span data-lang="zh">开发分期</span><span data-lang="zt">開發分期</span></div>
       <h2 class="section-title">
         <span data-lang="en">A Community Built<br><em>Over Time</em></span>
-        <span data-lang="ko">시간을 거쳐<br><em>완성되는</em> 커뮤니티</span>
+        <span data-lang="ko">시간을 거쳐<br><em>완성되는</em> 커뮤니티</span><span data-lang="zh">历经时间<br><em>渐次成形</em>的社区</span><span data-lang="zt">歷經時間<br><em>漸次成形</em>的社區</span>
       </h2>
     </div>
     <div class="stages-grid fade-in">
@@ -346,41 +359,41 @@ body.lang-ko .hero-cta .ko-text{display:inline}
         <div class="stage-num">01</div>
         <div class="stage-name">Imperial</div>
         <div class="stage-status" data-lang="en">✓ Completed · Sold Out</div>
-        <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div>
+        <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div><div class="stage-status" data-lang="zh">✓ 已竣工 · 售罄</div><div class="stage-status" data-lang="zt">✓ 已竣工 · 售罄</div>
         <div class="stage-info" data-lang="en">Completed 2019. The first stage established the benchmark for luxury apartment living at The Orchards.</div>
-        <div class="stage-info" data-lang="ko">2019년 완공. 더 오차드의 럭셔리 아파트 기준을 세운 첫 번째 단계.</div>
+        <div class="stage-info" data-lang="ko">2019년 완공. 더 오차드의 럭셔리 아파트 기준을 세운 첫 번째 단계.</div><div class="stage-info" data-lang="zh">2019 年竣工。确立 The Orchard 豪华公寓标准的首个分期。</div><div class="stage-info" data-lang="zt">2019 年竣工。確立 The Orchard 豪華公寓標準的首個分期。</div>
       </div>
       <div class="stage-card complete">
         <div class="stage-num">02</div>
         <div class="stage-name">Lumia</div>
         <div class="stage-status" data-lang="en">✓ Completed · Sold Out</div>
-        <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div>
+        <div class="stage-status" data-lang="ko">✓ 완공 · 완판</div><div class="stage-status" data-lang="zh">✓ 已竣工 · 售罄</div><div class="stage-status" data-lang="zt">✓ 已竣工 · 售罄</div>
         <div class="stage-info" data-lang="en">Completed 2022. Building on the success of Imperial, Lumia further expanded the community.</div>
-        <div class="stage-info" data-lang="ko">2022년 완공. 임페리얼의 성공을 이어 커뮤니티를 더욱 확장했습니다.</div>
+        <div class="stage-info" data-lang="ko">2022년 완공. 임페리얼의 성공을 이어 커뮤니티를 더욱 확장했습니다.</div><div class="stage-info" data-lang="zh">2022 年竣工。延续 Imperial 的成功，进一步拓展社区规模。</div><div class="stage-info" data-lang="zt">2022 年竣工。延續 Imperial 的成功，進一步拓展社區規模。</div>
       </div>
       <div class="stage-card active">
         <div class="stage-num">03</div>
         <div class="stage-name">Veue Central</div>
         <div class="stage-status" data-lang="en">⬤ Under Construction</div>
-        <div class="stage-status" data-lang="ko">⬤ 공사중</div>
+        <div class="stage-status" data-lang="ko">⬤ 공사중</div><div class="stage-status" data-lang="zh">⬤ 施工中</div><div class="stage-status" data-lang="zt">⬤ 施工中</div>
         <div class="stage-info" data-lang="en">210 apartments, Levels 1–22 (Tower A & B). Construction commenced 2023, completion expected 2026.</div>
-        <div class="stage-info" data-lang="ko">타워 A&B, 1~22층 210세대. 2023년 착공, 2026년 완공 예정.</div>
+        <div class="stage-info" data-lang="ko">타워 A&B, 1~22층 210세대. 2023년 착공, 2026년 완공 예정.</div><div class="stage-info" data-lang="zh">A、B 座，1 至 22 层共 210 户。2023 年动工，预计 2026 年竣工。</div><div class="stage-info" data-lang="zt">A、B 座，1 至 22 層共 210 戶。2023 年動工，預計 2026 年竣工。</div>
       </div>
       <div class="stage-card active">
         <div class="stage-num">04</div>
         <div class="stage-name">Veue Parkside</div>
         <div class="stage-status" data-lang="en">⬤ Now Selling</div>
-        <div class="stage-status" data-lang="ko">⬤ 분양중</div>
+        <div class="stage-status" data-lang="ko">⬤ 분양중</div><div class="stage-status" data-lang="zh">⬤ 发售中</div><div class="stage-status" data-lang="zt">⬤ 發售中</div>
         <div class="stage-info" data-lang="en">Building E & F. 1, 2 and 3 bedroom apartments with park-side outlooks and premium finishes.</div>
-        <div class="stage-info" data-lang="ko">빌딩 E&F. 공원 전망의 1~3베드룸 아파트. 프리미엄 마감재 적용.</div>
+        <div class="stage-info" data-lang="ko">빌딩 E&F. 공원 전망의 1~3베드룸 아파트. 프리미엄 마감재 적용.</div><div class="stage-info" data-lang="zh">E、F 栋。可享公园景观的 1 至 3 房公寓，采用高端饰面。</div><div class="stage-info" data-lang="zt">E、F 棟。可享公園景觀的 1 至 3 房公寓，採用高端飾面。</div>
       </div>
       <div class="stage-card upcoming">
         <div class="stage-num">05</div>
         <div class="stage-name">Veue Grand</div>
         <div class="stage-status" data-lang="en">★ Latest Release</div>
-        <div class="stage-status" data-lang="ko">★ 최신 분양</div>
+        <div class="stage-status" data-lang="ko">★ 최신 분양</div><div class="stage-status" data-lang="zh">★ 最新发售</div><div class="stage-status" data-lang="zt">★ 最新發售</div>
         <div class="stage-info" data-lang="en">Newest & most prestigious stage. Launched March 2025. Grand scale apartments at 104 Fairway Drive.</div>
-        <div class="stage-info" data-lang="ko">최신, 최고급 단계. 2025년 3월 론칭. 페어웨이 드라이브 104번지.</div>
+        <div class="stage-info" data-lang="ko">최신, 최고급 단계. 2025년 3월 론칭. 페어웨이 드라이브 104번지.</div><div class="stage-info" data-lang="zh">最新、最高端的分期。2025 年 3 月发布。Fairway Drive 104 号。</div><div class="stage-info" data-lang="zt">最新、最高端的分期。2025 年 3 月發佈。Fairway Drive 104 號。</div>
       </div>
     </div>
   </div>
@@ -392,9 +405,9 @@ body.lang-ko .hero-cta .ko-text{display:inline}
   <div class="img-band-overlay"></div>
   <div class="img-band-caption">
     <h3 data-lang="en">Veue Grand</h3>
-    <h3 data-lang="ko">뷰에 그랜드</h3>
+    <h3 data-lang="ko">뷰에 그랜드</h3><h3 data-lang="zh">Veue Grand</h3><h3 data-lang="zt">Veue Grand</h3>
     <p data-lang="en">Stage 5 · 104 Fairway Drive, Norwest · Artist Impression</p>
-    <p data-lang="ko">5단계 · 노스웨스트 페어웨이 드라이브 104번지 · 조감도</p>
+    <p data-lang="ko">5단계 · 노스웨스트 페어웨이 드라이브 104번지 · 조감도</p><p data-lang="zh">第五期 · Norwest Fairway Drive 104 号 · 效果图</p><p data-lang="zt">第五期 · Norwest Fairway Drive 104 號 · 效果圖</p>
   </div>
 </div>
 
@@ -402,31 +415,31 @@ body.lang-ko .hero-cta .ko-text{display:inline}
 <section class="interiors-section" id="interiors">
   <div class="interiors-wrap fade-in">
     <div class="interiors-intro">
-      <div class="section-eyebrow"><span data-lang="en">Interior Finishes</span><span data-lang="ko">인테리어 마감</span></div>
+      <div class="section-eyebrow"><span data-lang="en">Interior Finishes</span><span data-lang="ko">인테리어 마감</span><span data-lang="zh">室内饰面</span><span data-lang="zt">室內飾面</span></div>
       <h2 class="section-title">
         <span data-lang="en">Two Distinctive<br><em>Colour Schemes</em></span>
-        <span data-lang="ko">두 가지 독창적인<br><em>컬러 스킴</em></span>
+        <span data-lang="ko">두 가지 독창적인<br><em>컬러 스킴</em></span><span data-lang="zh">两款独到的<br><em>配色方案</em></span><span data-lang="zt">兩款獨到的<br><em>配色方案</em></span>
       </h2>
       <p class="section-subtitle" data-lang="en">Each apartment at The Orchards offers a choice of two expertly curated interior palettes — Dune and Grove — designed to complement the natural surroundings with timeless elegance.</p>
-      <p class="section-subtitle" data-lang="ko">더 오차드의 모든 아파트는 던(Dune)과 그로브(Grove), 두 가지 정교하게 큐레이션된 인테리어 팔레트를 선택할 수 있습니다. 자연 환경을 보완하는 시간을 초월한 우아함으로 설계되었습니다.</p>
+      <p class="section-subtitle" data-lang="ko">더 오차드의 모든 아파트는 던(Dune)과 그로브(Grove), 두 가지 정교하게 큐레이션된 인테리어 팔레트를 선택할 수 있습니다. 자연 환경을 보완하는 시간을 초월한 우아함으로 설계되었습니다.</p><p class="section-subtitle" data-lang="zh">The Orchard 的每一户公寓均可于 Dune 与 Grove 两款精心策划的室内配色中选择，以隽永优雅呼应周边自然环境。</p><p class="section-subtitle" data-lang="zt">The Orchard 的每一戶公寓均可於 Dune 與 Grove 兩款精心策劃的室內配色中選擇，以雋永優雅呼應周邊自然環境。</p>
     </div>
     <div class="interiors-grid">
       <div class="interior-card">
         <img src="assets/norwest-veue/interior-dune.jpg" alt="Dune Colour Scheme — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">Dune — At First Light</h4>
-          <h4 data-lang="ko">던 — 새벽빛의 밝음</h4>
+          <h4 data-lang="ko">던 — 새벽빛의 밝음</h4><h4 data-lang="zh">Dune —— 晨光之明亮</h4><h4 data-lang="zt">Dune —— 晨光之明亮</h4>
           <p data-lang="en">Light timber · Stone benchtops · Soft tones · Artist Impression</p>
-          <p data-lang="ko">밝은 목재 · 스톤 벤치탑 · 소프트 톤 · 조감도</p>
+          <p data-lang="ko">밝은 목재 · 스톤 벤치탑 · 소프트 톤 · 조감도</p><p data-lang="zh">浅色木材 · 石材台面 · 柔和色调 · 效果图</p><p data-lang="zt">淺色木材 · 石材檯面 · 柔和色調 · 效果圖</p>
         </div>
       </div>
       <div class="interior-card">
         <img src="assets/norwest-veue/interior-grove.jpg" alt="Grove Colour Scheme — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">Grove — In Afterglow</h4>
-          <h4 data-lang="ko">그로브 — 황혼의 온기</h4>
+          <h4 data-lang="ko">그로브 — 황혼의 온기</h4><h4 data-lang="zh">Grove —— 暮色之温润</h4><h4 data-lang="zt">Grove —— 暮色之溫潤</h4>
           <p data-lang="en">Dark wenge joinery · Champagne floors · Warm accents · Artist Impression</p>
-          <p data-lang="ko">다크 웬지 조이너리 · 샴페인 바닥 · 따뜻한 포인트 · 조감도</p>
+          <p data-lang="ko">다크 웬지 조이너리 · 샴페인 바닥 · 따뜻한 포인트 · 조감도</p><p data-lang="zh">深色胡桃木木作 · 香槟色地板 · 温暖点缀 · 效果图</p><p data-lang="zt">深色胡桃木木作 · 香檳色地板 · 溫暖點綴 · 效果圖</p>
         </div>
       </div>
     </div>
@@ -438,64 +451,64 @@ body.lang-ko .hero-cta .ko-text{display:inline}
   <div class="amenities-wrap">
     <div class="amenities-intro fade-in">
       <div>
-        <div class="section-eyebrow"><span data-lang="en">Community Amenities</span><span data-lang="ko">커뮤니티 편의시설</span></div>
+        <div class="section-eyebrow"><span data-lang="en">Community Amenities</span><span data-lang="ko">커뮤니티 편의시설</span><span data-lang="zh">社区配套</span><span data-lang="zt">社區配套</span></div>
         <h2 class="section-title">
           <span data-lang="en">A Life Beyond<br><em>the Apartment</em></span>
-          <span data-lang="ko">아파트를 넘어선<br><em>더 넓은 삶</em></span>
+          <span data-lang="ko">아파트를 넘어선<br><em>더 넓은 삶</em></span><span data-lang="zh">超越公寓的<br><em>广阔生活</em></span><span data-lang="zt">超越公寓的<br><em>廣闊生活</em></span>
         </h2>
       </div>
       <div>
         <p class="section-subtitle" data-lang="en">The Orchards offers unrivalled access to the best things in life — from connection and convenience to abundant green spaces. Every amenity has been designed to bring the community together.</p>
-        <p class="section-subtitle" data-lang="ko">더 오차드는 연결성, 편의성, 풍부한 녹지 공간까지 삶의 최고를 누릴 수 있는 환경을 제공합니다. 모든 편의시설은 커뮤니티를 하나로 이어주도록 설계되었습니다.</p>
+        <p class="section-subtitle" data-lang="ko">더 오차드는 연결성, 편의성, 풍부한 녹지 공간까지 삶의 최고를 누릴 수 있는 환경을 제공합니다. 모든 편의시설은 커뮤니티를 하나로 이어주도록 설계되었습니다.</p><p class="section-subtitle" data-lang="zh">The Orchard 提供兼具交通、便利与丰沛绿意的优质生活环境。每一项配套皆以凝聚社区为设计初衷。</p><p class="section-subtitle" data-lang="zt">The Orchard 提供兼具交通、便利與豐沛綠意的優質生活環境。每一項配套皆以凝聚社區爲設計初衷。</p>
       </div>
     </div>
     <div class="amenities-grid fade-in">
       <div class="amenity-card">
         <div class="amenity-icon">🏊</div>
         <div class="amenity-name" data-lang="en">Outdoor Lagoon Pool</div>
-        <div class="amenity-name" data-lang="ko">야외 라군 풀</div>
+        <div class="amenity-name" data-lang="ko">야외 라군 풀</div><div class="amenity-name" data-lang="zh">户外泻湖泳池</div><div class="amenity-name" data-lang="zt">戶外瀉湖泳池</div>
         <div class="amenity-desc" data-lang="en">A cool oasis in summer, the lagoon pool makes the most of the area's natural assets with resort-quality swimming.</div>
-        <div class="amenity-desc" data-lang="ko">여름철 시원한 오아시스. 리조트 수준의 라군 풀로 자연의 매력을 극대화했습니다.</div>
+        <div class="amenity-desc" data-lang="ko">여름철 시원한 오아시스. 리조트 수준의 라군 풀로 자연의 매력을 극대화했습니다.</div><div class="amenity-desc" data-lang="zh">夏日的清凉绿洲。度假级泻湖泳池将自然魅力发挥至极致。</div><div class="amenity-desc" data-lang="zt">夏日的清涼綠洲。度假級瀉湖泳池將自然魅力發揮至極致。</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🎬</div>
         <div class="amenity-name" data-lang="en">Outdoor Cinema</div>
-        <div class="amenity-name" data-lang="ko">야외 시네마</div>
+        <div class="amenity-name" data-lang="ko">야외 시네마</div><div class="amenity-name" data-lang="zh">露天影院</div><div class="amenity-name" data-lang="zt">露天影院</div>
         <div class="amenity-desc" data-lang="en">Enjoy your favourite movie under the stars in The Orchards' high-end outdoor cinema — open year-round.</div>
-        <div class="amenity-desc" data-lang="ko">별 아래에서 좋아하는 영화를 감상하세요. 연중 이용 가능한 프리미엄 야외 시네마.</div>
+        <div class="amenity-desc" data-lang="ko">별 아래에서 좋아하는 영화를 감상하세요. 연중 이용 가능한 프리미엄 야외 시네마.</div><div class="amenity-desc" data-lang="zh">在星空下欣赏喜爱的电影。全年开放的高端露天影院。</div><div class="amenity-desc" data-lang="zt">在星空下欣賞喜愛的電影。全年開放的高端露天影院。</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🌿</div>
         <div class="amenity-name" data-lang="en">1.4ha Parklands</div>
-        <div class="amenity-name" data-lang="ko">1.4ha 공원</div>
+        <div class="amenity-name" data-lang="ko">1.4ha 공원</div><div class="amenity-name" data-lang="zh">1.4 公顷公园</div><div class="amenity-name" data-lang="zt">1.4 公頃公園</div>
         <div class="amenity-desc" data-lang="en">Publicly accessible linear park with retention of significant trees. Walk, ride, or simply unwind in nature.</div>
-        <div class="amenity-desc" data-lang="ko">기존 수목을 보존한 공개 리니어 파크. 산책, 자전거, 휴식 등 다양한 활동이 가능합니다.</div>
+        <div class="amenity-desc" data-lang="ko">기존 수목을 보존한 공개 리니어 파크. 산책, 자전거, 휴식 등 다양한 활동이 가능합니다.</div><div class="amenity-desc" data-lang="zh">保留原生树木的开放式带状公园。可散步、骑行、休憩，用途多样。</div><div class="amenity-desc" data-lang="zt">保留原生樹木的開放式帶狀公園。可散步、騎行、休憩，用途多樣。</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🏋️</div>
         <div class="amenity-name" data-lang="en">Community Centre</div>
-        <div class="amenity-name" data-lang="ko">커뮤니티 센터</div>
+        <div class="amenity-name" data-lang="ko">커뮤니티 센터</div><div class="amenity-name" data-lang="zh">社区中心</div><div class="amenity-name" data-lang="zt">社區中心</div>
         <div class="amenity-desc" data-lang="en">Complete with gym, indoor heated swimming pool, spa, and function centre for residents year-round.</div>
-        <div class="amenity-desc" data-lang="ko">피트니스 센터, 실내 온수 수영장, 스파, 행사장을 갖춘 종합 커뮤니티 시설.</div>
+        <div class="amenity-desc" data-lang="ko">피트니스 센터, 실내 온수 수영장, 스파, 행사장을 갖춘 종합 커뮤니티 시설.</div><div class="amenity-desc" data-lang="zh">设有健身中心、室内恒温泳池、水疗与活动场地的综合社区设施。</div><div class="amenity-desc" data-lang="zt">設有健身中心、室內恆溫泳池、水療與活動場地的綜合社區設施。</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🥩</div>
         <div class="amenity-name" data-lang="en">BBQ & Entertaining</div>
-        <div class="amenity-name" data-lang="ko">BBQ & 엔터테이닝</div>
+        <div class="amenity-name" data-lang="ko">BBQ & 엔터테이닝</div><div class="amenity-name" data-lang="zh">烧烤与聚会</div><div class="amenity-name" data-lang="zt">燒烤與聚會</div>
         <div class="amenity-desc" data-lang="en">With a selection of outdoor spaces to entertain in, getting together with friends and family has never been easier.</div>
-        <div class="amenity-desc" data-lang="ko">다양한 야외 공간에서 가족, 친구들과의 모임을 언제든 즐길 수 있습니다.</div>
+        <div class="amenity-desc" data-lang="ko">다양한 야외 공간에서 가족, 친구들과의 모임을 언제든 즐길 수 있습니다.</div><div class="amenity-desc" data-lang="zh">多处户外空间，随时享受与亲友相聚的时光。</div><div class="amenity-desc" data-lang="zt">多處戶外空間，隨時享受與親友相聚的時光。</div>
         <div class="amenity-divider"></div>
       </div>
       <div class="amenity-card">
         <div class="amenity-icon">🚶</div>
         <div class="amenity-name" data-lang="en">Walking Trails</div>
-        <div class="amenity-name" data-lang="ko">워킹 트레일</div>
+        <div class="amenity-name" data-lang="ko">워킹 트레일</div><div class="amenity-name" data-lang="zh">步道</div><div class="amenity-name" data-lang="zt">步道</div>
         <div class="amenity-desc" data-lang="en">Explore the path network while staying connected to the community. Nature right at your doorstep.</div>
-        <div class="amenity-desc" data-lang="ko">커뮤니티와 연결된 산책로 네트워크를 탐험하세요. 바로 앞에 있는 자연을 즐길 수 있습니다.</div>
+        <div class="amenity-desc" data-lang="ko">커뮤니티와 연결된 산책로 네트워크를 탐험하세요. 바로 앞에 있는 자연을 즐길 수 있습니다.</div><div class="amenity-desc" data-lang="zh">探索连通社区的步道网络，尽享近在咫尺的自然。</div><div class="amenity-desc" data-lang="zt">探索連通社區的步道網絡，盡享近在咫尺的自然。</div>
         <div class="amenity-divider"></div>
       </div>
     </div>
@@ -505,50 +518,50 @@ body.lang-ko .hero-cta .ko-text{display:inline}
 <!-- LOCATION -->
 <section class="location-section" id="location">
   <div class="location-wrap fade-in">
-    <div class="section-eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
-    <h2 class="section-title"><span data-lang="en">Connected to <em>Everything</em></span><span data-lang="ko"><em>모든 것</em>이 가까운 위치</span></h2>
+    <div class="section-eyebrow"><span data-lang="en">Location & Connectivity</span><span data-lang="ko">위치 & 교통</span><span data-lang="zh">位置与交通</span><span data-lang="zt">位置與交通</span></div>
+    <h2 class="section-title"><span data-lang="en">Connected to <em>Everything</em></span><span data-lang="ko"><em>모든 것</em>이 가까운 위치</span><span data-lang="zh"><em>一切</em>皆在咫尺</span><span data-lang="zt"><em>一切</em>皆在咫尺</span></h2>
     <p class="section-subtitle" data-lang="en">9 Spurway Drive, Norwest NSW 2153 — at the heart of one of Sydney's fastest-growing business and lifestyle precincts. Norwest Metro Station is just 600 metres away.</p>
-    <p class="section-subtitle" data-lang="ko">노스웨스트 NSW 2153, 스퍼웨이 드라이브 9번지 — 시드니에서 가장 빠르게 성장하는 지구의 중심부. 노스웨스트 메트로역까지 단 600m.</p>
+    <p class="section-subtitle" data-lang="ko">노스웨스트 NSW 2153, 스퍼웨이 드라이브 9번지 — 시드니에서 가장 빠르게 성장하는 지구의 중심부. 노스웨스트 메트로역까지 단 600m.</p><p class="section-subtitle" data-lang="zh">Norwest NSW 2153，Solent Circuit 9 号 —— 悉尼增长最快区域的核心地带。距 Norwest 地铁站仅 600 米。</p><p class="section-subtitle" data-lang="zt">Norwest NSW 2153，Solent Circuit 9 號 —— 悉尼增長最快區域的核心地帶。距 Norwest 地鐵站僅 600 米。</p>
     <div class="location-grid">
       <div class="location-card">
         <div class="location-dist">600<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Metro Station</div><div class="location-name" data-lang="ko">노스웨스트 메트로역</div>
-        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Metro Station</div><div class="location-name" data-lang="ko">노스웨스트 메트로역</div><div class="location-name" data-lang="zh">Norwest 地铁站</div><div class="location-name" data-lang="zt">Norwest 地鐵站</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div><div class="location-mode" data-lang="zh">步行</div><div class="location-mode" data-lang="zt">步行</div>
       </div>
       <div class="location-card">
         <div class="location-dist">200<small>m</small></div>
-        <div class="location-name" data-lang="en">Lakeview Private Hospital</div><div class="location-name" data-lang="ko">레이크뷰 사립병원</div>
-        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Lakeview Private Hospital</div><div class="location-name" data-lang="ko">레이크뷰 사립병원</div><div class="location-name" data-lang="zh">Lakeview 私立医院</div><div class="location-name" data-lang="zt">Lakeview 私立醫院</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div><div class="location-mode" data-lang="zh">步行</div><div class="location-mode" data-lang="zt">步行</div>
       </div>
       <div class="location-card">
         <div class="location-dist">500<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Business Park</div><div class="location-name" data-lang="ko">노스웨스트 비즈니스파크</div>
-        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Business Park</div><div class="location-name" data-lang="ko">노스웨스트 비즈니스파크</div><div class="location-name" data-lang="zh">Norwest 商务园区</div><div class="location-name" data-lang="zt">Norwest 商務園區</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div><div class="location-mode" data-lang="zh">步行</div><div class="location-mode" data-lang="zt">步行</div>
       </div>
       <div class="location-card">
         <div class="location-dist">400<small>m</small></div>
-        <div class="location-name" data-lang="en">Norwest Marketown</div><div class="location-name" data-lang="ko">노스웨스트 마켓타운</div>
-        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+        <div class="location-name" data-lang="en">Norwest Marketown</div><div class="location-name" data-lang="ko">노스웨스트 마켓타운</div><div class="location-name" data-lang="zh">Norwest Marketown</div><div class="location-name" data-lang="zt">Norwest Marketown</div>
+        <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div><div class="location-mode" data-lang="zh">步行</div><div class="location-mode" data-lang="zt">步行</div>
       </div>
       <div class="location-card">
-        <div class="location-dist">10<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Castle Towers</div><div class="location-name" data-lang="ko">캐슬 타워스</div>
-        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+        <div class="location-dist">10<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+        <div class="location-name" data-lang="en">Castle Towers</div><div class="location-name" data-lang="ko">캐슬 타워스</div><div class="location-name" data-lang="zh">Castle Towers</div><div class="location-name" data-lang="zt">Castle Towers</div>
+        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div><div class="location-mode" data-lang="zh">驾车</div><div class="location-mode" data-lang="zt">駕車</div>
       </div>
       <div class="location-card">
-        <div class="location-dist">25<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Chatswood</div><div class="location-name" data-lang="ko">채츠우드</div>
-        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div>
+        <div class="location-dist">25<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+        <div class="location-name" data-lang="en">Chatswood</div><div class="location-name" data-lang="ko">채츠우드</div><div class="location-name" data-lang="zh">Chatswood</div><div class="location-name" data-lang="zt">Chatswood</div>
+        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div><div class="location-mode" data-lang="zh">地铁</div><div class="location-mode" data-lang="zt">地鐵</div>
       </div>
       <div class="location-card">
-        <div class="location-dist">48<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div>
-        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div>
+        <div class="location-dist">48<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+        <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div><div class="location-name" data-lang="zh">悉尼 CBD</div><div class="location-name" data-lang="zt">悉尼 CBD</div>
+        <div class="location-mode" data-lang="en">Metro</div><div class="location-mode" data-lang="ko">메트로</div><div class="location-mode" data-lang="zh">地铁</div><div class="location-mode" data-lang="zt">地鐵</div>
       </div>
       <div class="location-card">
-        <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-        <div class="location-name" data-lang="en">Castle Hill Country Club</div><div class="location-name" data-lang="ko">캐슬힐 컨트리클럽</div>
-        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div>
+        <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+        <div class="location-name" data-lang="en">Castle Hill Country Club</div><div class="location-name" data-lang="ko">캐슬힐 컨트리클럽</div><div class="location-name" data-lang="zh">Castle Hill 乡村俱乐部</div><div class="location-name" data-lang="zt">Castle Hill 鄉村俱樂部</div>
+        <div class="location-mode" data-lang="en">By car</div><div class="location-mode" data-lang="ko">차량</div><div class="location-mode" data-lang="zh">驾车</div><div class="location-mode" data-lang="zt">駕車</div>
       </div>
     </div>
   </div>
@@ -556,7 +569,7 @@ body.lang-ko .hero-cta .ko-text{display:inline}
 
 <!-- MASTERPLAN BAND -->
 <div class="masterplan-band fade-in">
-  <div class="masterplan-band-label"><span data-lang="en">The Orchards — Site Masterplan</span><span data-lang="ko">더 오차드 — 단지 마스터플랜</span></div>
+  <div class="masterplan-band-label"><span data-lang="en">The Orchards — Site Masterplan</span><span data-lang="ko">더 오차드 — 단지 마스터플랜</span><span data-lang="zh">The Orchard —— 小区总体规划</span><span data-lang="zt">The Orchard —— 小區總體規劃</span></div>
   <img src="assets/norwest-veue/masterplan.jpg" alt="The Orchards Norwest Masterplan" loading="lazy">
 </div>
 
@@ -565,47 +578,47 @@ body.lang-ko .hero-cta .ko-text{display:inline}
   <div class="stats-wrap">
     <div class="stats-header fade-in">
       <div>
-        <div class="section-eyebrow"><span data-lang="en">Why Norwest</span><span data-lang="ko">왜 노스웨스트인가</span></div>
+        <div class="section-eyebrow"><span data-lang="en">Why Norwest</span><span data-lang="ko">왜 노스웨스트인가</span><span data-lang="zh">为何选择 Norwest</span><span data-lang="zt">爲何選擇 Norwest</span></div>
         <h2 class="section-title">
           <span data-lang="en">A Suburb of<br><em>High Achievers</em></span>
-          <span data-lang="ko">높은 성취를 이룬<br><em>사람들의 지역</em></span>
+          <span data-lang="ko">높은 성취를 이룬<br><em>사람들의 지역</em></span><span data-lang="zh">高成就<br><em>人群聚集之区</em></span><span data-lang="zt">高成就<br><em>人羣聚集之區</em></span>
         </h2>
       </div>
       <div>
         <p class="section-subtitle" data-lang="en">Norwest consistently attracts Sydney's most educated and high-earning residents. The suburb's demographics reflect a thriving professional community driven by proximity to major business parks, hospitals, and educational institutions.</p>
-        <p class="section-subtitle" data-lang="ko">노스웨스트는 시드니에서 가장 교육 수준이 높고 소득이 높은 주민들을 지속적으로 유치하고 있습니다. 주요 비즈니스파크, 병원, 교육기관과의 근접성으로 번영하는 전문직 커뮤니티가 형성되어 있습니다.</p>
+        <p class="section-subtitle" data-lang="ko">노스웨스트는 시드니에서 가장 교육 수준이 높고 소득이 높은 주민들을 지속적으로 유치하고 있습니다. 주요 비즈니스파크, 병원, 교육기관과의 근접성으로 번영하는 전문직 커뮤니티가 형성되어 있습니다.</p><p class="section-subtitle" data-lang="zh">Norwest 持续吸引悉尼教育程度与收入水平最高的居民。毗邻主要商务园区、医院与教育机构，形成蓬勃发展的专业人士社区。</p><p class="section-subtitle" data-lang="zt">Norwest 持續吸引悉尼教育程度與收入水平最高的居民。毗鄰主要商務園區、醫院與教育機構，形成蓬勃發展的專業人士社區。</p>
       </div>
     </div>
     <div class="stats-grid fade-in">
       <div class="stat-card">
         <div class="stat-num">$2,207</div>
-        <div class="stat-label" data-lang="en">Median Weekly Household Income</div><div class="stat-label" data-lang="ko">주당 중간 가구 소득</div>
-        <div class="stat-sub" data-lang="en">2021 Census · Norwest suburb</div><div class="stat-sub" data-lang="ko">2021년 인구조사 · 노스웨스트</div>
+        <div class="stat-label" data-lang="en">Median Weekly Household Income</div><div class="stat-label" data-lang="ko">주당 중간 가구 소득</div><div class="stat-label" data-lang="zh">家庭周中位收入</div><div class="stat-label" data-lang="zt">家庭週中位收入</div>
+        <div class="stat-sub" data-lang="en">2021 Census · Norwest suburb</div><div class="stat-sub" data-lang="ko">2021년 인구조사 · 노스웨스트</div><div class="stat-sub" data-lang="zh">2021 年人口普查 · Norwest</div><div class="stat-sub" data-lang="zt">2021 年人口普查 · Norwest</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">39.7%</div>
-        <div class="stat-label" data-lang="en">Bachelor Degree or Above</div><div class="stat-label" data-lang="ko">학사 이상 학력 보유자</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 27.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 27.8% 대비</div>
+        <div class="stat-label" data-lang="en">Bachelor Degree or Above</div><div class="stat-label" data-lang="ko">학사 이상 학력 보유자</div><div class="stat-label" data-lang="zh">持有学士及以上学历者</div><div class="stat-label" data-lang="zt">持有學士及以上學歷者</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 27.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 27.8% 대비</div><div class="stat-sub" data-lang="zh">对比 NSW 平均 27.8%</div><div class="stat-sub" data-lang="zt">對比 NSW 平均 27.8%</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">36.2%</div>
-        <div class="stat-label" data-lang="en">Professional Workforce</div><div class="stat-label" data-lang="ko">전문직 종사자 비율</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 25.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 25.8% 대비</div>
+        <div class="stat-label" data-lang="en">Professional Workforce</div><div class="stat-label" data-lang="ko">전문직 종사자 비율</div><div class="stat-label" data-lang="zh">专业人士占比</div><div class="stat-label" data-lang="zt">專業人士佔比</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 25.8%</div><div class="stat-sub" data-lang="ko">NSW 평균 25.8% 대비</div><div class="stat-sub" data-lang="zh">对比 NSW 平均 25.8%</div><div class="stat-sub" data-lang="zt">對比 NSW 平均 25.8%</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">18.4%</div>
-        <div class="stat-label" data-lang="en">Managers</div><div class="stat-label" data-lang="ko">관리직 비율</div>
-        <div class="stat-sub" data-lang="en">vs NSW average of 14.6%</div><div class="stat-sub" data-lang="ko">NSW 평균 14.6% 대비</div>
+        <div class="stat-label" data-lang="en">Managers</div><div class="stat-label" data-lang="ko">관리직 비율</div><div class="stat-label" data-lang="zh">管理职占比</div><div class="stat-label" data-lang="zt">管理職佔比</div>
+        <div class="stat-sub" data-lang="en">vs NSW average of 14.6%</div><div class="stat-sub" data-lang="ko">NSW 평균 14.6% 대비</div><div class="stat-sub" data-lang="zh">对比 NSW 平均 14.6%</div><div class="stat-sub" data-lang="zt">對比 NSW 平均 14.6%</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">Top 3</div>
-        <div class="stat-label" data-lang="en">Local School Rankings</div><div class="stat-label" data-lang="ko">지역 학교 순위</div>
-        <div class="stat-sub" data-lang="en">Baulkham Hills HS ranks #3 in Sydney</div><div class="stat-sub" data-lang="ko">볼컴힐스 HS 시드니 3위권</div>
+        <div class="stat-label" data-lang="en">Local School Rankings</div><div class="stat-label" data-lang="ko">지역 학교 순위</div><div class="stat-label" data-lang="zh">本地学校排名</div><div class="stat-label" data-lang="zt">本地學校排名</div>
+        <div class="stat-sub" data-lang="en">Baulkham Hills HS ranks #3 in Sydney</div><div class="stat-sub" data-lang="ko">볼컴힐스 HS 시드니 3위권</div><div class="stat-sub" data-lang="zh">Baulkham Hills 中学位列悉尼前三</div><div class="stat-sub" data-lang="zt">Baulkham Hills 中學位列悉尼前三</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">$1.42M</div>
-        <div class="stat-label" data-lang="en">Recent 2BR Resale (2024)</div><div class="stat-label" data-lang="ko">2BR 최근 재매도가 (2024)</div>
-        <div class="stat-sub" data-lang="en">223/9 Spurway Dr · bought $950K in 2020</div><div class="stat-sub" data-lang="ko">2020년 $950K → 2024년 $1.42M</div>
+        <div class="stat-label" data-lang="en">Recent 2BR Resale (2024)</div><div class="stat-label" data-lang="ko">2BR 최근 재매도가 (2024)</div><div class="stat-label" data-lang="zh">2 房近期转售价（2024 年）</div><div class="stat-label" data-lang="zt">2 房近期轉售價（2024 年）</div>
+        <div class="stat-sub" data-lang="en">223/9 Spurway Dr · bought $950K in 2020</div><div class="stat-sub" data-lang="ko">2020년 $950K → 2024년 $1.42M</div><div class="stat-sub" data-lang="zh">2020 年 95 万澳元 → 2024 年 142 万澳元</div><div class="stat-sub" data-lang="zt">2020 年 95 萬澳元 → 2024 年 142 萬澳元</div>
       </div>
     </div>
   </div>
@@ -618,29 +631,29 @@ body.lang-ko .hero-cta .ko-text{display:inline}
       <div class="developer-logo-text">SEKISUI HOUSE</div>
     </div>
     <div>
-      <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
+      <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span><span data-lang="zh">开发商</span><span data-lang="zt">開發商</span></div>
       <h2 class="section-title">
         <span data-lang="en">Built on a Legacy<br>of <em>Trust</em></span>
-        <span data-lang="ko">신뢰의 유산 위에<br><em>세워진</em> 브랜드</span>
+        <span data-lang="ko">신뢰의 유산 위에<br><em>세워진</em> 브랜드</span><span data-lang="zh">建立于<br><em>信赖传承</em>之上的品牌</span><span data-lang="zt">建立於<br><em>信賴傳承</em>之上的品牌</span>
       </h2>
       <p class="section-subtitle" data-lang="en">Established in 1960, Sekisui House is one of the world's largest residential development companies, having built more than 2.6 million homes globally. Their defining philosophy, <em>Love of Humanity</em>, underpins every home they create.</p>
-      <p class="section-subtitle" data-lang="ko">1960년 설립된 세키스이 하우스는 전 세계에 260만 채 이상의 주택을 건설한 세계 최대 주거 개발 회사 중 하나입니다. '인류에 대한 사랑'이라는 핵심 철학이 모든 주택 건설의 기반이 됩니다.</p>
+      <p class="section-subtitle" data-lang="ko">1960년 설립된 세키스이 하우스는 전 세계에 260만 채 이상의 주택을 건설한 세계 최대 주거 개발 회사 중 하나입니다. '인류에 대한 사랑'이라는 핵심 철학이 모든 주택 건설의 기반이 됩니다.</p><p class="section-subtitle" data-lang="zh">创立于 1960 年的积水住宅，是全球规模最大的住宅开发企业之一，在世界各地已建成逾 260 万户住宅。「爱人」这一核心理念，是其所有住宅建造的根基。</p><p class="section-subtitle" data-lang="zt">創立於 1960 年的積水住宅，是全球規模最大的住宅開發企業之一，在世界各地已建成逾 260 萬戶住宅。「愛人」這一核心理念，是其所有住宅建造的根基。</p>
       <div class="developer-stats">
         <div class="dev-stat">
           <div class="dev-stat-num">2.6M+</div>
-          <div class="dev-stat-label" data-lang="en">Homes Delivered Worldwide</div><div class="dev-stat-label" data-lang="ko">전 세계 주택 공급 실적</div>
+          <div class="dev-stat-label" data-lang="en">Homes Delivered Worldwide</div><div class="dev-stat-label" data-lang="ko">전 세계 주택 공급 실적</div><div class="dev-stat-label" data-lang="zh">全球已交付住宅</div><div class="dev-stat-label" data-lang="zt">全球已交付住宅</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">$18.5B</div>
-          <div class="dev-stat-label" data-lang="en">Development Value in Australia</div><div class="dev-stat-label" data-lang="ko">호주 개발 총 가치</div>
+          <div class="dev-stat-label" data-lang="en">Development Value in Australia</div><div class="dev-stat-label" data-lang="ko">호주 개발 총 가치</div><div class="dev-stat-label" data-lang="zh">澳洲开发总值</div><div class="dev-stat-label" data-lang="zt">澳洲開發總值</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">12,500+</div>
-          <div class="dev-stat-label" data-lang="en">Properties Delivered in Australia</div><div class="dev-stat-label" data-lang="ko">호주 공급 주택 수</div>
+          <div class="dev-stat-label" data-lang="en">Properties Delivered in Australia</div><div class="dev-stat-label" data-lang="ko">호주 공급 주택 수</div><div class="dev-stat-label" data-lang="zh">澳洲已交付住宅数</div><div class="dev-stat-label" data-lang="zt">澳洲已交付住宅數</div>
         </div>
         <div class="dev-stat">
           <div class="dev-stat-num">65+</div>
-          <div class="dev-stat-label" data-lang="en">Years of Excellence</div><div class="dev-stat-label" data-lang="ko">혁신의 역사</div>
+          <div class="dev-stat-label" data-lang="en">Years of Excellence</div><div class="dev-stat-label" data-lang="ko">혁신의 역사</div><div class="dev-stat-label" data-lang="zh">创新历程</div><div class="dev-stat-label" data-lang="zt">創新曆程</div>
         </div>
       </div>
     </div>
@@ -650,35 +663,35 @@ body.lang-ko .hero-cta .ko-text{display:inline}
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-wrap fade-in">
-    <div class="section-eyebrow" style="justify-content:center;color:#D4A94A"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <div class="section-eyebrow" style="justify-content:center;color:#D4A94A"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
     <h2 class="section-title">
       <span data-lang="en">Your New Home<br>at The <em>Orchards</em></span>
-      <span data-lang="ko">더 오차드에서<br><em>새 삶</em>을 시작하세요</span>
+      <span data-lang="ko">더 오차드에서<br><em>새 삶</em>을 시작하세요</span><span data-lang="zh">在 The Orchard<br>开启<em>新生活</em></span><span data-lang="zt">在 The Orchard<br>開啓<em>新生活</em></span>
     </h2>
     <p class="section-subtitle" data-lang="en">Interested in Norwest Veue? Contact Sunghoon Choi (Sunny) at Forise Group for a personalised consultation on available apartments and investment opportunities.</p>
-    <p class="section-subtitle" data-lang="ko">노스웨스트 뷰에에 관심이 있으신가요? 포라이즈 그룹 최성훈에게 연락하여 개인 맞춤형 상담과 투자 기회에 대해 문의하세요.</p>
+    <p class="section-subtitle" data-lang="ko">노스웨스트 뷰에에 관심이 있으신가요? 포라이즈 그룹 최성훈에게 연락하여 개인 맞춤형 상담과 투자 기회에 대해 문의하세요.</p><p class="section-subtitle" data-lang="zh">对 Norwest Veue 感兴趣吗？欢迎联系 Forise Group 的 Sunny，咨询专属建议与投资机会。</p><p class="section-subtitle" data-lang="zt">對 Norwest Veue 感興趣嗎？歡迎聯繫 Forise Group 的 Sunny，諮詢專屬建議與投資機會。</p>
     <div class="contact-divider"></div>
     <div class="contact-info">
       <div class="contact-item">
-        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
-        <span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span>
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label>
+        <span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span>
       </div>
       <div class="contact-item">
-        <label data-lang="en">Mobile</label><label data-lang="ko">연락처</label>
+        <label data-lang="en">Mobile</label><label data-lang="ko">연락처</label><label data-lang="zh">联系方式</label><label data-lang="zt">聯繫方式</label>
         <a href="tel:0414824225">0414 824 225</a>
       </div>
       <div class="contact-item">
-        <label data-lang="en">Email</label><label data-lang="ko">이메일</label>
+        <label data-lang="en">Email</label><label data-lang="ko">이메일</label><label data-lang="zh">邮箱</label><label data-lang="zt">郵箱</label>
         <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
       </div>
     </div>
     <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Norwest%20Veue%20Enquiry" class="contact-cta">
       <span data-lang="en">Request Information / 분양 문의</span>
-      <span data-lang="ko">분양 문의하기 →</span>
+      <span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span>
     </a>
     <div class="contact-divider"></div>
     <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Images are artist impressions only. Pricing information is available upon request. Forise Group acts as selling agent on behalf of Sekisui House.</p>
-    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도이며 실제와 다를 수 있습니다. 가격 정보는 문의 시 제공됩니다.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도이며 실제와 다를 수 있습니다. 가격 정보는 문의 시 제공됩니다.</p><p class="contact-disclaimer" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像为效果图，可能与实物有所不同。价格信息于咨询时提供。</p><p class="contact-disclaimer" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像爲效果圖，可能與實物有所不同。價格信息於諮詢時提供。</p>
   </div>
 </section>
 
@@ -698,12 +711,22 @@ if(false){
   document.body.setAttribute('data-theme','dark');
   document.querySelector('.btn-theme').textContent='☀';
 }
-let isKo=false;
-function toggleLang(){
-  isKo=!isKo;
-  document.body.classList.toggle('lang-ko',isKo);
-  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('norwest-veue-lang', l); }catch(e){}
 }
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('norwest-veue-lang'); }catch(e){ return null; } })() || 'en');
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 </script>
