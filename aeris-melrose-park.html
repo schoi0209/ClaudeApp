@@ -111,9 +111,11 @@ section{padding:100px 60px}
 footer{background:#080B0D;border-top:1px solid rgba(143,190,205,.1);padding:34px 60px;display:flex;justify-content:space-between;align-items:center}
 .fb{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--acc3)}
 .fc{font-size:.7rem;color:rgba(244,247,248,.28)}
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta .kt{display:none}
 @media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hc{padding:0 24px 60px}
 .g2,.li{grid-template-columns:1fr;gap:38px}.ig{grid-template-columns:1fr}.ic{height:300px}
@@ -121,13 +123,24 @@ body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta 
 .band{height:300px}.bc{left:24px;bottom:24px}.vis,.lim{height:320px}.hb{display:none}
 footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 @media(max-width:600px){.ag,.dg,.lg,.sw,.hm{grid-template-columns:1fr}.sp{border-right:none;border-bottom:1px solid rgba(255,255,255,.18)}}
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--acc);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 <nav>
   <a href="#" class="nl">aeris<span>MELROSE PARK</span></a>
   <div class="na">
-    <button class="bl" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="bt" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bm">☕ Buy Me a Coffee</a>
   </div>
@@ -137,20 +150,20 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img class="hi" src="assets/aeris-melrose-park/hero.jpg" alt="Aeris at Melrose Park — Artist Impression" loading="eager">
   <div class="ho"></div><div class="ha"></div>
   <div class="hb" data-lang="en">MELROSE PARK NSW 2114</div>
-  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div>
+  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div><div class="hb" data-lang="zh">Melrose Park NSW 2114</div><div class="hb" data-lang="zt">Melrose Park NSW 2114</div>
   <div class="hc">
     <div class="he" data-lang="en">Stage 6 · Sekisui House × Hankyu Hanshin</div>
-    <div class="he" data-lang="ko">6단계 · 세키스이 하우스 × 한큐 한신</div>
-    <h1 class="ht"><span data-lang="en">A Life<br><em>Above.</em></span><span data-lang="ko">하늘 위의<br><em>삶.</em></span></h1>
+    <div class="he" data-lang="ko">6단계 · 세키스이 하우스 × 한큐 한신</div><div class="he" data-lang="zh">第六期 · 积水住宅 × 阪急阪神</div><div class="he" data-lang="zt">第六期 · 積水住宅 × 阪急阪神</div>
+    <h1 class="ht"><span data-lang="en">A Life<br><em>Above.</em></span><span data-lang="ko">하늘 위의<br><em>삶.</em></span><span data-lang="zh">云端<br><em>之居。</em></span><span data-lang="zt">雲端<br><em>之居。</em></span></h1>
     <p class="hs" data-lang="en">468 residences at the highest point of Melrose Park · Designed by Group GSA</p>
-    <p class="hs" data-lang="ko">멜로즈 파크 최고점에 들어서는 468세대 · Group GSA 설계</p>
+    <p class="hs" data-lang="ko">멜로즈 파크 최고점에 들어서는 468세대 · Group GSA 설계</p><p class="hs" data-lang="zh">坐落于 Melrose Park 最高点的 468 户住宅 · Group GSA 设计</p><p class="hs" data-lang="zt">坐落於 Melrose Park 最高點的 468 戶住宅 · Group GSA 設計</p>
     <div class="hm">
-      <div class="hmi"><label data-lang="en">Residences</label><label data-lang="ko">세대수</label><span>468</span></div>
-      <div class="hmi"><label data-lang="en">Towers</label><label data-lang="ko">타워</label><span>20 &amp; 24<small data-lang="en"> lvl</small><small data-lang="ko"> 층</small></span></div>
-      <div class="hmi"><label data-lang="en">To Sydney CBD</label><label data-lang="ko">시드니 CBD까지</label><span>15<small>km</small></span></div>
-      <div class="hmi"><label data-lang="en">Completion</label><label data-lang="ko">준공</label><span>Q4<small> 2027</small></span></div>
+      <div class="hmi"><label data-lang="en">Residences</label><label data-lang="ko">세대수</label><label data-lang="zh">户数</label><label data-lang="zt">戶數</label><span>468</span></div>
+      <div class="hmi"><label data-lang="en">Towers</label><label data-lang="ko">타워</label><label data-lang="zh">塔楼</label><label data-lang="zt">塔樓</label><span>20 &amp; 24<small data-lang="en"> lvl</small><small data-lang="ko"> 층</small><small data-lang="zh">层</small><small data-lang="zt">層</small></span></div>
+      <div class="hmi"><label data-lang="en">To Sydney CBD</label><label data-lang="ko">시드니 CBD까지</label><label data-lang="zh">至悉尼 CBD</label><label data-lang="zt">至悉尼 CBD</label><span>15<small>km</small></span></div>
+      <div class="hmi"><label data-lang="en">Completion</label><label data-lang="ko">준공</label><label data-lang="zh">竣工</label><label data-lang="zt">竣工</label><span>Q4<small> 2027</small></span></div>
     </div>
-    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span> →</a>
+    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span><span class="kt" data-lang="zh">咨询详情</span><span class="kt" data-lang="zt">諮詢詳情</span> →</a>
   </div>
 </section>
 
@@ -160,56 +173,56 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
       <img src="assets/aeris-melrose-park/masterplan.jpg" alt="Melrose Park masterplan aerial — Artist Impression" loading="lazy">
       <div class="vo"></div>
       <div class="vb" data-lang="en">Melrose Park · 30 ha Masterplan</div>
-      <div class="vb" data-lang="ko">멜로즈 파크 · 30헥타르 마스터플랜</div>
+      <div class="vb" data-lang="ko">멜로즈 파크 · 30헥타르 마스터플랜</div><div class="vb" data-lang="zh">Melrose Park · 30 公顷总体规划</div><div class="vb" data-lang="zt">Melrose Park · 30 公頃總體規劃</div>
       <div class="vc" data-lang="en">Aeris sits at the highest point of the precinct</div>
-      <div class="vc" data-lang="ko">단지 최고 지대에 자리한 Aeris</div>
+      <div class="vc" data-lang="ko">단지 최고 지대에 자리한 Aeris</div><div class="vc" data-lang="zh">Aeris 位于全区最高地势</div><div class="vc" data-lang="zt">Aeris 位於全區最高地勢</div>
     </div>
     <div>
-      <div class="eb"><span data-lang="en">The Sixth Stage</span><span data-lang="ko">여섯 번째 단계</span></div>
-      <h2 class="ti"><span data-lang="en">Aeris at <em>Melrose Park</em></span><span data-lang="ko"><em>멜로즈 파크</em>의 Aeris</span></h2>
+      <div class="eb"><span data-lang="en">The Sixth Stage</span><span data-lang="ko">여섯 번째 단계</span><span data-lang="zh">第六期</span><span data-lang="zt">第六期</span></div>
+      <h2 class="ti"><span data-lang="en">Aeris at <em>Melrose Park</em></span><span data-lang="ko"><em>멜로즈 파크</em>의 Aeris</span><span data-lang="zh"><em>Melrose Park</em> 的 Aeris</span><span data-lang="zt"><em>Melrose Park</em> 的 Aeris</span></h2>
       <p class="bt2" data-lang="en">Aeris — from the Latin <em>aer</em>, meaning "air" — is the latest and most elevated realisation of Sekisui House's vision at Melrose Park. Positioned at the highest point of the 30-hectare site, two slender towers of 20 and 24 storeys and a seven-level mid-rise deliver 468 apartments above a common basement podium.</p>
-      <p class="bt2" data-lang="ko">라틴어로 '공기'를 뜻하는 <em>aer</em>에서 이름을 딴 Aeris는 멜로즈 파크에서 세키스이 하우스가 선보이는 가장 높고 새로운 단계입니다. 30헥타르 부지의 최고 지대에 20층과 24층의 슬렌더 타워 두 동과 7층 중층 건물이 공용 지하 포디움 위에 468세대를 이룹니다.</p>
+      <p class="bt2" data-lang="ko">라틴어로 '공기'를 뜻하는 <em>aer</em>에서 이름을 딴 Aeris는 멜로즈 파크에서 세키스이 하우스가 선보이는 가장 높고 새로운 단계입니다. 30헥타르 부지의 최고 지대에 20층과 24층의 슬렌더 타워 두 동과 7층 중층 건물이 공용 지하 포디움 위에 468세대를 이룹니다.</p><p class="bt2" data-lang="zh">Aeris 取名自拉丁语中意为「空气」的 <em>aer</em>，是积水住宅在 Melrose Park 推出的最高、最新一期。于 30 公顷地块的最高处，两座 20 层与 24 层的纤细塔楼及一栋 7 层中层建筑，共同在地下裙楼之上构成 468 户住宅。</p><p class="bt2" data-lang="zt">Aeris 取名自拉丁語中意爲「空氣」的 <em>aer</em>，是積水住宅在 Melrose Park 推出的最高、最新一期。於 30 公頃地塊的最高處，兩座 20 層與 24 層的纖細塔樓及一棟 7 層中層建築，共同在地下裙樓之上構成 468 戶住宅。</p>
       <p class="bt2" data-lang="en">Sweeping vistas unfold across the Parramatta River, Sydney Olympic Parklands and the Sydney skyline to the east, with the Parramatta CBD and sunsets to the west. A unique dual-aspect design with soaring windows amplifies light, breeze and view in every home.</p>
-      <p class="bt2" data-lang="ko">파라마타 강, 시드니 올림픽 파크랜드, 동쪽 시드니 스카이라인이 파노라마로 펼쳐지고, 서쪽으로는 파라마타 CBD와 일몰이 담깁니다. 높은 창을 갖춘 독창적인 듀얼 애스펙트 설계가 모든 세대에 빛과 바람, 조망을 극대화합니다.</p>
+      <p class="bt2" data-lang="ko">파라마타 강, 시드니 올림픽 파크랜드, 동쪽 시드니 스카이라인이 파노라마로 펼쳐지고, 서쪽으로는 파라마타 CBD와 일몰이 담깁니다. 높은 창을 갖춘 독창적인 듀얼 애스펙트 설계가 모든 세대에 빛과 바람, 조망을 극대화합니다.</p><p class="bt2" data-lang="zh">Parramatta 河、悉尼奥林匹克公园绿地与东面的悉尼天际线尽收眼底，西侧则可揽 Parramatta CBD 与落日。配备高窗的独特双面采光设计，令每一户的采光、通风与景观皆达至最佳。</p><p class="bt2" data-lang="zt">Parramatta 河、悉尼奧林匹克公園綠地與東面的悉尼天際線盡收眼底，西側則可攬 Parramatta CBD 與落日。配備高窗的獨特雙面採光設計，令每一戶的採光、通風與景觀皆達至最佳。</p>
       <div class="tags">
-        <span class="tag" data-lang="en">1, 2 &amp; 3 Bedroom</span><span class="tag" data-lang="ko">1·2·3 베드룸</span>
-        <span class="tag" data-lang="en">Dual-Key Layouts</span><span class="tag" data-lang="ko">듀얼키 평면</span>
-        <span class="tag" data-lang="en">Miele Appliances</span><span class="tag" data-lang="ko">Miele 가전</span>
-        <span class="tag" data-lang="en">Smart Home</span><span class="tag" data-lang="ko">스마트홈</span>
-        <span class="tag" data-lang="en">Timber Flooring</span><span class="tag" data-lang="ko">원목 마루</span>
+        <span class="tag" data-lang="en">1, 2 &amp; 3 Bedroom</span><span class="tag" data-lang="ko">1·2·3 베드룸</span><span class="tag" data-lang="zh">1、2、3 房</span><span class="tag" data-lang="zt">1、2、3 房</span>
+        <span class="tag" data-lang="en">Dual-Key Layouts</span><span class="tag" data-lang="ko">듀얼키 평면</span><span class="tag" data-lang="zh">双钥匙户型</span><span class="tag" data-lang="zt">雙鑰匙戶型</span>
+        <span class="tag" data-lang="en">Miele Appliances</span><span class="tag" data-lang="ko">Miele 가전</span><span class="tag" data-lang="zh">Miele 家电</span><span class="tag" data-lang="zt">Miele 家電</span>
+        <span class="tag" data-lang="en">Smart Home</span><span class="tag" data-lang="ko">스마트홈</span><span class="tag" data-lang="zh">智能家居</span><span class="tag" data-lang="zt">智能家居</span>
+        <span class="tag" data-lang="en">Timber Flooring</span><span class="tag" data-lang="ko">원목 마루</span><span class="tag" data-lang="zh">实木地板</span><span class="tag" data-lang="zt">實木地板</span>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip"><div class="sw">
-  <div class="sp"><div class="sn">468</div><div class="sl" data-lang="en">Residences</div><div class="sl" data-lang="ko">세대</div></div>
-  <div class="sp"><div class="sn">24</div><div class="sl" data-lang="en">Storeys — Tallest at Melrose Park</div><div class="sl" data-lang="ko">층 — 멜로즈 파크 최고층</div></div>
-  <div class="sp"><div class="sn">50–130<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Internal Sizes</div><div class="sl" data-lang="ko">내부 면적</div></div>
-  <div class="sp"><div class="sn">7<span style="font-size:1.3rem">★</span></div><div class="sl" data-lang="en">NatHERS Target</div><div class="sl" data-lang="ko">NatHERS 목표 등급</div></div>
+  <div class="sp"><div class="sn">468</div><div class="sl" data-lang="en">Residences</div><div class="sl" data-lang="ko">세대</div><div class="sl" data-lang="zh">户</div><div class="sl" data-lang="zt">戶</div></div>
+  <div class="sp"><div class="sn">24</div><div class="sl" data-lang="en">Storeys — Tallest at Melrose Park</div><div class="sl" data-lang="ko">층 — 멜로즈 파크 최고층</div><div class="sl" data-lang="zh">层 —— Melrose Park 最高楼</div><div class="sl" data-lang="zt">層 —— Melrose Park 最高樓</div></div>
+  <div class="sp"><div class="sn">50–130<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Internal Sizes</div><div class="sl" data-lang="ko">내부 면적</div><div class="sl" data-lang="zh">室内面积</div><div class="sl" data-lang="zt">室內面積</div></div>
+  <div class="sp"><div class="sn">7<span style="font-size:1.3rem">★</span></div><div class="sl" data-lang="en">NatHERS Target</div><div class="sl" data-lang="ko">NatHERS 목표 등급</div><div class="sl" data-lang="zh">NatHERS 目标评级</div><div class="sl" data-lang="zt">NatHERS 目標評級</div></div>
 </div></div>
 
 <div class="band">
   <img src="assets/aeris-melrose-park/amenity-pool.jpg" alt="Aeris resort-style amenity — Artist Impression" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">Resort-Style Amenity</h3><h3 data-lang="ko">리조트급 편의시설</h3>
+    <h3 data-lang="en">Resort-Style Amenity</h3><h3 data-lang="ko">리조트급 편의시설</h3><h3 data-lang="zh">度假级配套设施</h3><h3 data-lang="zt">度假級配套設施</h3>
     <p data-lang="en">16-metre pool · Gym · Rooftop cinema · Artist Impression</p>
-    <p data-lang="ko">16m 수영장 · 짐 · 루프탑 시네마 · 조감도</p>
+    <p data-lang="ko">16m 수영장 · 짐 · 루프탑 시네마 · 조감도</p><p data-lang="zh">16 米泳池 · 健身房 · 屋顶影院 · 效果图</p><p data-lang="zt">16 米泳池 · 健身房 · 屋頂影院 · 效果圖</p>
   </div>
 </div>
 
 <section class="dk" id="interiors">
   <div class="wrap fade">
-    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span></div>
-    <h2 class="ti"><span data-lang="en">Artfully <em>Composed</em></span><span data-lang="ko">정교하게 <em>구성된 공간</em></span></h2>
+    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span><span data-lang="zh">住宅</span><span data-lang="zt">住宅</span></div>
+    <h2 class="ti"><span data-lang="en">Artfully <em>Composed</em></span><span data-lang="ko">정교하게 <em>구성된 공간</em></span><span data-lang="zh">精心<em>构筑的空间</em></span><span data-lang="zt">精心<em>構築的空間</em></span></h2>
     <p class="su" data-lang="en">Group GSA has crafted each apartment to breathe in light and natural breezes. Free-flowing floorplans, Miele appliances, timber flooring, clever pantry and integrated storage — with a flexible study in 2- and 3-bedroom homes that works as a home office, nursery or meditation space.</p>
-    <p class="su" data-lang="ko">Group GSA는 빛과 자연 바람이 흐르도록 모든 세대를 설계했습니다. 자유로운 동선의 평면, Miele 가전, 원목 마루, 영리한 팬트리와 빌트인 수납을 갖췄으며, 2·3베드룸에는 홈오피스·아기방·명상 공간으로 활용 가능한 유연한 스터디가 마련됩니다.</p>
+    <p class="su" data-lang="ko">Group GSA는 빛과 자연 바람이 흐르도록 모든 세대를 설계했습니다. 자유로운 동선의 평면, Miele 가전, 원목 마루, 영리한 팬트리와 빌트인 수납을 갖췄으며, 2·3베드룸에는 홈오피스·아기방·명상 공간으로 활용 가능한 유연한 스터디가 마련됩니다.</p><p class="su" data-lang="zh">Group GSA 让光线与自然气流贯穿每一户的设计。动线自由的平面、Miele 家电、实木地板、巧思食品储藏与嵌入式收纳；2 房与 3 房更设灵活书房，可作居家办公、婴儿房或冥想空间。</p><p class="su" data-lang="zt">Group GSA 讓光線與自然氣流貫穿每一戶的設計。動線自由的平面、Miele 家電、實木地板、巧思食品儲藏與嵌入式收納；2 房與 3 房更設靈活書房，可作居家辦公、嬰兒房或冥想空間。</p>
     <div class="ig">
-      <div class="ic"><img src="assets/aeris-melrose-park/int-1.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p></div></div>
-      <div class="ic"><img src="assets/aeris-melrose-park/int-2.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p></div></div>
-      <div class="ic"><img src="assets/aeris-melrose-park/int-3.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p></div></div>
-      <div class="ic"><img src="assets/aeris-melrose-park/int-4.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p></div></div>
+      <div class="ic"><img src="assets/aeris-melrose-park/int-1.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p><p data-lang="zh">效果图</p><p data-lang="zt">效果圖</p></div></div>
+      <div class="ic"><img src="assets/aeris-melrose-park/int-2.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p><p data-lang="zh">效果图</p><p data-lang="zt">效果圖</p></div></div>
+      <div class="ic"><img src="assets/aeris-melrose-park/int-3.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p><p data-lang="zh">效果图</p><p data-lang="zt">效果圖</p></div></div>
+      <div class="ic"><img src="assets/aeris-melrose-park/int-4.jpg" alt="Aeris residence interior — Artist Impression" loading="lazy"><div class="il"><p data-lang="en">Artist's Impression</p><p data-lang="ko">조감도</p><p data-lang="zh">效果图</p><p data-lang="zt">效果圖</p></div></div>
     </div>
   </div>
 </section>
@@ -217,16 +230,16 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 <section id="amenities">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">Amenity &amp; Landscape</span><span data-lang="ko">편의시설 & 조경</span></div>
-      <h2 class="ti"><span data-lang="en">Elevating the <em>Everyday</em></span><span data-lang="ko">일상을 <em>고양시키다</em></span></h2>
+      <div class="eb"><span data-lang="en">Amenity &amp; Landscape</span><span data-lang="ko">편의시설 & 조경</span><span data-lang="zh">配套与景观</span><span data-lang="zt">配套與景觀</span></div>
+      <h2 class="ti"><span data-lang="en">Elevating the <em>Everyday</em></span><span data-lang="ko">일상을 <em>고양시키다</em></span><span data-lang="zh">让日常<em>升华</em></span><span data-lang="zt">讓日常<em>昇華</em></span></h2>
     </div>
     <div class="ag fade">
-      <div class="am"><div class="ai">🏊</div><h5 data-lang="en">16-Metre Pool</h5><h5 data-lang="ko">16m 수영장</h5><p data-lang="en">A luxurious pool with loungers and city skyline views, exclusive to residents.</p><p data-lang="ko">라운저와 시티 스카이라인 조망을 갖춘 입주민 전용 럭셔리 수영장.</p></div>
-      <div class="am"><div class="ai">💪</div><h5 data-lang="en">State-of-the-Art Gym</h5><h5 data-lang="ko">최신 피트니스</h5><p data-lang="en">A private resident-only fitness centre fitted out to a premium standard.</p><p data-lang="ko">프리미엄 사양으로 완비된 입주민 전용 피트니스 센터.</p></div>
-      <div class="am"><div class="ai">🎬</div><h5 data-lang="en">Rooftop Cinema</h5><h5 data-lang="ko">루프탑 시네마</h5><p data-lang="en">A private outdoor cinema on the roof — film nights under the open sky.</p><p data-lang="ko">옥상의 프라이빗 야외 시네마 — 탁 트인 하늘 아래 영화의 밤.</p></div>
-      <div class="am"><div class="ai">🍽️</div><h5 data-lang="en">Gourmet Zone</h5><h5 data-lang="ko">고메 존</h5><p data-lang="en">BBQ facilities and generous outdoor settings for entertaining friends and family.</p><p data-lang="ko">가족·친구와 함께하는 BBQ 시설과 넉넉한 야외 공간.</p></div>
-      <div class="am"><div class="ai">🌳</div><h5 data-lang="en">Two Internal Parks</h5><h5 data-lang="ko">두 개의 내부 공원</h5><p data-lang="en">Flowing green havens at street level with open lawns, shady planting and BBQ areas.</p><p data-lang="ko">개방형 잔디, 그늘 식재, BBQ 공간을 갖춘 스트리트 레벨의 녹지 안식처.</p></div>
-      <div class="am"><div class="ai">🚶</div><h5 data-lang="en">Town Centre Link</h5><h5 data-lang="ko">타운센터 연결</h5><p data-lang="en">A pedestrian through-site link connects residents to the future Central Park and Town Centre.</p><p data-lang="ko">보행 연결로가 미래의 센트럴 파크와 타운센터로 이어집니다.</p></div>
+      <div class="am"><div class="ai">🏊</div><h5 data-lang="en">16-Metre Pool</h5><h5 data-lang="ko">16m 수영장</h5><h5 data-lang="zh">16 米泳池</h5><h5 data-lang="zt">16 米泳池</h5><p data-lang="en">A luxurious pool with loungers and city skyline views, exclusive to residents.</p><p data-lang="ko">라운저와 시티 스카이라인 조망을 갖춘 입주민 전용 럭셔리 수영장.</p><p data-lang="zh">配躺椅并可远眺城市天际线的住户专属奢华泳池。</p><p data-lang="zt">配躺椅並可遠眺城市天際線的住戶專屬奢華泳池。</p></div>
+      <div class="am"><div class="ai">💪</div><h5 data-lang="en">State-of-the-Art Gym</h5><h5 data-lang="ko">최신 피트니스</h5><h5 data-lang="zh">先进健身设施</h5><h5 data-lang="zt">先進健身設施</h5><p data-lang="en">A private resident-only fitness centre fitted out to a premium standard.</p><p data-lang="ko">프리미엄 사양으로 완비된 입주민 전용 피트니스 센터.</p><p data-lang="zh">以高端规格打造的住户专属健身中心。</p><p data-lang="zt">以高端規格打造的住戶專屬健身中心。</p></div>
+      <div class="am"><div class="ai">🎬</div><h5 data-lang="en">Rooftop Cinema</h5><h5 data-lang="ko">루프탑 시네마</h5><h5 data-lang="zh">屋顶影院</h5><h5 data-lang="zt">屋頂影院</h5><p data-lang="en">A private outdoor cinema on the roof — film nights under the open sky.</p><p data-lang="ko">옥상의 프라이빗 야외 시네마 — 탁 트인 하늘 아래 영화의 밤.</p><p data-lang="zh">屋顶的私人露天影院 —— 在开阔夜空下享受电影之夜。</p><p data-lang="zt">屋頂的私人露天影院 —— 在開闊夜空下享受電影之夜。</p></div>
+      <div class="am"><div class="ai">🍽️</div><h5 data-lang="en">Gourmet Zone</h5><h5 data-lang="ko">고메 존</h5><h5 data-lang="zh">美食区</h5><h5 data-lang="zt">美食區</h5><p data-lang="en">BBQ facilities and generous outdoor settings for entertaining friends and family.</p><p data-lang="ko">가족·친구와 함께하는 BBQ 시설과 넉넉한 야외 공간.</p><p data-lang="zh">供亲友共聚的烧烤设施与宽敞户外空间。</p><p data-lang="zt">供親友共聚的燒烤設施與寬敞戶外空間。</p></div>
+      <div class="am"><div class="ai">🌳</div><h5 data-lang="en">Two Internal Parks</h5><h5 data-lang="ko">두 개의 내부 공원</h5><h5 data-lang="zh">两座内部公园</h5><h5 data-lang="zt">兩座內部公園</h5><p data-lang="en">Flowing green havens at street level with open lawns, shady planting and BBQ areas.</p><p data-lang="ko">개방형 잔디, 그늘 식재, BBQ 공간을 갖춘 스트리트 레벨의 녹지 안식처.</p><p data-lang="zh">设开放草坪、遮荫植栽与烧烤空间的街区级绿色憩所。</p><p data-lang="zt">設開放草坪、遮蔭植栽與燒烤空間的街區級綠色憩所。</p></div>
+      <div class="am"><div class="ai">🚶</div><h5 data-lang="en">Town Centre Link</h5><h5 data-lang="ko">타운센터 연결</h5><h5 data-lang="zh">连通镇中心</h5><h5 data-lang="zt">連通鎮中心</h5><p data-lang="en">A pedestrian through-site link connects residents to the future Central Park and Town Centre.</p><p data-lang="ko">보행 연결로가 미래의 센트럴 파크와 타운센터로 이어집니다.</p><p data-lang="zh">步行连廊直通未来的中央公园与镇中心。</p><p data-lang="zt">步行連廊直通未來的中央公園與鎮中心。</p></div>
     </div>
   </div>
 </section>
@@ -235,9 +248,9 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img src="assets/aeris-melrose-park/evening.jpg" alt="Aeris at Melrose Park — Artist Impression" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">An Urban Forest</h3><h3 data-lang="ko">어반 포레스트</h3>
+    <h3 data-lang="en">An Urban Forest</h3><h3 data-lang="ko">어반 포레스트</h3><h3 data-lang="zh">城市森林</h3><h3 data-lang="zt">城市森林</h3>
     <p data-lang="en">Dappled light &amp; bird song · Artist Impression</p>
-    <p data-lang="ko">스며드는 빛과 새소리 · 조감도</p>
+    <p data-lang="ko">스며드는 빛과 새소리 · 조감도</p><p data-lang="zh">洒落的光与鸟鸣 · 效果图</p><p data-lang="zt">灑落的光與鳥鳴 · 效果圖</p>
   </div>
 </div>
 
@@ -245,17 +258,17 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <div class="li fade">
     <div class="lim"><img src="assets/aeris-melrose-park/masterplan.jpg" alt="Melrose Park precinct aerial" loading="lazy"></div>
     <div>
-      <div class="eb"><span data-lang="en">Location &amp; Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
-      <h2 class="ti"><span data-lang="en">At Sydney's<br><em>Geographic Centre</em></span><span data-lang="ko">시드니의<br><em>지리적 중심</em></span></h2>
+      <div class="eb"><span data-lang="en">Location &amp; Connectivity</span><span data-lang="ko">위치 & 교통</span><span data-lang="zh">位置与交通</span><span data-lang="zt">位置與交通</span></div>
+      <h2 class="ti"><span data-lang="en">At Sydney's<br><em>Geographic Centre</em></span><span data-lang="ko">시드니의<br><em>지리적 중심</em></span><span data-lang="zh">悉尼的<br><em>地理中心</em></span><span data-lang="zt">悉尼的<br><em>地理中心</em></span></h2>
       <p class="su" data-lang="en">Melrose Park sits 15km west of the Sydney CBD and just 15 minutes from Parramatta, Sydney's second CBD. The precinct is served by road, ferry and bus, and is earmarked for Stage 2 of the Parramatta Light Rail.</p>
-      <p class="su" data-lang="ko">멜로즈 파크는 시드니 CBD에서 서쪽으로 15km, 시드니 제2의 CBD인 파라마타에서 15분 거리에 있습니다. 도로·페리·버스가 연결되며, 파라마타 라이트레일 2단계 노선에 포함될 예정입니다.</p>
+      <p class="su" data-lang="ko">멜로즈 파크는 시드니 CBD에서 서쪽으로 15km, 시드니 제2의 CBD인 파라마타에서 15분 거리에 있습니다. 도로·페리·버스가 연결되며, 파라마타 라이트레일 2단계 노선에 포함될 예정입니다.</p><p class="su" data-lang="zh">Melrose Park 位于悉尼 CBD 以西 15 公里，距悉尼第二 CBD Parramatta 仅 15 分钟。道路、渡轮与巴士皆可连通，并将纳入 Parramatta 轻轨二期路线。</p><p class="su" data-lang="zt">Melrose Park 位於悉尼 CBD 以西 15 公里，距悉尼第二 CBD Parramatta 僅 15 分鐘。道路、渡輪與巴士皆可連通，並將納入 Parramatta 輕軌二期路線。</p>
       <div class="lg">
-        <div class="lc"><div class="ln">15<small>km</small></div><div class="lt" data-lang="en">Sydney CBD</div><div class="lt" data-lang="ko">시드니 CBD</div><div class="lm" data-lang="en">Due west</div><div class="lm" data-lang="ko">서쪽 방향</div></div>
-        <div class="lc"><div class="ln">15<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lm" data-lang="en">By car</div><div class="lm" data-lang="ko">차량</div></div>
-        <div class="lc"><div class="ln" style="font-size:1.5rem" data-lang="en">Walk</div><div class="ln" style="font-size:1.5rem" data-lang="ko">도보</div><div class="lt" data-lang="en">Melrose Park Town Centre</div><div class="lt" data-lang="ko">멜로즈 파크 타운센터</div><div class="lm" data-lang="en">Coles + 25 stores · opens 2026</div><div class="lm" data-lang="ko">Coles 외 25개 매장 · 2026년 개장</div></div>
-        <div class="lc"><div class="ln" style="font-size:1.5rem">LRT</div><div class="lt" data-lang="en">Parramatta Light Rail Stage 2</div><div class="lt" data-lang="ko">파라마타 라이트레일 2단계</div><div class="lm" data-lang="en">Precinct earmarked</div><div class="lm" data-lang="ko">노선 포함 예정</div></div>
-        <div class="lc"><div class="ln">52,000<small>m²</small></div><div class="lt" data-lang="en">Green Open Space</div><div class="lt" data-lang="ko">녹지 공간</div><div class="lm" data-lang="en">1,400+ mature trees</div><div class="lm" data-lang="ko">성목 1,400그루 이상</div></div>
-        <div class="lc"><div class="ln">6,000</div><div class="lt" data-lang="en">Homes at Full Completion</div><div class="lt" data-lang="ko">전체 준공 시 세대수</div><div class="lm" data-lang="en">$5bn urban renewal</div><div class="lm" data-lang="ko">50억 달러 도시재생</div></div>
+        <div class="lc"><div class="ln">15<small>km</small></div><div class="lt" data-lang="en">Sydney CBD</div><div class="lt" data-lang="ko">시드니 CBD</div><div class="lt" data-lang="zh">悉尼 CBD</div><div class="lt" data-lang="zt">悉尼 CBD</div><div class="lm" data-lang="en">Due west</div><div class="lm" data-lang="ko">서쪽 방향</div><div class="lm" data-lang="zh">向西</div><div class="lm" data-lang="zt">向西</div></div>
+        <div class="lc"><div class="ln">15<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lt" data-lang="zh">Parramatta CBD</div><div class="lt" data-lang="zt">Parramatta CBD</div><div class="lm" data-lang="en">By car</div><div class="lm" data-lang="ko">차량</div><div class="lm" data-lang="zh">驾车</div><div class="lm" data-lang="zt">駕車</div></div>
+        <div class="lc"><div class="ln" style="font-size:1.5rem" data-lang="en">Walk</div><div class="ln" style="font-size:1.5rem" data-lang="ko">도보</div><div class="ln" style="font-size:1.5rem" data-lang="zh">步行</div><div class="ln" style="font-size:1.5rem" data-lang="zt">步行</div><div class="lt" data-lang="en">Melrose Park Town Centre</div><div class="lt" data-lang="ko">멜로즈 파크 타운센터</div><div class="lt" data-lang="zh">Melrose Park 镇中心</div><div class="lt" data-lang="zt">Melrose Park 鎮中心</div><div class="lm" data-lang="en">Coles + 25 stores · opens 2026</div><div class="lm" data-lang="ko">Coles 외 25개 매장 · 2026년 개장</div><div class="lm" data-lang="zh">Coles 及另外 25 家店铺 · 2026 年开业</div><div class="lm" data-lang="zt">Coles 及另外 25 家店鋪 · 2026 年開業</div></div>
+        <div class="lc"><div class="ln" style="font-size:1.5rem">LRT</div><div class="lt" data-lang="en">Parramatta Light Rail Stage 2</div><div class="lt" data-lang="ko">파라마타 라이트레일 2단계</div><div class="lt" data-lang="zh">Parramatta 轻轨二期</div><div class="lt" data-lang="zt">Parramatta 輕軌二期</div><div class="lm" data-lang="en">Precinct earmarked</div><div class="lm" data-lang="ko">노선 포함 예정</div><div class="lm" data-lang="zh">预计纳入路线</div><div class="lm" data-lang="zt">預計納入路線</div></div>
+        <div class="lc"><div class="ln">52,000<small>m²</small></div><div class="lt" data-lang="en">Green Open Space</div><div class="lt" data-lang="ko">녹지 공간</div><div class="lt" data-lang="zh">绿化空间</div><div class="lt" data-lang="zt">綠化空間</div><div class="lm" data-lang="en">1,400+ mature trees</div><div class="lm" data-lang="ko">성목 1,400그루 이상</div><div class="lm" data-lang="zh">逾 1,400 棵成年树木</div><div class="lm" data-lang="zt">逾 1,400 棵成年樹木</div></div>
+        <div class="lc"><div class="ln">6,000</div><div class="lt" data-lang="en">Homes at Full Completion</div><div class="lt" data-lang="ko">전체 준공 시 세대수</div><div class="lt" data-lang="zh">全部竣工后总户数</div><div class="lt" data-lang="zt">全部竣工後總戶數</div><div class="lm" data-lang="en">$5bn urban renewal</div><div class="lm" data-lang="ko">50억 달러 도시재생</div><div class="lm" data-lang="zh">50 亿澳元城市更新</div><div class="lm" data-lang="zt">50 億澳元城市更新</div></div>
       </div>
     </div>
   </div>
@@ -264,45 +277,45 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 <section id="sustainability">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">Smart &amp; Sustainable</span><span data-lang="ko">스마트 & 지속가능</span></div>
-      <h2 class="ti"><span data-lang="en">Refined, <em>Responsibly</em></span><span data-lang="ko">책임 있는 <em>정교함</em></span></h2>
+      <div class="eb"><span data-lang="en">Smart &amp; Sustainable</span><span data-lang="ko">스마트 & 지속가능</span><span data-lang="zh">智能与可持续</span><span data-lang="zt">智能與可持續</span></div>
+      <h2 class="ti"><span data-lang="en">Refined, <em>Responsibly</em></span><span data-lang="ko">책임 있는 <em>정교함</em></span><span data-lang="zh">负责任的<em>精致</em></span><span data-lang="zt">負責任的<em>精緻</em></span></h2>
     </div>
     <div class="ag fade">
-      <div class="am"><div class="ai">⚡</div><h5 data-lang="en">Dedicated Energy Network</h5><h5 data-lang="ko">전용 에너지 네트워크</h5><p data-lang="en">Renewables, grid supply, gas and water brought together in one holistic, efficient system.</p><p data-lang="ko">재생에너지·전력망·가스·수도를 통합한 효율적 시스템.</p></div>
-      <div class="am"><div class="ai">🌡️</div><h5 data-lang="en">Superior Efficiency</h5><h5 data-lang="ko">뛰어난 에너지 효율</h5><p data-lang="en">NatHERS ratings of 16.7 for heating and 11.3 for cooling — far exceeding the national average.</p><p data-lang="ko">난방 16.7, 냉방 11.3의 NatHERS 등급으로 전국 평균을 크게 상회합니다.</p></div>
-      <div class="am"><div class="ai">🏠</div><h5 data-lang="en">Smart Home Automation</h5><h5 data-lang="ko">스마트홈 자동화</h5><p data-lang="en">Link appliances to your phone — close blinds or switch off lights from anywhere.</p><p data-lang="ko">가전을 스마트폰과 연동해 어디서든 블라인드·조명을 제어합니다.</p></div>
-      <div class="am"><div class="ai">🔌</div><h5 data-lang="en">EV Charging</h5><h5 data-lang="ko">EV 충전</h5><p data-lang="en">Communal and private EV charging provision throughout the development.</p><p data-lang="ko">단지 전역에 공용·전용 전기차 충전 설비를 제공합니다.</p></div>
-      <div class="am"><div class="ai">☀️</div><h5 data-lang="en">Rooftop Solar</h5><h5 data-lang="ko">루프탑 태양광</h5><p data-lang="en">Rooftop solar panels contribute to the precinct's 7-star NatHERS target.</p><p data-lang="ko">옥상 태양광 패널이 단지의 NatHERS 7성급 목표에 기여합니다.</p></div>
-      <div class="am"><div class="ai">📶</div><h5 data-lang="en">Smart Suburb</h5><h5 data-lang="ko">스마트 서버브</h5><p data-lang="en">WiFi hotspots, smart wayfinding and smart poles across the precinct.</p><p data-lang="ko">단지 전역의 WiFi 핫스팟, 스마트 길안내, 스마트 폴.</p></div>
+      <div class="am"><div class="ai">⚡</div><h5 data-lang="en">Dedicated Energy Network</h5><h5 data-lang="ko">전용 에너지 네트워크</h5><h5 data-lang="zh">专属能源网络</h5><h5 data-lang="zt">專屬能源網絡</h5><p data-lang="en">Renewables, grid supply, gas and water brought together in one holistic, efficient system.</p><p data-lang="ko">재생에너지·전력망·가스·수도를 통합한 효율적 시스템.</p><p data-lang="zh">整合可再生能源、电网、燃气与供水的高效系统。</p><p data-lang="zt">整合可再生能源、電網、燃氣與供水的高效系統。</p></div>
+      <div class="am"><div class="ai">🌡️</div><h5 data-lang="en">Superior Efficiency</h5><h5 data-lang="ko">뛰어난 에너지 효율</h5><h5 data-lang="zh">卓越能效</h5><h5 data-lang="zt">卓越能效</h5><p data-lang="en">NatHERS ratings of 16.7 for heating and 11.3 for cooling — far exceeding the national average.</p><p data-lang="ko">난방 16.7, 냉방 11.3의 NatHERS 등급으로 전국 평균을 크게 상회합니다.</p><p data-lang="zh">供暖 16.7、制冷 11.3 的 NatHERS 评级，大幅优于全国平均水平。</p><p data-lang="zt">供暖 16.7、製冷 11.3 的 NatHERS 評級，大幅優於全國平均水平。</p></div>
+      <div class="am"><div class="ai">🏠</div><h5 data-lang="en">Smart Home Automation</h5><h5 data-lang="ko">스마트홈 자동화</h5><h5 data-lang="zh">智能家居自动化</h5><h5 data-lang="zt">智能家居自動化</h5><p data-lang="en">Link appliances to your phone — close blinds or switch off lights from anywhere.</p><p data-lang="ko">가전을 스마트폰과 연동해 어디서든 블라인드·조명을 제어합니다.</p><p data-lang="zh">家电与手机联动，随时随地控制百叶窗与照明。</p><p data-lang="zt">家電與手機聯動，隨時隨地控制百葉窗與照明。</p></div>
+      <div class="am"><div class="ai">🔌</div><h5 data-lang="en">EV Charging</h5><h5 data-lang="ko">EV 충전</h5><h5 data-lang="zh">电动车充电</h5><h5 data-lang="zt">電動車充電</h5><p data-lang="en">Communal and private EV charging provision throughout the development.</p><p data-lang="ko">단지 전역에 공용·전용 전기차 충전 설비를 제공합니다.</p><p data-lang="zh">全区提供公共与专属电动车充电设施。</p><p data-lang="zt">全區提供公共與專屬電動車充電設施。</p></div>
+      <div class="am"><div class="ai">☀️</div><h5 data-lang="en">Rooftop Solar</h5><h5 data-lang="ko">루프탑 태양광</h5><h5 data-lang="zh">屋顶太阳能</h5><h5 data-lang="zt">屋頂太陽能</h5><p data-lang="en">Rooftop solar panels contribute to the precinct's 7-star NatHERS target.</p><p data-lang="ko">옥상 태양광 패널이 단지의 NatHERS 7성급 목표에 기여합니다.</p><p data-lang="zh">屋顶太阳能板助力全区达成 NatHERS 七星目标。</p><p data-lang="zt">屋頂太陽能板助力全區達成 NatHERS 七星目標。</p></div>
+      <div class="am"><div class="ai">📶</div><h5 data-lang="en">Smart Suburb</h5><h5 data-lang="ko">스마트 서버브</h5><h5 data-lang="zh">智慧城区</h5><h5 data-lang="zt">智慧城區</h5><p data-lang="en">WiFi hotspots, smart wayfinding and smart poles across the precinct.</p><p data-lang="ko">단지 전역의 WiFi 핫스팟, 스마트 길안내, 스마트 폴.</p><p data-lang="zh">全区 WiFi 热点、智能导引与智慧灯杆。</p><p data-lang="zt">全區 WiFi 熱點、智能導引與智慧燈杆。</p></div>
     </div>
   </div>
 </section>
 
 <section class="dk" id="developer">
   <div class="wrap fade">
-    <div class="eb"><span data-lang="en">Trusted Partners</span><span data-lang="ko">신뢰의 파트너</span></div>
-    <h2 class="ti"><span data-lang="en">Japanese Craft, <em>Australian Home</em></span><span data-lang="ko">일본의 장인정신, <em>호주의 집</em></span></h2>
+    <div class="eb"><span data-lang="en">Trusted Partners</span><span data-lang="ko">신뢰의 파트너</span><span data-lang="zh">值得信赖的伙伴</span><span data-lang="zt">值得信賴的夥伴</span></div>
+    <h2 class="ti"><span data-lang="en">Japanese Craft, <em>Australian Home</em></span><span data-lang="ko">일본의 장인정신, <em>호주의 집</em></span><span data-lang="zh">日本匠心，<em>澳洲之家</em></span><span data-lang="zt">日本匠心，<em>澳洲之家</em></span></h2>
     <div class="dg">
       <div class="dc">
         <div class="dn">Sekisui House</div>
-        <div class="dr" data-lang="en">Developer · Since 1960</div><div class="dr" data-lang="ko">디벨로퍼 · 1960년 설립</div>
+        <div class="dr" data-lang="en">Developer · Since 1960</div><div class="dr" data-lang="ko">디벨로퍼 · 1960년 설립</div><div class="dr" data-lang="zh">开发商 · 创立于 1960 年</div><div class="dr" data-lang="zt">開發商 · 創立於 1960 年</div>
         <p class="dd" data-lang="en">Founded in Japan in 1960, Sekisui House is one of the world's largest homebuilders. In Australia it has delivered over 13,000 homes with a further 10,000 in the pipeline.</p>
-        <p class="dd" data-lang="ko">1960년 일본에서 설립된 세키스이 하우스는 세계 최대 규모의 주택 건설사 중 하나입니다. 호주에서 13,000세대 이상을 공급했으며 10,000세대가 추가 진행 중입니다.</p>
-        <div class="ds"><div class="dsi"><b>2.6M+</b><span data-lang="en">Homes worldwide</span><span data-lang="ko">전 세계 공급 주택</span></div><div class="dsi"><b>4★</b><span data-lang="en">iCIRT Gold</span><span data-lang="ko">iCIRT 골드</span></div></div>
+        <p class="dd" data-lang="ko">1960년 일본에서 설립된 세키스이 하우스는 세계 최대 규모의 주택 건설사 중 하나입니다. 호주에서 13,000세대 이상을 공급했으며 10,000세대가 추가 진행 중입니다.</p><p class="dd" data-lang="zh">积水住宅于 1960 年创立于日本，是全球规模最大的住宅建造商之一。在澳洲已交付逾 13,000 户住宅，另有 10,000 户在建。</p><p class="dd" data-lang="zt">積水住宅於 1960 年創立於日本，是全球規模最大的住宅建造商之一。在澳洲已交付逾 13,000 戶住宅，另有 10,000 戶在建。</p>
+        <div class="ds"><div class="dsi"><b>2.6M+</b><span data-lang="en">Homes worldwide</span><span data-lang="ko">전 세계 공급 주택</span><span data-lang="zh">全球已交付住宅</span><span data-lang="zt">全球已交付住宅</span></div><div class="dsi"><b>4★</b><span data-lang="en">iCIRT Gold</span><span data-lang="ko">iCIRT 골드</span><span data-lang="zh">iCIRT 金级</span><span data-lang="zt">iCIRT 金級</span></div></div>
       </div>
       <div class="dc">
         <div class="dn">Hankyu Hanshin</div>
-        <div class="dr" data-lang="en">Partner · Since 1899</div><div class="dr" data-lang="ko">파트너 · 1899년 설립</div>
+        <div class="dr" data-lang="en">Partner · Since 1899</div><div class="dr" data-lang="ko">파트너 · 1899년 설립</div><div class="dr" data-lang="zh">合作伙伴 · 创立于 1899 年</div><div class="dr" data-lang="zt">合作伙伴 · 創立於 1899 年</div>
         <p class="dd" data-lang="en">With over a century of history, Hankyu Hanshin Properties has led urban development in Japan since 1899, and now develops and manages property across key Australian cities.</p>
-        <p class="dd" data-lang="ko">1899년부터 한 세기가 넘는 역사를 지닌 한큐 한신 프로퍼티스는 일본 도시개발을 선도해 왔으며, 현재 호주 주요 도시에서 부동산을 개발·운영합니다.</p>
-        <div class="ds"><div class="dsi"><b>100+</b><span data-lang="en">Years of history</span><span data-lang="ko">년의 역사</span></div><div class="dsi"><b>4</b><span data-lang="en">Australian cities</span><span data-lang="ko">개 호주 도시</span></div></div>
+        <p class="dd" data-lang="ko">1899년부터 한 세기가 넘는 역사를 지닌 한큐 한신 프로퍼티스는 일본 도시개발을 선도해 왔으며, 현재 호주 주요 도시에서 부동산을 개발·운영합니다.</p><p class="dd" data-lang="zh">阪急阪神不动产自 1899 年起已逾一个世纪，长期引领日本的城市开发，现于澳洲主要城市开发并运营物业。</p><p class="dd" data-lang="zt">阪急阪神不動產自 1899 年起已逾一個世紀，長期引領日本的城市開發，現於澳洲主要城市開發並運營物業。</p>
+        <div class="ds"><div class="dsi"><b>100+</b><span data-lang="en">Years of history</span><span data-lang="ko">년의 역사</span><span data-lang="zh">年历史</span><span data-lang="zt">年曆史</span></div><div class="dsi"><b>4</b><span data-lang="en">Australian cities</span><span data-lang="ko">개 호주 도시</span><span data-lang="zh">座澳洲城市</span><span data-lang="zt">座澳洲城市</span></div></div>
       </div>
       <div class="dc">
         <div class="dn">Group GSA</div>
-        <div class="dr" data-lang="en">Architect</div><div class="dr" data-lang="ko">건축 설계</div>
+        <div class="dr" data-lang="en">Architect</div><div class="dr" data-lang="ko">건축 설계</div><div class="dr" data-lang="zh">建筑设计</div><div class="dr" data-lang="zt">建築設計</div>
         <p class="dd" data-lang="en">A global design studio offering architecture, interior, landscape and urban design. Group GSA has led the architectural design of multiple Melrose Park stages, including Dawn and Aeris.</p>
-        <p class="dd" data-lang="ko">건축·인테리어·조경·도시설계를 아우르는 글로벌 디자인 스튜디오. Dawn과 Aeris를 포함한 멜로즈 파크 여러 단계의 건축 설계를 총괄했습니다.</p>
-        <div class="ds"><div class="dsi"><b>45+</b><span data-lang="en">Years experience</span><span data-lang="ko">년 경력</span></div><div class="dsi"><b>800+</b><span data-lang="en">Apartments at Melrose Park</span><span data-lang="ko">멜로즈 파크 세대</span></div></div>
+        <p class="dd" data-lang="ko">건축·인테리어·조경·도시설계를 아우르는 글로벌 디자인 스튜디오. Dawn과 Aeris를 포함한 멜로즈 파크 여러 단계의 건축 설계를 총괄했습니다.</p><p class="dd" data-lang="zh">横跨建筑、室内、景观与城市设计的全球设计工作室，主导了 Melrose Park 多个分期的建筑设计，包括 Dawn 与 Aeris。</p><p class="dd" data-lang="zt">橫跨建築、室內、景觀與城市設計的全球設計工作室，主導了 Melrose Park 多個分期的建築設計，包括 Dawn 與 Aeris。</p>
+        <div class="ds"><div class="dsi"><b>45+</b><span data-lang="en">Years experience</span><span data-lang="ko">년 경력</span><span data-lang="zh">年经验</span><span data-lang="zt">年經驗</span></div><div class="dsi"><b>800+</b><span data-lang="en">Apartments at Melrose Park</span><span data-lang="ko">멜로즈 파크 세대</span><span data-lang="zh">Melrose Park 户数</span><span data-lang="zt">Melrose Park 戶數</span></div></div>
       </div>
     </div>
   </div>
@@ -310,18 +323,18 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section class="ct" id="contact">
   <div class="cw fade">
-    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
-    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Aeris</em></span><span data-lang="ko">Aeris에서<br><em>새 보금자리</em>를</span></h2>
+    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
+    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Aeris</em></span><span data-lang="ko">Aeris에서<br><em>새 보금자리</em>를</span><span data-lang="zh">在 Aeris<br>开启<em>新家</em></span><span data-lang="zt">在 Aeris<br>開啓<em>新家</em></span></h2>
     <p class="su" style="margin:0 auto" data-lang="en">Construction commenced late 2025 · First tower due Q4 2027, second tower 2028. Contact Sunghoon Choi (Sunny) at Forise Group for availability, floorplans and a personalised consultation.</p>
-    <p class="su" style="margin:0 auto" data-lang="ko">2025년 말 착공 · 첫 번째 타워 2027년 4분기, 두 번째 타워 2028년 준공 예정. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p>
+    <p class="su" style="margin:0 auto" data-lang="ko">2025년 말 착공 · 첫 번째 타워 2027년 4분기, 두 번째 타워 2028년 준공 예정. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p><p class="su" style="margin:0 auto" data-lang="zh">2025 年底动工 · 首座塔楼预计 2027 年第四季度、第二座塔楼 2028 年竣工。欢迎向 Forise Group 的 Sunny 咨询剩余房源、平面图与专属建议。</p><p class="su" style="margin:0 auto" data-lang="zt">2025 年底動工 · 首座塔樓預計 2027 年第四季度、第二座塔樓 2028 年竣工。歡迎向 Forise Group 的 Sunny 諮詢剩餘房源、平面圖與專屬建議。</p>
     <div class="ci">
-      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span></div>
-      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><a href="tel:0414824225">0414 824 225</a></div>
+      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span></div>
+      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><label data-lang="zh">电话 / KakaoTalk</label><label data-lang="zt">電話 / KakaoTalk</label><a href="tel:0414824225">0414 824 225</a></div>
       <div class="cii"><label>Email</label><a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a></div>
     </div>
-    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Aeris%20at%20Melrose%20Park%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span></a>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Aeris%20at%20Melrose%20Park%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span></a>
     <p class="cd" data-lang="en">All information is for marketing purposes only and subject to change without notice. Images are artist impressions. Pricing available upon request. Forise Group acts as selling agent. Developed by Sekisui House Australia with Hankyu Hanshin Properties.</p>
-    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: 세키스이 하우스 오스트레일리아 & 한큐 한신 프로퍼티스.</p>
+    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: 세키스이 하우스 오스트레일리아 & 한큐 한신 프로퍼티스.</p><p class="cd" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像为效果图。价格于咨询时提供。Forise Group 为销售代理。开发商：积水住宅澳洲 & 阪急阪神不动产。</p><p class="cd" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像爲效果圖。價格於諮詢時提供。Forise Group 爲銷售代理。開發商：積水住宅澳洲 & 阪急阪神不動產。</p>
   </div>
 </section>
 
@@ -332,8 +345,22 @@ function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='d
 const sv=localStorage.getItem('theme');
 if(sv){document.body.setAttribute('data-theme',sv);document.querySelector('.bt').textContent=sv==='dark'?'☀':'☾';}
 else if(false){document.body.setAttribute('data-theme','dark');document.querySelector('.bt').textContent='☀';}
-let ko=false;
-function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.bl').textContent=ko?'English':'한국어';}
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('aeris-melrose-park-lang', l); }catch(e){}
+}
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('aeris-melrose-park-lang'); }catch(e){ return null; } })() || 'en');
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 </script>

@@ -128,9 +128,11 @@ section{padding:100px 60px}
 footer{background:#080A06;border-top:1px solid rgba(155,190,131,.1);padding:34px 60px;display:flex;justify-content:space-between;align-items:center}
 .fb{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--acc3)}
 .fc{font-size:.7rem;color:rgba(244,247,238,.28)}
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta .kt{display:none}
 @media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hc{padding:0 24px 60px}
 .g2,.li,.dw{grid-template-columns:1fr;gap:38px}.ig,.fpg{grid-template-columns:1fr}.ic{height:300px}
@@ -138,13 +140,24 @@ body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta 
 .band{height:300px}.bc{left:24px;bottom:24px}.vis,.lim{height:340px}.hb{display:none}
 footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 @media(max-width:600px){.ag,.lg,.sw,.hm,.dst{grid-template-columns:1fr}.sp{border-right:none;border-bottom:1px solid rgba(255,255,255,.18)}}
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--acc);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 <nav>
   <a href="#" class="nl">Melrose Park<span>VILLAGE</span></a>
   <div class="na">
-    <button class="bl" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="bt" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bm">☕ Buy Me a Coffee</a>
   </div>
@@ -154,20 +167,20 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img class="hi" src="assets/melrose-park-village/hero.jpg" alt="Melrose Park Village — Artist Impression" loading="eager">
   <div class="ho"></div><div class="ha"></div>
   <div class="hb" data-lang="en">MELROSE PARK NSW 2114</div>
-  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div>
+  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div><div class="hb" data-lang="zh">Melrose Park NSW 2114</div><div class="hb" data-lang="zt">Melrose Park NSW 2114</div>
   <div class="hc">
     <div class="he" data-lang="en">Melrose Park Village · by Sekisui House</div>
-    <div class="he" data-lang="ko">멜로즈 파크 빌리지 · by 세키스이 하우스</div>
-    <h1 class="ht"><span data-lang="en">Live Well<br>at the <em>Village.</em></span><span data-lang="ko">빌리지에서<br><em>잘 사는 법.</em></span></h1>
+    <div class="he" data-lang="ko">멜로즈 파크 빌리지 · by 세키스이 하우스</div><div class="he" data-lang="zh">Melrose Park Village · by 积水住宅</div><div class="he" data-lang="zt">Melrose Park Village · by 積水住宅</div>
+    <h1 class="ht"><span data-lang="en">Live Well<br>at the <em>Village.</em></span><span data-lang="ko">빌리지에서<br><em>잘 사는 법.</em></span><span data-lang="zh">在村落里<br><em>好好生活。</em></span><span data-lang="zt">在村落裏<br><em>好好生活。</em></span></h1>
     <p class="hs" data-lang="en">Completed and ready to move in — 2 &amp; 3 bedroom apartments around 4,000sqm of private green space</p>
-    <p class="hs" data-lang="ko">완공 후 즉시 입주 가능 — 4,000㎡ 전용 녹지를 품은 2·3베드룸 아파트</p>
+    <p class="hs" data-lang="ko">완공 후 즉시 입주 가능 — 4,000㎡ 전용 녹지를 품은 2·3베드룸 아파트</p><p class="hs" data-lang="zh">竣工现房，即买即住 —— 环抱 4,000 平方米专属绿地的 2、3 房公寓</p><p class="hs" data-lang="zt">竣工現房，即買即住 —— 環抱 4,000 平方米專屬綠地的 2、3 房公寓</p>
     <div class="hm">
-      <div class="hmi"><label data-lang="en">Private Open Space</label><label data-lang="ko">전용 녹지</label><span>4,000<small>m²</small></span></div>
-      <div class="hmi"><label data-lang="en">Masterplan Parkland</label><label data-lang="ko">마스터플랜 공원</label><span>50,000<small>m²</small></span></div>
-      <div class="hmi"><label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label><span>5.4<small>km</small></span></div>
-      <div class="hmi"><label data-lang="en">Status</label><label data-lang="ko">현황</label><span data-lang="en">Move in now</span><span data-lang="ko">즉시 입주</span></div>
+      <div class="hmi"><label data-lang="en">Private Open Space</label><label data-lang="ko">전용 녹지</label><label data-lang="zh">专属绿地</label><label data-lang="zt">專屬綠地</label><span>4,000<small>m²</small></span></div>
+      <div class="hmi"><label data-lang="en">Masterplan Parkland</label><label data-lang="ko">마스터플랜 공원</label><label data-lang="zh">总体规划公园</label><label data-lang="zt">總體規劃公園</label><span>50,000<small>m²</small></span></div>
+      <div class="hmi"><label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label><label data-lang="zh">至 Parramatta</label><label data-lang="zt">至 Parramatta</label><span>5.4<small>km</small></span></div>
+      <div class="hmi"><label data-lang="en">Status</label><label data-lang="ko">현황</label><label data-lang="zh">现状</label><label data-lang="zt">現狀</label><span data-lang="en">Move in now</span><span data-lang="ko">즉시 입주</span><span data-lang="zh">即可入住</span><span data-lang="zt">即可入住</span></div>
     </div>
-    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span> →</a>
+    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span><span class="kt" data-lang="zh">咨询详情</span><span class="kt" data-lang="zt">諮詢詳情</span> →</a>
   </div>
 </section>
 
@@ -177,67 +190,67 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
       <img src="assets/melrose-park-village/courtyard.jpg" alt="Melrose Park Village landscaped courtyard and BBQ pavilion — completed" loading="lazy">
       <div class="vo"></div>
       <div class="vb" data-lang="en">Completed &amp; Ready to Move In</div>
-      <div class="vb" data-lang="ko">완공 · 즉시 입주 가능</div>
+      <div class="vb" data-lang="ko">완공 · 즉시 입주 가능</div><div class="vb" data-lang="zh">已竣工 · 即可入住</div><div class="vb" data-lang="zt">已竣工 · 即可入住</div>
       <div class="vc" data-lang="en">Landscaped courtyard and BBQ pavilion — photographed on completion</div>
-      <div class="vc" data-lang="ko">조경 안뜰과 BBQ 파빌리온 — 준공 후 실제 촬영</div>
+      <div class="vc" data-lang="ko">조경 안뜰과 BBQ 파빌리온 — 준공 후 실제 촬영</div><div class="vc" data-lang="zh">景观庭院与烧烤凉亭 —— 竣工后实景拍摄</div><div class="vc" data-lang="zt">景觀庭院與燒烤涼亭 —— 竣工後實景拍攝</div>
     </div>
     <div>
-      <div class="eb"><span data-lang="en">Space to Grow</span><span data-lang="ko">성장할 공간</span></div>
-      <h2 class="ti"><span data-lang="en">Melrose Park <em>Village</em></span><span data-lang="ko">멜로즈 파크 <em>빌리지</em></span></h2>
+      <div class="eb"><span data-lang="en">Space to Grow</span><span data-lang="ko">성장할 공간</span><span data-lang="zh">成长的空间</span><span data-lang="zt">成長的空間</span></div>
+      <h2 class="ti"><span data-lang="en">Melrose Park <em>Village</em></span><span data-lang="ko">멜로즈 파크 <em>빌리지</em></span><span data-lang="zh">Melrose Park <em>Village</em></span><span data-lang="zt">Melrose Park <em>Village</em></span></h2>
       <p class="bt2" data-lang="en">Welcome to the Village — a growing community at the heart of Melrose Park and a thriving hub for urban life. Built around almost 4,000sqm of green space private to residents, this place is designed for the little interactions that make your day, with all the retail and lifestyle offerings of city living at your doorstep.</p>
-      <p class="bt2" data-lang="ko">빌리지에 오신 것을 환영합니다 — 멜로즈 파크 중심부에서 성장하는 커뮤니티이자 도시 생활의 활기찬 허브입니다. 입주민 전용 약 4,000㎡ 녹지를 중심으로 조성되어 일상의 소소한 교류를 담아내며, 도심의 리테일과 라이프스타일이 문 앞에 펼쳐집니다.</p>
+      <p class="bt2" data-lang="ko">빌리지에 오신 것을 환영합니다 — 멜로즈 파크 중심부에서 성장하는 커뮤니티이자 도시 생활의 활기찬 허브입니다. 입주민 전용 약 4,000㎡ 녹지를 중심으로 조성되어 일상의 소소한 교류를 담아내며, 도심의 리테일과 라이프스타일이 문 앞에 펼쳐집니다.</p><p class="bt2" data-lang="zh">欢迎来到 Village —— 位于 Melrose Park 核心、不断成长的社区，也是都市生活的活力枢纽。项目围绕约 4,000 平方米的住户专属绿地布局，承载日常的点滴交流，都市零售与生活方式近在门前。</p><p class="bt2" data-lang="zt">歡迎來到 Village —— 位於 Melrose Park 核心、不斷成長的社區，也是都市生活的活力樞紐。項目圍繞約 4,000 平方米的住戶專屬綠地佈局，承載日常的點滴交流，都市零售與生活方式近在門前。</p>
       <p class="bt2" data-lang="en">Melrose Park Village completes the northern stage of the Melrose Park masterplan. Relax in oversized, adaptable spaces designed to grow with you — with green spaces at your door and a landmark Central Park due in 2027.</p>
-      <p class="bt2" data-lang="ko">멜로즈 파크 빌리지는 마스터플랜의 북측 단계를 완성합니다. 삶의 변화에 맞춰 유연하게 쓸 수 있는 넉넉한 공간에서 여유를 누리세요 — 문 앞의 녹지와 2027년 완공 예정인 랜드마크 센트럴 파크가 함께합니다.</p>
+      <p class="bt2" data-lang="ko">멜로즈 파크 빌리지는 마스터플랜의 북측 단계를 완성합니다. 삶의 변화에 맞춰 유연하게 쓸 수 있는 넉넉한 공간에서 여유를 누리세요 — 문 앞의 녹지와 2027년 완공 예정인 랜드마크 센트럴 파크가 함께합니다.</p><p class="bt2" data-lang="zh">Melrose Park Village 让总体规划的北侧分期臻于完整。在可随生活变化灵活运用的宽敞空间里从容生活 —— 门前绿意相伴，预计 2027 年建成的地标中央公园亦触手可及。</p><p class="bt2" data-lang="zt">Melrose Park Village 讓總體規劃的北側分期臻於完整。在可隨生活變化靈活運用的寬敞空間裏從容生活 —— 門前綠意相伴，預計 2027 年建成的地標中央公園亦觸手可及。</p>
       <div class="tags">
-        <span class="tag" data-lang="en">Oversized Layouts</span><span class="tag" data-lang="ko">넓은 평면</span>
-        <span class="tag" data-lang="en">Wintergarden</span><span class="tag" data-lang="ko">윈터가든</span>
-        <span class="tag" data-lang="en">Smart Home</span><span class="tag" data-lang="ko">스마트홈</span>
-        <span class="tag" data-lang="en">European Appliances</span><span class="tag" data-lang="ko">유럽산 가전</span>
-        <span class="tag" data-lang="en">Pet-Friendly</span><span class="tag" data-lang="ko">반려동물 친화</span>
+        <span class="tag" data-lang="en">Oversized Layouts</span><span class="tag" data-lang="ko">넓은 평면</span><span class="tag" data-lang="zh">宽敞户型</span><span class="tag" data-lang="zt">寬敞戶型</span>
+        <span class="tag" data-lang="en">Wintergarden</span><span class="tag" data-lang="ko">윈터가든</span><span class="tag" data-lang="zh">冬季花园</span><span class="tag" data-lang="zt">冬季花園</span>
+        <span class="tag" data-lang="en">Smart Home</span><span class="tag" data-lang="ko">스마트홈</span><span class="tag" data-lang="zh">智能家居</span><span class="tag" data-lang="zt">智能家居</span>
+        <span class="tag" data-lang="en">European Appliances</span><span class="tag" data-lang="ko">유럽산 가전</span><span class="tag" data-lang="zh">欧洲家电</span><span class="tag" data-lang="zt">歐洲家電</span>
+        <span class="tag" data-lang="en">Pet-Friendly</span><span class="tag" data-lang="ko">반려동물 친화</span><span class="tag" data-lang="zh">宠物友好</span><span class="tag" data-lang="zt">寵物友好</span>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip"><div class="sw">
-  <div class="sp"><div class="sn">4,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Private Open Space</div><div class="sl" data-lang="ko">전용 녹지</div></div>
-  <div class="sp"><div class="sn">20,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Grand Central Park</div><div class="sl" data-lang="ko">그랜드 센트럴 파크</div></div>
-  <div class="sp"><div class="sn">25<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">Specialty Stores</div><div class="sl" data-lang="ko">전문 매장</div></div>
-  <div class="sp"><div class="sn">1,500<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">New Trees Planted</div><div class="sl" data-lang="ko">신규 식재 수목</div></div>
+  <div class="sp"><div class="sn">4,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Private Open Space</div><div class="sl" data-lang="ko">전용 녹지</div><div class="sl" data-lang="zh">专属绿地</div><div class="sl" data-lang="zt">專屬綠地</div></div>
+  <div class="sp"><div class="sn">20,000<span style="font-size:1.2rem">m²</span></div><div class="sl" data-lang="en">Grand Central Park</div><div class="sl" data-lang="ko">그랜드 센트럴 파크</div><div class="sl" data-lang="zh">Grand Central Park</div><div class="sl" data-lang="zt">Grand Central Park</div></div>
+  <div class="sp"><div class="sn">25<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">Specialty Stores</div><div class="sl" data-lang="ko">전문 매장</div><div class="sl" data-lang="zh">专门店</div><div class="sl" data-lang="zt">專門店</div></div>
+  <div class="sp"><div class="sn">1,500<span style="font-size:1.4rem">+</span></div><div class="sl" data-lang="en">New Trees Planted</div><div class="sl" data-lang="ko">신규 식재 수목</div><div class="sl" data-lang="zh">新植树木</div><div class="sl" data-lang="zt">新植樹木</div></div>
 </div></div>
 
 <div class="band">
   <img src="assets/melrose-park-village/city-arrival.jpg" alt="Melrose Park Village arrival — Artist Impression" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">More Than Green Space</h3><h3 data-lang="ko">녹지 그 이상</h3>
+    <h3 data-lang="en">More Than Green Space</h3><h3 data-lang="ko">녹지 그 이상</h3><h3 data-lang="zh">不只是绿地</h3><h3 data-lang="zt">不只是綠地</h3>
     <p data-lang="en">Rooftop garden · Wild play · Fruit trees · Artist Impression</p>
-    <p data-lang="ko">루프탑 가든 · 와일드 플레이 · 과실수 · 조감도</p>
+    <p data-lang="ko">루프탑 가든 · 와일드 플레이 · 과실수 · 조감도</p><p data-lang="zh">屋顶花园 · 自然野趣游乐 · 果树 · 效果图</p><p data-lang="zt">屋頂花園 · 自然野趣遊樂 · 果樹 · 效果圖</p>
   </div>
 </div>
 
 <section id="amenities">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">A Place to Thrive</span><span data-lang="ko">성장하는 공간</span></div>
-      <h2 class="ti"><span data-lang="en">Space to relax,<br>work-out &amp; <em>recover</em></span><span data-lang="ko">쉬고, 운동하고,<br><em>회복하는</em> 공간</span></h2>
+      <div class="eb"><span data-lang="en">A Place to Thrive</span><span data-lang="ko">성장하는 공간</span><span data-lang="zh">成长的空间</span><span data-lang="zt">成長的空間</span></div>
+      <h2 class="ti"><span data-lang="en">Space to relax,<br>work-out &amp; <em>recover</em></span><span data-lang="ko">쉬고, 운동하고,<br><em>회복하는</em> 공간</span><span data-lang="zh">休憩、锻炼、<br><em>恢复</em>之所</span><span data-lang="zt">休憩、鍛鍊、<br><em>恢復</em>之所</span></h2>
     </div>
     <div class="ag fade">
-      <div class="am"><div class="ai">🧘</div><h5 data-lang="en">Yoga &amp; Meditation</h5><h5 data-lang="ko">요가 & 명상</h5><p data-lang="en">A designated yoga studio and meditation room give you every opportunity to thrive — mentally and physically.</p><p data-lang="ko">전용 요가 스튜디오와 명상룸이 신체적·정신적 웰빙을 뒷받침합니다.</p></div>
-      <div class="am"><div class="ai">🔥</div><h5 data-lang="en">Gym &amp; Infrared Sauna</h5><h5 data-lang="ko">짐 & 적외선 사우나</h5><p data-lang="en">A residents' gym paired with an infrared sauna for recovery after every session.</p><p data-lang="ko">입주민 전용 짐과 운동 후 회복을 위한 적외선 사우나를 갖췄습니다.</p></div>
-      <div class="am"><div class="ai">🌿</div><h5 data-lang="en">Rooftop Garden</h5><h5 data-lang="ko">루프탑 가든</h5><p data-lang="en">A rooftop garden with wild play area, open naturescapes and productive fruit trees honouring the site's orchard history.</p><p data-lang="ko">와일드 플레이 공간, 자연 경관, 부지의 과수원 역사를 기리는 과실수가 어우러진 루프탑 가든.</p></div>
-      <div class="am"><div class="ai">💼</div><h5 data-lang="en">Co-Working Space</h5><h5 data-lang="ko">코워킹 스페이스</h5><p data-lang="en">Flexible co-working with individual workspaces, fast internet and printers — work from home without staying home.</p><p data-lang="ko">개인 업무 공간, 고속 인터넷, 프린터를 갖춘 유연한 코워킹 공간.</p></div>
-      <div class="am"><div class="ai">🎱</div><h5 data-lang="en">Activities Room</h5><h5 data-lang="ko">액티비티 룸</h5><p data-lang="en">An indoor activities room — the perfect spot to meet neighbours for chess or a game of pool.</p><p data-lang="ko">체스나 당구로 이웃과 어울릴 수 있는 실내 액티비티 룸.</p></div>
-      <div class="am"><div class="ai">🐾</div><h5 data-lang="en">Pet Wash &amp; Grooming</h5><h5 data-lang="ko">펫 워시 & 그루밍</h5><p data-lang="en">Plenty of green space for long walks, plus a pet wash bay and grooming facilities.</p><p data-lang="ko">산책하기 좋은 녹지와 함께 펫 워시 베이·그루밍 시설을 제공합니다.</p></div>
-      <div class="am"><div class="ai">🔌</div><h5 data-lang="en">EV Charging &amp; Smart Home</h5><h5 data-lang="ko">EV 충전 & 스마트홈</h5><p data-lang="en">EV charging across the development, plus a smart home system in every apartment.</p><p data-lang="ko">단지 전역 EV 충전 설비와 전 세대 스마트홈 시스템을 제공합니다.</p></div>
-      <div class="am"><div class="ai">🚌</div><h5 data-lang="en">Resident Shuttle Bus</h5><h5 data-lang="ko">입주민 셔틀버스</h5><p data-lang="en">A free resident shuttle runs to Meadowbank Station and Wharf for train and ferry connections.</p><p data-lang="ko">메도우뱅크역·선착장까지 무료 입주민 셔틀이 운행되어 기차·페리로 연결됩니다.</p></div>
-      <div class="am"><div class="ai">🛝</div><h5 data-lang="en">Kids' Play Areas</h5><h5 data-lang="ko">키즈 플레이 공간</h5><p data-lang="en">Dedicated play areas and BBQ zones woven through 4,000sqm of open naturescapes.</p><p data-lang="ko">4,000㎡ 자연 경관 속에 마련된 전용 놀이 공간과 BBQ 존.</p></div>
+      <div class="am"><div class="ai">🧘</div><h5 data-lang="en">Yoga &amp; Meditation</h5><h5 data-lang="ko">요가 & 명상</h5><h5 data-lang="zh">瑜伽与冥想</h5><h5 data-lang="zt">瑜伽與冥想</h5><p data-lang="en">A designated yoga studio and meditation room give you every opportunity to thrive — mentally and physically.</p><p data-lang="ko">전용 요가 스튜디오와 명상룸이 신체적·정신적 웰빙을 뒷받침합니다.</p><p data-lang="zh">专属瑜伽工作室与冥想室，呵护身心健康。</p><p data-lang="zt">專屬瑜伽工作室與冥想室，呵護身心健康。</p></div>
+      <div class="am"><div class="ai">🔥</div><h5 data-lang="en">Gym &amp; Infrared Sauna</h5><h5 data-lang="ko">짐 & 적외선 사우나</h5><h5 data-lang="zh">健身房与红外线桑拿</h5><h5 data-lang="zt">健身房與紅外線桑拿</h5><p data-lang="en">A residents' gym paired with an infrared sauna for recovery after every session.</p><p data-lang="ko">입주민 전용 짐과 운동 후 회복을 위한 적외선 사우나를 갖췄습니다.</p><p data-lang="zh">住户专属健身房，并配红外线桑拿助力运动后恢复。</p><p data-lang="zt">住戶專屬健身房，並配紅外線桑拿助力運動後恢復。</p></div>
+      <div class="am"><div class="ai">🌿</div><h5 data-lang="en">Rooftop Garden</h5><h5 data-lang="ko">루프탑 가든</h5><h5 data-lang="zh">屋顶花园</h5><h5 data-lang="zt">屋頂花園</h5><p data-lang="en">A rooftop garden with wild play area, open naturescapes and productive fruit trees honouring the site's orchard history.</p><p data-lang="ko">와일드 플레이 공간, 자연 경관, 부지의 과수원 역사를 기리는 과실수가 어우러진 루프탑 가든.</p><p data-lang="zh">融合自然野趣游乐空间、自然景观，以及致敬地块果园历史的果树的屋顶花园。</p><p data-lang="zt">融合自然野趣遊樂空間、自然景觀，以及致敬地塊果園歷史的果樹的屋頂花園。</p></div>
+      <div class="am"><div class="ai">💼</div><h5 data-lang="en">Co-Working Space</h5><h5 data-lang="ko">코워킹 스페이스</h5><h5 data-lang="zh">共享办公空间</h5><h5 data-lang="zt">共享辦公空間</h5><p data-lang="en">Flexible co-working with individual workspaces, fast internet and printers — work from home without staying home.</p><p data-lang="ko">개인 업무 공간, 고속 인터넷, 프린터를 갖춘 유연한 코워킹 공간.</p><p data-lang="zh">配备独立工位、高速网络与打印设备的灵活共享办公空间。</p><p data-lang="zt">配備獨立工位、高速網絡與打印設備的靈活共享辦公空間。</p></div>
+      <div class="am"><div class="ai">🎱</div><h5 data-lang="en">Activities Room</h5><h5 data-lang="ko">액티비티 룸</h5><h5 data-lang="zh">活动室</h5><h5 data-lang="zt">活動室</h5><p data-lang="en">An indoor activities room — the perfect spot to meet neighbours for chess or a game of pool.</p><p data-lang="ko">체스나 당구로 이웃과 어울릴 수 있는 실내 액티비티 룸.</p><p data-lang="zh">可与邻里下棋或打台球的室内活动室。</p><p data-lang="zt">可與鄰里下棋或打檯球的室內活動室。</p></div>
+      <div class="am"><div class="ai">🐾</div><h5 data-lang="en">Pet Wash &amp; Grooming</h5><h5 data-lang="ko">펫 워시 & 그루밍</h5><h5 data-lang="zh">宠物清洗与美容</h5><h5 data-lang="zt">寵物清洗與美容</h5><p data-lang="en">Plenty of green space for long walks, plus a pet wash bay and grooming facilities.</p><p data-lang="ko">산책하기 좋은 녹지와 함께 펫 워시 베이·그루밍 시설을 제공합니다.</p><p data-lang="zh">提供宠物清洗位与美容设施，并有适合散步的优质绿地。</p><p data-lang="zt">提供寵物清洗位與美容設施，並有適合散步的優質綠地。</p></div>
+      <div class="am"><div class="ai">🔌</div><h5 data-lang="en">EV Charging &amp; Smart Home</h5><h5 data-lang="ko">EV 충전 & 스마트홈</h5><h5 data-lang="zh">电动车充电与智能家居</h5><h5 data-lang="zt">電動車充電與智能家居</h5><p data-lang="en">EV charging across the development, plus a smart home system in every apartment.</p><p data-lang="ko">단지 전역 EV 충전 설비와 전 세대 스마트홈 시스템을 제공합니다.</p><p data-lang="zh">全区配备电动车充电设施，全部户型配置智能家居系统。</p><p data-lang="zt">全區配備電動車充電設施，全部戶型配置智能家居系統。</p></div>
+      <div class="am"><div class="ai">🚌</div><h5 data-lang="en">Resident Shuttle Bus</h5><h5 data-lang="ko">입주민 셔틀버스</h5><h5 data-lang="zh">住户接驳巴士</h5><h5 data-lang="zt">住戶接駁巴士</h5><p data-lang="en">A free resident shuttle runs to Meadowbank Station and Wharf for train and ferry connections.</p><p data-lang="ko">메도우뱅크역·선착장까지 무료 입주민 셔틀이 운행되어 기차·페리로 연결됩니다.</p><p data-lang="zh">免费住户接驳巴士往返 Meadowbank 车站与码头，衔接火车与渡轮。</p><p data-lang="zt">免費住戶接駁巴士往返 Meadowbank 車站與碼頭，銜接火車與渡輪。</p></div>
+      <div class="am"><div class="ai">🛝</div><h5 data-lang="en">Kids' Play Areas</h5><h5 data-lang="ko">키즈 플레이 공간</h5><h5 data-lang="zh">儿童游乐空间</h5><h5 data-lang="zt">兒童遊樂空間</h5><p data-lang="en">Dedicated play areas and BBQ zones woven through 4,000sqm of open naturescapes.</p><p data-lang="ko">4,000㎡ 자연 경관 속에 마련된 전용 놀이 공간과 BBQ 존.</p><p data-lang="zh">于 4,000 平方米自然景观中设置的专属游乐空间与烧烤区。</p><p data-lang="zt">於 4,000 平方米自然景觀中設置的專屬遊樂空間與燒烤區。</p></div>
     </div>
 
     <div class="ig fade" style="grid-template-columns:repeat(3,1fr)">
-      <div class="ic"><img src="assets/melrose-park-village/gym.jpg" alt="Residents gym — completed" loading="lazy"><div class="il"><h4 data-lang="en">The Gym</h4><h4 data-lang="ko">피트니스</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p></div></div>
-      <div class="ic"><img src="assets/melrose-park-village/sauna.jpg" alt="Sauna — completed" loading="lazy"><div class="il"><h4 data-lang="en">The Sauna</h4><h4 data-lang="ko">사우나</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p></div></div>
-      <div class="ic"><img src="assets/melrose-park-village/coworking.jpg" alt="Co-working space — completed" loading="lazy"><div class="il"><h4 data-lang="en">Co-Working Space</h4><h4 data-lang="ko">코워킹 스페이스</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/gym.jpg" alt="Residents gym — completed" loading="lazy"><div class="il"><h4 data-lang="en">The Gym</h4><h4 data-lang="ko">피트니스</h4><h4 data-lang="zh">健身</h4><h4 data-lang="zt">健身</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p><p data-lang="zh">竣工后实景拍摄</p><p data-lang="zt">竣工後實景拍攝</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/sauna.jpg" alt="Sauna — completed" loading="lazy"><div class="il"><h4 data-lang="en">The Sauna</h4><h4 data-lang="ko">사우나</h4><h4 data-lang="zh">桑拿</h4><h4 data-lang="zt">桑拿</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p><p data-lang="zh">竣工后实景拍摄</p><p data-lang="zt">竣工後實景拍攝</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/coworking.jpg" alt="Co-working space — completed" loading="lazy"><div class="il"><h4 data-lang="en">Co-Working Space</h4><h4 data-lang="ko">코워킹 스페이스</h4><h4 data-lang="zh">共享办公空间</h4><h4 data-lang="zt">共享辦公空間</h4><p data-lang="en">Photographed on completion</p><p data-lang="ko">준공 후 실제 촬영</p><p data-lang="zh">竣工后实景拍摄</p><p data-lang="zt">竣工後實景拍攝</p></div></div>
     </div>
   </div>
 </section>
@@ -246,22 +259,22 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img src="assets/melrose-park-village/entrance.jpg" alt="Melrose Park Village residential entrance at dusk — completed" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">A Considered Arrival</h3><h3 data-lang="ko">품격 있는 진입부</h3>
+    <h3 data-lang="en">A Considered Arrival</h3><h3 data-lang="ko">품격 있는 진입부</h3><h3 data-lang="zh">格调入户</h3><h3 data-lang="zt">格調入戶</h3>
     <p data-lang="en">Residential entrance · Photographed on completion</p>
-    <p data-lang="ko">주거동 엔트런스 · 준공 후 실제 촬영</p>
+    <p data-lang="ko">주거동 엔트런스 · 준공 후 실제 촬영</p><p data-lang="zh">住宅楼入口 · 竣工后实景拍摄</p><p data-lang="zt">住宅樓入口 · 竣工後實景拍攝</p>
   </div>
 </div>
 
 <section class="dk" id="residences">
   <div class="wrap fade">
-    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span></div>
-    <h2 class="ti"><span data-lang="en">Life-Sized <em>Proportions</em></span><span data-lang="ko">삶에 꼭 맞는 <em>규모</em></span></h2>
+    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span><span data-lang="zh">住宅</span><span data-lang="zt">住宅</span></div>
+    <h2 class="ti"><span data-lang="en">Life-Sized <em>Proportions</em></span><span data-lang="ko">삶에 꼭 맞는 <em>규모</em></span><span data-lang="zh">恰如其分的<em>尺度</em></span><span data-lang="zt">恰如其分的<em>尺度</em></span></h2>
     <p class="su" data-lang="en">All floorplans are designed to maximise Sydney's natural light, air flow and views. The Three Bedroom offers the comfort of a freestanding home with the practicality of apartment living — generous kitchens with premium European appliances, and a wintergarden that works as both balcony and living space.</p>
-    <p class="su" data-lang="ko">모든 평면은 시드니의 자연 채광, 통풍, 조망을 극대화하도록 설계되었습니다. 3베드룸은 단독주택의 여유와 아파트의 편리함을 동시에 제공하며, 프리미엄 유럽산 가전을 갖춘 넉넉한 주방과 발코니이자 거실이 되는 윈터가든을 갖췄습니다.</p>
+    <p class="su" data-lang="ko">모든 평면은 시드니의 자연 채광, 통풍, 조망을 극대화하도록 설계되었습니다. 3베드룸은 단독주택의 여유와 아파트의 편리함을 동시에 제공하며, 프리미엄 유럽산 가전을 갖춘 넉넉한 주방과 발코니이자 거실이 되는 윈터가든을 갖췄습니다.</p><p class="su" data-lang="zh">所有户型均以最大化悉尼的自然采光、通风与景观为设计原则。3 房户型兼具独栋住宅的从容与公寓的便利，配备高端欧洲家电的宽敞厨房，以及既是阳台又是起居空间的冬季花园。</p><p class="su" data-lang="zt">所有戶型均以最大化悉尼的自然採光、通風與景觀爲設計原則。3 房戶型兼具獨棟住宅的從容與公寓的便利，配備高端歐洲家電的寬敞廚房，以及既是陽臺又是起居空間的冬季花園。</p>
     <div class="ig">
-      <div class="ic"><img src="assets/melrose-park-village/int-living.jpg" alt="Living, dining and kitchen — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">Live at Scale</h4><h4 data-lang="ko">넉넉한 스케일</h4><p data-lang="en">Living, dining &amp; kitchen · Completed apartment</p><p data-lang="ko">거실·다이닝·주방 · 실제 준공 세대</p></div></div>
-      <div class="ic"><img src="assets/melrose-park-village/int-kitchen.jpg" alt="Kitchen with stone benchtop — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">A Generous Heart</h4><h4 data-lang="ko">집의 중심, 주방</h4><p data-lang="en">Stone benchtops · European appliances</p><p data-lang="ko">스톤 벤치탑 · 유럽산 가전</p></div></div>
-      <div class="ic"><img src="assets/melrose-park-village/int-balcony.jpg" alt="Bedroom opening to balcony — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">Indoors, Outdoors</h4><h4 data-lang="ko">실내와 실외</h4><p data-lang="en">Bedroom opening to balcony · Completed apartment</p><p data-lang="ko">발코니와 연결된 침실 · 실제 준공 세대</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/int-living.jpg" alt="Living, dining and kitchen — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">Live at Scale</h4><h4 data-lang="ko">넉넉한 스케일</h4><h4 data-lang="zh">宽裕的尺度</h4><h4 data-lang="zt">寬裕的尺度</h4><p data-lang="en">Living, dining &amp; kitchen · Completed apartment</p><p data-lang="ko">거실·다이닝·주방 · 실제 준공 세대</p><p data-lang="zh">起居、餐厅与厨房 · 实际竣工单元</p><p data-lang="zt">起居、餐廳與廚房 · 實際竣工單元</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/int-kitchen.jpg" alt="Kitchen with stone benchtop — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">A Generous Heart</h4><h4 data-lang="ko">집의 중심, 주방</h4><h4 data-lang="zh">家的核心：厨房</h4><h4 data-lang="zt">家的核心：廚房</h4><p data-lang="en">Stone benchtops · European appliances</p><p data-lang="ko">스톤 벤치탑 · 유럽산 가전</p><p data-lang="zh">石材台面 · 欧洲家电</p><p data-lang="zt">石材檯面 · 歐洲家電</p></div></div>
+      <div class="ic"><img src="assets/melrose-park-village/int-balcony.jpg" alt="Bedroom opening to balcony — completed apartment" loading="lazy"><div class="il"><h4 data-lang="en">Indoors, Outdoors</h4><h4 data-lang="ko">실내와 실외</h4><h4 data-lang="zh">室内与室外</h4><h4 data-lang="zt">室內與室外</h4><p data-lang="en">Bedroom opening to balcony · Completed apartment</p><p data-lang="ko">발코니와 연결된 침실 · 실제 준공 세대</p><p data-lang="zh">连通阳台的卧室 · 实际竣工单元</p><p data-lang="zt">連通陽臺的臥室 · 實際竣工單元</p></div></div>
     </div>
   </div>
 </section>
@@ -269,10 +282,10 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 <section class="fpsec" id="floorplans">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">Three Bedroom Floorplans</span><span data-lang="ko">3베드룸 평면도</span></div>
-      <h2 class="ti"><span data-lang="en">Room for <em>everyone</em></span><span data-lang="ko">모두를 위한 <em>공간</em></span></h2>
+      <div class="eb"><span data-lang="en">Three Bedroom Floorplans</span><span data-lang="ko">3베드룸 평면도</span><span data-lang="zh">3 房户型图</span><span data-lang="zt">3 房戶型圖</span></div>
+      <h2 class="ti"><span data-lang="en">Room for <em>everyone</em></span><span data-lang="ko">모두를 위한 <em>공간</em></span><span data-lang="zh">为每个人而设的<em>空间</em></span><span data-lang="zt">爲每個人而設的<em>空間</em></span></h2>
       <p class="su" data-lang="en">Two currently available three-bedroom layouts at Four Melrose. Both include two bathrooms and two car spaces — with space for the kids as well as a grandparent.</p>
-      <p class="su" data-lang="ko">Four Melrose에서 현재 선택 가능한 두 가지 3베드룸 평면입니다. 두 세대 모두 욕실 2개와 주차 2대를 갖춰, 자녀는 물론 부모님까지 함께 지낼 수 있습니다.</p>
+      <p class="su" data-lang="ko">Four Melrose에서 현재 선택 가능한 두 가지 3베드룸 평면입니다. 두 세대 모두 욕실 2개와 주차 2대를 갖춰, 자녀는 물론 부모님까지 함께 지낼 수 있습니다.</p><p class="su" data-lang="zh">以下为 Four Melrose 目前可选的两款 3 房户型。两户均配两卫与两个车位，可容纳子女乃至父母同住。</p><p class="su" data-lang="zt">以下爲 Four Melrose 目前可選的兩款 3 房戶型。兩戶均配兩衛與兩個車位，可容納子女乃至父母同住。</p>
     </div>
     <div class="fpg fade">
       <figure class="fpc">
@@ -280,12 +293,12 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
         <figcaption class="fpm">
           <div class="fpt">C301</div>
           <div class="fps" data-lang="en">Four Melrose · East Building (B &amp; C) · Level 3 · North aspect</div>
-          <div class="fps" data-lang="ko">Four Melrose · 이스트 빌딩(B&amp;C) · 3층 · 북향</div>
+          <div class="fps" data-lang="ko">Four Melrose · 이스트 빌딩(B&amp;C) · 3층 · 북향</div><div class="fps" data-lang="zh">Four Melrose · 东楼（B&amp;C）· 3 层 · 北向</div><div class="fps" data-lang="zt">Four Melrose · 東樓（B&amp;C）· 3 層 · 北向</div>
           <div class="fpspecs">
-            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span></div>
-            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span></div>
-            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span></div>
-            <div><b>N</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span></div>
+            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span><span data-lang="zh">房</span><span data-lang="zt">房</span></div>
+            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span><span data-lang="zh">卫</span><span data-lang="zt">衛</span></div>
+            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span><span data-lang="zh">车位</span><span data-lang="zt">車位</span></div>
+            <div><b>N</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span><span data-lang="zh">朝向</span><span data-lang="zt">朝向</span></div>
           </div>
           <div class="fparea"><b>112 m²</b> total &nbsp;·&nbsp; 96 internal + 16 external</div>
         </figcaption>
@@ -295,19 +308,19 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
         <figcaption class="fpm">
           <div class="fpt">A502</div>
           <div class="fps" data-lang="en">Four Melrose · North-East Building (A) · Level 5 · West aspect · Adaptable</div>
-          <div class="fps" data-lang="ko">Four Melrose · 노스이스트 빌딩(A) · 5층 · 서향 · 어댑터블 설계</div>
+          <div class="fps" data-lang="ko">Four Melrose · 노스이스트 빌딩(A) · 5층 · 서향 · 어댑터블 설계</div><div class="fps" data-lang="zh">Four Melrose · 东北楼（A）· 5 层 · 西向 · 可适性设计</div><div class="fps" data-lang="zt">Four Melrose · 東北樓（A）· 5 層 · 西向 · 可適性設計</div>
           <div class="fpspecs">
-            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span></div>
-            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span></div>
-            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span></div>
-            <div><b>W</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span></div>
+            <div><b>3</b><span data-lang="en">Bed</span><span data-lang="ko">베드</span><span data-lang="zh">房</span><span data-lang="zt">房</span></div>
+            <div><b>2</b><span data-lang="en">Bath</span><span data-lang="ko">배스</span><span data-lang="zh">卫</span><span data-lang="zt">衛</span></div>
+            <div><b>2</b><span data-lang="en">Car</span><span data-lang="ko">주차</span><span data-lang="zh">车位</span><span data-lang="zt">車位</span></div>
+            <div><b>W</b><span data-lang="en">Aspect</span><span data-lang="ko">향</span><span data-lang="zh">朝向</span><span data-lang="zt">朝向</span></div>
           </div>
           <div class="fparea"><b>115 m²</b> total &nbsp;·&nbsp; 103 internal + 12 external</div>
         </figcaption>
       </figure>
     </div>
     <p class="fpnote" data-lang="en">Floorplans are indicative and intended as a guide only. Dimensions and areas are approximate, subject to change without notice, and do not form part of the contract for sale. Current availability and pricing are provided on enquiry.</p>
-    <p class="fpnote" data-lang="ko">평면도는 참고용이며, 치수와 면적은 근사치로 사전 예고 없이 변경될 수 있고 매매 계약의 일부를 구성하지 않습니다. 현재 분양 가능 여부와 가격은 문의 시 안내해 드립니다.</p>
+    <p class="fpnote" data-lang="ko">평면도는 참고용이며, 치수와 면적은 근사치로 사전 예고 없이 변경될 수 있고 매매 계약의 일부를 구성하지 않습니다. 현재 분양 가능 여부와 가격은 문의 시 안내해 드립니다.</p><p class="fpnote" data-lang="zh">户型图仅供参考，尺寸与面积为约数，可能恕不另行通知而变更，且不构成买卖合同的一部分。当前可售情况与价格于咨询时告知。</p><p class="fpnote" data-lang="zt">戶型圖僅供參考，尺寸與面積爲約數，可能恕不另行通知而變更，且不構成買賣合同的一部分。當前可售情況與價格於諮詢時告知。</p>
   </div>
 </section>
 
@@ -315,17 +328,17 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <div class="li fade">
     <div class="lim"><img src="assets/melrose-park-village/location-map.jpg" alt="Melrose Park location map" loading="lazy"></div>
     <div>
-      <div class="eb"><span data-lang="en">Location &amp; Connectivity</span><span data-lang="ko">위치 & 교통</span></div>
-      <h2 class="ti"><span data-lang="en">An Evolving<br><em>Community</em></span><span data-lang="ko">성장하는<br><em>커뮤니티</em></span></h2>
+      <div class="eb"><span data-lang="en">Location &amp; Connectivity</span><span data-lang="ko">위치 & 교통</span><span data-lang="zh">位置与交通</span><span data-lang="zt">位置與交通</span></div>
+      <h2 class="ti"><span data-lang="en">An Evolving<br><em>Community</em></span><span data-lang="ko">성장하는<br><em>커뮤니티</em></span><span data-lang="zh">成长中的<br><em>社区</em></span><span data-lang="zt">成長中的<br><em>社區</em></span></h2>
       <p class="su" data-lang="en">A short walk from the Village, the Melrose Park Town Centre opens in 2026 with a Coles supermarket, Dan Murphy's, alfresco dining, a gym and childcare across 30,000sqm of retail. New public and high schools are set to open in 2027, and a free resident shuttle runs to Meadowbank Station and Wharf.</p>
-      <p class="su" data-lang="ko">빌리지에서 도보 거리에 있는 멜로즈 파크 타운센터가 2026년 개장합니다 — 30,000㎡ 리테일에 Coles 슈퍼마켓, Dan Murphy's, 알프레스코 다이닝, 짐, 차일드케어가 들어섭니다. 신설 공립초·고등학교는 2027년 개교 예정이며, 메도우뱅크역·선착장까지 무료 입주민 셔틀이 운행됩니다.</p>
+      <p class="su" data-lang="ko">빌리지에서 도보 거리에 있는 멜로즈 파크 타운센터가 2026년 개장합니다 — 30,000㎡ 리테일에 Coles 슈퍼마켓, Dan Murphy's, 알프레스코 다이닝, 짐, 차일드케어가 들어섭니다. 신설 공립초·고등학교는 2027년 개교 예정이며, 메도우뱅크역·선착장까지 무료 입주민 셔틀이 운행됩니다.</p><p class="su" data-lang="zh">自 Village 步行可达的 Melrose Park 镇中心将于 2026 年开业 —— 30,000 平方米商业面积内将引入 Coles 超市、Dan Murphy's、露天餐饮、健身房与托儿中心。新建公立小学与中学预计 2027 年开学，并有免费住户接驳巴士往返 Meadowbank 车站与码头。</p><p class="su" data-lang="zt">自 Village 步行可達的 Melrose Park 鎮中心將於 2026 年開業 —— 30,000 平方米商業面積內將引入 Coles 超市、Dan Murphy's、露天餐飲、健身房與托兒中心。新建公立小學與中學預計 2027 年開學，並有免費住戶接駁巴士往返 Meadowbank 車站與碼頭。</p>
       <div class="lg">
-        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lm" data-lang="en">By car · 30 min to Sydney CBD</div><div class="lm" data-lang="ko">차량 · 시드니 CBD 30분</div></div>
-        <div class="lc"><div class="ln">25<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Meadowbank → Central Station</div><div class="lt" data-lang="ko">메도우뱅크 → 센트럴역</div><div class="lm" data-lang="en">By train</div><div class="lm" data-lang="ko">기차</div></div>
-        <div class="lc"><div class="ln">40<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Barangaroo</div><div class="lt" data-lang="ko">바랑가루</div><div class="lm" data-lang="en">By ferry</div><div class="lm" data-lang="ko">페리</div></div>
-        <div class="lc"><div class="ln">2,000<small data-lang="en">+</small></div><div class="lt" data-lang="en">Express Buses Weekly</div><div class="lt" data-lang="ko">주간 익스프레스 버스</div><div class="lm" data-lang="en">20 min to Parramatta</div><div class="lm" data-lang="ko">파라마타 20분</div></div>
-        <div class="lc"><div class="ln">30,000<small>m²</small></div><div class="lt" data-lang="en">Town Centre Retail</div><div class="lt" data-lang="ko">타운센터 리테일</div><div class="lm" data-lang="en">Coles &amp; more · opens 2026</div><div class="lm" data-lang="ko">Coles 외 · 2026년 개장</div></div>
-        <div class="lc"><div class="ln">2027</div><div class="lt" data-lang="en">New Public &amp; High Schools</div><div class="lt" data-lang="ko">신설 공립초·고등학교</div><div class="lm" data-lang="en">Walking distance</div><div class="lm" data-lang="ko">도보 거리</div></div>
+        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lt" data-lang="zh">Parramatta CBD</div><div class="lt" data-lang="zt">Parramatta CBD</div><div class="lm" data-lang="en">By car · 30 min to Sydney CBD</div><div class="lm" data-lang="ko">차량 · 시드니 CBD 30분</div><div class="lm" data-lang="zh">驾车 · 至悉尼 CBD 30 分钟</div><div class="lm" data-lang="zt">駕車 · 至悉尼 CBD 30 分鐘</div></div>
+        <div class="lc"><div class="ln">25<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Meadowbank → Central Station</div><div class="lt" data-lang="ko">메도우뱅크 → 센트럴역</div><div class="lt" data-lang="zh">Meadowbank → Central 站</div><div class="lt" data-lang="zt">Meadowbank → Central 站</div><div class="lm" data-lang="en">By train</div><div class="lm" data-lang="ko">기차</div><div class="lm" data-lang="zh">火车</div><div class="lm" data-lang="zt">火車</div></div>
+        <div class="lc"><div class="ln">40<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Barangaroo</div><div class="lt" data-lang="ko">바랑가루</div><div class="lt" data-lang="zh">Barangaroo</div><div class="lt" data-lang="zt">Barangaroo</div><div class="lm" data-lang="en">By ferry</div><div class="lm" data-lang="ko">페리</div><div class="lm" data-lang="zh">渡轮</div><div class="lm" data-lang="zt">渡輪</div></div>
+        <div class="lc"><div class="ln">2,000<small>+</small></div><div class="lt" data-lang="en">Express Buses Weekly</div><div class="lt" data-lang="ko">주간 익스프레스 버스</div><div class="lt" data-lang="zh">日间快速巴士</div><div class="lt" data-lang="zt">日間快速巴士</div><div class="lm" data-lang="en">20 min to Parramatta</div><div class="lm" data-lang="ko">파라마타 20분</div><div class="lm" data-lang="zh">至 Parramatta 20 分钟</div><div class="lm" data-lang="zt">至 Parramatta 20 分鐘</div></div>
+        <div class="lc"><div class="ln">30,000<small>m²</small></div><div class="lt" data-lang="en">Town Centre Retail</div><div class="lt" data-lang="ko">타운센터 리테일</div><div class="lt" data-lang="zh">镇中心商业</div><div class="lt" data-lang="zt">鎮中心商業</div><div class="lm" data-lang="en">Coles &amp; more · opens 2026</div><div class="lm" data-lang="ko">Coles 외 · 2026년 개장</div><div class="lm" data-lang="zh">Coles 及其他 · 2026 年开业</div><div class="lm" data-lang="zt">Coles 及其他 · 2026 年開業</div></div>
+        <div class="lc"><div class="ln">2027</div><div class="lt" data-lang="en">New Public &amp; High Schools</div><div class="lt" data-lang="ko">신설 공립초·고등학교</div><div class="lt" data-lang="zh">新建公立小学与中学</div><div class="lt" data-lang="zt">新建公立小學與中學</div><div class="lm" data-lang="en">Walking distance</div><div class="lm" data-lang="ko">도보 거리</div><div class="lm" data-lang="zh">步行可达</div><div class="lm" data-lang="zt">步行可達</div></div>
       </div>
     </div>
   </div>
@@ -333,17 +346,17 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section id="developer">
   <div class="dw fade">
-    <div class="dv"><div class="dlg">SEKISUI HOUSE<small data-lang="en">iCIRT 4 Gold Star (2024)</small><small data-lang="ko">iCIRT 4 골드스타 (2024)</small></div></div>
+    <div class="dv"><div class="dlg">SEKISUI HOUSE<small data-lang="en">iCIRT 4 Gold Star (2024)</small><small data-lang="ko">iCIRT 4 골드스타 (2024)</small><small data-lang="zh">iCIRT 四金星（2024 年）</small><small data-lang="zt">iCIRT 四金星（2024 年）</small></div></div>
     <div>
-      <div class="eb"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
-      <h2 class="ti"><span data-lang="en">Built to <em>Last</em></span><span data-lang="ko">오래도록 <em>지속되는 집</em></span></h2>
+      <div class="eb"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span><span data-lang="zh">开发商</span><span data-lang="zt">開發商</span></div>
+      <h2 class="ti"><span data-lang="en">Built to <em>Last</em></span><span data-lang="ko">오래도록 <em>지속되는 집</em></span><span data-lang="zh">经得起时间的<em>住宅</em></span><span data-lang="zt">經得起時間的<em>住宅</em></span></h2>
       <p class="su" data-lang="en">Melrose Park is delivered by Sekisui House Australia — one of the world's largest homebuilders, founded in Japan in 1960 and holding a 4 Gold Star iCIRT rating (2024). The masterplan combines a community-focused vision with future-proof technology and health-conscious design, including Smart Home technology and energy/water monitoring.</p>
-      <p class="su" data-lang="ko">멜로즈 파크는 1960년 일본에서 설립된 세계 최대 규모의 주택 건설사 중 하나인 세키스이 하우스 오스트레일리아가 공급하며, iCIRT 4 골드스타 등급(2024)을 보유하고 있습니다. 커뮤니티 중심의 비전에 미래 지향적 기술과 건강을 고려한 설계, 스마트홈 및 에너지·수도 모니터링을 결합했습니다.</p>
+      <p class="su" data-lang="ko">멜로즈 파크는 1960년 일본에서 설립된 세계 최대 규모의 주택 건설사 중 하나인 세키스이 하우스 오스트레일리아가 공급하며, iCIRT 4 골드스타 등급(2024)을 보유하고 있습니다. 커뮤니티 중심의 비전에 미래 지향적 기술과 건강을 고려한 설계, 스마트홈 및 에너지·수도 모니터링을 결합했습니다.</p><p class="su" data-lang="zh">Melrose Park 由 1960 年创立于日本、全球规模最大的住宅建造商之一积水住宅澳洲负责开发，并持有 iCIRT 四金星评级（2024 年）。其以社区为本的愿景，结合前瞻科技、着眼健康的设计，以及智能家居与能源、用水监测。</p><p class="su" data-lang="zt">Melrose Park 由 1960 年創立於日本、全球規模最大的住宅建造商之一積水住宅澳洲負責開發，並持有 iCIRT 四金星評級（2024 年）。其以社區爲本的願景，結合前瞻科技、着眼健康的設計，以及智能家居與能源、用水監測。</p>
       <div class="dst">
-        <div class="ds"><div class="dsn">1960</div><div class="dsl" data-lang="en">Founded in Japan</div><div class="dsl" data-lang="ko">일본 설립</div></div>
-        <div class="ds"><div class="dsn">4★</div><div class="dsl" data-lang="en">iCIRT Gold Rating (2024)</div><div class="dsl" data-lang="ko">iCIRT 골드 등급 (2024)</div></div>
-        <div class="ds"><div class="dsn">2027</div><div class="dsl" data-lang="en">Grand Central Park Due</div><div class="dsl" data-lang="ko">그랜드 센트럴 파크 완공</div></div>
-        <div class="ds"><div class="dsn">Smart</div><div class="dsl" data-lang="en">Home Tech &amp; Monitoring</div><div class="dsl" data-lang="ko">스마트홈 & 모니터링</div></div>
+        <div class="ds"><div class="dsn">1960</div><div class="dsl" data-lang="en">Founded in Japan</div><div class="dsl" data-lang="ko">일본 설립</div><div class="dsl" data-lang="zh">创立于日本</div><div class="dsl" data-lang="zt">創立於日本</div></div>
+        <div class="ds"><div class="dsn">4★</div><div class="dsl" data-lang="en">iCIRT Gold Rating (2024)</div><div class="dsl" data-lang="ko">iCIRT 골드 등급 (2024)</div><div class="dsl" data-lang="zh">iCIRT 金级评级（2024 年）</div><div class="dsl" data-lang="zt">iCIRT 金級評級（2024 年）</div></div>
+        <div class="ds"><div class="dsn">2027</div><div class="dsl" data-lang="en">Grand Central Park Due</div><div class="dsl" data-lang="ko">그랜드 센트럴 파크 완공</div><div class="dsl" data-lang="zh">Grand Central Park 建成</div><div class="dsl" data-lang="zt">Grand Central Park 建成</div></div>
+        <div class="ds"><div class="dsn">Smart</div><div class="dsl" data-lang="en">Home Tech &amp; Monitoring</div><div class="dsl" data-lang="ko">스마트홈 & 모니터링</div><div class="dsl" data-lang="zh">智能家居与监测</div><div class="dsl" data-lang="zt">智能家居與監測</div></div>
       </div>
     </div>
   </div>
@@ -351,18 +364,18 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section class="ct" id="contact">
   <div class="cw fade">
-    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
-    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Melrose Park</em></span><span data-lang="ko">멜로즈 파크에서<br><em>새 보금자리</em>를</span></h2>
+    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
+    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Melrose Park</em></span><span data-lang="ko">멜로즈 파크에서<br><em>새 보금자리</em>를</span><span data-lang="zh">在 Melrose Park<br>开启<em>新家</em></span><span data-lang="zt">在 Melrose Park<br>開啓<em>新家</em></span></h2>
     <p class="su" style="margin:0 auto" data-lang="en">Completed and ready to move in — display apartments open daily 10am–4pm at 38 Wharf Road, Melrose Park. Contact Sunghoon Choi (Sunny) at Forise Group for current availability, full floorplans and a personalised consultation.</p>
-    <p class="su" style="margin:0 auto" data-lang="ko">완공 후 즉시 입주 가능 — 디스플레이 아파트는 38 Wharf Road, Melrose Park에서 매일 오전 10시~오후 4시 오픈합니다. 포라이즈 그룹 최성훈에게 잔여 세대, 전체 평면도, 맞춤 상담을 문의하세요.</p>
+    <p class="su" style="margin:0 auto" data-lang="ko">완공 후 즉시 입주 가능 — 디스플레이 아파트는 38 Wharf Road, Melrose Park에서 매일 오전 10시~오후 4시 오픈합니다. 포라이즈 그룹 최성훈에게 잔여 세대, 전체 평면도, 맞춤 상담을 문의하세요.</p><p class="su" style="margin:0 auto" data-lang="zh">竣工现房，即买即住 —— 样板房位于 38 Wharf Road, Melrose Park，每日上午 10 时至下午 4 时开放。欢迎向 Forise Group 的 Sunny 咨询剩余房源、完整户型图与专属建议。</p><p class="su" style="margin:0 auto" data-lang="zt">竣工現房，即買即住 —— 樣板房位於 38 Wharf Road, Melrose Park，每日上午 10 時至下午 4 時開放。歡迎向 Forise Group 的 Sunny 諮詢剩餘房源、完整戶型圖與專屬建議。</p>
     <div class="ci">
-      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span></div>
-      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><a href="tel:0414824225">0414 824 225</a></div>
+      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span></div>
+      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><label data-lang="zh">电话 / KakaoTalk</label><label data-lang="zt">電話 / KakaoTalk</label><a href="tel:0414824225">0414 824 225</a></div>
       <div class="cii"><label>Email</label><a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a></div>
     </div>
-    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Melrose%20Park%20Village%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span></a>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Melrose%20Park%20Village%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span></a>
     <p class="cd" data-lang="en">All information is for marketing purposes only and subject to change without notice. Images include photographs of completed areas and artist impressions. Pricing available upon request. Forise Group acts as selling agent. Developed by Sekisui House Australia.</p>
-    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 준공 구역 실제 촬영본과 조감도가 함께 사용되었습니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: 세키스이 하우스 오스트레일리아.</p>
+    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 준공 구역 실제 촬영본과 조감도가 함께 사용되었습니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: 세키스이 하우스 오스트레일리아.</p><p class="cd" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像同时采用已竣工区域的实景拍摄与效果图。价格于咨询时提供。Forise Group 为销售代理。开发商：积水住宅澳洲。</p><p class="cd" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像同時採用已竣工區域的實景拍攝與效果圖。價格於諮詢時提供。Forise Group 爲銷售代理。開發商：積水住宅澳洲。</p>
   </div>
 </section>
 
@@ -373,8 +386,22 @@ function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='d
 (function(){let s=null;try{s=localStorage.getItem('mpv-theme');}catch(e){}
 document.body.setAttribute('data-theme',s==='dark'?'dark':'light');
 document.querySelector('.bt').textContent=s==='dark'?'☀':'☾';})();
-let ko=false;
-function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.bl').textContent=ko?'English':'한국어';}
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('melrose-park-village-lang', l); }catch(e){}
+}
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('melrose-park-village-lang'); }catch(e){ return null; } })() || 'en');
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 </script>

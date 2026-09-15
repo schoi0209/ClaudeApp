@@ -121,9 +121,11 @@ section{padding:100px 60px}
 footer{background:#0A0807;border-top:1px solid rgba(228,165,124,.1);padding:34px 60px;display:flex;justify-content:space-between;align-items:center}
 .fb{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--acc3)}
 .fc{font-size:.7rem;color:rgba(248,242,234,.28)}
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta .kt{display:none}
 @media(max-width:900px){nav{padding:0 20px}section{padding:70px 24px}.hc{padding:0 24px 60px}
 .g2,.li,.dw{grid-template-columns:1fr;gap:38px}.ig,.ig.thirds{grid-template-columns:1fr}.ic{height:300px}
@@ -131,13 +133,24 @@ body.lang-ko .hcta .kt{display:inline}body.lang-ko .hcta .et{display:none}.hcta 
 .band{height:300px}.bc{left:24px;bottom:24px}.vis,.lim{height:340px}.hb{display:none}
 footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 @media(max-width:600px){.ag,.bg,.lg,.sw,.hm,.dst{grid-template-columns:1fr}.sp{border-right:none;border-bottom:1px solid rgba(255,255,255,.18)}}
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--acc);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 <nav>
   <a href="#" class="nl"><b>mc</b>Melrose Central</a>
   <div class="na">
-    <button class="bl" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="bt" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bm">☕ Buy Me a Coffee</a>
   </div>
@@ -147,20 +160,20 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img class="hi" src="assets/melrose-central/hero.jpg" alt="Melrose Central — Artist Impression" loading="eager">
   <div class="ho"></div><div class="ha"></div>
   <div class="hb" data-lang="en">MELROSE PARK NSW 2114</div>
-  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div>
+  <div class="hb" data-lang="ko">멜로즈 파크 NSW 2114</div><div class="hb" data-lang="zh">Melrose Park NSW 2114</div><div class="hb" data-lang="zt">Melrose Park NSW 2114</div>
   <div class="hc">
     <div class="he" data-lang="en">Developed by Deicorp · Designed by TURNER</div>
-    <div class="he" data-lang="ko">시행 Deicorp · 설계 TURNER</div>
-    <h1 class="ht"><span data-lang="en">Welcome to the<br><em>Centre of Life.</em></span><span data-lang="ko">삶의 중심에<br><em>오신 것을 환영합니다.</em></span></h1>
+    <div class="he" data-lang="ko">시행 Deicorp · 설계 TURNER</div><div class="he" data-lang="zh">开发 Deicorp · 设计 TURNER</div><div class="he" data-lang="zt">開發 Deicorp · 設計 TURNER</div>
+    <h1 class="ht"><span data-lang="en">Welcome to the<br><em>Centre of Life.</em></span><span data-lang="ko">삶의 중심에<br><em>오신 것을 환영합니다.</em></span><span data-lang="zh"><br><em>欢迎来到生活的中心。</em></span><span data-lang="zt"><br><em>歡迎來到生活的中心。</em></span></h1>
     <p class="hs" data-lang="en">494 residences above Melrose Park's first-ever town centre and the new Parramatta Light Rail line</p>
-    <p class="hs" data-lang="ko">멜로즈 파크 최초의 타운센터와 새 파라마타 라이트레일 위에 들어서는 494세대</p>
+    <p class="hs" data-lang="ko">멜로즈 파크 최초의 타운센터와 새 파라마타 라이트레일 위에 들어서는 494세대</p><p class="hs" data-lang="zh">494 户住宅，坐落于 Melrose Park 首座镇中心与全新 Parramatta 轻轨之上</p><p class="hs" data-lang="zt">494 戶住宅，坐落於 Melrose Park 首座鎮中心與全新 Parramatta 輕軌之上</p>
     <div class="hm">
-      <div class="hmi"><label data-lang="en">Residences</label><label data-lang="ko">세대수</label><span>494</span></div>
-      <div class="hmi"><label data-lang="en">Buildings</label><label data-lang="ko">빌딩</label><span>6</span></div>
-      <div class="hmi"><label data-lang="en">Retail Precinct</label><label data-lang="ko">리테일 면적</label><span>30,000<small>m²</small></span></div>
-      <div class="hmi"><label data-lang="en">Light Rail</label><label data-lang="ko">라이트레일</label><span data-lang="en">At the door</span><span data-lang="ko">단지 앞</span></div>
+      <div class="hmi"><label data-lang="en">Residences</label><label data-lang="ko">세대수</label><label data-lang="zh">户数</label><label data-lang="zt">戶數</label><span>494</span></div>
+      <div class="hmi"><label data-lang="en">Buildings</label><label data-lang="ko">빌딩</label><label data-lang="zh">楼宇</label><label data-lang="zt">樓宇</label><span>6</span></div>
+      <div class="hmi"><label data-lang="en">Retail Precinct</label><label data-lang="ko">리테일 면적</label><label data-lang="zh">商业面积</label><label data-lang="zt">商業面積</label><span>30,000<small>m²</small></span></div>
+      <div class="hmi"><label data-lang="en">Light Rail</label><label data-lang="ko">라이트레일</label><label data-lang="zh">轻轨</label><label data-lang="zt">輕軌</label><span data-lang="en">At the door</span><span data-lang="ko">단지 앞</span><span data-lang="zh">小区门口</span><span data-lang="zt">小區門口</span></div>
     </div>
-    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span> →</a>
+    <a href="#contact" class="hcta"><span class="et" data-lang="en">Request Information</span><span class="kt" data-lang="ko">분양 문의하기</span><span class="kt" data-lang="zh">咨询详情</span><span class="kt" data-lang="zt">諮詢詳情</span> →</a>
   </div>
 </section>
 
@@ -169,85 +182,85 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
     <div class="vis">
       <img src="assets/melrose-central/sitemap.jpg" alt="Melrose Central precinct site plan" loading="lazy">
       <div class="vb" data-lang="en">33 Hope Street · Site Plan</div>
-      <div class="vb" data-lang="ko">33 Hope Street · 배치도</div>
+      <div class="vb" data-lang="ko">33 Hope Street · 배치도</div><div class="vb" data-lang="zh">33 Hope Street · 总平面图</div><div class="vb" data-lang="zt">33 Hope Street · 總平面圖</div>
     </div>
     <div>
-      <div class="eb"><span data-lang="en">Feel the Pulse</span><span data-lang="ko">도시의 맥박</span></div>
-      <h2 class="ti"><span data-lang="en">Melrose <em>Central</em></span><span data-lang="ko">멜로즈 <em>센트럴</em></span></h2>
+      <div class="eb"><span data-lang="en">Feel the Pulse</span><span data-lang="ko">도시의 맥박</span><span data-lang="zh">城市的脉搏</span><span data-lang="zt">城市的脈搏</span></div>
+      <h2 class="ti"><span data-lang="en">Melrose <em>Central</em></span><span data-lang="ko">멜로즈 <em>센트럴</em></span><span data-lang="zh">Melrose <em>Central</em></span><span data-lang="zt">Melrose <em>Central</em></span></h2>
       <p class="bt2" data-lang="en">Melrose Central is more than its residences. Taking inspiration from what locals want and need, this masterplanned precinct responds to all the facets of everyday living — from a leafy, walkable streetscape and bustling shopping centre, to the immersive landscape and pet-friendly apartments rising above it all.</p>
-      <p class="bt2" data-lang="ko">멜로즈 센트럴은 단순한 주거 그 이상입니다. 지역 주민이 원하는 것에서 출발한 이 마스터플랜 단지는 일상의 모든 면을 담아냅니다 — 녹음이 우거진 보행 친화적 거리와 활기찬 쇼핑센터부터, 그 위로 솟아오른 반려동물 친화 아파트까지.</p>
+      <p class="bt2" data-lang="ko">멜로즈 센트럴은 단순한 주거 그 이상입니다. 지역 주민이 원하는 것에서 출발한 이 마스터플랜 단지는 일상의 모든 면을 담아냅니다 — 녹음이 우거진 보행 친화적 거리와 활기찬 쇼핑센터부터, 그 위로 솟아오른 반려동물 친화 아파트까지.</p><p class="bt2" data-lang="zh">Melrose Central 不只是居所。这一总体规划社区源自本地居民的真实期待，涵盖日常生活的方方面面 —— 从绿意盎然的步行友好街道与充满活力的购物中心，到其上拔地而起的宠物友好公寓。</p><p class="bt2" data-lang="zt">Melrose Central 不只是居所。這一總體規劃社區源自本地居民的真實期待，涵蓋日常生活的方方面面 —— 從綠意盎然的步行友好街道與充滿活力的購物中心，到其上拔地而起的寵物友好公寓。</p>
       <p class="bt2" data-lang="en">Six residential buildings — each with its own character — sit above a 30,000 sqm, four-level retail town centre, joined by a 6,000 sqm residents-only Podium Park. A dedicated Parramatta Light Rail stop arrives at the precinct's Hope Street entrance.</p>
-      <p class="bt2" data-lang="ko">각기 다른 개성을 지닌 6개의 주거 빌딩이 4개 층, 30,000㎡ 규모의 리테일 타운센터 위에 자리하며, 6,000㎡ 입주민 전용 포디움 파크가 이를 잇습니다. 파라마타 라이트레일 전용 정거장이 단지 Hope Street 입구에 들어섭니다.</p>
+      <p class="bt2" data-lang="ko">각기 다른 개성을 지닌 6개의 주거 빌딩이 4개 층, 30,000㎡ 규모의 리테일 타운센터 위에 자리하며, 6,000㎡ 입주민 전용 포디움 파크가 이를 잇습니다. 파라마타 라이트레일 전용 정거장이 단지 Hope Street 입구에 들어섭니다.</p><p class="bt2" data-lang="zh">六栋各具个性的住宅楼宇，坐落于四层、30,000 平方米的商业镇中心之上，并由 6,000 平方米的住户专属裙楼公园相连。Parramatta 轻轨专属站点将设于小区 Hope Street 入口处。</p><p class="bt2" data-lang="zt">六棟各具個性的住宅樓宇，坐落於四層、30,000 平方米的商業鎮中心之上，並由 6,000 平方米的住戶專屬裙樓公園相連。Parramatta 輕軌專屬站點將設於小區 Hope Street 入口處。</p>
       <div class="tags">
-        <span class="tag" data-lang="en">1, 2 &amp; 3 Bedroom</span><span class="tag" data-lang="ko">1·2·3 베드룸</span>
-        <span class="tag" data-lang="en">SMEG Appliances</span><span class="tag" data-lang="ko">SMEG 가전</span>
-        <span class="tag" data-lang="en">Ducted A/C</span><span class="tag" data-lang="ko">덕트형 에어컨</span>
-        <span class="tag" data-lang="en">Timber Floors</span><span class="tag" data-lang="ko">원목 마루</span>
-        <span class="tag" data-lang="en">Pet-Friendly</span><span class="tag" data-lang="ko">반려동물 동반</span>
+        <span class="tag" data-lang="en">1, 2 &amp; 3 Bedroom</span><span class="tag" data-lang="ko">1·2·3 베드룸</span><span class="tag" data-lang="zh">1、2、3 房</span><span class="tag" data-lang="zt">1、2、3 房</span>
+        <span class="tag" data-lang="en">SMEG Appliances</span><span class="tag" data-lang="ko">SMEG 가전</span><span class="tag" data-lang="zh">SMEG 家电</span><span class="tag" data-lang="zt">SMEG 家電</span>
+        <span class="tag" data-lang="en">Ducted A/C</span><span class="tag" data-lang="ko">덕트형 에어컨</span><span class="tag" data-lang="zh">中央管道空调</span><span class="tag" data-lang="zt">中央管道空調</span>
+        <span class="tag" data-lang="en">Timber Floors</span><span class="tag" data-lang="ko">원목 마루</span><span class="tag" data-lang="zh">实木地板</span><span class="tag" data-lang="zt">實木地板</span>
+        <span class="tag" data-lang="en">Pet-Friendly</span><span class="tag" data-lang="ko">반려동물 동반</span><span class="tag" data-lang="zh">可携宠物</span><span class="tag" data-lang="zt">可攜寵物</span>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip"><div class="sw">
-  <div class="sp"><div class="sn">494</div><div class="sl" data-lang="en">Residences</div><div class="sl" data-lang="ko">세대</div></div>
-  <div class="sp"><div class="sn">30,000<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Retail over 4 Levels</div><div class="sl" data-lang="ko">4개 층 리테일</div></div>
-  <div class="sp"><div class="sn">6,000<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Residents' Podium Park</div><div class="sl" data-lang="ko">입주민 포디움 파크</div></div>
-  <div class="sp"><div class="sn">~50</div><div class="sl" data-lang="en">Specialty Stores</div><div class="sl" data-lang="ko">전문 매장</div></div>
+  <div class="sp"><div class="sn">494</div><div class="sl" data-lang="en">Residences</div><div class="sl" data-lang="ko">세대</div><div class="sl" data-lang="zh">户</div><div class="sl" data-lang="zt">戶</div></div>
+  <div class="sp"><div class="sn">30,000<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Retail over 4 Levels</div><div class="sl" data-lang="ko">4개 층 리테일</div><div class="sl" data-lang="zh">四层商业</div><div class="sl" data-lang="zt">四層商業</div></div>
+  <div class="sp"><div class="sn">6,000<span style="font-size:1.3rem">m²</span></div><div class="sl" data-lang="en">Residents' Podium Park</div><div class="sl" data-lang="ko">입주민 포디움 파크</div><div class="sl" data-lang="zh">住户裙楼公园</div><div class="sl" data-lang="zt">住戶裙樓公園</div></div>
+  <div class="sp"><div class="sn">~50</div><div class="sl" data-lang="en">Specialty Stores</div><div class="sl" data-lang="ko">전문 매장</div><div class="sl" data-lang="zh">专门店</div><div class="sl" data-lang="zt">專門店</div></div>
 </div></div>
 
 <div class="band">
   <img src="assets/melrose-central/ext-railway.jpg" alt="Melrose Central with Parramatta Light Rail — Artist Impression" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">Light Rail on Your Doorstep</h3><h3 data-lang="ko">문 앞의 라이트레일</h3>
+    <h3 data-lang="en">Light Rail on Your Doorstep</h3><h3 data-lang="ko">문 앞의 라이트레일</h3><h3 data-lang="zh">家门口的轻轨</h3><h3 data-lang="zt">家門口的輕軌</h3>
     <p data-lang="en">Parramatta Light Rail Stage 2 · Artist Impression</p>
-    <p data-lang="ko">파라마타 라이트레일 2단계 · 조감도</p>
+    <p data-lang="ko">파라마타 라이트레일 2단계 · 조감도</p><p data-lang="zh">Parramatta 轻轨二期 · 效果图</p><p data-lang="zt">Parramatta 輕軌二期 · 效果圖</p>
   </div>
 </div>
 
 <section id="buildings">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">Six Buildings, One Community</span><span data-lang="ko">6개 빌딩, 하나의 커뮤니티</span></div>
-      <h2 class="ti"><span data-lang="en">Each with its own <em>character</em></span><span data-lang="ko">각기 다른 <em>개성</em>을 담다</span></h2>
+      <div class="eb"><span data-lang="en">Six Buildings, One Community</span><span data-lang="ko">6개 빌딩, 하나의 커뮤니티</span><span data-lang="zh">六栋楼宇，一个社区</span><span data-lang="zt">六棟樓宇，一個社區</span></div>
+      <h2 class="ti"><span data-lang="en">Each with its own <em>character</em></span><span data-lang="ko">각기 다른 <em>개성</em>을 담다</span><span data-lang="zh">各具<em>个性</em></span><span data-lang="zt">各具<em>個性</em></span></h2>
     </div>
     <div class="bg fade">
       <div class="bd">
         <div class="bn">Terra</div><div class="bl2">Building A</div>
         <p data-lang="en">A clock tower and olive tree mark this corner as a local landmark. North-facing views span new parks and open spaces, with a distinctive terracotta palette countering the sweeping green outlook.</p>
-        <p data-lang="ko">시계탑과 올리브 나무가 지역 랜드마크를 이루는 코너. 북향 조망으로 새 공원과 열린 공간이 펼쳐지며, 독특한 테라코타 색조가 푸른 전망과 대비를 이룹니다.</p>
-        <div class="bstat"><span><b>23</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>158</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">시계탑과 올리브 나무가 지역 랜드마크를 이루는 코너. 북향 조망으로 새 공원과 열린 공간이 펼쳐지며, 독특한 테라코타 색조가 푸른 전망과 대비를 이룹니다.</p><p data-lang="zh">以钟楼与橄榄树构成地标的转角楼栋。北向视野尽览全新公园与开放空间，独特的赤陶色调与葱郁景致形成对比。</p><p data-lang="zt">以鐘樓與橄欖樹構成地標的轉角樓棟。北向視野盡覽全新公園與開放空間，獨特的赤陶色調與蔥鬱景緻形成對比。</p>
+        <div class="bstat"><span><b>23</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>158</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
       <div class="bd">
         <div class="bn">Cirro</div><div class="bl2">Building B</div>
         <p data-lang="en">Sculptured elements complement its neighbours as Cirro floats above Melrose Central's north entrance. Matt white accents integrate with lush planting, reflecting its park view and closeness to Podium Park.</p>
-        <p data-lang="ko">조각적인 요소가 이웃 건물과 조화를 이루며, 단지 북쪽 입구 위로 떠오르듯 자리합니다. 매트 화이트 악센트와 풍성한 식재가 어우러져 공원 조망과 포디움 파크와의 인접성을 반영합니다.</p>
-        <div class="bstat"><span><b>6</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>18</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">조각적인 요소가 이웃 건물과 조화를 이루며, 단지 북쪽 입구 위로 떠오르듯 자리합니다. 매트 화이트 악센트와 풍성한 식재가 어우러져 공원 조망과 포디움 파크와의 인접성을 반영합니다.</p><p data-lang="zh">雕塑感的体量与周边建筑相呼应，如悬浮般坐落于小区北入口之上。哑光白点缀搭配丰茂植栽，呼应公园景观与紧邻裙楼公园的优势。</p><p data-lang="zt">雕塑感的體量與周邊建築相呼應，如懸浮般坐落於小區北入口之上。啞光白點綴搭配豐茂植栽，呼應公園景觀與緊鄰裙樓公園的優勢。</p>
+        <div class="bstat"><span><b>6</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>18</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
       <div class="bd">
         <div class="bn">Mason</div><div class="bl2">Building C</div>
         <p data-lang="en">A lighter-toned building anchoring the eastern side of the precinct, with residences oriented to capture district and park outlooks above the town centre.</p>
-        <p data-lang="ko">단지 동쪽을 지지하는 밝은 톤의 건물로, 타운센터 위에서 지역과 공원 조망을 담도록 배치된 세대들로 구성됩니다.</p>
-        <div class="bstat"><span><b>14</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>92</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">단지 동쪽을 지지하는 밝은 톤의 건물로, 타운센터 위에서 지역과 공원 조망을 담도록 배치된 세대들로 구성됩니다.</p><p data-lang="zh">以明亮色调支撑小区东侧的楼栋，各户于镇中心之上布局，可揽社区与公园景观。</p><p data-lang="zt">以明亮色調支撐小區東側的樓棟，各戶於鎮中心之上佈局，可攬社區與公園景觀。</p>
+        <div class="bstat"><span><b>14</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>92</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
       <div class="bd">
         <div class="bn">Verdi</div><div class="bl2">Building D</div>
         <p data-lang="en">The precinct's southern tower, rising alongside the Town Centre entrance and the Hope Street light rail stop.</p>
-        <p data-lang="ko">타운센터 입구와 Hope Street 라이트레일 정거장과 나란히 솟아오르는 단지 남측 타워입니다.</p>
-        <div class="bstat"><span><b>22</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>152</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">타운센터 입구와 Hope Street 라이트레일 정거장과 나란히 솟아오르는 단지 남측 타워입니다.</p><p data-lang="zh">与镇中心入口及 Hope Street 轻轨站并立而起的小区南侧塔楼。</p><p data-lang="zt">與鎮中心入口及 Hope Street 輕軌站並立而起的小區南側塔樓。</p>
+        <div class="bstat"><span><b>22</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>152</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
       <div class="bd">
         <div class="bn">Bower</div><div class="bl2">Building E</div>
         <p data-lang="en">An intimate low-rise of just 12 residences, tucked beside the laneway link and Podium Park.</p>
-        <p data-lang="ko">단 12세대로 이루어진 아담한 저층 건물로, 레인웨이 링크와 포디움 파크 옆에 자리합니다.</p>
-        <div class="bstat"><span><b>4</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>12</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">단 12세대로 이루어진 아담한 저층 건물로, 레인웨이 링크와 포디움 파크 옆에 자리합니다.</p><p data-lang="zh">仅 12 户的小巧低层楼栋，毗邻巷道连廊与裙楼公园。</p><p data-lang="zt">僅 12 戶的小巧低層樓棟，毗鄰巷道連廊與裙樓公園。</p>
+        <div class="bstat"><span><b>4</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>12</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
       <div class="bd">
         <div class="bn">Ebony</div><div class="bl2">Building F</div>
         <p data-lang="en">A mid-rise on the western edge, completing the precinct alongside the laneway link and light rail stop.</p>
-        <p data-lang="ko">서측 가장자리의 중층 건물로, 레인웨이 링크와 라이트레일 정거장과 함께 단지를 완성합니다.</p>
-        <div class="bstat"><span><b>9–10</b><span data-lang="en">Levels</span><span data-lang="ko">층</span></span><span><b>62</b><span data-lang="en">Units</span><span data-lang="ko">세대</span></span></div>
+        <p data-lang="ko">서측 가장자리의 중층 건물로, 레인웨이 링크와 라이트레일 정거장과 함께 단지를 완성합니다.</p><p data-lang="zh">位于西侧边缘的中层楼栋，与巷道连廊及轻轨站共同构成完整小区。</p><p data-lang="zt">位於西側邊緣的中層樓棟，與巷道連廊及輕軌站共同構成完整小區。</p>
+        <div class="bstat"><span><b>9–10</b><span data-lang="en">Levels</span><span data-lang="ko">층</span><span data-lang="zh">层</span><span data-lang="zt">層</span></span><span><b>62</b><span data-lang="en">Units</span><span data-lang="ko">세대</span><span data-lang="zh">户</span><span data-lang="zt">戶</span></span></div>
       </div>
     </div>
   </div>
@@ -255,18 +268,18 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section class="dk" id="interiors">
   <div class="wrap fade">
-    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span></div>
-    <h2 class="ti"><span data-lang="en">Space, Style &amp; a <em>Stunning Outlook</em></span><span data-lang="ko">공간, 스타일, 그리고 <em>탁월한 조망</em></span></h2>
+    <div class="eb"><span data-lang="en">The Residences</span><span data-lang="ko">레지던스</span><span data-lang="zh">住宅</span><span data-lang="zt">住宅</span></div>
+    <h2 class="ti"><span data-lang="en">Space, Style &amp; a <em>Stunning Outlook</em></span><span data-lang="ko">공간, 스타일, 그리고 <em>탁월한 조망</em></span><span data-lang="zh">空间、格调与<em>卓越景观</em></span><span data-lang="zt">空間、格調與<em>卓越景觀</em></span></h2>
     <p class="su" data-lang="en">Modern 1, 2 and 3-bedroom apartments that flow and flex for how you live. Living spaces open onto private balconies or courtyards, finished with integrated SMEG appliances, ducted air conditioning and timber floors — with an integrated plumbed fridge in 3-bedroom homes.</p>
-    <p class="su" data-lang="ko">삶의 방식에 맞춰 유연하게 흐르는 모던한 1·2·3베드룸 아파트. 거실은 프라이빗 발코니 또는 안뜰로 이어지며, 빌트인 SMEG 가전, 덕트형 에어컨, 원목 마루로 마감됩니다. 3베드룸에는 배관 연결형 빌트인 냉장고가 제공됩니다.</p>
+    <p class="su" data-lang="ko">삶의 방식에 맞춰 유연하게 흐르는 모던한 1·2·3베드룸 아파트. 거실은 프라이빗 발코니 또는 안뜰로 이어지며, 빌트인 SMEG 가전, 덕트형 에어컨, 원목 마루로 마감됩니다. 3베드룸에는 배관 연결형 빌트인 냉장고가 제공됩니다.</p><p class="su" data-lang="zh">随生活方式灵活流转的现代 1、2、3 房公寓。起居空间延伸至私人阳台或庭院，配备嵌入式 SMEG 家电、中央管道空调与实木地板。3 房户型另设带管路连接的嵌入式冰箱。</p><p class="su" data-lang="zt">隨生活方式靈活流轉的現代 1、2、3 房公寓。起居空間延伸至私人陽臺或庭院，配備嵌入式 SMEG 家電、中央管道空調與實木地板。3 房戶型另設帶管路連接的嵌入式冰箱。</p>
     <div class="ig thirds">
-      <div class="ic"><img src="assets/melrose-central/int-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4><p data-lang="en">Integrated SMEG · Artist Impression</p><p data-lang="ko">빌트인 SMEG · 조감도</p></div></div>
-      <div class="ic"><img src="assets/melrose-central/int-kitchen-l.jpg" alt="L-shape kitchen — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">L-Shape Kitchen</h4><h4 data-lang="ko">L자형 주방</h4><p data-lang="en">Alternate layout · Artist Impression</p><p data-lang="ko">대체 평면 · 조감도</p></div></div>
-      <div class="ic"><img src="assets/melrose-central/int-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Bathroom</h4><h4 data-lang="ko">욕실</h4><p data-lang="en">Premium fixtures · Artist Impression</p><p data-lang="ko">프리미엄 설비 · 조감도</p></div></div>
+      <div class="ic"><img src="assets/melrose-central/int-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Kitchen</h4><h4 data-lang="ko">주방</h4><h4 data-lang="zh">厨房</h4><h4 data-lang="zt">廚房</h4><p data-lang="en">Integrated SMEG · Artist Impression</p><p data-lang="ko">빌트인 SMEG · 조감도</p><p data-lang="zh">嵌入式 SMEG · 效果图</p><p data-lang="zt">嵌入式 SMEG · 效果圖</p></div></div>
+      <div class="ic"><img src="assets/melrose-central/int-kitchen-l.jpg" alt="L-shape kitchen — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">L-Shape Kitchen</h4><h4 data-lang="ko">L자형 주방</h4><h4 data-lang="zh">L 型厨房</h4><h4 data-lang="zt">L 型廚房</h4><p data-lang="en">Alternate layout · Artist Impression</p><p data-lang="ko">대체 평면 · 조감도</p><p data-lang="zh">备选户型 · 效果图</p><p data-lang="zt">備選戶型 · 效果圖</p></div></div>
+      <div class="ic"><img src="assets/melrose-central/int-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Bathroom</h4><h4 data-lang="ko">욕실</h4><h4 data-lang="zh">浴室</h4><h4 data-lang="zt">浴室</h4><p data-lang="en">Premium fixtures · Artist Impression</p><p data-lang="ko">프리미엄 설비 · 조감도</p><p data-lang="zh">高端洁具 · 效果图</p><p data-lang="zt">高端潔具 · 效果圖</p></div></div>
     </div>
     <div class="ig">
-      <div class="ic"><img src="assets/melrose-central/int-lobby.jpg" alt="Residential lobby — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Residential Lobby</h4><h4 data-lang="ko">주거동 로비</h4><p data-lang="en">A considered arrival · Artist Impression</p><p data-lang="ko">품격 있는 첫인상 · 조감도</p></div></div>
-      <div class="ic"><img src="assets/melrose-central/balcony.jpg" alt="Balcony outlook — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Balcony Outlook</h4><h4 data-lang="ko">발코니 조망</h4><p data-lang="en">Water &amp; park views · Artist Impression</p><p data-lang="ko">강과 공원 조망 · 조감도</p></div></div>
+      <div class="ic"><img src="assets/melrose-central/int-lobby.jpg" alt="Residential lobby — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Residential Lobby</h4><h4 data-lang="ko">주거동 로비</h4><h4 data-lang="zh">住宅楼大堂</h4><h4 data-lang="zt">住宅樓大堂</h4><p data-lang="en">A considered arrival · Artist Impression</p><p data-lang="ko">품격 있는 첫인상 · 조감도</p><p data-lang="zh">格调十足的第一印象 · 效果图</p><p data-lang="zt">格調十足的第一印象 · 效果圖</p></div></div>
+      <div class="ic"><img src="assets/melrose-central/balcony.jpg" alt="Balcony outlook — Artist Impression" loading="lazy"><div class="il"><h4 data-lang="en">Balcony Outlook</h4><h4 data-lang="ko">발코니 조망</h4><h4 data-lang="zh">阳台景观</h4><h4 data-lang="zt">陽臺景觀</h4><p data-lang="en">Water &amp; park views · Artist Impression</p><p data-lang="ko">강과 공원 조망 · 조감도</p><p data-lang="zh">河景与公园景 · 效果图</p><p data-lang="zt">河景與公園景 · 效果圖</p></div></div>
     </div>
   </div>
 </section>
@@ -275,25 +288,25 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <img src="assets/melrose-central/park-retail.jpg" alt="Melrose Central park and retail precinct — Artist Impression" loading="lazy">
   <div class="bo"></div>
   <div class="bc">
-    <h3 data-lang="en">Live Above All You Need</h3><h3 data-lang="ko">필요한 모든 것 위에서</h3>
+    <h3 data-lang="en">Live Above All You Need</h3><h3 data-lang="ko">필요한 모든 것 위에서</h3><h3 data-lang="zh">于所需一切之上</h3><h3 data-lang="zt">於所需一切之上</h3>
     <p data-lang="en">Town centre, dining &amp; parkland · Artist Impression</p>
-    <p data-lang="ko">타운센터, 다이닝, 공원 · 조감도</p>
+    <p data-lang="ko">타운센터, 다이닝, 공원 · 조감도</p><p data-lang="zh">镇中心、餐饮与公园 · 效果图</p><p data-lang="zt">鎮中心、餐飲與公園 · 效果圖</p>
   </div>
 </div>
 
 <section id="amenities">
   <div class="wrap">
     <div class="fade">
-      <div class="eb"><span data-lang="en">Precinct &amp; Amenity</span><span data-lang="ko">단지 & 편의시설</span></div>
-      <h2 class="ti"><span data-lang="en">A Community that <em>Thrives</em></span><span data-lang="ko">활기가 넘치는 <em>커뮤니티</em></span></h2>
+      <div class="eb"><span data-lang="en">Precinct &amp; Amenity</span><span data-lang="ko">단지 & 편의시설</span><span data-lang="zh">小区与配套</span><span data-lang="zt">小區與配套</span></div>
+      <h2 class="ti"><span data-lang="en">A Community that <em>Thrives</em></span><span data-lang="ko">활기가 넘치는 <em>커뮤니티</em></span><span data-lang="zh">生机盎然的<em>社区</em></span><span data-lang="zt">生機盎然的<em>社區</em></span></h2>
     </div>
     <div class="ag fade">
-      <div class="am"><div class="ai">🌿</div><h5 data-lang="en">6,000m² Podium Park</h5><h5 data-lang="ko">6,000㎡ 포디움 파크</h5><p data-lang="en">A residents-only landscaped sanctuary above the streets, with a community room and BBQ entertaining spaces.</p><p data-lang="ko">거리 위에 자리한 입주민 전용 조경 공간. 커뮤니티 룸과 BBQ 공간을 갖췄습니다.</p></div>
-      <div class="am"><div class="ai">🛒</div><h5 data-lang="en">Full-Line Supermarket</h5><h5 data-lang="ko">대형 슈퍼마켓</h5><p data-lang="en">At least one full-line supermarket plus a fresh food emporium anchors the daily essentials.</p><p data-lang="ko">최소 1개의 대형 슈퍼마켓과 신선식품 매장이 일상의 필수를 책임집니다.</p></div>
-      <div class="am"><div class="ai">🍜</div><h5 data-lang="en">Culinary Precinct</h5><h5 data-lang="ko">푸드 프리싱크트</h5><p data-lang="en">A first-of-its-kind street-food precinct inspired by global flavours, with outdoor dining and restaurants.</p><p data-lang="ko">세계의 맛에서 영감을 받은 최초의 스트리트푸드 존과 야외 다이닝·레스토랑.</p></div>
-      <div class="am"><div class="ai">🧸</div><h5 data-lang="en">Childcare &amp; Medical</h5><h5 data-lang="ko">차일드케어 & 메디컬</h5><p data-lang="en">A 150-place childcare centre, medical services and a wellness hub with commercial gym are expected on site.</p><p data-lang="ko">150명 규모 차일드케어, 메디컬 서비스, 상업용 짐을 갖춘 웰니스 허브가 단지 내에 들어섭니다.</p></div>
-      <div class="am"><div class="ai">🅿️</div><h5 data-lang="en">Parking &amp; EV</h5><h5 data-lang="ko">주차 & EV</h5><p data-lang="en">Approx. 770 retail and 105 visitor parking spaces, with basement bicycle storage, a car wash bay and EV charging.</p><p data-lang="ko">리테일 약 770면·방문자 약 105면 주차, 지하 자전거 보관소, 세차 공간, EV 충전 설비.</p></div>
-      <div class="am"><div class="ai">🌳</div><h5 data-lang="en">Grand Central Park</h5><h5 data-lang="ko">그랜드 센트럴 파크</h5><p data-lang="en">An 18,000 sqm park — the centrepiece of the wider Melrose Park masterplan — sits directly adjacent to the precinct.</p><p data-lang="ko">멜로즈 파크 마스터플랜의 중심인 18,000㎡ 공원이 단지 바로 옆에 자리합니다.</p></div>
+      <div class="am"><div class="ai">🌿</div><h5 data-lang="en">6,000m² Podium Park</h5><h5 data-lang="ko">6,000㎡ 포디움 파크</h5><h5 data-lang="zh">6,000 平方米裙楼公园</h5><h5 data-lang="zt">6,000 平方米裙樓公園</h5><p data-lang="en">A residents-only landscaped sanctuary above the streets, with a community room and BBQ entertaining spaces.</p><p data-lang="ko">거리 위에 자리한 입주민 전용 조경 공간. 커뮤니티 룸과 BBQ 공간을 갖췄습니다.</p><p data-lang="zh">位于街道之上的住户专属景观空间，设有社区活动室与烧烤区。</p><p data-lang="zt">位於街道之上的住戶專屬景觀空間，設有社區活動室與燒烤區。</p></div>
+      <div class="am"><div class="ai">🛒</div><h5 data-lang="en">Full-Line Supermarket</h5><h5 data-lang="ko">대형 슈퍼마켓</h5><h5 data-lang="zh">大型超市</h5><h5 data-lang="zt">大型超市</h5><p data-lang="en">At least one full-line supermarket plus a fresh food emporium anchors the daily essentials.</p><p data-lang="ko">최소 1개의 대형 슈퍼마켓과 신선식품 매장이 일상의 필수를 책임집니다.</p><p data-lang="zh">至少一家大型超市与生鲜店铺，满足日常所需。</p><p data-lang="zt">至少一家大型超市與生鮮店鋪，滿足日常所需。</p></div>
+      <div class="am"><div class="ai">🍜</div><h5 data-lang="en">Culinary Precinct</h5><h5 data-lang="ko">푸드 프리싱크트</h5><h5 data-lang="zh">美食街区</h5><h5 data-lang="zt">美食街區</h5><p data-lang="en">A first-of-its-kind street-food precinct inspired by global flavours, with outdoor dining and restaurants.</p><p data-lang="ko">세계의 맛에서 영감을 받은 최초의 스트리트푸드 존과 야외 다이닝·레스토랑.</p><p data-lang="zh">以世界风味为灵感的首个街头美食区，以及户外餐饮与餐厅。</p><p data-lang="zt">以世界風味爲靈感的首個街頭美食區，以及戶外餐飲與餐廳。</p></div>
+      <div class="am"><div class="ai">🧸</div><h5 data-lang="en">Childcare &amp; Medical</h5><h5 data-lang="ko">차일드케어 & 메디컬</h5><h5 data-lang="zh">托儿与医疗</h5><h5 data-lang="zt">托兒與醫療</h5><p data-lang="en">A 150-place childcare centre, medical services and a wellness hub with commercial gym are expected on site.</p><p data-lang="ko">150명 규모 차일드케어, 메디컬 서비스, 상업용 짐을 갖춘 웰니스 허브가 단지 내에 들어섭니다.</p><p data-lang="zh">可容纳 150 名儿童的托儿中心、医疗服务与商业健身房构成的康体枢纽，皆设于小区内。</p><p data-lang="zt">可容納 150 名兒童的托兒中心、醫療服務與商業健身房構成的康體樞紐，皆設於小區內。</p></div>
+      <div class="am"><div class="ai">🅿️</div><h5 data-lang="en">Parking &amp; EV</h5><h5 data-lang="ko">주차 & EV</h5><h5 data-lang="zh">停车与电动车</h5><h5 data-lang="zt">停車與電動車</h5><p data-lang="en">Approx. 770 retail and 105 visitor parking spaces, with basement bicycle storage, a car wash bay and EV charging.</p><p data-lang="ko">리테일 약 770면·방문자 약 105면 주차, 지하 자전거 보관소, 세차 공간, EV 충전 설비.</p><p data-lang="zh">商业车位约 770 个、访客车位约 105 个，另设地下自行车停放处、洗车位与电动车充电设施。</p><p data-lang="zt">商業車位約 770 個、訪客車位約 105 個，另設地下自行車停放處、洗車位與電動車充電設施。</p></div>
+      <div class="am"><div class="ai">🌳</div><h5 data-lang="en">Grand Central Park</h5><h5 data-lang="ko">그랜드 센트럴 파크</h5><h5 data-lang="zh">Grand Central Park</h5><h5 data-lang="zt">Grand Central Park</h5><p data-lang="en">An 18,000 sqm park — the centrepiece of the wider Melrose Park masterplan — sits directly adjacent to the precinct.</p><p data-lang="ko">멜로즈 파크 마스터플랜의 중심인 18,000㎡ 공원이 단지 바로 옆에 자리합니다.</p><p data-lang="zh">作为 Melrose Park 总体规划核心的 18,000 平方米公园，就在小区旁。</p><p data-lang="zt">作爲 Melrose Park 總體規劃核心的 18,000 平方米公園，就在小區旁。</p></div>
     </div>
   </div>
 </section>
@@ -302,17 +315,17 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
   <div class="li fade">
     <div class="lim"><img src="assets/melrose-central/park-retail.jpg" alt="Melrose Central precinct — Artist Impression" loading="lazy"></div>
     <div>
-      <div class="eb"><span data-lang="en">Location &amp; Transport</span><span data-lang="ko">위치 & 교통</span></div>
-      <h2 class="ti"><span data-lang="en">Between Sydney's<br>Two Largest <em>CBDs</em></span><span data-lang="ko">시드니 2대 <em>CBD</em><br>사이에서</span></h2>
+      <div class="eb"><span data-lang="en">Location &amp; Transport</span><span data-lang="ko">위치 & 교통</span><span data-lang="zh">位置与交通</span><span data-lang="zt">位置與交通</span></div>
+      <h2 class="ti"><span data-lang="en">Between Sydney's<br>Two Largest <em>CBDs</em></span><span data-lang="ko">시드니 2대 <em>CBD</em><br>사이에서</span><span data-lang="zh">坐拥悉尼两大 <em>CBD</em><br>之间</span><span data-lang="zt">坐擁悉尼兩大 <em>CBD</em><br>之間</span></h2>
       <p class="su" data-lang="en">Melrose Park sits between Ryde and Parramatta. A dedicated Parramatta Light Rail Stage 2 stop arrives at the Hope Street entrance, linking to Parramatta CBD and across the river to Sydney Olympic Park for train and future Metro West links.</p>
-      <p class="su" data-lang="ko">멜로즈 파크는 라이드와 파라마타 사이에 위치합니다. 파라마타 라이트레일 2단계 전용 정거장이 Hope Street 입구에 들어서며, 파라마타 CBD와 강 건너 시드니 올림픽 파크(기차·향후 메트로 웨스트)로 연결됩니다.</p>
+      <p class="su" data-lang="ko">멜로즈 파크는 라이드와 파라마타 사이에 위치합니다. 파라마타 라이트레일 2단계 전용 정거장이 Hope Street 입구에 들어서며, 파라마타 CBD와 강 건너 시드니 올림픽 파크(기차·향후 메트로 웨스트)로 연결됩니다.</p><p class="su" data-lang="zh">Melrose Park 位于 Ryde 与 Parramatta 之间。Parramatta 轻轨二期专属站点将设于 Hope Street 入口，连通 Parramatta CBD 及河对岸的悉尼奥林匹克公园（火车与未来的西部地铁）。</p><p class="su" data-lang="zt">Melrose Park 位於 Ryde 與 Parramatta 之間。Parramatta 輕軌二期專屬站點將設於 Hope Street 入口，連通 Parramatta CBD 及河對岸的悉尼奧林匹克公園（火車與未來的西部地鐵）。</p>
       <div class="lg">
-        <div class="lc"><div class="ln" style="font-size:1.5rem" data-lang="en">On site</div><div class="ln" style="font-size:1.5rem" data-lang="ko">단지 내</div><div class="lt" data-lang="en">Parramatta Light Rail Stop</div><div class="lt" data-lang="ko">파라마타 라이트레일 정거장</div><div class="lm" data-lang="en">Hope Street entrance</div><div class="lm" data-lang="ko">Hope Street 입구</div></div>
-        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lm" data-lang="en">By car</div><div class="lm" data-lang="ko">차량</div></div>
-        <div class="lc"><div class="ln">4<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Meadowbank Train Station</div><div class="lt" data-lang="ko">메도우뱅크 기차역</div><div class="lm" data-lang="en">Train &amp; ferry</div><div class="lm" data-lang="ko">기차 & 페리</div></div>
-        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Sydney Olympic Park</div><div class="lt" data-lang="ko">시드니 올림픽 파크</div><div class="lm" data-lang="en">Future Metro West</div><div class="lm" data-lang="ko">향후 메트로 웨스트</div></div>
-        <div class="lc"><div class="ln">1<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Melrose Park Public School &amp; Future School</div><div class="lt" data-lang="ko">멜로즈 파크 공립초 & 신설 학교</div><div class="lm" data-lang="en">Walking distance</div><div class="lm" data-lang="ko">도보 거리</div></div>
-        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small></div><div class="lt" data-lang="en">Top Ryde &amp; Rhodes Waterside</div><div class="lt" data-lang="ko">탑 라이드 & 로즈 워터사이드</div><div class="lm" data-lang="en">Shopping centres</div><div class="lm" data-lang="ko">쇼핑센터</div></div>
+        <div class="lc"><div class="ln" style="font-size:1.5rem" data-lang="en">On site</div><div class="ln" style="font-size:1.5rem" data-lang="ko">단지 내</div><div class="ln" style="font-size:1.5rem" data-lang="zh">小区内</div><div class="ln" style="font-size:1.5rem" data-lang="zt">小區內</div><div class="lt" data-lang="en">Parramatta Light Rail Stop</div><div class="lt" data-lang="ko">파라마타 라이트레일 정거장</div><div class="lt" data-lang="zh">Parramatta 轻轨站</div><div class="lt" data-lang="zt">Parramatta 輕軌站</div><div class="lm" data-lang="en">Hope Street entrance</div><div class="lm" data-lang="ko">Hope Street 입구</div><div class="lm" data-lang="zh">Hope Street 入口</div><div class="lm" data-lang="zt">Hope Street 入口</div></div>
+        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Parramatta CBD</div><div class="lt" data-lang="ko">파라마타 CBD</div><div class="lt" data-lang="zh">Parramatta CBD</div><div class="lt" data-lang="zt">Parramatta CBD</div><div class="lm" data-lang="en">By car</div><div class="lm" data-lang="ko">차량</div><div class="lm" data-lang="zh">驾车</div><div class="lm" data-lang="zt">駕車</div></div>
+        <div class="lc"><div class="ln">4<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Meadowbank Train Station</div><div class="lt" data-lang="ko">메도우뱅크 기차역</div><div class="lt" data-lang="zh">Meadowbank 火车站</div><div class="lt" data-lang="zt">Meadowbank 火車站</div><div class="lm" data-lang="en">Train &amp; ferry</div><div class="lm" data-lang="ko">기차 & 페리</div><div class="lm" data-lang="zh">火车与渡轮</div><div class="lm" data-lang="zt">火車與渡輪</div></div>
+        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Sydney Olympic Park</div><div class="lt" data-lang="ko">시드니 올림픽 파크</div><div class="lt" data-lang="zh">悉尼奥林匹克公园</div><div class="lt" data-lang="zt">悉尼奧林匹克公園</div><div class="lm" data-lang="en">Future Metro West</div><div class="lm" data-lang="ko">향후 메트로 웨스트</div><div class="lm" data-lang="zh">未来西部地铁</div><div class="lm" data-lang="zt">未來西部地鐵</div></div>
+        <div class="lc"><div class="ln">1<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Melrose Park Public School &amp; Future School</div><div class="lt" data-lang="ko">멜로즈 파크 공립초 & 신설 학교</div><div class="lt" data-lang="zh">Melrose Park 公立小学与新建学校</div><div class="lt" data-lang="zt">Melrose Park 公立小學與新建學校</div><div class="lm" data-lang="en">Walking distance</div><div class="lm" data-lang="ko">도보 거리</div><div class="lm" data-lang="zh">步行可达</div><div class="lm" data-lang="zt">步行可達</div></div>
+        <div class="lc"><div class="ln">10<small data-lang="en"> min</small><small data-lang="ko">분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div><div class="lt" data-lang="en">Top Ryde &amp; Rhodes Waterside</div><div class="lt" data-lang="ko">탑 라이드 & 로즈 워터사이드</div><div class="lt" data-lang="zh">Top Ryde 与 Rhodes Waterside</div><div class="lt" data-lang="zt">Top Ryde 與 Rhodes Waterside</div><div class="lm" data-lang="en">Shopping centres</div><div class="lm" data-lang="ko">쇼핑센터</div><div class="lm" data-lang="zh">购物中心</div><div class="lm" data-lang="zt">購物中心</div></div>
       </div>
     </div>
   </div>
@@ -320,17 +333,17 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section id="developer">
   <div class="dw fade">
-    <div class="dv"><div class="dlg">DEICORP<small data-lang="en">Design. Develop. Deliver.</small><small data-lang="ko">Design. Develop. Deliver.</small></div></div>
+    <div class="dv"><div class="dlg">DEICORP<small data-lang="en">Design. Develop. Deliver.</small><small data-lang="ko">Design. Develop. Deliver.</small><small data-lang="zh">Design. Develop. Deliver.</small><small data-lang="zt">Design. Develop. Deliver.</small></div></div>
     <div>
-      <div class="eb"><span data-lang="en">The Team</span><span data-lang="ko">개발 & 설계</span></div>
-      <h2 class="ti"><span data-lang="en">Deicorp &amp; <em>TURNER</em></span><span data-lang="ko">Deicorp &amp; <em>TURNER</em></span></h2>
+      <div class="eb"><span data-lang="en">The Team</span><span data-lang="ko">개발 & 설계</span><span data-lang="zh">开发与设计</span><span data-lang="zt">開發與設計</span></div>
+      <h2 class="ti"><span data-lang="en">Deicorp &amp; <em>TURNER</em></span><span data-lang="ko">Deicorp &amp; <em>TURNER</em></span><span data-lang="zh">Deicorp &amp; <em>TURNER</em></span><span data-lang="zt">Deicorp &amp; <em>TURNER</em></span></h2>
       <p class="su" data-lang="en">Established in 1999, Deicorp is a proudly Australian developer that designs, develops and builds in-house — having delivered more than 10,000 apartments across Sydney. Melrose Central continues Deicorp's ongoing partnership with TURNER studio, with landscape design by Urbis.</p>
-      <p class="su" data-lang="ko">1999년 설립된 Deicorp는 설계·개발·시공을 자체적으로 수행하는 호주 디벨로퍼로, 시드니 전역에 10,000세대 이상을 공급해 왔습니다. 멜로즈 센트럴은 Deicorp와 TURNER 스튜디오의 지속적인 파트너십의 결과이며, 조경은 Urbis가 맡았습니다.</p>
+      <p class="su" data-lang="ko">1999년 설립된 Deicorp는 설계·개발·시공을 자체적으로 수행하는 호주 디벨로퍼로, 시드니 전역에 10,000세대 이상을 공급해 왔습니다. 멜로즈 센트럴은 Deicorp와 TURNER 스튜디오의 지속적인 파트너십의 결과이며, 조경은 Urbis가 맡았습니다.</p><p class="su" data-lang="zh">创立于 1999 年的 Deicorp 是集设计、开发与施工于一体的澳洲开发商，已于悉尼各区交付逾 10,000 户住宅。Melrose Central 是 Deicorp 与 TURNER 工作室长期合作的成果，景观设计由 Urbis 担纲。</p><p class="su" data-lang="zt">創立於 1999 年的 Deicorp 是集設計、開發與施工於一體的澳洲開發商，已於悉尼各區交付逾 10,000 戶住宅。Melrose Central 是 Deicorp 與 TURNER 工作室長期合作的成果，景觀設計由 Urbis 擔綱。</p>
       <div class="dst">
-        <div class="ds"><div class="dsn">1999</div><div class="dsl" data-lang="en">Established</div><div class="dsl" data-lang="ko">설립 연도</div></div>
-        <div class="ds"><div class="dsn">10,000+</div><div class="dsl" data-lang="en">Apartments Delivered</div><div class="dsl" data-lang="ko">누적 공급 세대</div></div>
-        <div class="ds"><div class="dsn">TURNER</div><div class="dsl" data-lang="en">Architect</div><div class="dsl" data-lang="ko">건축 설계</div></div>
-        <div class="ds"><div class="dsn">Urbis</div><div class="dsl" data-lang="en">Landscape Architect</div><div class="dsl" data-lang="ko">조경 설계</div></div>
+        <div class="ds"><div class="dsn">1999</div><div class="dsl" data-lang="en">Established</div><div class="dsl" data-lang="ko">설립 연도</div><div class="dsl" data-lang="zh">创立年份</div><div class="dsl" data-lang="zt">創立年份</div></div>
+        <div class="ds"><div class="dsn">10,000+</div><div class="dsl" data-lang="en">Apartments Delivered</div><div class="dsl" data-lang="ko">누적 공급 세대</div><div class="dsl" data-lang="zh">累计交付户数</div><div class="dsl" data-lang="zt">累計交付戶數</div></div>
+        <div class="ds"><div class="dsn">TURNER</div><div class="dsl" data-lang="en">Architect</div><div class="dsl" data-lang="ko">건축 설계</div><div class="dsl" data-lang="zh">建筑设计</div><div class="dsl" data-lang="zt">建築設計</div></div>
+        <div class="ds"><div class="dsn">Urbis</div><div class="dsl" data-lang="en">Landscape Architect</div><div class="dsl" data-lang="ko">조경 설계</div><div class="dsl" data-lang="zh">景观设计</div><div class="dsl" data-lang="zt">景觀設計</div></div>
       </div>
     </div>
   </div>
@@ -338,18 +351,18 @@ footer{flex-direction:column;gap:8px;text-align:center;padding:24px}}
 
 <section class="ct" id="contact">
   <div class="cw fade">
-    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
-    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Melrose Central</em></span><span data-lang="ko">멜로즈 센트럴에서<br><em>새 보금자리</em>를</span></h2>
+    <div class="eb" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
+    <h2 class="ti"><span data-lang="en">Your Home at<br><em>Melrose Central</em></span><span data-lang="ko">멜로즈 센트럴에서<br><em>새 보금자리</em>를</span><span data-lang="zh">在 Melrose Central<br>开启<em>新家</em></span><span data-lang="zt">在 Melrose Central<br>開啓<em>新家</em></span></h2>
     <p class="su" style="margin:0 auto" data-lang="en">Construction commenced Q1 2024 · Completion estimated 2026, with the town centre opening mid-2026. Contact Sunghoon Choi (Sunny) at Forise Group for availability, floorplans and a personalised consultation.</p>
-    <p class="su" style="margin:0 auto" data-lang="ko">2024년 1분기 착공 · 2026년 준공 예정이며, 타운센터는 2026년 중반 개장 예정입니다. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p>
+    <p class="su" style="margin:0 auto" data-lang="ko">2024년 1분기 착공 · 2026년 준공 예정이며, 타운센터는 2026년 중반 개장 예정입니다. 포라이즈 그룹 최성훈에게 잔여 세대, 평면도, 맞춤 상담을 문의하세요.</p><p class="su" style="margin:0 auto" data-lang="zh">2024 年第一季度动工 · 预计 2026 年竣工，镇中心预计于 2026 年年中开业。欢迎向 Forise Group 的 Sunny 咨询剩余房源、平面图与专属建议。</p><p class="su" style="margin:0 auto" data-lang="zt">2024 年第一季度動工 · 預計 2026 年竣工，鎮中心預計於 2026 年年中開業。歡迎向 Forise Group 的 Sunny 諮詢剩餘房源、平面圖與專屬建議。</p>
     <div class="ci">
-      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span></div>
-      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><a href="tel:0414824225">0414 824 225</a></div>
+      <div class="cii"><label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label><span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span></div>
+      <div class="cii"><label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><label data-lang="zh">电话 / KakaoTalk</label><label data-lang="zt">電話 / KakaoTalk</label><a href="tel:0414824225">0414 824 225</a></div>
       <div class="cii"><label>Email</label><a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a></div>
     </div>
-    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Melrose%20Central%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span></a>
+    <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Melrose%20Central%20Enquiry" class="cc"><span data-lang="en">Request Information / 분양 문의</span><span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span></a>
     <p class="cd" data-lang="en">All information is for marketing purposes only and subject to change without notice. Images are artist's impressions prepared prior to completion of detailed design and construction; actual appearance and configuration may vary. Pricing available upon request. Forise Group acts as selling agent. Developed by Deicorp.</p>
-    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 상세 설계 및 시공 완료 전에 제작된 조감도로, 실제 외관과 구성은 다를 수 있습니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: Deicorp.</p>
+    <p class="cd" data-lang="ko">모든 정보는 마케팅 목적이며 사전 예고 없이 변경될 수 있습니다. 이미지는 상세 설계 및 시공 완료 전에 제작된 조감도로, 실제 외관과 구성은 다를 수 있습니다. 가격은 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 시행: Deicorp.</p><p class="cd" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像为详细设计与施工完成前制作的效果图，实际外观与配置可能有所不同。价格于咨询时提供。Forise Group 为销售代理。开发商：Deicorp。</p><p class="cd" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像爲詳細設計與施工完成前製作的效果圖，實際外觀與配置可能有所不同。價格於諮詢時提供。Forise Group 爲銷售代理。開發商：Deicorp。</p>
   </div>
 </section>
 
@@ -360,8 +373,22 @@ function toggleTheme(){const b=document.body,d=b.getAttribute('data-theme')==='d
 const sv=localStorage.getItem('theme');
 if(sv){document.body.setAttribute('data-theme',sv);document.querySelector('.bt').textContent=sv==='dark'?'☀':'☾';}
 else if(false){document.body.setAttribute('data-theme','dark');document.querySelector('.bt').textContent='☀';}
-let ko=false;
-function toggleLang(){ko=!ko;document.body.classList.toggle('lang-ko',ko);document.querySelector('.bl').textContent=ko?'English':'한국어';}
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('melrose-central-lang', l); }catch(e){}
+}
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('melrose-central-lang'); }catch(e){ return null; } })() || 'en');
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 </script>
