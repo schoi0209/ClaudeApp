@@ -192,9 +192,11 @@ footer{background:var(--hero-bg);border-top:1px solid rgba(63,184,158,0.1);paddi
 .footer-copy{font-size:.7rem;color:rgba(244,246,245,0.28)}
 
 /* LANG */
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko .hero-cta .ko-t{display:inline}
 body.lang-ko .hero-cta .en-t{display:none}
 .hero-cta .ko-t{display:none}
@@ -221,15 +223,26 @@ body.lang-ko .hero-cta .en-t{display:none}
   .spec-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.15)}
   .contact-info{gap:20px}
 }
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--teal);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo"><span class="cq">CQ</span> Central Quarter</a>
   <div class="nav-actions">
-    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="btn-theme" onclick="toggleTheme()">☾</button>
     <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="btn-bmac">☕ Buy Me a Coffee</a>
   </div>
@@ -241,42 +254,42 @@ body.lang-ko .hero-cta .en-t{display:none}
   <div class="hero-overlay"></div>
   <div class="hero-accent"></div>
   <div class="hero-badge" data-lang="en">MERRYLANDS NSW 2160</div>
-  <div class="hero-badge" data-lang="ko">메릴랜즈 NSW 2160</div>
+  <div class="hero-badge" data-lang="ko">메릴랜즈 NSW 2160</div><div class="hero-badge" data-lang="zh">Merrylands NSW 2160</div><div class="hero-badge" data-lang="zt">Merrylands NSW 2160</div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-lang="en">Central Quarter · by Northland</div>
-    <div class="hero-eyebrow" data-lang="ko">센트럴 쿼터 · by Northland</div>
+    <div class="hero-eyebrow" data-lang="ko">센트럴 쿼터 · by Northland</div><div class="hero-eyebrow" data-lang="zh">Central Quarter · by Northland</div><div class="hero-eyebrow" data-lang="zt">Central Quarter · by Northland</div>
     <h1 class="hero-title">
       <span data-lang="en">Live. Experience.<br><em>Enjoy.</em></span>
-      <span data-lang="ko">살고. 경험하고.<br><em>즐기다.</em></span>
+      <span data-lang="ko">살고. 경험하고.<br><em>즐기다.</em></span><span data-lang="zh">生活。体验。<br><em>享受。</em></span><span data-lang="zt">生活。體驗。<br><em>享受。</em></span>
     </h1>
     <p class="hero-sub" data-lang="en">The Most Family-Friendly Address in Western Sydney · Merrylands</p>
-    <p class="hero-sub" data-lang="ko">웨스턴 시드니에서 가장 가족 친화적인 주소 · 메릴랜즈</p>
+    <p class="hero-sub" data-lang="ko">웨스턴 시드니에서 가장 가족 친화적인 주소 · 메릴랜즈</p><p class="hero-sub" data-lang="zh">西悉尼最适合家庭的地址 · Merrylands</p><p class="hero-sub" data-lang="zt">西悉尼最適合家庭的地址 · Merrylands</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <label data-lang="en">Apartments</label><label data-lang="ko">총 세대수</label>
-        <span>194<small data-lang="en"> homes</small><small data-lang="ko"> 세대</small></span>
+        <label data-lang="en">Apartments</label><label data-lang="ko">총 세대수</label><label data-lang="zh">住宅总数</label><label data-lang="zt">住宅總數</label>
+        <span>194<small data-lang="en"> homes</small><small data-lang="ko"> 세대</small><small data-lang="zh">户</small><small data-lang="zt">戶</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Levels</label><label data-lang="ko">층수</label>
-        <span>21<small data-lang="en"> storeys</small><small data-lang="ko"> 층</small></span>
+        <label data-lang="en">Levels</label><label data-lang="ko">층수</label><label data-lang="zh">楼层</label><label data-lang="zt">樓層</label>
+        <span>21<small data-lang="en"> storeys</small><small data-lang="ko"> 층</small><small data-lang="zh">层</small><small data-lang="zt">層</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">Completion</label><label data-lang="ko">준공</label>
+        <label data-lang="en">Completion</label><label data-lang="ko">준공</label><label data-lang="zh">竣工</label><label data-lang="zt">竣工</label>
         <span>Q1<small> 2026</small></span>
       </div>
       <div class="hero-meta-item">
-        <label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label>
-        <span>5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></span>
+        <label data-lang="en">To Parramatta</label><label data-lang="ko">파라마타까지</label><label data-lang="zh">至 Parramatta</label><label data-lang="zt">至 Parramatta</label>
+        <span>5<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></span>
       </div>
     </div>
     <a href="#contact" class="hero-cta">
       <span class="en-t" data-lang="en">Request Information</span>
-      <span class="ko-t" data-lang="ko">분양 문의하기</span>
+      <span class="ko-t" data-lang="ko">분양 문의하기</span><span class="ko-t" data-lang="zh">咨询详情</span><span class="ko-t" data-lang="zt">諮詢詳情</span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
   <div class="hero-scroll">
-    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span>
+    <span data-lang="en">SCROLL</span><span data-lang="ko">스크롤</span><span data-lang="zh">向下滚动</span><span data-lang="zt">向下滾動</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
@@ -288,28 +301,28 @@ body.lang-ko .hero-cta .en-t{display:none}
       <img src="assets/central-quarter/building-exterior.jpg" alt="Central Quarter — Artist Impression" loading="lazy">
       <div class="about-visual-overlay"></div>
       <div class="about-visual-badge" data-lang="en">242–252 Pitt St, Merrylands</div>
-      <div class="about-visual-badge" data-lang="ko">242–252 핏 스트리트, 메릴랜즈</div>
+      <div class="about-visual-badge" data-lang="ko">242–252 핏 스트리트, 메릴랜즈</div><div class="about-visual-badge" data-lang="zh">242–252 Pitt Street, Merrylands</div><div class="about-visual-badge" data-lang="zt">242–252 Pitt Street, Merrylands</div>
       <div class="about-visual-caption">
         <p data-lang="en">21 levels · 194 apartments · 3 levels of retail</p>
-        <p data-lang="ko">21층 · 194세대 · 리테일 3개 층</p>
+        <p data-lang="ko">21층 · 194세대 · 리테일 3개 층</p><p data-lang="zh">21 层 · 194 户 · 三层商业</p><p data-lang="zt">21 層 · 194 戶 · 三層商業</p>
       </div>
     </div>
     <div>
-      <div class="section-eyebrow"><span data-lang="en">About the Building</span><span data-lang="ko">건물 소개</span></div>
+      <div class="section-eyebrow"><span data-lang="en">About the Building</span><span data-lang="ko">건물 소개</span><span data-lang="zh">项目简介</span><span data-lang="zt">項目簡介</span></div>
       <h2 class="section-title">
         <span data-lang="en">Central <em>Quarter</em></span>
-        <span data-lang="ko">센트럴 <em>쿼터</em></span>
+        <span data-lang="ko">센트럴 <em>쿼터</em></span><span data-lang="zh">Central <em>Quarter</em></span><span data-lang="zt">Central <em>Quarter</em></span>
       </h2>
       <p class="about-body" data-lang="en">Central Quarter is a landmark 21-level mixed-use development in the heart of Merrylands, delivering 194 thoughtfully designed apartments above three levels of retail and commercial space. Located directly across from Stockland Merrylands — one of Western Sydney's largest shopping centres — it places everyday convenience at your doorstep.</p>
-      <p class="about-body" data-lang="ko">센트럴 쿼터는 메릴랜즈 중심부에 위치한 21층 복합 개발 랜드마크로, 리테일 및 상업 공간 3개 층 위에 정교하게 설계된 194세대를 제공합니다. 웨스턴 시드니 최대 규모의 쇼핑센터 중 하나인 Stockland Merrylands 바로 맞은편에 위치해 일상의 편리함을 누릴 수 있습니다.</p>
+      <p class="about-body" data-lang="ko">센트럴 쿼터는 메릴랜즈 중심부에 위치한 21층 복합 개발 랜드마크로, 리테일 및 상업 공간 3개 층 위에 정교하게 설계된 194세대를 제공합니다. 웨스턴 시드니 최대 규모의 쇼핑센터 중 하나인 Stockland Merrylands 바로 맞은편에 위치해 일상의 편리함을 누릴 수 있습니다.</p><p class="about-body" data-lang="zh">Central Quarter 是位于 Merrylands 核心的 21 层综合开发地标，于三层商业与办公空间之上，提供 194 户精心设计的住宅。项目正对西悉尼规模最大的购物中心之一 Stockland Merrylands，尽享日常便利。</p><p class="about-body" data-lang="zt">Central Quarter 是位於 Merrylands 核心的 21 層綜合開發地標，於三層商業與辦公空間之上，提供 194 戶精心設計的住宅。項目正對西悉尼規模最大的購物中心之一 Stockland Merrylands，盡享日常便利。</p>
       <p class="about-body" data-lang="en">Residents enjoy a rooftop communal area with BBQ facilities and recreational spaces, a secondary communal zone on Level 3, plus an on-site 24/7 gym and childcare. Expected completion Q1 2026.</p>
-      <p class="about-body" data-lang="ko">입주민은 BBQ 시설과 레크리에이션 공간을 갖춘 루프탑 커뮤널 공간, 레벨 3의 추가 커뮤널 존, 그리고 단지 내 24시간 짐과 차일드케어를 이용할 수 있습니다. 2026년 1분기 준공 예정입니다.</p>
+      <p class="about-body" data-lang="ko">입주민은 BBQ 시설과 레크리에이션 공간을 갖춘 루프탑 커뮤널 공간, 레벨 3의 추가 커뮤널 존, 그리고 단지 내 24시간 짐과 차일드케어를 이용할 수 있습니다. 2026년 1분기 준공 예정입니다.</p><p class="about-body" data-lang="zh">住户可使用配备烧烤设施与休闲空间的屋顶公共区域、位于三层的额外公共空间，以及区内 24 小时健身房与托儿中心。预计 2026 年第一季度竣工。</p><p class="about-body" data-lang="zt">住戶可使用配備燒烤設施與休閒空間的屋頂公共區域、位於三層的額外公共空間，以及區內 24 小時健身房與托兒中心。預計 2026 年第一季度竣工。</p>
       <div class="about-tags">
-        <span class="tag" data-lang="en">Mixed-Use</span><span class="tag" data-lang="ko">복합 개발</span>
-        <span class="tag" data-lang="en">Rooftop BBQ</span><span class="tag" data-lang="ko">루프탑 BBQ</span>
-        <span class="tag" data-lang="en">24/7 Gym</span><span class="tag" data-lang="ko">24시간 짐</span>
-        <span class="tag" data-lang="en">On-site Childcare</span><span class="tag" data-lang="ko">단지 내 차일드케어</span>
-        <span class="tag" data-lang="en">10-Year LDI</span><span class="tag" data-lang="ko">10년 LDI 보험</span>
+        <span class="tag" data-lang="en">Mixed-Use</span><span class="tag" data-lang="ko">복합 개발</span><span class="tag" data-lang="zh">综合开发</span><span class="tag" data-lang="zt">綜合開發</span>
+        <span class="tag" data-lang="en">Rooftop BBQ</span><span class="tag" data-lang="ko">루프탑 BBQ</span><span class="tag" data-lang="zh">屋顶烧烤</span><span class="tag" data-lang="zt">屋頂燒烤</span>
+        <span class="tag" data-lang="en">24/7 Gym</span><span class="tag" data-lang="ko">24시간 짐</span><span class="tag" data-lang="zh">24 小时健身房</span><span class="tag" data-lang="zt">24 小時健身房</span>
+        <span class="tag" data-lang="en">On-site Childcare</span><span class="tag" data-lang="ko">단지 내 차일드케어</span><span class="tag" data-lang="zh">区内托儿中心</span><span class="tag" data-lang="zt">區內托兒中心</span>
+        <span class="tag" data-lang="en">10-Year LDI</span><span class="tag" data-lang="ko">10년 LDI 보험</span><span class="tag" data-lang="zh">十年 LDI 保险</span><span class="tag" data-lang="zt">十年 LDI 保險</span>
       </div>
     </div>
   </div>
@@ -320,19 +333,19 @@ body.lang-ko .hero-cta .en-t{display:none}
   <div class="specs-wrap">
     <div class="spec-item">
       <div class="spec-num">194</div>
-      <div class="spec-label" data-lang="en">Apartments</div><div class="spec-label" data-lang="ko">세대</div>
+      <div class="spec-label" data-lang="en">Apartments</div><div class="spec-label" data-lang="ko">세대</div><div class="spec-label" data-lang="zh">户</div><div class="spec-label" data-lang="zt">戶</div>
     </div>
     <div class="spec-item">
       <div class="spec-num">21</div>
-      <div class="spec-label" data-lang="en">Levels</div><div class="spec-label" data-lang="ko">층</div>
+      <div class="spec-label" data-lang="en">Levels</div><div class="spec-label" data-lang="ko">층</div><div class="spec-label" data-lang="zh">层</div><div class="spec-label" data-lang="zt">層</div>
     </div>
     <div class="spec-item">
       <div class="spec-num">3</div>
-      <div class="spec-label" data-lang="en">Retail Levels</div><div class="spec-label" data-lang="ko">리테일 층</div>
+      <div class="spec-label" data-lang="en">Retail Levels</div><div class="spec-label" data-lang="ko">리테일 층</div><div class="spec-label" data-lang="zh">商业楼层</div><div class="spec-label" data-lang="zt">商業樓層</div>
     </div>
     <div class="spec-item">
       <div class="spec-num">10</div>
-      <div class="spec-label" data-lang="en">Years LDI Cover</div><div class="spec-label" data-lang="ko">년 LDI 보장</div>
+      <div class="spec-label" data-lang="en">Years LDI Cover</div><div class="spec-label" data-lang="ko">년 LDI 보장</div><div class="spec-label" data-lang="zh">年 LDI 保障</div><div class="spec-label" data-lang="zt">年 LDI 保障</div>
     </div>
   </div>
 </div>
@@ -343,9 +356,9 @@ body.lang-ko .hero-cta .en-t{display:none}
   <div class="building-band-overlay"></div>
   <div class="building-band-caption">
     <h3 data-lang="en">Step Into Your Future</h3>
-    <h3 data-lang="ko">당신의 미래로</h3>
+    <h3 data-lang="ko">당신의 미래로</h3><h3 data-lang="zh">迈向你的未来</h3><h3 data-lang="zt">邁向你的未來</h3>
     <p data-lang="en">Corner of Pitt Street & Terminal Place · Artist Impression</p>
-    <p data-lang="ko">핏 스트리트 & 터미널 플레이스 코너 · 조감도</p>
+    <p data-lang="ko">핏 스트리트 & 터미널 플레이스 코너 · 조감도</p><p data-lang="zh">Pitt Street 与 Terminal Place 转角 · 效果图</p><p data-lang="zt">Pitt Street 與 Terminal Place 轉角 · 效果圖</p>
   </div>
 </div>
 
@@ -353,18 +366,18 @@ body.lang-ko .hero-cta .en-t{display:none}
 <section id="rooftop">
   <div class="about-wrap fade-in">
     <div>
-      <div class="section-eyebrow"><span data-lang="en">Rooftop & Communal</span><span data-lang="ko">루프탑 & 커뮤널</span></div>
+      <div class="section-eyebrow"><span data-lang="en">Rooftop & Communal</span><span data-lang="ko">루프탑 & 커뮤널</span><span data-lang="zh">屋顶与公共空间</span><span data-lang="zt">屋頂與公共空間</span></div>
       <h2 class="section-title">
         <span data-lang="en">Life Above<br><em>the City</em></span>
-        <span data-lang="ko">도시 위의<br><em>일상</em></span>
+        <span data-lang="ko">도시 위의<br><em>일상</em></span><span data-lang="zh">城市之上的<br><em>日常</em></span><span data-lang="zt">城市之上的<br><em>日常</em></span>
       </h2>
       <p class="about-body" data-lang="en">A thoughtfully designed rooftop communal area crowns Central Quarter — featuring an outdoor gym with inspiring views, a vibrant kids' play area, and landscaped green space to gather, unwind and connect. A secondary communal zone on Level 3 adds even more room to relax.</p>
-      <p class="about-body" data-lang="ko">센트럴 쿼터의 정점에는 정교하게 설계된 루프탑 커뮤널 공간이 자리합니다 — 탁 트인 전망의 야외 짐, 활기찬 키즈 플레이 공간, 그리고 모이고 쉬고 교류할 수 있는 조경된 녹지로 구성됩니다. 레벨 3의 추가 커뮤널 존이 더 넓은 휴식 공간을 더합니다.</p>
+      <p class="about-body" data-lang="ko">센트럴 쿼터의 정점에는 정교하게 설계된 루프탑 커뮤널 공간이 자리합니다 — 탁 트인 전망의 야외 짐, 활기찬 키즈 플레이 공간, 그리고 모이고 쉬고 교류할 수 있는 조경된 녹지로 구성됩니다. 레벨 3의 추가 커뮤널 존이 더 넓은 휴식 공간을 더합니다.</p><p class="about-body" data-lang="zh">Central Quarter 的顶层是精心设计的屋顶公共空间 —— 视野开阔的户外健身区、充满活力的儿童游乐空间，以及可供聚会、休憩与交流的景观绿地。三层的额外公共区域则提供更宽裕的休闲空间。</p><p class="about-body" data-lang="zt">Central Quarter 的頂層是精心設計的屋頂公共空間 —— 視野開闊的戶外健身區、充滿活力的兒童遊樂空間，以及可供聚會、休憩與交流的景觀綠地。三層的額外公共區域則提供更寬裕的休閒空間。</p>
       <div class="about-tags">
-        <span class="tag" data-lang="en">Rooftop Outdoor Gym</span><span class="tag" data-lang="ko">루프탑 야외 짐</span>
-        <span class="tag" data-lang="en">Kids' Play Area</span><span class="tag" data-lang="ko">키즈 플레이 공간</span>
-        <span class="tag" data-lang="en">BBQ & Recreation</span><span class="tag" data-lang="ko">BBQ & 레크리에이션</span>
-        <span class="tag" data-lang="en">Level 3 Communal</span><span class="tag" data-lang="ko">레벨 3 커뮤널</span>
+        <span class="tag" data-lang="en">Rooftop Outdoor Gym</span><span class="tag" data-lang="ko">루프탑 야외 짐</span><span class="tag" data-lang="zh">屋顶户外健身区</span><span class="tag" data-lang="zt">屋頂戶外健身區</span>
+        <span class="tag" data-lang="en">Kids' Play Area</span><span class="tag" data-lang="ko">키즈 플레이 공간</span><span class="tag" data-lang="zh">儿童游乐空间</span><span class="tag" data-lang="zt">兒童遊樂空間</span>
+        <span class="tag" data-lang="en">BBQ & Recreation</span><span class="tag" data-lang="ko">BBQ & 레크리에이션</span><span class="tag" data-lang="zh">烧烤与休闲</span><span class="tag" data-lang="zt">燒烤與休閒</span>
+        <span class="tag" data-lang="en">Level 3 Communal</span><span class="tag" data-lang="ko">레벨 3 커뮤널</span><span class="tag" data-lang="zh">三层公共空间</span><span class="tag" data-lang="zt">三層公共空間</span>
       </div>
     </div>
     <div class="about-visual">
@@ -372,7 +385,7 @@ body.lang-ko .hero-cta .en-t{display:none}
       <div class="about-visual-overlay"></div>
       <div class="about-visual-caption">
         <p data-lang="en">Rooftop communal area with outdoor gym & play space</p>
-        <p data-lang="ko">야외 짐과 플레이 공간을 갖춘 루프탑 커뮤널</p>
+        <p data-lang="ko">야외 짐과 플레이 공간을 갖춘 루프탑 커뮤널</p><p data-lang="zh">配备户外健身区与游乐空间的屋顶公共区域</p><p data-lang="zt">配備戶外健身區與遊樂空間的屋頂公共區域</p>
       </div>
     </div>
   </div>
@@ -382,92 +395,92 @@ body.lang-ko .hero-cta .en-t{display:none}
 <section class="interiors-section" id="interiors">
   <div class="interiors-wrap fade-in">
     <div class="interiors-intro">
-      <div class="section-eyebrow"><span data-lang="en">Interiors & Finishes</span><span data-lang="ko">인테리어 & 마감</span></div>
+      <div class="section-eyebrow"><span data-lang="en">Interiors & Finishes</span><span data-lang="ko">인테리어 & 마감</span><span data-lang="zh">室内与饰面</span><span data-lang="zt">室內與飾面</span></div>
       <h2 class="section-title">
         <span data-lang="en">Quality in <em>Every Detail</em></span>
-        <span data-lang="ko">디테일까지 <em>완벽하게</em></span>
+        <span data-lang="ko">디테일까지 <em>완벽하게</em></span><span data-lang="zh">细节皆<em>臻于完美</em></span><span data-lang="zt">細節皆<em>臻於完美</em></span>
       </h2>
       <p class="section-sub" data-lang="en">Designed for optimal light and space, every residence blends quality and style — from stone benchtops and European appliances to plush bedrooms with city skyline views.</p>
-      <p class="section-sub" data-lang="ko">최적의 채광과 공간을 위해 설계된 모든 레지던스는 스톤 벤치탑과 유럽산 가전부터 시티 스카이라인 전망의 침실까지, 품질과 스타일을 조화롭게 담아냈습니다.</p>
+      <p class="section-sub" data-lang="ko">최적의 채광과 공간을 위해 설계된 모든 레지던스는 스톤 벤치탑과 유럽산 가전부터 시티 스카이라인 전망의 침실까지, 품질과 스타일을 조화롭게 담아냈습니다.</p><p class="section-sub" data-lang="zh">每一户均以最佳采光与空间为设计原则，从石材台面、欧洲家电，到可眺城市天际线的卧室，将品质与格调融为一体。</p><p class="section-sub" data-lang="zt">每一戶均以最佳採光與空間爲設計原則，從石材檯面、歐洲家電，到可眺城市天際線的臥室，將品質與格調融爲一體。</p>
     </div>
     <div class="interiors-grid">
       <div class="interior-card">
         <img src="assets/central-quarter/interior-living.jpg" alt="Living room — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">Bright & Spacious Living</h4>
-          <h4 data-lang="ko">밝고 넓은 거실</h4>
+          <h4 data-lang="ko">밝고 넓은 거실</h4><h4 data-lang="zh">明亮宽敞的起居空间</h4><h4 data-lang="zt">明亮寬敞的起居空間</h4>
           <p data-lang="en">Private balcony · East-side CBD views · Artist Impression</p>
-          <p data-lang="ko">프라이빗 발코니 · 동향 CBD 전망 · 조감도</p>
+          <p data-lang="ko">프라이빗 발코니 · 동향 CBD 전망 · 조감도</p><p data-lang="zh">私人阳台 · 东向 CBD 景观 · 效果图</p><p data-lang="zt">私人陽臺 · 東向 CBD 景觀 · 效果圖</p>
         </div>
       </div>
       <div class="interior-card">
         <img src="assets/central-quarter/interior-kitchen.jpg" alt="Kitchen — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">A Symphony of Form & Function</h4>
-          <h4 data-lang="ko">형태와 기능의 조화, 주방</h4>
+          <h4 data-lang="ko">형태와 기능의 조화, 주방</h4><h4 data-lang="zh">形随机能的厨房</h4><h4 data-lang="zt">形隨機能的廚房</h4>
           <p data-lang="en">SMEG appliances · 20mm Luna white stone · Artist Impression</p>
-          <p data-lang="ko">SMEG 가전 · 20mm 루나 화이트 스톤 · 조감도</p>
+          <p data-lang="ko">SMEG 가전 · 20mm 루나 화이트 스톤 · 조감도</p><p data-lang="zh">SMEG 家电 · 20mm Luna White 石材 · 效果图</p><p data-lang="zt">SMEG 家電 · 20mm Luna White 石材 · 效果圖</p>
         </div>
       </div>
       <div class="interior-card">
         <img src="assets/central-quarter/interior-bedroom.jpg" alt="Bedroom — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">Contemporary Free-Flow Design</h4>
-          <h4 data-lang="ko">현대적 자유 동선의 침실</h4>
+          <h4 data-lang="ko">현대적 자유 동선의 침실</h4><h4 data-lang="zh">动线自在的现代卧室</h4><h4 data-lang="zt">動線自在的現代臥室</h4>
           <p data-lang="en">Plush carpet · Mirrored built-in robes · Artist Impression</p>
-          <p data-lang="ko">플러시 카펫 · 미러 빌트인 옷장 · 조감도</p>
+          <p data-lang="ko">플러시 카펫 · 미러 빌트인 옷장 · 조감도</p><p data-lang="zh">柔软地毯 · 镜面嵌入式衣柜 · 效果图</p><p data-lang="zt">柔軟地毯 · 鏡面嵌入式衣櫃 · 效果圖</p>
         </div>
       </div>
       <div class="interior-card">
         <img src="assets/central-quarter/interior-bathroom.jpg" alt="Bathroom — Artist Impression" loading="lazy">
         <div class="interior-card-label">
           <h4 data-lang="en">Timeless Bathrooms</h4>
-          <h4 data-lang="ko">시대를 초월한 욕실</h4>
+          <h4 data-lang="ko">시대를 초월한 욕실</h4><h4 data-lang="zh">隽永的浴室</h4><h4 data-lang="zt">雋永的浴室</h4>
           <p data-lang="en">Villeroy & Boch · Full-height tiling · Artist Impression</p>
-          <p data-lang="ko">Villeroy & Boch · 전체 높이 타일 · 조감도</p>
+          <p data-lang="ko">Villeroy & Boch · 전체 높이 타일 · 조감도</p><p data-lang="zh">Villeroy & Boch · 通顶墙砖 · 效果图</p><p data-lang="zt">Villeroy & Boch · 通頂牆磚 · 效果圖</p>
         </div>
       </div>
     </div>
     <div class="finishes-list">
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Flooring</div><div class="fi-label" data-lang="ko">바닥재</div>
+        <div class="fi-label" data-lang="en">Flooring</div><div class="fi-label" data-lang="ko">바닥재</div><div class="fi-label" data-lang="zh">地面材料</div><div class="fi-label" data-lang="zt">地面材料</div>
         <div class="fi-val" data-lang="en">Laminate timber in Beige Oak · plush carpet to bedrooms</div>
-        <div class="fi-val" data-lang="ko">베이지 오크 라미네이트 팀버 · 침실 플러시 카펫</div>
+        <div class="fi-val" data-lang="ko">베이지 오크 라미네이트 팀버 · 침실 플러시 카펫</div><div class="fi-val" data-lang="zh">米色橡木纹木质复合地板 · 卧室铺柔软地毯</div><div class="fi-val" data-lang="zt">米色橡木紋木質複合地板 · 臥室鋪柔軟地毯</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Appliances</div><div class="fi-label" data-lang="ko">가전</div>
+        <div class="fi-label" data-lang="en">Appliances</div><div class="fi-label" data-lang="ko">가전</div><div class="fi-label" data-lang="zh">家电</div><div class="fi-label" data-lang="zt">家電</div>
         <div class="fi-val" data-lang="en">SMEG — gas cooktop, multi-function oven, rangehood, microwave, dishwasher</div>
-        <div class="fi-val" data-lang="ko">SMEG — 가스쿡탑, 멀티펑션 오븐, 레인지후드, 전자레인지, 식기세척기</div>
+        <div class="fi-val" data-lang="ko">SMEG — 가스쿡탑, 멀티펑션 오븐, 레인지후드, 전자레인지, 식기세척기</div><div class="fi-val" data-lang="zh">SMEG —— 燃气灶具、多功能烤箱、抽油烟机、微波炉、洗碗机</div><div class="fi-val" data-lang="zt">SMEG —— 燃氣竈具、多功能烤箱、抽油煙機、微波爐、洗碗機</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Benchtops</div><div class="fi-label" data-lang="ko">벤치탑</div>
+        <div class="fi-label" data-lang="en">Benchtops</div><div class="fi-label" data-lang="ko">벤치탑</div><div class="fi-label" data-lang="zh">台面</div><div class="fi-label" data-lang="zt">檯面</div>
         <div class="fi-val" data-lang="en">20mm stone — Luna white, silica-free</div>
-        <div class="fi-val" data-lang="ko">20mm 스톤 — 루나 화이트, 실리카 프리</div>
+        <div class="fi-val" data-lang="ko">20mm 스톤 — 루나 화이트, 실리카 프리</div><div class="fi-val" data-lang="zh">20mm 石材 —— Luna White，无硅石成分</div><div class="fi-val" data-lang="zt">20mm 石材 —— Luna White，無硅石成分</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Tapware</div><div class="fi-label" data-lang="ko">수전</div>
+        <div class="fi-label" data-lang="en">Tapware</div><div class="fi-label" data-lang="ko">수전</div><div class="fi-label" data-lang="zh">龙头洁具</div><div class="fi-label" data-lang="zt">龍頭潔具</div>
         <div class="fi-val" data-lang="en">Villeroy & Boch — polished chrome finish</div>
-        <div class="fi-val" data-lang="ko">Villeroy & Boch — 폴리시드 크롬 마감</div>
+        <div class="fi-val" data-lang="ko">Villeroy & Boch — 폴리시드 크롬 마감</div><div class="fi-val" data-lang="zh">Villeroy & Boch —— 抛光铬饰面</div><div class="fi-val" data-lang="zt">Villeroy & Boch —— 拋光鉻飾面</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Joinery</div><div class="fi-label" data-lang="ko">조이너리</div>
+        <div class="fi-label" data-lang="en">Joinery</div><div class="fi-label" data-lang="ko">조이너리</div><div class="fi-label" data-lang="zh">木作</div><div class="fi-label" data-lang="zt">木作</div>
         <div class="fi-val" data-lang="en">Designer mixed — Porcelain & Tessuto Milan matt finishes</div>
-        <div class="fi-val" data-lang="ko">디자이너 믹스 — 포셀린 & 테수토 밀란 매트 마감</div>
+        <div class="fi-val" data-lang="ko">디자이너 믹스 — 포셀린 & 테수토 밀란 매트 마감</div><div class="fi-val" data-lang="zh">设计师配搭 —— Porcelain 与 Tesuto Milan 哑光饰面</div><div class="fi-val" data-lang="zt">設計師配搭 —— Porcelain 與 Tesuto Milan 啞光飾面</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Bathroom</div><div class="fi-label" data-lang="ko">욕실</div>
+        <div class="fi-label" data-lang="en">Bathroom</div><div class="fi-label" data-lang="ko">욕실</div><div class="fi-label" data-lang="zh">浴室</div><div class="fi-label" data-lang="zt">浴室</div>
         <div class="fi-val" data-lang="en">Fully tiled — 600×600 walls, 300×600 floors, natural stone look</div>
-        <div class="fi-val" data-lang="ko">풀 타일 — 600×600 벽, 300×600 바닥, 내추럴 스톤 룩</div>
+        <div class="fi-val" data-lang="ko">풀 타일 — 600×600 벽, 300×600 바닥, 내추럴 스톤 룩</div><div class="fi-val" data-lang="zh">全墙铺贴 —— 600×600 墙砖、300×600 地砖，天然石材质感</div><div class="fi-val" data-lang="zt">全牆鋪貼 —— 600×600 牆磚、300×600 地磚，天然石材質感</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Storage</div><div class="fi-label" data-lang="ko">수납</div>
+        <div class="fi-label" data-lang="en">Storage</div><div class="fi-label" data-lang="ko">수납</div><div class="fi-label" data-lang="zh">收纳</div><div class="fi-label" data-lang="zt">收納</div>
         <div class="fi-val" data-lang="en">Built-in robes with full-height mirrored fronts</div>
-        <div class="fi-val" data-lang="ko">전체 높이 미러 빌트인 옷장</div>
+        <div class="fi-val" data-lang="ko">전체 높이 미러 빌트인 옷장</div><div class="fi-val" data-lang="zh">通顶镜面嵌入式衣柜</div><div class="fi-val" data-lang="zt">通頂鏡面嵌入式衣櫃</div>
       </div>
       <div class="finish-item">
-        <div class="fi-label" data-lang="en">Climate Control</div><div class="fi-label" data-lang="ko">냉난방</div>
+        <div class="fi-label" data-lang="en">Climate Control</div><div class="fi-label" data-lang="ko">냉난방</div><div class="fi-label" data-lang="zh">冷暖空调</div><div class="fi-label" data-lang="zt">冷暖空調</div>
         <div class="fi-val" data-lang="en">A/C to all bedrooms & living areas, year-round comfort</div>
-        <div class="fi-val" data-lang="ko">전 침실·거실 에어컨, 연중 쾌적</div>
+        <div class="fi-val" data-lang="ko">전 침실·거실 에어컨, 연중 쾌적</div><div class="fi-val" data-lang="zh">全部卧室与起居空间配空调，四季舒适</div><div class="fi-val" data-lang="zt">全部臥室與起居空間配空調，四季舒適</div>
       </div>
     </div>
   </div>
@@ -478,57 +491,57 @@ body.lang-ko .hero-cta .en-t{display:none}
   <div class="features-wrap">
     <div class="features-header fade-in">
       <div>
-        <div class="section-eyebrow"><span data-lang="en">Why Merrylands</span><span data-lang="ko">왜 메릴랜즈인가</span></div>
+        <div class="section-eyebrow"><span data-lang="en">Why Merrylands</span><span data-lang="ko">왜 메릴랜즈인가</span><span data-lang="zh">为何选择 Merrylands</span><span data-lang="zt">爲何選擇 Merrylands</span></div>
         <h2 class="section-title">
           <span data-lang="en">The Most<br><em>Family-Friendly</em><br>in Western Sydney</span>
-          <span data-lang="ko">웨스턴 시드니에서<br>가장 <em>가족 친화적인</em><br>지역</span>
+          <span data-lang="ko">웨스턴 시드니에서<br>가장 <em>가족 친화적인</em><br>지역</span><span data-lang="zh">西悉尼<br>最<em>适合家庭</em>的<br>区域</span><span data-lang="zt">西悉尼<br>最<em>適合家庭</em>的<br>區域</span>
         </h2>
       </div>
       <p class="section-sub" data-lang="en">Merrylands combines infrastructure investment, outstanding family amenities, and strong rental demand — making it one of Western Sydney's most liveable and resilient suburbs.</p>
-      <p class="section-sub" data-lang="ko">메릴랜즈는 인프라 투자, 뛰어난 가족 편의시설, 강력한 임대 수요를 결합하여 웨스턴 시드니에서 가장 살기 좋고 견고한 지역 중 하나입니다.</p>
+      <p class="section-sub" data-lang="ko">메릴랜즈는 인프라 투자, 뛰어난 가족 편의시설, 강력한 임대 수요를 결합하여 웨스턴 시드니에서 가장 살기 좋고 견고한 지역 중 하나입니다.</p><p class="section-sub" data-lang="zh">Merrylands 结合了基建投资、优质的家庭配套与强劲的租赁需求，是西悉尼最宜居且最具韧性的区域之一。</p><p class="section-sub" data-lang="zt">Merrylands 結合了基建投資、優質的家庭配套與強勁的租賃需求，是西悉尼最宜居且最具韌性的區域之一。</p>
     </div>
     <div class="features-grid fade-in">
       <div class="feature-card">
         <div class="feature-icon">🏗️</div>
         <div class="feature-name" data-lang="en">Infrastructure Upgrade</div>
-        <div class="feature-name" data-lang="ko">인프라 업그레이드</div>
+        <div class="feature-name" data-lang="ko">인프라 업그레이드</div><div class="feature-name" data-lang="zh">基建升级</div><div class="feature-name" data-lang="zt">基建升級</div>
         <div class="feature-desc" data-lang="en">A five-year infrastructure project completed in April 2025 enhanced roads, facilities and essential services across Merrylands.</div>
-        <div class="feature-desc" data-lang="ko">2025년 4월 완료된 5년 인프라 프로젝트로 메릴랜즈 전역의 도로, 시설, 필수 서비스가 개선되었습니다.</div>
+        <div class="feature-desc" data-lang="ko">2025년 4월 완료된 5년 인프라 프로젝트로 메릴랜즈 전역의 도로, 시설, 필수 서비스가 개선되었습니다.</div><div class="feature-desc" data-lang="zh">历时五年、于 2025 年 4 月完成的基建项目，改善了 Merrylands 全区的道路、设施与基础服务。</div><div class="feature-desc" data-lang="zt">歷時五年、於 2025 年 4 月完成的基建項目，改善了 Merrylands 全區的道路、設施與基礎服務。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🏫</div>
         <div class="feature-name" data-lang="en">40–70 Childcare Centres</div>
-        <div class="feature-name" data-lang="ko">40~70개 차일드케어</div>
+        <div class="feature-name" data-lang="ko">40~70개 차일드케어</div><div class="feature-name" data-lang="zh">40 至 70 家托儿中心</div><div class="feature-name" data-lang="zt">40 至 70 家托兒中心</div>
         <div class="feature-desc" data-lang="en">The 2160 postcode hosts 40–70 childcare centres — well above the Sydney average, giving families real flexibility and choice.</div>
-        <div class="feature-desc" data-lang="ko">2160 우편번호 지역에 40~70개의 차일드케어가 있어 시드니 평균을 크게 상회하며, 가족에게 유연성과 선택권을 제공합니다.</div>
+        <div class="feature-desc" data-lang="ko">2160 우편번호 지역에 40~70개의 차일드케어가 있어 시드니 평균을 크게 상회하며, 가족에게 유연성과 선택권을 제공합니다.</div><div class="feature-desc" data-lang="zh">2160 邮区内有 40 至 70 家托儿中心，远高于悉尼平均水平，为家庭提供灵活性与选择空间。</div><div class="feature-desc" data-lang="zt">2160 郵區內有 40 至 70 家托兒中心，遠高於悉尼平均水平，爲家庭提供靈活性與選擇空間。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🎓</div>
         <div class="feature-name" data-lang="en">Strong Schools</div>
-        <div class="feature-name" data-lang="ko">우수한 학교</div>
+        <div class="feature-name" data-lang="ko">우수한 학교</div><div class="feature-name" data-lang="zh">优质学校</div><div class="feature-name" data-lang="zt">優質學校</div>
         <div class="feature-desc" data-lang="en">Merrylands Public, Merrylands High, plus private options and quick access to Western Sydney University (Parramatta).</div>
-        <div class="feature-desc" data-lang="ko">메릴랜즈 공립·고등학교, 사립 학교 옵션, 그리고 웨스턴 시드니 대학교(파라마타 캠퍼스) 빠른 접근.</div>
+        <div class="feature-desc" data-lang="ko">메릴랜즈 공립·고등학교, 사립 학교 옵션, 그리고 웨스턴 시드니 대학교(파라마타 캠퍼스) 빠른 접근.</div><div class="feature-desc" data-lang="zh">Merrylands 公立小学与中学、多所私立学校可选，并可快速抵达西悉尼大学（Parramatta 校区）。</div><div class="feature-desc" data-lang="zt">Merrylands 公立小學與中學、多所私立學校可選，並可快速抵達西悉尼大學（Parramatta 校區）。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🛍️</div>
         <div class="feature-name" data-lang="en">Stockland Merrylands</div>
-        <div class="feature-name" data-lang="ko">Stockland 메릴랜즈</div>
+        <div class="feature-name" data-lang="ko">Stockland 메릴랜즈</div><div class="feature-name" data-lang="zh">Stockland Merrylands</div><div class="feature-name" data-lang="zt">Stockland Merrylands</div>
         <div class="feature-desc" data-lang="en">One of Western Sydney's largest shopping centres — 200+ retailers, family services and casual dining, directly across the road.</div>
-        <div class="feature-desc" data-lang="ko">웨스턴 시드니 최대 쇼핑센터 중 하나 — 200개 이상의 매장, 가족 서비스, 캐주얼 다이닝이 바로 길 건너에 있습니다.</div>
+        <div class="feature-desc" data-lang="ko">웨스턴 시드니 최대 쇼핑센터 중 하나 — 200개 이상의 매장, 가족 서비스, 캐주얼 다이닝이 바로 길 건너에 있습니다.</div><div class="feature-desc" data-lang="zh">西悉尼规模最大的购物中心之一 —— 逾 200 家店铺、家庭服务与休闲餐饮，就在马路对面。</div><div class="feature-desc" data-lang="zt">西悉尼規模最大的購物中心之一 —— 逾 200 家店鋪、家庭服務與休閒餐飲，就在馬路對面。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📈</div>
         <div class="feature-name" data-lang="en">High Rental Demand</div>
-        <div class="feature-name" data-lang="ko">높은 임대 수요</div>
+        <div class="feature-name" data-lang="ko">높은 임대 수요</div><div class="feature-name" data-lang="zh">旺盛的租赁需求</div><div class="feature-name" data-lang="zt">旺盛的租賃需求</div>
         <div class="feature-desc" data-lang="en">A diverse community and broad amenity base drive strong rental demand from families and professionals alike.</div>
-        <div class="feature-desc" data-lang="ko">다양한 커뮤니티와 폭넓은 편의시설 기반이 가족과 전문직 모두로부터 강력한 임대 수요를 이끌어냅니다.</div>
+        <div class="feature-desc" data-lang="ko">다양한 커뮤니티와 폭넓은 편의시설 기반이 가족과 전문직 모두로부터 강력한 임대 수요를 이끌어냅니다.</div><div class="feature-desc" data-lang="zh">多元的社区构成与完善的配套基础，带动来自家庭与专业人士的强劲租赁需求。</div><div class="feature-desc" data-lang="zt">多元的社區構成與完善的配套基礎，帶動來自家庭與專業人士的強勁租賃需求。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🌳</div>
         <div class="feature-name" data-lang="en">Parks & Open Space</div>
-        <div class="feature-name" data-lang="ko">공원 & 녹지</div>
+        <div class="feature-name" data-lang="ko">공원 & 녹지</div><div class="feature-name" data-lang="zh">公园与绿地</div><div class="feature-name" data-lang="zt">公園與綠地</div>
         <div class="feature-desc" data-lang="en">Central Gardens Nature Reserve, Granville Park, Merrylands Park and Holroyd Gardens all within easy reach.</div>
-        <div class="feature-desc" data-lang="ko">센트럴 가든스 자연보호구역, 그랜빌 파크, 메릴랜즈 파크, 홀로이드 가든스가 모두 가까운 거리에 있습니다.</div>
+        <div class="feature-desc" data-lang="ko">센트럴 가든스 자연보호구역, 그랜빌 파크, 메릴랜즈 파크, 홀로이드 가든스가 모두 가까운 거리에 있습니다.</div><div class="feature-desc" data-lang="zh">Central Gardens 自然保护区、Granville Park、Merrylands Park 与 Holroyd Gardens 皆在近处。</div><div class="feature-desc" data-lang="zt">Central Gardens 自然保護區、Granville Park、Merrylands Park 與 Holroyd Gardens 皆在近處。</div>
       </div>
     </div>
   </div>
@@ -542,53 +555,53 @@ body.lang-ko .hero-cta .en-t{display:none}
         <img src="assets/central-quarter/location-aerial.jpg" alt="Central Quarter location — aerial view across from Stockland Merrylands" loading="lazy">
       </div>
       <div class="location-info">
-        <div class="section-eyebrow"><span data-lang="en">Connectivity</span><span data-lang="ko">교통 & 접근성</span></div>
+        <div class="section-eyebrow"><span data-lang="en">Connectivity</span><span data-lang="ko">교통 & 접근성</span><span data-lang="zh">交通与可达性</span><span data-lang="zt">交通與可達性</span></div>
         <h2 class="section-title">
           <span data-lang="en">Connected to<br><em>Everywhere</em></span>
-          <span data-lang="ko"><em>어디든</em><br>연결됩니다</span>
+          <span data-lang="ko"><em>어디든</em><br>연결됩니다</span><span data-lang="zh">连通<br><em>四面八方</em></span><span data-lang="zt">連通<br><em>四面八方</em></span>
         </h2>
         <p class="section-sub" data-lang="en">Merrylands Station sits on the T2 Inner West & Leppington Line, with direct trains to Parramatta and the Sydney CBD. Close to the M4 Motorway and Cumberland Highway.</p>
-        <p class="section-sub" data-lang="ko">메릴랜즈역은 T2 이너 웨스트 & 레핑턴 라인에 위치하며, 파라마타와 시드니 CBD로 직접 연결됩니다. M4 고속도로와 컴벌랜드 하이웨이도 가깝습니다.</p>
+        <p class="section-sub" data-lang="ko">메릴랜즈역은 T2 이너 웨스트 & 레핑턴 라인에 위치하며, 파라마타와 시드니 CBD로 직접 연결됩니다. M4 고속도로와 컴벌랜드 하이웨이도 가깝습니다.</p><p class="section-sub" data-lang="zh">Merrylands 车站位于 T2 Inner West & Leppington 线上，可直达 Parramatta 与悉尼 CBD。M4 高速公路与 Cumberland Highway 亦近在咫尺。</p><p class="section-sub" data-lang="zt">Merrylands 車站位於 T2 Inner West & Leppington 線上，可直達 Parramatta 與悉尼 CBD。M4 高速公路與 Cumberland Highway 亦近在咫尺。</p>
         <div class="location-cards">
           <div class="location-card">
-            <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-            <div class="location-name" data-lang="en">Parramatta CBD</div><div class="location-name" data-lang="ko">파라마타 CBD</div>
-            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+            <div class="location-dist">5<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+            <div class="location-name" data-lang="en">Parramatta CBD</div><div class="location-name" data-lang="ko">파라마타 CBD</div><div class="location-name" data-lang="zh">Parramatta CBD</div><div class="location-name" data-lang="zt">Parramatta CBD</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div><div class="location-mode" data-lang="zh">火车</div><div class="location-mode" data-lang="zt">火車</div>
           </div>
           <div class="location-card">
-            <div class="location-dist">&lt;40<small data-lang="en"> min</small><small data-lang="ko"> 분</small></div>
-            <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div>
-            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div>
+            <div class="location-dist">&lt;40<small data-lang="en"> min</small><small data-lang="ko"> 분</small><small data-lang="zh">分钟</small><small data-lang="zt">分鐘</small></div>
+            <div class="location-name" data-lang="en">Sydney CBD</div><div class="location-name" data-lang="ko">시드니 CBD</div><div class="location-name" data-lang="zh">悉尼 CBD</div><div class="location-name" data-lang="zt">悉尼 CBD</div>
+            <div class="location-mode" data-lang="en">By train</div><div class="location-mode" data-lang="ko">기차</div><div class="location-mode" data-lang="zh">火车</div><div class="location-mode" data-lang="zt">火車</div>
           </div>
           <div class="location-card">
-            <div class="location-dist">Across<small data-lang="en"> rd</small><small data-lang="ko"> 길건너</small></div>
-            <div class="location-name" data-lang="en">Stockland Shopping Centre</div><div class="location-name" data-lang="ko">Stockland 쇼핑센터</div>
-            <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div>
+            <div class="location-dist">Across<small data-lang="en"> rd</small><small data-lang="ko"> 길건너</small><small data-lang="zh">马路对面</small><small data-lang="zt">馬路對面</small></div>
+            <div class="location-name" data-lang="en">Stockland Shopping Centre</div><div class="location-name" data-lang="ko">Stockland 쇼핑센터</div><div class="location-name" data-lang="zh">Stockland 购物中心</div><div class="location-name" data-lang="zt">Stockland 購物中心</div>
+            <div class="location-mode" data-lang="en">On foot</div><div class="location-mode" data-lang="ko">도보</div><div class="location-mode" data-lang="zh">步行</div><div class="location-mode" data-lang="zt">步行</div>
           </div>
           <div class="location-card">
             <div class="location-dist">Gateway</div>
-            <div class="location-name" data-lang="en">Merrylands Train & Bus</div><div class="location-name" data-lang="ko">메릴랜즈 기차·버스</div>
-            <div class="location-mode" data-lang="en">At the door</div><div class="location-mode" data-lang="ko">바로 앞</div>
+            <div class="location-name" data-lang="en">Merrylands Train & Bus</div><div class="location-name" data-lang="ko">메릴랜즈 기차·버스</div><div class="location-name" data-lang="zh">Merrylands 火车与巴士</div><div class="location-name" data-lang="zt">Merrylands 火車與巴士</div>
+            <div class="location-mode" data-lang="en">At the door</div><div class="location-mode" data-lang="ko">바로 앞</div><div class="location-mode" data-lang="zh">就在门口</div><div class="location-mode" data-lang="zt">就在門口</div>
           </div>
           <div class="location-card">
             <div class="location-dist">2.5<small>km</small></div>
-            <div class="location-name" data-lang="en">Parramatta Park</div><div class="location-name" data-lang="ko">파라마타 파크</div>
-            <div class="location-mode" data-lang="en">6 min drive</div><div class="location-mode" data-lang="ko">차로 6분</div>
+            <div class="location-name" data-lang="en">Parramatta Park</div><div class="location-name" data-lang="ko">파라마타 파크</div><div class="location-name" data-lang="zh">Parramatta Park</div><div class="location-name" data-lang="zt">Parramatta Park</div>
+            <div class="location-mode" data-lang="en">6 min drive</div><div class="location-mode" data-lang="ko">차로 6분</div><div class="location-mode" data-lang="zh">驾车 6 分钟</div><div class="location-mode" data-lang="zt">駕車 6 分鐘</div>
           </div>
           <div class="location-card">
             <div class="location-dist">3.3<small>km</small></div>
-            <div class="location-name" data-lang="en">CommBank Stadium</div><div class="location-name" data-lang="ko">컴뱅크 스타디움</div>
-            <div class="location-mode" data-lang="en">7 min drive</div><div class="location-mode" data-lang="ko">차로 7분</div>
+            <div class="location-name" data-lang="en">CommBank Stadium</div><div class="location-name" data-lang="ko">컴뱅크 스타디움</div><div class="location-name" data-lang="zh">CommBank Stadium</div><div class="location-name" data-lang="zt">CommBank Stadium</div>
+            <div class="location-mode" data-lang="en">7 min drive</div><div class="location-mode" data-lang="ko">차로 7분</div><div class="location-mode" data-lang="zh">驾车 7 分钟</div><div class="location-mode" data-lang="zt">駕車 7 分鐘</div>
           </div>
           <div class="location-card">
             <div class="location-dist">4.2<small>km</small></div>
-            <div class="location-name" data-lang="en">Westmead Hospital</div><div class="location-name" data-lang="ko">웨스트미드 병원</div>
-            <div class="location-mode" data-lang="en">10 min drive</div><div class="location-mode" data-lang="ko">차로 10분</div>
+            <div class="location-name" data-lang="en">Westmead Hospital</div><div class="location-name" data-lang="ko">웨스트미드 병원</div><div class="location-name" data-lang="zh">Westmead 医院</div><div class="location-name" data-lang="zt">Westmead 醫院</div>
+            <div class="location-mode" data-lang="en">10 min drive</div><div class="location-mode" data-lang="ko">차로 10분</div><div class="location-mode" data-lang="zh">驾车 10 分钟</div><div class="location-mode" data-lang="zt">駕車 10 分鐘</div>
           </div>
           <div class="location-card">
             <div class="location-dist">M4</div>
-            <div class="location-name" data-lang="en">M4 Motorway & Cumberland Hwy</div><div class="location-name" data-lang="ko">M4 고속도로 & 컴벌랜드 하이웨이</div>
-            <div class="location-mode" data-lang="en">Nearby</div><div class="location-mode" data-lang="ko">인근</div>
+            <div class="location-name" data-lang="en">M4 Motorway & Cumberland Hwy</div><div class="location-name" data-lang="ko">M4 고속도로 & 컴벌랜드 하이웨이</div><div class="location-name" data-lang="zh">M4 高速公路与 Cumberland Highway</div><div class="location-name" data-lang="zt">M4 高速公路與 Cumberland Highway</div>
+            <div class="location-mode" data-lang="en">Nearby</div><div class="location-mode" data-lang="ko">인근</div><div class="location-mode" data-lang="zh">邻近</div><div class="location-mode" data-lang="zt">鄰近</div>
           </div>
         </div>
       </div>
@@ -600,10 +613,10 @@ body.lang-ko .hero-cta .en-t{display:none}
 <section class="lifestyle-section" id="lifestyle">
   <div class="lifestyle-wrap">
     <div class="fade-in">
-      <div class="section-eyebrow"><span data-lang="en">Parks, Recreation & Lifestyle</span><span data-lang="ko">공원 · 레크리에이션 · 라이프스타일</span></div>
+      <div class="section-eyebrow"><span data-lang="en">Parks, Recreation & Lifestyle</span><span data-lang="ko">공원 · 레크리에이션 · 라이프스타일</span><span data-lang="zh">公园 · 休闲 · 生活方式</span><span data-lang="zt">公園 · 休閒 · 生活方式</span></div>
       <h2 class="section-title">
         <span data-lang="en">Nature on Your <em>Doorstep</em></span>
-        <span data-lang="ko"><em>문 앞</em>에 펼쳐진 자연</span>
+        <span data-lang="ko"><em>문 앞</em>에 펼쳐진 자연</span><span data-lang="zh"><em>家门口</em>的自然</span><span data-lang="zt"><em>家門口</em>的自然</span>
       </h2>
     </div>
     <div class="lifestyle-grid fade-in">
@@ -611,31 +624,31 @@ body.lang-ko .hero-cta .en-t{display:none}
         <img src="assets/central-quarter/lifestyle-nature.jpg" alt="Central Gardens Nature Reserve waterfall" loading="lazy">
         <div class="lifestyle-img-cap">
           <p data-lang="en">Central Gardens Nature Reserve</p>
-          <p data-lang="ko">센트럴 가든스 자연보호구역</p>
+          <p data-lang="ko">센트럴 가든스 자연보호구역</p><p data-lang="zh">Central Gardens 自然保护区</p><p data-lang="zt">Central Gardens 自然保護區</p>
         </div>
       </div>
       <div class="park-list">
         <div class="park-item">
           <div class="park-name" data-lang="en">Central Gardens Nature Reserve</div>
-          <div class="park-name" data-lang="ko">센트럴 가든스 자연보호구역</div>
+          <div class="park-name" data-lang="ko">센트럴 가든스 자연보호구역</div><div class="park-name" data-lang="zh">Central Gardens 自然保护区</div><div class="park-name" data-lang="zt">Central Gardens 自然保護區</div>
           <div class="park-desc" data-lang="en">A 12-hectare urban reserve with two adventure playgrounds, native animal enclosures, waterfalls, ponds, bushwalking trails, an amphitheatre and BBQ facilities.</div>
-          <div class="park-desc" data-lang="ko">12헥타르 도심 보호구역 — 어드벤처 놀이터 2곳, 토종 동물 사육장, 폭포, 연못, 부시워킹 트레일, 야외극장, BBQ 시설.</div>
+          <div class="park-desc" data-lang="ko">12헥타르 도심 보호구역 — 어드벤처 놀이터 2곳, 토종 동물 사육장, 폭포, 연못, 부시워킹 트레일, 야외극장, BBQ 시설.</div><div class="park-desc" data-lang="zh">12 公顷的城市保护区 —— 两处探险游乐场、本土动物园区、瀑布、池塘、丛林步道、露天剧场与烧烤设施。</div><div class="park-desc" data-lang="zt">12 公頃的城市保護區 —— 兩處探險遊樂場、本土動物園區、瀑布、池塘、叢林步道、露天劇場與燒烤設施。</div>
           <div class="park-meta">12 ha</div>
         </div>
         <div class="park-item">
           <div class="park-name" data-lang="en">Granville Park</div>
-          <div class="park-name" data-lang="ko">그랜빌 파크</div>
+          <div class="park-name" data-lang="ko">그랜빌 파크</div><div class="park-name" data-lang="zh">Granville Park</div><div class="park-name" data-lang="zt">Granville Park</div>
           <div class="park-desc" data-lang="en">A ~13.2-hectare park with open green space, playgrounds, and Eric Tweedale Stadium — a 5,000-capacity rugby venue renovated in 2021.</div>
-          <div class="park-desc" data-lang="ko">약 13.2헥타르 공원 — 녹지, 놀이터, 그리고 2021년 리노베이션된 5,000명 수용 럭비 경기장 에릭 트위들 스타디움.</div>
+          <div class="park-desc" data-lang="ko">약 13.2헥타르 공원 — 녹지, 놀이터, 그리고 2021년 리노베이션된 5,000명 수용 럭비 경기장 에릭 트위들 스타디움.</div><div class="park-desc" data-lang="zh">约 13.2 公顷的公园 —— 绿地、游乐场，以及 2021 年翻新、可容纳 5,000 人的 Eric Tweedale 橄榄球体育场。</div><div class="park-desc" data-lang="zt">約 13.2 公頃的公園 —— 綠地、遊樂場，以及 2021 年翻新、可容納 5,000 人的 Eric Tweedale 橄欖球體育場。</div>
           <div class="park-meta">13.2 ha</div>
         </div>
         <div class="park-item">
           <div class="park-name" data-lang="en">Merrylands Park & Holroyd Gardens</div>
-          <div class="park-name" data-lang="ko">메릴랜즈 파크 & 홀로이드 가든스</div>
+          <div class="park-name" data-lang="ko">메릴랜즈 파크 & 홀로이드 가든스</div><div class="park-name" data-lang="zh">Merrylands Park 与 Holroyd Gardens</div><div class="park-name" data-lang="zt">Merrylands Park 與 Holroyd Gardens</div>
           <div class="park-desc" data-lang="en">Cricket, tennis, netball and basketball courts, an adjoining swimming centre, plus shaded picnic and BBQ zones for family weekends.</div>
-          <div class="park-desc" data-lang="ko">크리켓·테니스·넷볼·농구 코트, 인접 수영센터, 그늘진 피크닉 및 BBQ 존으로 가족 주말에 완벽합니다.</div>
+          <div class="park-desc" data-lang="ko">크리켓·테니스·넷볼·농구 코트, 인접 수영센터, 그늘진 피크닉 및 BBQ 존으로 가족 주말에 완벽합니다.</div><div class="park-desc" data-lang="zh">板球、网球、无挡板篮球与篮球场地，毗邻游泳中心，另有遮荫野餐与烧烤区，是家庭周末的理想去处。</div><div class="park-desc" data-lang="zt">板球、網球、無擋板籃球與籃球場地，毗鄰游泳中心，另有遮蔭野餐與燒烤區，是家庭週末的理想去處。</div>
           <div class="park-meta" data-lang="en">Sports & Swimming</div>
-          <div class="park-meta" data-lang="ko">스포츠 & 수영</div>
+          <div class="park-meta" data-lang="ko">스포츠 & 수영</div><div class="park-meta" data-lang="zh">运动与游泳</div><div class="park-meta" data-lang="zt">運動與游泳</div>
         </div>
       </div>
     </div>
@@ -645,18 +658,18 @@ body.lang-ko .hero-cta .en-t{display:none}
 <!-- FLOORPLAN BAND -->
 <div class="floorplan-band">
   <div class="floorplan-wrap fade-in">
-    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Sample Floorplan</span><span data-lang="ko">샘플 평면도</span></div>
+    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Sample Floorplan</span><span data-lang="ko">샘플 평면도</span><span data-lang="zh">样板户型图</span><span data-lang="zt">樣板戶型圖</span></div>
     <h2 class="section-title">
       <span data-lang="en">1 Bedroom <em>Residence</em></span>
-      <span data-lang="ko">1 베드룸 <em>레지던스</em></span>
+      <span data-lang="ko">1 베드룸 <em>레지던스</em></span><span data-lang="zh">1 房 <em>住宅</em></span><span data-lang="zt">1 房 <em>住宅</em></span>
     </h2>
     <p class="section-sub" style="margin:0 auto" data-lang="en">Total 63 sqm — 52 sqm internal + 11 sqm balcony. Levels 4–20. One of several layouts available across the development.</p>
-    <p class="section-sub" style="margin:0 auto" data-lang="ko">총 63㎡ — 내부 52㎡ + 발코니 11㎡. 레벨 4~20. 단지 내 다양한 평면 중 하나입니다.</p>
+    <p class="section-sub" style="margin:0 auto" data-lang="ko">총 63㎡ — 내부 52㎡ + 발코니 11㎡. 레벨 4~20. 단지 내 다양한 평면 중 하나입니다.</p><p class="section-sub" style="margin:0 auto" data-lang="zh">合计 63 平方米 —— 室内 52 平方米 + 阳台 11 平方米。位于 4 至 20 层。为项目众多户型之一。</p><p class="section-sub" style="margin:0 auto" data-lang="zt">合計 63 平方米 —— 室內 52 平方米 + 陽臺 11 平方米。位於 4 至 20 層。爲項目衆多戶型之一。</p>
     <div class="floorplan-img">
       <img src="assets/central-quarter/floorplan.jpg" alt="Central Quarter 1 Bedroom floorplan" loading="lazy">
     </div>
     <p class="floorplan-note" data-lang="en">Floorplan is a guide only and does not constitute an offer or contract. Areas and configurations may change.</p>
-    <p class="floorplan-note" data-lang="ko">평면도는 참고용이며 제안이나 계약을 구성하지 않습니다. 면적 및 구성은 변경될 수 있습니다.</p>
+    <p class="floorplan-note" data-lang="ko">평면도는 참고용이며 제안이나 계약을 구성하지 않습니다. 면적 및 구성은 변경될 수 있습니다.</p><p class="floorplan-note" data-lang="zh">户型图仅供参考，不构成要约或合同。面积与配置可能变更。</p><p class="floorplan-note" data-lang="zt">戶型圖僅供參考，不構成要約或合同。面積與配置可能變更。</p>
   </div>
 </div>
 
@@ -665,38 +678,38 @@ body.lang-ko .hero-cta .en-t{display:none}
   <div class="features-wrap">
     <div class="features-header fade-in">
       <div>
-        <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span></div>
+        <div class="section-eyebrow"><span data-lang="en">The Developer</span><span data-lang="ko">디벨로퍼</span><span data-lang="zh">开发商</span><span data-lang="zt">開發商</span></div>
         <h2 class="section-title">
           <span data-lang="en">Northland —<br><em>Since 1988</em></span>
-          <span data-lang="ko">Northland —<br><em>1988년부터</em></span>
+          <span data-lang="ko">Northland —<br><em>1988년부터</em></span><span data-lang="zh">Northland ——<br><em>自 1988 年起</em></span><span data-lang="zt">Northland ——<br><em>自 1988 年起</em></span>
         </h2>
       </div>
       <div>
         <p class="section-sub" data-lang="en">Established in 1988, Northland Group is an Australian-owned property development and construction company based in Sydney. For more than three decades, Northland has built a reputation for outstanding quality and exceptional care — creating distinctive developments designed to <em>Live, Experience and Enjoy</em>.</p>
-        <p class="section-sub" data-lang="ko">1988년 설립된 Northland Group은 시드니에 본사를 둔 호주 자국 소유의 부동산 개발·건설 회사입니다. 30년 이상 뛰어난 품질과 세심한 배려로 명성을 쌓아왔으며, '<em>Live, Experience and Enjoy</em>'라는 철학으로 특별한 개발을 만들어 갑니다.</p>
+        <p class="section-sub" data-lang="ko">1988년 설립된 Northland Group은 시드니에 본사를 둔 호주 자국 소유의 부동산 개발·건설 회사입니다. 30년 이상 뛰어난 품질과 세심한 배려로 명성을 쌓아왔으며, '<em>Live, Experience and Enjoy</em>'라는 철학으로 특별한 개발을 만들어 갑니다.</p><p class="section-sub" data-lang="zh">Northland Group 创立于 1988 年，是总部位于悉尼的澳洲本土房地产开发与建筑企业。逾三十年来以卓越品质与细致关怀建立口碑，并以「<em>Live, Experience and Enjoy</em>」的理念打造与众不同的项目。</p><p class="section-sub" data-lang="zt">Northland Group 創立於 1988 年，是總部位於悉尼的澳洲本土房地產開發與建築企業。逾三十年來以卓越品質與細緻關懷建立口碑，並以「<em>Live, Experience and Enjoy</em>」的理念打造與衆不同的項目。</p>
       </div>
     </div>
     <div class="features-grid fade-in">
       <div class="feature-card">
         <div class="feature-icon">🏛️</div>
         <div class="feature-name" data-lang="en">35+ Years</div>
-        <div class="feature-name" data-lang="ko">35년 이상</div>
+        <div class="feature-name" data-lang="ko">35년 이상</div><div class="feature-name" data-lang="zh">逾 35 年</div><div class="feature-name" data-lang="zt">逾 35 年</div>
         <div class="feature-desc" data-lang="en">Three-plus decades of property development and construction across Sydney.</div>
-        <div class="feature-desc" data-lang="ko">시드니 전역에서 30년 이상의 부동산 개발 및 건설 경력.</div>
+        <div class="feature-desc" data-lang="ko">시드니 전역에서 30년 이상의 부동산 개발 및 건설 경력.</div><div class="feature-desc" data-lang="zh">于悉尼各区累积逾三十年的房地产开发与建筑经验。</div><div class="feature-desc" data-lang="zt">於悉尼各區累積逾三十年的房地產開發與建築經驗。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🇦🇺</div>
         <div class="feature-name" data-lang="en">Australian-Owned</div>
-        <div class="feature-name" data-lang="ko">호주 자국 소유</div>
+        <div class="feature-name" data-lang="ko">호주 자국 소유</div><div class="feature-name" data-lang="zh">澳洲本土企业</div><div class="feature-name" data-lang="zt">澳洲本土企業</div>
         <div class="feature-desc" data-lang="en">A Sydney-based, Australian-owned group with deep local market knowledge.</div>
-        <div class="feature-desc" data-lang="ko">현지 시장에 대한 깊은 이해를 갖춘 시드니 기반 호주 기업.</div>
+        <div class="feature-desc" data-lang="ko">현지 시장에 대한 깊은 이해를 갖춘 시드니 기반 호주 기업.</div><div class="feature-desc" data-lang="zh">总部位于悉尼的澳洲企业，对本地市场有深入理解。</div><div class="feature-desc" data-lang="zt">總部位於悉尼的澳洲企業，對本地市場有深入理解。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🛡️</div>
         <div class="feature-name" data-lang="en">First LDI in Merrylands</div>
-        <div class="feature-name" data-lang="ko">메릴랜즈 최초 LDI</div>
+        <div class="feature-name" data-lang="ko">메릴랜즈 최초 LDI</div><div class="feature-name" data-lang="zh">Merrylands 首个 LDI</div><div class="feature-name" data-lang="zt">Merrylands 首個 LDI</div>
         <div class="feature-desc" data-lang="en">Northland is the first developer in the area to provide 10-Year Latent Defects Insurance.</div>
-        <div class="feature-desc" data-lang="ko">Northland은 이 지역에서 10년 잠재하자보험을 제공하는 최초의 디벨로퍼입니다.</div>
+        <div class="feature-desc" data-lang="ko">Northland은 이 지역에서 10년 잠재하자보험을 제공하는 최초의 디벨로퍼입니다.</div><div class="feature-desc" data-lang="zh">Northland 是本区首个提供十年潜在缺陷保险的开发商。</div><div class="feature-desc" data-lang="zt">Northland 是本區首個提供十年潛在缺陷保險的開發商。</div>
       </div>
     </div>
   </div>
@@ -706,35 +719,35 @@ body.lang-ko .hero-cta .en-t{display:none}
 <section class="ldi-section" id="ldi">
   <div class="ldi-wrap fade-in">
     <div class="ldi-badge">10</div>
-    <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)"><span data-lang="en">Latent Defects Insurance</span><span data-lang="ko">잠재하자보험 (LDI)</span></div>
+    <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)"><span data-lang="en">Latent Defects Insurance</span><span data-lang="ko">잠재하자보험 (LDI)</span><span data-lang="zh">潜在缺陷保险（LDI）</span><span data-lang="zt">潛在缺陷保險（LDI）</span></div>
     <h2 class="section-title">
       <span data-lang="en">10 Years of <em>Protection</em></span>
-      <span data-lang="ko">10년간의 <em>보호</em></span>
+      <span data-lang="ko">10년간의 <em>보호</em></span><span data-lang="zh">长达十年的<em>保障</em></span><span data-lang="zt">長達十年的<em>保障</em></span>
     </h2>
     <p class="ldi-desc" data-lang="en">Every Central Quarter apartment includes a 10-Year Latent Defects Insurance policy — protecting against significant structural and waterproofing defects well beyond completion. Owners can claim rectification costs directly from the insurer.</p>
-    <p class="ldi-desc" data-lang="ko">모든 센트럴 쿼터 아파트에는 10년 잠재하자보험(LDI)이 포함됩니다 — 준공 이후로도 오랫동안 중대한 구조적·방수 하자로부터 보호합니다. 소유주는 보수 비용을 보험사에 직접 청구할 수 있습니다.</p>
+    <p class="ldi-desc" data-lang="ko">모든 센트럴 쿼터 아파트에는 10년 잠재하자보험(LDI)이 포함됩니다 — 준공 이후로도 오랫동안 중대한 구조적·방수 하자로부터 보호합니다. 소유주는 보수 비용을 보험사에 직접 청구할 수 있습니다.</p><p class="ldi-desc" data-lang="zh">Central Quarter 的每一户公寓均含十年潜在缺陷保险（LDI）—— 于竣工后长期保障，涵盖重大结构与防水缺陷。业主可就修缮费用直接向保险公司索赔。</p><p class="ldi-desc" data-lang="zt">Central Quarter 的每一戶公寓均含十年潛在缺陷保險（LDI）—— 於竣工後長期保障，涵蓋重大結構與防水缺陷。業主可就修繕費用直接向保險公司索賠。</p>
     <p class="ldi-desc" data-lang="en">LDI is voluntary and only offered to developers deemed trustworthy by the insurance industry — backed by mandatory independent inspections at key construction phases. Northland is the first developer in Merrylands to provide it.</p>
-    <p class="ldi-desc" data-lang="ko">LDI는 자발적 보험으로 보험업계가 신뢰할 수 있다고 인정한 디벨로퍼에게만 제공되며, 주요 공사 단계마다 의무적인 독립 검사를 거칩니다. Northland은 메릴랜즈 최초로 이를 제공합니다.</p>
+    <p class="ldi-desc" data-lang="ko">LDI는 자발적 보험으로 보험업계가 신뢰할 수 있다고 인정한 디벨로퍼에게만 제공되며, 주요 공사 단계마다 의무적인 독립 검사를 거칩니다. Northland은 메릴랜즈 최초로 이를 제공합니다.</p><p class="ldi-desc" data-lang="zh">LDI 属自愿性保险，仅提供予获保险业界认可为可信赖的开发商，并须于各主要施工阶段接受强制性独立检验。Northland 是 Merrylands 首个提供此保险的开发商。</p><p class="ldi-desc" data-lang="zt">LDI 屬自願性保險，僅提供予獲保險業界認可爲可信賴的開發商，並須於各主要施工階段接受強制性獨立檢驗。Northland 是 Merrylands 首個提供此保險的開發商。</p>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap fade-in">
-    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span></div>
+    <div class="section-eyebrow" style="justify-content:center"><span data-lang="en">Enquire Now</span><span data-lang="ko">지금 문의하세요</span><span data-lang="zh">立即咨询</span><span data-lang="zt">立即諮詢</span></div>
     <h2 class="section-title">
       <span data-lang="en">Your New Home<br>at <em>Central Quarter</em></span>
-      <span data-lang="ko">센트럴 쿼터에서<br><em>새 보금자리</em>를</span>
+      <span data-lang="ko">센트럴 쿼터에서<br><em>새 보금자리</em>를</span><span data-lang="zh">在 Central Quarter<br>开启<em>新家</em></span><span data-lang="zt">在 Central Quarter<br>開啓<em>新家</em></span>
     </h2>
     <p class="section-sub" style="margin:0 auto;text-align:center" data-lang="en">Contact Sunghoon Choi (Sunny) at Forise Group for available apartments, floorplans, and a personalised consultation.</p>
-    <p class="section-sub" style="margin:0 auto;text-align:center" data-lang="ko">포라이즈 그룹 최성훈에게 연락하여 잔여 세대, 평면도, 개인 맞춤 상담을 받으세요.</p>
+    <p class="section-sub" style="margin:0 auto;text-align:center" data-lang="ko">포라이즈 그룹 최성훈에게 연락하여 잔여 세대, 평면도, 개인 맞춤 상담을 받으세요.</p><p class="section-sub" style="margin:0 auto;text-align:center" data-lang="zh">欢迎联系 Forise Group 的 Sunny，获取剩余房源、户型图与专属建议。</p><p class="section-sub" style="margin:0 auto;text-align:center" data-lang="zt">歡迎聯繫 Forise Group 的 Sunny，獲取剩餘房源、戶型圖與專屬建議。</p>
     <div class="contact-info">
       <div class="contact-item">
-        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label>
-        <span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span>
+        <label data-lang="en">Agent</label><label data-lang="ko">에이전트</label><label data-lang="zh">代理</label><label data-lang="zt">代理</label>
+        <span data-lang="en">Sunghoon Choi (Sunny) — Forise Group</span><span data-lang="ko">최성훈 — 포라이즈 그룹</span><span data-lang="zh">Sunny —— Forise Group</span><span data-lang="zt">Sunny —— Forise Group</span>
       </div>
       <div class="contact-item">
-        <label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label>
+        <label data-lang="en">Mobile / KakaoTalk</label><label data-lang="ko">전화 / 카카오톡</label><label data-lang="zh">电话 / KakaoTalk</label><label data-lang="zt">電話 / KakaoTalk</label>
         <a href="tel:0414824225">0414 824 225</a>
       </div>
       <div class="contact-item">
@@ -744,11 +757,11 @@ body.lang-ko .hero-cta .en-t{display:none}
     </div>
     <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Central%20Quarter%20Merrylands%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Central%20Quarter%20Merrylands." class="contact-cta">
       <span data-lang="en">Request Information / 분양 문의</span>
-      <span data-lang="ko">분양 문의하기 →</span>
+      <span data-lang="ko">분양 문의하기 →</span><span data-lang="zh">咨询详情 →</span><span data-lang="zt">諮詢詳情 →</span>
     </a>
     <div class="contact-divider"></div>
     <p class="contact-disclaimer" data-lang="en">All information is provided for marketing purposes only and is subject to change without notice. Images are artist impressions only. Pricing information is available upon request. Forise Group acts as selling agent. Developed by Northland.</p>
-    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 개발사: Northland.</p>
+    <p class="contact-disclaimer" data-lang="ko">모든 정보는 마케팅 목적으로만 제공되며 사전 예고 없이 변경될 수 있습니다. 이미지는 조감도입니다. 가격 정보는 문의 시 제공됩니다. 포라이즈 그룹은 판매 에이전트입니다. 개발사: Northland.</p><p class="contact-disclaimer" data-lang="zh">所有信息仅为市场推广之用，可能恕不另行通知而变更。图像为效果图。价格信息于咨询时提供。Forise Group 为销售代理。开发商：Northland。</p><p class="contact-disclaimer" data-lang="zt">所有信息僅爲市場推廣之用，可能恕不另行通知而變更。圖像爲效果圖。價格信息於諮詢時提供。Forise Group 爲銷售代理。開發商：Northland。</p>
   </div>
 </section>
 
@@ -769,12 +782,22 @@ const saved=localStorage.getItem('theme');
 if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
 else if(false){document.body.setAttribute('data-theme','dark');document.querySelector('.btn-theme').textContent='☀';}
 
-let isKo=false;
-function toggleLang(){
-  isKo=!isKo;
-  document.body.classList.toggle('lang-ko',isKo);
-  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('central-quarter-lang', l); }catch(e){}
 }
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('central-quarter-lang'); }catch(e){ return null; } })() || 'en');
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 </script>
