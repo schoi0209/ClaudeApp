@@ -1284,14 +1284,30 @@
 
   /* Language toggle */
   [data-lang-section] { display: none; }
-  [data-lang-section="en"] { display: inline; }
-  html[lang="ko"] [data-lang-section="en"] { display: none; }
+  html[lang="en"] [data-lang-section="en"] { display: inline; }
   html[lang="ko"] [data-lang-section="ko"] { display: inline; }
+  html[lang="zh-Hans"] [data-lang-section="zh"] { display: inline; }
+  html[lang="zh-Hant"] [data-lang-section="zt"] { display: inline; }
   [data-lang-block] { display: none; }
-  [data-lang-block="en"] { display: block; }
-  html[lang="ko"] [data-lang-block="en"] { display: none; }
+  html[lang="en"] [data-lang-block="en"] { display: block; }
   html[lang="ko"] [data-lang-block="ko"] { display: block; }
+  html[lang="zh-Hans"] [data-lang-block="zh"] { display: block; }
+  html[lang="zh-Hant"] [data-lang-block="zt"] { display: block; }
   html[lang="ko"] body { font-family: 'Sora', 'Noto Serif KR', sans-serif; }
+
+  /* Chinese typography */
+  html[lang="zh-Hans"] body, html[lang="zh-Hant"] body {
+    font-family: "Noto Sans SC", "Noto Sans HK", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .langgrp { display: inline-flex; border: 1px solid var(--line); background: var(--bg-card);
+    border-radius: 999px; overflow: hidden; }
+  .langgrp button { background: transparent; border: none; border-right: 1px solid var(--line-soft);
+    font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .08em;
+    padding: 9px 11px; cursor: pointer; color: var(--ink-mute); transition: all .25s; line-height: 1; }
+  .langgrp button:last-child { border-right: none; }
+  .langgrp button:hover { color: var(--ink); background: var(--bg-tint); }
+  .langgrp button.on { background: var(--sky-deep); color: #fff; }
+  @media (max-width: 720px) { .langgrp button { padding: 7px 8px; font-size: 10px; letter-spacing: .04em; } }
 </style>
 </head>
 <body>
@@ -1301,14 +1317,14 @@
   <div class="brand">
     <div class="brand-mark">C</div>
     <span data-lang-section="en">Concord Central</span>
-    <span data-lang-section="ko">콩코드 센트럴</span>
+    <span data-lang-section="ko">콩코드 센트럴</span><span data-lang-section="zh">Concord Central</span><span data-lang-section="zt">Concord Central</span>
   </div>
   <div class="topbar-actions">
     <a class="pill bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
       Buy me a coffee
     </a>
-    <button class="pill" id="langToggle"><span id="langLabel">한국어</span></button>
+    <span class="langgrp" id="langGrp"><button data-set="en"><span>EN</span></button><button data-set="ko"><span>한국어</span></button><button data-set="zh-Hans"><span>简体</span></button><button data-set="zh-Hant"><span>繁體</span></button></span>
     <button class="pill" id="themeToggle"><span id="themeLabel">◐</span></button>
   </div>
 </div>
@@ -1323,50 +1339,50 @@
     <div class="hero-top">
       <div class="hero-eyebrow">
         <span data-lang-section="en"><strong>Crafted by Billbergia</strong><br>Stage 1 · 1 King Street, Concord West NSW 2138</span>
-        <span data-lang-section="ko"><strong>Crafted by Billbergia</strong><br>1단계 · 1 King Street, Concord West NSW 2138</span>
+        <span data-lang-section="ko"><strong>Crafted by Billbergia</strong><br>1단계 · 1 King Street, Concord West NSW 2138</span><span data-lang-section="zh"><strong>Billbergia 匠心之作</strong><br>第一期 · 1 King Street, Concord West NSW 2138</span><span data-lang-section="zt"><strong>Billbergia 匠心之作</strong><br>第一期 · 1 King Street, Concord West NSW 2138</span>
       </div>
       <div class="hero-coords">
         33°50′27″S · 151°06′21″E<br>
         <span data-lang-section="en">8 Buildings · 1,336 Apartments</span>
-        <span data-lang-section="ko">8개 빌딩 · 1,336세대</span>
+        <span data-lang-section="ko">8개 빌딩 · 1,336세대</span><span data-lang-section="zh">8 栋楼宇 · 1,336 户住宅</span><span data-lang-section="zt">8 棟樓宇 · 1,336 戶住宅</span>
       </div>
     </div>
 
     <div class="hero-center">
       <h1 class="hero-title">
         <span data-lang-section="en">A new village<br>in the <em>sky.</em></span>
-        <span data-lang-section="ko">하늘 위의<br><em>새로운 마을.</em></span>
+        <span data-lang-section="ko">하늘 위의<br><em>새로운 마을.</em></span><span data-lang-section="zh">云端之上的<br><em>全新村落。</em></span><span data-lang-section="zt">雲端之上的<br><em>全新村落。</em></span>
       </h1>
       <p class="hero-tagline">
         <span data-lang-section="en">Concord Central — a masterplanned community of 1, 2, 3 and 4-bedroom residences across 8 buildings, designed by Group GSA. Where connectivity, green space and urban living converge.</span>
-        <span data-lang-section="ko">콩코드 센트럴 — 그룹 GSA가 설계한 1·2·3·4베드 레지던스 8개 빌딩의 마스터플랜 커뮤니티. 연결성, 녹지, 도시 생활이 한곳에 모이는 곳.</span>
+        <span data-lang-section="ko">콩코드 센트럴 — 그룹 GSA가 설계한 1·2·3·4베드 레지던스 8개 빌딩의 마스터플랜 커뮤니티. 연결성, 녹지, 도시 생활이 한곳에 모이는 곳.</span><span data-lang-section="zh">Concord Central —— 由 Group GSA 设计的 8 栋楼宇总体规划社区，涵盖 1、2、3、4 房住宅。交通、绿意与都市生活在此交汇。</span><span data-lang-section="zt">Concord Central —— 由 Group GSA 設計的 8 棟樓宇總體規劃社區，涵蓋 1、2、3、4 房住宅。交通、綠意與都市生活在此交匯。</span>
       </p>
     </div>
 
     <div class="hero-bottom">
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Buildings</div>
-        <div class="hb-lbl" data-lang-section="ko">총 빌딩</div>
+        <div class="hb-lbl" data-lang-section="ko">총 빌딩</div><div class="hb-lbl" data-lang-section="zh">楼宇总数</div><div class="hb-lbl" data-lang-section="zt">樓宇總數</div>
         <div class="hb-val">8 · 6–37 Storeys</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Apartments</div>
-        <div class="hb-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="hb-lbl" data-lang-section="ko">총 세대수</div><div class="hb-lbl" data-lang-section="zh">住宅总数</div><div class="hb-lbl" data-lang-section="zt">住宅總數</div>
         <div class="hb-val">1,336</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Architect</div>
-        <div class="hb-lbl" data-lang-section="ko">건축</div>
+        <div class="hb-lbl" data-lang-section="ko">건축</div><div class="hb-lbl" data-lang-section="zh">建筑设计</div><div class="hb-lbl" data-lang-section="zt">建築設計</div>
         <div class="hb-val">Group GSA</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">To Concord West Station</div>
-        <div class="hb-lbl" data-lang-section="ko">콩코드 웨스트역</div>
+        <div class="hb-lbl" data-lang-section="ko">콩코드 웨스트역</div><div class="hb-lbl" data-lang-section="zh">Concord West 火车站</div><div class="hb-lbl" data-lang-section="zt">Concord West 火車站</div>
         <div class="hb-val">Walking · Express T9</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">iCIRT Rating</div>
-        <div class="hb-lbl" data-lang-section="ko">iCIRT 등급</div>
+        <div class="hb-lbl" data-lang-section="ko">iCIRT 등급</div><div class="hb-lbl" data-lang-section="zh">iCIRT 评级</div><div class="hb-lbl" data-lang-section="zt">iCIRT 評級</div>
         <div class="hb-val">4.5★ Gold</div>
       </div>
     </div>
@@ -1377,27 +1393,27 @@
 <nav class="nav-sticky">
   <div class="nav-inner">
     <a href="#welcome" data-lang-section="en">Welcome</a>
-    <a href="#welcome" data-lang-section="ko">소개</a>
+    <a href="#welcome" data-lang-section="ko">소개</a><a href="#welcome" data-lang-section="zh">项目简介</a><a href="#welcome" data-lang-section="zt">項目簡介</a>
     <a href="#masterplan" data-lang-section="en">Masterplan</a>
-    <a href="#masterplan" data-lang-section="ko">마스터플랜</a>
+    <a href="#masterplan" data-lang-section="ko">마스터플랜</a><a href="#masterplan" data-lang-section="zh">总体规划</a><a href="#masterplan" data-lang-section="zt">總體規劃</a>
     <a href="#connectivity" data-lang-section="en">Connectivity</a>
-    <a href="#connectivity" data-lang-section="ko">교통 & 위치</a>
+    <a href="#connectivity" data-lang-section="ko">교통 & 위치</a><a href="#connectivity" data-lang-section="zh">交通与位置</a><a href="#connectivity" data-lang-section="zt">交通與位置</a>
     <a href="#lifestyle" data-lang-section="en">Amenities & Retail</a>
-    <a href="#lifestyle" data-lang-section="ko">편의시설 & 리테일</a>
+    <a href="#lifestyle" data-lang-section="ko">편의시설 & 리테일</a><a href="#lifestyle" data-lang-section="zh">配套与商业</a><a href="#lifestyle" data-lang-section="zt">配套與商業</a>
     <a href="#interiors" data-lang-section="en">Interiors</a>
-    <a href="#interiors" data-lang-section="ko">인테리어</a>
+    <a href="#interiors" data-lang-section="ko">인테리어</a><a href="#interiors" data-lang-section="zh">室内设计</a><a href="#interiors" data-lang-section="zt">室內設計</a>
     <a href="#schemes" data-lang-section="en">Schemes</a>
-    <a href="#schemes" data-lang-section="ko">컬러 스킴</a>
+    <a href="#schemes" data-lang-section="ko">컬러 스킴</a><a href="#schemes" data-lang-section="zh">配色方案</a><a href="#schemes" data-lang-section="zt">配色方案</a>
     <a href="#b1" data-lang-section="en">B1 Release</a>
-    <a href="#b1" data-lang-section="ko">B1 분양</a>
+    <a href="#b1" data-lang-section="ko">B1 분양</a><a href="#b1" data-lang-section="zh">B1 栋发售</a><a href="#b1" data-lang-section="zt">B1 棟發售</a>
     <a href="#developer" data-lang-section="en">Developer</a>
-    <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#developer" data-lang-section="ko">시행사</a><a href="#developer" data-lang-section="zh">开发商</a><a href="#developer" data-lang-section="zt">開發商</a>
     <a href="#offers" data-lang-section="en">Offers</a>
-    <a href="#offers" data-lang-section="ko">프로모션</a>
+    <a href="#offers" data-lang-section="ko">프로모션</a><a href="#offers" data-lang-section="zh">优惠活动</a><a href="#offers" data-lang-section="zt">優惠活動</a>
     <a href="#finance" data-lang-section="en">0% Deposit</a>
-    <a href="#finance" data-lang-section="ko">0% 디파짓</a>
+    <a href="#finance" data-lang-section="ko">0% 디파짓</a><a href="#finance" data-lang-section="zh">0% 首付</a><a href="#finance" data-lang-section="zt">0% 首付</a>
     <a href="#enquire" data-lang-section="en">Enquire</a>
-    <a href="#enquire" data-lang-section="ko">분양 문의</a>
+    <a href="#enquire" data-lang-section="ko">분양 문의</a><a href="#enquire" data-lang-section="zh">咨询详情</a><a href="#enquire" data-lang-section="zt">諮詢詳情</a>
   </div>
 </nav>
 
@@ -1409,65 +1425,65 @@
         <div class="sec-tag">01 — Welcome</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Where the village<br>meets the <em>sky.</em></span>
-          <span data-lang-section="ko">마을과 하늘이<br><em>만나는 곳.</em></span>
+          <span data-lang-section="ko">마을과 하늘이<br><em>만나는 곳.</em></span><span data-lang-section="zh">村落与天空<br><em>相遇之处。</em></span><span data-lang-section="zt">村落與天空<br><em>相遇之處。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">A landmark development set to redefine the heart of Concord — where every part of your life is infused with nature, from the rainforest-inspired ground plane to the sprawling central park.</span>
-        <span data-lang-section="ko">콩코드의 중심을 재정의하는 랜드마크 개발 — 열대우림에서 영감을 받은 지상층부터 광활한 센트럴 파크까지, 자연이 일상에 스며드는 곳.</span>
+        <span data-lang-section="ko">콩코드의 중심을 재정의하는 랜드마크 개발 — 열대우림에서 영감을 받은 지상층부터 광활한 센트럴 파크까지, 자연이 일상에 스며드는 곳.</span><span data-lang-section="zh">重新定义 Concord 核心的地标项目 —— 从雨林灵感的地面层到开阔的中央公园，让自然融入日常。</span><span data-lang-section="zt">重新定義 Concord 核心的地標項目 —— 從雨林靈感的地面層到開闊的中央公園，讓自然融入日常。</span>
       </p>
     </div>
 
     <div class="welcome-grid">
       <div class="welcome-text">
         <p class="lead" data-lang-block="en">Jump in a lift and be transported up to a village in the sky, where from your balcony, Sydney's largest urban parklands, golf course and waterways span as far as the eye can see.</p>
-        <p class="lead" data-lang-block="ko">엘리베이터를 타고 하늘 위의 마을로 올라가세요. 발코니에서는 시드니 최대의 도심 공원, 골프 코스, 그리고 수로가 시야가 닿는 곳까지 펼쳐집니다.</p>
+        <p class="lead" data-lang-block="ko">엘리베이터를 타고 하늘 위의 마을로 올라가세요. 발코니에서는 시드니 최대의 도심 공원, 골프 코스, 그리고 수로가 시야가 닿는 곳까지 펼쳐집니다.</p><p class="lead" data-lang-block="zh">乘电梯直上云端村落。站在阳台上，悉尼最大的城市公园、高尔夫球场与水道一路延伸至视野尽头。</p><p class="lead" data-lang-block="zt">乘電梯直上雲端村落。站在陽臺上，悉尼最大的城市公園、高爾夫球場與水道一路延伸至視野盡頭。</p>
 
         <p data-lang-block="en">This collection of 1, 2, 3 and 4-bedroom residences across <strong>8 buildings</strong> beautifully designed by <strong>Group GSA architects</strong> features Billbergia-quality premium finishes and appliances — delivering exceptional living with an exclusive combination of breathtaking waterways, parklands and the city skyline.</p>
         <p data-lang-block="en">The ground level comes to life with a carefully considered retail offering, delivering daily convenience with a traditional village feel. From morning coffee to evening dining, Concord Central connects community and culture in one welcoming destination.</p>
 
-        <p data-lang-block="ko"><strong>그룹 GSA 건축사</strong>가 설계한 <strong>8개 빌딩</strong>의 1·2·3·4베드 레지던스 컬렉션은 Billbergia 특유의 프리미엄 마감재와 가전을 갖췄으며, 숨막히게 아름다운 수로, 공원, 도시 스카이라인이 어우러진 독보적인 라이프스타일을 선사합니다.</p>
-        <p data-lang-block="ko">지상층은 일상의 편리함과 전통적인 마을 분위기를 동시에 담은 정성 어린 리테일 공간으로 살아 움직입니다. 아침 커피부터 저녁 식사까지, 콩코드 센트럴은 커뮤니티와 문화를 하나의 환영하는 목적지로 연결합니다.</p>
+        <p data-lang-block="ko"><strong>그룹 GSA 건축사</strong>가 설계한 <strong>8개 빌딩</strong>의 1·2·3·4베드 레지던스 컬렉션은 Billbergia 특유의 프리미엄 마감재와 가전을 갖췄으며, 숨막히게 아름다운 수로, 공원, 도시 스카이라인이 어우러진 독보적인 라이프스타일을 선사합니다.</p><p data-lang-block="zh">由 <strong>Group GSA 建筑事务所</strong>设计的 <strong>8 栋楼宇</strong>，涵盖 1、2、3、4 房住宅，配备 Billbergia 标志性的高端饰面与家电，坐拥令人屏息的水景、公园与城市天际线，成就独树一帜的生活方式。</p><p data-lang-block="zt">由 <strong>Group GSA 建築事務所</strong>設計的 <strong>8 棟樓宇</strong>，涵蓋 1、2、3、4 房住宅，配備 Billbergia 標誌性的高端飾面與家電，坐擁令人屏息的水景、公園與城市天際線，成就獨樹一幟的生活方式。</p>
+        <p data-lang-block="ko">지상층은 일상의 편리함과 전통적인 마을 분위기를 동시에 담은 정성 어린 리테일 공간으로 살아 움직입니다. 아침 커피부터 저녁 식사까지, 콩코드 센트럴은 커뮤니티와 문화를 하나의 환영하는 목적지로 연결합니다.</p><p data-lang-block="zh">地面层以用心打造的商业空间焕发活力，兼具日常便利与传统村落氛围。从清晨咖啡到晚间用餐，Concord Central 将社区与文化融汇于一个温暖的目的地。</p><p data-lang-block="zt">地面層以用心打造的商業空間煥發活力，兼具日常便利與傳統村落氛圍。從清晨咖啡到晚間用餐，Concord Central 將社區與文化融匯於一個溫暖的目的地。</p>
       </div>
 
       <div class="welcome-card">
         <div class="wc-lbl" data-lang-section="en">At a Glance</div>
-        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div>
+        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div><div class="wc-lbl" data-lang-section="zh">一览</div><div class="wc-lbl" data-lang-section="zt">一覽</div>
         <ul class="wc-list">
           <li>
             <div class="lbl" data-lang-block="en">Address</div>
-            <div class="lbl" data-lang-block="ko">주소</div>
+            <div class="lbl" data-lang-block="ko">주소</div><div class="lbl" data-lang-block="zh">地址</div><div class="lbl" data-lang-block="zt">地址</div>
             <div class="val">1 King Street<small>Concord West NSW 2138</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Developer</div>
-            <div class="lbl" data-lang-block="ko">시행사</div>
-            <div class="val">Billbergia<small data-lang-section="en">40 years creating communities</small><small data-lang-section="ko">40년 커뮤니티 창조</small></div>
+            <div class="lbl" data-lang-block="ko">시행사</div><div class="lbl" data-lang-block="zh">开发商</div><div class="lbl" data-lang-block="zt">開發商</div>
+            <div class="val">Billbergia<small data-lang-section="en">40 years creating communities</small><small data-lang-section="ko">40년 커뮤니티 창조</small><small data-lang-section="zh">40 年社区营造</small><small data-lang-section="zt">40 年社區營造</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Architect</div>
-            <div class="lbl" data-lang-block="ko">건축</div>
+            <div class="lbl" data-lang-block="ko">건축</div><div class="lbl" data-lang-block="zh">建筑设计</div><div class="lbl" data-lang-block="zt">建築設計</div>
             <div class="val">Group GSA</div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Buildings</div>
-            <div class="lbl" data-lang-block="ko">총 빌딩</div>
-            <div class="val">8<small data-lang-section="en">6–37 storeys</small><small data-lang-section="ko">6–37층</small></div>
+            <div class="lbl" data-lang-block="ko">총 빌딩</div><div class="lbl" data-lang-block="zh">楼宇总数</div><div class="lbl" data-lang-block="zt">樓宇總數</div>
+            <div class="val">8<small data-lang-section="en">6–37 storeys</small><small data-lang-section="ko">6–37층</small><small data-lang-section="zh">6–37 层</small><small data-lang-section="zt">6–37 層</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Total Apartments</div>
-            <div class="lbl" data-lang-block="ko">총 세대수</div>
-            <div class="val">1,336<small data-lang-section="en">1, 2, 3 & 4 bedrooms</small><small data-lang-section="ko">1·2·3·4베드룸</small></div>
+            <div class="lbl" data-lang-block="ko">총 세대수</div><div class="lbl" data-lang-block="zh">住宅总数</div><div class="lbl" data-lang-block="zt">住宅總數</div>
+            <div class="val">1,336<small data-lang-section="en">1, 2, 3 & 4 bedrooms</small><small data-lang-section="ko">1·2·3·4베드룸</small><small data-lang-section="zh">1、2、3、4 房</small><small data-lang-section="zt">1、2、3、4 房</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Retail GFA</div>
-            <div class="lbl" data-lang-block="ko">리테일 면적</div>
+            <div class="lbl" data-lang-block="ko">리테일 면적</div><div class="lbl" data-lang-block="zh">商业面积</div><div class="lbl" data-lang-block="zt">商業面積</div>
             <div class="val">4,933 sqm</div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Quality Rating</div>
-            <div class="lbl" data-lang-block="ko">품질 등급</div>
-            <div class="val">4.5★ Gold<small data-lang-section="en">iCIRT by Equifax</small><small data-lang-section="ko">Equifax 인증 iCIRT</small></div>
+            <div class="lbl" data-lang-block="ko">품질 등급</div><div class="lbl" data-lang-block="zh">品质评级</div><div class="lbl" data-lang-block="zt">品質評級</div>
+            <div class="val">4.5★ Gold<small data-lang-section="en">iCIRT by Equifax</small><small data-lang-section="ko">Equifax 인증 iCIRT</small><small data-lang-section="zh">Equifax 认证 iCIRT</small><small data-lang-section="zt">Equifax 認證 iCIRT</small></div>
           </li>
         </ul>
       </div>
@@ -1480,9 +1496,9 @@
   <img src="./assets/concord-central/aerial.jpg" alt="Aerial view of the full Concord Central masterplan — four towers rising above Concord West Station with landscaped grounds" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">The Masterplan · Aerial View</span>
-    <span class="mc-tag" data-lang-section="ko">마스터플랜 · 항공 뷰</span>
+    <span class="mc-tag" data-lang-section="ko">마스터플랜 · 항공 뷰</span><span class="mc-tag" data-lang-section="zh">总体规划 · 鸟瞰图</span><span class="mc-tag" data-lang-section="zt">總體規劃 · 鳥瞰圖</span>
     <span class="mc-cap" data-lang-section="en">"A new village in the sky, anchored at Concord West Station."</span>
-    <span class="mc-cap" data-lang-section="ko">"콩코드 웨스트역 위에 솟아오른 하늘의 마을."</span>
+    <span class="mc-cap" data-lang-section="ko">"콩코드 웨스트역 위에 솟아오른 하늘의 마을."</span><span class="mc-cap" data-lang-section="zh">「矗立于 Concord West 车站之上的云端村落。」</span><span class="mc-cap" data-lang-section="zt">「矗立於 Concord West 車站之上的雲端村落。」</span>
   </figcaption>
 </figure>
 
@@ -1494,12 +1510,12 @@
         <div class="sec-tag">02 — The Masterplan</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Eight buildings.<br>One <em>community.</em></span>
-          <span data-lang-section="ko">8개의 빌딩.<br>하나의 <em>커뮤니티.</em></span>
+          <span data-lang-section="ko">8개의 빌딩.<br>하나의 <em>커뮤니티.</em></span><span data-lang-section="zh">八栋楼宇。<br>一个 <em>社区。</em></span><span data-lang-section="zt">八棟樓宇。<br>一個 <em>社區。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">A masterplan of three Stage 1 buildings — B1, A1 and A2 — opening across the precinct, with Concord Central Park at the heart of the community.</span>
-        <span data-lang-section="ko">B1, A1, A2 세 개의 1단계 빌딩이 단지 전체에 걸쳐 펼쳐지며, 콩코드 센트럴 파크가 커뮤니티의 중심에 자리합니다.</span>
+        <span data-lang-section="ko">B1, A1, A2 세 개의 1단계 빌딩이 단지 전체에 걸쳐 펼쳐지며, 콩코드 센트럴 파크가 커뮤니티의 중심에 자리합니다.</span><span data-lang-section="zh">第一期 B1、A1、A2 三栋楼宇贯穿全区，Concord Central 公园坐落于社区中心。</span><span data-lang-section="zt">第一期 B1、A1、A2 三棟樓宇貫穿全區，Concord Central 公園坐落於社區中心。</span>
       </p>
     </div>
 
@@ -1507,72 +1523,72 @@
       <div class="mp-cell">
         <div class="mp-num">8</div>
         <div class="mp-lbl" data-lang-section="en">Total Buildings</div>
-        <div class="mp-lbl" data-lang-section="ko">총 빌딩</div>
+        <div class="mp-lbl" data-lang-section="ko">총 빌딩</div><div class="mp-lbl" data-lang-section="zh">楼宇总数</div><div class="mp-lbl" data-lang-section="zt">樓宇總數</div>
         <div class="mp-desc" data-lang-section="en">Spanning 6 to 37 storeys.</div>
-        <div class="mp-desc" data-lang-section="ko">6~37층 규모.</div>
+        <div class="mp-desc" data-lang-section="ko">6~37층 규모.</div><div class="mp-desc" data-lang-section="zh">楼高 6 至 37 层。</div><div class="mp-desc" data-lang-section="zt">樓高 6 至 37 層。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">1,336</div>
         <div class="mp-lbl" data-lang-section="en">Total Apartments</div>
-        <div class="mp-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="mp-lbl" data-lang-section="ko">총 세대수</div><div class="mp-lbl" data-lang-section="zh">住宅总数</div><div class="mp-lbl" data-lang-section="zt">住宅總數</div>
         <div class="mp-desc" data-lang-section="en">1, 2, 3 and 4-bedroom residences.</div>
-        <div class="mp-desc" data-lang-section="ko">1·2·3·4베드룸 레지던스.</div>
+        <div class="mp-desc" data-lang-section="ko">1·2·3·4베드룸 레지던스.</div><div class="mp-desc" data-lang-section="zh">1、2、3、4 房住宅。</div><div class="mp-desc" data-lang-section="zt">1、2、3、4 房住宅。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">4,933<small>m²</small></div>
         <div class="mp-lbl" data-lang-section="en">Retail GFA</div>
-        <div class="mp-lbl" data-lang-section="ko">리테일 면적</div>
+        <div class="mp-lbl" data-lang-section="ko">리테일 면적</div><div class="mp-lbl" data-lang-section="zh">商业面积</div><div class="mp-lbl" data-lang-section="zt">商業面積</div>
         <div class="mp-desc" data-lang-section="en">Town centre at ground level.</div>
-        <div class="mp-desc" data-lang-section="ko">지상층 타운 센터.</div>
+        <div class="mp-desc" data-lang-section="ko">지상층 타운 센터.</div><div class="mp-desc" data-lang-section="zh">地面层城镇中心。</div><div class="mp-desc" data-lang-section="zt">地面層城鎮中心。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">14<small>+</small></div>
         <div class="mp-lbl" data-lang-section="en">Surrounding Parks</div>
-        <div class="mp-lbl" data-lang-section="ko">주변 공원</div>
+        <div class="mp-lbl" data-lang-section="ko">주변 공원</div><div class="mp-lbl" data-lang-section="zh">周边公园</div><div class="mp-lbl" data-lang-section="zt">周邊公園</div>
         <div class="mp-desc" data-lang-section="en">Including Concord Central Park.</div>
-        <div class="mp-desc" data-lang-section="ko">콩코드 센트럴 파크 포함.</div>
+        <div class="mp-desc" data-lang-section="ko">콩코드 센트럴 파크 포함.</div><div class="mp-desc" data-lang-section="zh">含 Concord Central 公园。</div><div class="mp-desc" data-lang-section="zt">含 Concord Central 公園。</div>
       </div>
     </div>
 
     <h3 style="font-family:'Spectral',serif;font-weight:300;font-size:36px;letter-spacing:-.015em;margin-bottom:32px;">
       <span data-lang-section="en">Stage 1 — Three Buildings</span>
-      <span data-lang-section="ko">1단계 — 3개 빌딩</span>
+      <span data-lang-section="ko">1단계 — 3개 빌딩</span><span data-lang-section="zh">第一期 —— 三栋楼宇</span><span data-lang-section="zt">第一期 —— 三棟樓宇</span>
     </h3>
     <div class="buildings">
       <div class="bldg-card feature">
         <div class="b-lbl" data-lang-section="en">First Release · Now Selling</div>
-        <div class="b-lbl" data-lang-section="ko">최초 분양 · 진행 중</div>
+        <div class="b-lbl" data-lang-section="ko">최초 분양 · 진행 중</div><div class="b-lbl" data-lang-section="zh">首期发售 · 热销中</div><div class="b-lbl" data-lang-section="zt">首期發售 · 熱銷中</div>
         <div class="b-name">Tower B1</div>
         <p class="b-sub" data-lang-block="en">The flagship 37-storey tower — the tallest in the masterplan, with 4 lifts and 276 apartments across 1, 2, 3 and 4-bedroom configurations.</p>
-        <p class="b-sub" data-lang-block="ko">37층 규모의 플래그십 타워 — 마스터플랜 내 최고층 빌딩. 4개의 엘리베이터, 1·2·3·4베드 구성의 276세대 아파트.</p>
+        <p class="b-sub" data-lang-block="ko">37층 규모의 플래그십 타워 — 마스터플랜 내 최고층 빌딩. 4개의 엘리베이터, 1·2·3·4베드 구성의 276세대 아파트.</p><p class="b-sub" data-lang-block="zh">楼高 37 层的旗舰塔楼 —— 总体规划中的最高楼宇。配备 4 部电梯，共 276 户 1、2、3、4 房公寓。</p><p class="b-sub" data-lang-block="zt">樓高 37 層的旗艦塔樓 —— 總體規劃中的最高樓宇。配備 4 部電梯，共 276 戶 1、2、3、4 房公寓。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">37</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">276</div><div class="l" data-lang-section="en">Apartments</div><div class="l" data-lang-section="ko">세대</div></div>
-          <div class="b-stat"><div class="v">4</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div></div>
+          <div class="b-stat"><div class="v">37</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">276</div><div class="l" data-lang-section="en">Apartments</div><div class="l" data-lang-section="ko">세대</div><div class="l" data-lang-section="zh">户数</div><div class="l" data-lang-section="zt">戶數</div></div>
+          <div class="b-stat"><div class="v">4</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div><div class="l" data-lang-section="zh">电梯</div><div class="l" data-lang-section="zt">電梯</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Stage 1 · Coming Soon</div>
-        <div class="b-lbl" data-lang-section="ko">1단계 · 출시 예정</div>
+        <div class="b-lbl" data-lang-section="ko">1단계 · 출시 예정</div><div class="b-lbl" data-lang-section="zh">第一期 · 即将推出</div><div class="b-lbl" data-lang-section="zt">第一期 · 即將推出</div>
         <div class="b-name">Tower A1</div>
         <p class="b-sub" data-lang-block="en">27-storey residential tower with 4 lifts, offering an alternative configuration of homes and aspects across the precinct.</p>
-        <p class="b-sub" data-lang-block="ko">27층 주거 타워, 4개 엘리베이터. 단지 내 다른 평면 구성과 향(aspect)을 제공합니다.</p>
+        <p class="b-sub" data-lang-block="ko">27층 주거 타워, 4개 엘리베이터. 단지 내 다른 평면 구성과 향(aspect)을 제공합니다.</p><p class="b-sub" data-lang-block="zh">27 层住宅塔楼，配备 4 部电梯。提供区内不同的户型配置与朝向。</p><p class="b-sub" data-lang-block="zt">27 層住宅塔樓，配備 4 部電梯。提供區內不同的戶型配置與朝向。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">27</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">4</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div></div>
+          <div class="b-stat"><div class="v">27</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">4</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div><div class="l" data-lang-section="zh">电梯</div><div class="l" data-lang-section="zt">電梯</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Stage 1 · Coming Soon</div>
-        <div class="b-lbl" data-lang-section="ko">1단계 · 출시 예정</div>
+        <div class="b-lbl" data-lang-section="ko">1단계 · 출시 예정</div><div class="b-lbl" data-lang-section="zh">第一期 · 即将推出</div><div class="b-lbl" data-lang-section="zt">第一期 · 即將推出</div>
         <div class="b-name">Tower A2</div>
         <p class="b-sub" data-lang-block="en">A boutique 7-storey building with 2 lifts — a more intimate scale within the larger precinct community.</p>
-        <p class="b-sub" data-lang-block="ko">2개 엘리베이터의 부티크 7층 빌딩 — 대규모 단지 내에서도 보다 친밀한 스케일을 제공합니다.</p>
+        <p class="b-sub" data-lang-block="ko">2개 엘리베이터의 부티크 7층 빌딩 — 대규모 단지 내에서도 보다 친밀한 스케일을 제공합니다.</p><p class="b-sub" data-lang-block="zh">配备 2 部电梯的 7 层精品楼宇 —— 于大型社区中呈现更亲密的尺度。</p><p class="b-sub" data-lang-block="zt">配備 2 部電梯的 7 層精品樓宇 —— 於大型社區中呈現更親密的尺度。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">7</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">2</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div></div>
+          <div class="b-stat"><div class="v">7</div><div class="l" data-lang-section="en">Storeys</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">2</div><div class="l" data-lang-section="en">Lifts</div><div class="l" data-lang-section="ko">엘리베이터</div><div class="l" data-lang-section="zh">电梯</div><div class="l" data-lang-section="zt">電梯</div></div>
         </div>
       </div>
     </div>
@@ -1587,28 +1603,28 @@
         <div class="sec-tag">03 — Connectivity</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Where connectivity<br><em>converges.</em></span>
-          <span data-lang-section="ko">연결성이<br><em>한곳에 모이는 곳.</em></span>
+          <span data-lang-section="ko">연결성이<br><em>한곳에 모이는 곳.</em></span><span data-lang-section="zh">交通<br><em>汇聚之地。</em></span><span data-lang-section="zt">交通<br><em>匯聚之地。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Just 150 metres to Concord West Station on the T9 Northern Line — express services to the Sydney CBD, Strathfield interchange and the Inner West. From 2032, the future North Strathfield Metro (1.3km) adds high-frequency Sydney Metro West connections.</span>
-        <span data-lang-section="ko">T9 노던 라인 콩코드 웨스트역까지 단 150m — 시드니 CBD, 스트라스필드 환승역, 이너 웨스트까지 급행으로 연결됩니다. 2032년부터는 1.3km 거리의 노스 스트라스필드 메트로가 개통되어 시드니 메트로 웨스트 고빈도 노선이 더해집니다.</span>
+        <span data-lang-section="ko">T9 노던 라인 콩코드 웨스트역까지 단 150m — 시드니 CBD, 스트라스필드 환승역, 이너 웨스트까지 급행으로 연결됩니다. 2032년부터는 1.3km 거리의 노스 스트라스필드 메트로가 개통되어 시드니 메트로 웨스트 고빈도 노선이 더해집니다.</span><span data-lang-section="zh">距 T9 Northern Line 的 Concord West 火车站仅 150 米 —— 快车直达悉尼 CBD、Strathfield 换乘站及内西区。2032 年起，1.3 公里外的 North Strathfield 地铁站将接入悉尼西部地铁高频线路。</span><span data-lang-section="zt">距 T9 Northern Line 的 Concord West 火車站僅 150 米 —— 快車直達悉尼 CBD、Strathfield 換乘站及內西區。2032 年起，1.3 公里外的 North Strathfield 地鐵站將接入悉尼西部地鐵高頻線路。</span>
       </p>
     </div>
 
     <div class="conn-grid">
       <div class="conn-card">
         <div class="conn-sub" data-lang-section="en">By Train · Concord West Station (Express)</div>
-        <div class="conn-sub" data-lang-section="ko">기차 · 콩코드 웨스트역 (급행)</div>
+        <div class="conn-sub" data-lang-section="ko">기차 · 콩코드 웨스트역 (급행)</div><div class="conn-sub" data-lang-section="zh">火车 · Concord West 站（快车）</div><div class="conn-sub" data-lang-section="zt">火車 · Concord West 站（快車）</div>
         <h3 data-lang-block="en">Express T9 line</h3>
-        <h3 data-lang-block="ko">급행 T9 라인</h3>
+        <h3 data-lang-block="ko">급행 T9 라인</h3><h3 data-lang-block="zh">T9 线快车</h3><h3 data-lang-block="zt">T9 線快車</h3>
         <ul class="conn-list">
           <li>
             <div class="conn-time">6<small>min</small></div>
             <div>
               <div class="conn-name">Strathfield</div>
               <div class="conn-via" data-lang-block="en">Interchange to all major lines</div>
-              <div class="conn-via" data-lang-block="ko">주요 노선 환승역</div>
+              <div class="conn-via" data-lang-block="ko">주요 노선 환승역</div><div class="conn-via" data-lang-block="zh">主要线路换乘站</div><div class="conn-via" data-lang-block="zt">主要線路換乘站</div>
             </div>
           </li>
           <li>
@@ -1616,7 +1632,7 @@
             <div>
               <div class="conn-name">Burwood</div>
               <div class="conn-via" data-lang-block="en">Westfield Burwood & dining strip</div>
-              <div class="conn-via" data-lang-block="ko">웨스트필드 버우드 & 다이닝가</div>
+              <div class="conn-via" data-lang-block="ko">웨스트필드 버우드 & 다이닝가</div><div class="conn-via" data-lang-block="zh">Westfield Burwood 与美食街</div><div class="conn-via" data-lang-block="zt">Westfield Burwood 與美食街</div>
             </div>
           </li>
           <li>
@@ -1624,16 +1640,16 @@
             <div>
               <div class="conn-name">Epping</div>
               <div class="conn-via" data-lang-block="en">Northern Sydney connection</div>
-              <div class="conn-via" data-lang-block="ko">노던 시드니 연결</div>
+              <div class="conn-via" data-lang-block="ko">노던 시드니 연결</div><div class="conn-via" data-lang-block="zh">连接悉尼北区</div><div class="conn-via" data-lang-block="zt">連接悉尼北區</div>
             </div>
           </li>
           <li>
             <div class="conn-time">22<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Sydney CBD (Central)</div>
-              <div class="conn-name" data-lang-block="ko">시드니 CBD (Central)</div>
+              <div class="conn-name" data-lang-block="ko">시드니 CBD (Central)</div><div class="conn-name" data-lang-block="zh">悉尼 CBD（Central 站）</div><div class="conn-name" data-lang-block="zt">悉尼 CBD（Central 站）</div>
               <div class="conn-via" data-lang-block="en">Direct express service</div>
-              <div class="conn-via" data-lang-block="ko">직통 급행 서비스</div>
+              <div class="conn-via" data-lang-block="ko">직통 급행 서비스</div><div class="conn-via" data-lang-block="zh">直达快车服务</div><div class="conn-via" data-lang-block="zt">直達快車服務</div>
             </div>
           </li>
           <li>
@@ -1641,7 +1657,7 @@
             <div>
               <div class="conn-name">Macquarie Park</div>
               <div class="conn-via" data-lang-block="en">Tech & innovation precinct</div>
-              <div class="conn-via" data-lang-block="ko">테크 & 혁신 권역</div>
+              <div class="conn-via" data-lang-block="ko">테크 & 혁신 권역</div><div class="conn-via" data-lang-block="zh">科技与创新园区</div><div class="conn-via" data-lang-block="zt">科技與創新園區</div>
             </div>
           </li>
         </ul>
@@ -1649,16 +1665,16 @@
 
       <div class="conn-card">
         <div class="conn-sub" data-lang-section="en">By Car · From the doorstep</div>
-        <div class="conn-sub" data-lang-section="ko">자동차 · 단지 앞에서</div>
+        <div class="conn-sub" data-lang-section="ko">자동차 · 단지 앞에서</div><div class="conn-sub" data-lang-section="zh">驾车 · 自小区门口起</div><div class="conn-sub" data-lang-section="zt">駕車 · 自小區門口起</div>
         <h3 data-lang-block="en">Surrounding destinations</h3>
-        <h3 data-lang-block="ko">주변 명소</h3>
+        <h3 data-lang-block="ko">주변 명소</h3><h3 data-lang-block="zh">周边亮点</h3><h3 data-lang-block="zt">周邊亮點</h3>
         <ul class="conn-list">
           <li>
             <div class="conn-time">6<small>min</small></div>
             <div>
               <div class="conn-name">Rhodes Waterside</div>
               <div class="conn-via" data-lang-block="en">131 shops · IKEA · Reading Cinema</div>
-              <div class="conn-via" data-lang-block="ko">131개 매장 · IKEA · 리딩 시네마</div>
+              <div class="conn-via" data-lang-block="ko">131개 매장 · IKEA · 리딩 시네마</div><div class="conn-via" data-lang-block="zh">131 家商铺 · IKEA · Reading Cinemas</div><div class="conn-via" data-lang-block="zt">131 家商鋪 · IKEA · Reading Cinemas</div>
             </div>
           </li>
           <li>
@@ -1666,7 +1682,7 @@
             <div>
               <div class="conn-name">Majors Bay Village</div>
               <div class="conn-via" data-lang-block="en">Concord's al fresco eat street</div>
-              <div class="conn-via" data-lang-block="ko">콩코드의 야외 식당가</div>
+              <div class="conn-via" data-lang-block="ko">콩코드의 야외 식당가</div><div class="conn-via" data-lang-block="zh">Concord 的户外美食街</div><div class="conn-via" data-lang-block="zt">Concord 的戶外美食街</div>
             </div>
           </li>
           <li>
@@ -1674,25 +1690,25 @@
             <div>
               <div class="conn-name">DFO Homebush</div>
               <div class="conn-via" data-lang-block="en">Luxury outlet shopping</div>
-              <div class="conn-via" data-lang-block="ko">럭셔리 아울렛 쇼핑</div>
+              <div class="conn-via" data-lang-block="ko">럭셔리 아울렛 쇼핑</div><div class="conn-via" data-lang-block="zh">奢侈品奥特莱斯购物</div><div class="conn-via" data-lang-block="zt">奢侈品奧特萊斯購物</div>
             </div>
           </li>
           <li>
             <div class="conn-time">8<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Rhodes Central (Billbergia)</div>
-              <div class="conn-name" data-lang-block="ko">로즈 센트럴 (Billbergia)</div>
+              <div class="conn-name" data-lang-block="ko">로즈 센트럴 (Billbergia)</div><div class="conn-name" data-lang-block="zh">Rhodes Central（Billbergia 开发）</div><div class="conn-name" data-lang-block="zt">Rhodes Central（Billbergia 開發）</div>
               <div class="conn-via" data-lang-block="en">Woolworths, Asian grocer, gym, medical</div>
-              <div class="conn-via" data-lang-block="ko">울워스, 아시안 식료품점, 헬스장, 진료소</div>
+              <div class="conn-via" data-lang-block="ko">울워스, 아시안 식료품점, 헬스장, 진료소</div><div class="conn-via" data-lang-block="zh">Woolworths、亚洲食品超市、健身房、诊所</div><div class="conn-via" data-lang-block="zt">Woolworths、亞洲食品超市、健身房、診所</div>
             </div>
           </li>
           <li>
             <div class="conn-time">10<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Concord Golf Club</div>
-              <div class="conn-name" data-lang-block="ko">콩코드 골프 클럽</div>
+              <div class="conn-name" data-lang-block="ko">콩코드 골프 클럽</div><div class="conn-name" data-lang-block="zh">Concord 高尔夫俱乐部</div><div class="conn-name" data-lang-block="zt">Concord 高爾夫俱樂部</div>
               <div class="conn-via" data-lang-block="en">Top 50 Australian golf course</div>
-              <div class="conn-via" data-lang-block="ko">호주 톱 50 골프 코스</div>
+              <div class="conn-via" data-lang-block="ko">호주 톱 50 골프 코스</div><div class="conn-via" data-lang-block="zh">澳洲五十佳高尔夫球场</div><div class="conn-via" data-lang-block="zt">澳洲五十佳高爾夫球場</div>
             </div>
           </li>
         </ul>
@@ -1701,7 +1717,7 @@
 
     <div style="text-align:center; padding: 32px 0 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute);">
       <span data-lang-section="en">Also nearby — Concord General Hospital · Bicentennial Park · Cabarita Beach · Sydney Olympic Park · Westfield Burwood · Bakehouse Quarter</span>
-      <span data-lang-section="ko">주변 시설 — 콩코드 종합병원 · 바이센테니얼 파크 · 카바리타 비치 · 시드니 올림픽 파크 · 웨스트필드 버우드 · 베이크하우스 쿼터</span>
+      <span data-lang-section="ko">주변 시설 — 콩코드 종합병원 · 바이센테니얼 파크 · 카바리타 비치 · 시드니 올림픽 파크 · 웨스트필드 버우드 · 베이크하우스 쿼터</span><span data-lang-section="zh">周边设施 —— Concord 综合医院 · Bicentennial Park · Cabarita Beach · 悉尼奥林匹克公园 · Westfield Burwood · Bakehouse Quarter</span><span data-lang-section="zt">周邊設施 —— Concord 綜合醫院 · Bicentennial Park · Cabarita Beach · 悉尼奧林匹克公園 · Westfield Burwood · Bakehouse Quarter</span>
     </div>
   </div>
 </section>
@@ -1714,21 +1730,21 @@
         <div class="sec-tag">04 — Amenities & Retail</div>
         <h2 class="sec-title">
           <span data-lang-section="en">A town centre<br>at your <em>door.</em></span>
-          <span data-lang-section="ko">현관 앞의<br><em>타운 센터.</em></span>
+          <span data-lang-section="ko">현관 앞의<br><em>타운 센터.</em></span><span data-lang-section="zh">家门口的<br><em>城镇中心。</em></span><span data-lang-section="zt">家門口的<br><em>城鎮中心。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Resort-style amenities for residents above, a vibrant retail and lifestyle precinct below. Everything you need for daily life — without leaving home.</span>
-        <span data-lang-section="ko">위층에는 입주민 전용 리조트형 편의시설, 아래층에는 활기찬 리테일·라이프스타일 권역. 집을 떠나지 않아도 일상의 모든 것이 충족됩니다.</span>
+        <span data-lang-section="ko">위층에는 입주민 전용 리조트형 편의시설, 아래층에는 활기찬 리테일·라이프스타일 권역. 집을 떠나지 않아도 일상의 모든 것이 충족됩니다.</span><span data-lang-section="zh">楼上是住户专属的度假式配套设施，楼下是充满活力的商业与生活街区。足不出区，日常所需一应俱全。</span><span data-lang-section="zt">樓上是住戶專屬的度假式配套設施，樓下是充滿活力的商業與生活街區。足不出區，日常所需一應俱全。</span>
       </p>
     </div>
 
     <div class="amenities-grid">
       <div class="am-block feature">
         <div class="am-eyebrow" data-lang-section="en">Resident Amenities</div>
-        <div class="am-eyebrow" data-lang-section="ko">입주민 편의시설</div>
+        <div class="am-eyebrow" data-lang-section="ko">입주민 편의시설</div><div class="am-eyebrow" data-lang-section="zh">住户配套设施</div><div class="am-eyebrow" data-lang-section="zt">住戶配套設施</div>
         <h3 data-lang-block="en">Resort-style retreat</h3>
-        <h3 data-lang-block="ko">리조트 스타일 휴식처</h3>
+        <h3 data-lang-block="ko">리조트 스타일 휴식처</h3><h3 data-lang-block="zh">度假式休憩空间</h3><h3 data-lang-block="zt">度假式休憩空間</h3>
         <ul>
           <li data-lang-block="en">Swimming pool</li>
           <li data-lang-block="en">Spa & sauna / steam room</li>
@@ -1739,22 +1755,22 @@
           <li data-lang-block="en">Concord Central Park</li>
           <li data-lang-block="en">Communal lounge & outdoor seating</li>
 
-          <li data-lang-block="ko">수영장</li>
-          <li data-lang-block="ko">스파 & 사우나 / 스팀룸</li>
-          <li data-lang-block="ko">풀옵션 헬스장</li>
-          <li data-lang-block="ko">도서관 & 스터디 공간</li>
-          <li data-lang-block="ko">야외 BBQ 구역</li>
-          <li data-lang-block="ko">인조잔디 멀티코트</li>
-          <li data-lang-block="ko">콩코드 센트럴 파크</li>
-          <li data-lang-block="ko">공용 라운지 & 야외 좌석</li>
+          <li data-lang-block="ko">수영장</li><li data-lang-block="zh">游泳池</li><li data-lang-block="zt">游泳池</li>
+          <li data-lang-block="ko">스파 & 사우나 / 스팀룸</li><li data-lang-block="zh">水疗与桑拿／蒸汽房</li><li data-lang-block="zt">水療與桑拿／蒸汽房</li>
+          <li data-lang-block="ko">풀옵션 헬스장</li><li data-lang-block="zh">设备齐全的健身房</li><li data-lang-block="zt">設備齊全的健身房</li>
+          <li data-lang-block="ko">도서관 & 스터디 공간</li><li data-lang-block="zh">图书室与自习空间</li><li data-lang-block="zt">圖書室與自習空間</li>
+          <li data-lang-block="ko">야외 BBQ 구역</li><li data-lang-block="zh">户外烧烤区</li><li data-lang-block="zt">戶外燒烤區</li>
+          <li data-lang-block="ko">인조잔디 멀티코트</li><li data-lang-block="zh">人造草坪多功能球场</li><li data-lang-block="zt">人造草坪多功能球場</li>
+          <li data-lang-block="ko">콩코드 센트럴 파크</li><li data-lang-block="zh">Concord Central 公园</li><li data-lang-block="zt">Concord Central 公園</li>
+          <li data-lang-block="ko">공용 라운지 & 야외 좌석</li><li data-lang-block="zh">公共休息厅与户外座席</li><li data-lang-block="zt">公共休息廳與戶外座席</li>
         </ul>
       </div>
 
       <div class="am-block warm">
         <div class="am-eyebrow" data-lang-section="en">Retail & Convenience</div>
-        <div class="am-eyebrow" data-lang-section="ko">리테일 & 편의시설</div>
+        <div class="am-eyebrow" data-lang-section="ko">리테일 & 편의시설</div><div class="am-eyebrow" data-lang-section="zh">商业与便利设施</div><div class="am-eyebrow" data-lang-section="zt">商業與便利設施</div>
         <h3 data-lang-block="en">Village at ground level</h3>
-        <h3 data-lang-block="ko">지상층의 마을</h3>
+        <h3 data-lang-block="ko">지상층의 마을</h3><h3 data-lang-block="zh">地面层的村落</h3><h3 data-lang-block="zt">地面層的村落</h3>
         <ul>
           <li data-lang-block="en">Supermarket (Woolworths / Coles / IGA scale)</li>
           <li data-lang-block="en">Speciality supermarket — Asian grocer</li>
@@ -1764,13 +1780,13 @@
           <li data-lang-block="en">Community gathering spaces</li>
           <li data-lang-block="en">4,933 sqm total retail GFA</li>
 
-          <li data-lang-block="ko">슈퍼마켓 (Woolworths / Coles / IGA 규모)</li>
-          <li data-lang-block="ko">전문 슈퍼마켓 — 아시안 식료품점</li>
-          <li data-lang-block="ko">단지 내 보육시설</li>
-          <li data-lang-block="ko">카페 & 캐주얼 다이닝</li>
-          <li data-lang-block="ko">스페셜티 리테일 매장</li>
-          <li data-lang-block="ko">커뮤니티 모임 공간</li>
-          <li data-lang-block="ko">총 4,933㎡ 리테일 면적</li>
+          <li data-lang-block="ko">슈퍼마켓 (Woolworths / Coles / IGA 규모)</li><li data-lang-block="zh">超市（Woolworths / Coles / IGA 规模）</li><li data-lang-block="zt">超市（Woolworths / Coles / IGA 規模）</li>
+          <li data-lang-block="ko">전문 슈퍼마켓 — 아시안 식료품점</li><li data-lang-block="zh">专业超市 —— 亚洲食品店</li><li data-lang-block="zt">專業超市 —— 亞洲食品店</li>
+          <li data-lang-block="ko">단지 내 보육시설</li><li data-lang-block="zh">区内托儿中心</li><li data-lang-block="zt">區內托兒中心</li>
+          <li data-lang-block="ko">카페 & 캐주얼 다이닝</li><li data-lang-block="zh">咖啡馆与轻食餐厅</li><li data-lang-block="zt">咖啡館與輕食餐廳</li>
+          <li data-lang-block="ko">스페셜티 리테일 매장</li><li data-lang-block="zh">特色零售店铺</li><li data-lang-block="zt">特色零售店鋪</li>
+          <li data-lang-block="ko">커뮤니티 모임 공간</li><li data-lang-block="zh">社区聚会空间</li><li data-lang-block="zt">社區聚會空間</li>
+          <li data-lang-block="ko">총 4,933㎡ 리테일 면적</li><li data-lang-block="zh">商业面积合计 4,933 平方米</li><li data-lang-block="zt">商業面積合計 4,933 平方米</li>
         </ul>
       </div>
     </div>
@@ -1780,29 +1796,29 @@
       <figure class="pg-card">
         <img src="./assets/concord-central/pool.jpg" alt="Concord Central Sky Village indoor pool with tropical planting — Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Sky Village Pool</strong><strong data-lang-section="ko">스카이 빌리지 수영장</strong>
-          <span data-lang-section="en">Indoor resort pool · Artist Impression</span><span data-lang-section="ko">실내 리조트 풀 · 조감도</span>
+          <strong data-lang-section="en">Sky Village Pool</strong><strong data-lang-section="ko">스카이 빌리지 수영장</strong><strong data-lang-section="zh">Sky Village 泳池</strong><strong data-lang-section="zt">Sky Village 泳池</strong>
+          <span data-lang-section="en">Indoor resort pool · Artist Impression</span><span data-lang-section="ko">실내 리조트 풀 · 조감도</span><span data-lang-section="zh">室内度假泳池 · 效果图</span><span data-lang-section="zt">室內度假泳池 · 效果圖</span>
         </figcaption>
       </figure>
       <figure class="pg-card">
         <img src="./assets/concord-central/spa.jpg" alt="Concord Central spa, sauna and steam room — Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Spa · Sauna · Steam</strong><strong data-lang-section="ko">스파 · 사우나 · 스팀룸</strong>
-          <span data-lang-section="en">Wellness retreat · Artist Impression</span><span data-lang-section="ko">웰니스 공간 · 조감도</span>
+          <strong data-lang-section="en">Spa · Sauna · Steam</strong><strong data-lang-section="ko">스파 · 사우나 · 스팀룸</strong><strong data-lang-section="zh">水疗 · 桑拿 · 蒸汽房</strong><strong data-lang-section="zt">水療 · 桑拿 · 蒸汽房</strong>
+          <span data-lang-section="en">Wellness retreat · Artist Impression</span><span data-lang-section="ko">웰니스 공간 · 조감도</span><span data-lang-section="zh">康体空间 · 效果图</span><span data-lang-section="zt">康體空間 · 效果圖</span>
         </figcaption>
       </figure>
       <figure class="pg-card">
         <img src="./assets/concord-central/gym.jpg" alt="Outdoor yoga deck and fully equipped gym — Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Gym & Yoga Deck</strong><strong data-lang-section="ko">헬스장 & 요가 데크</strong>
-          <span data-lang-section="en">Indoor–outdoor training · Artist Impression</span><span data-lang-section="ko">실내외 트레이닝 · 조감도</span>
+          <strong data-lang-section="en">Gym & Yoga Deck</strong><strong data-lang-section="ko">헬스장 & 요가 데크</strong><strong data-lang-section="zh">健身房与瑜伽平台</strong><strong data-lang-section="zt">健身房與瑜伽平臺</strong>
+          <span data-lang-section="en">Indoor–outdoor training · Artist Impression</span><span data-lang-section="ko">실내외 트레이닝 · 조감도</span><span data-lang-section="zh">室内外训练区 · 效果图</span><span data-lang-section="zt">室內外訓練區 · 效果圖</span>
         </figcaption>
       </figure>
       <figure class="pg-card">
         <img src="./assets/concord-central/pavilion-lookdown.jpg" alt="Cutaway of the amenity pavilion — gym above, pool and cabanas below — Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">The Amenity Pavilion</strong><strong data-lang-section="ko">어메니티 파빌리온</strong>
-          <span data-lang-section="en">Pool, cabanas & gym levels · Artist Impression</span><span data-lang-section="ko">풀·카바나·짐 레벨 · 조감도</span>
+          <strong data-lang-section="en">The Amenity Pavilion</strong><strong data-lang-section="ko">어메니티 파빌리온</strong><strong data-lang-section="zh">配套设施楼阁</strong><strong data-lang-section="zt">配套設施樓閣</strong>
+          <span data-lang-section="en">Pool, cabanas & gym levels · Artist Impression</span><span data-lang-section="ko">풀·카바나·짐 레벨 · 조감도</span><span data-lang-section="zh">泳池、凉亭与健身层 · 效果图</span><span data-lang-section="zt">泳池、涼亭與健身層 · 效果圖</span>
         </figcaption>
       </figure>
     </div>
@@ -1814,9 +1830,9 @@
   <img src="./assets/concord-central/park.jpg" alt="Concord Central Park — families on the village green between the towers, with the pavilion gym beyond" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">Concord Central Park · Village Green</span>
-    <span class="mc-tag" data-lang-section="ko">콩코드 센트럴 파크 · 빌리지 그린</span>
+    <span class="mc-tag" data-lang-section="ko">콩코드 센트럴 파크 · 빌리지 그린</span><span class="mc-tag" data-lang-section="zh">Concord Central 公园 · 中央草坪</span><span class="mc-tag" data-lang-section="zt">Concord Central 公園 · 中央草坪</span>
     <span class="mc-cap" data-lang-section="en">"An entire park at your doorstep — soccer field, picnic lawns and the pavilion beyond."</span>
-    <span class="mc-cap" data-lang-section="ko">"문 앞에 펼쳐진 공원 — 축구장, 피크닉 잔디, 그리고 파빌리온까지."</span>
+    <span class="mc-cap" data-lang-section="ko">"문 앞에 펼쳐진 공원 — 축구장, 피크닉 잔디, 그리고 파빌리온까지."</span><span class="mc-cap" data-lang-section="zh">「家门口的公园 —— 足球场、野餐草坪与楼阁一应俱全。」</span><span class="mc-cap" data-lang-section="zt">「家門口的公園 —— 足球場、野餐草坪與樓閣一應俱全。」</span>
   </figcaption>
 </figure>
 
@@ -1828,47 +1844,47 @@
         <div class="sec-tag">05 — Apartment Features</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Designed for<br><em>effortless</em> living.</span>
-          <span data-lang-section="ko"><em>완벽한</em><br>일상을 위한 설계.</span>
+          <span data-lang-section="ko"><em>완벽한</em><br>일상을 위한 설계.</span><span data-lang-section="zh">为<em>理想</em><br>日常而设计。</span><span data-lang-section="zt">爲<em>理想</em><br>日常而設計。</span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Thoughtfully crafted interiors bring together natural light, refined materials and timeless detailing — designed to feel as good as they look.</span>
-        <span data-lang-section="ko">자연광, 정제된 소재, 시대를 초월한 디테일이 어우러진 정성스러운 인테리어 — 보기에도 느낌에도 완벽한 공간.</span>
+        <span data-lang-section="ko">자연광, 정제된 소재, 시대를 초월한 디테일이 어우러진 정성스러운 인테리어 — 보기에도 느낌에도 완벽한 공간.</span><span data-lang-section="zh">自然采光、精致选材与隽永细节交织的用心室内 —— 观感与体验皆臻完美。</span><span data-lang-section="zt">自然採光、精緻選材與雋永細節交織的用心室內 —— 觀感與體驗皆臻完美。</span>
       </p>
     </div>
 
     <div class="features-headline">
       <div class="features-text">
         <p class="lead" data-lang-block="en">Spacious living zones and beautifully appointed bathrooms create a sense of everyday luxury.</p>
-        <p class="lead" data-lang-block="ko">넓은 거실과 정성스러운 욕실이 만드는 일상의 럭셔리.</p>
+        <p class="lead" data-lang-block="ko">넓은 거실과 정성스러운 욕실이 만드는 일상의 럭셔리.</p><p class="lead" data-lang-block="zh">开阔的起居空间与用心打造的浴室，成就日常的奢享。</p><p class="lead" data-lang-block="zt">開闊的起居空間與用心打造的浴室，成就日常的奢享。</p>
         <p data-lang-block="en"><strong>Bosch appliances</strong> throughout. Gas cooktops with ducted external rangehoods. <strong>Double-glazed windows</strong> for thermal comfort and acoustic isolation. <strong>Ducted air conditioning</strong> reaching every bedroom and living area.</p>
         <p data-lang-block="en">A washing machine and dryer are included. Blinds are provided. Embedded NBN fibre-to-the-premises (FTTP). Solar panels on the rooftop reduce energy demand for the building.</p>
-        <p data-lang-block="ko"><strong>Bosch 가전</strong>이 기본 사양. 가스 쿡탑 + 외부 배출 후드. <strong>이중 단열 유리창</strong>으로 단열과 차음을 확보. 모든 침실과 거실에 <strong>덕트형 에어컨</strong>.</p>
-        <p data-lang-block="ko">세탁기와 건조기가 포함됩니다. 블라인드 기본 제공. 임베디드 NBN FTTP. 건물 옥상의 태양광 패널이 에너지 수요를 줄여줍니다.</p>
+        <p data-lang-block="ko"><strong>Bosch 가전</strong>이 기본 사양. 가스 쿡탑 + 외부 배출 후드. <strong>이중 단열 유리창</strong>으로 단열과 차음을 확보. 모든 침실과 거실에 <strong>덕트형 에어컨</strong>.</p><p data-lang-block="zh"><strong>Bosch 家电</strong>为标准配置。燃气灶具 + 外排式抽油烟机。<strong>双层隔热玻璃窗</strong>兼顾保温与隔音。所有卧室与客厅均配<strong>中央管道空调</strong>。</p><p data-lang-block="zt"><strong>Bosch 家電</strong>爲標準配置。燃氣竈具 + 外排式抽油煙機。<strong>雙層隔熱玻璃窗</strong>兼顧保溫與隔音。所有臥室與客廳均配<strong>中央管道空調</strong>。</p>
+        <p data-lang-block="ko">세탁기와 건조기가 포함됩니다. 블라인드 기본 제공. 임베디드 NBN FTTP. 건물 옥상의 태양광 패널이 에너지 수요를 줄여줍니다.</p><p data-lang-block="zh">洗衣机与烘干机随房配备。百叶窗为标准配置。内嵌式 NBN FTTP 光纤。楼顶太阳能板有助降低能耗需求。</p><p data-lang-block="zt">洗衣機與烘乾機隨房配備。百葉窗爲標準配置。內嵌式 NBN FTTP 光纖。樓頂太陽能板有助降低能耗需求。</p>
       </div>
 
       <div class="heights-card">
         <h4 data-lang-section="en">Ceiling Heights</h4>
-        <h4 data-lang-section="ko">천장 높이</h4>
+        <h4 data-lang-section="ko">천장 높이</h4><h4 data-lang-section="zh">层高</h4><h4 data-lang-section="zt">層高</h4>
         <div class="height-row">
           <div class="height-room" data-lang-block="en">Living & Bedrooms</div>
-          <div class="height-room" data-lang-block="ko">거실 & 침실</div>
+          <div class="height-room" data-lang-block="ko">거실 & 침실</div><div class="height-room" data-lang-block="zh">客厅与卧室</div><div class="height-room" data-lang-block="zt">客廳與臥室</div>
           <div class="height-mm">2,700<small>mm</small></div>
         </div>
         <div class="height-row">
           <div class="height-room" data-lang-block="en">Bathrooms</div>
-          <div class="height-room" data-lang-block="ko">욕실</div>
+          <div class="height-room" data-lang-block="ko">욕실</div><div class="height-room" data-lang-block="zh">浴室</div><div class="height-room" data-lang-block="zt">浴室</div>
           <div class="height-mm">2,400<small>mm</small></div>
         </div>
         <div class="height-row">
           <div class="height-room" data-lang-block="en">Balustrade — Wintergarden</div>
-          <div class="height-room" data-lang-block="ko">윈터가든 발코니 난간</div>
+          <div class="height-room" data-lang-block="ko">윈터가든 발코니 난간</div><div class="height-room" data-lang-block="zh">冬季花园阳台栏杆</div><div class="height-room" data-lang-block="zt">冬季花園陽臺欄杆</div>
           <div class="height-mm" style="font-size:18px;color:var(--ink)" data-lang-block="en">Full height glazing</div>
-          <div class="height-mm" style="font-size:18px;color:var(--ink)" data-lang-block="ko">전면 통유리</div>
+          <div class="height-mm" style="font-size:18px;color:var(--ink)" data-lang-block="ko">전면 통유리</div><div class="height-mm" style="font-size:18px;color:var(--ink)" data-lang-block="zh">全幅落地玻璃</div><div class="height-mm" style="font-size:18px;color:var(--ink)" data-lang-block="zt">全幅落地玻璃</div>
         </div>
         <div class="height-row">
           <div class="height-room" data-lang-block="en">Balustrade — Open Balcony</div>
-          <div class="height-room" data-lang-block="ko">오픈 발코니 난간</div>
+          <div class="height-room" data-lang-block="ko">오픈 발코니 난간</div><div class="height-room" data-lang-block="zh">开放式阳台栏杆</div><div class="height-room" data-lang-block="zt">開放式陽臺欄杆</div>
           <div class="height-mm">1,300<small>mm</small></div>
         </div>
       </div>
@@ -1878,58 +1894,58 @@
       <div class="feat-tile">
         <div class="icon">i.</div>
         <h5 data-lang-block="en">Bosch Appliances</h5>
-        <h5 data-lang-block="ko">Bosch 가전</h5>
+        <h5 data-lang-block="ko">Bosch 가전</h5><h5 data-lang-block="zh">Bosch 家电</h5><h5 data-lang-block="zt">Bosch 家電</h5>
         <p data-lang-block="en">Kitchen appliances throughout — gas cooktop with ducted rangehood.</p>
-        <p data-lang-block="ko">키친 가전 일체 — 가스 쿡탑 + 외부 배출 후드.</p>
+        <p data-lang-block="ko">키친 가전 일체 — 가스 쿡탑 + 외부 배출 후드.</p><p data-lang-block="zh">厨房家电全配 —— 燃气灶具 + 外排式抽油烟机。</p><p data-lang-block="zt">廚房家電全配 —— 燃氣竈具 + 外排式抽油煙機。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">ii.</div>
         <h5 data-lang-block="en">Ducted A/C</h5>
-        <h5 data-lang-block="ko">덕트형 에어컨</h5>
+        <h5 data-lang-block="ko">덕트형 에어컨</h5><h5 data-lang-block="zh">中央管道空调</h5><h5 data-lang-block="zt">中央管道空調</h5>
         <p data-lang-block="en">Every bedroom and living area — full home climate control.</p>
-        <p data-lang-block="ko">모든 침실과 거실 — 전체 공간 온도 제어.</p>
+        <p data-lang-block="ko">모든 침실과 거실 — 전체 공간 온도 제어.</p><p data-lang-block="zh">覆盖所有卧室与客厅 —— 全屋温度调控。</p><p data-lang-block="zt">覆蓋所有臥室與客廳 —— 全屋溫度調控。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">iii.</div>
         <h5 data-lang-block="en">Double Glazing</h5>
-        <h5 data-lang-block="ko">이중 단열 유리</h5>
+        <h5 data-lang-block="ko">이중 단열 유리</h5><h5 data-lang-block="zh">双层隔热玻璃</h5><h5 data-lang-block="zt">雙層隔熱玻璃</h5>
         <p data-lang-block="en">Thermal comfort and acoustic isolation throughout.</p>
-        <p data-lang-block="ko">전 세대 단열 + 차음 효과.</p>
+        <p data-lang-block="ko">전 세대 단열 + 차음 효과.</p><p data-lang-block="zh">全屋保温兼隔音。</p><p data-lang-block="zt">全屋保溫兼隔音。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">iv.</div>
         <h5 data-lang-block="en">NBN Fibre</h5>
-        <h5 data-lang-block="ko">NBN 광케이블</h5>
+        <h5 data-lang-block="ko">NBN 광케이블</h5><h5 data-lang-block="zh">NBN 光纤</h5><h5 data-lang-block="zt">NBN 光纖</h5>
         <p data-lang-block="en">Fibre-to-the-premises via embedded network.</p>
-        <p data-lang-block="ko">임베디드 네트워크의 FTTP 광케이블.</p>
+        <p data-lang-block="ko">임베디드 네트워크의 FTTP 광케이블.</p><p data-lang-block="zh">内嵌网络的 FTTP 光纤到户。</p><p data-lang-block="zt">內嵌網絡的 FTTP 光纖到戶。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">v.</div>
         <h5 data-lang-block="en">Solar Rooftop</h5>
-        <h5 data-lang-block="ko">옥상 태양광</h5>
+        <h5 data-lang-block="ko">옥상 태양광</h5><h5 data-lang-block="zh">楼顶太阳能</h5><h5 data-lang-block="zt">樓頂太陽能</h5>
         <p data-lang-block="en">Building-level solar panels reduce energy demand.</p>
-        <p data-lang-block="ko">건물 옥상의 태양광 패널로 에너지 수요 감소.</p>
+        <p data-lang-block="ko">건물 옥상의 태양광 패널로 에너지 수요 감소.</p><p data-lang-block="zh">楼顶太阳能板降低能耗需求。</p><p data-lang-block="zt">樓頂太陽能板降低能耗需求。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">vi.</div>
         <h5 data-lang-block="en">Laundry Included</h5>
-        <h5 data-lang-block="ko">세탁 가전 포함</h5>
+        <h5 data-lang-block="ko">세탁 가전 포함</h5><h5 data-lang-block="zh">洗衣家电随房配备</h5><h5 data-lang-block="zt">洗衣家電隨房配備</h5>
         <p data-lang-block="en">Washing machine and dryer in every apartment.</p>
-        <p data-lang-block="ko">모든 세대에 세탁기 + 건조기 포함.</p>
+        <p data-lang-block="ko">모든 세대에 세탁기 + 건조기 포함.</p><p data-lang-block="zh">每户均配洗衣机 + 烘干机。</p><p data-lang-block="zt">每戶均配洗衣機 + 烘乾機。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">vii.</div>
         <h5 data-lang-block="en">EV Charging</h5>
-        <h5 data-lang-block="ko">EV 충전</h5>
+        <h5 data-lang-block="ko">EV 충전</h5><h5 data-lang-block="zh">电动车充电</h5><h5 data-lang-block="zt">電動車充電</h5>
         <p data-lang-block="en">Shared basement EV stations · 7kW dedicated upgrade option.</p>
-        <p data-lang-block="ko">지하 공용 EV 충전소 · 7kW 전용 충전기 업그레이드 옵션.</p>
+        <p data-lang-block="ko">지하 공용 EV 충전소 · 7kW 전용 충전기 업그레이드 옵션.</p><p data-lang-block="zh">地下公共电动车充电站 · 可升级 7kW 专属充电桩。</p><p data-lang-block="zt">地下公共電動車充電站 · 可升級 7kW 專屬充電樁。</p>
       </div>
       <div class="feat-tile">
         <div class="icon">viii.</div>
         <h5 data-lang-block="en">Storage Cages</h5>
-        <h5 data-lang-block="ko">스토리지 케이지</h5>
+        <h5 data-lang-block="ko">스토리지 케이지</h5><h5 data-lang-block="zh">储物笼</h5><h5 data-lang-block="zt">儲物籠</h5>
         <p data-lang-block="en">Dedicated storage cages in the basement.</p>
-        <p data-lang-block="ko">지하 전용 스토리지 케이지 제공.</p>
+        <p data-lang-block="ko">지하 전용 스토리지 케이지 제공.</p><p data-lang-block="zh">地下配备专属储物笼。</p><p data-lang-block="zt">地下配備專屬儲物籠。</p>
       </div>
     </div>
 
@@ -1938,22 +1954,22 @@
       <figure class="pg-card tall">
         <img src="./assets/concord-central/int-bar.jpg" alt="Kitchen, dining and bar with Sydney Harbour Bridge view — Residence 36, Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Kitchen & Bar</strong><strong data-lang-section="ko">주방 & 바</strong>
-          <span data-lang-section="en">Harbour Bridge outlook · Artist Impression</span><span data-lang-section="ko">하버브리지 전망 · 조감도</span>
+          <strong data-lang-section="en">Kitchen & Bar</strong><strong data-lang-section="ko">주방 & 바</strong><strong data-lang-section="zh">厨房与吧台</strong><strong data-lang-section="zt">廚房與吧檯</strong>
+          <span data-lang-section="en">Harbour Bridge outlook · Artist Impression</span><span data-lang-section="ko">하버브리지 전망 · 조감도</span><span data-lang-section="zh">海港大桥景观 · 效果图</span><span data-lang-section="zt">海港大橋景觀 · 效果圖</span>
         </figcaption>
       </figure>
       <figure class="pg-card tall">
         <img src="./assets/concord-central/int-living.jpg" alt="Living room with oak joinery entertainment wall — Residence 36, Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Living</strong><strong data-lang-section="ko">거실</strong>
-          <span data-lang-section="en">Oak joinery · stone hearth · Artist Impression</span><span data-lang-section="ko">오크 조이너리 · 스톤 · 조감도</span>
+          <strong data-lang-section="en">Living</strong><strong data-lang-section="ko">거실</strong><strong data-lang-section="zh">客厅</strong><strong data-lang-section="zt">客廳</strong>
+          <span data-lang-section="en">Oak joinery · stone hearth · Artist Impression</span><span data-lang-section="ko">오크 조이너리 · 스톤 · 조감도</span><span data-lang-section="zh">橡木木作 · 石材 · 效果图</span><span data-lang-section="zt">橡木木作 · 石材 · 效果圖</span>
         </figcaption>
       </figure>
       <figure class="pg-card tall">
         <img src="./assets/concord-central/int-study.jpg" alt="Built-in study nook with stone desk — Residence 36, Artist Impression" loading="lazy" />
         <figcaption>
-          <strong data-lang-section="en">Study Nook</strong><strong data-lang-section="ko">스터디 누크</strong>
-          <span data-lang-section="en">Built-in work-from-home zone · Artist Impression</span><span data-lang-section="ko">빌트인 재택근무 공간 · 조감도</span>
+          <strong data-lang-section="en">Study Nook</strong><strong data-lang-section="ko">스터디 누크</strong><strong data-lang-section="zh">书房角落</strong><strong data-lang-section="zt">書房角落</strong>
+          <span data-lang-section="en">Built-in work-from-home zone · Artist Impression</span><span data-lang-section="ko">빌트인 재택근무 공간 · 조감도</span><span data-lang-section="zh">内置居家办公空间 · 效果图</span><span data-lang-section="zt">內置居家辦公空間 · 效果圖</span>
         </figcaption>
       </figure>
     </div>
@@ -1968,12 +1984,12 @@
         <div class="sec-tag">06 — Interior Schemes</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Two moods.<br>One <em>standard.</em></span>
-          <span data-lang-section="ko">두 가지 무드.<br>하나의 <em>기준.</em></span>
+          <span data-lang-section="ko">두 가지 무드.<br>하나의 <em>기준.</em></span><span data-lang-section="zh">两种格调。<br>同一 <em>标准。</em></span><span data-lang-section="zt">兩種格調。<br>同一 <em>標準。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Choose between two distinct interior colour palettes — both designed to feel timeless, refined and effortlessly liveable.</span>
-        <span data-lang-section="ko">두 가지 차별화된 인테리어 컬러 팔레트 중 선택 — 모두 시대를 초월하고 정제된, 쉽게 어우러지는 디자인.</span>
+        <span data-lang-section="ko">두 가지 차별화된 인테리어 컬러 팔레트 중 선택 — 모두 시대를 초월하고 정제된, 쉽게 어우러지는 디자인.</span><span data-lang-section="zh">两款风格迥异的室内配色方案可选 —— 皆隽永精致，易于搭配。</span><span data-lang-section="zt">兩款風格迥異的室內配色方案可選 —— 皆雋永精緻，易於搭配。</span>
       </p>
     </div>
 
@@ -1986,9 +2002,9 @@
         <div class="scheme-body">
           <h3 class="scheme-name"><em>Dawn</em></h3>
           <p class="scheme-desc" data-lang-block="en">Soft, light-filled tones with warm neutrals — bringing morning calm to your everyday space.</p>
-          <p class="scheme-desc" data-lang-block="ko">부드럽고 빛이 가득한 톤과 따뜻한 뉴트럴 컬러 — 일상에 아침의 평온함을 더합니다.</p>
+          <p class="scheme-desc" data-lang-block="ko">부드럽고 빛이 가득한 톤과 따뜻한 뉴트럴 컬러 — 일상에 아침의 평온함을 더합니다.</p><p class="scheme-desc" data-lang-block="zh">柔和通透的色调与温暖的中性色 —— 为日常注入清晨般的宁静。</p><p class="scheme-desc" data-lang-block="zt">柔和通透的色調與溫暖的中性色 —— 爲日常注入清晨般的寧靜。</p>
           <div class="scheme-mood" data-lang-block="en">"Bright. Open. Inviting."</div>
-          <div class="scheme-mood" data-lang-block="ko">"환하게. 열린. 따뜻한."</div>
+          <div class="scheme-mood" data-lang-block="ko">"환하게. 열린. 따뜻한."</div><div class="scheme-mood" data-lang-block="zh">「明亮。开阔。温暖。」</div><div class="scheme-mood" data-lang-block="zt">「明亮。開闊。溫暖。」</div>
         </div>
       </div>
 
@@ -2000,16 +2016,16 @@
         <div class="scheme-body">
           <h3 class="scheme-name"><em>Dusk</em></h3>
           <p class="scheme-desc" data-lang-block="en">Deeper, moodier tones with sophisticated greys — for a richer, more dramatic interior expression.</p>
-          <p class="scheme-desc" data-lang-block="ko">깊고 무드 있는 톤과 세련된 그레이 컬러 — 보다 풍부하고 드라마틱한 인테리어 표현.</p>
+          <p class="scheme-desc" data-lang-block="ko">깊고 무드 있는 톤과 세련된 그레이 컬러 — 보다 풍부하고 드라마틱한 인테리어 표현.</p><p class="scheme-desc" data-lang-block="zh">深邃有格调的色调与考究的灰阶 —— 呈现更浓郁、更具戏剧张力的室内表达。</p><p class="scheme-desc" data-lang-block="zt">深邃有格調的色調與考究的灰階 —— 呈現更濃郁、更具戲劇張力的室內表達。</p>
           <div class="scheme-mood" data-lang-block="en">"Refined. Bold. Atmospheric."</div>
-          <div class="scheme-mood" data-lang-block="ko">"세련된. 대담한. 분위기 있는."</div>
+          <div class="scheme-mood" data-lang-block="ko">"세련된. 대담한. 분위기 있는."</div><div class="scheme-mood" data-lang-block="zh">「考究。大胆。有氛围。」</div><div class="scheme-mood" data-lang-block="zt">「考究。大膽。有氛圍。」</div>
         </div>
       </div>
     </div>
 
     <p style="margin-top:48px;text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);">
       <span data-lang-section="en">Bespoke upgrades available — kitchen island, banquette dry bar, TV wall unit, study joinery, hybrid flooring, integrated fridge, EV charger and more</span>
-      <span data-lang-section="ko">맞춤 업그레이드 가능 — 키친 아일랜드, 뱅켓 드라이 바, TV 월 유닛, 스터디 조이너리, 하이브리드 플로어링, 빌트인 냉장고, EV 충전기 등</span>
+      <span data-lang-section="ko">맞춤 업그레이드 가능 — 키친 아일랜드, 뱅켓 드라이 바, TV 월 유닛, 스터디 조이너리, 하이브리드 플로어링, 빌트인 냉장고, EV 충전기 등</span><span data-lang-section="zh">可选定制升级 —— 厨房中岛、卡座干吧、电视墙柜、书房木作、复合地板、嵌入式冰箱、电动车充电桩等</span><span data-lang-section="zt">可選定製升級 —— 廚房中島、卡座幹吧、電視牆櫃、書房木作、複合地板、嵌入式冰箱、電動車充電樁等</span>
     </p>
   </div>
 </section>
@@ -2022,25 +2038,25 @@
         <div class="sec-tag">07 — Building B1</div>
         <h2 class="sec-title">
           <span data-lang-section="en">The flagship<br>tower. <em>First release.</em></span>
-          <span data-lang-section="ko">플래그십<br>타워. <em>최초 분양.</em></span>
+          <span data-lang-section="ko">플래그십<br>타워. <em>최초 분양.</em></span><span data-lang-section="zh">旗舰<br>塔楼。<em>首期发售。</em></span><span data-lang-section="zt">旗艦<br>塔樓。<em>首期發售。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Tower B1 is the tallest of the three Stage 1 buildings — 37 storeys, 276 apartments, with the broadest mix of typologies from 1-bedroom homes to 4-bedroom Sky Village residences.</span>
-        <span data-lang-section="ko">B1 타워는 1단계 3개 빌딩 중 최고층 — 37층 규모, 276세대, 1베드 홈부터 4베드 스카이 빌리지 레지던스까지 가장 다양한 평면 구성.</span>
+        <span data-lang-section="ko">B1 타워는 1단계 3개 빌딩 중 최고층 — 37층 규모, 276세대, 1베드 홈부터 4베드 스카이 빌리지 레지던스까지 가장 다양한 평면 구성.</span><span data-lang-section="zh">B1 塔楼为第一期三栋楼宇中最高 —— 楼高 37 层，共 276 户，户型最为丰富，从 1 房住宅到 4 房 Sky Village 住宅一应俱全。</span><span data-lang-section="zt">B1 塔樓爲第一期三棟樓宇中最高 —— 樓高 37 層，共 276 戶，戶型最爲豐富，從 1 房住宅到 4 房 Sky Village 住宅一應俱全。</span>
       </p>
     </div>
 
     <div class="b1-grid">
       <div class="b1-text">
         <p class="lead" data-lang-block="en">Apartments above level 19 offer 3-bedroom configurations with 2 car spaces — the rarest typology in the precinct.</p>
-        <p class="lead" data-lang-block="ko">19층 이상의 아파트는 3베드 + 주차 2대 구성을 제공 — 단지 내에서 가장 희귀한 평면.</p>
+        <p class="lead" data-lang-block="ko">19층 이상의 아파트는 3베드 + 주차 2대 구성을 제공 — 단지 내에서 가장 희귀한 평면.</p><p class="lead" data-lang-block="zh">19 层以上的公寓提供 3 房 + 双车位配置 —— 区内最为稀有的户型。</p><p class="lead" data-lang-block="zt">19 層以上的公寓提供 3 房 + 雙車位配置 —— 區內最爲稀有的戶型。</p>
 
         <p data-lang-block="en">The Sky Village floors (33–37) offer the largest premium homes with sweeping views over Sydney's parklands, Concord Golf Club, and the city skyline. Level 37 is dedicated to a single 4-bedroom residence — the pinnacle of the tower.</p>
         <p data-lang-block="en">Every apartment comes with secure basement parking, a dedicated storage cage, and access to the resort-style amenities on the lower levels.</p>
 
-        <p data-lang-block="ko">스카이 빌리지 층(33–37층)은 시드니의 공원, 콩코드 골프 클럽, 그리고 도시 스카이라인이 한눈에 들어오는 최대형 프리미엄 레지던스를 제공합니다. 37층은 단 한 채의 4베드 레지던스로 구성된 타워의 정점입니다.</p>
-        <p data-lang-block="ko">모든 세대에 지하 주차 공간, 전용 스토리지 케이지, 그리고 하부층 리조트 스타일 편의시설 이용권이 포함됩니다.</p>
+        <p data-lang-block="ko">스카이 빌리지 층(33–37층)은 시드니의 공원, 콩코드 골프 클럽, 그리고 도시 스카이라인이 한눈에 들어오는 최대형 프리미엄 레지던스를 제공합니다. 37층은 단 한 채의 4베드 레지던스로 구성된 타워의 정점입니다.</p><p data-lang-block="zh">Sky Village 楼层（33–37 层）提供面积最大的顶级住宅，悉尼的公园、Concord 高尔夫俱乐部与城市天际线尽收眼底。37 层为塔楼之巅，仅设一户 4 房住宅。</p><p data-lang-block="zt">Sky Village 樓層（33–37 層）提供面積最大的頂級住宅，悉尼的公園、Concord 高爾夫俱樂部與城市天際線盡收眼底。37 層爲塔樓之巔，僅設一戶 4 房住宅。</p>
+        <p data-lang-block="ko">모든 세대에 지하 주차 공간, 전용 스토리지 케이지, 그리고 하부층 리조트 스타일 편의시설 이용권이 포함됩니다.</p><p data-lang-block="zh">每户均含地下车位、专属储物笼，以及低层度假式配套设施的使用权。</p><p data-lang-block="zt">每戶均含地下車位、專屬儲物籠，以及低層度假式配套設施的使用權。</p>
       </div>
 
       <div class="typologies">
@@ -2048,71 +2064,71 @@
           <div class="typology-icon">1</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">1 Bedroom</div>
-            <div class="typology-name" data-lang-block="ko">1 베드룸</div>
+            <div class="typology-name" data-lang-block="ko">1 베드룸</div><div class="typology-name" data-lang-block="zh">1 房</div><div class="typology-name" data-lang-block="zt">1 房</div>
             <div class="typology-config">1 BATH · WINTERGARDEN</div>
           </div>
           <div class="typology-note" data-lang-block="en">From Level 1</div>
-          <div class="typology-note" data-lang-block="ko">1층부터</div>
+          <div class="typology-note" data-lang-block="ko">1층부터</div><div class="typology-note" data-lang-block="zh">自 1 层起</div><div class="typology-note" data-lang-block="zt">自 1 層起</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">1+</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">1 Bedroom + MPR</div>
-            <div class="typology-name" data-lang-block="ko">1 베드룸 + 다목적실</div>
+            <div class="typology-name" data-lang-block="ko">1 베드룸 + 다목적실</div><div class="typology-name" data-lang-block="zh">1 房 + 多功能间</div><div class="typology-name" data-lang-block="zt">1 房 + 多功能間</div>
             <div class="typology-config">1 BATH · MPR · WINTERGARDEN</div>
           </div>
           <div class="typology-note" data-lang-block="en">From Level 1</div>
-          <div class="typology-note" data-lang-block="ko">1층부터</div>
+          <div class="typology-note" data-lang-block="ko">1층부터</div><div class="typology-note" data-lang-block="zh">自 1 层起</div><div class="typology-note" data-lang-block="zt">自 1 層起</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">2</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">2 Bedroom</div>
-            <div class="typology-name" data-lang-block="ko">2 베드룸</div>
+            <div class="typology-name" data-lang-block="ko">2 베드룸</div><div class="typology-name" data-lang-block="zh">2 房</div><div class="typology-name" data-lang-block="zt">2 房</div>
             <div class="typology-config">2 BATH · 1 CAR</div>
           </div>
           <div class="typology-note" data-lang-block="en">From Level 1</div>
-          <div class="typology-note" data-lang-block="ko">1층부터</div>
+          <div class="typology-note" data-lang-block="ko">1층부터</div><div class="typology-note" data-lang-block="zh">自 1 层起</div><div class="typology-note" data-lang-block="zt">自 1 層起</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">2+</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">2 Bedroom + MPR</div>
-            <div class="typology-name" data-lang-block="ko">2 베드룸 + 다목적실</div>
+            <div class="typology-name" data-lang-block="ko">2 베드룸 + 다목적실</div><div class="typology-name" data-lang-block="zh">2 房 + 多功能间</div><div class="typology-name" data-lang-block="zt">2 房 + 多功能間</div>
             <div class="typology-config">2 BATH · 1 CAR · MPR</div>
           </div>
           <div class="typology-note" data-lang-block="en">From Level 1</div>
-          <div class="typology-note" data-lang-block="ko">1층부터</div>
+          <div class="typology-note" data-lang-block="ko">1층부터</div><div class="typology-note" data-lang-block="zh">自 1 层起</div><div class="typology-note" data-lang-block="zt">自 1 層起</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">3</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">3 Bedroom</div>
-            <div class="typology-name" data-lang-block="ko">3 베드룸</div>
+            <div class="typology-name" data-lang-block="ko">3 베드룸</div><div class="typology-name" data-lang-block="zh">3 房</div><div class="typology-name" data-lang-block="zt">3 房</div>
             <div class="typology-config">2 BATH · 1 CAR</div>
           </div>
           <div class="typology-note" data-lang-block="en">From Level 1</div>
-          <div class="typology-note" data-lang-block="ko">1층부터</div>
+          <div class="typology-note" data-lang-block="ko">1층부터</div><div class="typology-note" data-lang-block="zh">自 1 层起</div><div class="typology-note" data-lang-block="zt">自 1 層起</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">3+</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">3 Bed · 2 Car (Sky Village)</div>
-            <div class="typology-name" data-lang-block="ko">3 베드 · 주차 2대 (스카이 빌리지)</div>
+            <div class="typology-name" data-lang-block="ko">3 베드 · 주차 2대 (스카이 빌리지)</div><div class="typology-name" data-lang-block="zh">3 房 · 双车位（Sky Village）</div><div class="typology-name" data-lang-block="zt">3 房 · 雙車位（Sky Village）</div>
             <div class="typology-config">2 BATH · 2 CAR</div>
           </div>
           <div class="typology-note" data-lang-block="en">Level 19+ only</div>
-          <div class="typology-note" data-lang-block="ko">19층 이상 한정</div>
+          <div class="typology-note" data-lang-block="ko">19층 이상 한정</div><div class="typology-note" data-lang-block="zh">仅限 19 层以上</div><div class="typology-note" data-lang-block="zt">僅限 19 層以上</div>
         </div>
         <div class="typology-row">
           <div class="typology-icon">4</div>
           <div class="typology-info">
             <div class="typology-name" data-lang-block="en">4 Bedroom (Premium)</div>
-            <div class="typology-name" data-lang-block="ko">4 베드룸 (프리미엄)</div>
+            <div class="typology-name" data-lang-block="ko">4 베드룸 (프리미엄)</div><div class="typology-name" data-lang-block="zh">4 房（尊享）</div><div class="typology-name" data-lang-block="zt">4 房（尊享）</div>
             <div class="typology-config">3 BATH · 2 CAR · SKY VILLAGE</div>
           </div>
           <div class="typology-note" data-lang-block="en">Levels 33–37 only</div>
-          <div class="typology-note" data-lang-block="ko">33–37층 한정</div>
+          <div class="typology-note" data-lang-block="ko">33–37층 한정</div><div class="typology-note" data-lang-block="zh">仅限 33–37 层</div><div class="typology-note" data-lang-block="zt">僅限 33–37 層</div>
         </div>
       </div>
     </div>
@@ -2124,9 +2140,9 @@
   <img src="./assets/concord-central/retail-dusk.jpg" alt="The retail pavilion at dusk — ground-floor café dining with the yoga terrace above" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">The Pavilion · Dusk</span>
-    <span class="mc-tag" data-lang-section="ko">파빌리온 · 황혼</span>
+    <span class="mc-tag" data-lang-section="ko">파빌리온 · 황혼</span><span class="mc-tag" data-lang-section="zh">楼阁 · 暮色</span><span class="mc-tag" data-lang-section="zt">樓閣 · 暮色</span>
     <span class="mc-cap" data-lang-section="en">"Cafés below, wellness above — the village comes alive at golden hour."</span>
-    <span class="mc-cap" data-lang-section="ko">"아래는 카페, 위는 웰니스 — 황혼에 살아나는 마을."</span>
+    <span class="mc-cap" data-lang-section="ko">"아래는 카페, 위는 웰니스 — 황혼에 살아나는 마을."</span><span class="mc-cap" data-lang-section="zh">「楼下咖啡，楼上康体 —— 暮色中苏醒的村落。」</span><span class="mc-cap" data-lang-section="zt">「樓下咖啡，樓上康體 —— 暮色中甦醒的村落。」</span>
   </figcaption>
 </figure>
 
@@ -2138,46 +2154,46 @@
         <div class="sec-tag">08 — Billbergia</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Creating<br>communities. <em>40 years.</em></span>
-          <span data-lang-section="ko">커뮤니티를<br>창조해온 <em>40년.</em></span>
+          <span data-lang-section="ko">커뮤니티를<br>창조해온 <em>40년.</em></span><span data-lang-section="zh">四十年<br><em>社区营造。</em></span><span data-lang-section="zt">四十年<br><em>社區營造。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Billbergia delivers projects through in-house development and construction teams — ensuring architectural excellence and the highest quality standards across every home. At Concord Central, Billbergia partners with Metrics Credit Partners (~$20bn AUM) and an award-winning alliance: Group GSA as executive architect, Lachlan Seegers Architect, Fitzpatrick + Partners, Carter Williamson, and landscape architects McGregor Coxall.</span>
-        <span data-lang-section="ko">Billbergia는 자체 개발 및 시공 팀을 통해 프로젝트를 진행 — 모든 주택에 건축적 우수성과 최고 수준의 품질을 보장합니다. 콩코드 센트럴에서는 금융 파트너 Metrics Credit Partners(운용자산 약 200억 달러)와 수상 경력의 건축 얼라이언스가 함께합니다 — 총괄 건축 Group GSA, Lachlan Seegers Architect, Fitzpatrick + Partners, Carter Williamson, 조경 McGregor Coxall.</span>
+        <span data-lang-section="ko">Billbergia는 자체 개발 및 시공 팀을 통해 프로젝트를 진행 — 모든 주택에 건축적 우수성과 최고 수준의 품질을 보장합니다. 콩코드 센트럴에서는 금융 파트너 Metrics Credit Partners(운용자산 약 200억 달러)와 수상 경력의 건축 얼라이언스가 함께합니다 — 총괄 건축 Group GSA, Lachlan Seegers Architect, Fitzpatrick + Partners, Carter Williamson, 조경 McGregor Coxall.</span><span data-lang-section="zh">Billbergia 拥有自有开发与施工团队 —— 确保每一户住宅的建筑水准与顶级品质。Concord Central 项目由金融合作伙伴 Metrics Credit Partners（管理资产约 200 亿澳元）支持，并携手屡获殊荣的建筑联盟 —— 总建筑设计 Group GSA、Lachlan Seegers Architect、Fitzpatrick + Partners、Carter Williamson，景观设计 McGregor Coxall。</span><span data-lang-section="zt">Billbergia 擁有自有開發與施工團隊 —— 確保每一戶住宅的建築水準與頂級品質。Concord Central 項目由金融合作伙伴 Metrics Credit Partners（管理資產約 200 億澳元）支持，並攜手屢獲殊榮的建築聯盟 —— 總建築設計 Group GSA、Lachlan Seegers Architect、Fitzpatrick + Partners、Carter Williamson，景觀設計 McGregor Coxall。</span>
       </p>
     </div>
 
     <div class="dev-section">
       <div class="dev-block">
         <p class="lead" data-lang-block="en">Billbergia is proud to have been awarded a 4.5-Gold Star iCIRT rating from independent verifier Equifax, and an industry best rating for 'Conduct' — demonstrating integrity in business.</p>
-        <p class="lead" data-lang-block="ko">Billbergia는 독립 검증 기관 Equifax로부터 4.5★ Gold iCIRT 등급을 수상했으며, 업계 최고의 'Conduct' 등급을 받아 비즈니스의 진정성을 입증했습니다.</p>
+        <p class="lead" data-lang-block="ko">Billbergia는 독립 검증 기관 Equifax로부터 4.5★ Gold iCIRT 등급을 수상했으며, 업계 최고의 'Conduct' 등급을 받아 비즈니스의 진정성을 입증했습니다.</p><p class="lead" data-lang-block="zh">Billbergia 获独立评估机构 Equifax 授予 4.5★ Gold iCIRT 评级，并取得业内最高的「Conduct（行为操守）」评级，印证其经营诚信。</p><p class="lead" data-lang-block="zt">Billbergia 獲獨立評估機構 Equifax 授予 4.5★ Gold iCIRT 評級，並取得業內最高的「Conduct（行爲操守）」評級，印證其經營誠信。</p>
 
         <p data-lang-block="en">Their focus is on lifestyle choices — access to amenities, transport connections, convenience retail experiences and active leisure opportunities for all residents to enjoy.</p>
         <p data-lang-block="en">Billbergia continues to explore and adopt new aspects from Environmentally Sustainable Design (ESD). All apartments are designed to be <strong>energy-efficient</strong>, reducing carbon emissions and benefiting financial sustainability through lower utility bills.</p>
 
-        <p data-lang-block="ko">그들의 초점은 라이프스타일 선택 — 편의시설 접근성, 교통 연결, 편리한 리테일 경험, 그리고 모든 입주민이 즐길 수 있는 활발한 레저 기회입니다.</p>
-        <p data-lang-block="ko">Billbergia는 환경 친화적 설계(ESD)에서 새로운 측면을 지속적으로 탐구하고 채택합니다. 모든 아파트는 <strong>에너지 효율적</strong>으로 설계되어 탄소 배출을 줄이고, 낮은 전기·수도 요금을 통한 가계 재정의 지속가능성을 지원합니다.</p>
+        <p data-lang-block="ko">그들의 초점은 라이프스타일 선택 — 편의시설 접근성, 교통 연결, 편리한 리테일 경험, 그리고 모든 입주민이 즐길 수 있는 활발한 레저 기회입니다.</p><p data-lang-block="zh">其着眼点在于生活方式的选择 —— 配套设施的便利、交通接驳、便捷的购物体验，以及全体住户皆可享受的丰富休闲机会。</p><p data-lang-block="zt">其着眼點在於生活方式的選擇 —— 配套設施的便利、交通接駁、便捷的購物體驗，以及全體住戶皆可享受的豐富休閒機會。</p>
+        <p data-lang-block="ko">Billbergia는 환경 친화적 설계(ESD)에서 새로운 측면을 지속적으로 탐구하고 채택합니다. 모든 아파트는 <strong>에너지 효율적</strong>으로 설계되어 탄소 배출을 줄이고, 낮은 전기·수도 요금을 통한 가계 재정의 지속가능성을 지원합니다.</p><p data-lang-block="zh">Billbergia 持续探索并采用生态可持续设计（ESD）的新方向。所有公寓均以<strong>节能</strong>为设计原则，减少碳排放，并通过更低的水电费用支持家庭财务的可持续性。</p><p data-lang-block="zt">Billbergia 持續探索並採用生態可持續設計（ESD）的新方向。所有公寓均以<strong>節能</strong>爲設計原則，減少碳排放，並通過更低的水電費用支持家庭財務的可持續性。</p>
 
         <div class="badges">
           <span class="badge gold">4.5★ Gold iCIRT</span>
           <span class="badge" data-lang-section="en">40 Years</span>
-          <span class="badge" data-lang-section="ko">40년 경력</span>
+          <span class="badge" data-lang-section="ko">40년 경력</span><span class="badge" data-lang-section="zh">40 年经验</span><span class="badge" data-lang-section="zt">40 年經驗</span>
           <span class="badge" data-lang-section="en">In-house Development & Construction</span>
-          <span class="badge" data-lang-section="ko">자체 개발 & 시공</span>
+          <span class="badge" data-lang-section="ko">자체 개발 & 시공</span><span class="badge" data-lang-section="zh">自有开发与施工</span><span class="badge" data-lang-section="zt">自有開發與施工</span>
           <span class="badge" data-lang-section="en">ESD Energy-Efficient</span>
-          <span class="badge" data-lang-section="ko">ESD 에너지 효율</span>
+          <span class="badge" data-lang-section="ko">ESD 에너지 효율</span><span class="badge" data-lang-section="zh">ESD 能效设计</span><span class="badge" data-lang-section="zt">ESD 能效設計</span>
         </div>
       </div>
 
       <div class="past-projects">
         <h4 data-lang-section="en">Recent Projects by Billbergia</h4>
-        <h4 data-lang-section="ko">Billbergia 최근 프로젝트</h4>
+        <h4 data-lang-section="ko">Billbergia 최근 프로젝트</h4><h4 data-lang-section="zh">Billbergia 近期项目</h4><h4 data-lang-section="zt">Billbergia 近期項目</h4>
         <div class="past-project">
           <div class="pp-year">2023</div>
           <div>
             <div class="pp-name">88 Walker Street</div>
             <div class="pp-loc" data-lang-block="en">North Sydney NSW</div>
-            <div class="pp-loc" data-lang-block="ko">노스 시드니 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">노스 시드니 NSW</div><div class="pp-loc" data-lang-block="zh">北悉尼 NSW</div><div class="pp-loc" data-lang-block="zt">北悉尼 NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2185,7 +2201,7 @@
           <div>
             <div class="pp-name">Lidcombe Rise</div>
             <div class="pp-loc" data-lang-block="en">Lidcombe NSW</div>
-            <div class="pp-loc" data-lang-block="ko">리드콤 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">리드콤 NSW</div><div class="pp-loc" data-lang-block="zh">Lidcombe NSW</div><div class="pp-loc" data-lang-block="zt">Lidcombe NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2193,7 +2209,7 @@
           <div>
             <div class="pp-name">Rhodes Central — Stage 1</div>
             <div class="pp-loc" data-lang-block="en">Rhodes NSW</div>
-            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div><div class="pp-loc" data-lang-block="zh">Rhodes NSW</div><div class="pp-loc" data-lang-block="zt">Rhodes NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2201,7 +2217,7 @@
           <div>
             <div class="pp-name">Sunrise at Meadowbank</div>
             <div class="pp-loc" data-lang-block="en">Meadowbank NSW</div>
-            <div class="pp-loc" data-lang-block="ko">미도우뱅크 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">미도우뱅크 NSW</div><div class="pp-loc" data-lang-block="zh">Meadowbank NSW</div><div class="pp-loc" data-lang-block="zt">Meadowbank NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2209,7 +2225,7 @@
           <div>
             <div class="pp-name">Brisbane Skytower</div>
             <div class="pp-loc" data-lang-block="en">Brisbane QLD</div>
-            <div class="pp-loc" data-lang-block="ko">브리즈번 QLD</div>
+            <div class="pp-loc" data-lang-block="ko">브리즈번 QLD</div><div class="pp-loc" data-lang-block="zh">布里斯班 QLD</div><div class="pp-loc" data-lang-block="zt">布里斯班 QLD</div>
           </div>
         </div>
         <div class="past-project">
@@ -2217,7 +2233,7 @@
           <div>
             <div class="pp-name">Marina Square at Wentworth Point</div>
             <div class="pp-loc" data-lang-block="en">Wentworth Point NSW</div>
-            <div class="pp-loc" data-lang-block="ko">웬트워스 포인트 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">웬트워스 포인트 NSW</div><div class="pp-loc" data-lang-block="zh">Wentworth Point NSW</div><div class="pp-loc" data-lang-block="zt">Wentworth Point NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2225,7 +2241,7 @@
           <div>
             <div class="pp-name">Skyline at Village Quay</div>
             <div class="pp-loc" data-lang-block="en">Rhodes NSW</div>
-            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div><div class="pp-loc" data-lang-block="zh">Rhodes NSW</div><div class="pp-loc" data-lang-block="zt">Rhodes NSW</div>
           </div>
         </div>
       </div>
@@ -2238,49 +2254,49 @@
 <section id="offers" class="offers-section">
   <div class="offers-inner">
     <div class="offers-ribbon" data-lang-section="en">Limited-Time Promotion · Now On</div>
-    <div class="offers-ribbon" data-lang-section="ko">기간 한정 프로모션 · 진행 중</div>
+    <div class="offers-ribbon" data-lang-section="ko">기간 한정 프로모션 · 진행 중</div><div class="offers-ribbon" data-lang-section="zh">限时优惠 · 进行中</div><div class="offers-ribbon" data-lang-section="zt">限時優惠 · 進行中</div>
     <h2 class="offers-title">
       <span data-lang-section="en">Three reasons to<br>buy <em>right now.</em></span>
-      <span data-lang-section="ko">지금 사야 하는<br><em>세 가지 이유.</em></span>
+      <span data-lang-section="ko">지금 사야 하는<br><em>세 가지 이유.</em></span><span data-lang-section="zh">此刻入手的<br><em>三个理由。</em></span><span data-lang-section="zt">此刻入手的<br><em>三個理由。</em></span>
     </h2>
     <p class="offers-lede" data-lang-section="en">Billbergia is currently offering an exceptional launch package at Concord Central — whether you're buying your forever home or building your portfolio.</p>
-    <p class="offers-lede" data-lang-section="ko">빌버지아가 콩코드 센트럴 론칭을 맞아 특별 패키지를 제공하고 있습니다 — 실거주 내 집 마련이든, 포트폴리오 투자든 모두에게 혜택이 있습니다.</p>
+    <p class="offers-lede" data-lang-section="ko">빌버지아가 콩코드 센트럴 론칭을 맞아 특별 패키지를 제공하고 있습니다 — 실거주 내 집 마련이든, 포트폴리오 투자든 모두에게 혜택이 있습니다.</p><p class="offers-lede" data-lang-section="zh">Billbergia 为 Concord Central 首发推出专属礼遇 —— 无论自住还是投资置业，均可受惠。</p><p class="offers-lede" data-lang-section="zt">Billbergia 爲 Concord Central 首發推出專屬禮遇 —— 無論自住還是投資置業，均可受惠。</p>
     <div class="offers-grid">
       <div class="offer-card">
         <div class="offer-badge" data-lang-section="en">For All Buyers</div>
-        <div class="offer-badge" data-lang-section="ko">모든 구매자</div>
-        <div class="offer-num"><em data-lang-section="en">Free</em><em data-lang-section="ko">무료</em> <span data-lang-section="en">Prestige Upgrades</span><span data-lang-section="ko">프레스티지 업그레이드</span></div>
+        <div class="offer-badge" data-lang-section="ko">모든 구매자</div><div class="offer-badge" data-lang-section="zh">所有买家</div><div class="offer-badge" data-lang-section="zt">所有買家</div>
+        <div class="offer-num"><em data-lang-section="en">Free</em><em data-lang-section="ko">무료</em><em data-lang-section="zh">免费</em><em data-lang-section="zt">免費</em> <span data-lang-section="en">Prestige Upgrades</span><span data-lang-section="ko">프레스티지 업그레이드</span><span data-lang-section="zh">尊享升级包</span><span data-lang-section="zt">尊享升級包</span></div>
         <p class="offer-desc" data-lang-section="en">Billbergia's Prestige Optional Upgrades package — normally a paid extra — is currently included free. Customise your home with:</p>
-        <p class="offer-desc" data-lang-section="ko">유상 옵션인 빌버지아 프레스티지 업그레이드 패키지가 현재 무료로 포함됩니다. 다음 항목으로 내 집을 커스터마이즈하세요:</p>
+        <p class="offer-desc" data-lang-section="ko">유상 옵션인 빌버지아 프레스티지 업그레이드 패키지가 현재 무료로 포함됩니다. 다음 항목으로 내 집을 커스터마이즈하세요:</p><p class="offer-desc" data-lang-section="zh">原为付费选配的 Billbergia 尊享升级包，现免费包含。可通过以下项目定制您的居所：</p><p class="offer-desc" data-lang-section="zt">原爲付費選配的 Billbergia 尊享升級包，現免費包含。可通過以下項目定製您的居所：</p>
         <ul class="offer-list">
-          <li data-lang-block="en">Mineral stone kitchen</li><li data-lang-block="ko">미네랄 스톤 주방</li>
-          <li data-lang-block="en">Cocktail bar</li><li data-lang-block="ko">칵테일 바</li>
-          <li data-lang-block="en">Pendant lighting</li><li data-lang-block="ko">펜던트 조명</li>
-          <li data-lang-block="en">Study joinery unit</li><li data-lang-block="ko">스터디 조이너리</li>
-          <li data-lang-block="en">Integrated fridge/freezer</li><li data-lang-block="ko">빌트인 냉장/냉동고</li>
-          <li data-lang-block="en">Timber-look flooring</li><li data-lang-block="ko">팀버룩 바닥재</li>
-          <li data-lang-block="en">Full-wall TV joinery</li><li data-lang-block="ko">풀월 TV 조이너리</li>
-          <li data-lang-block="en">EV charging station</li><li data-lang-block="ko">EV 충전 스테이션</li>
+          <li data-lang-block="en">Mineral stone kitchen</li><li data-lang-block="ko">미네랄 스톤 주방</li><li data-lang-block="zh">矿石台面厨房</li><li data-lang-block="zt">礦石臺面廚房</li>
+          <li data-lang-block="en">Cocktail bar</li><li data-lang-block="ko">칵테일 바</li><li data-lang-block="zh">鸡尾酒吧台</li><li data-lang-block="zt">雞尾酒吧檯</li>
+          <li data-lang-block="en">Pendant lighting</li><li data-lang-block="ko">펜던트 조명</li><li data-lang-block="zh">吊灯</li><li data-lang-block="zt">吊燈</li>
+          <li data-lang-block="en">Study joinery unit</li><li data-lang-block="ko">스터디 조이너리</li><li data-lang-block="zh">书房木作</li><li data-lang-block="zt">書房木作</li>
+          <li data-lang-block="en">Integrated fridge/freezer</li><li data-lang-block="ko">빌트인 냉장/냉동고</li><li data-lang-block="zh">嵌入式冷藏／冷冻柜</li><li data-lang-block="zt">嵌入式冷藏／冷凍櫃</li>
+          <li data-lang-block="en">Timber-look flooring</li><li data-lang-block="ko">팀버룩 바닥재</li><li data-lang-block="zh">木纹地板</li><li data-lang-block="zt">木紋地板</li>
+          <li data-lang-block="en">Full-wall TV joinery</li><li data-lang-block="ko">풀월 TV 조이너리</li><li data-lang-block="zh">整面墙电视柜</li><li data-lang-block="zt">整面牆電視櫃</li>
+          <li data-lang-block="en">EV charging station</li><li data-lang-block="ko">EV 충전 스테이션</li><li data-lang-block="zh">电动车充电站</li><li data-lang-block="zt">電動車充電站</li>
         </ul>
       </div>
       <div class="offer-card">
         <div class="offer-badge" data-lang-section="en">For Owner-Occupiers</div>
-        <div class="offer-badge" data-lang-section="ko">실거주자</div>
-        <div class="offer-num"><span data-lang-section="en">Exclusive <em>Discount</em></span><span data-lang-section="ko">전용 <em>할인 혜택</em></span></div>
+        <div class="offer-badge" data-lang-section="ko">실거주자</div><div class="offer-badge" data-lang-section="zh">自住买家</div><div class="offer-badge" data-lang-section="zt">自住買家</div>
+        <div class="offer-num"><span data-lang-section="en">Exclusive <em>Discount</em></span><span data-lang-section="ko">전용 <em>할인 혜택</em></span><span data-lang-section="zh">专属<em>折扣礼遇</em></span><span data-lang-section="zt">專屬<em>折扣禮遇</em></span></div>
         <p class="offer-desc" data-lang-section="en">Buying to live in? Owner-occupiers receive a dedicated purchase discount on top of the free upgrades package. Discount amount varies by apartment — enquire for your personalised figure.</p>
-        <p class="offer-desc" data-lang-section="ko">실거주 목적으로 구매하시나요? 실거주 구매자에게는 무료 업그레이드에 더해 전용 구매 할인이 제공됩니다. 할인 폭은 세대별로 다르니 문의 시 맞춤 견적을 받아보세요.</p>
+        <p class="offer-desc" data-lang-section="ko">실거주 목적으로 구매하시나요? 실거주 구매자에게는 무료 업그레이드에 더해 전용 구매 할인이 제공됩니다. 할인 폭은 세대별로 다르니 문의 시 맞춤 견적을 받아보세요.</p><p class="offer-desc" data-lang-section="zh">自住置业？自住买家除免费升级外，另享专属购房折扣。折扣幅度因房源而异，咨询时可获取专属报价。</p><p class="offer-desc" data-lang-section="zt">自住置業？自住買家除免費升級外，另享專屬購房折扣。折扣幅度因房源而異，諮詢時可獲取專屬報價。</p>
       </div>
       <div class="offer-card">
         <div class="offer-badge" data-lang-section="en">For Investors</div>
-        <div class="offer-badge" data-lang-section="ko">투자자</div>
-        <div class="offer-num"><em>6%</em> <span data-lang-section="en">Rental Guarantee</span><span data-lang-section="ko">렌트 개런티</span></div>
+        <div class="offer-badge" data-lang-section="ko">투자자</div><div class="offer-badge" data-lang-section="zh">投资者</div><div class="offer-badge" data-lang-section="zt">投資者</div>
+        <div class="offer-num"><em>6%</em> <span data-lang-section="en">Rental Guarantee</span><span data-lang-section="ko">렌트 개런티</span><span data-lang-section="zh">租金保证</span><span data-lang-section="zt">租金保證</span></div>
         <p class="offer-desc" data-lang-section="en">Investors can secure a 6% rental guarantee — locking in strong, predictable income from settlement regardless of market vacancy. Terms and duration provided on enquiry.</p>
-        <p class="offer-desc" data-lang-section="ko">투자자에게는 6% 렌트 개런티가 제공됩니다 — 시장 공실률과 무관하게 잔금일부터 안정적이고 예측 가능한 임대 수익을 확보하세요. 조건 및 기간은 문의 시 안내됩니다.</p>
+        <p class="offer-desc" data-lang-section="ko">투자자에게는 6% 렌트 개런티가 제공됩니다 — 시장 공실률과 무관하게 잔금일부터 안정적이고 예측 가능한 임대 수익을 확보하세요. 조건 및 기간은 문의 시 안내됩니다.</p><p class="offer-desc" data-lang-section="zh">投资者可享 6% 租金保证 —— 自交割日起获得稳定可预期的租金收益，不受市场空置率影响。条款与期限详情请来电咨询。</p><p class="offer-desc" data-lang-section="zt">投資者可享 6% 租金保證 —— 自交割日起獲得穩定可預期的租金收益，不受市場空置率影響。條款與期限詳情請來電諮詢。</p>
       </div>
     </div>
     <p class="offers-note">
       <span data-lang-section="en">Promotional offers are available for a limited time on selected apartments, subject to availability and developer terms; upgrade items subject to apartment layout. Offers may be varied or withdrawn without notice. Contact Sunghoon Choi (Sunny) for current eligibility, inclusions and full terms.</span>
-      <span data-lang-section="ko">프로모션은 일부 세대에 한해 기간 한정으로 제공되며, 잔여 세대 상황 및 시행사 조건이 적용됩니다. 업그레이드 항목은 세대 평면에 따라 달라질 수 있습니다. 프로모션은 사전 예고 없이 변경·종료될 수 있습니다. 현재 자격 요건, 포함 내역, 전체 조건은 최성훈에게 문의하세요.</span>
+      <span data-lang-section="ko">프로모션은 일부 세대에 한해 기간 한정으로 제공되며, 잔여 세대 상황 및 시행사 조건이 적용됩니다. 업그레이드 항목은 세대 평면에 따라 달라질 수 있습니다. 프로모션은 사전 예고 없이 변경·종료될 수 있습니다. 현재 자격 요건, 포함 내역, 전체 조건은 최성훈에게 문의하세요.</span><span data-lang-section="zh">优惠仅限部分房源并为限时提供，须视剩余房源情况及开发商条款而定。升级项目可能因户型而异。优惠可能恕不另行通知而变更或终止。当前资格条件、包含内容及完整条款，请咨询 Sunny。</span><span data-lang-section="zt">優惠僅限部分房源併爲限時提供，須視剩餘房源情況及開發商條款而定。升級項目可能因戶型而異。優惠可能恕不另行通知而變更或終止。當前資格條件、包含內容及完整條款，請諮詢 Sunny。</span>
     </p>
   </div>
 </section>
@@ -2289,48 +2305,48 @@
 <section id="finance" class="finance-section">
   <div class="finance-inner">
     <div class="finance-tag" data-lang-section="en">Flexible Finance · Zeroo Partnership</div>
-    <div class="finance-tag" data-lang-section="ko">유연한 파이낸스 · Zeroo 연계</div>
+    <div class="finance-tag" data-lang-section="ko">유연한 파이낸스 · Zeroo 연계</div><div class="finance-tag" data-lang-section="zh">灵活金融方案 · 携手 Zeroo</div><div class="finance-tag" data-lang-section="zt">靈活金融方案 · 攜手 Zeroo</div>
     <h2 class="finance-title">
       <span data-lang-section="en">No 10% deposit saved?<br>You can <em>still buy.</em></span>
-      <span data-lang-section="ko">10% 디파짓이 없어도<br><em>구매할 수 있습니다.</em></span>
+      <span data-lang-section="ko">10% 디파짓이 없어도<br><em>구매할 수 있습니다.</em></span><span data-lang-section="zh">没有 10% 首付<br><em>也能置业。</em></span><span data-lang-section="zt">沒有 10% 首付<br><em>也能置業。</em></span>
     </h2>
     <p class="finance-lede" data-lang-section="en">Through Zeroo's 0% deposit, shared-equity home loan, eligible buyers can secure a home at Concord Central without years of saving. Zeroo lends 100% of the purchase price — no Lenders Mortgage Insurance — and you own your home from day one, needing only a small settlement fee to get started.</p>
-    <p class="finance-lede" data-lang-section="ko">Zeroo의 0% 디파짓 공유지분(shared-equity) 홈론을 통해, 자격을 갖춘 구매자는 수년간 저축하지 않아도 콩코드 센트럴의 집을 확보할 수 있습니다. Zeroo가 구매가의 100%를 대출하며 — LMI(대출보증보험) 없이 — 첫날부터 100% 내 소유가 됩니다. 시작에 필요한 것은 소액의 정산 수수료뿐입니다.</p>
+    <p class="finance-lede" data-lang-section="ko">Zeroo의 0% 디파짓 공유지분(shared-equity) 홈론을 통해, 자격을 갖춘 구매자는 수년간 저축하지 않아도 콩코드 센트럴의 집을 확보할 수 있습니다. Zeroo가 구매가의 100%를 대출하며 — LMI(대출보증보험) 없이 — 첫날부터 100% 내 소유가 됩니다. 시작에 필요한 것은 소액의 정산 수수료뿐입니다.</p><p class="finance-lede" data-lang-section="zh">通过 Zeroo 的 0% 首付共享权益（shared-equity）房贷，符合条件的买家无需多年储蓄即可入手 Concord Central 的住宅。Zeroo 提供购房价 100% 的贷款 —— 且无需支付 LMI（贷款保险）—— 从第一天起即 100% 拥有产权。起步仅需一笔小额交割手续费。</p><p class="finance-lede" data-lang-section="zt">通過 Zeroo 的 0% 首付共享權益（shared-equity）房貸，符合條件的買家無需多年儲蓄即可入手 Concord Central 的住宅。Zeroo 提供購房價 100% 的貸款 —— 且無需支付 LMI（貸款保險）—— 從第一天起即 100% 擁有產權。起步僅需一筆小額交割手續費。</p>
     <div class="finance-grid">
       <div class="fin-cell">
         <div class="fin-num">0%</div>
         <div class="fin-lbl" data-lang-section="en">Deposit required — Zeroo lends 100% of the purchase price</div>
-        <div class="fin-lbl" data-lang-section="ko">디파짓 불필요 — 구매가 100% 대출</div>
+        <div class="fin-lbl" data-lang-section="ko">디파짓 불필요 — 구매가 100% 대출</div><div class="fin-lbl" data-lang-section="zh">无需首付 —— 贷款覆盖购房价 100%</div><div class="fin-lbl" data-lang-section="zt">無需首付 —— 貸款覆蓋購房價 100%</div>
       </div>
       <div class="fin-cell">
         <div class="fin-num">1.5–2.2%</div>
         <div class="fin-lbl" data-lang-section="en">Settlement fee is all you need upfront (finance options available)</div>
-        <div class="fin-lbl" data-lang-section="ko">선불로 필요한 건 정산 수수료뿐 (파이낸스 옵션 가능)</div>
+        <div class="fin-lbl" data-lang-section="ko">선불로 필요한 건 정산 수수료뿐 (파이낸스 옵션 가능)</div><div class="fin-lbl" data-lang-section="zh">前期仅需交割手续费（可选金融方案）</div><div class="fin-lbl" data-lang-section="zt">前期僅需交割手續費（可選金融方案）</div>
       </div>
       <div class="fin-cell">
         <div class="fin-num">No LMI</div>
         <div class="fin-lbl" data-lang-section="en">No Lenders Mortgage Insurance despite the 100% loan</div>
-        <div class="fin-lbl" data-lang-section="ko">100% 대출인데도 LMI(대출보증보험) 없음</div>
+        <div class="fin-lbl" data-lang-section="ko">100% 대출인데도 LMI(대출보증보험) 없음</div><div class="fin-lbl" data-lang-section="zh">即便 100% 贷款，亦无需 LMI（贷款保险）</div><div class="fin-lbl" data-lang-section="zt">即便 100% 貸款，亦無需 LMI（貸款保險）</div>
       </div>
       <div class="fin-cell">
         <div class="fin-num">Day 1</div>
         <div class="fin-lbl" data-lang-section="en">You own 100% of your home from day one & build equity as it grows</div>
-        <div class="fin-lbl" data-lang-section="ko">첫날부터 100% 소유 — 가치 상승분으로 에퀴티 축적</div>
+        <div class="fin-lbl" data-lang-section="ko">첫날부터 100% 소유 — 가치 상승분으로 에퀴티 축적</div><div class="fin-lbl" data-lang-section="zh">自第一天起 100% 拥有产权 —— 随增值累积权益</div><div class="fin-lbl" data-lang-section="zt">自第一天起 100% 擁有產權 —— 隨增值累積權益</div>
       </div>
     </div>
     <div class="finance-cta-row">
       <a href="https://www.zeroo.com.au/" target="_blank" rel="noopener" class="finance-btn">
         <span data-lang-section="en">Learn More at Zeroo →</span>
-        <span data-lang-section="ko">Zeroo에서 자세히 보기 →</span>
+        <span data-lang-section="ko">Zeroo에서 자세히 보기 →</span><span data-lang-section="zh">前往 Zeroo 了解详情 →</span><span data-lang-section="zt">前往 Zeroo 瞭解詳情 →</span>
       </a>
       <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Concord%20Central%20%2B%20Zeroo%20Finance%20Enquiry" class="finance-btn" style="background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;">
         <span data-lang-section="en">Ask Sunny About Eligibility</span>
-        <span data-lang-section="ko">자격 조건 문의하기</span>
+        <span data-lang-section="ko">자격 조건 문의하기</span><span data-lang-section="zh">咨询资格条件</span><span data-lang-section="zt">諮詢資格條件</span>
       </a>
     </div>
     <p class="finance-note">
       <span data-lang-section="en">Zeroo Home Loans is a third-party credit provider (Mondus Capital Pty Ltd, Authorised Representative under Australian Credit Licence 509175) and is not affiliated with Billbergia or Forise Group. All loans are subject to Zeroo's eligibility and credit assessment criteria. When you later refinance, Zeroo shares in a portion of your property's growth (10% of the new property value). This is general information only, not financial advice — consider your own circumstances and refer to Zeroo's Credit Guide.</span>
-      <span data-lang-section="ko">Zeroo Home Loans는 제3자 신용 제공사(Mondus Capital Pty Ltd, 호주 신용 라이선스 509175의 공인 대리인)이며 Billbergia 및 포라이즈 그룹과 무관합니다. 모든 대출은 Zeroo의 자격 및 신용 심사 기준을 따릅니다. 추후 재융자 시 Zeroo가 부동산 가치 상승분의 일부(새 부동산 가치의 10%)를 공유합니다. 본 내용은 일반 정보이며 금융 자문이 아닙니다 — 본인의 상황을 고려하시고 Zeroo의 Credit Guide를 참고하세요.</span>
+      <span data-lang-section="ko">Zeroo Home Loans는 제3자 신용 제공사(Mondus Capital Pty Ltd, 호주 신용 라이선스 509175의 공인 대리인)이며 Billbergia 및 포라이즈 그룹과 무관합니다. 모든 대출은 Zeroo의 자격 및 신용 심사 기준을 따릅니다. 추후 재융자 시 Zeroo가 부동산 가치 상승분의 일부(새 부동산 가치의 10%)를 공유합니다. 본 내용은 일반 정보이며 금융 자문이 아닙니다 — 본인의 상황을 고려하시고 Zeroo의 Credit Guide를 참고하세요.</span><span data-lang-section="zh">Zeroo Home Loans 为第三方信贷机构（Mondus Capital Pty Ltd，澳洲信贷牌照 509175 之授权代表），与 Billbergia 及 Forise Group 并无关联。所有贷款均须符合 Zeroo 的资格与信贷审核标准。日后再融资时，Zeroo 将分享物业增值的一部分（新物业估值的 10%）。以上仅为一般信息，不构成金融建议 —— 请结合自身情况并参阅 Zeroo 的 Credit Guide。</span><span data-lang-section="zt">Zeroo Home Loans 爲第三方信貸機構（Mondus Capital Pty Ltd，澳洲信貸牌照 509175 之授權代表），與 Billbergia 及 Forise Group 並無關聯。所有貸款均須符合 Zeroo 的資格與信貸審覈標準。日後再融資時，Zeroo 將分享物業增值的一部分（新物業估值的 10%）。以上僅爲一般信息，不構成金融建議 —— 請結合自身情況並參閱 Zeroo 的 Credit Guide。</span>
     </p>
   </div>
 </section>
@@ -2340,41 +2356,41 @@
     <div class="sec-tag">09 — Next Steps</div>
     <h2>
       <span data-lang-section="en">Eight buildings.<br>1,336 homes. <em>One enquiry away.</em></span>
-      <span data-lang-section="ko">8개의 빌딩.<br>1,336세대. <em>한 통의 문의로 시작.</em></span>
+      <span data-lang-section="ko">8개의 빌딩.<br>1,336세대. <em>한 통의 문의로 시작.</em></span><span data-lang-section="zh">八栋楼宇。<br>1,336 户。<em>一通咨询即可开始。</em></span><span data-lang-section="zt">八棟樓宇。<br>1,336 戶。<em>一通諮詢即可開始。</em></span>
     </h2>
 
     <div class="enquire-summary">
       <div class="es-cell">
         <div class="es-num">B1</div>
         <div class="es-lbl" data-lang-section="en">First Release · 276 Apts</div>
-        <div class="es-lbl" data-lang-section="ko">최초 분양 · 276세대</div>
+        <div class="es-lbl" data-lang-section="ko">최초 분양 · 276세대</div><div class="es-lbl" data-lang-section="zh">首期发售 · 276 户</div><div class="es-lbl" data-lang-section="zt">首期發售 · 276 戶</div>
       </div>
       <div class="es-cell">
         <div class="es-num">7</div>
         <div class="es-lbl" data-lang-section="en">Typologies · 1B → 4B</div>
-        <div class="es-lbl" data-lang-section="ko">평면 타입 · 1B → 4B</div>
+        <div class="es-lbl" data-lang-section="ko">평면 타입 · 1B → 4B</div><div class="es-lbl" data-lang-section="zh">户型 · 1房 → 4房</div><div class="es-lbl" data-lang-section="zt">戶型 · 1房 → 4房</div>
       </div>
       <div class="es-cell">
         <div class="es-num">22<small>min</small></div>
         <div class="es-lbl" data-lang-section="en">To Sydney CBD by Express</div>
-        <div class="es-lbl" data-lang-section="ko">시드니 CBD 급행</div>
+        <div class="es-lbl" data-lang-section="ko">시드니 CBD 급행</div><div class="es-lbl" data-lang-section="zh">快车直达悉尼 CBD</div><div class="es-lbl" data-lang-section="zt">快車直達悉尼 CBD</div>
       </div>
       <div class="es-cell">
         <div class="es-num">4.5<small>★</small></div>
         <div class="es-lbl" data-lang-section="en">Gold iCIRT Quality Rating</div>
-        <div class="es-lbl" data-lang-section="ko">Gold iCIRT 품질 등급</div>
+        <div class="es-lbl" data-lang-section="ko">Gold iCIRT 품질 등급</div><div class="es-lbl" data-lang-section="zh">Gold iCIRT 品质评级</div><div class="es-lbl" data-lang-section="zt">Gold iCIRT 品質評級</div>
       </div>
     </div>
 
     <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Concord%20Central%20%E2%80%94%20Information%20Request" class="cta-btn">
       <span data-lang-section="en">Request Information & Brochure</span>
-      <span data-lang-section="ko">자료 & 브로셔 요청</span>
+      <span data-lang-section="ko">자료 & 브로셔 요청</span><span data-lang-section="zh">索取资料与宣传册</span><span data-lang-section="zt">索取資料與宣傳冊</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
     </a>
 
     <p style="margin-top:48px; max-width:740px; font-size:14px; color:rgba(255,255,255,.6); line-height:1.6;">
       <span data-lang-section="en">Detailed apartment availability, current incentives — including free Prestige Upgrades, owner-occupier discounts and the 6% investor rental guarantee — floorplans by typology and unit-specific information are provided privately on enquiry. Get in touch for the complete information package.</span>
-      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브 — 무료 프레스티지 업그레이드, 실거주자 할인, 투자자 6% 렌트 개런티 포함 — 평면별 도면, 세대별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지를 받으시려면 연락 주세요.</span>
+      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브 — 무료 프레스티지 업그레이드, 실거주자 할인, 투자자 6% 렌트 개런티 포함 — 평면별 도면, 세대별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지를 받으시려면 연락 주세요.</span><span data-lang-section="zh">具体房源可售情况、当前适用礼遇（含免费尊享升级、自住买家折扣、投资者 6% 租金保证）、各户型图纸及房源详情，均于咨询时单独提供。如需完整资料包，欢迎与我联系。</span><span data-lang-section="zt">具體房源可售情況、當前適用禮遇（含免費尊享升級、自住買家折扣、投資者 6% 租金保證）、各戶型圖紙及房源詳情，均於諮詢時單獨提供。如需完整資料包，歡迎與我聯繫。</span>
     </p>
   </div>
 </section>
@@ -2386,15 +2402,15 @@
     <div class="contact-grid">
       <h2 class="contact-title">
         <span data-lang-section="en">Let's <em>start</em><br>a conversation.</span>
-        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span>
+        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span><span data-lang-section="zh"><em>让我们</em><br>开始交流。</span><span data-lang-section="zt"><em>讓我們</em><br>開始交流。</span>
       </h2>
       <div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Agent</div>
-          <div class="lbl" data-lang-section="ko">담당</div>
+          <div class="lbl" data-lang-section="ko">담당</div><div class="lbl" data-lang-section="zh">负责人</div><div class="lbl" data-lang-section="zt">負責人</div>
           <div>
             <div class="val" data-lang-section="en">Sunghoon Choi (Sunny)</div>
-            <div class="val" data-lang-section="ko">최성훈</div>
+            <div class="val" data-lang-section="ko">최성훈</div><div class="val" data-lang-section="zh">Sunny</div><div class="val" data-lang-section="zt">Sunny</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -2403,7 +2419,7 @@
         </div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Phone</div>
-          <div class="lbl" data-lang-section="ko">전화</div>
+          <div class="lbl" data-lang-section="ko">전화</div><div class="lbl" data-lang-section="zh">电话</div><div class="lbl" data-lang-section="zt">電話</div>
           <a class="val" href="tel:+61414824225">0414 824 225</a>
         </div>
         <div class="contact-detail">
@@ -2424,7 +2440,7 @@
   <p>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</p>
   <p>
     <span data-lang-section="en">All renderings are artist's impressions only; completed apartments may vary. Information presented for reference only; specifications, configurations and availability subject to change. Please contact the agent to confirm details. Information drawn from the official Billbergia / Concord Central brochures, Project Summary V2 (Mar 2026), and Purchaser Q&A (Rev 1, Mar 2026).</span>
-    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며 완공된 아파트는 다를 수 있습니다. 본 정보는 참고용이며, 사양·구성·분양 가능 여부는 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 내용은 공식 Billbergia / Concord Central 브로셔, Project Summary V2 (2026년 3월), Purchaser Q&A (Rev 1, 2026년 3월)에서 발췌되었습니다.</span>
+    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며 완공된 아파트는 다를 수 있습니다. 본 정보는 참고용이며, 사양·구성·분양 가능 여부는 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 내용은 공식 Billbergia / Concord Central 브로셔, Project Summary V2 (2026년 3월), Purchaser Q&A (Rev 1, 2026년 3월)에서 발췌되었습니다.</span><span data-lang-section="zh">所有效果图均为作家想象图，竣工后的实际单元可能有所不同。本信息仅供参考，规格、配置及可售情况可能变更。详情请咨询负责代理。内容摘自 Billbergia / Concord Central 官方宣传册、Project Summary V2（2026 年 3 月）及 Purchaser Q&A（Rev 1，2026 年 3 月）。</span><span data-lang-section="zt">所有效果圖均爲作家想象圖，竣工後的實際單元可能有所不同。本信息僅供參考，規格、配置及可售情況可能變更。詳情請諮詢負責代理。內容摘自 Billbergia / Concord Central 官方宣傳冊、Project Summary V2（2026 年 3 月）及 Purchaser Q&A（Rev 1，2026 年 3 月）。</span>
   </p>
 </footer>
 
@@ -2451,18 +2467,20 @@
   });
 
   // ============ LANGUAGE ============
-  const langToggle = document.getElementById('langToggle');
-  const langLabel  = document.getElementById('langLabel');
+  const langGrp = document.getElementById('langGrp');
   function applyLang(l) {
+    if (!['en','ko','zh-Hans','zh-Hant'].includes(l)) l = 'en';
     document.documentElement.setAttribute('lang', l);
-    langLabel.textContent = l === 'ko' ? 'EN' : '한국어';
+    langGrp.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.set === l);
+    });
     localStorage.setItem('cc-lang', l);
   }
-  applyLang(localStorage.getItem('cc-lang') || 'en');
-  langToggle.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('lang');
-    applyLang(cur === 'ko' ? 'en' : 'ko');
+  langGrp.addEventListener('click', function (e) {
+    const b = e.target.closest('button');
+    if (b) applyLang(b.dataset.set);
   });
+  applyLang(localStorage.getItem('cc-lang') || 'en');
 
   // ============ REVEAL ON SCROLL ============
   const obs = new IntersectionObserver(entries => {
