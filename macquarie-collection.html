@@ -1048,14 +1048,30 @@
 
   /* Language toggle */
   [data-lang-section] { display: none; }
-  [data-lang-section="en"] { display: inline; }
-  html[lang="ko"] [data-lang-section="en"] { display: none; }
+  html[lang="en"] [data-lang-section="en"] { display: inline; }
   html[lang="ko"] [data-lang-section="ko"] { display: inline; }
+  html[lang="zh-Hans"] [data-lang-section="zh"] { display: inline; }
+  html[lang="zh-Hant"] [data-lang-section="zt"] { display: inline; }
   [data-lang-block] { display: none; }
-  [data-lang-block="en"] { display: block; }
-  html[lang="ko"] [data-lang-block="en"] { display: none; }
+  html[lang="en"] [data-lang-block="en"] { display: block; }
   html[lang="ko"] [data-lang-block="ko"] { display: block; }
+  html[lang="zh-Hans"] [data-lang-block="zh"] { display: block; }
+  html[lang="zh-Hant"] [data-lang-block="zt"] { display: block; }
   html[lang="ko"] body { font-family: 'Inter Tight', 'Noto Serif KR', sans-serif; }
+
+  /* Chinese typography */
+  html[lang="zh-Hans"] body, html[lang="zh-Hant"] body {
+    font-family: "Noto Sans SC", "Noto Sans HK", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .langgrp { display: inline-flex; border: 1px solid var(--line); background: var(--bg-card);
+    border-radius: 999px; overflow: hidden; }
+  .langgrp button { background: transparent; border: none; border-right: 1px solid var(--line-soft);
+    font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .08em;
+    padding: 9px 11px; cursor: pointer; color: var(--ink-mute); transition: all .25s; line-height: 1; }
+  .langgrp button:last-child { border-right: none; }
+  .langgrp button:hover { color: var(--ink); background: var(--bg-tint); }
+  .langgrp button.on { background: var(--accent-deep); color: #fff; }
+  @media (max-width: 720px) { .langgrp button { padding: 7px 8px; font-size: 10px; letter-spacing: .04em; } }
 </style>
 </head>
 <body>
@@ -1065,14 +1081,14 @@
   <div class="brand">
     <div class="brand-mark"><em>M</em></div>
     <span data-lang-section="en">The Macquarie Collection</span>
-    <span data-lang-section="ko">더 매쿼리 컬렉션</span>
+    <span data-lang-section="ko">더 매쿼리 컬렉션</span><span data-lang-section="zh">The Macquarie Collection</span><span data-lang-section="zt">The Macquarie Collection</span>
   </div>
   <div class="topbar-actions">
     <a class="pill bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
       Buy me a coffee
     </a>
-    <button class="pill" id="langToggle"><span id="langLabel">한국어</span></button>
+    <span class="langgrp" id="langGrp"><button data-set="en"><span>EN</span></button><button data-set="ko"><span>한국어</span></button><button data-set="zh-Hans"><span>简体</span></button><button data-set="zh-Hant"><span>繁體</span></button></span>
     <button class="pill" id="themeToggle"><span id="themeLabel">◐</span></button>
   </div>
 </div>
@@ -1085,50 +1101,50 @@
     <div class="hero-top">
       <div class="hero-eyebrow">
         <span data-lang-section="en"><strong>Landmark</strong> × AJC Architects<br>5 Halifax St · Macquarie Park NSW 2113</span>
-        <span data-lang-section="ko"><strong>Landmark</strong> × AJC 건축<br>5 Halifax St · Macquarie Park NSW 2113</span>
+        <span data-lang-section="ko"><strong>Landmark</strong> × AJC 건축<br>5 Halifax St · Macquarie Park NSW 2113</span><span data-lang-section="zh"><strong>Landmark</strong> × AJC 建筑设计<br>5 Halifax St · Macquarie Park NSW 2113</span><span data-lang-section="zt"><strong>Landmark</strong> × AJC 建築設計<br>5 Halifax St · Macquarie Park NSW 2113</span>
       </div>
       <div class="hero-coords">
         33°46′32″S · 151°07′40″E<br>
         <span data-lang-section="en">52 Apartments · 2 Buildings</span>
-        <span data-lang-section="ko">52세대 · 2개 건물</span>
+        <span data-lang-section="ko">52세대 · 2개 건물</span><span data-lang-section="zh">52 户 · 两栋楼宇</span><span data-lang-section="zt">52 戶 · 兩棟樓宇</span>
       </div>
     </div>
 
     <div class="hero-center">
       <h1 class="hero-title">
         <span data-lang-section="en">The Macquarie<br><em>Collection.</em></span>
-        <span data-lang-section="ko">매쿼리<br><em>컬렉션.</em></span>
+        <span data-lang-section="ko">매쿼리<br><em>컬렉션.</em></span><span data-lang-section="zh">Macquarie<br><em>Collection.</em></span><span data-lang-section="zt">Macquarie<br><em>Collection.</em></span>
       </h1>
       <p class="hero-tagline">
         <span data-lang-section="en">A beautiful collection of contemporary Australian apartments — designed by AJC Architects, connected to the everyday convenience of Macquarie Park.</span>
-        <span data-lang-section="ko">현대 호주 아파트의 아름다운 컬렉션 — AJC 건축의 디자인, 매쿼리 파크의 일상적 편리함과 연결된 라이프스타일.</span>
+        <span data-lang-section="ko">현대 호주 아파트의 아름다운 컬렉션 — AJC 건축의 디자인, 매쿼리 파크의 일상적 편리함과 연결된 라이프스타일.</span><span data-lang-section="zh">一组精美的当代澳洲公寓 —— 由 AJC 建筑设计操刀，衔接 Macquarie Park 的日常便利与互联生活方式。</span><span data-lang-section="zt">一組精美的當代澳洲公寓 —— 由 AJC 建築設計操刀，銜接 Macquarie Park 的日常便利與互聯生活方式。</span>
       </p>
     </div>
 
     <div class="hero-bottom">
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Apartments</div>
-        <div class="hb-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="hb-lbl" data-lang-section="ko">총 세대수</div><div class="hb-lbl" data-lang-section="zh">住宅总数</div><div class="hb-lbl" data-lang-section="zt">住宅總數</div>
         <div class="hb-val">52 · 1B/1B+S/2B/3B+S</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">To Metro</div>
-        <div class="hb-lbl" data-lang-section="ko">메트로까지</div>
+        <div class="hb-lbl" data-lang-section="ko">메트로까지</div><div class="hb-lbl" data-lang-section="zh">至地铁站</div><div class="hb-lbl" data-lang-section="zt">至地鐵站</div>
         <div class="hb-val">650 m · 8 min walk</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Architect</div>
-        <div class="hb-lbl" data-lang-section="ko">건축</div>
+        <div class="hb-lbl" data-lang-section="ko">건축</div><div class="hb-lbl" data-lang-section="zh">建筑设计</div><div class="hb-lbl" data-lang-section="zt">建築設計</div>
         <div class="hb-val">AJC · Est. 1956</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Developer</div>
-        <div class="hb-lbl" data-lang-section="ko">시행사</div>
+        <div class="hb-lbl" data-lang-section="ko">시행사</div><div class="hb-lbl" data-lang-section="zh">开发商</div><div class="hb-lbl" data-lang-section="zt">開發商</div>
         <div class="hb-val">Landmark · $4B+</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Structural Warranty</div>
-        <div class="hb-lbl" data-lang-section="ko">구조 보증</div>
+        <div class="hb-lbl" data-lang-section="ko">구조 보증</div><div class="hb-lbl" data-lang-section="zh">结构质保</div><div class="hb-lbl" data-lang-section="zt">結構質保</div>
         <div class="hb-val">10 Years</div>
       </div>
     </div>
@@ -1139,23 +1155,23 @@
 <nav class="nav-sticky">
   <div class="nav-inner">
     <a href="#welcome" data-lang-section="en">Welcome</a>
-    <a href="#welcome" data-lang-section="ko">소개</a>
+    <a href="#welcome" data-lang-section="ko">소개</a><a href="#welcome" data-lang-section="zh">项目简介</a><a href="#welcome" data-lang-section="zt">項目簡介</a>
     <a href="#macquarie" data-lang-section="en">Macquarie Park</a>
-    <a href="#macquarie" data-lang-section="ko">매쿼리 파크</a>
+    <a href="#macquarie" data-lang-section="ko">매쿼리 파크</a><a href="#macquarie" data-lang-section="zh">Macquarie Park</a><a href="#macquarie" data-lang-section="zt">Macquarie Park</a>
     <a href="#location" data-lang-section="en">Connectivity</a>
-    <a href="#location" data-lang-section="ko">교통</a>
+    <a href="#location" data-lang-section="ko">교통</a><a href="#location" data-lang-section="zh">交通</a><a href="#location" data-lang-section="zt">交通</a>
     <a href="#lifestyle" data-lang-section="en">Lifestyle</a>
-    <a href="#lifestyle" data-lang-section="ko">라이프스타일</a>
+    <a href="#lifestyle" data-lang-section="ko">라이프스타일</a><a href="#lifestyle" data-lang-section="zh">生活方式</a><a href="#lifestyle" data-lang-section="zt">生活方式</a>
     <a href="#design" data-lang-section="en">Design</a>
-    <a href="#design" data-lang-section="ko">디자인</a>
+    <a href="#design" data-lang-section="ko">디자인</a><a href="#design" data-lang-section="zh">设计</a><a href="#design" data-lang-section="zt">設計</a>
     <a href="#floorplans" data-lang-section="en">Floorplans</a>
-    <a href="#floorplans" data-lang-section="ko">평면도</a>
+    <a href="#floorplans" data-lang-section="ko">평면도</a><a href="#floorplans" data-lang-section="zh">户型图</a><a href="#floorplans" data-lang-section="zt">戶型圖</a>
     <a href="#developer" data-lang-section="en">Developer</a>
-    <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#developer" data-lang-section="ko">시행사</a><a href="#developer" data-lang-section="zh">开发商</a><a href="#developer" data-lang-section="zt">開發商</a>
     <a href="#enquire" data-lang-section="en">Enquire</a>
-    <a href="#enquire" data-lang-section="ko">분양 문의</a>
+    <a href="#enquire" data-lang-section="ko">분양 문의</a><a href="#enquire" data-lang-section="zh">咨询详情</a><a href="#enquire" data-lang-section="zt">諮詢詳情</a>
     <a href="#contact" data-lang-section="en">Contact</a>
-    <a href="#contact" data-lang-section="ko">문의</a>
+    <a href="#contact" data-lang-section="ko">문의</a><a href="#contact" data-lang-section="zh">联系</a><a href="#contact" data-lang-section="zt">聯繫</a>
   </div>
 </nav>
 
@@ -1167,60 +1183,60 @@
         <div class="sec-tag">01 — Welcome</div>
         <h2 class="sec-title">
           <span data-lang-section="en">From your doorstep<br>to <em>everywhere.</em></span>
-          <span data-lang-section="ko">현관에서<br><em>모든 곳으로.</em></span>
+          <span data-lang-section="ko">현관에서<br><em>모든 곳으로.</em></span><span data-lang-section="zh">从家门口<br><em>通往各处。</em></span><span data-lang-section="zt">從家門口<br><em>通往各處。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">A lively and connected community, central to everything the modern cosmopolitan lifestyle demands.</span>
-        <span data-lang-section="ko">현대적 코스모폴리탄 라이프스타일이 요구하는 모든 것의 중심에 자리한, 활기차고 연결된 커뮤니티.</span>
+        <span data-lang-section="ko">현대적 코스모폴리탄 라이프스타일이 요구하는 모든 것의 중심에 자리한, 활기차고 연결된 커뮤니티.</span><span data-lang-section="zh">一个充满活力、四通八达的社区，坐落于当代都会生活所需一切的核心。</span><span data-lang-section="zt">一個充滿活力、四通八達的社區，坐落於當代都會生活所需一切的核心。</span>
       </p>
     </div>
 
     <div class="welcome-grid">
       <div class="welcome-text">
         <p class="lead" data-lang-block="en">The Macquarie Collection sits at the heart of the North Shore's constellation of leisure, retail, business and advanced education centres.</p>
-        <p class="lead" data-lang-block="ko">매쿼리 컬렉션은 노스 쇼어의 레저·리테일·비즈니스·고등교육 중심지가 모인 별자리 한복판에 자리합니다.</p>
+        <p class="lead" data-lang-block="ko">매쿼리 컬렉션은 노스 쇼어의 레저·리테일·비즈니스·고등교육 중심지가 모인 별자리 한복판에 자리합니다.</p><p class="lead" data-lang-block="zh">Macquarie Collection 坐落于北岸休闲、商业、商务与高等教育中心交织而成的星群之中。</p><p class="lead" data-lang-block="zt">Macquarie Collection 坐落於北岸休閒、商業、商務與高等教育中心交織而成的星羣之中。</p>
 
         <p data-lang-block="en">It's a home that keeps you in touch with all the things you need, all the places you love. Stroll <strong>650m to both the new North Ryde and Macquarie Park Metro stations</strong>. Enjoy premier shopping, dining and entertainment at nearby Macquarie Shopping Centre, Chatswood, North Ryde and St Leonards.</p>
         <p data-lang-block="en">Take time out on the peaceful banks of Lane Cove River, or the wine bars and restaurants that populate the leafy North Shore.</p>
 
-        <p data-lang-block="ko">필요한 모든 것, 사랑하는 모든 장소와 연결되는 집입니다. <strong>새로 개통된 노스 라이드역과 매쿼리 파크 메트로역까지 도보 650m</strong>. 인근 매쿼리 쇼핑센터, 채즈우드, 노스 라이드, 세인트 레너즈에서 최고의 쇼핑·다이닝·엔터테인먼트를 즐길 수 있습니다.</p>
-        <p data-lang-block="ko">레인 코브 강변에서 여유를 누리거나, 녹음이 우거진 노스 쇼어의 와인바와 레스토랑을 탐험해보세요.</p>
+        <p data-lang-block="ko">필요한 모든 것, 사랑하는 모든 장소와 연결되는 집입니다. <strong>새로 개통된 노스 라이드역과 매쿼리 파크 메트로역까지 도보 650m</strong>. 인근 매쿼리 쇼핑센터, 채즈우드, 노스 라이드, 세인트 레너즈에서 최고의 쇼핑·다이닝·엔터테인먼트를 즐길 수 있습니다.</p><p data-lang-block="zh">这是一个与你所需一切、所爱之处紧密相连的家。<strong>步行 650 米即达新启用的 North Ryde 站与 Macquarie Park 地铁站</strong>。邻近的 Macquarie Centre、Chatswood、North Ryde 与 St Leonards 汇聚顶尖购物、餐饮与娱乐。</p><p data-lang-block="zt">這是一個與你所需一切、所愛之處緊密相連的家。<strong>步行 650 米即達新啓用的 North Ryde 站與 Macquarie Park 地鐵站</strong>。鄰近的 Macquarie Centre、Chatswood、North Ryde 與 St Leonards 匯聚頂尖購物、餐飲與娛樂。</p>
+        <p data-lang-block="ko">레인 코브 강변에서 여유를 누리거나, 녹음이 우거진 노스 쇼어의 와인바와 레스토랑을 탐험해보세요.</p><p data-lang-block="zh">可在 Lane Cove 河畔悠然放松，或探索绿意盎然的北岸酒吧与餐厅。</p><p data-lang-block="zt">可在 Lane Cove 河畔悠然放鬆，或探索綠意盎然的北岸酒吧與餐廳。</p>
       </div>
 
       <div class="welcome-card">
         <div class="wc-lbl" data-lang-section="en">At a Glance</div>
-        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div>
+        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div><div class="wc-lbl" data-lang-section="zh">一览</div><div class="wc-lbl" data-lang-section="zt">一覽</div>
         <ul class="wc-list">
           <li>
             <div class="lbl" data-lang-block="en">Address</div>
-            <div class="lbl" data-lang-block="ko">주소</div>
+            <div class="lbl" data-lang-block="ko">주소</div><div class="lbl" data-lang-block="zh">地址</div><div class="lbl" data-lang-block="zt">地址</div>
             <div class="val">5 Halifax St<small>Macquarie Park NSW 2113</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Buildings</div>
-            <div class="lbl" data-lang-block="ko">건물</div>
-            <div class="val">2<small data-lang-section="en">Building 1 (Lvl 1–30) · Building 2 (Lvl 1–6)</small><small data-lang-section="ko">빌딩 1 (1–30층) · 빌딩 2 (1–6층)</small></div>
+            <div class="lbl" data-lang-block="ko">건물</div><div class="lbl" data-lang-block="zh">楼宇</div><div class="lbl" data-lang-block="zt">樓宇</div>
+            <div class="val">2<small data-lang-section="en">Building 1 (Lvl 1–30) · Building 2 (Lvl 1–6)</small><small data-lang-section="ko">빌딩 1 (1–30층) · 빌딩 2 (1–6층)</small><small data-lang-section="zh">第 1 栋（1–30 层）· 第 2 栋（1–6 层）</small><small data-lang-section="zt">第 1 棟（1–30 層）· 第 2 棟（1–6 層）</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Apartments</div>
-            <div class="lbl" data-lang-block="ko">세대수</div>
-            <div class="val">52<small data-lang-section="en">1B · 1B+S · 2B · 3B+S</small><small data-lang-section="ko">1베드 · 1베드+서재 · 2베드 · 3베드+서재</small></div>
+            <div class="lbl" data-lang-block="ko">세대수</div><div class="lbl" data-lang-block="zh">户数</div><div class="lbl" data-lang-block="zt">戶數</div>
+            <div class="val">52<small data-lang-section="en">1B · 1B+S · 2B · 3B+S</small><small data-lang-section="ko">1베드 · 1베드+서재 · 2베드 · 3베드+서재</small><small data-lang-section="zh">1 房 · 1 房+书房 · 2 房 · 3 房+书房</small><small data-lang-section="zt">1 房 · 1 房+書房 · 2 房 · 3 房+書房</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Architect</div>
-            <div class="lbl" data-lang-block="ko">건축</div>
-            <div class="val">AJC Architects<small data-lang-section="en">Founded 1956</small><small data-lang-section="ko">1956년 설립</small></div>
+            <div class="lbl" data-lang-block="ko">건축</div><div class="lbl" data-lang-block="zh">建筑设计</div><div class="lbl" data-lang-block="zt">建築設計</div>
+            <div class="val">AJC Architects<small data-lang-section="en">Founded 1956</small><small data-lang-section="ko">1956년 설립</small><small data-lang-section="zh">创立于 1956 年</small><small data-lang-section="zt">創立於 1956 年</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Developer</div>
-            <div class="lbl" data-lang-block="ko">시행사</div>
-            <div class="val">Landmark<small data-lang-section="en">25+ years · 4000+ apartments</small><small data-lang-section="ko">25년 이상 · 4,000세대 이상</small></div>
+            <div class="lbl" data-lang-block="ko">시행사</div><div class="lbl" data-lang-block="zh">开发商</div><div class="lbl" data-lang-block="zt">開發商</div>
+            <div class="val">Landmark<small data-lang-section="en">25+ years · 4000+ apartments</small><small data-lang-section="ko">25년 이상 · 4,000세대 이상</small><small data-lang-section="zh">逾 25 年 · 逾 4,000 户交付</small><small data-lang-section="zt">逾 25 年 · 逾 4,000 戶交付</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Warranty</div>
-            <div class="lbl" data-lang-block="ko">보증</div>
-            <div class="val">10 Years<small data-lang-section="en">Structural (NSW requires 6)</small><small data-lang-section="ko">구조 보증 (NSW 법정 6년)</small></div>
+            <div class="lbl" data-lang-block="ko">보증</div><div class="lbl" data-lang-block="zh">质保</div><div class="lbl" data-lang-block="zt">質保</div>
+            <div class="val">10 Years<small data-lang-section="en">Structural (NSW requires 6)</small><small data-lang-section="ko">구조 보증 (NSW 법정 6년)</small><small data-lang-section="zh">结构质保（NSW 法定为 6 年）</small><small data-lang-section="zt">結構質保（NSW 法定爲 6 年）</small></div>
           </li>
         </ul>
       </div>
@@ -1236,12 +1252,12 @@
         <div class="sec-tag">02 — Macquarie Park</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Australia's<br><em>Silicon Valley.</em></span>
-          <span data-lang-section="ko">호주의<br><em>실리콘 밸리.</em></span>
+          <span data-lang-section="ko">호주의<br><em>실리콘 밸리.</em></span><span data-lang-section="zh">澳洲的<br><em>硅谷。</em></span><span data-lang-section="zt">澳洲的<br><em>硅谷。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Macquarie Park is the fourth-largest employment centre in NSW — a global hub for technology, education, and innovation, ranked amongst Sydney's premier live-work-play precincts.</span>
-        <span data-lang-section="ko">매쿼리 파크는 NSW에서 네 번째로 큰 고용 중심지이자, 시드니 최고의 직주근접 권역으로 꼽히는 기술·교육·혁신의 글로벌 허브입니다.</span>
+        <span data-lang-section="ko">매쿼리 파크는 NSW에서 네 번째로 큰 고용 중심지이자, 시드니 최고의 직주근접 권역으로 꼽히는 기술·교육·혁신의 글로벌 허브입니다.</span><span data-lang-section="zh">Macquarie Park 是 NSW 第四大就业中心，也是悉尼职住最为接近的区域之一，堪称科技、教育与创新的全球枢纽。</span><span data-lang-section="zt">Macquarie Park 是 NSW 第四大就業中心，也是悉尼職住最爲接近的區域之一，堪稱科技、教育與創新的全球樞紐。</span>
       </p>
     </div>
 
@@ -1249,57 +1265,57 @@
       <div class="mp-cell">
         <div class="mp-num">47<small>K+</small></div>
         <div class="mp-lbl" data-lang-section="en">Jobs (2020)</div>
-        <div class="mp-lbl" data-lang-section="ko">일자리 (2020)</div>
+        <div class="mp-lbl" data-lang-section="ko">일자리 (2020)</div><div class="mp-lbl" data-lang-section="zh">就业岗位（2020 年）</div><div class="mp-lbl" data-lang-section="zt">就業崗位（2020 年）</div>
         <div class="mp-desc" data-lang-section="en">Capacity for over 47,000 jobs in NSW.</div>
-        <div class="mp-desc" data-lang-section="ko">NSW에서 47,000개 이상의 일자리 수용.</div>
+        <div class="mp-desc" data-lang-section="ko">NSW에서 47,000개 이상의 일자리 수용.</div><div class="mp-desc" data-lang-section="zh">于 NSW 承载逾 47,000 个岗位。</div><div class="mp-desc" data-lang-section="zt">於 NSW 承載逾 47,000 個崗位。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">$9.5<small>B</small></div>
         <div class="mp-lbl" data-lang-section="en">NSW GDP Contribution</div>
-        <div class="mp-lbl" data-lang-section="ko">NSW GDP 기여</div>
+        <div class="mp-lbl" data-lang-section="ko">NSW GDP 기여</div><div class="mp-lbl" data-lang-section="zh">对 NSW GDP 的贡献</div><div class="mp-lbl" data-lang-section="zt">對 NSW GDP 的貢獻</div>
         <div class="mp-desc" data-lang-section="en">Macquarie Park's economic output in 2018.</div>
-        <div class="mp-desc" data-lang-section="ko">2018년 매쿼리 파크의 경제 기여 규모.</div>
+        <div class="mp-desc" data-lang-section="ko">2018년 매쿼리 파크의 경제 기여 규모.</div><div class="mp-desc" data-lang-section="zh">2018 年 Macquarie Park 的经济贡献规模。</div><div class="mp-desc" data-lang-section="zt">2018 年 Macquarie Park 的經濟貢獻規模。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">20<small>K</small></div>
         <div class="mp-lbl" data-lang-section="en">New Jobs by 2040</div>
-        <div class="mp-lbl" data-lang-section="ko">2040년까지 신규 일자리</div>
+        <div class="mp-lbl" data-lang-section="ko">2040년까지 신규 일자리</div><div class="mp-lbl" data-lang-section="zh">至 2040 年新增岗位</div><div class="mp-lbl" data-lang-section="zt">至 2040 年新增崗位</div>
         <div class="mp-desc" data-lang-section="en">Macquarie Park Place Strategy target.</div>
-        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 플레이스 전략 목표.</div>
+        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 플레이스 전략 목표.</div><div class="mp-desc" data-lang-section="zh">Macquarie Park Place Strategy 目标。</div><div class="mp-desc" data-lang-section="zt">Macquarie Park Place Strategy 目標。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">519<small>%</small></div>
         <div class="mp-lbl" data-lang-section="en">Population Growth to 2046</div>
-        <div class="mp-lbl" data-lang-section="ko">2046년까지 인구 성장</div>
+        <div class="mp-lbl" data-lang-section="ko">2046년까지 인구 성장</div><div class="mp-lbl" data-lang-section="zh">至 2046 年人口增长</div><div class="mp-lbl" data-lang-section="zt">至 2046 年人口增長</div>
         <div class="mp-desc" data-lang-section="en">Forecast for Macquarie Park Station area.</div>
-        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 역 권역 인구 전망.</div>
+        <div class="mp-desc" data-lang-section="ko">매쿼리 파크 역 권역 인구 전망.</div><div class="mp-desc" data-lang-section="zh">Macquarie Park 车站片区人口预测。</div><div class="mp-desc" data-lang-section="zt">Macquarie Park 車站片區人口預測。</div>
       </div>
     </div>
 
     <h3 style="font-family:'Newsreader',serif;font-weight:300;font-size:36px;letter-spacing:-.015em;margin-bottom:32px;">
       <span data-lang-section="en">Key Industries by Workforce</span>
-      <span data-lang-section="ko">주요 산업 분포</span>
+      <span data-lang-section="ko">주요 산업 분포</span><span data-lang-section="zh">主要产业构成</span><span data-lang-section="zt">主要產業構成</span>
     </h3>
     <div class="industries">
       <div class="ind-card">
         <div class="ind-pct">25%</div>
         <div class="ind-name" data-lang-section="en">High Tech & Computing</div>
-        <div class="ind-name" data-lang-section="ko">하이테크 & 컴퓨팅</div>
+        <div class="ind-name" data-lang-section="ko">하이테크 & 컴퓨팅</div><div class="ind-name" data-lang-section="zh">高新科技与计算</div><div class="ind-name" data-lang-section="zt">高新科技與計算</div>
       </div>
       <div class="ind-card">
         <div class="ind-pct">20%</div>
         <div class="ind-name" data-lang-section="en">Electronics</div>
-        <div class="ind-name" data-lang-section="ko">전자</div>
+        <div class="ind-name" data-lang-section="ko">전자</div><div class="ind-name" data-lang-section="zh">电子</div><div class="ind-name" data-lang-section="zt">電子</div>
       </div>
       <div class="ind-card">
         <div class="ind-pct">19%</div>
         <div class="ind-name" data-lang-section="en">Pharmaceuticals</div>
-        <div class="ind-name" data-lang-section="ko">제약</div>
+        <div class="ind-name" data-lang-section="ko">제약</div><div class="ind-name" data-lang-section="zh">制药</div><div class="ind-name" data-lang-section="zt">製藥</div>
       </div>
       <div class="ind-card">
         <div class="ind-pct">7%</div>
         <div class="ind-name" data-lang-section="en">Telecommunications</div>
-        <div class="ind-name" data-lang-section="ko">통신</div>
+        <div class="ind-name" data-lang-section="ko">통신</div><div class="ind-name" data-lang-section="zh">通信</div><div class="ind-name" data-lang-section="zt">通信</div>
       </div>
     </div>
 
@@ -1326,9 +1342,9 @@
   <img src="./assets/macquarie-collection/aerial.jpg" alt="Aerial view of Macquarie Park showing The Macquarie Collection's position relative to Chatswood, Lane Cove National Park, Sydney CBD, and Macquarie University" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">Macquarie Park · Aerial</span>
-    <span class="mc-tag" data-lang-section="ko">매쿼리 파크 · 항공</span>
+    <span class="mc-tag" data-lang-section="ko">매쿼리 파크 · 항공</span><span class="mc-tag" data-lang-section="zh">Macquarie Park · 鸟瞰</span><span class="mc-tag" data-lang-section="zt">Macquarie Park · 鳥瞰</span>
     <span class="mc-cap" data-lang-section="en">"A constellation of leisure, retail, business, and education — all within reach."</span>
-    <span class="mc-cap" data-lang-section="ko">"레저·리테일·비즈니스·교육이 한 권역에."</span>
+    <span class="mc-cap" data-lang-section="ko">"레저·리테일·비즈니스·교육이 한 권역에."</span><span class="mc-cap" data-lang-section="zh">「休闲、商业、商务与教育汇于一区。」</span><span class="mc-cap" data-lang-section="zt">「休閒、商業、商務與教育匯於一區。」</span>
   </figcaption>
 </figure>
 
@@ -1340,12 +1356,12 @@
         <div class="sec-tag">03 — Connectivity</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Live in<br>a <em>gateway.</em></span>
-          <span data-lang-section="ko">관문에<br><em>살다.</em></span>
+          <span data-lang-section="ko">관문에<br><em>살다.</em></span><span data-lang-section="zh">居于<br><em>门户之地。</em></span><span data-lang-section="zt">居於<br><em>門戶之地。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">A connected hub of trains, Metro and bus — the choice is yours. Just 650m to both North Ryde and Macquarie Park Metro stations.</span>
-        <span data-lang-section="ko">기차·메트로·버스가 연결된 허브 — 선택은 당신의 몫. 노스 라이드역과 매쿼리 파크 메트로역까지 단 650m.</span>
+        <span data-lang-section="ko">기차·메트로·버스가 연결된 허브 — 선택은 당신의 몫. 노스 라이드역과 매쿼리 파크 메트로역까지 단 650m.</span><span data-lang-section="zh">火车、地铁与巴士交汇的枢纽 —— 出行方式由你选择。距 North Ryde 站与 Macquarie Park 地铁站仅 650 米。</span><span data-lang-section="zt">火車、地鐵與巴士交匯的樞紐 —— 出行方式由你選擇。距 North Ryde 站與 Macquarie Park 地鐵站僅 650 米。</span>
       </p>
     </div>
 
@@ -1353,16 +1369,16 @@
       <div class="loc-meta-card">
         <div class="loc-mc-big">650<small>m</small></div>
         <div class="loc-mc-lbl" data-lang-section="en">To Two Metro Stations</div>
-        <div class="loc-mc-lbl" data-lang-section="ko">두 개의 메트로역까지</div>
+        <div class="loc-mc-lbl" data-lang-section="ko">두 개의 메트로역까지</div><div class="loc-mc-lbl" data-lang-section="zh">至两座地铁站</div><div class="loc-mc-lbl" data-lang-section="zt">至兩座地鐵站</div>
         <div class="loc-mc-desc" data-lang-section="en">Walk to either North Ryde Station or Macquarie Park Station in under 9 minutes — the rare position of having two Metro lines within walking distance.</div>
-        <div class="loc-mc-desc" data-lang-section="ko">노스 라이드역 또는 매쿼리 파크역까지 도보 9분 이내 — 도보 거리에 두 개의 메트로역을 둔 흔치 않은 입지.</div>
+        <div class="loc-mc-desc" data-lang-section="ko">노스 라이드역 또는 매쿼리 파크역까지 도보 9분 이내 — 도보 거리에 두 개의 메트로역을 둔 흔치 않은 입지.</div><div class="loc-mc-desc" data-lang-section="zh">步行 9 分钟内可达 North Ryde 站或 Macquarie Park 站 —— 步行范围内坐拥两座地铁站的稀有区位。</div><div class="loc-mc-desc" data-lang-section="zt">步行 9 分鐘內可達 North Ryde 站或 Macquarie Park 站 —— 步行範圍內坐擁兩座地鐵站的稀有區位。</div>
       </div>
       <div class="loc-meta-card">
         <div class="loc-mc-big">$200<small>M</small></div>
         <div class="loc-mc-lbl" data-lang-section="en">Transport Investment</div>
-        <div class="loc-mc-lbl" data-lang-section="ko">교통 인프라 투자</div>
+        <div class="loc-mc-lbl" data-lang-section="ko">교통 인프라 투자</div><div class="loc-mc-lbl" data-lang-section="zh">交通基建投资</div><div class="loc-mc-lbl" data-lang-section="zt">交通基建投資</div>
         <div class="loc-mc-desc" data-lang-section="en">Australian and NSW Governments are investing nearly $200 million to upgrade Macquarie Park transport — including bus interchange upgrades and 165 new electric buses.</div>
-        <div class="loc-mc-desc" data-lang-section="ko">호주 연방 정부와 NSW 정부가 매쿼리 파크 교통 인프라 개선에 약 2억 달러 투자 — 버스 환승센터 업그레이드, 165대의 신규 전기버스 포함.</div>
+        <div class="loc-mc-desc" data-lang-section="ko">호주 연방 정부와 NSW 정부가 매쿼리 파크 교통 인프라 개선에 약 2억 달러 투자 — 버스 환승센터 업그레이드, 165대의 신규 전기버스 포함.</div><div class="loc-mc-desc" data-lang-section="zh">澳洲联邦政府与 NSW 政府投入约 2 亿澳元改善 Macquarie Park 交通基建 —— 包含巴士转乘中心升级及 165 辆全新电动巴士。</div><div class="loc-mc-desc" data-lang-section="zt">澳洲聯邦政府與 NSW 政府投入約 2 億澳元改善 Macquarie Park 交通基建 —— 包含巴士轉乘中心升級及 165 輛全新電動巴士。</div>
       </div>
     </div>
 
@@ -1371,9 +1387,9 @@
         <div class="stop-time">2<small>min</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">Macquarie University</div>
-          <div class="stop-name" data-lang-block="ko">매쿼리 대학교</div>
+          <div class="stop-name" data-lang-block="ko">매쿼리 대학교</div><div class="stop-name" data-lang-block="zh">麦考瑞大学</div><div class="stop-name" data-lang-block="zt">麥考瑞大學</div>
           <div class="stop-via" data-lang-block="en">One stop on the Metro</div>
-          <div class="stop-via" data-lang-block="ko">메트로 한 정거장</div>
+          <div class="stop-via" data-lang-block="ko">메트로 한 정거장</div><div class="stop-via" data-lang-block="zh">地铁一站</div><div class="stop-via" data-lang-block="zt">地鐵一站</div>
         </div>
         <div></div>
         <div class="stop-mode">Metro</div>
@@ -1382,9 +1398,9 @@
         <div class="stop-time">5<small>min</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">Chatswood Chase</div>
-          <div class="stop-name" data-lang-block="ko">채즈우드 체이스</div>
+          <div class="stop-name" data-lang-block="ko">채즈우드 체이스</div><div class="stop-name" data-lang-block="zh">Chatswood Chase</div><div class="stop-name" data-lang-block="zt">Chatswood Chase</div>
           <div class="stop-via" data-lang-block="en">Luxury shopping precinct via Metro</div>
-          <div class="stop-via" data-lang-block="ko">럭셔리 쇼핑 권역, 메트로 이용</div>
+          <div class="stop-via" data-lang-block="ko">럭셔리 쇼핑 권역, 메트로 이용</div><div class="stop-via" data-lang-block="zh">奢华购物区，地铁可达</div><div class="stop-via" data-lang-block="zt">奢華購物區，地鐵可達</div>
         </div>
         <div></div>
         <div class="stop-mode">Metro</div>
@@ -1393,9 +1409,9 @@
         <div class="stop-time">8<small>min</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">North Sydney CBD</div>
-          <div class="stop-name" data-lang-block="ko">노스 시드니 CBD</div>
+          <div class="stop-name" data-lang-block="ko">노스 시드니 CBD</div><div class="stop-name" data-lang-block="zh">北悉尼 CBD</div><div class="stop-name" data-lang-block="zt">北悉尼 CBD</div>
           <div class="stop-via" data-lang-block="en">Via Metro</div>
-          <div class="stop-via" data-lang-block="ko">메트로 이용</div>
+          <div class="stop-via" data-lang-block="ko">메트로 이용</div><div class="stop-via" data-lang-block="zh">地铁可达</div><div class="stop-via" data-lang-block="zt">地鐵可達</div>
         </div>
         <div></div>
         <div class="stop-mode">Metro</div>
@@ -1404,9 +1420,9 @@
         <div class="stop-time">15<small>min</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">Sydney CBD (Barangaroo / Martin Place)</div>
-          <div class="stop-name" data-lang-block="ko">시드니 CBD (바랑가루 / 마틴 플레이스)</div>
+          <div class="stop-name" data-lang-block="ko">시드니 CBD (바랑가루 / 마틴 플레이스)</div><div class="stop-name" data-lang-block="zh">悉尼 CBD（Barangaroo / Martin Place）</div><div class="stop-name" data-lang-block="zt">悉尼 CBD（Barangaroo / Martin Place）</div>
           <div class="stop-via" data-lang-block="en">Direct Metro line</div>
-          <div class="stop-via" data-lang-block="ko">메트로 직통 라인</div>
+          <div class="stop-via" data-lang-block="ko">메트로 직통 라인</div><div class="stop-via" data-lang-block="zh">地铁直达线路</div><div class="stop-via" data-lang-block="zt">地鐵直達線路</div>
         </div>
         <div></div>
         <div class="stop-mode">Metro</div>
@@ -1415,9 +1431,9 @@
         <div class="stop-time">10<small>min</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">Lane Cove National Park</div>
-          <div class="stop-name" data-lang-block="ko">레인 코브 국립공원</div>
+          <div class="stop-name" data-lang-block="ko">레인 코브 국립공원</div><div class="stop-name" data-lang-block="zh">Lane Cove 国家公园</div><div class="stop-name" data-lang-block="zt">Lane Cove 國家公園</div>
           <div class="stop-via" data-lang-block="en">By car — bushland, river & picnic grounds</div>
-          <div class="stop-via" data-lang-block="ko">자동차 — 부시랜드·강·피크닉장</div>
+          <div class="stop-via" data-lang-block="ko">자동차 — 부시랜드·강·피크닉장</div><div class="stop-via" data-lang-block="zh">驾车 —— 原野、河流与野餐地</div><div class="stop-via" data-lang-block="zt">駕車 —— 原野、河流與野餐地</div>
         </div>
         <div></div>
         <div class="stop-mode">Drive</div>
@@ -1426,9 +1442,9 @@
         <div class="stop-time">30<small>+</small></div>
         <div>
           <div class="stop-name" data-lang-block="en">Bus Routes Servicing the Area</div>
-          <div class="stop-name" data-lang-block="ko">지역 운행 버스 노선</div>
+          <div class="stop-name" data-lang-block="ko">지역 운행 버스 노선</div><div class="stop-name" data-lang-block="zh">区内运行的巴士线路</div><div class="stop-name" data-lang-block="zt">區內運行的巴士線路</div>
           <div class="stop-via" data-lang-block="en">M2 Motorway · Lane Cove Rd · Epping Rd · Delhi Rd</div>
-          <div class="stop-via" data-lang-block="ko">M2 모터웨이 · 레인 코브 로드 · 에핑 로드 · 델리 로드</div>
+          <div class="stop-via" data-lang-block="ko">M2 모터웨이 · 레인 코브 로드 · 에핑 로드 · 델리 로드</div><div class="stop-via" data-lang-block="zh">M2 高速公路 · Lane Cove Road · Epping Road · Delhi Road</div><div class="stop-via" data-lang-block="zt">M2 高速公路 · Lane Cove Road · Epping Road · Delhi Road</div>
         </div>
         <div></div>
         <div class="stop-mode">Bus</div>
@@ -1445,12 +1461,12 @@
         <div class="sec-tag">04 — Lifestyle</div>
         <h2 class="sec-title">
           <span data-lang-section="en">A hub of<br><em>everything.</em></span>
-          <span data-lang-section="ko">모든 것의<br><em>중심지.</em></span>
+          <span data-lang-section="ko">모든 것의<br><em>중심지.</em></span><span data-lang-section="zh">万象<br><em>之中心。</em></span><span data-lang-section="zt">萬象<br><em>之中心。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Close to everything — rapid commuting, majestic parklands, destination dining and shopping, world-class education, and one of Australia's most influential innovation hubs.</span>
-        <span data-lang-section="ko">모든 것이 가까운 곳 — 빠른 통근, 장엄한 공원, 명소 다이닝과 쇼핑, 세계적 수준의 교육, 그리고 호주에서 가장 영향력 있는 혁신 허브 중 하나.</span>
+        <span data-lang-section="ko">모든 것이 가까운 곳 — 빠른 통근, 장엄한 공원, 명소 다이닝과 쇼핑, 세계적 수준의 교육, 그리고 호주에서 가장 영향력 있는 혁신 허브 중 하나.</span><span data-lang-section="zh">一切近在咫尺 —— 快捷通勤、壮阔公园、名店餐饮与购物、世界级教育，以及澳洲最具影响力的创新枢纽之一。</span><span data-lang-section="zt">一切近在咫尺 —— 快捷通勤、壯闊公園、名店餐飲與購物、世界級教育，以及澳洲最具影響力的創新樞紐之一。</span>
       </p>
     </div>
 
@@ -1459,9 +1475,9 @@
         <div class="ls-num">01 · The Village Next Door</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Lachlan's Square Village.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">래클런 스퀘어 빌리지.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">래클런 스퀘어 빌리지.</h3><h3 class="ls-headline" data-lang-block="zh">Lachlan's Square Village。</h3><h3 class="ls-headline" data-lang-block="zt">Lachlan's Square Village。</h3>
           <p class="ls-body" data-lang-block="en">Your neighbourhood one-stop-shop — Coles, Liquorland, medical centre, chemist, gym, childcare, cafés, and an outdoor amphitheatre — all on your doorstep.</p>
-          <p class="ls-body" data-lang-block="ko">현관 앞의 원스톱 동네 광장 — 콜스, 리커랜드, 진료소, 약국, 헬스장, 보육시설, 카페, 야외 원형극장까지 모두 도보권 내에 있습니다.</p>
+          <p class="ls-body" data-lang-block="ko">현관 앞의 원스톱 동네 광장 — 콜스, 리커랜드, 진료소, 약국, 헬스장, 보육시설, 카페, 야외 원형극장까지 모두 도보권 내에 있습니다.</p><p class="ls-body" data-lang-block="zh">家门口的一站式社区广场 —— Coles、Liquorland、诊所、药房、健身房、托儿中心、咖啡馆与户外圆形剧场，皆在步行范围内。</p><p class="ls-body" data-lang-block="zt">家門口的一站式社區廣場 —— Coles、Liquorland、診所、藥房、健身房、托兒中心、咖啡館與戶外圓形劇場，皆在步行範圍內。</p>
         </div>
       </div>
 
@@ -1469,9 +1485,9 @@
         <div class="ls-num">02 · Shopping</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Macquarie Centre.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">매쿼리 센터.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">매쿼리 센터.</h3><h3 class="ls-headline" data-lang-block="zh">Macquarie Centre。</h3><h3 class="ls-headline" data-lang-block="zt">Macquarie Centre。</h3>
           <p class="ls-body" data-lang-block="en">Premier shopping mall with K-Mart, Aesop, Apple, Macquarie Ice Rink and over 350 stores — Sydney's North Shore retail crown.</p>
-          <p class="ls-body" data-lang-block="ko">K-Mart, 이솝, 애플, 매쿼리 아이스링크, 350개 이상의 매장이 있는 프리미어 쇼핑몰 — 시드니 노스 쇼어 리테일의 왕관.</p>
+          <p class="ls-body" data-lang-block="ko">K-Mart, 이솝, 애플, 매쿼리 아이스링크, 350개 이상의 매장이 있는 프리미어 쇼핑몰 — 시드니 노스 쇼어 리테일의 왕관.</p><p class="ls-body" data-lang-block="zh">汇聚 Kmart、Aesop、Apple、Macquarie 溜冰场及逾 350 家店铺的顶级购物中心 —— 悉尼北岸零售的桂冠之作。</p><p class="ls-body" data-lang-block="zt">匯聚 Kmart、Aesop、Apple、Macquarie 溜冰場及逾 350 家店鋪的頂級購物中心 —— 悉尼北岸零售的桂冠之作。</p>
         </div>
       </div>
 
@@ -1479,9 +1495,9 @@
         <div class="ls-num">03 · Education</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Top 1% University.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">세계 상위 1% 대학.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">세계 상위 1% 대학.</h3><h3 class="ls-headline" data-lang-block="zh">世界前 1% 大学。</h3><h3 class="ls-headline" data-lang-block="zt">世界前 1% 大學。</h3>
           <p class="ls-body" data-lang-block="en">Macquarie University ranks in the top 1% of universities worldwide — a sprawling campus with cutting-edge research facilities and industry partnerships.</p>
-          <p class="ls-body" data-lang-block="ko">매쿼리 대학교는 세계 상위 1%의 대학 — 최첨단 연구시설과 산업체 협력 파트너십을 갖춘 광활한 캠퍼스.</p>
+          <p class="ls-body" data-lang-block="ko">매쿼리 대학교는 세계 상위 1%의 대학 — 최첨단 연구시설과 산업체 협력 파트너십을 갖춘 광활한 캠퍼스.</p><p class="ls-body" data-lang-block="zh">麦考瑞大学位列世界前 1% —— 拥有广阔校园、尖端研究设施与产业合作伙伴关系。</p><p class="ls-body" data-lang-block="zt">麥考瑞大學位列世界前 1% —— 擁有廣闊校園、尖端研究設施與產業合作伙伴關係。</p>
         </div>
       </div>
 
@@ -1489,9 +1505,9 @@
         <div class="ls-num">04 · Nature</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Lane Cove National Park.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">레인 코브 국립공원.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">레인 코브 국립공원.</h3><h3 class="ls-headline" data-lang-block="zh">Lane Cove 国家公园。</h3><h3 class="ls-headline" data-lang-block="zt">Lane Cove 國家公園。</h3>
           <p class="ls-body" data-lang-block="en">A peaceful retreat of bushland, river banks and picnic grounds — minutes away. Plus Eden Gardens, Macquarie Park's abundant green spaces and the Ryde Aquatic Centre.</p>
-          <p class="ls-body" data-lang-block="ko">부시랜드, 강변, 피크닉 명소가 어우러진 평화로운 휴식처 — 단 몇 분 거리. 에덴 가든스와 라이드 아쿠아틱 센터도 함께.</p>
+          <p class="ls-body" data-lang-block="ko">부시랜드, 강변, 피크닉 명소가 어우러진 평화로운 휴식처 — 단 몇 분 거리. 에덴 가든스와 라이드 아쿠아틱 센터도 함께.</p><p class="ls-body" data-lang-block="zh">原野、河岸与野餐胜地交织的静谧憩所 —— 仅数分钟车程。另有 Eden Gardens 与 Ryde Aquatic Centre。</p><p class="ls-body" data-lang-block="zt">原野、河岸與野餐勝地交織的靜謐憩所 —— 僅數分鐘車程。另有 Eden Gardens 與 Ryde Aquatic Centre。</p>
         </div>
       </div>
 
@@ -1499,9 +1515,9 @@
         <div class="ls-num">05 · Dining</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Restaurant Capital.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">레스토랑 캐피털.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">레스토랑 캐피털.</h3><h3 class="ls-headline" data-lang-block="zh">餐饮之都。</h3><h3 class="ls-headline" data-lang-block="zt">餐飲之都。</h3>
           <p class="ls-body" data-lang-block="en">Verace Pizzeria, Mama Mulan, Kin by Us, Senpai Ramen, PAFU, Manpuku, Hawkers Lane at Chatswood — international fusion and top chefs at your doorstep.</p>
-          <p class="ls-body" data-lang-block="ko">베라체 피체리아, 마마 물란, 킨 바이 어스, 센파이 라멘, PAFU, 만푸쿠, 채즈우드 호커스 레인 — 인터내셔널 퓨전과 최고의 셰프들이 현관 앞에.</p>
+          <p class="ls-body" data-lang-block="ko">베라체 피체리아, 마마 물란, 킨 바이 어스, 센파이 라멘, PAFU, 만푸쿠, 채즈우드 호커스 레인 — 인터내셔널 퓨전과 최고의 셰프들이 현관 앞에.</p><p class="ls-body" data-lang-block="zh">Verace Pizzeria、Mama Mulan、Kirin by Us、Senpai Ramen、PAFU、Manpuku、Chatswood Hawker Lane —— 国际融合料理与顶尖主厨就在家门口。</p><p class="ls-body" data-lang-block="zt">Verace Pizzeria、Mama Mulan、Kirin by Us、Senpai Ramen、PAFU、Manpuku、Chatswood Hawker Lane —— 國際融合料理與頂尖主廚就在家門口。</p>
         </div>
       </div>
 
@@ -1509,9 +1525,9 @@
         <div class="ls-num">06 · Connection</div>
         <div>
           <h3 class="ls-headline" data-lang-block="en">Lower North Shore Access.</h3>
-          <h3 class="ls-headline" data-lang-block="ko">로어 노스 쇼어 연결성.</h3>
+          <h3 class="ls-headline" data-lang-block="ko">로어 노스 쇼어 연결성.</h3><h3 class="ls-headline" data-lang-block="zh">畅达下北岸。</h3><h3 class="ls-headline" data-lang-block="zt">暢達下北岸。</h3>
           <p class="ls-body" data-lang-block="en">A few Metro stops away are Crows Nest Village, St Leonards dining, and Chatswood Chase luxury. Plus M2 Motorway access to the rest of Sydney.</p>
-          <p class="ls-body" data-lang-block="ko">메트로 몇 정거장이면 크로우즈 네스트 빌리지, 세인트 레너즈 다이닝, 채즈우드 체이스 럭셔리 쇼핑. 또한 M2 모터웨이로 시드니 전역과 연결.</p>
+          <p class="ls-body" data-lang-block="ko">메트로 몇 정거장이면 크로우즈 네스트 빌리지, 세인트 레너즈 다이닝, 채즈우드 체이스 럭셔리 쇼핑. 또한 M2 모터웨이로 시드니 전역과 연결.</p><p class="ls-body" data-lang-block="zh">地铁数站即达 Crows Nest Village、St Leonards 美食街与 Chatswood Chase 奢华购物。M2 高速公路亦连通悉尼各区。</p><p class="ls-body" data-lang-block="zt">地鐵數站即達 Crows Nest Village、St Leonards 美食街與 Chatswood Chase 奢華購物。M2 高速公路亦連通悉尼各區。</p>
         </div>
       </div>
     </div>
@@ -1523,9 +1539,9 @@
   <img src="./assets/macquarie-collection/rooftop.jpg" alt="Rooftop terrace rendering with communal dining tables, BBQ, and landscaped gardens" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">Rooftop · Communal</span>
-    <span class="mc-tag" data-lang-section="ko">옥상 · 공용 공간</span>
+    <span class="mc-tag" data-lang-section="ko">옥상 · 공용 공간</span><span class="mc-tag" data-lang-section="zh">屋顶 · 公共空间</span><span class="mc-tag" data-lang-section="zt">屋頂 · 公共空間</span>
     <span class="mc-cap" data-lang-section="en">"Indoor and outdoor life blend — architecture, nature, and modern living in harmony."</span>
-    <span class="mc-cap" data-lang-section="ko">"실내와 야외의 경계가 사라지는 곳."</span>
+    <span class="mc-cap" data-lang-section="ko">"실내와 야외의 경계가 사라지는 곳."</span><span class="mc-cap" data-lang-section="zh">「室内与户外界线消融之处。」</span><span class="mc-cap" data-lang-section="zt">「室內與戶外界線消融之處。」</span>
   </figcaption>
 </figure>
 
@@ -1537,25 +1553,25 @@
         <div class="sec-tag">05 — The Architecture</div>
         <h2 class="sec-title">
           <span data-lang-section="en">A sanctuary<br>with <em>urban edge.</em></span>
-          <span data-lang-section="ko">도시적 감각의<br><em>안식처.</em></span>
+          <span data-lang-section="ko">도시적 감각의<br><em>안식처.</em></span><span data-lang-section="zh">都会格调的<br><em>栖居之所。</em></span><span data-lang-section="zt">都會格調的<br><em>棲居之所。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">The Macquarie Collection re-envisions modern living with residences interwoven with the natural world. Two buildings designed to foster a welcoming sense of community.</span>
-        <span data-lang-section="ko">매쿼리 컬렉션은 자연과 어우러진 주거를 통해 현대적 라이프스타일을 재해석합니다. 두 개의 건물이 환영의 커뮤니티 감각을 조성하도록 설계되었습니다.</span>
+        <span data-lang-section="ko">매쿼리 컬렉션은 자연과 어우러진 주거를 통해 현대적 라이프스타일을 재해석합니다. 두 개의 건물이 환영의 커뮤니티 감각을 조성하도록 설계되었습니다.</span><span data-lang-section="zh">Macquarie Collection 以融入自然的居住方式重新诠释当代生活。两栋楼宇的布局旨在营造温暖的社区归属感。</span><span data-lang-section="zt">Macquarie Collection 以融入自然的居住方式重新詮釋當代生活。兩棟樓宇的佈局旨在營造溫暖的社區歸屬感。</span>
       </p>
     </div>
 
     <div class="design-grid">
       <div class="design-text">
         <p class="lead" data-lang-block="en">Across the buildings, communal spaces blend indoor and outdoor life. From its leafy green park, double-height entry lobbies, roof terraces, and sky gardens there is connection to nature everywhere.</p>
-        <p class="lead" data-lang-block="ko">두 건물 전체에 걸쳐 공용 공간이 실내와 야외 생활을 자연스럽게 잇습니다. 녹음이 우거진 정원, 더블 하이트 로비, 루프테라스, 스카이가든 곳곳에서 자연과의 연결이 살아 있습니다.</p>
+        <p class="lead" data-lang-block="ko">두 건물 전체에 걸쳐 공용 공간이 실내와 야외 생활을 자연스럽게 잇습니다. 녹음이 우거진 정원, 더블 하이트 로비, 루프테라스, 스카이가든 곳곳에서 자연과의 연결이 살아 있습니다.</p><p class="lead" data-lang-block="zh">两栋楼宇的公共空间将室内与户外生活自然衔接。绿意盎然的花园、挑高大堂、屋顶露台与空中花园，处处延续着与自然的联结。</p><p class="lead" data-lang-block="zt">兩棟樓宇的公共空間將室內與戶外生活自然銜接。綠意盎然的花園、挑高大堂、屋頂露臺與空中花園，處處延續着與自然的聯結。</p>
 
         <p data-lang-block="en">On the sunny northeast corner, beautifully landscaped open space is your own <strong>'urban backyard.'</strong> Open-plan kitchens and eat-in islands invite people to gather, with timeless finishes blending into the living areas.</p>
         <p data-lang-block="en">Floor-to-ceiling windows frame the views while spacious balconies form natural extensions of the living areas. The collection of one, two and three bedroom <strong>climate-controlled apartments</strong> are perfectly oriented to draw in breezes, sunlight and views.</p>
 
-        <p data-lang-block="ko">햇살이 잘 드는 북동쪽 코너에 자리한 아름답게 조성된 야외 공간은 <strong>'어반 백야드'</strong> — 나만의 도시 속 정원입니다. 오픈 플랜 키친과 아일랜드 식탁이 사람들을 모이게 하고, 시대를 초월한 마감재가 거실로 이어집니다.</p>
-        <p data-lang-block="ko">바닥에서 천장까지 이어지는 창이 풍경을 액자처럼 담아내며, 넓은 발코니는 거실의 자연스러운 확장입니다. 1·2·3베드룸 <strong>기후 제어 아파트</strong>는 산들바람, 햇빛, 전망을 최대한 끌어들이도록 완벽하게 배치되었습니다.</p>
+        <p data-lang-block="ko">햇살이 잘 드는 북동쪽 코너에 자리한 아름답게 조성된 야외 공간은 <strong>'어반 백야드'</strong> — 나만의 도시 속 정원입니다. 오픈 플랜 키친과 아일랜드 식탁이 사람들을 모이게 하고, 시대를 초월한 마감재가 거실로 이어집니다.</p><p data-lang-block="zh">位于阳光充沛的东北角、精心营造的户外空间即是<strong>「都会后院」</strong> —— 属于你的城市花园。开放式厨房与岛台将人们聚拢，隽永的饰面一路延伸至起居空间。</p><p data-lang-block="zt">位於陽光充沛的東北角、精心營造的戶外空間即是<strong>「都會後院」</strong> —— 屬於你的城市花園。開放式廚房與島臺將人們聚攏，雋永的飾面一路延伸至起居空間。</p>
+        <p data-lang-block="ko">바닥에서 천장까지 이어지는 창이 풍경을 액자처럼 담아내며, 넓은 발코니는 거실의 자연스러운 확장입니다. 1·2·3베드룸 <strong>기후 제어 아파트</strong>는 산들바람, 햇빛, 전망을 최대한 끌어들이도록 완벽하게 배치되었습니다.</p><p data-lang-block="zh">通顶落地窗将风景框入画中，宽敞阳台则是起居空间的自然延展。1 房、2 房与 3 房<strong>恒温公寓</strong>经过完美布局，最大限度引入微风、阳光与景观。</p><p data-lang-block="zt">通頂落地窗將風景框入畫中，寬敞陽臺則是起居空間的自然延展。1 房、2 房與 3 房<strong>恆溫公寓</strong>經過完美佈局，最大限度引入微風、陽光與景觀。</p>
       </div>
 
       <ul class="feature-list">
@@ -1563,63 +1579,63 @@
           <div class="ico">i.</div>
           <div>
             <h4 data-lang-block="en">Climate-controlled comfort</h4>
-            <h4 data-lang-block="ko">기후 제어 시스템</h4>
+            <h4 data-lang-block="ko">기후 제어 시스템</h4><h4 data-lang-block="zh">恒温调控系统</h4><h4 data-lang-block="zt">恆溫調控系統</h4>
             <p data-lang-block="en">Year-round indoor climate control across all apartments.</p>
-            <p data-lang-block="ko">사계절 내내 일정한 실내 환경을 유지하는 시스템.</p>
+            <p data-lang-block="ko">사계절 내내 일정한 실내 환경을 유지하는 시스템.</p><p data-lang-block="zh">四季维持稳定室内环境的系统。</p><p data-lang-block="zt">四季維持穩定室內環境的系統。</p>
           </div>
         </li>
         <li>
           <div class="ico">ii.</div>
           <div>
             <h4 data-lang-block="en">Open-plan kitchens & islands</h4>
-            <h4 data-lang-block="ko">오픈플랜 키친 & 아일랜드</h4>
+            <h4 data-lang-block="ko">오픈플랜 키친 & 아일랜드</h4><h4 data-lang-block="zh">开放式厨房与岛台</h4><h4 data-lang-block="zt">開放式廚房與島臺</h4>
             <p data-lang-block="en">Eat-in islands with timeless finishes designed for gathering.</p>
-            <p data-lang-block="ko">사람들이 모일 수 있도록 설계된 식사 가능한 아일랜드와 시대를 초월한 마감재.</p>
+            <p data-lang-block="ko">사람들이 모일 수 있도록 설계된 식사 가능한 아일랜드와 시대를 초월한 마감재.</p><p data-lang-block="zh">可供用餐的岛台与隽永饰面，为聚会而设计。</p><p data-lang-block="zt">可供用餐的島臺與雋永飾面，爲聚會而設計。</p>
           </div>
         </li>
         <li>
           <div class="ico">iii.</div>
           <div>
             <h4 data-lang-block="en">Floor-to-ceiling windows</h4>
-            <h4 data-lang-block="ko">전면 통창</h4>
+            <h4 data-lang-block="ko">전면 통창</h4><h4 data-lang-block="zh">通顶落地窗</h4><h4 data-lang-block="zt">通頂落地窗</h4>
             <p data-lang-block="en">Frame the views and maximise natural light.</p>
-            <p data-lang-block="ko">전망을 액자처럼 담아내고 자연광을 극대화합니다.</p>
+            <p data-lang-block="ko">전망을 액자처럼 담아내고 자연광을 극대화합니다.</p><p data-lang-block="zh">将景观框入画中，最大化自然采光。</p><p data-lang-block="zt">將景觀框入畫中，最大化自然採光。</p>
           </div>
         </li>
         <li>
           <div class="ico">iv.</div>
           <div>
             <h4 data-lang-block="en">Spacious balconies</h4>
-            <h4 data-lang-block="ko">넓은 발코니</h4>
+            <h4 data-lang-block="ko">넓은 발코니</h4><h4 data-lang-block="zh">宽敞阳台</h4><h4 data-lang-block="zt">寬敞陽臺</h4>
             <p data-lang-block="en">Form natural extensions of the living areas.</p>
-            <p data-lang-block="ko">거실의 자연스러운 연장 공간.</p>
+            <p data-lang-block="ko">거실의 자연스러운 연장 공간.</p><p data-lang-block="zh">起居空间的自然延展。</p><p data-lang-block="zt">起居空間的自然延展。</p>
           </div>
         </li>
         <li>
           <div class="ico">v.</div>
           <div>
             <h4 data-lang-block="en">Rooftop terraces & sky gardens</h4>
-            <h4 data-lang-block="ko">루프테라스 & 스카이 가든</h4>
+            <h4 data-lang-block="ko">루프테라스 & 스카이 가든</h4><h4 data-lang-block="zh">屋顶露台与空中花园</h4><h4 data-lang-block="zt">屋頂露臺與空中花園</h4>
             <p data-lang-block="en">Communal spaces for barbecues and contemplation.</p>
-            <p data-lang-block="ko">바비큐와 휴식을 위한 공용 공간.</p>
+            <p data-lang-block="ko">바비큐와 휴식을 위한 공용 공간.</p><p data-lang-block="zh">供烧烤与休憩的公共空间。</p><p data-lang-block="zt">供燒烤與休憩的公共空間。</p>
           </div>
         </li>
         <li>
           <div class="ico">vi.</div>
           <div>
             <h4 data-lang-block="en">Double-height lobbies</h4>
-            <h4 data-lang-block="ko">더블 하이트 로비</h4>
+            <h4 data-lang-block="ko">더블 하이트 로비</h4><h4 data-lang-block="zh">挑高大堂</h4><h4 data-lang-block="zt">挑高大堂</h4>
             <p data-lang-block="en">Grand entry experiences with leafy green park surrounds.</p>
-            <p data-lang-block="ko">녹음이 어우러진 웅장한 입주 경험.</p>
+            <p data-lang-block="ko">녹음이 어우러진 웅장한 입주 경험.</p><p data-lang-block="zh">绿意环绕的气派入户体验。</p><p data-lang-block="zt">綠意環繞的氣派入戶體驗。</p>
           </div>
         </li>
         <li>
           <div class="ico">vii.</div>
           <div>
             <h4 data-lang-block="en">Storage included</h4>
-            <h4 data-lang-block="ko">기본 제공 창고</h4>
+            <h4 data-lang-block="ko">기본 제공 창고</h4><h4 data-lang-block="zh">标配储藏室</h4><h4 data-lang-block="zt">標配儲藏室</h4>
             <p data-lang-block="en">Every apartment includes a dedicated storage unit.</p>
-            <p data-lang-block="ko">모든 세대에 전용 창고가 기본 제공됩니다.</p>
+            <p data-lang-block="ko">모든 세대에 전용 창고가 기본 제공됩니다.</p><p data-lang-block="zh">每户均标配专属储藏室。</p><p data-lang-block="zt">每戶均標配專屬儲藏室。</p>
           </div>
         </li>
       </ul>
@@ -1635,12 +1651,12 @@
         <div class="sec-tag">06 — Floorplans</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Four<br><em>typologies.</em></span>
-          <span data-lang-section="ko">네 가지<br><em>유형.</em></span>
+          <span data-lang-section="ko">네 가지<br><em>유형.</em></span><span data-lang-section="zh">四种<br><em>户型。</em></span><span data-lang-section="zt">四種<br><em>戶型。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">From a clever 1-bedroom-plus-study at 68 sqm to spacious 3-bed plus study apartments at 164 sqm total. Every home includes private storage.</span>
-        <span data-lang-section="ko">영리한 1베드+서재 68㎡부터 넓은 3베드+서재 164㎡까지. 모든 세대에 전용 창고가 포함됩니다.</span>
+        <span data-lang-section="ko">영리한 1베드+서재 68㎡부터 넓은 3베드+서재 164㎡까지. 모든 세대에 전용 창고가 포함됩니다.</span><span data-lang-section="zh">从巧思的 1 房+书房 68 平方米，到开阔的 3 房+书房 164 平方米。每户均含专属储藏室。</span><span data-lang-section="zt">從巧思的 1 房+書房 68 平方米，到開闊的 3 房+書房 164 平方米。每戶均含專屬儲藏室。</span>
       </p>
     </div>
 
@@ -1649,11 +1665,11 @@
         <div class="fp-type">Type A · 1 Bed + Study</div>
         <div class="fp-name">68 sqm</div>
         <div class="fp-sub" data-lang-section="en">A flexible plan with study nook and west aspect — apartments 12, 97, 107, 117, 127, 137, 147, 157.</div>
-        <div class="fp-sub" data-lang-section="ko">서재 공간과 서향이 포함된 유연한 평면 — 12, 97, 107, 117, 127, 137, 147, 157호.</div>
+        <div class="fp-sub" data-lang-section="ko">서재 공간과 서향이 포함된 유연한 평면 — 12, 97, 107, 117, 127, 137, 147, 157호.</div><div class="fp-sub" data-lang-section="zh">含书房空间与西向采光的灵活户型 —— 12、97、107、117、127、137、147、157 号房。</div><div class="fp-sub" data-lang-section="zt">含書房空間與西向採光的靈活戶型 —— 12、97、107、117、127、137、147、157 號房。</div>
         <div class="fp-meta">
-          <div class="fp-meta-item"><div class="v">57<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
-          <div class="fp-meta-item"><div class="v">11<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
-          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div></div>
+          <div class="fp-meta-item"><div class="v">57<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div><div class="l" data-lang-section="zh">室内</div><div class="l" data-lang-section="zt">室內</div></div>
+          <div class="fp-meta-item"><div class="v">11<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div><div class="l" data-lang-section="zh">室外</div><div class="l" data-lang-section="zt">室外</div></div>
+          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div><div class="l" data-lang-section="zh">含储藏室</div><div class="l" data-lang-section="zt">含儲藏室</div></div>
         </div>
       </div>
 
@@ -1661,11 +1677,11 @@
         <div class="fp-type">Type B · 1 Bed + Study</div>
         <div class="fp-name">76 sqm</div>
         <div class="fp-sub" data-lang-section="en">Larger 1-bed with study, west or NE aspect — flexible for working from home.</div>
-        <div class="fp-sub" data-lang-section="ko">서재가 있는 더 넓은 1베드 — 서향 또는 북동향, 재택근무에 최적.</div>
+        <div class="fp-sub" data-lang-section="ko">서재가 있는 더 넓은 1베드 — 서향 또는 북동향, 재택근무에 최적.</div><div class="fp-sub" data-lang-section="zh">配书房的加大 1 房 —— 西向或东北向，最适合居家办公。</div><div class="fp-sub" data-lang-section="zt">配書房的加大 1 房 —— 西向或東北向，最適合居家辦公。</div>
         <div class="fp-meta">
-          <div class="fp-meta-item"><div class="v">61<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
-          <div class="fp-meta-item"><div class="v">15<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
-          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div></div>
+          <div class="fp-meta-item"><div class="v">61<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div><div class="l" data-lang-section="zh">室内</div><div class="l" data-lang-section="zt">室內</div></div>
+          <div class="fp-meta-item"><div class="v">15<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div><div class="l" data-lang-section="zh">室外</div><div class="l" data-lang-section="zt">室外</div></div>
+          <div class="fp-meta-item"><div class="v">1<small>bath</small></div><div class="l" data-lang-section="en">Storage incl.</div><div class="l" data-lang-section="ko">창고 포함</div><div class="l" data-lang-section="zh">含储藏室</div><div class="l" data-lang-section="zt">含儲藏室</div></div>
         </div>
       </div>
 
@@ -1673,11 +1689,11 @@
         <div class="fp-type">Type C · 2 Bedroom</div>
         <div class="fp-name">117 sqm</div>
         <div class="fp-sub" data-lang-section="en">2-bed with 2 bathrooms, parking space included — west aspect with large balcony.</div>
-        <div class="fp-sub" data-lang-section="ko">2개의 욕실과 주차 공간이 포함된 2베드 — 서향, 대형 발코니.</div>
+        <div class="fp-sub" data-lang-section="ko">2개의 욕실과 주차 공간이 포함된 2베드 — 서향, 대형 발코니.</div><div class="fp-sub" data-lang-section="zh">配两卫与车位的 2 房 —— 西向，大阳台。</div><div class="fp-sub" data-lang-section="zt">配兩衛與車位的 2 房 —— 西向，大陽臺。</div>
         <div class="fp-meta">
-          <div class="fp-meta-item"><div class="v">76<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
-          <div class="fp-meta-item"><div class="v">41<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
-          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div></div>
+          <div class="fp-meta-item"><div class="v">76<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div><div class="l" data-lang-section="zh">室内</div><div class="l" data-lang-section="zt">室內</div></div>
+          <div class="fp-meta-item"><div class="v">41<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div><div class="l" data-lang-section="zh">室外</div><div class="l" data-lang-section="zt">室外</div></div>
+          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div><div class="l" data-lang-section="zh">+ 车位</div><div class="l" data-lang-section="zt">+ 車位</div></div>
         </div>
       </div>
 
@@ -1685,11 +1701,11 @@
         <div class="fp-type">Type D · 3 Bed + Study</div>
         <div class="fp-name">164 sqm</div>
         <div class="fp-sub" data-lang-section="en">Premium 3-bed plus study, 2 baths, parking — N/E aspect with the largest balconies in the collection.</div>
-        <div class="fp-sub" data-lang-section="ko">프리미엄 3베드 + 서재, 2욕실, 주차 포함 — 북동향, 컬렉션 내 최대 크기의 발코니.</div>
+        <div class="fp-sub" data-lang-section="ko">프리미엄 3베드 + 서재, 2욕실, 주차 포함 — 북동향, 컬렉션 내 최대 크기의 발코니.</div><div class="fp-sub" data-lang-section="zh">尊享 3 房 + 书房，两卫并含车位 —— 东北向，全系列中面积最大的阳台。</div><div class="fp-sub" data-lang-section="zt">尊享 3 房 + 書房，兩衛並含車位 —— 東北向，全系列中面積最大的陽臺。</div>
         <div class="fp-meta">
-          <div class="fp-meta-item"><div class="v">101<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div></div>
-          <div class="fp-meta-item"><div class="v">63<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div></div>
-          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div></div>
+          <div class="fp-meta-item"><div class="v">101<small>m²</small></div><div class="l" data-lang-section="en">Internal</div><div class="l" data-lang-section="ko">내부</div><div class="l" data-lang-section="zh">室内</div><div class="l" data-lang-section="zt">室內</div></div>
+          <div class="fp-meta-item"><div class="v">63<small>m²</small></div><div class="l" data-lang-section="en">External</div><div class="l" data-lang-section="ko">외부</div><div class="l" data-lang-section="zh">室外</div><div class="l" data-lang-section="zt">室外</div></div>
+          <div class="fp-meta-item"><div class="v">2<small>bath</small></div><div class="l" data-lang-section="en">+ Parking</div><div class="l" data-lang-section="ko">+ 주차</div><div class="l" data-lang-section="zh">+ 车位</div><div class="l" data-lang-section="zt">+ 車位</div></div>
         </div>
       </div>
     </div>
@@ -1704,12 +1720,12 @@
         <div class="sec-tag">07 — The Team</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Quality<br>is a <em>promise.</em></span>
-          <span data-lang-section="ko">품질은<br><em>약속입니다.</em></span>
+          <span data-lang-section="ko">품질은<br><em>약속입니다.</em></span><span data-lang-section="zh">品质即<br><em>承诺。</em></span><span data-lang-section="zt">品質即<br><em>承諾。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Two of Sydney's most respected names — AJC Architects shaping the city since 1956, and Landmark delivering apartments for Australian families for over 25 years.</span>
-        <span data-lang-section="ko">시드니에서 가장 존경받는 두 이름의 협업 — 1956년부터 도시를 빚어온 AJC 건축, 그리고 25년 이상 호주 가정에 아파트를 선보여온 Landmark.</span>
+        <span data-lang-section="ko">시드니에서 가장 존경받는 두 이름의 협업 — 1956년부터 도시를 빚어온 AJC 건축, 그리고 25년 이상 호주 가정에 아파트를 선보여온 Landmark.</span><span data-lang-section="zh">悉尼两个最受敬重名字的携手 —— 自 1956 年起塑造这座城市的 AJC 建筑设计，以及逾 25 年为澳洲家庭打造公寓的 Landmark。</span><span data-lang-section="zt">悉尼兩個最受敬重名字的攜手 —— 自 1956 年起塑造這座城市的 AJC 建築設計，以及逾 25 年爲澳洲家庭打造公寓的 Landmark。</span>
       </p>
     </div>
 
@@ -1717,29 +1733,29 @@
       <div class="dev-block">
         <h3>
           <span data-lang-section="en">AJC <em>Architects</em></span>
-          <span data-lang-section="ko">AJC <em>건축</em></span>
+          <span data-lang-section="ko">AJC <em>건축</em></span><span data-lang-section="zh">AJC <em>建筑设计</em></span><span data-lang-section="zt">AJC <em>建築設計</em></span>
         </h3>
         <p data-lang-block="en">Founded in <strong>1956</strong>, the AJC name is synonymous with creative, spatially inspiring spaces and places. Today AJC works across many sectors and scales — from education and commercial projects to luxury and affordable residential developments.</p>
         <p data-lang-block="en">The practice has earned scores of awards locally and internationally. Their work has changed the way people live, learn, work and play.</p>
 
-        <p data-lang-block="ko"><strong>1956년</strong>에 설립된 AJC는 창의적이고 영감을 주는 공간 설계의 대명사입니다. 오늘날 AJC는 교육·상업 프로젝트부터 럭셔리 및 합리적 주거 개발에 이르기까지 다양한 분야와 규모의 작업을 진행합니다.</p>
-        <p data-lang-block="ko">호주 내외에서 수많은 상을 수상했으며, 그들의 작업은 사람들이 살고, 배우고, 일하고, 노는 방식을 변화시켜 왔습니다.</p>
+        <p data-lang-block="ko"><strong>1956년</strong>에 설립된 AJC는 창의적이고 영감을 주는 공간 설계의 대명사입니다. 오늘날 AJC는 교육·상업 프로젝트부터 럭셔리 및 합리적 주거 개발에 이르기까지 다양한 분야와 규모의 작업을 진행합니다.</p><p data-lang-block="zh">创立于 <strong>1956 年</strong>的 AJC，是富有创意与启发性空间设计的代名词。今日的 AJC 涉猎广泛，从教育与商业项目到豪华及可负担住宅开发，规模不一。</p><p data-lang-block="zt">創立於 <strong>1956 年</strong>的 AJC，是富有創意與啓發性空間設計的代名詞。今日的 AJC 涉獵廣泛，從教育與商業項目到豪華及可負擔住宅開發，規模不一。</p>
+        <p data-lang-block="ko">호주 내외에서 수많은 상을 수상했으며, 그들의 작업은 사람들이 살고, 배우고, 일하고, 노는 방식을 변화시켜 왔습니다.</p><p data-lang-block="zh">其于澳洲境内外屡获奖项，作品持续改变着人们居住、学习、工作与休憩的方式。</p><p data-lang-block="zt">其於澳洲境內外屢獲獎項，作品持續改變着人們居住、學習、工作與休憩的方式。</p>
 
         <div class="dev-stats">
           <div class="dev-stat">
             <div class="n">68<small>yr</small></div>
             <div class="l" data-lang-section="en">Years of Practice</div>
-            <div class="l" data-lang-section="ko">설립 연수</div>
+            <div class="l" data-lang-section="ko">설립 연수</div><div class="l" data-lang-section="zh">成立年数</div><div class="l" data-lang-section="zt">成立年數</div>
           </div>
           <div class="dev-stat">
             <div class="n">Multi</div>
             <div class="l" data-lang-section="en">Award Winner</div>
-            <div class="l" data-lang-section="ko">다수 수상</div>
+            <div class="l" data-lang-section="ko">다수 수상</div><div class="l" data-lang-section="zh">屡获奖项</div><div class="l" data-lang-section="zt">屢獲獎項</div>
           </div>
           <div class="dev-stat">
             <div class="n">SYD</div>
             <div class="l" data-lang-section="en">Modern Sydney</div>
-            <div class="l" data-lang-section="ko">현대 시드니</div>
+            <div class="l" data-lang-section="ko">현대 시드니</div><div class="l" data-lang-section="zh">当代悉尼</div><div class="l" data-lang-section="zt">當代悉尼</div>
           </div>
         </div>
       </div>
@@ -1747,35 +1763,35 @@
       <div class="dev-block">
         <h3>
           <span data-lang-section="en">Landmark <em>Group</em></span>
-          <span data-lang-section="ko">Landmark <em>그룹</em></span>
+          <span data-lang-section="ko">Landmark <em>그룹</em></span><span data-lang-section="zh">Landmark <em>集团</em></span><span data-lang-section="zt">Landmark <em>集團</em></span>
         </h3>
         <p data-lang-block="en">Australian property developer and builder since <strong>1999</strong>. With a team of over 60 property experts, Landmark has successfully delivered projects worth over <strong>$4 billion</strong> — making the dream of home ownership a reality for everyone.</p>
         <p data-lang-block="en">Excellence is at the heart of what they do — from choosing the best materials and finishes to ensuring customers are supported at every stage. Every home comes with a <strong>10-year Structural Warranty</strong> that exceeds the NSW statutory requirement of 6 years.</p>
 
-        <p data-lang-block="ko"><strong>1999년부터</strong> 호주의 부동산 개발 및 시공사로 활동해 온 Landmark. 60명 이상의 전문가 팀과 함께 <strong>40억 달러</strong> 이상의 프로젝트를 성공적으로 완수해 왔으며, 모든 사람의 주택 소유의 꿈을 현실로 만들어 왔습니다.</p>
-        <p data-lang-block="ko">최고의 자재와 마감재 선택부터 모든 단계에서의 고객 지원까지, 우수성이 그들의 핵심 가치입니다. 모든 주택에는 NSW 법정 기준(6년)을 넘는 <strong>10년 구조 보증</strong>이 적용됩니다.</p>
+        <p data-lang-block="ko"><strong>1999년부터</strong> 호주의 부동산 개발 및 시공사로 활동해 온 Landmark. 60명 이상의 전문가 팀과 함께 <strong>40억 달러</strong> 이상의 프로젝트를 성공적으로 완수해 왔으며, 모든 사람의 주택 소유의 꿈을 현실로 만들어 왔습니다.</p><p data-lang-block="zh">Landmark <strong>自 1999 年起</strong>投身澳洲房地产开发与建筑领域。凭借逾 60 人的专业团队，已成功完成逾 <strong>40 亿澳元</strong>的项目，让人人拥有住房的梦想成真。</p><p data-lang-block="zt">Landmark <strong>自 1999 年起</strong>投身澳洲房地產開發與建築領域。憑藉逾 60 人的專業團隊，已成功完成逾 <strong>40 億澳元</strong>的項目，讓人人擁有住房的夢想成真。</p>
+        <p data-lang-block="ko">최고의 자재와 마감재 선택부터 모든 단계에서의 고객 지원까지, 우수성이 그들의 핵심 가치입니다. 모든 주택에는 NSW 법정 기준(6년)을 넘는 <strong>10년 구조 보증</strong>이 적용됩니다.</p><p data-lang-block="zh">从甄选顶级材料与饰面，到各阶段的客户支持，卓越是其核心价值。所有住宅均享超越 NSW 法定标准（6 年）的 <strong>10 年结构质保</strong>。</p><p data-lang-block="zt">從甄選頂級材料與飾面，到各階段的客戶支持，卓越是其核心價值。所有住宅均享超越 NSW 法定標準（6 年）的 <strong>10 年結構質保</strong>。</p>
 
         <div class="dev-stats">
           <div class="dev-stat">
             <div class="n">$4<small>B+</small></div>
             <div class="l" data-lang-section="en">Projects Delivered</div>
-            <div class="l" data-lang-section="ko">총 프로젝트 규모</div>
+            <div class="l" data-lang-section="ko">총 프로젝트 규모</div><div class="l" data-lang-section="zh">项目总规模</div><div class="l" data-lang-section="zt">項目總規模</div>
           </div>
           <div class="dev-stat">
             <div class="n">4K<small>+</small></div>
             <div class="l" data-lang-section="en">Apartments Built</div>
-            <div class="l" data-lang-section="ko">완공 세대</div>
+            <div class="l" data-lang-section="ko">완공 세대</div><div class="l" data-lang-section="zh">已交付住宅</div><div class="l" data-lang-section="zt">已交付住宅</div>
           </div>
           <div class="dev-stat">
             <div class="n">41</div>
             <div class="l" data-lang-section="en">Projects Completed</div>
-            <div class="l" data-lang-section="ko">완료 프로젝트</div>
+            <div class="l" data-lang-section="ko">완료 프로젝트</div><div class="l" data-lang-section="zh">已完成项目</div><div class="l" data-lang-section="zt">已完成項目</div>
           </div>
         </div>
 
         <p style="margin-top:32px; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute);">
           <span data-lang-section="en">Recent: Delmar (Dee Why) · The Mills (Merrylands) · The Avenue (Mascot) · Echo (Lane Cove) · Delano (Crows Nest)</span>
-          <span data-lang-section="ko">최근 프로젝트: Delmar (Dee Why) · The Mills (Merrylands) · The Avenue (Mascot) · Echo (Lane Cove) · Delano (Crows Nest)</span>
+          <span data-lang-section="ko">최근 프로젝트: Delmar (Dee Why) · The Mills (Merrylands) · The Avenue (Mascot) · Echo (Lane Cove) · Delano (Crows Nest)</span><span data-lang-section="zh">近期项目：Delmar（Dee Why）· The Mills（Merrylands）· The Avenue（Mascot）· Echo（Lane Cove）· Delano（Crows Nest）</span><span data-lang-section="zt">近期項目：Delmar（Dee Why）· The Mills（Merrylands）· The Avenue（Mascot）· Echo（Lane Cove）· Delano（Crows Nest）</span>
         </p>
       </div>
     </div>
@@ -1788,41 +1804,41 @@
     <div class="sec-tag">08 — Next Steps</div>
     <h2>
       <span data-lang-section="en">Two buildings.<br>52 apartments. <em>One conversation away.</em></span>
-      <span data-lang-section="ko">두 개의 건물.<br>52세대. <em>한 통의 문의면 충분합니다.</em></span>
+      <span data-lang-section="ko">두 개의 건물.<br>52세대. <em>한 통의 문의면 충분합니다.</em></span><span data-lang-section="zh">两栋楼宇。<br>52 户。<em>一通咨询即可开始。</em></span><span data-lang-section="zt">兩棟樓宇。<br>52 戶。<em>一通諮詢即可開始。</em></span>
     </h2>
 
     <div class="price-summary">
       <div class="ps-cell">
         <div class="ps-num">52</div>
         <div class="ps-lbl" data-lang-section="en">Apartments Available</div>
-        <div class="ps-lbl" data-lang-section="ko">분양 가능 세대</div>
+        <div class="ps-lbl" data-lang-section="ko">분양 가능 세대</div><div class="ps-lbl" data-lang-section="zh">可售房源</div><div class="ps-lbl" data-lang-section="zt">可售房源</div>
       </div>
       <div class="ps-cell">
         <div class="ps-num">4</div>
         <div class="ps-lbl" data-lang-section="en">Typologies · 1B → 3B+S</div>
-        <div class="ps-lbl" data-lang-section="ko">평면 타입 · 1B → 3B+S</div>
+        <div class="ps-lbl" data-lang-section="ko">평면 타입 · 1B → 3B+S</div><div class="ps-lbl" data-lang-section="zh">户型 · 1房 → 3房+书房</div><div class="ps-lbl" data-lang-section="zt">戶型 · 1房 → 3房+書房</div>
       </div>
       <div class="ps-cell">
         <div class="ps-num">650<small>m</small></div>
         <div class="ps-lbl" data-lang-section="en">To Two Metro Stations</div>
-        <div class="ps-lbl" data-lang-section="ko">두 메트로역까지</div>
+        <div class="ps-lbl" data-lang-section="ko">두 메트로역까지</div><div class="ps-lbl" data-lang-section="zh">至两座地铁站</div><div class="ps-lbl" data-lang-section="zt">至兩座地鐵站</div>
       </div>
       <div class="ps-cell">
         <div class="ps-num">10<small>yr</small></div>
         <div class="ps-lbl" data-lang-section="en">Structural Warranty</div>
-        <div class="ps-lbl" data-lang-section="ko">구조 보증</div>
+        <div class="ps-lbl" data-lang-section="ko">구조 보증</div><div class="ps-lbl" data-lang-section="zh">结构质保</div><div class="ps-lbl" data-lang-section="zt">結構質保</div>
       </div>
     </div>
 
     <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=The%20Macquarie%20Collection%20%E2%80%94%20Price%20List%20Request" class="cta-btn">
       <span data-lang-section="en">Request Price List & Brochure</span>
-      <span data-lang-section="ko">분양가 & 브로셔 요청</span>
+      <span data-lang-section="ko">분양가 & 브로셔 요청</span><span data-lang-section="zh">索取价格与宣传册</span><span data-lang-section="zt">索取價格與宣傳冊</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
     </a>
 
     <p style="margin-top:48px; max-width:700px; font-size:14px; color:rgba(255,255,255,.6); line-height:1.6;">
       <span data-lang-section="en">Detailed unit-by-unit pricing — including aspect, size, level, parking, storage and current incentives — is provided privately upon enquiry. Get in touch for the full price list and brochure.</span>
-      <span data-lang-section="ko">세대별 상세 분양가 (방향, 면적, 층수, 주차, 창고, 현재 적용 인센티브 포함)는 문의 시 개별적으로 제공됩니다. 전체 분양가와 브로셔를 받으시려면 연락 주세요.</span>
+      <span data-lang-section="ko">세대별 상세 분양가 (방향, 면적, 층수, 주차, 창고, 현재 적용 인센티브 포함)는 문의 시 개별적으로 제공됩니다. 전체 분양가와 브로셔를 받으시려면 연락 주세요.</span><span data-lang-section="zh">各房源的详细报价（含朝向、面积、楼层、车位、储藏室及当前适用礼遇）均于咨询时单独提供。如需完整价格表与宣传册，欢迎与我联系。</span><span data-lang-section="zt">各房源的詳細報價（含朝向、面積、樓層、車位、儲藏室及當前適用禮遇）均於諮詢時單獨提供。如需完整價格表與宣傳冊，歡迎與我聯繫。</span>
     </p>
   </div>
 </section>
@@ -1834,15 +1850,15 @@
     <div class="contact-grid">
       <h2 class="contact-title">
         <span data-lang-section="en">Let's <em>start</em><br>a conversation.</span>
-        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span>
+        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span><span data-lang-section="zh"><em>让我们</em><br>开始交流。</span><span data-lang-section="zt"><em>讓我們</em><br>開始交流。</span>
       </h2>
       <div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Agent</div>
-          <div class="lbl" data-lang-section="ko">담당</div>
+          <div class="lbl" data-lang-section="ko">담당</div><div class="lbl" data-lang-section="zh">负责人</div><div class="lbl" data-lang-section="zt">負責人</div>
           <div>
             <div class="val" data-lang-section="en">Sunghoon Choi (Sunny)</div>
-            <div class="val" data-lang-section="ko">최성훈</div>
+            <div class="val" data-lang-section="ko">최성훈</div><div class="val" data-lang-section="zh">Sunny</div><div class="val" data-lang-section="zt">Sunny</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -1851,7 +1867,7 @@
         </div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Phone</div>
-          <div class="lbl" data-lang-section="ko">전화</div>
+          <div class="lbl" data-lang-section="ko">전화</div><div class="lbl" data-lang-section="zh">电话</div><div class="lbl" data-lang-section="zt">電話</div>
           <a class="val" href="tel:+61414824225">0414 824 225</a>
         </div>
         <div class="contact-detail">
@@ -1872,7 +1888,7 @@
   <p>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</p>
   <p>
     <span data-lang-section="en">All renderings are artist's impressions only. Completed apartments may vary from the images shown. Information presented for reference only; pricing, availability and specifications subject to change. Please contact the agent to confirm details. Disclaimer adapted from the official Landmark / Macquarie Collection brochure.</span>
-    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며, 완공된 아파트는 이미지와 다를 수 있습니다. 본 정보는 참고용이며, 가격·분양 가능 여부·사양은 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 면책 조항은 Landmark / Macquarie Collection 공식 브로셔에서 발췌되었습니다.</span>
+    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며, 완공된 아파트는 이미지와 다를 수 있습니다. 본 정보는 참고용이며, 가격·분양 가능 여부·사양은 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 면책 조항은 Landmark / Macquarie Collection 공식 브로셔에서 발췌되었습니다.</span><span data-lang-section="zh">所有效果图均为作家想象图，竣工后的实际单元可能与图片有所不同。本信息仅供参考，价格、可售情况及规格可能变更。详情请咨询负责代理。本免责声明摘自 Landmark / Macquarie Collection 官方宣传册。</span><span data-lang-section="zt">所有效果圖均爲作家想象圖，竣工後的實際單元可能與圖片有所不同。本信息僅供參考，價格、可售情況及規格可能變更。詳情請諮詢負責代理。本免責聲明摘自 Landmark / Macquarie Collection 官方宣傳冊。</span>
   </p>
 </footer>
 
@@ -1899,18 +1915,21 @@
   });
 
   // ============ LANGUAGE ============
-  const langToggle = document.getElementById('langToggle');
-  const langLabel  = document.getElementById('langLabel');
+  const LSKEY = 'tmc-lang';
+  const langGrp = document.getElementById('langGrp');
   function applyLang(l) {
+    if (!['en','ko','zh-Hans','zh-Hant'].includes(l)) l = 'en';
     document.documentElement.setAttribute('lang', l);
-    langLabel.textContent = l === 'ko' ? 'EN' : '한국어';
-    localStorage.setItem('tmc-lang', l);
+    langGrp.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.set === l);
+    });
+    localStorage.setItem(LSKEY, l);
   }
-  applyLang(localStorage.getItem('tmc-lang') || 'en');
-  langToggle.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('lang');
-    applyLang(cur === 'ko' ? 'en' : 'ko');
+  langGrp.addEventListener('click', function (e) {
+    const b = e.target.closest('button');
+    if (b) applyLang(b.dataset.set);
   });
+  applyLang(localStorage.getItem(LSKEY) || 'en');
 
   // ============ REVEAL ON SCROLL ============
   const obs = new IntersectionObserver(entries => {
