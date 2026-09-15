@@ -1389,14 +1389,30 @@
 
   /* Language toggle */
   [data-lang-section] { display: none; }
-  [data-lang-section="en"] { display: inline; }
-  html[lang="ko"] [data-lang-section="en"] { display: none; }
+  html[lang="en"] [data-lang-section="en"] { display: inline; }
   html[lang="ko"] [data-lang-section="ko"] { display: inline; }
+  html[lang="zh-Hans"] [data-lang-section="zh"] { display: inline; }
+  html[lang="zh-Hant"] [data-lang-section="zt"] { display: inline; }
   [data-lang-block] { display: none; }
-  [data-lang-block="en"] { display: block; }
-  html[lang="ko"] [data-lang-block="en"] { display: none; }
+  html[lang="en"] [data-lang-block="en"] { display: block; }
   html[lang="ko"] [data-lang-block="ko"] { display: block; }
+  html[lang="zh-Hans"] [data-lang-block="zh"] { display: block; }
+  html[lang="zh-Hant"] [data-lang-block="zt"] { display: block; }
   html[lang="ko"] body { font-family: 'Plus Jakarta Sans', 'Noto Serif KR', sans-serif; }
+
+  /* Chinese typography */
+  html[lang="zh-Hans"] body, html[lang="zh-Hant"] body {
+    font-family: "Noto Sans SC", "Noto Sans HK", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .langgrp { display: inline-flex; border: 1px solid var(--line); background: var(--bg-card);
+    border-radius: 999px; overflow: hidden; }
+  .langgrp button { background: transparent; border: none; border-right: 1px solid var(--line-soft);
+    font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .08em;
+    padding: 9px 11px; cursor: pointer; color: var(--ink-mute); transition: all .25s; line-height: 1; }
+  .langgrp button:last-child { border-right: none; }
+  .langgrp button:hover { color: var(--ink); background: var(--bg-tint); }
+  .langgrp button.on { background: var(--jade-deep); color: #fff; }
+  @media (max-width: 720px) { .langgrp button { padding: 7px 8px; font-size: 10px; letter-spacing: .04em; } }
 </style>
 </head>
 <body>
@@ -1406,14 +1422,14 @@
   <div class="brand">
     <div class="brand-mark">R</div>
     <span data-lang-section="en">Rhodes Bay</span>
-    <span data-lang-section="ko">로즈 베이</span>
+    <span data-lang-section="ko">로즈 베이</span><span data-lang-section="zh">Rhodes Bay</span><span data-lang-section="zt">Rhodes Bay</span>
   </div>
   <div class="topbar-actions">
     <a class="pill bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
       Buy me a coffee
     </a>
-    <button class="pill" id="langToggle"><span id="langLabel">한국어</span></button>
+    <span class="langgrp" id="langGrp"><button data-set="en"><span>EN</span></button><button data-set="ko"><span>한국어</span></button><button data-set="zh-Hans"><span>简体</span></button><button data-set="zh-Hant"><span>繁體</span></button></span>
     <button class="pill" id="themeToggle"><span id="themeLabel">◐</span></button>
   </div>
 </div>
@@ -1426,50 +1442,50 @@
     <div class="hero-top">
       <div class="hero-eyebrow">
         <span data-lang-section="en"><strong>Crafted by Billbergia</strong><br>Leeds Street, Rhodes NSW 2138</span>
-        <span data-lang-section="ko"><strong>Crafted by Billbergia</strong><br>Leeds Street, Rhodes NSW 2138</span>
+        <span data-lang-section="ko"><strong>Crafted by Billbergia</strong><br>Leeds Street, Rhodes NSW 2138</span><span data-lang-section="zh"><strong>Billbergia 匠心之作</strong><br>Leeds Street, Rhodes NSW 2138</span><span data-lang-section="zt"><strong>Billbergia 匠心之作</strong><br>Leeds Street, Rhodes NSW 2138</span>
       </div>
       <div class="hero-coords">
         33°49′59″S · 151°05′13″E<br>
         <span data-lang-section="en">6 Buildings · 337 Apartments</span>
-        <span data-lang-section="ko">6개 빌딩 · 337세대</span>
+        <span data-lang-section="ko">6개 빌딩 · 337세대</span><span data-lang-section="zh">6 栋楼宇 · 337 户住宅</span><span data-lang-section="zt">6 棟樓宇 · 337 戶住宅</span>
       </div>
     </div>
 
     <div class="hero-center">
       <h1 class="hero-title">
         <span data-lang-section="en">Absolute<br><em>waterfront</em> living.</span>
-        <span data-lang-section="ko">절대 수변의<br><em>일상.</em></span>
+        <span data-lang-section="ko">절대 수변의<br><em>일상.</em></span><span data-lang-section="zh">纯正水岸<br><em>日常。</em></span><span data-lang-section="zt">純正水岸<br><em>日常。</em></span>
       </h1>
       <p class="hero-tagline">
         <span data-lang-section="en">The first Rhodes development with direct access to Parramatta River. Six buildings rise from a foreshore park and promenade — embraced by water on three sides.</span>
-        <span data-lang-section="ko">파라마타 강에 직접 면한 로즈 최초의 개발 프로젝트. 세 면이 물에 둘러싸인 강변 공원과 산책로 위로 6개 빌딩이 솟아오릅니다.</span>
+        <span data-lang-section="ko">파라마타 강에 직접 면한 로즈 최초의 개발 프로젝트. 세 면이 물에 둘러싸인 강변 공원과 산책로 위로 6개 빌딩이 솟아오릅니다.</span><span data-lang-section="zh">Rhodes 半岛首个直面 Parramatta 河的开发项目。六栋楼宇矗立于三面环水的河畔公园与滨水步道之上。</span><span data-lang-section="zt">Rhodes 半島首個直面 Parramatta 河的開發項目。六棟樓宇矗立於三面環水的河畔公園與濱水步道之上。</span>
       </p>
     </div>
 
     <div class="hero-bottom">
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Buildings</div>
-        <div class="hb-lbl" data-lang-section="ko">총 빌딩</div>
+        <div class="hb-lbl" data-lang-section="ko">총 빌딩</div><div class="hb-lbl" data-lang-section="zh">楼宇总数</div><div class="hb-lbl" data-lang-section="zt">樓宇總數</div>
         <div class="hb-val">6 · 7–17 Storeys</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Total Dwellings</div>
-        <div class="hb-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="hb-lbl" data-lang-section="ko">총 세대수</div><div class="hb-lbl" data-lang-section="zh">住宅总数</div><div class="hb-lbl" data-lang-section="zt">住宅總數</div>
         <div class="hb-val">337</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">To Sydney CBD</div>
-        <div class="hb-lbl" data-lang-section="ko">시드니 CBD</div>
+        <div class="hb-lbl" data-lang-section="ko">시드니 CBD</div><div class="hb-lbl" data-lang-section="zh">悉尼 CBD</div><div class="hb-lbl" data-lang-section="zt">悉尼 CBD</div>
         <div class="hb-val">19 min · Express</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Waterfront Buildings</div>
-        <div class="hb-lbl" data-lang-section="ko">절대 수변 빌딩</div>
+        <div class="hb-lbl" data-lang-section="ko">절대 수변 빌딩</div><div class="hb-lbl" data-lang-section="zh">纯正水岸楼宇</div><div class="hb-lbl" data-lang-section="zt">純正水岸樓宇</div>
         <div class="hb-val">E & F</div>
       </div>
       <div class="hb-cell">
         <div class="hb-lbl" data-lang-section="en">Quality Rating</div>
-        <div class="hb-lbl" data-lang-section="ko">품질 등급</div>
+        <div class="hb-lbl" data-lang-section="ko">품질 등급</div><div class="hb-lbl" data-lang-section="zh">品质评级</div><div class="hb-lbl" data-lang-section="zt">品質評級</div>
         <div class="hb-val">4.5★ Gold iCIRT</div>
       </div>
     </div>
@@ -1480,23 +1496,23 @@
 <nav class="nav-sticky">
   <div class="nav-inner">
     <a href="#welcome" data-lang-section="en">Welcome</a>
-    <a href="#welcome" data-lang-section="ko">소개</a>
+    <a href="#welcome" data-lang-section="ko">소개</a><a href="#welcome" data-lang-section="zh">项目简介</a><a href="#welcome" data-lang-section="zt">項目簡介</a>
     <a href="#masterplan" data-lang-section="en">Masterplan</a>
-    <a href="#masterplan" data-lang-section="ko">마스터플랜</a>
+    <a href="#masterplan" data-lang-section="ko">마스터플랜</a><a href="#masterplan" data-lang-section="zh">总体规划</a><a href="#masterplan" data-lang-section="zt">總體規劃</a>
     <a href="#connectivity" data-lang-section="en">Connectivity</a>
-    <a href="#connectivity" data-lang-section="ko">교통 & 위치</a>
+    <a href="#connectivity" data-lang-section="ko">교통 & 위치</a><a href="#connectivity" data-lang-section="zh">交通与位置</a><a href="#connectivity" data-lang-section="zt">交通與位置</a>
     <a href="#lifestyle" data-lang-section="en">Amenities & Retail</a>
-    <a href="#lifestyle" data-lang-section="ko">편의시설 & 리테일</a>
+    <a href="#lifestyle" data-lang-section="ko">편의시설 & 리테일</a><a href="#lifestyle" data-lang-section="zh">配套与商业</a><a href="#lifestyle" data-lang-section="zt">配套與商業</a>
     <a href="#interiors" data-lang-section="en">Interiors</a>
-    <a href="#interiors" data-lang-section="ko">인테리어</a>
+    <a href="#interiors" data-lang-section="ko">인테리어</a><a href="#interiors" data-lang-section="zh">室内设计</a><a href="#interiors" data-lang-section="zt">室內設計</a>
     <a href="#schemes" data-lang-section="en">Schemes</a>
-    <a href="#schemes" data-lang-section="ko">컬러 스킴</a>
+    <a href="#schemes" data-lang-section="ko">컬러 스킴</a><a href="#schemes" data-lang-section="zh">配色方案</a><a href="#schemes" data-lang-section="zt">配色方案</a>
     <a href="#stages" data-lang-section="en">Stages</a>
-    <a href="#stages" data-lang-section="ko">스테이지</a>
+    <a href="#stages" data-lang-section="ko">스테이지</a><a href="#stages" data-lang-section="zh">分期开发</a><a href="#stages" data-lang-section="zt">分期開發</a>
     <a href="#developer" data-lang-section="en">Developer</a>
-    <a href="#developer" data-lang-section="ko">시행사</a>
+    <a href="#developer" data-lang-section="ko">시행사</a><a href="#developer" data-lang-section="zh">开发商</a><a href="#developer" data-lang-section="zt">開發商</a>
     <a href="#enquire" data-lang-section="en">Enquire</a>
-    <a href="#enquire" data-lang-section="ko">분양 문의</a>
+    <a href="#enquire" data-lang-section="ko">분양 문의</a><a href="#enquire" data-lang-section="zh">咨询详情</a><a href="#enquire" data-lang-section="zt">諮詢詳情</a>
   </div>
 </nav>
 
@@ -1508,72 +1524,72 @@
         <div class="sec-tag">01 — Welcome</div>
         <h2 class="sec-title">
           <span data-lang-section="en">A jade belt<br>around <em>Rhodes.</em></span>
-          <span data-lang-section="ko">로즈를 감싸는<br><em>옥띠.</em></span>
+          <span data-lang-section="ko">로즈를 감싸는<br><em>옥띠.</em></span><span data-lang-section="zh">环抱 Rhodes 的<br><em>玉带。</em></span><span data-lang-section="zt">環抱 Rhodes 的<br><em>玉帶。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Rhodes Peninsula is embraced by water on three sides — by Parramatta River, Brays Bay and Homebush Bay. In feng shui terms, a jade belt river: prosperity, harmony, exceptional fortune.</span>
-        <span data-lang-section="ko">로즈 반도는 파라마타 강, 브레이스 베이, 홈부시 베이로 세 면이 물에 둘러싸여 있습니다. 풍수에서 옥띠 같은 강 — 번영, 조화, 그리고 빼어난 운세를 상징합니다.</span>
+        <span data-lang-section="ko">로즈 반도는 파라마타 강, 브레이스 베이, 홈부시 베이로 세 면이 물에 둘러싸여 있습니다. 풍수에서 옥띠 같은 강 — 번영, 조화, 그리고 빼어난 운세를 상징합니다.</span><span data-lang-section="zh">Rhodes 半岛三面为 Parramatta 河、Brays Bay 与 Homebush Bay 所环抱。风水中称之为玉带环腰之水 —— 象征富足、和谐与上佳运势。</span><span data-lang-section="zt">Rhodes 半島三面爲 Parramatta 河、Brays Bay 與 Homebush Bay 所環抱。風水中稱之爲玉帶環腰之水 —— 象徵富足、和諧與上佳運勢。</span>
       </p>
     </div>
 
     <div class="welcome-grid">
       <div class="welcome-text">
         <p class="lead" data-lang-block="en">Rhodes Bay is the first new development in the peninsula's history to be built with direct access to Parramatta River — an absolute waterfront address.</p>
-        <p class="lead" data-lang-block="ko">로즈 베이는 반도 역사상 최초로 파라마타 강에 직접 면해 건설되는 신규 개발 프로젝트 — 절대 수변(Absolute Waterfront) 주소지입니다.</p>
+        <p class="lead" data-lang-block="ko">로즈 베이는 반도 역사상 최초로 파라마타 강에 직접 면해 건설되는 신규 개발 프로젝트 — 절대 수변(Absolute Waterfront) 주소지입니다.</p><p class="lead" data-lang-block="zh">Rhodes Bay 是半岛历史上首个直面 Parramatta 河兴建的全新开发项目 —— 一个纯正水岸（Absolute Waterfront）的地址。</p><p class="lead" data-lang-block="zt">Rhodes Bay 是半島歷史上首個直面 Parramatta 河興建的全新開發項目 —— 一個純正水岸（Absolute Waterfront）的地址。</p>
 
         <p data-lang-block="en">Designed for the modern Sydney-sider — investors, first homebuyers, young families and downsizers — these boutique apartments make the most of an irreplaceable waterfront location, just <strong>12km west of Sydney's CBD</strong>. Six mixed-use residential buildings rise from a new foreshore park and promenade, with a future restaurant and retail precinct at ground level.</p>
         <p data-lang-block="en">As part of the NSW Government's <strong>Rhodes East Place Plan</strong>, the surrounding precinct is being transformed with a new primary school, a waterfront dining precinct, and a ferry wharf — a convenient alternative connection to the city.</p>
 
-        <p data-lang-block="ko">현대 시드니 주민을 위해 설계 — 투자자, 첫 주택 구매자, 젊은 가족, 다운사이저 — 이 부티크 아파트들은 <strong>시드니 CBD에서 서쪽으로 12km</strong> 거리의 대체 불가능한 수변 입지를 최대한 활용합니다. 6개의 복합용도 주거 빌딩이 새로운 강변 공원과 산책로 위로 솟아오르며, 지상층에는 향후 레스토랑과 리테일 권역이 들어섭니다.</p>
-        <p data-lang-block="ko">NSW 정부의 <strong>Rhodes East Place Plan</strong>의 일환으로, 주변 권역은 새 초등학교, 수변 다이닝 권역, 그리고 시티로 향하는 편리한 대안 교통수단인 페리 선착장과 함께 변모하고 있습니다.</p>
+        <p data-lang-block="ko">현대 시드니 주민을 위해 설계 — 투자자, 첫 주택 구매자, 젊은 가족, 다운사이저 — 이 부티크 아파트들은 <strong>시드니 CBD에서 서쪽으로 12km</strong> 거리의 대체 불가능한 수변 입지를 최대한 활용합니다. 6개의 복합용도 주거 빌딩이 새로운 강변 공원과 산책로 위로 솟아오르며, 지상층에는 향후 레스토랑과 리테일 권역이 들어섭니다.</p><p data-lang-block="zh">专为当代悉尼居民而设 —— 投资者、首次置业者、年轻家庭与换小房人士 —— 这些精品公寓充分发挥其位于<strong>悉尼 CBD 以西 12 公里</strong>的不可复制水岸区位。六栋综合用途住宅楼宇矗立于全新河畔公园与滨水步道之上，地面层将引入餐饮与商业街区。</p><p data-lang-block="zt">專爲當代悉尼居民而設 —— 投資者、首次置業者、年輕家庭與換小房人士 —— 這些精品公寓充分發揮其位於<strong>悉尼 CBD 以西 12 公里</strong>的不可複製水岸區位。六棟綜合用途住宅樓宇矗立於全新河畔公園與濱水步道之上，地面層將引入餐飲與商業街區。</p>
+        <p data-lang-block="ko">NSW 정부의 <strong>Rhodes East Place Plan</strong>의 일환으로, 주변 권역은 새 초등학교, 수변 다이닝 권역, 그리고 시티로 향하는 편리한 대안 교통수단인 페리 선착장과 함께 변모하고 있습니다.</p><p data-lang-block="zh">作为 NSW 政府 <strong>Rhodes East Place Plan</strong> 的一部分，周边区域正在焕新，将增设全新小学、滨水餐饮街区，以及通往市区的便捷替代通勤方式 —— 渡轮码头。</p><p data-lang-block="zt">作爲 NSW 政府 <strong>Rhodes East Place Plan</strong> 的一部分，周邊區域正在煥新，將增設全新小學、濱水餐飲街區，以及通往市區的便捷替代通勤方式 —— 渡輪碼頭。</p>
 
         <div class="welcome-quote">
           <span data-lang-block="en">"Rhodes Bay is certainly bespoke — what we're really excited about is its absolute waterfront location. It's the first time a new development with direct access to Parramatta River will be available to purchasers."</span>
-          <span data-lang-block="ko">"로즈 베이는 분명 특별합니다 — 우리가 진정으로 흥분한 것은 절대 수변 입지입니다. 파라마타 강에 직접 면한 신규 개발이 구매자에게 제공되는 것은 처음입니다."</span>
+          <span data-lang-block="ko">"로즈 베이는 분명 특별합니다 — 우리가 진정으로 흥분한 것은 절대 수변 입지입니다. 파라마타 강에 직접 면한 신규 개발이 구매자에게 제공되는 것은 처음입니다."</span><span data-lang-block="zh">「Rhodes Bay 确实与众不同 —— 真正令我们振奋的是这个纯正水岸区位。这是首次有直面 Parramatta 河的全新开发项目呈现给买家。」</span><span data-lang-block="zt">「Rhodes Bay 確實與衆不同 —— 真正令我們振奮的是這個純正水岸區位。這是首次有直面 Parramatta 河的全新開發項目呈現給買家。」</span>
           <cite>Saul Moran · Development Director, Billbergia</cite>
         </div>
       </div>
 
       <div class="welcome-card">
         <div class="wc-lbl" data-lang-section="en">At a Glance</div>
-        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div>
+        <div class="wc-lbl" data-lang-section="ko">한눈에 보기</div><div class="wc-lbl" data-lang-section="zh">一览</div><div class="wc-lbl" data-lang-section="zt">一覽</div>
         <ul class="wc-list">
           <li>
             <div class="lbl" data-lang-block="en">Address</div>
-            <div class="lbl" data-lang-block="ko">주소</div>
+            <div class="lbl" data-lang-block="ko">주소</div><div class="lbl" data-lang-block="zh">地址</div><div class="lbl" data-lang-block="zt">地址</div>
             <div class="val">Leeds Street<small>Rhodes NSW 2138</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Developer</div>
-            <div class="lbl" data-lang-block="ko">시행사</div>
-            <div class="val">Billbergia<small data-lang-section="en">20+ years in Rhodes</small><small data-lang-section="ko">로즈 20년+ 경력</small></div>
+            <div class="lbl" data-lang-block="ko">시행사</div><div class="lbl" data-lang-block="zh">开发商</div><div class="lbl" data-lang-block="zt">開發商</div>
+            <div class="val">Billbergia<small data-lang-section="en">20+ years in Rhodes</small><small data-lang-section="ko">로즈 20년+ 경력</small><small data-lang-section="zh">深耕 Rhodes 逾 20 年</small><small data-lang-section="zt">深耕 Rhodes 逾 20 年</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Buildings</div>
-            <div class="lbl" data-lang-block="ko">총 빌딩</div>
-            <div class="val">6<small data-lang-section="en">A · B · C · D · E · F (7–17 storeys)</small><small data-lang-section="ko">A · B · C · D · E · F (7–17층)</small></div>
+            <div class="lbl" data-lang-block="ko">총 빌딩</div><div class="lbl" data-lang-block="zh">楼宇总数</div><div class="lbl" data-lang-block="zt">樓宇總數</div>
+            <div class="val">6<small data-lang-section="en">A · B · C · D · E · F (7–17 storeys)</small><small data-lang-section="ko">A · B · C · D · E · F (7–17층)</small><small data-lang-section="zh">A · B · C · D · E · F（7–17 层）</small><small data-lang-section="zt">A · B · C · D · E · F（7–17 層）</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Total Dwellings</div>
-            <div class="lbl" data-lang-block="ko">총 세대수</div>
-            <div class="val">337<small data-lang-section="en">Mixed-use residential (SSDA SSD-6741-9241)</small><small data-lang-section="ko">복합용도 주거 (SSDA SSD-6741-9241)</small></div>
+            <div class="lbl" data-lang-block="ko">총 세대수</div><div class="lbl" data-lang-block="zh">住宅总数</div><div class="lbl" data-lang-block="zt">住宅總數</div>
+            <div class="val">337<small data-lang-section="en">Mixed-use residential (SSDA SSD-6741-9241)</small><small data-lang-section="ko">복합용도 주거 (SSDA SSD-6741-9241)</small><small data-lang-section="zh">综合用途住宅（SSDA SSD-6741-9241）</small><small data-lang-section="zt">綜合用途住宅（SSDA SSD-6741-9241）</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Waterfront Buildings</div>
-            <div class="lbl" data-lang-block="ko">절대 수변 빌딩</div>
-            <div class="val">E & F<small data-lang-section="en">Direct Parramatta River frontage</small><small data-lang-section="ko">파라마타 강 직접 면함</small></div>
+            <div class="lbl" data-lang-block="ko">절대 수변 빌딩</div><div class="lbl" data-lang-block="zh">纯正水岸楼宇</div><div class="lbl" data-lang-block="zt">純正水岸樓宇</div>
+            <div class="val">E & F<small data-lang-section="en">Direct Parramatta River frontage</small><small data-lang-section="ko">파라마타 강 직접 면함</small><small data-lang-section="zh">直面 Parramatta 河</small><small data-lang-section="zt">直面 Parramatta 河</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Foreshore Features</div>
-            <div class="lbl" data-lang-block="ko">강변 시설</div>
+            <div class="lbl" data-lang-block="ko">강변 시설</div><div class="lbl" data-lang-block="zh">水岸设施</div><div class="lbl" data-lang-block="zt">水岸設施</div>
             <div class="val" data-lang-block="en">Park & Promenade<small>Through-site pedestrian link</small></div>
-            <div class="val" data-lang-block="ko">공원 & 산책로<small>단지 관통 보행 통로</small></div>
+            <div class="val" data-lang-block="ko">공원 & 산책로<small>단지 관통 보행 통로</small></div><div class="val" data-lang-block="zh">公园与滨水步道<small>贯穿小区的步行通道</small></div><div class="val" data-lang-block="zt">公園與濱水步道<small>貫穿小區的步行通道</small></div>
           </li>
           <li>
             <div class="lbl" data-lang-block="en">Quality Rating</div>
-            <div class="lbl" data-lang-block="ko">품질 등급</div>
-            <div class="val">4.5★ Gold<small data-lang-section="en">iCIRT by Equifax</small><small data-lang-section="ko">Equifax 인증 iCIRT</small></div>
+            <div class="lbl" data-lang-block="ko">품질 등급</div><div class="lbl" data-lang-block="zh">品质评级</div><div class="lbl" data-lang-block="zt">品質評級</div>
+            <div class="val">4.5★ Gold<small data-lang-section="en">iCIRT by Equifax</small><small data-lang-section="ko">Equifax 인증 iCIRT</small><small data-lang-section="zh">Equifax 认证 iCIRT</small><small data-lang-section="zt">Equifax 認證 iCIRT</small></div>
           </li>
         </ul>
       </div>
@@ -1586,9 +1602,9 @@
   <img src="./assets/rhodes-bay/aerial.jpg" alt="Aerial view of the Rhodes peninsula showing the Parramatta River and surrounding waterways" loading="lazy" />
   <figcaption>
     <span class="mc-tag" data-lang-section="en">Rhodes Peninsula · Aerial</span>
-    <span class="mc-tag" data-lang-section="ko">로즈 반도 · 항공 뷰</span>
+    <span class="mc-tag" data-lang-section="ko">로즈 반도 · 항공 뷰</span><span class="mc-tag" data-lang-section="zh">Rhodes 半岛 · 鸟瞰图</span><span class="mc-tag" data-lang-section="zt">Rhodes 半島 · 鳥瞰圖</span>
     <span class="mc-cap" data-lang-section="en">"Three sides embraced by water — the Parramatta River, Brays Bay, and Homebush Bay."</span>
-    <span class="mc-cap" data-lang-section="ko">"세 면이 물에 둘러싸인 — 파라마타 강, 브레이스 베이, 홈부시 베이."</span>
+    <span class="mc-cap" data-lang-section="ko">"세 면이 물에 둘러싸인 — 파라마타 강, 브레이스 베이, 홈부시 베이."</span><span class="mc-cap" data-lang-section="zh">「三面环水 —— Parramatta 河、Brays Bay 与 Homebush Bay。」</span><span class="mc-cap" data-lang-section="zt">「三面環水 —— Parramatta 河、Brays Bay 與 Homebush Bay。」</span>
   </figcaption>
 </figure>
 
@@ -1600,12 +1616,12 @@
         <div class="sec-tag">02 — The Masterplan</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Six buildings.<br>One <em>waterfront.</em></span>
-          <span data-lang-section="ko">6개의 빌딩.<br>하나의 <em>강변.</em></span>
+          <span data-lang-section="ko">6개의 빌딩.<br>하나의 <em>강변.</em></span><span data-lang-section="zh">六栋楼宇。<br>一片 <em>水岸。</em></span><span data-lang-section="zt">六棟樓宇。<br>一片 <em>水岸。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Six mixed-use residential buildings rise from 7 to 17 storeys, anchored by Buildings E and F — the only two absolute-waterfront blocks on the entire Rhodes peninsula.</span>
-        <span data-lang-section="ko">7층에서 17층까지 6개의 복합용도 주거 빌딩이 솟아오르며, 로즈 반도 전체에서 유일한 두 개의 절대 수변 블록인 E·F 빌딩이 그 중심을 이룹니다.</span>
+        <span data-lang-section="ko">7층에서 17층까지 6개의 복합용도 주거 빌딩이 솟아오르며, 로즈 반도 전체에서 유일한 두 개의 절대 수변 블록인 E·F 빌딩이 그 중심을 이룹니다.</span><span data-lang-section="zh">六栋综合用途住宅楼宇由 7 层递升至 17 层，其中 E、F 两栋为 Rhodes 半岛仅有的纯正水岸地块，构成项目核心。</span><span data-lang-section="zt">六棟綜合用途住宅樓宇由 7 層遞升至 17 層，其中 E、F 兩棟爲 Rhodes 半島僅有的純正水岸地塊，構成項目核心。</span>
       </p>
     </div>
 
@@ -1613,108 +1629,108 @@
       <div class="mp-cell">
         <div class="mp-num">6</div>
         <div class="mp-lbl" data-lang-section="en">Mixed-Use Buildings</div>
-        <div class="mp-lbl" data-lang-section="ko">복합용도 빌딩</div>
+        <div class="mp-lbl" data-lang-section="ko">복합용도 빌딩</div><div class="mp-lbl" data-lang-section="zh">综合用途楼宇</div><div class="mp-lbl" data-lang-section="zt">綜合用途樓宇</div>
         <div class="mp-desc" data-lang-section="en">A through F · 7 to 17 storeys.</div>
-        <div class="mp-desc" data-lang-section="ko">A부터 F까지 · 7~17층 규모.</div>
+        <div class="mp-desc" data-lang-section="ko">A부터 F까지 · 7~17층 규모.</div><div class="mp-desc" data-lang-section="zh">A 至 F 栋 · 楼高 7 至 17 层。</div><div class="mp-desc" data-lang-section="zt">A 至 F 棟 · 樓高 7 至 17 層。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">337</div>
         <div class="mp-lbl" data-lang-section="en">Total Dwellings</div>
-        <div class="mp-lbl" data-lang-section="ko">총 세대수</div>
+        <div class="mp-lbl" data-lang-section="ko">총 세대수</div><div class="mp-lbl" data-lang-section="zh">住宅总数</div><div class="mp-lbl" data-lang-section="zt">住宅總數</div>
         <div class="mp-desc" data-lang-section="en">1, 1.5, 2, 2+S, 3 bed & townhouses.</div>
-        <div class="mp-desc" data-lang-section="ko">1·1.5·2·2+S·3베드 + 타운하우스.</div>
+        <div class="mp-desc" data-lang-section="ko">1·1.5·2·2+S·3베드 + 타운하우스.</div><div class="mp-desc" data-lang-section="zh">1房、1.5房、2房、2房+多功能间、3房及联排别墅。</div><div class="mp-desc" data-lang-section="zt">1房、1.5房、2房、2房+多功能間、3房及聯排別墅。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">12<small>km</small></div>
         <div class="mp-lbl" data-lang-section="en">To Sydney CBD</div>
-        <div class="mp-lbl" data-lang-section="ko">시드니 CBD까지</div>
+        <div class="mp-lbl" data-lang-section="ko">시드니 CBD까지</div><div class="mp-lbl" data-lang-section="zh">至悉尼 CBD</div><div class="mp-lbl" data-lang-section="zt">至悉尼 CBD</div>
         <div class="mp-desc" data-lang-section="en">Express train · 19 minutes.</div>
-        <div class="mp-desc" data-lang-section="ko">기차 급행 · 19분.</div>
+        <div class="mp-desc" data-lang-section="ko">기차 급행 · 19분.</div><div class="mp-desc" data-lang-section="zh">火车快车 · 19 分钟。</div><div class="mp-desc" data-lang-section="zt">火車快車 · 19 分鐘。</div>
       </div>
       <div class="mp-cell">
         <div class="mp-num">12<small>+</small></div>
         <div class="mp-lbl" data-lang-section="en">Surrounding Parks</div>
-        <div class="mp-lbl" data-lang-section="ko">주변 공원</div>
+        <div class="mp-lbl" data-lang-section="ko">주변 공원</div><div class="mp-lbl" data-lang-section="zh">周边公园</div><div class="mp-lbl" data-lang-section="zt">周邊公園</div>
         <div class="mp-desc" data-lang-section="en">Brays Bay Reserve · McIlwaine Park.</div>
-        <div class="mp-desc" data-lang-section="ko">브레이스 베이 리저브 · 매킬웨인 파크.</div>
+        <div class="mp-desc" data-lang-section="ko">브레이스 베이 리저브 · 매킬웨인 파크.</div><div class="mp-desc" data-lang-section="zh">Brays Bay Reserve · McIlwaine Park。</div><div class="mp-desc" data-lang-section="zt">Brays Bay Reserve · McIlwaine Park。</div>
       </div>
     </div>
 
     <h3 class="bldgs-head">
       <span data-lang-section="en">Six buildings, six <em>aspects.</em></span>
-      <span data-lang-section="ko">여섯 빌딩, 여섯 <em>방향.</em></span>
+      <span data-lang-section="ko">여섯 빌딩, 여섯 <em>방향.</em></span><span data-lang-section="zh">六栋楼宇，六种 <em>朝向。</em></span><span data-lang-section="zt">六棟樓宇，六種 <em>朝向。</em></span>
     </h3>
     <div class="buildings">
       <div class="bldg-card feature">
         <div class="b-lbl" data-lang-section="en">Absolute Waterfront · Flagship</div>
-        <div class="b-lbl" data-lang-section="ko">절대 수변 · 플래그십</div>
+        <div class="b-lbl" data-lang-section="ko">절대 수변 · 플래그십</div><div class="b-lbl" data-lang-section="zh">纯正水岸 · 旗舰</div><div class="b-lbl" data-lang-section="zt">純正水岸 · 旗艦</div>
         <div class="b-name">Building <em>E</em></div>
         <p class="b-sub" data-lang-block="en">North-west facing tower with direct river views and wintergarden balconies. The signature waterfront block of the masterplan.</p>
-        <p class="b-sub" data-lang-block="ko">북서향 타워, 직접적인 강 조망과 윈터가든 발코니. 마스터플랜의 시그니처 수변 블록.</p>
+        <p class="b-sub" data-lang-block="ko">북서향 타워, 직접적인 강 조망과 윈터가든 발코니. 마스터플랜의 시그니처 수변 블록.</p><p class="b-sub" data-lang-block="zh">西北向塔楼，直面河景并配冬季花园阳台。总体规划中的标志性水岸地块。</p><p class="b-sub" data-lang-block="zt">西北向塔樓，直面河景並配冬季花園陽臺。總體規劃中的標誌性水岸地塊。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">NW</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
-          <div class="b-stat"><div class="v">8</div><div class="l" data-lang-section="en">Stage 1 Levels</div><div class="l" data-lang-section="ko">1단계 층수</div></div>
-          <div class="b-stat"><div class="v">River</div><div class="l" data-lang-section="en">Direct View</div><div class="l" data-lang-section="ko">직접 조망</div></div>
+          <div class="b-stat"><div class="v">NW</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
+          <div class="b-stat"><div class="v">8</div><div class="l" data-lang-section="en">Stage 1 Levels</div><div class="l" data-lang-section="ko">1단계 층수</div><div class="l" data-lang-section="zh">第一期层数</div><div class="l" data-lang-section="zt">第一期層數</div></div>
+          <div class="b-stat"><div class="v">River</div><div class="l" data-lang-section="en">Direct View</div><div class="l" data-lang-section="ko">직접 조망</div><div class="l" data-lang-section="zh">直面景观</div><div class="l" data-lang-section="zt">直面景觀</div></div>
         </div>
       </div>
 
       <div class="bldg-card feature">
         <div class="b-lbl" data-lang-section="en">Absolute Waterfront · Premium</div>
-        <div class="b-lbl" data-lang-section="ko">절대 수변 · 프리미엄</div>
+        <div class="b-lbl" data-lang-section="ko">절대 수변 · 프리미엄</div><div class="b-lbl" data-lang-section="zh">纯正水岸 · 尊享</div><div class="b-lbl" data-lang-section="zt">純正水岸 · 尊享</div>
         <div class="b-name">Building <em>F</em></div>
         <p class="b-sub" data-lang-block="en">North-east facing tower with large balconies and dual-key configurations on select levels. Surrounded by foreshore park.</p>
-        <p class="b-sub" data-lang-block="ko">북동향 타워, 대형 발코니와 선택 층의 듀얼키 구성. 강변 공원에 둘러싸여 있습니다.</p>
+        <p class="b-sub" data-lang-block="ko">북동향 타워, 대형 발코니와 선택 층의 듀얼키 구성. 강변 공원에 둘러싸여 있습니다.</p><p class="b-sub" data-lang-block="zh">东北向塔楼，配大型阳台，部分楼层设双钥匙户型。四周环绕河畔公园。</p><p class="b-sub" data-lang-block="zt">東北向塔樓，配大型陽臺，部分樓層設雙鑰匙戶型。四周環繞河畔公園。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">NE</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
-          <div class="b-stat"><div class="v">15</div><div class="l" data-lang-section="en">Top Level</div><div class="l" data-lang-section="ko">최상층</div></div>
-          <div class="b-stat"><div class="v">Park</div><div class="l" data-lang-section="en">Surroundings</div><div class="l" data-lang-section="ko">주변 환경</div></div>
+          <div class="b-stat"><div class="v">NE</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
+          <div class="b-stat"><div class="v">15</div><div class="l" data-lang-section="en">Top Level</div><div class="l" data-lang-section="ko">최상층</div><div class="l" data-lang-section="zh">顶层</div><div class="l" data-lang-section="zt">頂層</div></div>
+          <div class="b-stat"><div class="v">Park</div><div class="l" data-lang-section="en">Surroundings</div><div class="l" data-lang-section="ko">주변 환경</div><div class="l" data-lang-section="zh">周边环境</div><div class="l" data-lang-section="zt">周邊環境</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Stage 2 · East Facade</div>
-        <div class="b-lbl" data-lang-section="ko">2단계 · 동향 파사드</div>
+        <div class="b-lbl" data-lang-section="ko">2단계 · 동향 파사드</div><div class="b-lbl" data-lang-section="zh">第二期 · 东向立面</div><div class="b-lbl" data-lang-section="zt">第二期 · 東向立面</div>
         <div class="b-name">Building <em>A</em></div>
         <p class="b-sub" data-lang-block="en">12-level east-facing tower with two-storey townhouse stock at ground level — a rare offering in the Rhodes precinct.</p>
-        <p class="b-sub" data-lang-block="ko">12층 동향 타워, 지상층에 2층 타운하우스 — 로즈 권역에서 보기 드문 구성.</p>
+        <p class="b-sub" data-lang-block="ko">12층 동향 타워, 지상층에 2층 타운하우스 — 로즈 권역에서 보기 드문 구성.</p><p class="b-sub" data-lang-block="zh">12 层东向塔楼，地面层设双层联排别墅 —— 于 Rhodes 区域极为罕见。</p><p class="b-sub" data-lang-block="zt">12 層東向塔樓，地面層設雙層聯排別墅 —— 於 Rhodes 區域極爲罕見。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">12</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">East</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
+          <div class="b-stat"><div class="v">12</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">East</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Southeast Aspect</div>
-        <div class="b-lbl" data-lang-section="ko">남동향</div>
+        <div class="b-lbl" data-lang-section="ko">남동향</div><div class="b-lbl" data-lang-section="zh">东南向</div><div class="b-lbl" data-lang-section="zt">東南向</div>
         <div class="b-name">Building <em>B</em></div>
         <p class="b-sub" data-lang-block="en">South-east facing block, capturing morning light across the masterplan from the precinct's southern edge.</p>
-        <p class="b-sub" data-lang-block="ko">남동향 블록, 단지 남쪽에서 마스터플랜 전체로 아침 빛을 받습니다.</p>
+        <p class="b-sub" data-lang-block="ko">남동향 블록, 단지 남쪽에서 마스터플랜 전체로 아침 빛을 받습니다.</p><p class="b-sub" data-lang-block="zh">东南向地块，位于小区南侧，晨光洒遍整个总体规划区。</p><p class="b-sub" data-lang-block="zt">東南向地塊，位於小區南側，晨光灑遍整個總體規劃區。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">SE</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
+          <div class="b-stat"><div class="v">SE</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Stage 1 · West Facade</div>
-        <div class="b-lbl" data-lang-section="ko">1단계 · 서향 파사드</div>
+        <div class="b-lbl" data-lang-section="ko">1단계 · 서향 파사드</div><div class="b-lbl" data-lang-section="zh">第一期 · 西向立面</div><div class="b-lbl" data-lang-section="zt">第一期 · 西向立面</div>
         <div class="b-name">Building <em>C</em></div>
         <p class="b-sub" data-lang-block="en">9-level west-facing block — typical 1-bed and 2-bed apartments with wintergarden balconies. Afternoon and sunset light.</p>
-        <p class="b-sub" data-lang-block="ko">9층 서향 블록 — 윈터가든 발코니를 갖춘 1베드·2베드 평면. 오후와 일몰 빛.</p>
+        <p class="b-sub" data-lang-block="ko">9층 서향 블록 — 윈터가든 발코니를 갖춘 1베드·2베드 평면. 오후와 일몰 빛.</p><p class="b-sub" data-lang-block="zh">9 层西向地块 —— 配冬季花园阳台的 1 房与 2 房户型。享午后与日落光线。</p><p class="b-sub" data-lang-block="zt">9 層西向地塊 —— 配冬季花園陽臺的 1 房與 2 房戶型。享午後與日落光線。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">9</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">West</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
+          <div class="b-stat"><div class="v">9</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">West</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
         </div>
       </div>
 
       <div class="bldg-card">
         <div class="b-lbl" data-lang-section="en">Stage 1 · West Facade</div>
-        <div class="b-lbl" data-lang-section="ko">1단계 · 서향 파사드</div>
+        <div class="b-lbl" data-lang-section="ko">1단계 · 서향 파사드</div><div class="b-lbl" data-lang-section="zh">第一期 · 西向立面</div><div class="b-lbl" data-lang-section="zt">第一期 · 西向立面</div>
         <div class="b-name">Building <em>D</em></div>
         <p class="b-sub" data-lang-block="en">7-level west-facing block with typical 2-bed apartments — wintergarden plus balcony combinations.</p>
-        <p class="b-sub" data-lang-block="ko">7층 서향 블록, 윈터가든 + 발코니 조합을 갖춘 2베드 평면.</p>
+        <p class="b-sub" data-lang-block="ko">7층 서향 블록, 윈터가든 + 발코니 조합을 갖춘 2베드 평면.</p><p class="b-sub" data-lang-block="zh">7 层西向地块，2 房户型配冬季花园 + 阳台组合。</p><p class="b-sub" data-lang-block="zt">7 層西向地塊，2 房戶型配冬季花園 + 陽臺組合。</p>
         <div class="b-stats">
-          <div class="b-stat"><div class="v">7</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div></div>
-          <div class="b-stat"><div class="v">West</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div></div>
+          <div class="b-stat"><div class="v">7</div><div class="l" data-lang-section="en">Levels</div><div class="l" data-lang-section="ko">층수</div><div class="l" data-lang-section="zh">楼层</div><div class="l" data-lang-section="zt">樓層</div></div>
+          <div class="b-stat"><div class="v">West</div><div class="l" data-lang-section="en">Facing</div><div class="l" data-lang-section="ko">방향</div><div class="l" data-lang-section="zh">朝向</div><div class="l" data-lang-section="zt">朝向</div></div>
         </div>
       </div>
     </div>
@@ -1729,37 +1745,37 @@
         <div class="sec-tag">03 — Connectivity</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Express to the<br><em>city.</em> Ferry to come.</span>
-          <span data-lang-section="ko">시티로 향하는 <em>급행</em>,<br>곧 다가올 페리.</span>
+          <span data-lang-section="ko">시티로 향하는 <em>급행</em>,<br>곧 다가올 페리.</span><span data-lang-section="zh">直达市区的 <em>快车</em>，<br>渡轮亦将启用。</span><span data-lang-section="zt">直達市區的 <em>快車</em>，<br>渡輪亦將啓用。</span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Walking distance to Rhodes Station on the T9 Northern Line — express services to the CBD, Strathfield interchange and the Macquarie tech precinct. A future ferry wharf will add a riverside alternative.</span>
-        <span data-lang-section="ko">T9 노던 라인 로즈역까지 도보 거리 — CBD, 스트라스필드 환승역, 매쿼리 테크 권역까지 급행. 향후 페리 선착장이 강변 대안 교통수단으로 추가됩니다.</span>
+        <span data-lang-section="ko">T9 노던 라인 로즈역까지 도보 거리 — CBD, 스트라스필드 환승역, 매쿼리 테크 권역까지 급행. 향후 페리 선착장이 강변 대안 교통수단으로 추가됩니다.</span><span data-lang-section="zh">步行可达 T9 Northern Line 的 Rhodes 火车站 —— 快车直达 CBD、Strathfield 换乘站及 Macquarie 科技园区。未来渡轮码头将增添一条滨水替代通勤路线。</span><span data-lang-section="zt">步行可達 T9 Northern Line 的 Rhodes 火車站 —— 快車直達 CBD、Strathfield 換乘站及 Macquarie 科技園區。未來渡輪碼頭將增添一條濱水替代通勤路線。</span>
       </p>
     </div>
 
     <div class="conn-grid">
       <div class="conn-card">
         <div class="conn-sub" data-lang-section="en">By Train · Rhodes Station (Express)</div>
-        <div class="conn-sub" data-lang-section="ko">기차 · 로즈역 (급행)</div>
+        <div class="conn-sub" data-lang-section="ko">기차 · 로즈역 (급행)</div><div class="conn-sub" data-lang-section="zh">火车 · Rhodes 站（快车）</div><div class="conn-sub" data-lang-section="zt">火車 · Rhodes 站（快車）</div>
         <h3 data-lang-block="en">Express T9 line</h3>
-        <h3 data-lang-block="ko">급행 T9 라인</h3>
+        <h3 data-lang-block="ko">급행 T9 라인</h3><h3 data-lang-block="zh">T9 线快车</h3><h3 data-lang-block="zt">T9 線快車</h3>
         <ul class="conn-list">
           <li>
             <div class="conn-time">14<small>min</small></div>
             <div>
               <div class="conn-name">Burwood</div>
               <div class="conn-via" data-lang-block="en">Westfield Burwood & dining strip</div>
-              <div class="conn-via" data-lang-block="ko">웨스트필드 버우드 & 다이닝가</div>
+              <div class="conn-via" data-lang-block="ko">웨스트필드 버우드 & 다이닝가</div><div class="conn-via" data-lang-block="zh">Westfield Burwood 与美食街</div><div class="conn-via" data-lang-block="zt">Westfield Burwood 與美食街</div>
             </div>
           </li>
           <li>
             <div class="conn-time">19<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Sydney CBD (Central)</div>
-              <div class="conn-name" data-lang-block="ko">시드니 CBD (Central)</div>
+              <div class="conn-name" data-lang-block="ko">시드니 CBD (Central)</div><div class="conn-name" data-lang-block="zh">悉尼 CBD（Central 站）</div><div class="conn-name" data-lang-block="zt">悉尼 CBD（Central 站）</div>
               <div class="conn-via" data-lang-block="en">Direct express service</div>
-              <div class="conn-via" data-lang-block="ko">직통 급행 서비스</div>
+              <div class="conn-via" data-lang-block="ko">직통 급행 서비스</div><div class="conn-via" data-lang-block="zh">直达快车服务</div><div class="conn-via" data-lang-block="zt">直達快車服務</div>
             </div>
           </li>
           <li>
@@ -1767,7 +1783,7 @@
             <div>
               <div class="conn-name">Parramatta</div>
               <div class="conn-via" data-lang-block="en">Western Sydney's second CBD</div>
-              <div class="conn-via" data-lang-block="ko">웨스턴 시드니의 제2 CBD</div>
+              <div class="conn-via" data-lang-block="ko">웨스턴 시드니의 제2 CBD</div><div class="conn-via" data-lang-block="zh">西悉尼第二 CBD</div><div class="conn-via" data-lang-block="zt">西悉尼第二 CBD</div>
             </div>
           </li>
           <li>
@@ -1775,16 +1791,16 @@
             <div>
               <div class="conn-name">Macquarie Park</div>
               <div class="conn-via" data-lang-block="en">Tech & innovation precinct</div>
-              <div class="conn-via" data-lang-block="ko">테크 & 혁신 권역</div>
+              <div class="conn-via" data-lang-block="ko">테크 & 혁신 권역</div><div class="conn-via" data-lang-block="zh">科技与创新园区</div><div class="conn-via" data-lang-block="zt">科技與創新園區</div>
             </div>
           </li>
           <li>
             <div class="conn-time">↪</div>
             <div>
               <div class="conn-name" data-lang-block="en">Future Ferry Wharf</div>
-              <div class="conn-name" data-lang-block="ko">향후 페리 선착장</div>
+              <div class="conn-name" data-lang-block="ko">향후 페리 선착장</div><div class="conn-name" data-lang-block="zh">未来渡轮码头</div><div class="conn-name" data-lang-block="zt">未來渡輪碼頭</div>
               <div class="conn-via" data-lang-block="en">Riverside alternative to Circular Quay</div>
-              <div class="conn-via" data-lang-block="ko">서큘러 키로 향하는 강변 대안</div>
+              <div class="conn-via" data-lang-block="ko">서큘러 키로 향하는 강변 대안</div><div class="conn-via" data-lang-block="zh">通往 Circular Quay 的滨水路线</div><div class="conn-via" data-lang-block="zt">通往 Circular Quay 的濱水路線</div>
             </div>
           </li>
         </ul>
@@ -1792,17 +1808,17 @@
 
       <div class="conn-card">
         <div class="conn-sub" data-lang-section="en">By Foot & Car · From the doorstep</div>
-        <div class="conn-sub" data-lang-section="ko">도보 & 자동차 · 단지 앞에서</div>
+        <div class="conn-sub" data-lang-section="ko">도보 & 자동차 · 단지 앞에서</div><div class="conn-sub" data-lang-section="zh">步行与驾车 · 自小区门口起</div><div class="conn-sub" data-lang-section="zt">步行與駕車 · 自小區門口起</div>
         <h3 data-lang-block="en">Daily life around <em>Rhodes</em></h3>
-        <h3 data-lang-block="ko"><em>로즈</em>의 일상</h3>
+        <h3 data-lang-block="ko"><em>로즈</em>의 일상</h3><h3 data-lang-block="zh"><em>Rhodes</em> 的日常</h3><h3 data-lang-block="zt"><em>Rhodes</em> 的日常</h3>
         <ul class="conn-list">
           <li>
             <div class="conn-time">2<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Rhodes Central (Billbergia)</div>
-              <div class="conn-name" data-lang-block="ko">로즈 센트럴 (Billbergia)</div>
+              <div class="conn-name" data-lang-block="ko">로즈 센트럴 (Billbergia)</div><div class="conn-name" data-lang-block="zh">Rhodes Central（Billbergia 开发）</div><div class="conn-name" data-lang-block="zt">Rhodes Central（Billbergia 開發）</div>
               <div class="conn-via" data-lang-block="en">Woolworths · Asian grocer · gym · medical</div>
-              <div class="conn-via" data-lang-block="ko">울워스 · 아시안 식료품점 · 헬스장 · 진료소</div>
+              <div class="conn-via" data-lang-block="ko">울워스 · 아시안 식료품점 · 헬스장 · 진료소</div><div class="conn-via" data-lang-block="zh">Woolworths · 亚洲食品超市 · 健身房 · 诊所</div><div class="conn-via" data-lang-block="zt">Woolworths · 亞洲食品超市 · 健身房 · 診所</div>
             </div>
           </li>
           <li>
@@ -1810,34 +1826,34 @@
             <div>
               <div class="conn-name">Rhodes Waterside</div>
               <div class="conn-via" data-lang-block="en">131 shops · IKEA · Reading Cinema · 4 banks</div>
-              <div class="conn-via" data-lang-block="ko">131개 매장 · IKEA · 리딩 시네마 · 4대 은행</div>
+              <div class="conn-via" data-lang-block="ko">131개 매장 · IKEA · 리딩 시네마 · 4대 은행</div><div class="conn-via" data-lang-block="zh">131 家商铺 · IKEA · Reading Cinemas · 四大银行</div><div class="conn-via" data-lang-block="zt">131 家商鋪 · IKEA · Reading Cinemas · 四大銀行</div>
             </div>
           </li>
           <li>
             <div class="conn-time">5<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Brays Bay Reserve</div>
-              <div class="conn-name" data-lang-block="ko">브레이스 베이 리저브</div>
+              <div class="conn-name" data-lang-block="ko">브레이스 베이 리저브</div><div class="conn-name" data-lang-block="zh">Brays Bay Reserve</div><div class="conn-name" data-lang-block="zt">Brays Bay Reserve</div>
               <div class="conn-via" data-lang-block="en">Waterfront park & cycle path</div>
-              <div class="conn-via" data-lang-block="ko">강변 공원 & 자전거 도로</div>
+              <div class="conn-via" data-lang-block="ko">강변 공원 & 자전거 도로</div><div class="conn-via" data-lang-block="zh">河畔公园与自行车道</div><div class="conn-via" data-lang-block="zt">河畔公園與自行車道</div>
             </div>
           </li>
           <li>
             <div class="conn-time">7<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Concord General Hospital</div>
-              <div class="conn-name" data-lang-block="ko">콩코드 종합병원</div>
+              <div class="conn-name" data-lang-block="ko">콩코드 종합병원</div><div class="conn-name" data-lang-block="zh">Concord 综合医院</div><div class="conn-name" data-lang-block="zt">Concord 綜合醫院</div>
               <div class="conn-via" data-lang-block="en">Major Sydney teaching hospital</div>
-              <div class="conn-via" data-lang-block="ko">시드니 주요 교육 병원</div>
+              <div class="conn-via" data-lang-block="ko">시드니 주요 교육 병원</div><div class="conn-via" data-lang-block="zh">悉尼主要教学医院</div><div class="conn-via" data-lang-block="zt">悉尼主要教學醫院</div>
             </div>
           </li>
           <li>
             <div class="conn-time">8<small>min</small></div>
             <div>
               <div class="conn-name" data-lang-block="en">Rhodes Corporate Park</div>
-              <div class="conn-name" data-lang-block="ko">로즈 기업 단지</div>
+              <div class="conn-name" data-lang-block="ko">로즈 기업 단지</div><div class="conn-name" data-lang-block="zh">Rhodes 企业园区</div><div class="conn-name" data-lang-block="zt">Rhodes 企業園區</div>
               <div class="conn-via" data-lang-block="en">NAB · Unisys · HP · Nestlé · Frasers</div>
-              <div class="conn-via" data-lang-block="ko">NAB · 유니시스 · HP · 네슬레 · 프레이저스</div>
+              <div class="conn-via" data-lang-block="ko">NAB · 유니시스 · HP · 네슬레 · 프레이저스</div><div class="conn-via" data-lang-block="zh">NAB · Unisys · HP · Nestlé · Frasers</div><div class="conn-via" data-lang-block="zt">NAB · Unisys · HP · Nestlé · Frasers</div>
             </div>
           </li>
         </ul>
@@ -1846,9 +1862,9 @@
 
     <div class="precinct-note">
       <div class="pn-lbl" data-lang-section="en">NSW Government · Rhodes East Place Plan</div>
-      <div class="pn-lbl" data-lang-section="ko">NSW 정부 · Rhodes East Place Plan</div>
+      <div class="pn-lbl" data-lang-section="ko">NSW 정부 · Rhodes East Place Plan</div><div class="pn-lbl" data-lang-section="zh">NSW 政府 · Rhodes East Place Plan</div><div class="pn-lbl" data-lang-section="zt">NSW 政府 · Rhodes East Place Plan</div>
       <p data-lang-block="en">The wider Rhodes precinct is being transformed under the NSW Place Strategy: up to <em>4,200 new homes</em>, workspaces for over <em>1,100 new jobs</em>, <em>23,000 sqm of public space</em> — and a new primary school, waterfront dining precinct, and ferry wharf within walking distance of Rhodes Bay.</p>
-      <p data-lang-block="ko">광역 로즈 권역은 NSW Place Strategy에 따라 변모하고 있습니다: 최대 <em>4,200세대의 신규 주택</em>, <em>1,100개 이상의 신규 일자리</em>를 위한 업무 공간, <em>23,000㎡의 공공 공간</em> — 그리고 로즈 베이에서 도보 거리에 있는 새 초등학교, 수변 다이닝 권역, 페리 선착장.</p>
+      <p data-lang-block="ko">광역 로즈 권역은 NSW Place Strategy에 따라 변모하고 있습니다: 최대 <em>4,200세대의 신규 주택</em>, <em>1,100개 이상의 신규 일자리</em>를 위한 업무 공간, <em>23,000㎡의 공공 공간</em> — 그리고 로즈 베이에서 도보 거리에 있는 새 초등학교, 수변 다이닝 권역, 페리 선착장.</p><p data-lang-block="zh">大 Rhodes 区域正依据 NSW Place Strategy 焕新：最多 <em>4,200 套新增住宅</em>、可容纳 <em>1,100 个以上新增职位</em>的办公空间、<em>23,000 平方米公共空间</em> —— 以及步行可达 Rhodes Bay 的全新小学、滨水餐饮街区与渡轮码头。</p><p data-lang-block="zt">大 Rhodes 區域正依據 NSW Place Strategy 煥新：最多 <em>4,200 套新增住宅</em>、可容納 <em>1,100 個以上新增職位</em>的辦公空間、<em>23,000 平方米公共空間</em> —— 以及步行可達 Rhodes Bay 的全新小學、濱水餐飲街區與渡輪碼頭。</p>
     </div>
   </div>
 </section>
@@ -1861,21 +1877,21 @@
         <div class="sec-tag">04 — Amenities & Retail</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Foreshore park.<br>Rooftop <em>gardens.</em></span>
-          <span data-lang-section="ko">강변 공원.<br>옥상 <em>정원.</em></span>
+          <span data-lang-section="ko">강변 공원.<br>옥상 <em>정원.</em></span><span data-lang-section="zh">河畔公园。<br>屋顶 <em>花园。</em></span><span data-lang-section="zt">河畔公園。<br>屋頂 <em>花園。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Resident-only amenities curated around the waterfront — a foreshore park, rooftop gardens, putting greens and an indoor virtual golf room. A retail and dining precinct at ground level brings the village to your doorstep.</span>
-        <span data-lang-section="ko">강변을 중심으로 큐레이션된 입주민 전용 편의시설 — 강변 공원, 옥상 정원, 퍼팅 그린, 실내 가상 골프룸. 지상층의 리테일·다이닝 권역이 마을을 현관 앞으로 가져옵니다.</span>
+        <span data-lang-section="ko">강변을 중심으로 큐레이션된 입주민 전용 편의시설 — 강변 공원, 옥상 정원, 퍼팅 그린, 실내 가상 골프룸. 지상층의 리테일·다이닝 권역이 마을을 현관 앞으로 가져옵니다.</span><span data-lang-section="zh">围绕水岸精心规划的住户专属配套 —— 河畔公园、屋顶花园、推杆果岭与室内模拟高尔夫室。地面层的商业与餐饮街区，将村落生活带到家门口。</span><span data-lang-section="zt">圍繞水岸精心規劃的住戶專屬配套 —— 河畔公園、屋頂花園、推杆果嶺與室內模擬高爾夫室。地面層的商業與餐飲街區，將村落生活帶到家門口。</span>
       </p>
     </div>
 
     <div class="amenities-grid">
       <div class="am-block feature">
         <div class="am-eyebrow" data-lang-section="en">Resident Amenities</div>
-        <div class="am-eyebrow" data-lang-section="ko">입주민 편의시설</div>
+        <div class="am-eyebrow" data-lang-section="ko">입주민 편의시설</div><div class="am-eyebrow" data-lang-section="zh">住户配套设施</div><div class="am-eyebrow" data-lang-section="zt">住戶配套設施</div>
         <h3 data-lang-block="en">A <em>waterfront</em> retreat</h3>
-        <h3 data-lang-block="ko">강변 <em>휴식처</em></h3>
+        <h3 data-lang-block="ko">강변 <em>휴식처</em></h3><h3 data-lang-block="zh">水岸 <em>憩所</em></h3><h3 data-lang-block="zt">水岸 <em>憩所</em></h3>
         <ul>
           <li data-lang-block="en">Foreshore park & promenade</li>
           <li data-lang-block="en">Through-site pedestrian link</li>
@@ -1885,21 +1901,21 @@
           <li data-lang-block="en">Communal lounge & meeting room</li>
           <li data-lang-block="en">Onsite car parking</li>
 
-          <li data-lang-block="ko">강변 공원 & 산책로</li>
-          <li data-lang-block="ko">단지 관통 보행 통로</li>
-          <li data-lang-block="ko">옥상 정원</li>
-          <li data-lang-block="ko">퍼팅 그린</li>
-          <li data-lang-block="ko">실내 가상 골프룸</li>
-          <li data-lang-block="ko">공용 라운지 & 회의실</li>
-          <li data-lang-block="ko">단지 내 주차</li>
+          <li data-lang-block="ko">강변 공원 & 산책로</li><li data-lang-block="zh">河畔公园与滨水步道</li><li data-lang-block="zt">河畔公園與濱水步道</li>
+          <li data-lang-block="ko">단지 관통 보행 통로</li><li data-lang-block="zh">贯穿小区的步行通道</li><li data-lang-block="zt">貫穿小區的步行通道</li>
+          <li data-lang-block="ko">옥상 정원</li><li data-lang-block="zh">屋顶花园</li><li data-lang-block="zt">屋頂花園</li>
+          <li data-lang-block="ko">퍼팅 그린</li><li data-lang-block="zh">推杆果岭</li><li data-lang-block="zt">推杆果嶺</li>
+          <li data-lang-block="ko">실내 가상 골프룸</li><li data-lang-block="zh">室内模拟高尔夫室</li><li data-lang-block="zt">室內模擬高爾夫室</li>
+          <li data-lang-block="ko">공용 라운지 & 회의실</li><li data-lang-block="zh">公共休息厅与会议室</li><li data-lang-block="zt">公共休息廳與會議室</li>
+          <li data-lang-block="ko">단지 내 주차</li><li data-lang-block="zh">区内停车</li><li data-lang-block="zt">區內停車</li>
         </ul>
       </div>
 
       <div class="am-block warm">
         <div class="am-eyebrow" data-lang-section="en">On-Site & Nearby Retail</div>
-        <div class="am-eyebrow" data-lang-section="ko">단지 내 & 인근 리테일</div>
+        <div class="am-eyebrow" data-lang-section="ko">단지 내 & 인근 리테일</div><div class="am-eyebrow" data-lang-section="zh">区内与周边商业</div><div class="am-eyebrow" data-lang-section="zt">區內與周邊商業</div>
         <h3 data-lang-block="en">Destination <em>retail</em></h3>
-        <h3 data-lang-block="ko">목적지가 되는 <em>리테일</em></h3>
+        <h3 data-lang-block="ko">목적지가 되는 <em>리테일</em></h3><h3 data-lang-block="zh">成为目的地的 <em>商业街区</em></h3><h3 data-lang-block="zt">成爲目的地的 <em>商業街區</em></h3>
         <ul>
           <li data-lang-block="en">Restaurant & entertainment precinct (on-site)</li>
           <li data-lang-block="en">Rhodes Central — Woolworths, Asian grocer, gym, medical</li>
@@ -1908,12 +1924,12 @@
           <li data-lang-block="en">Concord General Hospital nearby</li>
           <li data-lang-block="en">Rhodes Corporate Park — major employers</li>
 
-          <li data-lang-block="ko">레스토랑 & 엔터테인먼트 권역 (단지 내)</li>
-          <li data-lang-block="ko">로즈 센트럴 — 울워스 · 아시안 식료품점 · 헬스장 · 진료소</li>
-          <li data-lang-block="ko">로즈 워터사이드 — 131개 매장 · IKEA · 리딩 시네마</li>
-          <li data-lang-block="ko">향후 수변 다이닝 권역 (Place Strategy)</li>
-          <li data-lang-block="ko">콩코드 종합병원 인근</li>
-          <li data-lang-block="ko">로즈 기업 단지 — 주요 고용주</li>
+          <li data-lang-block="ko">레스토랑 & 엔터테인먼트 권역 (단지 내)</li><li data-lang-block="zh">餐饮与娱乐街区（区内）</li><li data-lang-block="zt">餐飲與娛樂街區（區內）</li>
+          <li data-lang-block="ko">로즈 센트럴 — 울워스 · 아시안 식료품점 · 헬스장 · 진료소</li><li data-lang-block="zh">Rhodes Central —— Woolworths · 亚洲食品超市 · 健身房 · 诊所</li><li data-lang-block="zt">Rhodes Central —— Woolworths · 亞洲食品超市 · 健身房 · 診所</li>
+          <li data-lang-block="ko">로즈 워터사이드 — 131개 매장 · IKEA · 리딩 시네마</li><li data-lang-block="zh">Rhodes Waterside —— 131 家商铺 · IKEA · Reading Cinemas</li><li data-lang-block="zt">Rhodes Waterside —— 131 家商鋪 · IKEA · Reading Cinemas</li>
+          <li data-lang-block="ko">향후 수변 다이닝 권역 (Place Strategy)</li><li data-lang-block="zh">未来滨水餐饮街区（Place Strategy）</li><li data-lang-block="zt">未來濱水餐飲街區（Place Strategy）</li>
+          <li data-lang-block="ko">콩코드 종합병원 인근</li><li data-lang-block="zh">毗邻 Concord 综合医院</li><li data-lang-block="zt">毗鄰 Concord 綜合醫院</li>
+          <li data-lang-block="ko">로즈 기업 단지 — 주요 고용주</li><li data-lang-block="zh">Rhodes 企业园区 —— 区内主要雇主</li><li data-lang-block="zt">Rhodes 企業園區 —— 區內主要僱主</li>
         </ul>
       </div>
     </div>
@@ -1923,21 +1939,21 @@
       <div class="rec-text">
         <h4>
           <span data-lang-section="en">The <em>Recreation Centre</em></span>
-          <span data-lang-section="ko"><em>레크리에이션 센터</em></span>
+          <span data-lang-section="ko"><em>레크리에이션 센터</em></span><span data-lang-section="zh"><em>康体中心</em></span><span data-lang-section="zt"><em>康體中心</em></span>
         </h4>
         <p data-lang-block="en">Billbergia's $85M state-of-the-art wellness facility — gymnastics, café, coworking, health club, badminton. Opening alongside the Rhodes precinct revitalisation.</p>
-        <p data-lang-block="ko">Billbergia의 $8,500만 최첨단 웰니스 시설 — 체조, 카페, 코워킹, 헬스클럽, 배드민턴. 로즈 권역 재생과 함께 오픈.</p>
+        <p data-lang-block="ko">Billbergia의 $8,500만 최첨단 웰니스 시설 — 체조, 카페, 코워킹, 헬스클럽, 배드민턴. 로즈 권역 재생과 함께 오픈.</p><p data-lang-block="zh">Billbergia 投资 8,500 万澳元打造的尖端康体设施 —— 涵盖体操、咖啡馆、共享办公、健身俱乐部与羽毛球。随 Rhodes 区域更新同步启用。</p><p data-lang-block="zt">Billbergia 投資 8,500 萬澳元打造的尖端康體設施 —— 涵蓋體操、咖啡館、共享辦公、健身俱樂部與羽毛球。隨 Rhodes 區域更新同步啓用。</p>
       </div>
       <div class="rec-stats">
         <div class="rec-stat">
           <div class="v">9,100<small>m²</small></div>
           <div class="l" data-lang-section="en">Floor Area</div>
-          <div class="l" data-lang-section="ko">연면적</div>
+          <div class="l" data-lang-section="ko">연면적</div><div class="l" data-lang-section="zh">建筑面积</div><div class="l" data-lang-section="zt">建築面積</div>
         </div>
         <div class="rec-stat">
           <div class="v">$85<small>M</small></div>
           <div class="l" data-lang-section="en">Investment</div>
-          <div class="l" data-lang-section="ko">투자 규모</div>
+          <div class="l" data-lang-section="ko">투자 규모</div><div class="l" data-lang-section="zh">投资规模</div><div class="l" data-lang-section="zt">投資規模</div>
         </div>
       </div>
     </div>
@@ -1952,54 +1968,54 @@
         <div class="sec-tag">05 — Apartment Features</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Bespoke,<br><em>by design.</em></span>
-          <span data-lang-section="ko">맞춤형,<br><em>설계부터.</em></span>
+          <span data-lang-section="ko">맞춤형,<br><em>설계부터.</em></span><span data-lang-section="zh">量身定制，<br><em>始于设计。</em></span><span data-lang-section="zt">量身定製，<br><em>始於設計。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Boutique apartments designed for the modern Sydney-sider — every layout considered for orientation, light, and the rare privilege of a wintergarden over open water.</span>
-        <span data-lang-section="ko">현대 시드니 주민을 위해 설계된 부티크 아파트 — 모든 평면이 방향, 빛, 그리고 열린 수면을 향한 윈터가든이라는 흔치 않은 특권을 고려해 만들어졌습니다.</span>
+        <span data-lang-section="ko">현대 시드니 주민을 위해 설계된 부티크 아파트 — 모든 평면이 방향, 빛, 그리고 열린 수면을 향한 윈터가든이라는 흔치 않은 특권을 고려해 만들어졌습니다.</span><span data-lang-section="zh">为当代悉尼居民而设的精品公寓 —— 每一个户型皆着眼于朝向、采光，以及面向开阔水面的冬季花园这一难得优势。</span><span data-lang-section="zt">爲當代悉尼居民而設的精品公寓 —— 每一個戶型皆着眼於朝向、採光，以及面向開闊水面的冬季花園這一難得優勢。</span>
       </p>
     </div>
 
     <div class="features-headline">
       <div class="features-text">
         <p class="lead" data-lang-block="en">Wintergardens are the signature feature of Rhodes Bay — enclosed glazed balconies that extend living space year-round.</p>
-        <p class="lead" data-lang-block="ko">윈터가든은 로즈 베이의 시그니처 — 사계절 거실 공간을 확장하는 유리로 둘러싸인 발코니입니다.</p>
+        <p class="lead" data-lang-block="ko">윈터가든은 로즈 베이의 시그니처 — 사계절 거실 공간을 확장하는 유리로 둘러싸인 발코니입니다.</p><p class="lead" data-lang-block="zh">冬季花园是 Rhodes Bay 的标志 —— 以玻璃围合的阳台，四季延展您的起居空间。</p><p class="lead" data-lang-block="zt">冬季花園是 Rhodes Bay 的標誌 —— 以玻璃圍合的陽臺，四季延展您的起居空間。</p>
 
         <p data-lang-block="en">Stage 1 brings <strong>Buildings C, D and E</strong> to market with 1-bedroom, 2-bedroom and 3-bedroom configurations. Stage 2 follows with <strong>Buildings A and F</strong> — the latter featuring large balconies on the river side, plus rare <strong>dual-key</strong> 3-bedroom layouts and the 4-bedroom premium stock.</p>
         <p data-lang-block="en">Across the masterplan, <strong>seven 2-storey townhouses</strong> sit at the ground level of Buildings A and D — among the rarest stock in the entire Rhodes peninsula.</p>
 
-        <p data-lang-block="ko">1단계에서는 <strong>C, D, E 빌딩</strong>이 1베드·2베드·3베드 평면으로 출시됩니다. 2단계는 <strong>A, F 빌딩</strong>이 이어지며, F 빌딩은 강쪽 대형 발코니와 함께 희귀한 <strong>듀얼키</strong> 3베드 평면, 그리고 4베드 프리미엄 평면을 갖습니다.</p>
-        <p data-lang-block="ko">마스터플랜 전체에서, <strong>2층 타운하우스 7세대</strong>가 A·D 빌딩 지상층에 자리합니다 — 로즈 반도 전체에서 가장 희귀한 평면 중 하나입니다.</p>
+        <p data-lang-block="ko">1단계에서는 <strong>C, D, E 빌딩</strong>이 1베드·2베드·3베드 평면으로 출시됩니다. 2단계는 <strong>A, F 빌딩</strong>이 이어지며, F 빌딩은 강쪽 대형 발코니와 함께 희귀한 <strong>듀얼키</strong> 3베드 평면, 그리고 4베드 프리미엄 평면을 갖습니다.</p><p data-lang-block="zh">第一期推出 <strong>C、D、E 栋</strong>，涵盖 1 房、2 房与 3 房户型。第二期为 <strong>A、F 栋</strong>，其中 F 栋设有配朝河大阳台的稀有<strong>双钥匙</strong>3 房户型，以及 4 房尊享户型。</p><p data-lang-block="zt">第一期推出 <strong>C、D、E 棟</strong>，涵蓋 1 房、2 房與 3 房戶型。第二期爲 <strong>A、F 棟</strong>，其中 F 棟設有配朝河大陽臺的稀有<strong>雙鑰匙</strong>3 房戶型，以及 4 房尊享戶型。</p>
+        <p data-lang-block="ko">마스터플랜 전체에서, <strong>2층 타운하우스 7세대</strong>가 A·D 빌딩 지상층에 자리합니다 — 로즈 반도 전체에서 가장 희귀한 평면 중 하나입니다.</p><p data-lang-block="zh">在整个总体规划中，<strong>7 套双层联排别墅</strong>坐落于 A、D 栋地面层 —— 属 Rhodes 半岛最为稀有的户型之一。</p><p data-lang-block="zt">在整個總體規劃中，<strong>7 套雙層聯排別墅</strong>坐落於 A、D 棟地面層 —— 屬 Rhodes 半島最爲稀有的戶型之一。</p>
       </div>
 
       <div class="upgrades-card">
         <h4 data-lang-section="en">Bespoke Upgrade Options</h4>
-        <h4 data-lang-section="ko">맞춤형 업그레이드 옵션</h4>
+        <h4 data-lang-section="ko">맞춤형 업그레이드 옵션</h4><h4 data-lang-section="zh">定制升级选项</h4><h4 data-lang-section="zt">定製升級選項</h4>
         <div class="upgrade-row">
           <div class="upgrade-num"><em>i.</em></div>
           <div class="upgrade-name" data-lang-block="en">EV Charger<small>Dedicated charger installation in your parking space</small></div>
-          <div class="upgrade-name" data-lang-block="ko">EV 충전기<small>주차 공간에 전용 충전기 설치</small></div>
+          <div class="upgrade-name" data-lang-block="ko">EV 충전기<small>주차 공간에 전용 충전기 설치</small></div><div class="upgrade-name" data-lang-block="zh">电动车充电桩<small>于车位加装专属充电桩</small></div><div class="upgrade-name" data-lang-block="zt">電動車充電樁<small>於車位加裝專屬充電樁</small></div>
         </div>
         <div class="upgrade-row">
           <div class="upgrade-num"><em>ii.</em></div>
           <div class="upgrade-name" data-lang-block="en">Study Joinery<small>Built-in desk and shelving unit, subject to layout</small></div>
-          <div class="upgrade-name" data-lang-block="ko">스터디 조이너리<small>붙박이 책상과 선반 유닛, 평면에 따라 다름</small></div>
+          <div class="upgrade-name" data-lang-block="ko">스터디 조이너리<small>붙박이 책상과 선반 유닛, 평면에 따라 다름</small></div><div class="upgrade-name" data-lang-block="zh">书房木作<small>嵌入式书桌与层架组合，视户型而定</small></div><div class="upgrade-name" data-lang-block="zt">書房木作<small>嵌入式書桌與層架組合，視戶型而定</small></div>
         </div>
         <div class="upgrade-row">
           <div class="upgrade-num"><em>iii.</em></div>
           <div class="upgrade-name" data-lang-block="en">TV Joinery<small>Full-wall media unit with timber laminate and stone accents</small></div>
-          <div class="upgrade-name" data-lang-block="ko">TV 조이너리<small>목재 라미네이트와 스톤 액센트의 전면 미디어 유닛</small></div>
+          <div class="upgrade-name" data-lang-block="ko">TV 조이너리<small>목재 라미네이트와 스톤 액센트의 전면 미디어 유닛</small></div><div class="upgrade-name" data-lang-block="zh">电视木作<small>木纹饰面搭配石材点缀的整面影音柜</small></div><div class="upgrade-name" data-lang-block="zt">電視木作<small>木紋飾面搭配石材點綴的整面影音櫃</small></div>
         </div>
         <div class="upgrade-row">
           <div class="upgrade-num"><em>iv.</em></div>
           <div class="upgrade-name" data-lang-block="en">Entry Cupboard<small>Concealed storage at the apartment entry</small></div>
-          <div class="upgrade-name" data-lang-block="ko">엔트리 컵보드<small>현관 입구 숨김 수납장</small></div>
+          <div class="upgrade-name" data-lang-block="ko">엔트리 컵보드<small>현관 입구 숨김 수납장</small></div><div class="upgrade-name" data-lang-block="zh">玄关柜<small>入户处的隐藏式收纳柜</small></div><div class="upgrade-name" data-lang-block="zt">玄關櫃<small>入戶處的隱藏式收納櫃</small></div>
         </div>
         <div class="upgrade-row">
           <div class="upgrade-num"><em>v.</em></div>
           <div class="upgrade-name" data-lang-block="en">Wet Bar<small>Cocktail bar with benchtop, splashback and storage</small></div>
-          <div class="upgrade-name" data-lang-block="ko">웻바<small>벤치탑·스플래시백·수납을 갖춘 칵테일 바</small></div>
+          <div class="upgrade-name" data-lang-block="ko">웻바<small>벤치탑·스플래시백·수납을 갖춘 칵테일 바</small></div><div class="upgrade-name" data-lang-block="zh">湿吧<small>配台面、防溅板与收纳的鸡尾酒吧台</small></div><div class="upgrade-name" data-lang-block="zt">溼吧<small>配檯面、防濺板與收納的雞尾酒吧檯</small></div>
         </div>
       </div>
     </div>
@@ -2014,12 +2030,12 @@
         <div class="sec-tag">06 — Interior Schemes</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Two finishes.<br>One <em>standard.</em></span>
-          <span data-lang-section="ko">두 가지 마감.<br>하나의 <em>기준.</em></span>
+          <span data-lang-section="ko">두 가지 마감.<br>하나의 <em>기준.</em></span><span data-lang-section="zh">两款饰面。<br>同一 <em>标准。</em></span><span data-lang-section="zt">兩款飾面。<br>同一 <em>標準。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Choose between two distinct finish schedules — Amber for warmth and depth, Pearl for light and openness. Both designed to feel timeless against the waterfront backdrop.</span>
-        <span data-lang-section="ko">두 가지 차별화된 마감 옵션 — 따스함과 깊이의 Amber, 빛과 개방감의 Pearl. 두 스킴 모두 수변 배경 앞에서 시대를 초월한 느낌을 줍니다.</span>
+        <span data-lang-section="ko">두 가지 차별화된 마감 옵션 — 따스함과 깊이의 Amber, 빛과 개방감의 Pearl. 두 스킴 모두 수변 배경 앞에서 시대를 초월한 느낌을 줍니다.</span><span data-lang-section="zh">两款风格分明的饰面可选 —— 温润深沉的 Amber，通透明亮的 Pearl。两款方案在水岸背景下皆显隽永。</span><span data-lang-section="zt">兩款風格分明的飾面可選 —— 溫潤深沉的 Amber，通透明亮的 Pearl。兩款方案在水岸背景下皆顯雋永。</span>
       </p>
     </div>
 
@@ -2027,7 +2043,7 @@
       <img src="./assets/rhodes-bay/interior.jpg" alt="Living room rendering with floor-to-ceiling glass opening onto a balcony overlooking Parramatta River, in the Pearl scheme" loading="lazy" />
       <figcaption>
         <span class="mc-title" data-lang-section="en">A living room opens onto the river — Pearl scheme shown.</span>
-        <span class="mc-title" data-lang-section="ko">강을 향해 열리는 거실 — Pearl 스킴 예시.</span>
+        <span class="mc-title" data-lang-section="ko">강을 향해 열리는 거실 — Pearl 스킴 예시.</span><span class="mc-title" data-lang-section="zh">朝河敞开的起居空间 —— Pearl 方案示例。</span><span class="mc-title" data-lang-section="zt">朝河敞開的起居空間 —— Pearl 方案示例。</span>
         <span class="mc-meta">Indicative · Pearl</span>
       </figcaption>
     </figure>
@@ -2040,9 +2056,9 @@
         <div class="scheme-body">
           <h3 class="scheme-name"><em>Amber</em></h3>
           <p class="scheme-desc" data-lang-block="en">Rich warm tones with timber finishes and bronze accents — a deep, grounded interior expression for sunset-facing aspects.</p>
-          <p class="scheme-desc" data-lang-block="ko">목재 마감과 브론즈 액센트의 풍부한 따스한 톤 — 일몰 향 평면을 위한 깊고 안정된 인테리어 표현.</p>
+          <p class="scheme-desc" data-lang-block="ko">목재 마감과 브론즈 액센트의 풍부한 따스한 톤 — 일몰 향 평면을 위한 깊고 안정된 인테리어 표현.</p><p class="scheme-desc" data-lang-block="zh">木质饰面与青铜点缀交织的浓郁暖调 —— 为朝向日落的户型带来深邃沉稳的室内表达。</p><p class="scheme-desc" data-lang-block="zt">木質飾面與青銅點綴交織的濃郁暖調 —— 爲朝向日落的戶型帶來深邃沉穩的室內表達。</p>
           <div class="scheme-mood" data-lang-block="en">"Rich. Grounded. Atmospheric."</div>
-          <div class="scheme-mood" data-lang-block="ko">"풍부한. 안정된. 분위기 있는."</div>
+          <div class="scheme-mood" data-lang-block="ko">"풍부한. 안정된. 분위기 있는."</div><div class="scheme-mood" data-lang-block="zh">「浓郁。沉稳。有氛围。」</div><div class="scheme-mood" data-lang-block="zt">「濃郁。沉穩。有氛圍。」</div>
         </div>
       </div>
 
@@ -2053,16 +2069,16 @@
         <div class="scheme-body">
           <h3 class="scheme-name"><em>Pearl</em></h3>
           <p class="scheme-desc" data-lang-block="en">Soft luminous tones with light timbers and warm whites — opening up the wintergarden and amplifying the river light.</p>
-          <p class="scheme-desc" data-lang-block="ko">밝은 목재와 따스한 화이트의 부드럽고 빛나는 톤 — 윈터가든을 열어주고 강의 빛을 증폭시킵니다.</p>
+          <p class="scheme-desc" data-lang-block="ko">밝은 목재와 따스한 화이트의 부드럽고 빛나는 톤 — 윈터가든을 열어주고 강의 빛을 증폭시킵니다.</p><p class="scheme-desc" data-lang-block="zh">浅色木材与暖白交织的柔和通透色调 —— 让冬季花园更显开阔，并放大河面的光线。</p><p class="scheme-desc" data-lang-block="zt">淺色木材與暖白交織的柔和通透色調 —— 讓冬季花園更顯開闊，並放大河面的光線。</p>
           <div class="scheme-mood" data-lang-block="en">"Bright. Calm. Luminous."</div>
-          <div class="scheme-mood" data-lang-block="ko">"밝은. 차분한. 빛나는."</div>
+          <div class="scheme-mood" data-lang-block="ko">"밝은. 차분한. 빛나는."</div><div class="scheme-mood" data-lang-block="zh">「明亮。恬静。通透。」</div><div class="scheme-mood" data-lang-block="zt">「明亮。恬靜。通透。」</div>
         </div>
       </div>
     </div>
 
     <p style="margin-top:48px;text-align:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);">
       <span data-lang-section="en">Both schemes include integrated kitchen appliances · stone benchtops · timber-look hybrid flooring · designer tapware</span>
-      <span data-lang-section="ko">두 스킴 모두 빌트인 키친 가전 · 스톤 벤치탑 · 목재 룩 하이브리드 플로어링 · 디자이너 수도꼭지 포함</span>
+      <span data-lang-section="ko">두 스킴 모두 빌트인 키친 가전 · 스톤 벤치탑 · 목재 룩 하이브리드 플로어링 · 디자이너 수도꼭지 포함</span><span data-lang-section="zh">两款方案均含嵌入式厨房家电 · 石材台面 · 木纹复合地板 · 设计师龙头</span><span data-lang-section="zt">兩款方案均含嵌入式廚房家電 · 石材檯面 · 木紋複合地板 · 設計師龍頭</span>
     </p>
   </div>
 </section>
@@ -2075,12 +2091,12 @@
         <div class="sec-tag">07 — Stages & Typologies</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Two stages.<br>Six <em>buildings.</em></span>
-          <span data-lang-section="ko">두 단계.<br>여섯 <em>빌딩.</em></span>
+          <span data-lang-section="ko">두 단계.<br>여섯 <em>빌딩.</em></span><span data-lang-section="zh">两期开发。<br>六栋 <em>楼宇。</em></span><span data-lang-section="zt">兩期開發。<br>六棟 <em>樓宇。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Stage 1 brings the inner blocks (C, D, E) to market first. Stage 2 follows with Buildings A and F — including the absolute-waterfront F tower and rare townhouse stock.</span>
-        <span data-lang-section="ko">1단계는 내측 블록(C, D, E)을 먼저 시장에 선보입니다. 2단계는 절대 수변 F 타워와 희귀한 타운하우스를 포함한 A·F 빌딩이 이어집니다.</span>
+        <span data-lang-section="ko">1단계는 내측 블록(C, D, E)을 먼저 시장에 선보입니다. 2단계는 절대 수변 F 타워와 희귀한 타운하우스를 포함한 A·F 빌딩이 이어집니다.</span><span data-lang-section="zh">第一期率先推出内侧地块（C、D、E 栋）。第二期为 A、F 栋，含纯正水岸的 F 座塔楼及稀有的联排别墅。</span><span data-lang-section="zt">第一期率先推出內側地塊（C、D、E 棟）。第二期爲 A、F 棟，含純正水岸的 F 座塔樓及稀有的聯排別墅。</span>
       </p>
     </div>
 
@@ -2088,17 +2104,17 @@
       <div class="stage-card">
         <div class="stage-head">
           <div class="s-lbl" data-lang-section="en">Stage 1 · Now Selling</div>
-          <div class="s-lbl" data-lang-section="ko">1단계 · 분양 중</div>
+          <div class="s-lbl" data-lang-section="ko">1단계 · 분양 중</div><div class="s-lbl" data-lang-section="zh">第一期 · 发售中</div><div class="s-lbl" data-lang-section="zt">第一期 · 發售中</div>
           <div class="s-name">Stage <em>One</em></div>
           <div class="s-sub" data-lang-block="en">Buildings C, D and E — inner blocks with wintergarden balconies.</div>
-          <div class="s-sub" data-lang-block="ko">C, D, E 빌딩 — 윈터가든 발코니를 갖춘 내측 블록.</div>
+          <div class="s-sub" data-lang-block="ko">C, D, E 빌딩 — 윈터가든 발코니를 갖춘 내측 블록.</div><div class="s-sub" data-lang-block="zh">C、D、E 栋 —— 配冬季花园阳台的内侧地块。</div><div class="s-sub" data-lang-block="zt">C、D、E 棟 —— 配冬季花園陽臺的內側地塊。</div>
         </div>
         <ul class="stage-rows">
           <li>
             <div class="sr-bldg">C</div>
             <div class="sr-info">
               <span data-lang-block="en">1 Bed · Wintergarden</span>
-              <span data-lang-block="ko">1베드 · 윈터가든</span>
+              <span data-lang-block="ko">1베드 · 윈터가든</span><span data-lang-block="zh">1 房 · 冬季花园</span><span data-lang-block="zt">1 房 · 冬季花園</span>
               <span class="sr-config">WEST FACING · 1 BATH</span>
             </div>
             <div class="sr-level">Lv 1–9</div>
@@ -2107,7 +2123,7 @@
             <div class="sr-bldg">D</div>
             <div class="sr-info">
               <span data-lang-block="en">2 Bed · Wintergarden + Balcony</span>
-              <span data-lang-block="ko">2베드 · 윈터가든 + 발코니</span>
+              <span data-lang-block="ko">2베드 · 윈터가든 + 발코니</span><span data-lang-block="zh">2 房 · 冬季花园 + 阳台</span><span data-lang-block="zt">2 房 · 冬季花園 + 陽臺</span>
               <span class="sr-config">WEST FACING · 2 BATH · 1 CAR</span>
             </div>
             <div class="sr-level">Lv 1–7</div>
@@ -2116,7 +2132,7 @@
             <div class="sr-bldg">E</div>
             <div class="sr-info">
               <span data-lang-block="en">3 Bed · Balcony</span>
-              <span data-lang-block="ko">3베드 · 발코니</span>
+              <span data-lang-block="ko">3베드 · 발코니</span><span data-lang-block="zh">3 房 · 阳台</span><span data-lang-block="zt">3 房 · 陽臺</span>
               <span class="sr-config">NORTH FACING · 2 BATH</span>
             </div>
             <div class="sr-level">Lv 1–8</div>
@@ -2125,7 +2141,7 @@
             <div class="sr-bldg">E</div>
             <div class="sr-info">
               <span data-lang-block="en">2 Bed + Study · Window Study</span>
-              <span data-lang-block="ko">2베드 + 스터디 · 창측 스터디</span>
+              <span data-lang-block="ko">2베드 + 스터디 · 창측 스터디</span><span data-lang-block="zh">2 房 + 书房 · 临窗书房</span><span data-lang-block="zt">2 房 + 書房 · 臨窗書房</span>
               <span class="sr-config">EAST FACING · 2 BATH</span>
             </div>
             <div class="sr-level">Lv 1–8</div>
@@ -2136,17 +2152,17 @@
       <div class="stage-card">
         <div class="stage-head">
           <div class="s-lbl" data-lang-section="en">Stage 2 · Coming Soon</div>
-          <div class="s-lbl" data-lang-section="ko">2단계 · 출시 예정</div>
+          <div class="s-lbl" data-lang-section="ko">2단계 · 출시 예정</div><div class="s-lbl" data-lang-section="zh">第二期 · 即将推出</div><div class="s-lbl" data-lang-section="zt">第二期 · 即將推出</div>
           <div class="s-name">Stage <em>Two</em></div>
           <div class="s-sub" data-lang-block="en">Buildings A and F — including the absolute-waterfront F tower.</div>
-          <div class="s-sub" data-lang-block="ko">A·F 빌딩 — 절대 수변 F 타워 포함.</div>
+          <div class="s-sub" data-lang-block="ko">A·F 빌딩 — 절대 수변 F 타워 포함.</div><div class="s-sub" data-lang-block="zh">A、F 栋 —— 含纯正水岸的 F 座塔楼。</div><div class="s-sub" data-lang-block="zt">A、F 棟 —— 含純正水岸的 F 座塔樓。</div>
         </div>
         <ul class="stage-rows">
           <li>
             <div class="sr-bldg">A</div>
             <div class="sr-info">
               <span data-lang-block="en">East-facing residences</span>
-              <span data-lang-block="ko">동향 레지던스</span>
+              <span data-lang-block="ko">동향 레지던스</span><span data-lang-block="zh">东向住宅</span><span data-lang-block="zt">東向住宅</span>
               <span class="sr-config">LEVELS G–12 · MIXED CONFIG</span>
             </div>
             <div class="sr-level">Lv G–12</div>
@@ -2155,7 +2171,7 @@
             <div class="sr-bldg">A</div>
             <div class="sr-info">
               <span data-lang-block="en">Level 12 Dual-Key 3 Bed</span>
-              <span data-lang-block="ko">12층 듀얼키 3베드</span>
+              <span data-lang-block="ko">12층 듀얼키 3베드</span><span data-lang-block="zh">12 层双钥匙 3 房</span><span data-lang-block="zt">12 層雙鑰匙 3 房</span>
               <span class="sr-config">3 UNITS ONLY · TOP FLOOR</span>
             </div>
             <div class="sr-level">Lv 12</div>
@@ -2164,7 +2180,7 @@
             <div class="sr-bldg">F</div>
             <div class="sr-info">
               <span data-lang-block="en">Waterfront residences</span>
-              <span data-lang-block="ko">수변 레지던스</span>
+              <span data-lang-block="ko">수변 레지던스</span><span data-lang-block="zh">水岸住宅</span><span data-lang-block="zt">水岸住宅</span>
               <span class="sr-config">NE FACING · WATERFRONT · 1ST RELEASE G–7</span>
             </div>
             <div class="sr-level">Lv G–7</div>
@@ -2173,7 +2189,7 @@
             <div class="sr-bldg">F</div>
             <div class="sr-info">
               <span data-lang-block="en">3 Bed Dual-Key · 3 Balconies</span>
-              <span data-lang-block="ko">3베드 듀얼키 · 3개 발코니</span>
+              <span data-lang-block="ko">3베드 듀얼키 · 3개 발코니</span><span data-lang-block="zh">3 房双钥匙 · 三个阳台</span><span data-lang-block="zt">3 房雙鑰匙 · 三個陽臺</span>
               <span class="sr-config">F.01 TYPE · NORTH FACING · WATERFRONT</span>
             </div>
             <div class="sr-level">Premium</div>
@@ -2187,10 +2203,10 @@
       <div class="townhouse-text">
         <h5>
           <span data-lang-section="en">Seven 2-storey <em>townhouses</em></span>
-          <span data-lang-section="ko">2층 <em>타운하우스</em> 7세대</span>
+          <span data-lang-section="ko">2층 <em>타운하우스</em> 7세대</span><span data-lang-section="zh">7 套双层 <em>联排别墅</em></span><span data-lang-section="zt">7 套雙層 <em>聯排別墅</em></span>
         </h5>
         <p data-lang-block="en">A rare offering across Buildings A and D — among the only townhouse stock in the entire Rhodes peninsula. Three-bedroom configurations with private entries, approx. 135 sqm.</p>
-        <p data-lang-block="ko">A·D 빌딩에 걸친 희귀한 평면 — 로즈 반도 전체에서 거의 유일한 타운하우스 평면. 약 135㎡, 3베드룸 + 전용 입구.</p>
+        <p data-lang-block="ko">A·D 빌딩에 걸친 희귀한 평면 — 로즈 반도 전체에서 거의 유일한 타운하우스 평면. 약 135㎡, 3베드룸 + 전용 입구.</p><p data-lang-block="zh">横跨 A、D 栋的稀有户型 —— 于 Rhodes 半岛近乎独一无二。约 135 平方米，3 房并设专属入户。</p><p data-lang-block="zt">橫跨 A、D 棟的稀有戶型 —— 於 Rhodes 半島近乎獨一無二。約 135 平方米，3 房並設專屬入戶。</p>
       </div>
     </div>
 
@@ -2198,7 +2214,7 @@
       <img src="./assets/rhodes-bay/floorplan.jpg" alt="Floorplan of townhouse apartment AG.02 — 3 bedrooms, 2.5 bathrooms, 1 car, 135 square metres" loading="lazy" />
       <figcaption>
         <span class="mc-title" data-lang-section="en">Apartment AG.02 — townhouse floorplan example.</span>
-        <span class="mc-title" data-lang-section="ko">AG.02 — 타운하우스 평면도 예시.</span>
+        <span class="mc-title" data-lang-section="ko">AG.02 — 타운하우스 평면도 예시.</span><span class="mc-title" data-lang-section="zh">AG.02 —— 联排别墅户型图示例。</span><span class="mc-title" data-lang-section="zt">AG.02 —— 聯排別墅戶型圖示例。</span>
         <span class="mc-meta">3 BED · 2.5 BATH · 1 CAR · 135M²</span>
       </figcaption>
     </figure>
@@ -2213,46 +2229,46 @@
         <div class="sec-tag">08 — Billbergia</div>
         <h2 class="sec-title">
           <span data-lang-section="en">Twenty years<br>shaping <em>Rhodes.</em></span>
-          <span data-lang-section="ko">20년간<br><em>로즈</em>를 빚어온.</span>
+          <span data-lang-section="ko">20년간<br><em>로즈</em>를 빚어온.</span><span data-lang-section="zh">二十年<br>塑造 <em>Rhodes。</em></span><span data-lang-section="zt">二十年<br>塑造 <em>Rhodes。</em></span>
         </h2>
       </div>
       <p class="sec-lede">
         <span data-lang-section="en">Billbergia has been a major contributor to the Rhodes precinct for more than 20 years — delivering parks, open space, Rhodes Central Shopping Centre, and the new $85M sports and recreation centre.</span>
-        <span data-lang-section="ko">Billbergia는 20년 이상 로즈 권역의 주요 기여자 — 공원, 오픈 스페이스, 로즈 센트럴 쇼핑 센터, 그리고 새 $8,500만 스포츠·레크리에이션 센터를 건설.</span>
+        <span data-lang-section="ko">Billbergia는 20년 이상 로즈 권역의 주요 기여자 — 공원, 오픈 스페이스, 로즈 센트럴 쇼핑 센터, 그리고 새 $8,500만 스포츠·레크리에이션 센터를 건설.</span><span data-lang-section="zh">Billbergia 深耕 Rhodes 区域逾二十年，是区内主要贡献者 —— 建设了公园、开放空间、Rhodes Central 购物中心，以及全新的 8,500 万澳元体育康体中心。</span><span data-lang-section="zt">Billbergia 深耕 Rhodes 區域逾二十年，是區內主要貢獻者 —— 建設了公園、開放空間、Rhodes Central 購物中心，以及全新的 8,500 萬澳元體育康體中心。</span>
       </p>
     </div>
 
     <div class="dev-section">
       <div class="dev-block">
         <p class="lead" data-lang-block="en">Billbergia is proud to have been awarded a 4.5-Gold Star iCIRT rating from independent verifier Equifax, and an industry-best rating for 'Conduct' — demonstrating integrity in business.</p>
-        <p class="lead" data-lang-block="ko">Billbergia는 독립 검증 기관 Equifax로부터 4.5★ Gold iCIRT 등급을 받았으며, 업계 최고의 'Conduct' 등급을 받아 비즈니스의 진정성을 입증했습니다.</p>
+        <p class="lead" data-lang-block="ko">Billbergia는 독립 검증 기관 Equifax로부터 4.5★ Gold iCIRT 등급을 받았으며, 업계 최고의 'Conduct' 등급을 받아 비즈니스의 진정성을 입증했습니다.</p><p class="lead" data-lang-block="zh">Billbergia 获独立评估机构 Equifax 授予 4.5★ Gold iCIRT 评级，并取得业内最高的「Conduct（行为操守）」评级，印证其经营诚信。</p><p class="lead" data-lang-block="zt">Billbergia 獲獨立評估機構 Equifax 授予 4.5★ Gold iCIRT 評級，並取得業內最高的「Conduct（行爲操守）」評級，印證其經營誠信。</p>
 
         <p data-lang-block="en">More than a developer, Billbergia is a <strong>community builder</strong> — having shaped the modern Rhodes peninsula through multiple successful projects. Beyond residential apartments, they have delivered the award-winning Rhodes Central Shopping Centre, key parks and foreshore connections, and infrastructure that benefits the entire precinct.</p>
         <p data-lang-block="en">All projects are delivered by <strong>in-house development and construction teams</strong>, ensuring quality control from concept to completion. Billbergia continues to invest in sustainable design and energy-efficient apartment specifications.</p>
 
-        <p data-lang-block="ko">Billbergia는 단순한 시행사가 아닌 <strong>커뮤니티 빌더</strong> — 여러 성공적인 프로젝트를 통해 현대 로즈 반도를 빚어냈습니다. 주거 아파트뿐만 아니라, 수상 경력에 빛나는 로즈 센트럴 쇼핑 센터, 주요 공원·강변 연결, 그리고 권역 전체에 혜택을 주는 인프라를 제공했습니다.</p>
-        <p data-lang-block="ko">모든 프로젝트는 <strong>자체 개발 및 시공 팀</strong>에 의해 진행되어, 컨셉부터 완공까지 품질 관리를 보장합니다. Billbergia는 지속가능한 설계와 에너지 효율적인 아파트 사양에 지속적으로 투자하고 있습니다.</p>
+        <p data-lang-block="ko">Billbergia는 단순한 시행사가 아닌 <strong>커뮤니티 빌더</strong> — 여러 성공적인 프로젝트를 통해 현대 로즈 반도를 빚어냈습니다. 주거 아파트뿐만 아니라, 수상 경력에 빛나는 로즈 센트럴 쇼핑 센터, 주요 공원·강변 연결, 그리고 권역 전체에 혜택을 주는 인프라를 제공했습니다.</p><p data-lang-block="zh">Billbergia 不只是开发商，更是<strong>社区营造者</strong> —— 以多个成功项目塑造了今日的 Rhodes 半岛。除住宅公寓外，更交付了屡获殊荣的 Rhodes Central 购物中心、主要公园与滨水连接，以及惠及整个区域的基础设施。</p><p data-lang-block="zt">Billbergia 不只是開發商，更是<strong>社區營造者</strong> —— 以多個成功項目塑造了今日的 Rhodes 半島。除住宅公寓外，更交付了屢獲殊榮的 Rhodes Central 購物中心、主要公園與濱水連接，以及惠及整個區域的基礎設施。</p>
+        <p data-lang-block="ko">모든 프로젝트는 <strong>자체 개발 및 시공 팀</strong>에 의해 진행되어, 컨셉부터 완공까지 품질 관리를 보장합니다. Billbergia는 지속가능한 설계와 에너지 효율적인 아파트 사양에 지속적으로 투자하고 있습니다.</p><p data-lang-block="zh">所有项目均由<strong>自有开发与施工团队</strong>执行，确保从概念到竣工的品质把控。Billbergia 持续投入可持续设计与节能公寓规格。</p><p data-lang-block="zt">所有項目均由<strong>自有開發與施工團隊</strong>執行，確保從概念到竣工的品質把控。Billbergia 持續投入可持續設計與節能公寓規格。</p>
 
         <div class="badges">
           <span class="badge gold">4.5★ Gold iCIRT</span>
           <span class="badge" data-lang-section="en">20+ Years in Rhodes</span>
-          <span class="badge" data-lang-section="ko">로즈 20년+ 경력</span>
+          <span class="badge" data-lang-section="ko">로즈 20년+ 경력</span><span class="badge" data-lang-section="zh">深耕 Rhodes 逾 20 年</span><span class="badge" data-lang-section="zt">深耕 Rhodes 逾 20 年</span>
           <span class="badge" data-lang-section="en">In-house Construction</span>
-          <span class="badge" data-lang-section="ko">자체 시공</span>
+          <span class="badge" data-lang-section="ko">자체 시공</span><span class="badge" data-lang-section="zh">自有施工团队</span><span class="badge" data-lang-section="zt">自有施工團隊</span>
           <span class="badge" data-lang-section="en">Community Builder</span>
-          <span class="badge" data-lang-section="ko">커뮤니티 빌더</span>
+          <span class="badge" data-lang-section="ko">커뮤니티 빌더</span><span class="badge" data-lang-section="zh">社区营造者</span><span class="badge" data-lang-section="zt">社區營造者</span>
         </div>
       </div>
 
       <div class="past-projects">
         <h4 data-lang-section="en">Recent Projects by Billbergia</h4>
-        <h4 data-lang-section="ko">Billbergia 최근 프로젝트</h4>
+        <h4 data-lang-section="ko">Billbergia 최근 프로젝트</h4><h4 data-lang-section="zh">Billbergia 近期项目</h4><h4 data-lang-section="zt">Billbergia 近期項目</h4>
         <div class="past-project">
           <div class="pp-year">TBC</div>
           <div>
             <div class="pp-name">Arncliffe Central</div>
             <div class="pp-loc" data-lang-block="en">Arncliffe NSW · Sold, under construction</div>
-            <div class="pp-loc" data-lang-block="ko">안클리프 NSW · 분양 완료, 시공 중</div>
+            <div class="pp-loc" data-lang-block="ko">안클리프 NSW · 분양 완료, 시공 중</div><div class="pp-loc" data-lang-block="zh">Arncliffe NSW · 已售罄，施工中</div><div class="pp-loc" data-lang-block="zt">Arncliffe NSW · 已售罄，施工中</div>
           </div>
         </div>
         <div class="past-project">
@@ -2260,7 +2276,7 @@
           <div>
             <div class="pp-name">88 Walker Street</div>
             <div class="pp-loc" data-lang-block="en">North Sydney NSW</div>
-            <div class="pp-loc" data-lang-block="ko">노스 시드니 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">노스 시드니 NSW</div><div class="pp-loc" data-lang-block="zh">北悉尼 NSW</div><div class="pp-loc" data-lang-block="zt">北悉尼 NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2268,7 +2284,7 @@
           <div>
             <div class="pp-name">Lidcombe Rise</div>
             <div class="pp-loc" data-lang-block="en">Lidcombe NSW</div>
-            <div class="pp-loc" data-lang-block="ko">리드콤 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">리드콤 NSW</div><div class="pp-loc" data-lang-block="zh">Lidcombe NSW</div><div class="pp-loc" data-lang-block="zt">Lidcombe NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2276,7 +2292,7 @@
           <div>
             <div class="pp-name">Rhodes Central — Stage 1</div>
             <div class="pp-loc" data-lang-block="en">Rhodes NSW · 2 min from Rhodes Bay</div>
-            <div class="pp-loc" data-lang-block="ko">로즈 NSW · 로즈 베이에서 2분</div>
+            <div class="pp-loc" data-lang-block="ko">로즈 NSW · 로즈 베이에서 2분</div><div class="pp-loc" data-lang-block="zh">Rhodes NSW · 距 Rhodes Bay 两分钟</div><div class="pp-loc" data-lang-block="zt">Rhodes NSW · 距 Rhodes Bay 兩分鐘</div>
           </div>
         </div>
         <div class="past-project">
@@ -2284,7 +2300,7 @@
           <div>
             <div class="pp-name">Sunrise at Meadowbank</div>
             <div class="pp-loc" data-lang-block="en">Meadowbank NSW</div>
-            <div class="pp-loc" data-lang-block="ko">미도우뱅크 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">미도우뱅크 NSW</div><div class="pp-loc" data-lang-block="zh">Meadowbank NSW</div><div class="pp-loc" data-lang-block="zt">Meadowbank NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2292,7 +2308,7 @@
           <div>
             <div class="pp-name">Brisbane Skytower</div>
             <div class="pp-loc" data-lang-block="en">Brisbane QLD</div>
-            <div class="pp-loc" data-lang-block="ko">브리즈번 QLD</div>
+            <div class="pp-loc" data-lang-block="ko">브리즈번 QLD</div><div class="pp-loc" data-lang-block="zh">布里斯班 QLD</div><div class="pp-loc" data-lang-block="zt">布里斯班 QLD</div>
           </div>
         </div>
         <div class="past-project">
@@ -2300,7 +2316,7 @@
           <div>
             <div class="pp-name">Marina Square at Wentworth Point</div>
             <div class="pp-loc" data-lang-block="en">Wentworth Point NSW</div>
-            <div class="pp-loc" data-lang-block="ko">웬트워스 포인트 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">웬트워스 포인트 NSW</div><div class="pp-loc" data-lang-block="zh">Wentworth Point NSW</div><div class="pp-loc" data-lang-block="zt">Wentworth Point NSW</div>
           </div>
         </div>
         <div class="past-project">
@@ -2308,7 +2324,7 @@
           <div>
             <div class="pp-name">Skyline at Village Quay</div>
             <div class="pp-loc" data-lang-block="en">Rhodes NSW</div>
-            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div>
+            <div class="pp-loc" data-lang-block="ko">로즈 NSW</div><div class="pp-loc" data-lang-block="zh">Rhodes NSW</div><div class="pp-loc" data-lang-block="zt">Rhodes NSW</div>
           </div>
         </div>
       </div>
@@ -2322,41 +2338,41 @@
     <div class="sec-tag">09 — Next Steps</div>
     <h2>
       <span data-lang-section="en">Six buildings.<br>337 homes. <em>One enquiry away.</em></span>
-      <span data-lang-section="ko">6개 빌딩.<br>337세대. <em>한 통의 문의로 시작.</em></span>
+      <span data-lang-section="ko">6개 빌딩.<br>337세대. <em>한 통의 문의로 시작.</em></span><span data-lang-section="zh">六栋楼宇。<br>337 户。<em>一通咨询即可开始。</em></span><span data-lang-section="zt">六棟樓宇。<br>337 戶。<em>一通諮詢即可開始。</em></span>
     </h2>
 
     <div class="enquire-summary">
       <div class="es-cell">
         <div class="es-num">E<em>+</em>F</div>
         <div class="es-lbl" data-lang-section="en">Absolute Waterfront Buildings</div>
-        <div class="es-lbl" data-lang-section="ko">절대 수변 빌딩</div>
+        <div class="es-lbl" data-lang-section="ko">절대 수변 빌딩</div><div class="es-lbl" data-lang-section="zh">纯正水岸楼宇</div><div class="es-lbl" data-lang-section="zt">純正水岸樓宇</div>
       </div>
       <div class="es-cell">
         <div class="es-num">7</div>
         <div class="es-lbl" data-lang-section="en">Townhouses · 2-Storey</div>
-        <div class="es-lbl" data-lang-section="ko">2층 타운하우스</div>
+        <div class="es-lbl" data-lang-section="ko">2층 타운하우스</div><div class="es-lbl" data-lang-section="zh">双层联排别墅</div><div class="es-lbl" data-lang-section="zt">雙層聯排別墅</div>
       </div>
       <div class="es-cell">
         <div class="es-num">19<small>min</small></div>
         <div class="es-lbl" data-lang-section="en">To Sydney CBD Express</div>
-        <div class="es-lbl" data-lang-section="ko">시드니 CBD 급행</div>
+        <div class="es-lbl" data-lang-section="ko">시드니 CBD 급행</div><div class="es-lbl" data-lang-section="zh">快车直达悉尼 CBD</div><div class="es-lbl" data-lang-section="zt">快車直達悉尼 CBD</div>
       </div>
       <div class="es-cell">
         <div class="es-num">4.5<small>★</small></div>
         <div class="es-lbl" data-lang-section="en">Gold iCIRT Quality Rating</div>
-        <div class="es-lbl" data-lang-section="ko">Gold iCIRT 품질 등급</div>
+        <div class="es-lbl" data-lang-section="ko">Gold iCIRT 품질 등급</div><div class="es-lbl" data-lang-section="zh">Gold iCIRT 品质评级</div><div class="es-lbl" data-lang-section="zt">Gold iCIRT 品質評級</div>
       </div>
     </div>
 
     <a href="mailto:sunghoon.choi@forisegroup.com.au?subject=Rhodes%20Bay%20%E2%80%94%20Information%20Request" class="cta-btn">
       <span data-lang-section="en">Request Information & Brochure</span>
-      <span data-lang-section="ko">자료 & 브로셔 요청</span>
+      <span data-lang-section="ko">자료 & 브로셔 요청</span><span data-lang-section="zh">索取资料与宣传册</span><span data-lang-section="zt">索取資料與宣傳冊</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
     </a>
 
     <p style="margin-top:48px; max-width:760px; font-size:14px; color:rgba(255,255,255,.6); line-height:1.6;">
       <span data-lang-section="en">Individual apartment availability, current incentives, floorplans by typology and aspect-specific information are provided privately on enquiry. Get in touch for the complete information package and current Stage 1 release stock.</span>
-      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브, 평면별 도면, 향(aspect)별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지와 현재 1단계 분양 재고를 받으시려면 연락 주세요.</span>
+      <span data-lang-section="ko">개별 세대 분양 가능 여부, 현재 적용 인센티브, 평면별 도면, 향(aspect)별 상세 정보는 문의 시 개별적으로 제공됩니다. 전체 자료 패키지와 현재 1단계 분양 재고를 받으시려면 연락 주세요.</span><span data-lang-section="zh">具体房源可售情况、当前适用礼遇、各户型图纸及朝向详情，均于咨询时单独提供。如需完整资料包及第一期当前房源清单，欢迎与我联系。</span><span data-lang-section="zt">具體房源可售情況、當前適用禮遇、各戶型圖紙及朝向詳情，均於諮詢時單獨提供。如需完整資料包及第一期當前房源清單，歡迎與我聯繫。</span>
     </p>
   </div>
 </section>
@@ -2368,15 +2384,15 @@
     <div class="contact-grid">
       <h2 class="contact-title">
         <span data-lang-section="en">Let's <em>start</em><br>a conversation.</span>
-        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span>
+        <span data-lang-section="ko"><em>대화를</em><br>시작합시다.</span><span data-lang-section="zh"><em>让我们</em><br>开始交流。</span><span data-lang-section="zt"><em>讓我們</em><br>開始交流。</span>
       </h2>
       <div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Agent</div>
-          <div class="lbl" data-lang-section="ko">담당</div>
+          <div class="lbl" data-lang-section="ko">담당</div><div class="lbl" data-lang-section="zh">负责人</div><div class="lbl" data-lang-section="zt">負責人</div>
           <div>
             <div class="val" data-lang-section="en">Sunghoon Choi (Sunny)</div>
-            <div class="val" data-lang-section="ko">최성훈</div>
+            <div class="val" data-lang-section="ko">최성훈</div><div class="val" data-lang-section="zh">Sunny</div><div class="val" data-lang-section="zt">Sunny</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -2385,7 +2401,7 @@
         </div>
         <div class="contact-detail">
           <div class="lbl" data-lang-section="en">Phone</div>
-          <div class="lbl" data-lang-section="ko">전화</div>
+          <div class="lbl" data-lang-section="ko">전화</div><div class="lbl" data-lang-section="zh">电话</div><div class="lbl" data-lang-section="zt">電話</div>
           <a class="val" href="tel:+61414824225">0414 824 225</a>
         </div>
         <div class="contact-detail">
@@ -2406,7 +2422,7 @@
   <p>Made by <a href="https://schoi0209.github.io/ClaudeApp/links.html">SunnyApps</a>. All rights reserved.</p>
   <p>
     <span data-lang-section="en">All renderings are artist's impressions only; completed apartments may vary. Information presented for reference only; specifications, configurations and availability subject to change. Please contact the agent to confirm details. Information drawn from the official Billbergia Rhodes Bay Training Presentation (Y2025), Billbergia website article (Sept 2024), and the NSW Government Rhodes Place Strategy (Sept 2021). SSDA Reference: SSD-6741-9241.</span>
-    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며 완공된 아파트는 다를 수 있습니다. 본 정보는 참고용이며, 사양·구성·분양 가능 여부는 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 내용은 공식 Billbergia Rhodes Bay 트레이닝 프레젠테이션 (2025년), Billbergia 웹사이트 기사 (2024년 9월), NSW 정부 Rhodes Place Strategy (2021년 9월)에서 발췌되었습니다. SSDA 참조: SSD-6741-9241.</span>
+    <span data-lang-section="ko">모든 렌더링은 작가의 인상화이며 완공된 아파트는 다를 수 있습니다. 본 정보는 참고용이며, 사양·구성·분양 가능 여부는 변경될 수 있습니다. 자세한 사항은 담당 에이전트에게 문의해 주세요. 본 내용은 공식 Billbergia Rhodes Bay 트레이닝 프레젠테이션 (2025년), Billbergia 웹사이트 기사 (2024년 9월), NSW 정부 Rhodes Place Strategy (2021년 9월)에서 발췌되었습니다. SSDA 참조: SSD-6741-9241.</span><span data-lang-section="zh">所有效果图均为作家想象图，竣工后的实际单元可能有所不同。本信息仅供参考，规格、配置及可售情况可能变更。详情请咨询负责代理。内容摘自 Billbergia Rhodes Bay 官方培训演示文稿（2025 年）、Billbergia 官网文章（2024 年 9 月）及 NSW 政府 Rhodes Place Strategy（2021 年 9 月）。SSDA 编号：SSD-6741-9241。</span><span data-lang-section="zt">所有效果圖均爲作家想象圖，竣工後的實際單元可能有所不同。本信息僅供參考，規格、配置及可售情況可能變更。詳情請諮詢負責代理。內容摘自 Billbergia Rhodes Bay 官方培訓演示文稿（2025 年）、Billbergia 官網文章（2024 年 9 月）及 NSW 政府 Rhodes Place Strategy（2021 年 9 月）。SSDA 編號：SSD-6741-9241。</span>
   </p>
 </footer>
 
@@ -2433,18 +2449,21 @@
   });
 
   // ============ LANGUAGE ============
-  const langToggle = document.getElementById('langToggle');
-  const langLabel  = document.getElementById('langLabel');
+  const LSKEY = 'rb-lang';
+  const langGrp = document.getElementById('langGrp');
   function applyLang(l) {
+    if (!['en','ko','zh-Hans','zh-Hant'].includes(l)) l = 'en';
     document.documentElement.setAttribute('lang', l);
-    langLabel.textContent = l === 'ko' ? 'EN' : '한국어';
-    localStorage.setItem('rb-lang', l);
+    langGrp.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.set === l);
+    });
+    localStorage.setItem(LSKEY, l);
   }
-  applyLang(localStorage.getItem('rb-lang') || 'en');
-  langToggle.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('lang');
-    applyLang(cur === 'ko' ? 'en' : 'ko');
+  langGrp.addEventListener('click', function (e) {
+    const b = e.target.closest('button');
+    if (b) applyLang(b.dataset.set);
   });
+  applyLang(localStorage.getItem(LSKEY) || 'en');
 
   // ============ REVEAL ON SCROLL ============
   const obs = new IntersectionObserver(entries => {
