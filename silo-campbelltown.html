@@ -29,10 +29,14 @@ body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;transiti
 img{display:block}
 
 /* LANG */
-[data-lang="ko"]{display:none}
-body.lang-ko [data-lang="en"]{display:none}
+[data-lang="ko"],[data-lang="zh"],[data-lang="zt"]{display:none}
+body.lang-ko [data-lang="en"],body.lang-zh [data-lang="en"],body.lang-zt [data-lang="en"]{display:none}
 body.lang-ko [data-lang="ko"]{display:block}
+body.lang-zh [data-lang="zh"]{display:block}
+body.lang-zt [data-lang="zt"]{display:block}
 body.lang-ko [data-lang="ko"].inl{display:inline}
+body.lang-zh [data-lang="zh"].inl{display:inline}
+body.lang-zt [data-lang="zt"].inl{display:inline}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(13,15,26,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(232,133,26,0.15)}
@@ -202,16 +206,27 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
   .duo img{height:220px}
   .spec-grid{grid-template-columns:1fr 1fr}
 }
+
+body.lang-zh{font-family:'Noto Sans SC',sans-serif}
+body.lang-zt{font-family:'Noto Sans HK','Noto Sans SC','PingFang TC',sans-serif}
+.lang-group{display:inline-flex;border:1px solid rgba(128,128,128,.3);border-radius:3px;overflow:hidden;vertical-align:middle}
+.lang-group button{background:transparent;border:none;border-right:1px solid rgba(128,128,128,.22);
+  font-family:inherit;font-size:.66rem;font-weight:600;letter-spacing:.06em;padding:6px 9px;
+  cursor:pointer;color:inherit;opacity:.6;line-height:1;transition:all .2s}
+.lang-group button:last-child{border-right:none}
+.lang-group button:hover{opacity:1}
+.lang-group button.on{background:var(--navy);color:#fff;opacity:1}
+@media(max-width:900px){.lang-group button{padding:5px 6px;font-size:.58rem;letter-spacing:0}}
 </style>
 </head>
-<body data-theme="light">
+<body class="lang-en" data-theme="light">
 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Silo <span>|</span> Campbelltown</a>
   <div class="nav-actions">
     <a class="btn-bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
-    <button class="btn-lang" onclick="toggleLang()">한국어</button>
+    <span class="lang-group" id="langGrp"><button data-set="en">EN</button><button data-set="ko">한국어</button><button data-set="zh">简体</button><button data-set="zt">繁體</button></span>
     <button class="btn-theme" onclick="toggleTheme()">☾</button>
   </div>
 </nav>
@@ -223,37 +238,37 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
   <div class="hero-accent"></div>
   <div class="hero-badge">
     <span data-lang="en" class="inl">Completion Early 2028</span>
-    <span data-lang="ko" class="inl">2028년 초 완공 예정</span>
+    <span data-lang="ko" class="inl">2028년 초 완공 예정</span><span data-lang="zh" class="inl">预计 2028 年初竣工</span><span data-lang="zt" class="inl">預計 2028 年初竣工</span>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span data-lang="en" class="inl">6 Grange Rd, Campbelltown NSW</span>
-      <span data-lang="ko" class="inl">6 Grange Rd, 캠벨타운 NSW</span>
+      <span data-lang="ko" class="inl">6 Grange Rd, 캠벨타운 NSW</span><span data-lang="zh" class="inl">6 Grange Rd, Campbelltown NSW</span><span data-lang="zt" class="inl">6 Grange Rd, Campbelltown NSW</span>
     </div>
     <h1 class="hero-title">Silo <em>Campbelltown</em></h1>
     <p class="hero-sub" data-lang="en">Strata-titled micro-warehouses and storage units in the heart of Sydney's South-West growth corridor.</p>
-    <p class="hero-sub" data-lang="ko">시드니 남서부 성장 회랑 중심부에 들어서는 스트라타 등기 마이크로 창고 &amp; 스토리지 유닛.</p>
+    <p class="hero-sub" data-lang="ko">시드니 남서부 성장 회랑 중심부에 들어서는 스트라타 등기 마이크로 창고 &amp; 스토리지 유닛.</p><p class="hero-sub" data-lang="zh">位于悉尼西南增长走廊核心的独立产权微型仓库与仓储单元。</p><p class="hero-sub" data-lang="zt">位於悉尼西南增長走廊核心的獨立產權微型倉庫與倉儲單元。</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <label><span data-lang="en" class="inl">Type</span><span data-lang="ko" class="inl">유형</span></label>
-        <span data-lang="en" class="inl">Micro-Warehouse</span><span data-lang="ko" class="inl">마이크로 창고</span>
+        <label><span data-lang="en" class="inl">Type</span><span data-lang="ko" class="inl">유형</span><span data-lang="zh" class="inl">类型</span><span data-lang="zt" class="inl">類型</span></label>
+        <span data-lang="en" class="inl">Micro-Warehouse</span><span data-lang="ko" class="inl">마이크로 창고</span><span data-lang="zh" class="inl">微型仓库</span><span data-lang="zt" class="inl">微型倉庫</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-lang="en" class="inl">Ownership</span><span data-lang="ko" class="inl">소유 형태</span></label>
-        <span data-lang="en" class="inl">Strata Title</span><span data-lang="ko" class="inl">스트라타 등기</span>
+        <label><span data-lang="en" class="inl">Ownership</span><span data-lang="ko" class="inl">소유 형태</span><span data-lang="zh" class="inl">产权形式</span><span data-lang="zt" class="inl">產權形式</span></label>
+        <span data-lang="en" class="inl">Strata Title</span><span data-lang="ko" class="inl">스트라타 등기</span><span data-lang="zh" class="inl">独立分契产权</span><span data-lang="zt" class="inl">獨立分契產權</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-lang="en" class="inl">Access</span><span data-lang="ko" class="inl">출입</span></label>
+        <label><span data-lang="en" class="inl">Access</span><span data-lang="ko" class="inl">출입</span><span data-lang="zh" class="inl">出入</span><span data-lang="zt" class="inl">出入</span></label>
         <span>24/7</span>
       </div>
       <div class="hero-meta-item">
-        <label><span data-lang="en" class="inl">Completion</span><span data-lang="ko" class="inl">완공</span></label>
-        <span data-lang="en" class="inl">Early 2028</span><span data-lang="ko" class="inl">2028년 초</span>
+        <label><span data-lang="en" class="inl">Completion</span><span data-lang="ko" class="inl">완공</span><span data-lang="zh" class="inl">竣工</span><span data-lang="zt" class="inl">竣工</span></label>
+        <span data-lang="en" class="inl">Early 2028</span><span data-lang="ko" class="inl">2028년 초</span><span data-lang="zh" class="inl">2028 年初</span><span data-lang="zt" class="inl">2028 年初</span>
       </div>
     </div>
     <a class="hero-cta" href="#contact">
       <span data-lang="en" class="inl">Request Information / 분양 문의</span>
-      <span data-lang="ko" class="inl">분양 문의하기 →</span>
+      <span data-lang="ko" class="inl">분양 문의하기 →</span><span data-lang="zh" class="inl">咨询详情 →</span><span data-lang="zt" class="inl">諮詢詳情 →</span>
     </a>
   </div>
   <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
@@ -269,14 +284,14 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
     </div>
     <div>
       <div class="section-eyebrow">
-        <span data-lang="en" class="inl">The Project</span><span data-lang="ko" class="inl">프로젝트 소개</span>
+        <span data-lang="en" class="inl">The Project</span><span data-lang="ko" class="inl">프로젝트 소개</span><span data-lang="zh" class="inl">项目简介</span><span data-lang="zt" class="inl">項目簡介</span>
       </div>
       <h2 class="section-title" data-lang="en">Your own space,<br><em>secured and titled</em></h2>
-      <h2 class="section-title" data-lang="ko">내 이름으로 등기되는<br><em>나만의 공간</em></h2>
+      <h2 class="section-title" data-lang="ko">내 이름으로 등기되는<br><em>나만의 공간</em></h2><h2 class="section-title" data-lang="zh">以您之名登记的<br><em>专属空间</em></h2><h2 class="section-title" data-lang="zt">以您之名登記的<br><em>專屬空間</em></h2>
       <p class="about-body" data-lang="en">Silo Campbelltown is the latest project from Silo Storage Group, following completed facilities in Wollongong, Huskisson, Nowra and Oran Park. Purpose-built at 6 Grange Rd, it delivers secure, modern micro-warehouse and storage space to one of NSW's fastest-growing residential and business catchments.</p>
-      <p class="about-body" data-lang="ko">Silo Campbelltown은 울런공, 허스키슨, 나우라, 오란파크에서 시설을 완공한 Silo Storage Group의 최신 프로젝트입니다. 6 Grange Rd에 목적 설계로 지어지며, NSW에서 가장 빠르게 성장하는 주거·비즈니스 상권 중 한 곳에 안전하고 현대적인 마이크로 창고 및 스토리지 공간을 공급합니다.</p>
+      <p class="about-body" data-lang="ko">Silo Campbelltown은 울런공, 허스키슨, 나우라, 오란파크에서 시설을 완공한 Silo Storage Group의 최신 프로젝트입니다. 6 Grange Rd에 목적 설계로 지어지며, NSW에서 가장 빠르게 성장하는 주거·비즈니스 상권 중 한 곳에 안전하고 현대적인 마이크로 창고 및 스토리지 공간을 공급합니다.</p><p class="about-body" data-lang="zh">Silo Campbelltown 是 Silo Storage Group 的最新项目，此前已在 Wollongong、Huskisson、Nowra 与 Oran Park 完成多个设施。项目于 6 Grange Rd 专门设计建造，为 NSW 增长最快的住宅与商业腹地之一提供安全现代的微型仓库与仓储空间。</p><p class="about-body" data-lang="zt">Silo Campbelltown 是 Silo Storage Group 的最新項目，此前已在 Wollongong、Huskisson、Nowra 與 Oran Park 完成多個設施。項目於 6 Grange Rd 專門設計建造，爲 NSW 增長最快的住宅與商業腹地之一提供安全現代的微型倉庫與倉儲空間。</p>
       <p class="about-body" data-lang="en">Each unit is individually titled under a strata arrangement, so owners receive a Certificate of Title on settlement — the same as any other real property purchase in NSW. Units suit owner-occupiers who need working space as much as investors seeking a compact, low-maintenance industrial asset.</p>
-      <p class="about-body" data-lang="ko">각 유닛은 스트라타 방식으로 개별 등기되어, 결제(settlement) 시 NSW의 다른 부동산 매입과 동일하게 소유권 증서(Certificate of Title)를 받게 됩니다. 실제 작업 공간이 필요한 실사용자는 물론, 관리 부담이 적은 소형 산업용 자산을 찾는 투자자에게도 적합합니다.</p>
+      <p class="about-body" data-lang="ko">각 유닛은 스트라타 방식으로 개별 등기되어, 결제(settlement) 시 NSW의 다른 부동산 매입과 동일하게 소유권 증서(Certificate of Title)를 받게 됩니다. 실제 작업 공간이 필요한 실사용자는 물론, 관리 부담이 적은 소형 산업용 자산을 찾는 투자자에게도 적합합니다.</p><p class="about-body" data-lang="zh">每个单元均以分契产权（Strata Title）独立登记，交割时可取得与 NSW 其他不动产购置相同的产权证书（Certificate of Title）。既适合需要实际作业空间的自用者，也适合寻求管理省心的小型工业资产的投资者。</p><p class="about-body" data-lang="zt">每個單元均以分契產權（Strata Title）獨立登記，交割時可取得與 NSW 其他不動產購置相同的產權證書（Certificate of Title）。既適合需要實際作業空間的自用者，也適合尋求管理省心的小型工業資產的投資者。</p>
       <div class="about-tags">
         <span class="tag">Strata Title</span>
         <span class="tag">Micro-Warehouse</span>
@@ -294,9 +309,9 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
   <img src="./assets/silo-campbelltown/signage.jpg" alt="6 Grange Rd building signage — Artist Impression" loading="lazy">
   <div class="band-content">
     <h3 class="band-title" data-lang="en">Six uses under one roof</h3>
-    <h3 class="band-title" data-lang="ko">한 건물 안의 여섯 가지 용도</h3>
+    <h3 class="band-title" data-lang="ko">한 건물 안의 여섯 가지 용도</h3><h3 class="band-title" data-lang="zh">一栋建筑，六种用途</h3><h3 class="band-title" data-lang="zt">一棟建築，六種用途</h3>
     <p class="band-sub" data-lang="en">As a mixed-use destination, 6 Grange Rd draws a varied flow of people through the site every day. That activity lifts the building's profile, visibility and demand — supporting occupancy and long-term value across the estate.</p>
-    <p class="band-sub" data-lang="ko">복합용도 건물인 6 Grange Rd에는 매일 다양한 방문객이 오갑니다. 이러한 유동인구는 건물의 인지도와 가시성, 수요를 끌어올려 임대율과 장기적인 자산 가치를 뒷받침합니다.</p>
+    <p class="band-sub" data-lang="ko">복합용도 건물인 6 Grange Rd에는 매일 다양한 방문객이 오갑니다. 이러한 유동인구는 건물의 인지도와 가시성, 수요를 끌어올려 임대율과 장기적인 자산 가치를 뒷받침합니다.</p><p class="band-sub" data-lang="zh">作为综合用途建筑，6 Grange Rd 每日迎来各类访客。这股人流提升了建筑的知名度、曝光度与需求，为出租率与长期资产价值提供支撑。</p><p class="band-sub" data-lang="zt">作爲綜合用途建築，6 Grange Rd 每日迎來各類訪客。這股人流提升了建築的知名度、曝光度與需求，爲出租率與長期資產價值提供支撐。</p>
     <div class="use-row">
       <span class="use-pill">Silo Storage</span>
       <span class="use-pill">Childcare</span>
@@ -318,37 +333,37 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
       </div>
       <div>
         <div class="section-eyebrow">
-          <span data-lang="en" class="inl">Product 01</span><span data-lang="ko" class="inl">상품 01</span>
+          <span data-lang="en" class="inl">Product 01</span><span data-lang="ko" class="inl">상품 01</span><span data-lang="zh" class="inl">产品 01</span><span data-lang="zt" class="inl">產品 01</span>
         </div>
         <h2 class="section-title" data-lang="en">Micro-<em>Warehouses</em></h2>
-        <h2 class="section-title" data-lang="ko">마이크로 <em>창고</em></h2>
+        <h2 class="section-title" data-lang="ko">마이크로 <em>창고</em></h2><h2 class="section-title" data-lang="zh">微型<em>仓库</em></h2><h2 class="section-title" data-lang="zt">微型<em>倉庫</em></h2>
         <p class="section-sub" data-lang="en">Drive-in units built for trades, e-commerce operators and small businesses that have outgrown the garage — with the height, power and access to run a real operation.</p>
-        <p class="section-sub" data-lang="ko">차량 진입이 가능한 유닛으로, 창고가 좁아진 트레이드·이커머스·소상공인을 위해 설계되었습니다. 실제 사업 운영이 가능한 층고와 전력, 출입 환경을 갖추었습니다.</p>
+        <p class="section-sub" data-lang="ko">차량 진입이 가능한 유닛으로, 창고가 좁아진 트레이드·이커머스·소상공인을 위해 설계되었습니다. 실제 사업 운영이 가능한 층고와 전력, 출입 환경을 갖추었습니다.</p><p class="section-sub" data-lang="zh">车辆可直接驶入的单元，专为车库已不敷使用的技术工种、电商与小微企业而设计。具备可实际经营业务的层高、电力与出入条件。</p><p class="section-sub" data-lang="zt">車輛可直接駛入的單元，專爲車庫已不敷使用的技術工種、電商與小微企業而設計。具備可實際經營業務的層高、電力與出入條件。</p>
         <div class="spec-grid">
           <div class="spec">
-            <label><span data-lang="en" class="inl">Unit Size</span><span data-lang="ko" class="inl">유닛 면적</span></label>
+            <label><span data-lang="en" class="inl">Unit Size</span><span data-lang="ko" class="inl">유닛 면적</span><span data-lang="zh" class="inl">单元面积</span><span data-lang="zt" class="inl">單元面積</span></label>
             <span>26m² – 80m²</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Internal Clearance</span><span data-lang="ko" class="inl">내부 층고</span></label>
-            <span data-lang="en" class="inl">Up to 3.9m</span><span data-lang="ko" class="inl">최대 3.9m</span>
+            <label><span data-lang="en" class="inl">Internal Clearance</span><span data-lang="ko" class="inl">내부 층고</span><span data-lang="zh" class="inl">内部层高</span><span data-lang="zt" class="inl">內部層高</span></label>
+            <span data-lang="en" class="inl">Up to 3.9m</span><span data-lang="ko" class="inl">최대 3.9m</span><span data-lang="zh" class="inl">最高 3.9 米</span><span data-lang="zt" class="inl">最高 3.9 米</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Roller Door</span><span data-lang="ko" class="inl">롤러 도어</span></label>
-            <span data-lang="en" class="inl">3.0m Electric</span><span data-lang="ko" class="inl">3.0m 전동</span>
+            <label><span data-lang="en" class="inl">Roller Door</span><span data-lang="ko" class="inl">롤러 도어</span><span data-lang="zh" class="inl">卷帘门</span><span data-lang="zt" class="inl">捲簾門</span></label>
+            <span data-lang="en" class="inl">3.0m Electric</span><span data-lang="ko" class="inl">3.0m 전동</span><span data-lang="zh" class="inl">3.0 米电动</span><span data-lang="zt" class="inl">3.0 米電動</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Power Supply</span><span data-lang="ko" class="inl">전력 공급</span></label>
-            <span data-lang="en" class="inl">40A Included</span><span data-lang="ko" class="inl">40A 포함</span>
+            <label><span data-lang="en" class="inl">Power Supply</span><span data-lang="ko" class="inl">전력 공급</span><span data-lang="zh" class="inl">电力供应</span><span data-lang="zt" class="inl">電力供應</span></label>
+            <span data-lang="en" class="inl">40A Included</span><span data-lang="ko" class="inl">40A 포함</span><span data-lang="zh" class="inl">含 40A 供电</span><span data-lang="zt" class="inl">含 40A 供電</span>
           </div>
         </div>
         <ul class="feat-list">
-          <li><span data-lang="en" class="inl">Remote electric roller door and drive-in access</span><span data-lang="ko" class="inl">리모컨 전동 롤러 도어 및 차량 진입 가능</span></li>
-          <li><span data-lang="en" class="inl">Temperature stable, heavy duty construction</span><span data-lang="ko" class="inl">온도 안정성이 높은 견고한 구조</span></li>
-          <li><span data-lang="en" class="inl">Common kitchenette and toilets outside the unit</span><span data-lang="ko" class="inl">유닛 외부 공용 간이주방 및 화장실</span></li>
-          <li><span data-lang="en" class="inl">Lights included, free power to the unit</span><span data-lang="ko" class="inl">조명 기본 제공, 유닛 전력 무료 제공</span></li>
-          <li><span data-lang="en" class="inl">Smart access with motion detector, camera and alarm</span><span data-lang="ko" class="inl">동작 감지·카메라·경보가 연동된 스마트 출입 시스템</span></li>
-          <li><span data-lang="en" class="inl">Generous on-site parking, 24/7 secure access</span><span data-lang="ko" class="inl">넉넉한 부지 내 주차, 24시간 보안 출입</span></li>
+          <li><span data-lang="en" class="inl">Remote electric roller door and drive-in access</span><span data-lang="ko" class="inl">리모컨 전동 롤러 도어 및 차량 진입 가능</span><span data-lang="zh" class="inl">遥控电动卷帘门，车辆可直接驶入</span><span data-lang="zt" class="inl">遙控電動捲簾門，車輛可直接駛入</span></li>
+          <li><span data-lang="en" class="inl">Temperature stable, heavy duty construction</span><span data-lang="ko" class="inl">온도 안정성이 높은 견고한 구조</span><span data-lang="zh" class="inl">温度稳定的坚固结构</span><span data-lang="zt" class="inl">溫度穩定的堅固結構</span></li>
+          <li><span data-lang="en" class="inl">Common kitchenette and toilets outside the unit</span><span data-lang="ko" class="inl">유닛 외부 공용 간이주방 및 화장실</span><span data-lang="zh" class="inl">单元外设公共简易厨房与洗手间</span><span data-lang="zt" class="inl">單元外設公共簡易廚房與洗手間</span></li>
+          <li><span data-lang="en" class="inl">Lights included, free power to the unit</span><span data-lang="ko" class="inl">조명 기본 제공, 유닛 전력 무료 제공</span><span data-lang="zh" class="inl">标配照明，单元用电免费提供</span><span data-lang="zt" class="inl">標配照明，單元用電免費提供</span></li>
+          <li><span data-lang="en" class="inl">Smart access with motion detector, camera and alarm</span><span data-lang="ko" class="inl">동작 감지·카메라·경보가 연동된 스마트 출입 시스템</span><span data-lang="zh" class="inl">联动动作感应、摄像头与警报的智能门禁系统</span><span data-lang="zt" class="inl">聯動動作感應、攝像頭與警報的智能門禁系統</span></li>
+          <li><span data-lang="en" class="inl">Generous on-site parking, 24/7 secure access</span><span data-lang="ko" class="inl">넉넉한 부지 내 주차, 24시간 보안 출입</span><span data-lang="zh" class="inl">园区内充裕停车位，24 小时安保出入</span><span data-lang="zt" class="inl">園區內充裕停車位，24 小時安保出入</span></li>
         </ul>
       </div>
     </div>
@@ -369,9 +384,9 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
   <img src="./assets/silo-campbelltown/storage-corridor.jpg" alt="Internal storage unit corridor at a completed Silo facility" loading="lazy" style="max-height:340px">
   <div class="band-content">
     <h3 class="band-title" data-lang="en">Secure, sheltered, lift-served</h3>
-    <h3 class="band-title" data-lang="ko">안전하고, 실내이며, 화물 리프트 완비</h3>
+    <h3 class="band-title" data-lang="ko">안전하고, 실내이며, 화물 리프트 완비</h3><h3 class="band-title" data-lang="zh">安全、室内、货梯齐备</h3><h3 class="band-title" data-lang="zt">安全、室內、貨梯齊備</h3>
     <p class="band-sub" data-lang="en">Internal corridors, large goods lifts and generous parking make loading and unloading straightforward in any weather.</p>
-    <p class="band-sub" data-lang="ko">실내 통로와 대형 화물 리프트, 넉넉한 주차 공간으로 날씨와 관계없이 편리하게 상·하차할 수 있습니다.</p>
+    <p class="band-sub" data-lang="ko">실내 통로와 대형 화물 리프트, 넉넉한 주차 공간으로 날씨와 관계없이 편리하게 상·하차할 수 있습니다.</p><p class="band-sub" data-lang="zh">室内通道、大型货梯与充裕停车位，让装卸货不受天气影响。</p><p class="band-sub" data-lang="zt">室內通道、大型貨梯與充裕停車位，讓裝卸貨不受天氣影響。</p>
   </div>
 </div>
 
@@ -381,37 +396,37 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
     <div class="prod rev">
       <div>
         <div class="section-eyebrow">
-          <span data-lang="en" class="inl">Product 02</span><span data-lang="ko" class="inl">상품 02</span>
+          <span data-lang="en" class="inl">Product 02</span><span data-lang="ko" class="inl">상품 02</span><span data-lang="zh" class="inl">产品 02</span><span data-lang="zt" class="inl">產品 02</span>
         </div>
         <h2 class="section-title" data-lang="en">Storage <em>Units</em></h2>
-        <h2 class="section-title" data-lang="ko">스토리지 <em>유닛</em></h2>
+        <h2 class="section-title" data-lang="ko">스토리지 <em>유닛</em></h2><h2 class="section-title" data-lang="zh">仓储<em>单元</em></h2><h2 class="section-title" data-lang="zt">倉儲<em>單元</em></h2>
         <p class="section-sub" data-lang="en">Compact, individually titled units from half-garage size up — ideal for tradies, online retailers, collectors and households that simply need more room.</p>
-        <p class="section-sub" data-lang="ko">반 차고 크기부터 시작하는 소형 개별 등기 유닛. 트레이드, 온라인 리테일러, 컬렉터, 그리고 단순히 공간이 더 필요한 가정에 적합합니다.</p>
+        <p class="section-sub" data-lang="ko">반 차고 크기부터 시작하는 소형 개별 등기 유닛. 트레이드, 온라인 리테일러, 컬렉터, 그리고 단순히 공간이 더 필요한 가정에 적합합니다.</p><p class="section-sub" data-lang="zh">自半个车库大小起的小型独立产权单元。适合技术工种、网店经营者、收藏爱好者，以及单纯需要更多空间的家庭。</p><p class="section-sub" data-lang="zt">自半個車庫大小起的小型獨立產權單元。適合技術工種、網店經營者、收藏愛好者，以及單純需要更多空間的家庭。</p>
         <div class="spec-grid">
           <div class="spec">
-            <label><span data-lang="en" class="inl">Unit Size</span><span data-lang="ko" class="inl">유닛 면적</span></label>
+            <label><span data-lang="en" class="inl">Unit Size</span><span data-lang="ko" class="inl">유닛 면적</span><span data-lang="zh" class="inl">单元面积</span><span data-lang="zt" class="inl">單元面積</span></label>
             <span>8m² – 24m²</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Internal Clearance</span><span data-lang="ko" class="inl">내부 층고</span></label>
+            <label><span data-lang="en" class="inl">Internal Clearance</span><span data-lang="ko" class="inl">내부 층고</span><span data-lang="zh" class="inl">内部层高</span><span data-lang="zt" class="inl">內部層高</span></label>
             <span>2.4m</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Roller Door</span><span data-lang="ko" class="inl">롤러 도어</span></label>
-            <span data-lang="en" class="inl">2.4m Electric</span><span data-lang="ko" class="inl">2.4m 전동</span>
+            <label><span data-lang="en" class="inl">Roller Door</span><span data-lang="ko" class="inl">롤러 도어</span><span data-lang="zh" class="inl">卷帘门</span><span data-lang="zt" class="inl">捲簾門</span></label>
+            <span data-lang="en" class="inl">2.4m Electric</span><span data-lang="ko" class="inl">2.4m 전동</span><span data-lang="zh" class="inl">2.4 米电动</span><span data-lang="zt" class="inl">2.4 米電動</span>
           </div>
           <div class="spec">
-            <label><span data-lang="en" class="inl">Solar Power</span><span data-lang="ko" class="inl">태양광 전력</span></label>
-            <span data-lang="en" class="inl">Free, Double Outlet</span><span data-lang="ko" class="inl">무료, 2구 콘센트</span>
+            <label><span data-lang="en" class="inl">Solar Power</span><span data-lang="ko" class="inl">태양광 전력</span><span data-lang="zh" class="inl">太阳能电力</span><span data-lang="zt" class="inl">太陽能電力</span></label>
+            <span data-lang="en" class="inl">Free, Double Outlet</span><span data-lang="ko" class="inl">무료, 2구 콘센트</span><span data-lang="zh" class="inl">免费，双孔插座</span><span data-lang="zt" class="inl">免費，雙孔插座</span>
           </div>
         </div>
         <ul class="feat-list">
-          <li><span data-lang="en" class="inl">Free solar power via double power outlet</span><span data-lang="ko" class="inl">2구 콘센트를 통한 무료 태양광 전력</span></li>
-          <li><span data-lang="en" class="inl">Lights included in every unit</span><span data-lang="ko" class="inl">전 유닛 조명 기본 제공</span></li>
-          <li><span data-lang="en" class="inl">Large goods lifts serving upper levels</span><span data-lang="ko" class="inl">상층부까지 연결되는 대형 화물 리프트</span></li>
-          <li><span data-lang="en" class="inl">Common kitchenette and amenities outside the unit</span><span data-lang="ko" class="inl">유닛 외부 공용 간이주방 및 편의시설</span></li>
-          <li><span data-lang="en" class="inl">Smart access with motion detector, camera and alarm</span><span data-lang="ko" class="inl">동작 감지·카메라·경보가 연동된 스마트 출입 시스템</span></li>
-          <li><span data-lang="en" class="inl">24/7 secure access, generous parking</span><span data-lang="ko" class="inl">24시간 보안 출입, 넉넉한 주차 공간</span></li>
+          <li><span data-lang="en" class="inl">Free solar power via double power outlet</span><span data-lang="ko" class="inl">2구 콘센트를 통한 무료 태양광 전력</span><span data-lang="zh" class="inl">经双孔插座提供的免费太阳能电力</span><span data-lang="zt" class="inl">經雙孔插座提供的免費太陽能電力</span></li>
+          <li><span data-lang="en" class="inl">Lights included in every unit</span><span data-lang="ko" class="inl">전 유닛 조명 기본 제공</span><span data-lang="zh" class="inl">全部单元标配照明</span><span data-lang="zt" class="inl">全部單元標配照明</span></li>
+          <li><span data-lang="en" class="inl">Large goods lifts serving upper levels</span><span data-lang="ko" class="inl">상층부까지 연결되는 대형 화물 리프트</span><span data-lang="zh" class="inl">直通上层的大型货梯</span><span data-lang="zt" class="inl">直通上層的大型貨梯</span></li>
+          <li><span data-lang="en" class="inl">Common kitchenette and amenities outside the unit</span><span data-lang="ko" class="inl">유닛 외부 공용 간이주방 및 편의시설</span><span data-lang="zh" class="inl">单元外设公共简易厨房与便利设施</span><span data-lang="zt" class="inl">單元外設公共簡易廚房與便利設施</span></li>
+          <li><span data-lang="en" class="inl">Smart access with motion detector, camera and alarm</span><span data-lang="ko" class="inl">동작 감지·카메라·경보가 연동된 스마트 출입 시스템</span><span data-lang="zh" class="inl">联动动作感应、摄像头与警报的智能门禁系统</span><span data-lang="zt" class="inl">聯動動作感應、攝像頭與警報的智能門禁系統</span></li>
+          <li><span data-lang="en" class="inl">24/7 secure access, generous parking</span><span data-lang="ko" class="inl">24시간 보안 출입, 넉넉한 주차 공간</span><span data-lang="zh" class="inl">24 小时安保出入，充裕停车位</span><span data-lang="zt" class="inl">24 小時安保出入，充裕停車位</span></li>
         </ul>
       </div>
       <div class="prod-img">
@@ -425,54 +440,54 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section style="background:var(--bg2)">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-lang="en" class="inl">Who Uses Them</span><span data-lang="ko" class="inl">주요 사용자</span>
+      <span data-lang="en" class="inl">Who Uses Them</span><span data-lang="ko" class="inl">주요 사용자</span><span data-lang="zh" class="inl">主要使用者</span><span data-lang="zt" class="inl">主要使用者</span>
     </div>
     <h2 class="section-title" data-lang="en">Everyday businesses,<br><em>everyday households</em></h2>
-    <h2 class="section-title" data-lang="ko">평범한 사업자와<br><em>평범한 가정</em></h2>
+    <h2 class="section-title" data-lang="ko">평범한 사업자와<br><em>평범한 가정</em></h2><h2 class="section-title" data-lang="zh">平凡的经营者与<br><em>平凡的家庭</em></h2><h2 class="section-title" data-lang="zt">平凡的經營者與<br><em>平凡的家庭</em></h2>
     <p class="section-sub" data-lang="en">Tenant profiles observed across Silo's completed facilities in Wollongong, Huskisson, Nowra and Oran Park.</p>
-    <p class="section-sub" data-lang="ko">울런공, 허스키슨, 나우라, 오란파크의 기존 Silo 시설에서 확인된 실제 임차인 유형입니다.</p>
+    <p class="section-sub" data-lang="ko">울런공, 허스키슨, 나우라, 오란파크의 기존 Silo 시설에서 확인된 실제 임차인 유형입니다.</p><p class="section-sub" data-lang="zh">以下为 Wollongong、Huskisson、Nowra 与 Oran Park 既有 Silo 设施中实际出现的租户类型。</p><p class="section-sub" data-lang="zt">以下爲 Wollongong、Huskisson、Nowra 與 Oran Park 既有 Silo 設施中實際出現的租戶類型。</p>
     <div class="tenant-grid">
       <div class="tcard">
         <div class="tcard-ico">🔧</div>
         <h4 data-lang="en">Trades &amp; Contractors</h4>
-        <h4 data-lang="ko">트레이드 &amp; 시공업체</h4>
+        <h4 data-lang="ko">트레이드 &amp; 시공업체</h4><h4 data-lang="zh">技术工种与施工商</h4><h4 data-lang="zt">技術工種與施工商</h4>
         <p data-lang="en">Electricians, plumbers and builders storing tools, materials and vehicles close to job sites.</p>
-        <p data-lang="ko">전기·배관·건축 시공업자가 현장 인근에 공구, 자재, 차량을 보관합니다.</p>
+        <p data-lang="ko">전기·배관·건축 시공업자가 현장 인근에 공구, 자재, 차량을 보관합니다.</p><p data-lang="zh">电工、水管工与建筑商在工地附近存放工具、材料与车辆。</p><p data-lang="zt">電工、水管工與建築商在工地附近存放工具、材料與車輛。</p>
       </div>
       <div class="tcard">
         <div class="tcard-ico">📦</div>
         <h4 data-lang="en">E-Commerce &amp; Retail</h4>
-        <h4 data-lang="ko">이커머스 &amp; 리테일</h4>
+        <h4 data-lang="ko">이커머스 &amp; 리테일</h4><h4 data-lang="zh">电商与零售</h4><h4 data-lang="zt">電商與零售</h4>
         <p data-lang="en">Online sellers running inventory, packing and dispatch from a single secure unit.</p>
-        <p data-lang="ko">온라인 셀러가 재고 보관부터 포장·출고까지 한 유닛에서 처리합니다.</p>
+        <p data-lang="ko">온라인 셀러가 재고 보관부터 포장·출고까지 한 유닛에서 처리합니다.</p><p data-lang="zh">网店卖家在同一单元内完成库存存放、包装与发货。</p><p data-lang="zt">網店賣家在同一單元內完成庫存存放、包裝與發貨。</p>
       </div>
       <div class="tcard">
         <div class="tcard-ico">🚗</div>
         <h4 data-lang="en">Prestige &amp; Classic Cars</h4>
-        <h4 data-lang="ko">프레스티지 &amp; 클래식카</h4>
+        <h4 data-lang="ko">프레스티지 &amp; 클래식카</h4><h4 data-lang="zh">名贵车与经典车</h4><h4 data-lang="zt">名貴車與經典車</h4>
         <p data-lang="en">Collectors and motorbike enthusiasts wanting secure, weather-protected garaging.</p>
-        <p data-lang="ko">보안과 날씨 보호가 되는 차고를 원하는 컬렉터와 모터바이크 애호가.</p>
+        <p data-lang="ko">보안과 날씨 보호가 되는 차고를 원하는 컬렉터와 모터바이크 애호가.</p><p data-lang="zh">寻求安全且遮风挡雨车库的收藏者与摩托车爱好者。</p><p data-lang="zt">尋求安全且遮風擋雨車庫的收藏者與摩托車愛好者。</p>
       </div>
       <div class="tcard">
         <div class="tcard-ico">🗄️</div>
         <h4 data-lang="en">Document &amp; Archive</h4>
-        <h4 data-lang="ko">서류 &amp; 아카이브</h4>
+        <h4 data-lang="ko">서류 &amp; 아카이브</h4><h4 data-lang="zh">文件与档案</h4><h4 data-lang="zt">文件與檔案</h4>
         <p data-lang="en">Professional firms storing records and business equipment off-site but close by.</p>
-        <p data-lang="ko">전문직 사무소가 기록물과 사무 장비를 가까운 외부 공간에 보관합니다.</p>
+        <p data-lang="ko">전문직 사무소가 기록물과 사무 장비를 가까운 외부 공간에 보관합니다.</p><p data-lang="zh">专业事务所将档案与办公设备存放于就近的场外空间。</p><p data-lang="zt">專業事務所將檔案與辦公設備存放於就近的場外空間。</p>
       </div>
       <div class="tcard">
         <div class="tcard-ico">🏠</div>
         <h4 data-lang="en">Households</h4>
-        <h4 data-lang="ko">일반 가정</h4>
+        <h4 data-lang="ko">일반 가정</h4><h4 data-lang="zh">普通家庭</h4><h4 data-lang="zt">普通家庭</h4>
         <p data-lang="en">Downsizers, growing families and renovators storing furniture and seasonal items.</p>
-        <p data-lang="ko">다운사이징 가구, 자녀가 늘어난 가정, 리노베이션 중인 가정의 가구·계절용품 보관.</p>
+        <p data-lang="ko">다운사이징 가구, 자녀가 늘어난 가정, 리노베이션 중인 가정의 가구·계절용품 보관.</p><p data-lang="zh">换小房家庭、成员增加的家庭及装修中的家庭，存放家具与季节性物品。</p><p data-lang="zt">換小房家庭、成員增加的家庭及裝修中的家庭，存放傢俱與季節性物品。</p>
       </div>
       <div class="tcard">
         <div class="tcard-ico">🏄</div>
         <h4 data-lang="en">Sports &amp; Recreation</h4>
-        <h4 data-lang="ko">스포츠 &amp; 레저</h4>
+        <h4 data-lang="ko">스포츠 &amp; 레저</h4><h4 data-lang="zh">运动与休闲</h4><h4 data-lang="zt">運動與休閒</h4>
         <p data-lang="en">Caravans, boats, trailers and recreational equipment kept secure year-round.</p>
-        <p data-lang="ko">카라반, 보트, 트레일러, 레저 장비를 연중 안전하게 보관합니다.</p>
+        <p data-lang="ko">카라반, 보트, 트레일러, 레저 장비를 연중 안전하게 보관합니다.</p><p data-lang="zh">房车、船艇、拖车与休闲装备全年安全存放。</p><p data-lang="zt">房車、船艇、拖車與休閒裝備全年安全存放。</p>
       </div>
     </div>
   </div>
@@ -482,24 +497,24 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section class="loc-sec">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-lang="en" class="inl">Location</span><span data-lang="ko" class="inl">입지</span>
+      <span data-lang="en" class="inl">Location</span><span data-lang="ko" class="inl">입지</span><span data-lang="zh" class="inl">区位</span><span data-lang="zt" class="inl">區位</span>
     </div>
     <h2 class="section-title" data-lang="en">On Campbelltown Road,<br><em>in full view</em></h2>
-    <h2 class="section-title" data-lang="ko">캠벨타운 로드 전면,<br><em>눈에 띄는 자리</em></h2>
+    <h2 class="section-title" data-lang="ko">캠벨타운 로드 전면,<br><em>눈에 띄는 자리</em></h2><h2 class="section-title" data-lang="zh">Campbelltown Road 临街，<br><em>醒目之位</em></h2><h2 class="section-title" data-lang="zt">Campbelltown Road 臨街，<br><em>醒目之位</em></h2>
     <p class="section-sub" data-lang="en">Positioned minutes from Campbelltown's established residential, commercial and industrial precincts, with direct frontage to a major arterial road.</p>
-    <p class="section-sub" data-lang="ko">캠벨타운의 기존 주거·상업·산업 지구에서 몇 분 거리에 위치하며, 주요 간선도로에 직접 면해 있습니다.</p>
+    <p class="section-sub" data-lang="ko">캠벨타운의 기존 주거·상업·산업 지구에서 몇 분 거리에 위치하며, 주요 간선도로에 직접 면해 있습니다.</p><p class="section-sub" data-lang="zh">距 Campbelltown 既有住宅、商业与工业片区仅数分钟，并直接临主干道。</p><p class="section-sub" data-lang="zt">距 Campbelltown 既有住宅、商業與工業片區僅數分鐘，並直接臨主幹道。</p>
     <div class="loc-img">
       <img src="./assets/silo-campbelltown/aerial.jpg" alt="Aerial view of 6 Grange Rd Campbelltown showing Campbelltown Road, Leumeah Station and Campbelltown Stadium" loading="lazy">
     </div>
     <div class="loc-grid">
-      <div class="loc-item"><div class="lv">1 min</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Road</span><span data-lang="ko" class="inl">캠벨타운 로드</span></div></div>
-      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Shopping Centre</span><span data-lang="ko" class="inl">캠벨타운 쇼핑센터</span></div></div>
-      <div class="loc-item"><div class="lv">27.4 km</div><div class="ll"><span data-lang="en" class="inl">Badgerys Creek Airport</span><span data-lang="ko" class="inl">배저리스 크릭 공항</span></div></div>
-      <div class="loc-item"><div class="lv">55 km</div><div class="ll"><span data-lang="en" class="inl">Sydney CBD</span><span data-lang="ko" class="inl">시드니 CBD</span></div></div>
-      <div class="loc-item"><div class="lv">🚉</div><div class="ll"><span data-lang="en" class="inl">Leumeah Train Station nearby</span><span data-lang="ko" class="inl">인근 루미아 기차역</span></div></div>
-      <div class="loc-item"><div class="lv">🏟</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Stadium nearby</span><span data-lang="ko" class="inl">인근 캠벨타운 스타디움</span></div></div>
-      <div class="loc-item"><div class="lv">🏥</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Hospital precinct</span><span data-lang="ko" class="inl">캠벨타운 병원 권역</span></div></div>
-      <div class="loc-item"><div class="lv">🎓</div><div class="ll"><span data-lang="en" class="inl">Western Sydney University &amp; TAFE NSW</span><span data-lang="ko" class="inl">웨스턴 시드니 대학교 &amp; TAFE NSW</span></div></div>
+      <div class="loc-item"><div class="lv">1 min</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Road</span><span data-lang="ko" class="inl">캠벨타운 로드</span><span data-lang="zh" class="inl">Campbelltown Road</span><span data-lang="zt" class="inl">Campbelltown Road</span></div></div>
+      <div class="loc-item"><div class="lv">8 min</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Shopping Centre</span><span data-lang="ko" class="inl">캠벨타운 쇼핑센터</span><span data-lang="zh" class="inl">Campbelltown 购物中心</span><span data-lang="zt" class="inl">Campbelltown 購物中心</span></div></div>
+      <div class="loc-item"><div class="lv">27.4 km</div><div class="ll"><span data-lang="en" class="inl">Badgerys Creek Airport</span><span data-lang="ko" class="inl">배저리스 크릭 공항</span><span data-lang="zh" class="inl">Badgerys Creek 机场</span><span data-lang="zt" class="inl">Badgerys Creek 機場</span></div></div>
+      <div class="loc-item"><div class="lv">55 km</div><div class="ll"><span data-lang="en" class="inl">Sydney CBD</span><span data-lang="ko" class="inl">시드니 CBD</span><span data-lang="zh" class="inl">悉尼 CBD</span><span data-lang="zt" class="inl">悉尼 CBD</span></div></div>
+      <div class="loc-item"><div class="lv">🚉</div><div class="ll"><span data-lang="en" class="inl">Leumeah Train Station nearby</span><span data-lang="ko" class="inl">인근 루미아 기차역</span><span data-lang="zh" class="inl">临近 Leumeah 火车站</span><span data-lang="zt" class="inl">臨近 Leumeah 火車站</span></div></div>
+      <div class="loc-item"><div class="lv">🏟</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Stadium nearby</span><span data-lang="ko" class="inl">인근 캠벨타운 스타디움</span><span data-lang="zh" class="inl">临近 Campbelltown 体育场</span><span data-lang="zt" class="inl">臨近 Campbelltown 體育場</span></div></div>
+      <div class="loc-item"><div class="lv">🏥</div><div class="ll"><span data-lang="en" class="inl">Campbelltown Hospital precinct</span><span data-lang="ko" class="inl">캠벨타운 병원 권역</span><span data-lang="zh" class="inl">Campbelltown 医院片区</span><span data-lang="zt" class="inl">Campbelltown 醫院片區</span></div></div>
+      <div class="loc-item"><div class="lv">🎓</div><div class="ll"><span data-lang="en" class="inl">Western Sydney University &amp; TAFE NSW</span><span data-lang="ko" class="inl">웨스턴 시드니 대학교 &amp; TAFE NSW</span><span data-lang="zh" class="inl">西悉尼大学与 TAFE NSW</span><span data-lang="zt" class="inl">西悉尼大學與 TAFE NSW</span></div></div>
     </div>
   </div>
 </section>
@@ -508,54 +523,54 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section>
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-lang="en" class="inl">The Market</span><span data-lang="ko" class="inl">시장 현황</span>
+      <span data-lang="en" class="inl">The Market</span><span data-lang="ko" class="inl">시장 현황</span><span data-lang="zh" class="inl">市场概况</span><span data-lang="zt" class="inl">市場概況</span>
     </div>
     <h2 class="section-title" data-lang="en">Campbelltown at a <em>glance</em></h2>
-    <h2 class="section-title" data-lang="ko">한눈에 보는 <em>캠벨타운</em></h2>
+    <h2 class="section-title" data-lang="ko">한눈에 보는 <em>캠벨타운</em></h2><h2 class="section-title" data-lang="zh">一览 <em>Campbelltown</em></h2><h2 class="section-title" data-lang="zt">一覽 <em>Campbelltown</em></h2>
     <p class="section-sub" data-lang="en">Campbelltown is a major regional centre roughly 55km south-west of Sydney's CBD and a key residential, commercial and employment hub for Sydney's south-west.</p>
-    <p class="section-sub" data-lang="ko">캠벨타운은 시드니 CBD에서 남서쪽으로 약 55km 떨어진 주요 지역 중심지이자, 시드니 남서부의 핵심 주거·상업·고용 거점입니다.</p>
+    <p class="section-sub" data-lang="ko">캠벨타운은 시드니 CBD에서 남서쪽으로 약 55km 떨어진 주요 지역 중심지이자, 시드니 남서부의 핵심 주거·상업·고용 거점입니다.</p><p class="section-sub" data-lang="zh">Campbelltown 位于悉尼 CBD 西南约 55 公里，是重要的区域中心，也是悉尼西南部核心的居住、商业与就业据点。</p><p class="section-sub" data-lang="zt">Campbelltown 位於悉尼 CBD 西南約 55 公里，是重要的區域中心，也是悉尼西南部核心的居住、商業與就業據點。</p>
     <div class="stat-grid">
       <div class="stat">
         <div class="sv">191,000+</div>
-        <div class="sl"><span data-lang="en" class="inl">Residents in the Campbelltown LGA</span><span data-lang="ko" class="inl">캠벨타운 지자체 인구</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Residents in the Campbelltown LGA</span><span data-lang="ko" class="inl">캠벨타운 지자체 인구</span><span data-lang="zh" class="inl">Campbelltown 地方政府区人口</span><span data-lang="zt" class="inl">Campbelltown 地方政府區人口</span></div>
       </div>
       <div class="stat">
         <div class="sv">311.5 km²</div>
-        <div class="sl"><span data-lang="en" class="inl">LGA area, ~614 people per km²</span><span data-lang="ko" class="inl">지자체 면적, km²당 약 614명</span></div>
+        <div class="sl"><span data-lang="en" class="inl">LGA area, ~614 people per km²</span><span data-lang="ko" class="inl">지자체 면적, km²당 약 614명</span><span data-lang="zh" class="inl">地方政府区面积，每平方公里约 614 人</span><span data-lang="zt" class="inl">地方政府區面積，每平方公里約 614 人</span></div>
       </div>
       <div class="stat">
         <div class="sv">~90%</div>
-        <div class="sl"><span data-lang="en" class="inl">Industrial occupancy across the Macarthur region</span><span data-lang="ko" class="inl">맥아더 권역 산업용 부동산 임대율</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Industrial occupancy across the Macarthur region</span><span data-lang="ko" class="inl">맥아더 권역 산업용 부동산 임대율</span><span data-lang="zh" class="inl">Macarthur 区域工业地产出租率</span><span data-lang="zt" class="inl">Macarthur 區域工業地產出租率</span></div>
       </div>
       <div class="stat">
         <div class="sv">2036</div>
-        <div class="sl"><span data-lang="en" class="inl">Population forecast to grow substantially by</span><span data-lang="ko" class="inl">인구가 크게 늘어날 것으로 전망되는 시점</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Population forecast to grow substantially by</span><span data-lang="ko" class="inl">인구가 크게 늘어날 것으로 전망되는 시점</span><span data-lang="zh" class="inl">人口预计大幅增长的时点</span><span data-lang="zt" class="inl">人口預計大幅增長的時點</span></div>
       </div>
     </div>
     <div class="driver-grid">
       <div class="driver">
         <h4 data-lang="en">Population Growth</h4>
-        <h4 data-lang="ko">인구 증가</h4>
+        <h4 data-lang="ko">인구 증가</h4><h4 data-lang="zh">人口增长</h4><h4 data-lang="zt">人口增長</h4>
         <p data-lang="en">Ongoing housing development and urban renewal across established and emerging communities continue to attract new residents, lifting demand for household and business storage.</p>
-        <p data-lang="ko">기존 및 신규 지역의 지속적인 주택 개발과 도시 재생이 새로운 주민을 끌어들이며, 가정용·사업용 보관 수요를 함께 끌어올리고 있습니다.</p>
+        <p data-lang="ko">기존 및 신규 지역의 지속적인 주택 개발과 도시 재생이 새로운 주민을 끌어들이며, 가정용·사업용 보관 수요를 함께 끌어올리고 있습니다.</p><p data-lang="zh">既有与新兴片区持续的住宅开发与城市更新吸引新居民迁入，同时带动家庭与商业的仓储需求。</p><p data-lang="zt">既有與新興片區持續的住宅開發與城市更新吸引新居民遷入，同時帶動家庭與商業的倉儲需求。</p>
       </div>
       <div class="driver">
         <h4 data-lang="en">E-Commerce Growth</h4>
-        <h4 data-lang="ko">이커머스 성장</h4>
+        <h4 data-lang="ko">이커머스 성장</h4><h4 data-lang="zh">电商增长</h4><h4 data-lang="zt">電商增長</h4>
         <p data-lang="en">The rise of online retail has created a wave of small businesses needing somewhere to hold inventory and run shipping operations.</p>
-        <p data-lang="ko">온라인 리테일 확산으로 재고 보관과 배송 운영 공간이 필요한 소상공인이 크게 늘었습니다.</p>
+        <p data-lang="ko">온라인 리테일 확산으로 재고 보관과 배송 운영 공간이 필요한 소상공인이 크게 늘었습니다.</p><p data-lang="zh">线上零售扩张，使需要库存存放与发货运营空间的小微企业大幅增加。</p><p data-lang="zt">線上零售擴張，使需要庫存存放與發貨運營空間的小微企業大幅增加。</p>
       </div>
       <div class="driver">
         <h4 data-lang="en">Infrastructure Investment</h4>
-        <h4 data-lang="ko">인프라 투자</h4>
+        <h4 data-lang="ko">인프라 투자</h4><h4 data-lang="zh">基建投资</h4><h4 data-lang="zt">基建投資</h4>
         <p data-lang="en">NSW Government investment in road, rail, health and education — including upgrades to Campbelltown Hospital and the M5 motorway extension — continues to strengthen the area's appeal.</p>
-        <p data-lang="ko">캠벨타운 병원 확충과 M5 고속도로 연장을 포함한 NSW 주정부의 도로·철도·의료·교육 투자가 지역 경쟁력을 지속적으로 높이고 있습니다.</p>
+        <p data-lang="ko">캠벨타운 병원 확충과 M5 고속도로 연장을 포함한 NSW 주정부의 도로·철도·의료·교육 투자가 지역 경쟁력을 지속적으로 높이고 있습니다.</p><p data-lang="zh">NSW 州政府在道路、铁路、医疗与教育方面的投入 —— 包括 Campbelltown 医院扩建与 M5 高速延伸 —— 持续提升区域竞争力。</p><p data-lang="zt">NSW 州政府在道路、鐵路、醫療與教育方面的投入 —— 包括 Campbelltown 醫院擴建與 M5 高速延伸 —— 持續提升區域競爭力。</p>
       </div>
       <div class="driver">
         <h4 data-lang="en">Downsizing Trend</h4>
-        <h4 data-lang="ko">다운사이징 흐름</h4>
+        <h4 data-lang="ko">다운사이징 흐름</h4><h4 data-lang="zh">换小房趋势</h4><h4 data-lang="zt">換小房趨勢</h4>
         <p data-lang="en">As baby boomers downsize their homes, furniture and belongings that no longer fit create sustained demand for secure storage.</p>
-        <p data-lang="ko">베이비부머 세대가 주거 규모를 줄이면서, 새 집에 들어가지 않는 가구와 물품에 대한 보관 수요가 꾸준히 발생합니다.</p>
+        <p data-lang="ko">베이비부머 세대가 주거 규모를 줄이면서, 새 집에 들어가지 않는 가구와 물품에 대한 보관 수요가 꾸준히 발생합니다.</p><p data-lang="zh">随着婴儿潮世代缩减居住面积，新居容纳不下的家具与物品持续产生仓储需求。</p><p data-lang="zt">隨着嬰兒潮世代縮減居住面積，新居容納不下的傢俱與物品持續產生倉儲需求。</p>
       </div>
     </div>
   </div>
@@ -565,12 +580,12 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section style="background:var(--bg2)">
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-lang="en" class="inl">Track Record</span><span data-lang="ko" class="inl">시공 실적</span>
+      <span data-lang="en" class="inl">Track Record</span><span data-lang="ko" class="inl">시공 실적</span><span data-lang="zh" class="inl">既往业绩</span><span data-lang="zt" class="inl">既往業績</span>
     </div>
     <h2 class="section-title" data-lang="en">Four facilities <em>already delivered</em></h2>
-    <h2 class="section-title" data-lang="ko">이미 완공된 <em>네 개의 시설</em></h2>
+    <h2 class="section-title" data-lang="ko">이미 완공된 <em>네 개의 시설</em></h2><h2 class="section-title" data-lang="zh">已建成的<em>四座设施</em></h2><h2 class="section-title" data-lang="zt">已建成的<em>四座設施</em></h2>
     <p class="section-sub" data-lang="en">Silo Storage has a completed portfolio across the Illawarra, Shoalhaven and South-West Sydney, with a pipeline of further projects in the Sydney regions.</p>
-    <p class="section-sub" data-lang="ko">Silo Storage는 일라와라, 쇼얼헤이븐, 시드니 남서부에 걸쳐 완공 실적을 보유하고 있으며, 시드니 권역에 추가 프로젝트가 예정되어 있습니다.</p>
+    <p class="section-sub" data-lang="ko">Silo Storage는 일라와라, 쇼얼헤이븐, 시드니 남서부에 걸쳐 완공 실적을 보유하고 있으며, 시드니 권역에 추가 프로젝트가 예정되어 있습니다.</p><p class="section-sub" data-lang="zh">Silo Storage 在 Illawarra、Shoalhaven 与悉尼西南部均有建成业绩，并在悉尼区域储备了更多项目。</p><p class="section-sub" data-lang="zt">Silo Storage 在 Illawarra、Shoalhaven 與悉尼西南部均有建成業績，並在悉尼區域儲備了更多項目。</p>
     <div class="proj-grid">
       <div class="proj">
         <img src="./assets/silo-campbelltown/past-wollongong.jpg" alt="Silo Wollongong completed facility" loading="lazy">
@@ -578,11 +593,11 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
           <h4>Silo Wollongong</h4>
           <div class="proj-loc">Completed 2021 · 3 Levels</div>
           <p data-lang="en">A modern facility just south of Wollongong providing storage and micro-warehouse space for personal and business customers.</p>
-          <p data-lang="ko">울런공 남쪽에 위치한 현대적 시설로, 개인 및 사업자 고객에게 스토리지와 마이크로 창고 공간을 제공합니다.</p>
+          <p data-lang="ko">울런공 남쪽에 위치한 현대적 시설로, 개인 및 사업자 고객에게 스토리지와 마이크로 창고 공간을 제공합니다.</p><p data-lang="zh">位于 Wollongong 南侧的现代化设施，为个人与商业客户提供仓储与微型仓库空间。</p><p data-lang="zt">位於 Wollongong 南側的現代化設施，爲個人與商業客戶提供倉儲與微型倉庫空間。</p>
           <div class="proj-meta">
-            <div><strong>176</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span></div>
-            <div><strong>10</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span></div>
-            <div><strong>97%</strong><span data-lang="en" class="inl">Average occupancy</span><span data-lang="ko" class="inl">평균 임대율</span></div>
+            <div><strong>176</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span><span data-lang="zh" class="inl">仓储单元</span><span data-lang="zt" class="inl">倉儲單元</span></div>
+            <div><strong>10</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span><span data-lang="zh" class="inl">微型仓库</span><span data-lang="zt" class="inl">微型倉庫</span></div>
+            <div><strong>97%</strong><span data-lang="en" class="inl">Average occupancy</span><span data-lang="ko" class="inl">평균 임대율</span><span data-lang="zh" class="inl">平均出租率</span><span data-lang="zt" class="inl">平均出租率</span></div>
           </div>
         </div>
       </div>
@@ -592,11 +607,11 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
           <h4>Silo Huskisson</h4>
           <div class="proj-loc">Completed December 2023</div>
           <p data-lang="en">A mix of warehouse and micro-warehouse units serving the local Huskisson market.</p>
-          <p data-lang="ko">허스키슨 지역 시장을 대상으로 창고와 마이크로 창고 유닛을 함께 공급합니다.</p>
+          <p data-lang="ko">허스키슨 지역 시장을 대상으로 창고와 마이크로 창고 유닛을 함께 공급합니다.</p><p data-lang="zh">面向 Huskisson 本地市场，同时提供仓库与微型仓库单元。</p><p data-lang="zt">面向 Huskisson 本地市場，同時提供倉庫與微型倉庫單元。</p>
           <div class="proj-meta">
-            <div><strong>8</strong><span data-lang="en" class="inl">Warehouses</span><span data-lang="ko" class="inl">창고</span></div>
-            <div><strong>21</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span></div>
-            <div><strong>85%</strong><span data-lang="en" class="inl">Tenanted</span><span data-lang="ko" class="inl">임대 완료</span></div>
+            <div><strong>8</strong><span data-lang="en" class="inl">Warehouses</span><span data-lang="ko" class="inl">창고</span><span data-lang="zh" class="inl">仓库</span><span data-lang="zt" class="inl">倉庫</span></div>
+            <div><strong>21</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span><span data-lang="zh" class="inl">微型仓库</span><span data-lang="zt" class="inl">微型倉庫</span></div>
+            <div><strong>85%</strong><span data-lang="en" class="inl">Tenanted</span><span data-lang="ko" class="inl">임대 완료</span><span data-lang="zh" class="inl">已出租</span><span data-lang="zt" class="inl">已出租</span></div>
           </div>
         </div>
       </div>
@@ -606,11 +621,11 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
           <h4>Silo Nowra</h4>
           <div class="proj-loc">Completed December 2025</div>
           <p data-lang="en">Delivering warehouses, micro-warehouses and super storage units in the Nowra regional centre for light industry and small business hubs.</p>
-          <p data-lang="ko">나우라 지역 중심부에 경공업과 소규모 비즈니스 허브를 위한 창고, 마이크로 창고, 대형 스토리지 유닛을 공급했습니다.</p>
+          <p data-lang="ko">나우라 지역 중심부에 경공업과 소규모 비즈니스 허브를 위한 창고, 마이크로 창고, 대형 스토리지 유닛을 공급했습니다.</p><p data-lang="zh">于 Nowra 区域中心为轻工业与小型商业枢纽提供仓库、微型仓库与大型仓储单元。</p><p data-lang="zt">於 Nowra 區域中心爲輕工業與小型商業樞紐提供倉庫、微型倉庫與大型倉儲單元。</p>
           <div class="proj-meta">
-            <div><strong>22</strong><span data-lang="en" class="inl">Warehouses</span><span data-lang="ko" class="inl">창고</span></div>
-            <div><strong>76</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span></div>
-            <div><strong>77</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span></div>
+            <div><strong>22</strong><span data-lang="en" class="inl">Warehouses</span><span data-lang="ko" class="inl">창고</span><span data-lang="zh" class="inl">仓库</span><span data-lang="zt" class="inl">倉庫</span></div>
+            <div><strong>76</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span><span data-lang="zh" class="inl">微型仓库</span><span data-lang="zt" class="inl">微型倉庫</span></div>
+            <div><strong>77</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span><span data-lang="zh" class="inl">仓储单元</span><span data-lang="zt" class="inl">倉儲單元</span></div>
           </div>
         </div>
       </div>
@@ -620,15 +635,15 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
           <h4>Silo Oran Park</h4>
           <div class="proj-loc">Completed April 2026</div>
           <p data-lang="en">A flagship South-West Sydney delivery across two facilities at 98 and 104 Southwell Road, answering demand from trades, e-commerce operators and households.</p>
-          <p data-lang="ko">98·104 Southwell Road 두 개 시설로 조성된 시드니 남서부 대표 프로젝트로, 트레이드·이커머스·가정 수요에 대응합니다.</p>
+          <p data-lang="ko">98·104 Southwell Road 두 개 시설로 조성된 시드니 남서부 대표 프로젝트로, 트레이드·이커머스·가정 수요에 대응합니다.</p><p data-lang="zh">由 98 与 104 Southwell Road 两处设施组成的悉尼西南代表项目，对应技术工种、电商与家庭需求。</p><p data-lang="zt">由 98 與 104 Southwell Road 兩處設施組成的悉尼西南代表項目，對應技術工種、電商與家庭需求。</p>
           <div class="proj-meta">
-            <div><strong>33</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span></div>
-            <div><strong>173</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span></div>
+            <div><strong>33</strong><span data-lang="en" class="inl">Micro-warehouses</span><span data-lang="ko" class="inl">마이크로 창고</span><span data-lang="zh" class="inl">微型仓库</span><span data-lang="zt" class="inl">微型倉庫</span></div>
+            <div><strong>173</strong><span data-lang="en" class="inl">Storage units</span><span data-lang="ko" class="inl">스토리지 유닛</span><span data-lang="zh" class="inl">仓储单元</span><span data-lang="zt" class="inl">倉儲單元</span></div>
           </div>
           <div style="margin-top:14px">
             <a href="./oran-park-silo.html" style="color:var(--orange);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;font-weight:600">
               <span data-lang="en" class="inl">View Silo Oran Park →</span>
-              <span data-lang="ko" class="inl">Silo 오란파크 보기 →</span>
+              <span data-lang="ko" class="inl">Silo 오란파크 보기 →</span><span data-lang="zh" class="inl">查看 Silo Oran Park →</span><span data-lang="zt" class="inl">查看 Silo Oran Park →</span>
             </a>
           </div>
         </div>
@@ -642,31 +657,31 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
   <div class="wrap dev-wrap fade-in">
     <div>
       <div class="section-eyebrow">
-        <span data-lang="en" class="inl">The Developer</span><span data-lang="ko" class="inl">디벨로퍼</span>
+        <span data-lang="en" class="inl">The Developer</span><span data-lang="ko" class="inl">디벨로퍼</span><span data-lang="zh" class="inl">开发商</span><span data-lang="zt" class="inl">開發商</span>
       </div>
       <h2 class="section-title" data-lang="en">Silo <em>Storage Group</em></h2>
-      <h2 class="section-title" data-lang="ko">Silo <em>스토리지 그룹</em></h2>
+      <h2 class="section-title" data-lang="ko">Silo <em>스토리지 그룹</em></h2><h2 class="section-title" data-lang="zh">Silo <em>Storage Group</em></h2><h2 class="section-title" data-lang="zt">Silo <em>Storage Group</em></h2>
       <p class="about-body" data-lang="en">The Silo Storage brand has an extensive record of delivering industrial warehouses, micro-warehouses and strata self-storage projects across NSW, backed by over 40 years of experience and more than $600 million in completed residential, commercial and industrial development.</p>
-      <p class="about-body" data-lang="ko">Silo Storage는 NSW 전역에서 산업용 창고, 마이크로 창고, 스트라타 셀프 스토리지 프로젝트를 공급해 온 브랜드로, 40년 이상의 경험과 6억 달러 이상의 주거·상업·산업 개발 완공 실적을 보유하고 있습니다.</p>
+      <p class="about-body" data-lang="ko">Silo Storage는 NSW 전역에서 산업용 창고, 마이크로 창고, 스트라타 셀프 스토리지 프로젝트를 공급해 온 브랜드로, 40년 이상의 경험과 6억 달러 이상의 주거·상업·산업 개발 완공 실적을 보유하고 있습니다.</p><p class="about-body" data-lang="zh">Silo Storage 是在 NSW 各地供应工业仓库、微型仓库与分契式自助仓储项目的品牌，拥有逾 40 年经验及逾 6 亿澳元的住宅、商业与工业开发建成业绩。</p><p class="about-body" data-lang="zt">Silo Storage 是在 NSW 各地供應工業倉庫、微型倉庫與分契式自助倉儲項目的品牌，擁有逾 40 年經驗及逾 6 億澳元的住宅、商業與工業開發建成業績。</p>
       <p class="about-body" data-lang="en">An in-house team of builders, architects, engineers, marketers, property managers and sales professionals works together on each project — and a specialist property management team can manage units on behalf of owners after settlement.</p>
-      <p class="about-body" data-lang="ko">시공, 설계, 엔지니어링, 마케팅, 자산관리, 세일즈 전문 인력이 사내에서 함께 프로젝트를 진행하며, 결제 이후에는 전문 자산관리 팀이 소유주를 대신해 유닛을 관리할 수 있습니다.</p>
+      <p class="about-body" data-lang="ko">시공, 설계, 엔지니어링, 마케팅, 자산관리, 세일즈 전문 인력이 사내에서 함께 프로젝트를 진행하며, 결제 이후에는 전문 자산관리 팀이 소유주를 대신해 유닛을 관리할 수 있습니다.</p><p class="about-body" data-lang="zh">施工、设计、工程、市场推广、资产管理与销售的专业团队于内部协同推进项目；交割后，专业资产管理团队可代业主管理单元。</p><p class="about-body" data-lang="zt">施工、設計、工程、市場推廣、資產管理與銷售的專業團隊於內部協同推進項目；交割後，專業資產管理團隊可代業主管理單元。</p>
     </div>
     <div class="stat-grid" style="margin-top:0">
       <div class="stat">
         <div class="sv">40+</div>
-        <div class="sl"><span data-lang="en" class="inl">Years of experience</span><span data-lang="ko" class="inl">업력</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Years of experience</span><span data-lang="ko" class="inl">업력</span><span data-lang="zh" class="inl">从业年数</span><span data-lang="zt" class="inl">從業年數</span></div>
       </div>
       <div class="stat">
         <div class="sv">$600M+</div>
-        <div class="sl"><span data-lang="en" class="inl">Development completed</span><span data-lang="ko" class="inl">개발 완공 규모</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Development completed</span><span data-lang="ko" class="inl">개발 완공 규모</span><span data-lang="zh" class="inl">开发建成规模</span><span data-lang="zt" class="inl">開發建成規模</span></div>
       </div>
       <div class="stat">
         <div class="sv">600+</div>
-        <div class="sl"><span data-lang="en" class="inl">Units under management</span><span data-lang="ko" class="inl">관리 중인 유닛</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Units under management</span><span data-lang="ko" class="inl">관리 중인 유닛</span><span data-lang="zh" class="inl">在管单元</span><span data-lang="zt" class="inl">在管單元</span></div>
       </div>
       <div class="stat">
         <div class="sv">4</div>
-        <div class="sl"><span data-lang="en" class="inl">Facilities completed in NSW</span><span data-lang="ko" class="inl">NSW 내 완공 시설</span></div>
+        <div class="sl"><span data-lang="en" class="inl">Facilities completed in NSW</span><span data-lang="ko" class="inl">NSW 내 완공 시설</span><span data-lang="zh" class="inl">NSW 建成设施</span><span data-lang="zt" class="inl">NSW 建成設施</span></div>
       </div>
     </div>
   </div>
@@ -676,82 +691,82 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section>
   <div class="wrap fade-in">
     <div class="section-eyebrow">
-      <span data-lang="en" class="inl">FAQ</span><span data-lang="ko" class="inl">자주 묻는 질문</span>
+      <span data-lang="en" class="inl">FAQ</span><span data-lang="ko" class="inl">자주 묻는 질문</span><span data-lang="zh" class="inl">常见问题</span><span data-lang="zt" class="inl">常見問題</span>
     </div>
     <h2 class="section-title" data-lang="en">Owning a unit at <em>Silo Campbelltown</em></h2>
-    <h2 class="section-title" data-lang="ko"><em>Silo Campbelltown</em> 유닛 소유 안내</h2>
+    <h2 class="section-title" data-lang="ko"><em>Silo Campbelltown</em> 유닛 소유 안내</h2><h2 class="section-title" data-lang="zh"><em>Silo Campbelltown</em> 单元持有须知</h2><h2 class="section-title" data-lang="zt"><em>Silo Campbelltown</em> 單元持有須知</h2>
     <div class="faq-grid">
       <div class="faq">
         <div class="q" data-lang="en">What is the ownership structure?</div>
-        <div class="q" data-lang="ko">소유 구조는 어떻게 되나요?</div>
+        <div class="q" data-lang="ko">소유 구조는 어떻게 되나요?</div><div class="q" data-lang="zh">产权结构是怎样的？</div><div class="q" data-lang="zt">產權結構是怎樣的？</div>
         <div class="a" data-lang="en">Each unit is individually titled under a strata title arrangement, giving direct legal ownership. You receive a Certificate of Title upon settlement, the same as any other real property purchase in NSW.</div>
-        <div class="a" data-lang="ko">각 유닛은 스트라타 타이틀 방식으로 개별 등기되어 직접적인 법적 소유권을 갖습니다. 결제 시 NSW의 다른 부동산 매입과 동일하게 소유권 증서를 받습니다.</div>
+        <div class="a" data-lang="ko">각 유닛은 스트라타 타이틀 방식으로 개별 등기되어 직접적인 법적 소유권을 갖습니다. 결제 시 NSW의 다른 부동산 매입과 동일하게 소유권 증서를 받습니다.</div><div class="a" data-lang="zh">每个单元以分契产权（Strata Title）独立登记，拥有直接的法律所有权。交割时可取得与 NSW 其他不动产购置相同的产权证书。</div><div class="a" data-lang="zt">每個單元以分契產權（Strata Title）獨立登記，擁有直接的法律所有權。交割時可取得與 NSW 其他不動產購置相同的產權證書。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Is there 24/7 access?</div>
-        <div class="q" data-lang="ko">24시간 출입이 가능한가요?</div>
+        <div class="q" data-lang="ko">24시간 출입이 가능한가요?</div><div class="q" data-lang="zh">是否可以 24 小时出入？</div><div class="q" data-lang="zt">是否可以 24 小時出入？</div>
         <div class="a" data-lang="en">Yes. Owners and tenants have 24/7 access through the smart access system.</div>
-        <div class="a" data-lang="ko">네. 소유주와 임차인은 스마트 출입 시스템을 통해 24시간 출입할 수 있습니다.</div>
+        <div class="a" data-lang="ko">네. 소유주와 임차인은 스마트 출입 시스템을 통해 24시간 출입할 수 있습니다.</div><div class="a" data-lang="zh">可以。业主与租客可通过智能门禁系统 24 小时出入。</div><div class="a" data-lang="zt">可以。業主與租客可通過智能門禁系統 24 小時出入。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">What security systems are included?</div>
-        <div class="q" data-lang="ko">어떤 보안 시스템이 포함되나요?</div>
+        <div class="q" data-lang="ko">어떤 보안 시스템이 포함되나요?</div><div class="q" data-lang="zh">包含哪些安保系统？</div><div class="q" data-lang="zt">包含哪些安保系統？</div>
         <div class="a" data-lang="en">Smart access control, motion detectors, security cameras, alarm systems and secure building access.</div>
-        <div class="a" data-lang="ko">스마트 출입 통제, 동작 감지기, 보안 카메라, 경보 시스템, 보안 출입 게이트가 포함됩니다.</div>
+        <div class="a" data-lang="ko">스마트 출입 통제, 동작 감지기, 보안 카메라, 경보 시스템, 보안 출입 게이트가 포함됩니다.</div><div class="a" data-lang="zh">包含智能门禁控制、动作感应器、监控摄像头、警报系统及安保出入闸口。</div><div class="a" data-lang="zt">包含智能門禁控制、動作感應器、監控攝像頭、警報系統及安保出入閘口。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">What are the unit sizes?</div>
-        <div class="q" data-lang="ko">유닛 크기는 어떻게 되나요?</div>
+        <div class="q" data-lang="ko">유닛 크기는 어떻게 되나요?</div><div class="q" data-lang="zh">单元面积有哪些？</div><div class="q" data-lang="zt">單元面積有哪些？</div>
         <div class="a" data-lang="en">Units range from half-garage 8m² storage up to 80m² micro-warehouses, in varying heights and dimensions.</div>
-        <div class="a" data-lang="ko">반 차고 크기의 8m² 스토리지부터 80m² 마이크로 창고까지, 층고와 치수가 다양하게 구성됩니다.</div>
+        <div class="a" data-lang="ko">반 차고 크기의 8m² 스토리지부터 80m² 마이크로 창고까지, 층고와 치수가 다양하게 구성됩니다.</div><div class="a" data-lang="zh">从半个车库大小的 8 平方米仓储，到 80 平方米微型仓库，层高与尺寸配置多样。</div><div class="a" data-lang="zt">從半個車庫大小的 8 平方米倉儲，到 80 平方米微型倉庫，層高與尺寸配置多樣。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Is solar power included?</div>
-        <div class="q" data-lang="ko">태양광 전력이 포함되나요?</div>
+        <div class="q" data-lang="ko">태양광 전력이 포함되나요?</div><div class="q" data-lang="zh">是否含太阳能电力？</div><div class="q" data-lang="zt">是否含太陽能電力？</div>
         <div class="a" data-lang="en">Yes. All units include free solar power to help reduce operating costs and support sustainability.</div>
-        <div class="a" data-lang="ko">네. 전 유닛에 무료 태양광 전력이 포함되어 운영비 절감과 친환경성을 지원합니다.</div>
+        <div class="a" data-lang="ko">네. 전 유닛에 무료 태양광 전력이 포함되어 운영비 절감과 친환경성을 지원합니다.</div><div class="a" data-lang="zh">是。全部单元均含免费太阳能电力，有助降低运营成本并支持环保。</div><div class="a" data-lang="zt">是。全部單元均含免費太陽能電力，有助降低運營成本並支持環保。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">When is completion expected?</div>
-        <div class="q" data-lang="ko">완공은 언제 예정인가요?</div>
+        <div class="q" data-lang="ko">완공은 언제 예정인가요?</div><div class="q" data-lang="zh">预计何时竣工？</div><div class="q" data-lang="zt">預計何時竣工？</div>
         <div class="a" data-lang="en">The development is anticipated to be completed in early 2028.</div>
-        <div class="a" data-lang="ko">개발은 2028년 초 완공될 것으로 예상됩니다.</div>
+        <div class="a" data-lang="ko">개발은 2028년 초 완공될 것으로 예상됩니다.</div><div class="a" data-lang="zh">项目预计于 2028 年初竣工。</div><div class="a" data-lang="zt">項目預計於 2028 年初竣工。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Is financing available?</div>
-        <div class="q" data-lang="ko">금융(대출)이 가능한가요?</div>
+        <div class="q" data-lang="ko">금융(대출)이 가능한가요?</div><div class="q" data-lang="zh">可以办理贷款吗？</div><div class="q" data-lang="zt">可以辦理貸款嗎？</div>
         <div class="a" data-lang="en">Finance options are available through a range of lenders. Speak with your broker or lender about what suits your circumstances.</div>
-        <div class="a" data-lang="ko">여러 대출 기관을 통한 금융 옵션이 있습니다. 본인 상황에 맞는 조건은 브로커나 대출 기관과 상담하시기 바랍니다.</div>
+        <div class="a" data-lang="ko">여러 대출 기관을 통한 금융 옵션이 있습니다. 본인 상황에 맞는 조건은 브로커나 대출 기관과 상담하시기 바랍니다.</div><div class="a" data-lang="zh">可通过多家贷款机构办理金融方案。适合自身情况的条件，请与贷款经纪或贷款机构咨询。</div><div class="a" data-lang="zt">可通過多家貸款機構辦理金融方案。適合自身情況的條件，請與貸款經紀或貸款機構諮詢。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Can I purchase in my SMSF?</div>
-        <div class="q" data-lang="ko">SMSF로 매입할 수 있나요?</div>
+        <div class="q" data-lang="ko">SMSF로 매입할 수 있나요?</div><div class="q" data-lang="zh">可以用 SMSF 购买吗？</div><div class="q" data-lang="zt">可以用 SMSF 購買嗎？</div>
         <div class="a" data-lang="en">Many Silo investors have purchased units through their SMSF. Please confirm suitability with your own accountant or financial adviser.</div>
-        <div class="a" data-lang="ko">많은 Silo 투자자가 SMSF를 통해 유닛을 매입했습니다. 적합 여부는 반드시 담당 회계사 또는 재무 자문가와 확인하시기 바랍니다.</div>
+        <div class="a" data-lang="ko">많은 Silo 투자자가 SMSF를 통해 유닛을 매입했습니다. 적합 여부는 반드시 담당 회계사 또는 재무 자문가와 확인하시기 바랍니다.</div><div class="a" data-lang="zh">许多 Silo 投资者已通过 SMSF 购置单元。是否适合，请务必与您的会计师或财务顾问确认。</div><div class="a" data-lang="zt">許多 Silo 投資者已通過 SMSF 購置單元。是否適合，請務必與您的會計師或財務顧問確認。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Who manages the unit?</div>
-        <div class="q" data-lang="ko">유닛 관리는 누가 하나요?</div>
+        <div class="q" data-lang="ko">유닛 관리는 누가 하나요?</div><div class="q" data-lang="zh">单元由谁管理？</div><div class="q" data-lang="zt">單元由誰管理？</div>
         <div class="a" data-lang="en">A specialist property management team can manage the unit on your behalf, so ownership can stay passive if you prefer.</div>
-        <div class="a" data-lang="ko">전문 자산관리 팀이 소유주를 대신해 유닛을 관리할 수 있어, 원하실 경우 관리 부담 없이 보유할 수 있습니다.</div>
+        <div class="a" data-lang="ko">전문 자산관리 팀이 소유주를 대신해 유닛을 관리할 수 있어, 원하실 경우 관리 부담 없이 보유할 수 있습니다.</div><div class="a" data-lang="zh">专业资产管理团队可代业主管理单元，如有需要，可实现省心持有。</div><div class="a" data-lang="zt">專業資產管理團隊可代業主管理單元，如有需要，可實現省心持有。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Can I upgrade to a larger unit later?</div>
-        <div class="q" data-lang="ko">나중에 더 큰 유닛으로 변경할 수 있나요?</div>
+        <div class="q" data-lang="ko">나중에 더 큰 유닛으로 변경할 수 있나요?</div><div class="q" data-lang="zh">日后可以换成更大的单元吗？</div><div class="q" data-lang="zt">日後可以換成更大的單元嗎？</div>
         <div class="a" data-lang="en">Subject to availability, you may be able to upgrade to a larger unit in future.</div>
-        <div class="a" data-lang="ko">재고 상황에 따라 향후 더 큰 유닛으로 변경이 가능할 수 있습니다.</div>
+        <div class="a" data-lang="ko">재고 상황에 따라 향후 더 큰 유닛으로 변경이 가능할 수 있습니다.</div><div class="a" data-lang="zh">视房源情况，日后有机会更换为更大的单元。</div><div class="a" data-lang="zt">視房源情況，日後有機會更換爲更大的單元。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">Are there strata levies and outgoings?</div>
-        <div class="q" data-lang="ko">스트라타 관리비와 부대비용이 있나요?</div>
+        <div class="q" data-lang="ko">스트라타 관리비와 부대비용이 있나요?</div><div class="q" data-lang="zh">是否有分契管理费与其他支出？</div><div class="q" data-lang="zt">是否有分契管理費與其他支出？</div>
         <div class="a" data-lang="en">Yes. Annual strata fees apply to cover building insurance, maintenance of common areas and security systems, alongside council rates. Current figures are available on request.</div>
-        <div class="a" data-lang="ko">네. 건물 보험, 공용부 유지관리, 보안 시스템을 위한 연간 스트라타 관리비와 카운슬 세금이 발생합니다. 현재 금액은 문의 시 안내해 드립니다.</div>
+        <div class="a" data-lang="ko">네. 건물 보험, 공용부 유지관리, 보안 시스템을 위한 연간 스트라타 관리비와 카운슬 세금이 발생합니다. 현재 금액은 문의 시 안내해 드립니다.</div><div class="a" data-lang="zh">有。会产生用于建筑保险、公共区域维护与安保系统的年度分契管理费，以及市政费。当前金额于咨询时告知。</div><div class="a" data-lang="zt">有。會產生用於建築保險、公共區域維護與安保系統的年度分契管理費，以及市政費。當前金額於諮詢時告知。</div>
       </div>
       <div class="faq">
         <div class="q" data-lang="en">What is the purchasing process?</div>
-        <div class="q" data-lang="ko">매입 절차는 어떻게 되나요?</div>
+        <div class="q" data-lang="ko">매입 절차는 어떻게 되나요?</div><div class="q" data-lang="zh">购买流程是怎样的？</div><div class="q" data-lang="zt">購買流程是怎樣的？</div>
         <div class="a" data-lang="en">An initial deposit secures your unit, contracts are then exchanged with the balance of the deposit, and the remainder is payable at settlement. Full details are provided on enquiry.</div>
-        <div class="a" data-lang="ko">초기 예약금으로 유닛을 확보한 뒤 계약을 교환하며 잔여 계약금을 납부하고, 나머지 금액은 결제(settlement) 시 지급합니다. 상세 내용은 문의 시 안내해 드립니다.</div>
+        <div class="a" data-lang="ko">초기 예약금으로 유닛을 확보한 뒤 계약을 교환하며 잔여 계약금을 납부하고, 나머지 금액은 결제(settlement) 시 지급합니다. 상세 내용은 문의 시 안내해 드립니다.</div><div class="a" data-lang="zh">先以初期订金锁定单元，随后交换合同并支付余下订金，剩余款项于交割（settlement）时支付。详细内容于咨询时说明。</div><div class="a" data-lang="zt">先以初期訂金鎖定單元，隨後交換合同並支付餘下訂金，剩餘款項於交割（settlement）時支付。詳細內容於諮詢時說明。</div>
       </div>
     </div>
   </div>
@@ -761,36 +776,36 @@ footer{background:#070910;padding:44px 60px;text-align:center;border-top:1px sol
 <section class="contact" id="contact">
   <div class="wrap fade-in">
     <div class="section-eyebrow" style="justify-content:center">
-      <span data-lang="en" class="inl">Enquire</span><span data-lang="ko" class="inl">문의</span>
+      <span data-lang="en" class="inl">Enquire</span><span data-lang="ko" class="inl">문의</span><span data-lang="zh" class="inl">咨询</span><span data-lang="zt" class="inl">諮詢</span>
     </div>
     <h2 class="section-title" data-lang="en">Request <em>Information</em></h2>
-    <h2 class="section-title" data-lang="ko"><em>분양 문의</em>하기</h2>
+    <h2 class="section-title" data-lang="ko"><em>분양 문의</em>하기</h2><h2 class="section-title" data-lang="zh"><em>咨询</em>详情</h2><h2 class="section-title" data-lang="zt"><em>諮詢</em>詳情</h2>
     <p class="contact-sub" data-lang="en">For unit availability, floor plans and sizes, please get in touch. Pricing information is available on request. Bilingual consultation available in English and Korean.</p>
-    <p class="contact-sub" data-lang="ko">유닛 재고, 평면도, 면적은 문의해 주시면 안내해 드립니다. 가격 정보는 문의 시 제공됩니다. 한국어·영어 상담 모두 가능합니다.</p>
+    <p class="contact-sub" data-lang="ko">유닛 재고, 평면도, 면적은 문의해 주시면 안내해 드립니다. 가격 정보는 문의 시 제공됩니다. 한국어·영어 상담 모두 가능합니다.</p><p class="contact-sub" data-lang="zh">单元房源、平面图与面积，欢迎咨询获取。价格信息于咨询时提供。提供中文、英文及韩文咨询服务。</p><p class="contact-sub" data-lang="zt">單元房源、平面圖與面積，歡迎諮詢獲取。價格信息於諮詢時提供。提供中文、英文及韓文諮詢服務。</p>
     <div class="contact-card">
       <div class="agent-name" data-lang="en">Sunghoon Choi (Sunny)</div>
-      <div class="agent-name" data-lang="ko">최성훈</div>
+      <div class="agent-name" data-lang="ko">최성훈</div><div class="agent-name" data-lang="zh">Sunny</div><div class="agent-name" data-lang="zt">Sunny</div>
       <div class="agent-role" data-lang="en">Forise Group · Licensed Real Estate Agent</div>
-      <div class="agent-role" data-lang="ko">포라이즈 그룹 · 공인 부동산 중개사</div>
+      <div class="agent-role" data-lang="ko">포라이즈 그룹 · 공인 부동산 중개사</div><div class="agent-role" data-lang="zh">Forise Group · 持牌房地产中介</div><div class="agent-role" data-lang="zt">Forise Group · 持牌房地產中介</div>
       <div class="agent-line">
-        <label><span data-lang="en" class="inl">Mobile</span><span data-lang="ko" class="inl">휴대폰</span></label>
+        <label><span data-lang="en" class="inl">Mobile</span><span data-lang="ko" class="inl">휴대폰</span><span data-lang="zh" class="inl">手机</span><span data-lang="zt" class="inl">手機</span></label>
         <a href="tel:0414824225">0414 824 225</a>
       </div>
       <div class="agent-line">
-        <label><span data-lang="en" class="inl">Email</span><span data-lang="ko" class="inl">이메일</span></label>
+        <label><span data-lang="en" class="inl">Email</span><span data-lang="ko" class="inl">이메일</span><span data-lang="zh" class="inl">邮箱</span><span data-lang="zt" class="inl">郵箱</span></label>
         <a href="mailto:sunghoon.choi@forisegroup.com.au">sunghoon.choi@forisegroup.com.au</a>
       </div>
       <div class="agent-line">
-        <label><span data-lang="en" class="inl">Address</span><span data-lang="ko" class="inl">주소</span></label>
+        <label><span data-lang="en" class="inl">Address</span><span data-lang="ko" class="inl">주소</span><span data-lang="zh" class="inl">地址</span><span data-lang="zt" class="inl">地址</span></label>
         <span style="color:#F5F4F1">6 Grange Rd, Campbelltown NSW</span>
       </div>
       <a class="contact-cta" href="mailto:sunghoon.choi@forisegroup.com.au?subject=Silo%20Campbelltown%20Enquiry&body=Hello%20Sunny%2C%20I%20would%20like%20to%20enquire%20about%20Silo%20Campbelltown.">
         <span data-lang="en" class="inl">Request Information / 분양 문의</span>
-        <span data-lang="ko" class="inl">분양 문의하기 →</span>
+        <span data-lang="ko" class="inl">분양 문의하기 →</span><span data-lang="zh" class="inl">咨询详情 →</span><span data-lang="zt" class="inl">諮詢詳情 →</span>
       </a>
     </div>
     <p class="contact-disclaimer" data-lang="en">Information contained on this page is correct at the time of production (June 2026) and is provided for marketing purposes only. Sections may be amended without notice in response to changing circumstances or for any other reason. Images are artist impressions only and exact details should be confirmed with a Silo agent. This page does not constitute financial, legal or taxation advice — please obtain independent advice before making any decision. Forise Group acts as selling agent.</p>
-    <p class="contact-disclaimer" data-lang="ko">본 페이지의 정보는 제작 시점(2026년 6월) 기준으로 정확하며 마케팅 목적으로만 제공됩니다. 상황 변화 또는 기타 사유로 사전 예고 없이 변경될 수 있습니다. 이미지는 작가 상상도이며 정확한 사항은 Silo 담당자를 통해 확인하시기 바랍니다. 본 페이지는 금융·법률·세무 자문이 아니므로, 결정 전 반드시 독립적인 전문가 자문을 받으시기 바랍니다. 포라이즈 그룹은 판매 에이전트로 활동합니다.</p>
+    <p class="contact-disclaimer" data-lang="ko">본 페이지의 정보는 제작 시점(2026년 6월) 기준으로 정확하며 마케팅 목적으로만 제공됩니다. 상황 변화 또는 기타 사유로 사전 예고 없이 변경될 수 있습니다. 이미지는 작가 상상도이며 정확한 사항은 Silo 담당자를 통해 확인하시기 바랍니다. 본 페이지는 금융·법률·세무 자문이 아니므로, 결정 전 반드시 독립적인 전문가 자문을 받으시기 바랍니다. 포라이즈 그룹은 판매 에이전트로 활동합니다.</p><p class="contact-disclaimer" data-lang="zh">本页面信息以制作时点（2026 年 6 月）为准，仅为市场推广之用。可能因情况变化或其他原因恕不另行通知而变更。图像为作家想象图，准确事项请通过 Silo 负责人确认。本页面不构成金融、法律或税务建议，决策前请务必寻求独立专业意见。Forise Group 为销售代理。</p><p class="contact-disclaimer" data-lang="zt">本頁面信息以製作時點（2026 年 6 月）爲準，僅爲市場推廣之用。可能因情況變化或其他原因恕不另行通知而變更。圖像爲作家想象圖，準確事項請通過 Silo 負責人確認。本頁面不構成金融、法律或稅務建議，決策前請務必尋求獨立專業意見。Forise Group 爲銷售代理。</p>
   </div>
 </section>
 
@@ -810,13 +825,22 @@ function toggleTheme(){
 const saved=localStorage.getItem('theme');
 if(saved){document.body.setAttribute('data-theme',saved);document.querySelector('.btn-theme').textContent=saved==='dark'?'☀':'☾';}
 
-let isKo=false;
-function toggleLang(){
-  isKo=!isKo;
-  document.body.classList.toggle('lang-ko',isKo);
-  document.documentElement.lang=isKo?'ko':'en';
-  document.querySelector('.btn-lang').textContent=isKo?'English':'한국어';
+const LANGS=['en','ko','zh','zt'];
+function setLang(l){
+  if(LANGS.indexOf(l)<0) l='en';
+  document.body.classList.remove('lang-en','lang-ko','lang-zh','lang-zt');
+  document.body.classList.add('lang-'+l);
+  document.documentElement.lang = l==='zh' ? 'zh-Hans' : (l==='zt' ? 'zh-Hant' : l);
+  document.querySelectorAll('#langGrp button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.set===l);
+  });
+  try{ localStorage.setItem('silo-campbelltown-lang', l); }catch(e){}
 }
+document.getElementById('langGrp').addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if (b) setLang(b.dataset.set);
+});
+setLang((function(){ try{ return localStorage.getItem('silo-campbelltown-lang'); }catch(e){ return null; } })() || 'en');
 
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
