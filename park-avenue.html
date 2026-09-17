@@ -119,6 +119,11 @@ body.lang-zh .band-title,body.lang-zt .band-title{font-family:'Noto Sans SC',ser
 .feat-list li::before{content:'';position:absolute;left:0;top:18px;width:6px;height:6px;background:var(--gold);border-radius:50%}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:46px}
 .duo img{width:100%;height:300px;object-fit:cover;border-radius:2px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
+.trio figure{margin:0;border-radius:2px;overflow:hidden;background:var(--bg2)}
+.trio img{width:100%;height:290px;object-fit:cover;display:block;transition:transform .6s}
+.trio figure:hover img{transform:scale(1.04)}
+.trio figcaption{padding:12px 4px 0;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b6b)}
 
 /* STATS */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--divider);border:1px solid var(--divider);margin-top:46px}
@@ -197,6 +202,8 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
   .about,.split,.split.rev{grid-template-columns:1fr;gap:36px}
   .about-visual{height:420px}
   .duo{grid-template-columns:1fr}
+  .trio{grid-template-columns:1fr}
+  .trio img{height:230px}
   .duo img{height:230px}
   .agent-line{flex-direction:column;gap:4px}
   .agent-line a,.agent-line span{text-align:left}
@@ -221,7 +228,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 
 <!-- HERO -->
 <header class="hero">
-  <img class="hero-img" src="./assets/park-avenue/hero.jpg" alt="Park Avenue Residences resort-style pool and lounge deck — Artist's Impression">
+  <img class="hero-img" src="./assets/park-avenue/hero.jpg" alt="Park Avenue Residences complete — aerial view to Sydney Harbour Bridge and the CBD skyline">
   <div class="hero-overlay"></div>
   <div class="hero-rule"></div>
   <div class="hero-badge">
@@ -314,7 +321,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
 
 <!-- BAND -->
 <div class="band">
-  <img src="./assets/park-avenue/facade.jpg" alt="Park Avenue Residences facade against the Sydney skyline — Artist's Impression" loading="lazy">
+  <img src="./assets/park-avenue/facade.jpg" alt="Completed Park Avenue Residences facade — photography" loading="lazy">
   <div class="band-content">
     <h3 class="band-title" data-l="en">A place where the natural, old and new worlds live in perfect harmony</h3>
     <h3 class="band-title" data-l="ko">자연과 전통, 그리고 현대가 완벽한 조화를 이루는 곳</h3>
@@ -323,7 +330,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
     <p class="band-sub" data-l="ko">Park Avenue는 세인트 레너즈 남측 주거 구역의 중심에 자리합니다. 지역의 헤리티지와 조화를 이루면서도 완전히 현대적인 건축입니다.</p>
     <p class="band-sub" data-l="zh">Park Avenue 坐落于圣伦纳兹备受青睐的南部住宅区核心地段——建筑既与本地历史风貌相融，又极具现代感。</p><p class="band-sub" data-l="zt">Park Avenue 坐落於聖倫納茲備受青睞的南部住宅區核心地段——建築既與本地歷史風貌相融，又極具現代感。</p>
   </div>
-  <div class="band-cap">Artist's Impression</div>
+  <div class="band-cap"><span data-l="en" class="i">Photography · Now Complete</span><span data-l="ko" class="i">실제 사진 · 완공</span><span data-l="zh" class="i">实景照片 · 已竣工</span><span data-l="zt" class="i">實景照片 · 已竣工</span></div>
 </div>
 
 <!-- RESIDENCES -->
@@ -331,7 +338,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
   <div class="wrap fade-in">
     <div class="split">
       <div class="split-img">
-        <img src="./assets/park-avenue/terrace.jpg" alt="Private terrace with harbour and city views — Artist's Impression" loading="lazy">
+        <img src="./assets/park-avenue/dining.jpg" alt="Completed living and dining opening to the private terrace — photography" loading="lazy">
       </div>
       <div>
         <div class="section-eyebrow">
@@ -354,10 +361,27 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
       </div>
     </div>
     <div class="duo">
-      <img src="./assets/park-avenue/living.jpg" alt="Living and dining space with city views — Artist's Impression" loading="lazy">
-      <img src="./assets/park-avenue/kitchen.jpg" alt="Miele kitchen with stone island bench — Artist's Impression" loading="lazy">
+      <img src="./assets/park-avenue/living.jpg" alt="Completed living and dining space — photography" loading="lazy">
+      <img src="./assets/park-avenue/kitchen.jpg" alt="Completed Miele kitchen with stone island bench — photography" loading="lazy">
     </div>
-    <p class="cap">Artist's Impression</p>
+    <p class="cap" data-l="en">Photography of the completed residences</p>
+    <p class="cap" data-l="ko">완공된 실제 주거 공간 사진</p>
+    <p class="cap" data-l="zh">已竣工住宅实景照片</p><p class="cap" data-l="zt">已竣工住宅實景照片</p>
+
+    <div class="trio">
+      <figure>
+        <img src="./assets/park-avenue/bedroom-main.jpg" alt="Completed main bedroom opening to a private terrace — photography" loading="lazy">
+        <figcaption><span data-l="en" class="i">Main Bedroom</span><span data-l="ko" class="i">마스터 베드룸</span><span data-l="zh" class="i">主卧</span><span data-l="zt" class="i">主臥</span></figcaption>
+      </figure>
+      <figure>
+        <img src="./assets/park-avenue/bedroom.jpg" alt="Completed bedroom with full-height glazing and built-in robes — photography" loading="lazy">
+        <figcaption><span data-l="en" class="i">Bedroom &amp; Built-in Robes</span><span data-l="ko" class="i">침실 & 빌트인 옷장</span><span data-l="zh" class="i">卧室与嵌入式衣柜</span><span data-l="zt" class="i">臥室與嵌入式衣櫃</span></figcaption>
+      </figure>
+      <figure>
+        <img src="./assets/park-avenue/bathroom.jpg" alt="Completed bathroom with full-height stone tiling and twin basins — photography" loading="lazy">
+        <figcaption><span data-l="en" class="i">Bathroom · Full-Height Tiling</span><span data-l="ko" class="i">욕실 · 천장 높이 타일</span><span data-l="zh" class="i">浴室 · 通顶墙砖</span><span data-l="zt" class="i">浴室 · 通頂牆磚</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -387,7 +411,7 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
         <p class="cap" data-l="zh">调光功能仅限主卧；空调控制仅支持整体温度与功能调节。</p><p class="cap" data-l="zt">調光功能僅限主臥；空調控制僅支持整體溫度與功能調節。</p>
       </div>
       <div class="split-img">
-        <img src="./assets/park-avenue/courtyard.jpg" alt="Landscaped courtyard between residences — Artist's Impression" loading="lazy">
+        <img src="./assets/park-avenue/architecture.jpg" alt="Completed facade and balconies — photography" loading="lazy">
       </div>
     </div>
   </div>
@@ -480,10 +504,12 @@ footer{background:#07080B;padding:46px 60px;text-align:center;border-top:1px sol
       </div>
     </div>
     <div class="duo">
-      <img src="./assets/park-avenue/pool.jpg" alt="25-metre resort-style heated pool and lounge deck — Artist's Impression" loading="lazy">
-      <img src="./assets/park-avenue/wellness.jpg" alt="Indoor wellness and yoga space overlooking the pool — Artist's Impression" loading="lazy">
+      <img src="./assets/park-avenue/pool.jpg" alt="Completed 25-metre resort-style pool and lounge deck — photography" loading="lazy">
+      <img src="./assets/park-avenue/gym.jpg" alt="Completed residents gymnasium — photography" loading="lazy">
     </div>
-    <p class="cap">Artist's Impression</p>
+    <p class="cap" data-l="en">Photography of the completed residences</p>
+    <p class="cap" data-l="ko">완공된 실제 주거 공간 사진</p>
+    <p class="cap" data-l="zh">已竣工住宅实景照片</p><p class="cap" data-l="zt">已竣工住宅實景照片</p>
   </div>
 </section>
 
