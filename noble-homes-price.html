@@ -118,6 +118,7 @@ td{padding:12px 10px;font-size:12px;white-space:nowrap;}
 .sc-reserved{background:var(--amber-l);color:var(--amber);border-color:rgba(192,112,32,.25);}
 .sc-dt{background:var(--blue-l);color:var(--blue);border-color:rgba(42,90,138,.25);}
 .land-price{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--ink);}
+.land-orig{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-decoration:line-through;margin-top:1px;}
 .pkg-from{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);margin-top:1px;}
 
 /* HOUSE DESIGN PANEL */
@@ -175,25 +176,25 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 
 <div class="masthead">
   <div>
-    <div class="m-overline" id="txt-overline">Noble Home Builders · NSW · Jan 2026</div>
+    <div class="m-overline" id="txt-overline">Noble Home Builders · NSW · Oct 2026</div>
     <h1>Gold<br><i>Inclusion</i><br>Matrix</h1>
   </div>
   <div class="m-right">
     <div class="incl-box">
       <div class="incl-title" id="incl-title">✦ Gold Inclusion Package</div>
-      <div class="incl-row"><div class="incl-dot"></div><span id="incl-1">Gold Inclusion (2025) — 7-star BASIX compliant</span></div>
+      <div class="incl-row"><div class="incl-dot"></div><span id="incl-1">Gold Inclusion (2026) — 7-star BASIX compliant</span></div>
       <div class="incl-row"><div class="incl-dot"></div><span id="incl-2">6-month price lock from contract exchange</span></div>
       <div class="incl-row"><div class="incl-dot"></div><span id="incl-3">Standard site cost included</span></div>
       <div class="incl-row"><div class="incl-dot"></div><span id="incl-4">Landscaping: +$31K (driveway + fence)</span></div>
       <div class="incl-row"><div class="incl-dot"></div><span id="incl-5">0.4%/month extension after 6 months</span></div>
     </div>
-    <div style="font-size:10px;color:var(--muted);line-height:1.7" id="txt-note">Click any lot to see available house designs and package prices.</div>
+    <div style="font-size:10px;color:var(--muted);line-height:1.7" id="txt-note">Click any lot to see available house designs and package prices. Struck-through land prices show the pre-discount figure.</div>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="s-cell"><div class="s-lbl" id="slbl-estates">Estates</div><div class="s-val" id="sval-estates">10</div><div class="s-sub" id="ssub-estates">Across NSW</div></div>
+  <div class="s-cell"><div class="s-lbl" id="slbl-estates">Estates</div><div class="s-val" id="sval-estates">14</div><div class="s-sub" id="ssub-estates">Across NSW</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-avail">Available</div><div class="s-val" id="sval-avail">—</div><div class="s-sub" id="ssub-avail">Lots</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-from">Land From</div><div class="s-val" id="sval-from">—</div><div class="s-sub" id="ssub-from">Land Price</div></div>
   <div class="s-cell"><div class="s-lbl" id="slbl-pkg-from">Package From</div><div class="s-val" id="sval-pkg-from">—</div><div class="s-sub" id="ssub-pkg-from">incl. house</div></div>
@@ -201,19 +202,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
 </div>
 
 <!-- ESTATE TABS -->
-<div class="tab-row">
-  <button class="tab-btn active" onclick="setEstate('all')" id="tab-all">All Estates <span class="tab-cnt" id="tc-all">0</span></button>
-  <button class="tab-btn" onclick="setEstate('newpark')"   id="tab-newpark">NewPark <span class="tab-cnt" id="tc-newpark">0</span></button>
-  <button class="tab-btn" onclick="setEstate('hills')"     id="tab-hills">Hills of Carmel <span class="tab-cnt" id="tc-hills">0</span></button>
-  <button class="tab-btn" onclick="setEstate('boxhill39')" id="tab-boxhill39">Box Hill 39 Mason <span class="tab-cnt" id="tc-boxhill39">0</span></button>
-  <button class="tab-btn" onclick="setEstate('austral325')"id="tab-austral325">Austral 325 <span class="tab-cnt" id="tc-austral325">0</span></button>
-  <button class="tab-btn" onclick="setEstate('westwood')"  id="tab-westwood">Westwood <span class="tab-cnt" id="tc-westwood">0</span></button>
-  <button class="tab-btn" onclick="setEstate('lepp64')"    id="tab-lepp64">Leppington 64 <span class="tab-cnt" id="tc-lepp64">0</span></button>
-  <button class="tab-btn" onclick="setEstate('lepp48')"    id="tab-lepp48">Leppington 48 <span class="tab-cnt" id="tc-lepp48">0</span></button>
-  <button class="tab-btn" onclick="setEstate('jacaranda')" id="tab-jacaranda">Jacaranda <span class="tab-cnt" id="tc-jacaranda">0</span></button>
-  <button class="tab-btn" onclick="setEstate('austral275')"id="tab-austral275">Austral 275 <span class="tab-cnt" id="tc-austral275">0</span></button>
-  <button class="tab-btn" onclick="setEstate('rousehill')" id="tab-rousehill">Rouse Hill <span class="tab-cnt" id="tc-rousehill">0</span></button>
-</div>
+<div class="tab-row" id="tabRow"></div>
 
 <!-- FILTERS -->
 <div class="filters">
@@ -317,147 +306,158 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-fa
   </div>
 </div>
 
-<footer>Made by SunnyApps. All rights reserved. · Noble Homes Gold Inclusion Price Matrix — 29 Jan 2026</footer>
+<footer>Made by SunnyApps. All rights reserved. · Noble Homes Gold Inclusion Price Matrix — 9 Oct 2026</footer>
 <a href="https://buymeacoffee.com/schoi0209" target="_blank" class="bmc-fixed">☕ Buy me a coffee</a>
 
 <script>
 // House designs: {name, size, price (base house price)}
 const designs = [
-  {key:'vista118',    name:'Vista 118',     size:118,  housePrice:347000},
-  {key:'vista137',    name:'Vista 137',     size:137,  housePrice:373000},
-  {key:'vista146',    name:'Vista 146',     size:146,  housePrice:380000},
-  {key:'vista171',    name:'Vista 171',     size:171,  housePrice:407000},
-  {key:'viva151',     name:'Viva 151',      size:151,  housePrice:381000},
-  {key:'viva163',     name:'Viva 163',      size:163,  housePrice:385000},
-  {key:'seabreeze188',name:'Seabreeze 188', size:188,  housePrice:502000},
-  {key:'aurora172',   name:'Aurora 172',    size:172,  housePrice:452000},
-  {key:'aurora210mg', name:'Aurora 210MG',  size:210,  housePrice:555000},
-  {key:'aurora230mg', name:'Aurora 230MG',  size:230,  housePrice:585000},
-  {key:'sienna175',   name:'Sienna 175',    size:175,  housePrice:462000},
-  {key:'sienna200',   name:'Sienna 200',    size:200,  housePrice:495000},
-  {key:'newlife182',  name:'Newlife 182',   size:182,  housePrice:472000},
-  {key:'newlife182mg',name:'Newlife 182MG', size:182,  housePrice:488000},
-  {key:'newlife193mg',name:'Newlife 193MG', size:193,  housePrice:502000},
-  {key:'brookvale195',name:'Brookvale 195', size:195,  housePrice:499000},
-  {key:'brookvale195mg',name:'Brookvale 195MG',size:195,housePrice:508000},
-  {key:'harrington207',name:'Harrington 207',size:207, housePrice:508000},
-  {key:'harrington240',name:'Harrington 240',size:240, housePrice:534000},
-  {key:'rose260',     name:'Rosé 260',      size:260,  housePrice:558000},
-  {key:'sienna239',   name:'Sienna 239',    size:239,  housePrice:518000},
-  {key:'oxley182',    name:'Oxley 182',     size:182,  housePrice:473000},
-  {key:'oxley195',    name:'Oxley 195',     size:195,  housePrice:482000},
-  {key:'oxley233',    name:'Oxley 233',     size:233,  housePrice:521000},
-  {key:'oxley257',    name:'Oxley 257',     size:257,  housePrice:552000},
-  {key:'opal244',     name:'Opal 244',      size:244,  housePrice:531000},
-  {key:'opal267',     name:'Opal 267',      size:267,  housePrice:568000},
-  {key:'carrington240',name:'Carrington 240',size:240, housePrice:526000},
-  {key:'brighton263', name:'Brighton 263',  size:263,  housePrice:578000},
-  {key:'brighton263mg',name:'Brighton 263MG',size:263, housePrice:589000},
-  {key:'chelsea294',  name:'Chelsea 294',   size:294,  housePrice:605000},
-  {key:'benham180',   name:'Benham 180',    size:180,  housePrice:478000},
-  {key:'benham182',   name:'Benham 182',    size:182,  housePrice:480000},
-  {key:'elsie166',    name:'Elsie 166',     size:166,  housePrice:462000},
-  {key:'belview168',  name:'Belview 168',   size:168,  housePrice:472000},
-  {key:'elyna204',    name:'Elyna 204',     size:204,  housePrice:508000},
-  {key:'linley207a',  name:'Linley 207A',   size:207,  housePrice:518000},
+  {key:'aurora172',name:"Aurora 172",size:172,housePrice:452000},
+  {key:'aurora210mg',name:"Aurora 210MG",size:210,housePrice:555000},
+  {key:'aurora230mg',name:"Aurora 230MG",size:230,housePrice:585000},
+  {key:'sienna175',name:"Sienna 175",size:175,housePrice:462000},
+  {key:'sienna200',name:"Sienna 200",size:200,housePrice:495000},
+  {key:'sienna239',name:"Sienna 239",size:239,housePrice:518000},
+  {key:'newlife182',name:"Newlife 182",size:182,housePrice:472000},
+  {key:'newlife182mg',name:"Newlife 182MG",size:182,housePrice:488000},
+  {key:'newlife193mg',name:"Newlife 193MG",size:193,housePrice:502000},
+  {key:'newlife225mg',name:"Newlife 225MG",size:225,housePrice:590000},
+  {key:'newlife246mg',name:"Newlife 246MG",size:246,housePrice:620000},
+  {key:'harrington207',name:"Harrington 207",size:207,housePrice:508000},
+  {key:'harrington240',name:"Harrington 240",size:240,housePrice:534000},
+  {key:'oxley182',name:"Oxley 182",size:182,housePrice:473000},
+  {key:'oxley195',name:"Oxley 195",size:195,housePrice:482000},
+  {key:'oxley233',name:"Oxley 233",size:233,housePrice:521000},
+  {key:'oxley257',name:"Oxley 257",size:257,housePrice:552000},
+  {key:'ros260',name:"Ros\u00e9 260",size:260,housePrice:558000},
+  {key:'ros267h',name:"Ros\u00e9 267 H",size:278,housePrice:609000},
+  {key:'brighton263',name:"Brighton 263",size:263,housePrice:578000},
+  {key:'brighton263mg',name:"Brighton 263MG",size:263,housePrice:589000},
+  {key:'opal244',name:"Opal 244",size:244,housePrice:531000},
+  {key:'opal267',name:"Opal 267",size:267,housePrice:568000},
+  {key:'carrington240',name:"Carrington 240",size:240,housePrice:526000},
+  {key:'chelsea294',name:"Chelsea 294",size:294,housePrice:605000},
+  {key:'merlot182mg',name:"Merlot 182MG",size:182,housePrice:495000},
+  {key:'benham182',name:"Benham 182",size:182,housePrice:480000},
+  {key:'elsie166',name:"Elsie 166",size:166,housePrice:462000},
+  {key:'belview168',name:"Belview 168",size:168,housePrice:472000},
+  {key:'elyna204',name:"Elyna 204",size:204,housePrice:508000},
+  {key:'vista118',name:"Vista 118",size:118,housePrice:347000},
+  {key:'vista137',name:"Vista 137",size:137,housePrice:373000},
+  {key:'vista146',name:"Vista 146",size:146,housePrice:380000},
+  {key:'vista171',name:"Vista 171",size:171,housePrice:407000},
+  {key:'viva151',name:"Viva 151",size:151,housePrice:381000},
+  {key:'viva163',name:"Viva 163",size:163,housePrice:385000},
+  {key:'penfold139',name:"Penfold 139",size:139,housePrice:378000},
+  {key:'seabreeze188',name:"Seabreeze 188",size:188,housePrice:502000},
+  {key:'brookvale195',name:"Brookvale 195",size:195,housePrice:499000},
+  {key:'brookvale195mg',name:"Brookvale 195MG",size:195,housePrice:508000},
+  {key:'cheriton202',name:"Cheriton 202",size:202,housePrice:521000},
+  {key:'cheriton205mg',name:"Cheriton 205MG",size:205,housePrice:527000},
+  {key:'cheriton222',name:"Cheriton 222",size:222,housePrice:526000},
+  {key:'cheriton225mg',name:"Cheriton 225MG",size:225,housePrice:539000},
+  {key:'linley207a',name:"Linley 207A",size:"Corner 207",housePrice:518000},
+  {key:'linley207d',name:"Linley 207D",size:"Corner 207",housePrice:527000},
+  {key:'barossa205',name:"Barossa 205",size:"DA 205",housePrice:515000},
 ];
 
 // Lot data — pkg prices are total package price (land + house)
 // null = N/A for that design
 const lots = [
-  // NewPark — Marsden Park
-  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7807', rego:'Registered', size:275,  front:10,   len:27.5,  type:'Zero',    landPrice:720000, status:'available', incentive:'$25k Rebate & Fixed site cost, Driveway',
-   pkgs:{vista118:1067000,aurora172:1172000,sienna175:1182000,sienna200:1215000,newlife182:1192000,newlife182mg:1208000,harrington207:1228000,harrington240:1254000,rose260:1281000,oxley182:1196000,oxley195:1205000}},
-  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7492', rego:'Registered', size:310.9,front:11.14,len:27.5,  type:'Zero',    landPrice:750000, status:'sold',      incentive:'',
-   pkgs:{vista118:1097000,viva151:1135000,aurora172:1202000,sienna175:1212000,sienna200:1245000,newlife182:1222000,newlife182mg:1238000,newlife193mg:1252000,harrington207:1258000,harrington240:1284000,rose260:1311000,oxley182:1226000,oxley195:1235000}},
-  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7572', rego:'Registered', size:289.6,front:10,   len:28.6,  type:'Zero',    landPrice:730000, status:'available', incentive:'',
-   pkgs:{vista118:1077000,vista137:1103000,aurora172:1182000,sienna175:1192000,sienna200:1225000,newlife182:1202000,newlife182mg:1218000,harrington207:1238000,harrington240:1264000,rose260:1291000,oxley182:1206000,oxley195:1215000,oxley233:1254000}},
-  {estate:'newpark', estName:'NewPark — Marsden Park', lot:'7220', rego:'Registered', size:275,  front:10,   len:27.5,  type:'Zero',    landPrice:725000, status:'available', incentive:'',
-   pkgs:{vista118:1072000,aurora172:1177000,sienna175:1187000,sienna200:1220000,newlife182:1197000,newlife182mg:1213000,harrington207:1233000,harrington240:1259000,rose260:1286000,oxley182:1201000,oxley195:1210000}},
-  // Hills of Carmel — Box Hill
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9536', rego:'Registered', size:251,  front:14.42,len:17.41, type:'Standard',landPrice:725000, status:'sold',      incentive:'30k commission — Fixed Price Contract, Driveway Included',
-   pkgs:{benham182:1205000,elsie166:1187000,belview168:1197000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9034', rego:'Registered', size:312.5,front:12.5, len:25,    type:'Standard',landPrice:850000, status:'available', incentive:'',
-   pkgs:{aurora172:1302000,sienna175:1312000,newlife182:1322000,newlife182mg:1338000,newlife193mg:1352000,harrington207:1358000,oxley182:1323000,opal244:1381000,opal267:1418000,brighton263:1428000,brighton263mg:1439000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'9058', rego:'Registered', size:326,  front:10,   len:32.6,  type:'Zero',    landPrice:867000, status:'available', incentive:'',
-   pkgs:{vista118:1214000,vista137:1240000,vista146:1247000,vista171:1274000,seabreeze188:1369000,aurora172:1319000,aurora210mg:1422000,sienna175:1329000,sienna200:1362000,newlife182:1339000,newlife182mg:1355000,harrington207:1375000,harrington240:1401000,rose260:1425000,oxley182:1340000,oxley195:1349000,oxley233:1388000,oxley257:1419000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7314', rego:'Registered', size:300,  front:10,   len:30,    type:'Zero',    landPrice:840000, status:'available', incentive:'',
-   pkgs:{vista118:1187000,vista137:1213000,vista146:1220000,vista171:1247000,aurora172:1292000,aurora210mg:1395000,sienna175:1302000,sienna200:1335000,newlife182:1312000,newlife182mg:1328000,harrington207:1348000,harrington240:1374000,rose260:1398000,oxley182:1313000,oxley195:1322000,oxley233:1361000,oxley257:1392000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7327', rego:'Registered', size:312.5,front:12.5, len:25,    type:'Standard',landPrice:850000, status:'available', incentive:'',
-   pkgs:{aurora172:1302000,sienna175:1312000,newlife182:1322000,newlife182mg:1338000,newlife193mg:1352000,harrington207:1358000,oxley182:1323000,opal244:1381000,opal267:1418000,brighton263:1428000,brighton263mg:1439000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7531', rego:'Registered', size:251,  front:14.34,len:17.5,  type:'Standard',landPrice:760000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
-   pkgs:{linley207a:1278000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7532', rego:'Registered', size:288.3,front:16.95,len:17.5,  type:'Corner',  landPrice:835000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
-   pkgs:{linley207a:1354000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7543', rego:'Registered', size:251,  front:14.34,len:17.5,  type:'Standard',landPrice:750000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
-   pkgs:{benham182:1268000,belview168:1260000}},
-  {estate:'hills', estName:'Hills of Carmel — Box Hill', lot:'7544', rego:'Registered', size:266,  front:15.66,len:17.5,  type:'Corner',  landPrice:770000, status:'available', incentive:'Fixed Site Cost & Driveway, Extra 30k Bonus',
-   pkgs:{linley207a:1289000}},
-  // Austral 325
-  {estate:'austral325', estName:'Austral — 325 Fifteenth Ave', lot:'13', rego:'Registered', size:307, front:10, len:30.71, type:'Standard',landPrice:650000, status:'available', incentive:'',
-   pkgs:{vista118:997000,vista137:1023000,vista146:1030000,aurora172:1102000,aurora210mg:1205000,sienna175:1112000,sienna200:1145000,newlife182:1122000,newlife182mg:1138000}},
-  // Westwood Estate
-  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'118', rego:'Registered', size:290,  front:10,  len:29,    type:'Standard',landPrice:735000, status:'sold',      incentive:'Extra 30k Bonus',
-   pkgs:{vista118:1082000,vista137:1108000,aurora172:1187000,aurora210mg:1290000,sienna175:1197000,sienna200:1230000,newlife182:1207000,newlife182mg:1223000}},
-  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'107', rego:'Registered', size:269,  front:10,  len:26.9,  type:'Standard',landPrice:699000, status:'sold',      incentive:'',
-   pkgs:{vista118:1046000,aurora172:1151000,sienna175:1161000,sienna200:1194000,newlife182:1171000,newlife182mg:1187000,oxley182:1172000,oxley195:1181000}},
-  {estate:'westwood', estName:'Westwood Estate — Caddens', lot:'108', rego:'Registered', size:269,  front:10,  len:26.9,  type:'Standard',landPrice:699000, status:'reserved',  incentive:'',
-   pkgs:{vista118:1046000,aurora172:1151000,sienna175:1161000,sienna200:1194000,newlife182:1171000,newlife182mg:1187000,oxley182:1172000,oxley195:1181000}},
-  // Leppington 64 Dickson Road
-  {estate:'lepp64', estName:'Leppington — 64 Dickson Road', lot:'53', rego:'Registered', size:404.9,front:12.5,len:32.39, type:'Standard',landPrice:880000, status:'available', incentive:'',
-   pkgs:{vista118:1227000,vista137:1253000,vista146:1260000,vista171:1287000,viva163:1265000,seabreeze188:1382000,aurora172:1332000,aurora210mg:1435000,sienna175:1342000,sienna200:1375000,newlife182:1352000,newlife182mg:1368000,newlife193mg:1382000,harrington207:1388000,harrington240:1414000,rose260:1438000,sienna239:1398000,oxley182:1353000,oxley195:1362000,oxley233:1401000,oxley257:1432000,opal244:1411000,opal267:1448000,carrington240:1406000,brighton263:1458000,brighton263mg:1469000}},
-  // Leppington 48 Dickson Road Stage 2
-  {estate:'lepp48', estName:'Leppington — 48 Dickson Road Stage 2', lot:'10', rego:'Registered', size:243,  front:7.5, len:32.4,  type:'Zero',    landPrice:645000, status:'available', incentive:'',
-   pkgs:{}},
-  {estate:'lepp48', estName:'Leppington — 48 Dickson Road Stage 2', lot:'18', rego:'Registered', size:291,  front:9,   len:32.4,  type:'Zero',    landPrice:699000, status:'reserved',  incentive:'',
-   pkgs:{vista118:1046000,vista137:1072000,vista146:1079000,aurora172:1151000,aurora210mg:1254000,sienna175:1161000,sienna200:1194000}},
-  // Jacaranda Estate
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'5',  rego:'46054',    size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'sold',      incentive:'',
-   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'6',  rego:'',         size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'sold',      incentive:'',
-   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'7',  rego:'',         size:253.8,front:10,  len:25.38, type:'Zero',    landPrice:655000, status:'dt',        incentive:'',
-   pkgs:{vista118:1002000,aurora172:1107000,sienna175:1117000,newlife182:1127000,newlife182mg:1143000,harrington207:1163000,oxley182:1128000,oxley195:1137000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'21', rego:'',         size:253.9,front:10,  len:25.39, type:'Zero',    landPrice:685000, status:'sold',      incentive:'',
-   pkgs:{vista118:1032000,aurora172:1137000,sienna175:1147000,newlife182:1157000,newlife182mg:1173000,harrington207:1193000,oxley182:1158000,oxley195:1167000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'25', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
-   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'26', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'sold',      incentive:'',
-   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'27', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
-   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
-  {estate:'jacaranda', estName:'Leppington — Jacaranda Estate', lot:'28', rego:'',         size:300,  front:10,  len:30,    type:'Zero',    landPrice:775000, status:'dt',        incentive:'',
-   pkgs:{vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,aurora172:1227000,aurora210mg:1330000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,harrington207:1283000,harrington240:1309000,rose260:1333000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000}},
-  // Austral 275 Twelfth Ave
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'2',  rego:'Q1 2026', size:250.1,front:9.92, len:25.2,  type:'Standard',landPrice:675000, status:'available', incentive:'',
-   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000,newlife182:1147000,newlife182mg:1163000}},
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'6',  rego:'',        size:250.1,front:10.49,len:23.84, type:'Standard',landPrice:685000, status:'available', incentive:'',
-   pkgs:{sienna175:1147000,newlife182:1157000,newlife182mg:1173000,newlife193mg:1187000,oxley182:1158000}},
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'9',  rego:'',        size:250.1,front:9.79, len:25.53, type:'Standard',landPrice:675000, status:'available', incentive:'',
-   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000}},
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'10', rego:'',        size:250.1,front:9.79, len:25.53, type:'Standard',landPrice:675000, status:'available', incentive:'',
-   pkgs:{vista118:1022000,aurora172:1127000,sienna175:1137000}},
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'16', rego:'',        size:300.1,front:9.31, len:32.23, type:'Standard',landPrice:740000, status:'available', incentive:'',
-   pkgs:{aurora172:1192000,aurora210mg:1295000}},
-  {estate:'austral275', estName:'Austral — 275 Twelfth Ave', lot:'17', rego:'',        size:300.1,front:9.31, len:32.23, type:'Standard',landPrice:740000, status:'available', incentive:'',
-   pkgs:{aurora172:1192000,aurora210mg:1295000}},
-  // Rouse Hill
-  {estate:'rousehill', estName:'Rouse Hill — 124 Tallawong Rd', lot:'33', rego:'Registered', size:360,  front:12,  len:30.5,  type:'Standard',landPrice:1035000, status:'available', incentive:'',
-   pkgs:{vista118:1382000,vista137:1408000,vista146:1415000,vista171:1442000,viva163:1420000,aurora172:1487000,aurora210mg:1590000,sienna175:1497000,sienna200:1530000,newlife182:1507000,newlife182mg:1523000,newlife193mg:1537000,harrington207:1543000,harrington240:1569000,rose260:1593000,oxley182:1508000,oxley195:1517000,oxley233:1556000,oxley257:1587000}},
+  {estate:'newpark-marsden-park',estName:"NewPark Marsden Park",lot:"7807",rego:"Registered",size:275.0,front:10.0,len:27.5,type:"Zero",landOrig:720000,landPrice:695000,status:'available',incentive:"Up to $25,000 discount of land price applied (limit time offer)",pkgs:{aurora172:1147000,sienna175:1157000,sienna200:1190000,newlife182:1167000,newlife182mg:1183000,harrington207:1203000,harrington240:1229000,oxley182:1171000,oxley195:1180000,ros260:1256000,ros267h:1307000,vista118:1042000,vista137:1068000,penfold139:1073000}},
+  {estate:'newpark-marsden-park',estName:"NewPark Marsden Park",lot:"7572",rego:"Registered",size:289.6,front:10.0,len:28.6,type:"Zero",landOrig:730000,landPrice:705000,status:'available',incentive:"",pkgs:{aurora172:1157000,sienna175:1167000,sienna200:1200000,newlife182:1177000,newlife182mg:1193000,newlife225mg:1295000,harrington207:1213000,harrington240:1239000,oxley182:1181000,oxley195:1190000,oxley233:1229000,ros260:1266000,ros267h:1317000,vista118:1052000,vista137:1078000,penfold139:1083000}},
+  {estate:'newpark-marsden-park',estName:"NewPark Marsden Park",lot:"7220",rego:"Registered",size:275.0,front:10.0,len:27.5,type:"Zero",landOrig:725000,landPrice:700000,status:'available',incentive:"",pkgs:{aurora172:1152000,sienna175:1162000,sienna200:1195000,newlife182:1172000,newlife182mg:1188000,harrington207:1208000,harrington240:1234000,oxley182:1176000,oxley195:1185000,ros260:1261000,ros267h:1312000,vista118:1047000,penfold139:1078000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"9536",rego:"Registered",size:251.0,front:14.42,len:17.41,type:"Standard",landOrig:725000,landPrice:715000,status:'available',incentive:"Up to $30,000 discount of land price applied (limit time offer)",pkgs:{elsie166:1177000,belview168:1187000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"9518",rego:"Registered",size:251.0,front:14.34,len:17.5,type:"Standard",landOrig:725000,landPrice:715000,status:'available',incentive:"",pkgs:{merlot182mg:1210000,benham182:1195000,elsie166:1177000,belview168:1187000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"9034",rego:"Registered",size:312.5,front:12.5,len:25.0,type:"Standard",landOrig:850000,landPrice:830000,status:'available',incentive:"",pkgs:{aurora172:1282000,sienna175:1292000,newlife182:1302000,newlife182mg:1318000,newlife193mg:1332000,harrington207:1338000,oxley182:1303000,brighton263:1408000,brighton263mg:1419000,opal244:1361000,opal267:1398000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"9058",rego:"Registered",size:326.0,front:10.0,len:32.6,type:"Zero",landOrig:867000,landPrice:850000,status:'available',incentive:"",pkgs:{aurora172:1302000,aurora210mg:1405000,sienna175:1312000,sienna200:1345000,newlife182:1322000,newlife182mg:1338000,newlife225mg:1440000,harrington207:1358000,harrington240:1384000,oxley182:1323000,oxley195:1332000,oxley233:1371000,oxley257:1402000,ros260:1408000,ros267h:1459000,vista118:1197000,vista137:1223000,vista146:1230000,vista171:1257000,penfold139:1228000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7314",rego:"Registered",size:300.0,front:10.0,len:30.0,type:"Zero",landOrig:840000,landPrice:820000,status:'available',incentive:"",pkgs:{aurora172:1272000,aurora210mg:1375000,sienna175:1282000,sienna200:1315000,newlife182:1292000,newlife182mg:1308000,newlife225mg:1410000,harrington207:1328000,harrington240:1354000,oxley182:1293000,oxley195:1302000,oxley233:1341000,oxley257:1372000,ros260:1378000,ros267h:1429000,vista118:1167000,vista137:1193000,vista146:1200000,vista171:1227000,penfold139:1198000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7503",rego:"Registered",size:251.0,front:13.95,len:17.99,type:"Standard",landOrig:750000,landPrice:720000,status:'available',incentive:"",pkgs:{elsie166:1182000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7531",rego:"Registered",size:251.0,front:14.34,len:17.5,type:"Standard",landOrig:760000,landPrice:760000,status:'available',incentive:"Fixed site cost and extra 10k bonus",pkgs:{merlot182mg:1285000,benham182:1270000,elsie166:1252000,belview168:1262000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7532",rego:"Registered",size:288.3,front:16.95,len:17.5,type:"Corner Square",landOrig:835000,landPrice:835000,status:'available',incentive:"",pkgs:{merlot182mg:1360000,benham182:1345000,elsie166:1327000,belview168:1337000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7543",rego:"Registered",size:251.0,front:14.34,len:17.5,type:"Standard",landOrig:750000,landPrice:750000,status:'available',incentive:"",pkgs:{merlot182mg:1275000,benham182:1260000,elsie166:1242000,belview168:1252000}},
+  {estate:'the-hills-of-carmel-box-hill',estName:"The Hills of Carmel Box Hill",lot:"7544",rego:"Registered",size:266.0,front:15.66,len:17.5,type:"Corner Square",landOrig:770000,landPrice:770000,status:'available',incentive:"",pkgs:{merlot182mg:1295000,benham182:1280000,elsie166:1262000,belview168:1272000}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"2042",rego:"Registered",size:300.0,front:10.0,len:30.0,type:"Zero",landOrig:882900,landPrice:882900,status:'available',incentive:"Rental Guarantee up to $1400 per week (Aurora 230MG only), RG Commission 30k",pkgs:{aurora172:1334900,aurora210mg:1437900,sienna175:1344900,sienna200:1377900,newlife182:1354900,newlife182mg:1370900,newlife225mg:1472900,harrington207:1390900,harrington240:1416900,oxley182:1355900,oxley195:1364900,oxley233:1403900,oxley257:1434900,ros260:1440900,ros267h:1491900,vista118:1229900,vista137:1255900,vista146:1262900,vista171:1289900,penfold139:1260900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"2044",rego:"Registered",size:330.0,front:11.0,len:30.0,type:"Standard",landOrig:942900,landPrice:942900,status:'available',incentive:"",pkgs:{aurora172:1394900,aurora210mg:1497900,sienna175:1404900,sienna200:1437900,newlife182:1414900,newlife182mg:1430900,newlife193mg:1444900,newlife225mg:1532900,harrington207:1450900,harrington240:1476900,oxley182:1415900,oxley195:1424900,oxley233:1463900,oxley257:1494900,ros260:1500900,ros267h:1551900,vista118:1289900,vista137:1315900,vista146:1322900,vista171:1349900,penfold139:1320900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"2056",rego:"Registered",size:312.5,front:12.5,len:30.0,type:"Standard",landOrig:917900,landPrice:917900,status:'available',incentive:"",pkgs:{aurora172:1369900,aurora210mg:1472900,sienna175:1379900,sienna200:1412900,sienna239:1435900,newlife182:1389900,newlife182mg:1405900,newlife193mg:1419900,newlife225mg:1507900,harrington207:1425900,harrington240:1451900,oxley182:1390900,oxley195:1399900,oxley233:1438900,oxley257:1469900,ros260:1475900,ros267h:1526900,brighton263:1495900,brighton263mg:1506900,opal244:1448900,opal267:1485900,carrington240:1443900,vista118:1264900,vista137:1290900,vista146:1297900,vista171:1324900,viva163:1302900,penfold139:1295900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"2119",rego:"Registered",size:270.0,front:9.0,len:28.0,type:"Zero",landOrig:827900,landPrice:827900,status:'available',incentive:"",pkgs:{aurora172:1279900,sienna175:1289900,sienna200:1322900,vista118:1174900,vista137:1200900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"4002",rego:"Registered",size:285.0,front:9.5,len:30.0,type:"Zero",landOrig:842900,landPrice:842900,status:'sold',incentive:"",pkgs:{aurora172:1294900,aurora210mg:1397900,sienna175:1304900,sienna200:1337900,harrington207:1350900,harrington240:1376900,vista118:1189900,vista137:1215900,vista146:1222900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"4017",rego:"Registered",size:308.0,front:10.0,len:29.26,type:"Zero",landOrig:897900,landPrice:897900,status:'available',incentive:"",pkgs:{aurora172:1349900,aurora210mg:1452900,sienna175:1359900,sienna200:1392900,newlife182:1369900,newlife182mg:1385900,newlife225mg:1487900,harrington207:1405900,harrington240:1431900,oxley182:1370900,oxley195:1379900,oxley233:1418900,ros260:1455900,ros267h:1506900,vista118:1244900,vista137:1270900,vista146:1277900,penfold139:1275900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"4023",rego:"Registered",size:340.0,front:9.57,len:35.16,type:"Zero",landOrig:977900,landPrice:977900,status:'sold',incentive:"",pkgs:{aurora172:1429900,aurora210mg:1532900,aurora230mg:1562900,sienna175:1439900,sienna200:1472900,harrington207:1485900,harrington240:1511900,vista118:1324900,vista137:1350900,vista146:1357900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"4024",rego:"Registered",size:348.2,front:9.515,len:36.345,type:"Zero",landOrig:987900,landPrice:987900,status:'sold',incentive:"",pkgs:{aurora172:1439900,aurora210mg:1542900,aurora230mg:1572900,sienna175:1449900,sienna200:1482900,harrington207:1495900,harrington240:1521900,vista118:1334900,vista137:1360900,vista146:1367900}},
+  {estate:'sapphire-310-tallawong-rd-ro',estName:"Sapphire - 310 Tallawong Rd, Rouse Hill",lot:"4027",rego:"Registered",size:334.0,front:9.62,len:34.34,type:"Zero",landOrig:967900,landPrice:967900,status:'available',incentive:"",pkgs:{aurora172:1419900,aurora210mg:1522900,aurora230mg:1552900,sienna175:1429900,sienna200:1462900,harrington207:1475900,harrington240:1501900,vista118:1314900,vista137:1340900,vista146:1347900}},
+  {estate:'rouse-hill-clarke-st',estName:"Rouse Hill - Clarke St",lot:"23",rego:"Registered",size:318.6,front:9.0,len:35.405,type:"Zero",landOrig:918000,landPrice:876000,status:'available',incentive:"",pkgs:{aurora172:1328000,aurora210mg:1431000,aurora230mg:1461000,sienna175:1338000,sienna200:1371000,vista118:1223000,vista137:1249000,vista146:1256000}},
+  {estate:'rouse-hill-clarke-st',estName:"Rouse Hill - Clarke St",lot:"24",rego:"Registered",size:318.6,front:9.0,len:35.405,type:"Zero",landOrig:918000,landPrice:830000,status:'available',incentive:"",pkgs:{aurora172:1282000,aurora210mg:1385000,aurora230mg:1415000,sienna175:1292000,sienna200:1325000,vista118:1177000,vista137:1203000,vista146:1210000}},
+  {estate:'rouse-hill-clarke-st',estName:"Rouse Hill - Clarke St",lot:"25",rego:"Registered",size:318.6,front:9.0,len:35.405,type:"Zero",landOrig:918000,landPrice:830000,status:'available',incentive:"",pkgs:{aurora172:1282000,aurora210mg:1385000,aurora230mg:1415000,sienna175:1292000,sienna200:1325000,vista118:1177000,vista137:1203000,vista146:1210000}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"109",rego:"Mid 2027",size:322.0,front:10.0,len:32.23,type:"Zero",landOrig:789900,landPrice:789900,status:'available',incentive:"",pkgs:{aurora172:1241900,aurora210mg:1344900,sienna175:1251900,sienna200:1284900,newlife182:1261900,newlife182mg:1277900,newlife225mg:1379900,harrington207:1297900,harrington240:1323900,oxley182:1262900,oxley195:1271900,oxley233:1310900,oxley257:1341900,ros260:1347900,ros267h:1398900,vista118:1136900,vista137:1162900,vista146:1169900,vista171:1196900,penfold139:1167900,seabreeze188:1291900}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"110",rego:"Mid 2027",size:322.0,front:10.0,len:32.23,type:"Zero",landOrig:789990,landPrice:789990,status:'sold',incentive:"",pkgs:{aurora172:1241990,aurora210mg:1344990,sienna175:1251990,sienna200:1284990,newlife182:1261990,newlife182mg:1277990,newlife225mg:1379990,harrington207:1297990,harrington240:1323990,oxley182:1262990,oxley195:1271990,oxley233:1310990,oxley257:1341990,ros260:1347990,ros267h:1398990,vista118:1136990,vista137:1162990,vista146:1169990,vista171:1196990,penfold139:1167990,seabreeze188:1291990}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"120",rego:"Mid 2027",size:322.0,front:10.0,len:32.23,type:"Zero",landOrig:782900,landPrice:782900,status:'available',incentive:"",pkgs:{aurora172:1234900,aurora210mg:1337900,sienna175:1244900,sienna200:1277900,newlife182:1254900,newlife182mg:1270900,newlife225mg:1372900,harrington207:1290900,harrington240:1316900,oxley182:1255900,oxley195:1264900,oxley233:1303900,oxley257:1334900,ros260:1340900,ros267h:1391900,vista118:1129900,vista137:1155900,vista146:1162900,vista171:1189900,penfold139:1160900,seabreeze188:1284900}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"121",rego:"Mid 2027",size:322.0,front:10.0,len:32.24,type:"Zero",landOrig:782900,landPrice:782900,status:'available',incentive:"",pkgs:{aurora172:1234900,aurora210mg:1337900,sienna175:1244900,sienna200:1277900,newlife182:1254900,newlife182mg:1270900,newlife225mg:1372900,harrington207:1290900,harrington240:1316900,oxley182:1255900,oxley195:1264900,oxley233:1303900,oxley257:1334900,ros260:1340900,ros267h:1391900,vista118:1129900,vista137:1155900,vista146:1162900,vista171:1189900,penfold139:1160900,seabreeze188:1284900}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"128",rego:"Mid 2027",size:322.0,front:10.0,len:32.4,type:"Zero",landOrig:782900,landPrice:782900,status:'sold',incentive:"",pkgs:{aurora172:1234900,aurora210mg:1337900,sienna175:1244900,sienna200:1277900,newlife182:1254900,newlife182mg:1270900,newlife225mg:1372900,harrington207:1290900,harrington240:1316900,oxley182:1255900,oxley195:1264900,oxley233:1303900,oxley257:1334900,ros260:1340900,ros267h:1391900,vista118:1129900,vista137:1155900,vista146:1162900,vista171:1189900,penfold139:1160900,seabreeze188:1284900}},
+  {estate:'grantham-farm-grantham-rise',estName:"Grantham Farm - Grantham Rise",lot:"129",rego:"Mid 2027",size:322.0,front:10.0,len:32.4,type:"Zero",landOrig:782900,landPrice:782900,status:'sold',incentive:"",pkgs:{aurora172:1234900,aurora210mg:1337900,sienna175:1244900,sienna200:1277900,newlife182:1254900,newlife182mg:1270900,newlife225mg:1372900,harrington207:1290900,harrington240:1316900,oxley182:1255900,oxley195:1264900,oxley233:1303900,oxley257:1334900,ros260:1340900,ros267h:1391900,vista118:1129900,vista137:1155900,vista146:1162900,vista171:1189900,penfold139:1160900,seabreeze188:1284900}},
+  {estate:'leppington-48-dickson-road-s',estName:"Leppington - 48 Dickson Road Stage 2",lot:"12",rego:"Registered",size:243.0,front:7.5,len:32.405,type:"Zero",landOrig:645000,landPrice:645000,status:'available',incentive:"",pkgs:{barossa205:1160000}},
+  {estate:'leppington-48-dickson-road-s',estName:"Leppington - 48 Dickson Road Stage 2",lot:"10",rego:"Registered",size:243.0,front:7.5,len:32.405,type:"Zero",landOrig:645000,landPrice:645000,status:'available',incentive:"",pkgs:{barossa205:1160000}},
+  {estate:'leppington-jacaranda-estate',estName:"Leppington - Jacaranda Estate",lot:"6",rego:"Registered",size:253.8,front:10.0,len:25.38,type:"Zero",landOrig:695000,landPrice:695000,status:'available',incentive:"",pkgs:{aurora172:1147000,sienna175:1157000,newlife182:1167000,newlife182mg:1183000,harrington207:1203000,oxley182:1168000,oxley195:1177000,vista118:1042000}},
+  {estate:'leppington-jacaranda-estate',estName:"Leppington - Jacaranda Estate",lot:"7",rego:"Registered",size:253.8,front:10.0,len:25.38,type:"Zero",landOrig:695000,landPrice:695000,status:'available',incentive:"",pkgs:{aurora172:1147000,sienna175:1157000,newlife182:1167000,newlife182mg:1183000,harrington207:1203000,oxley182:1168000,oxley195:1177000,vista118:1042000}},
+  {estate:'leppington-jacaranda-estate',estName:"Leppington - Jacaranda Estate",lot:"9",rego:"Registered",size:253.8,front:10.0,len:25.38,type:"Zero",landOrig:745000,landPrice:745000,status:'available',incentive:"",pkgs:{aurora172:1197000,sienna175:1207000,newlife182:1217000,newlife182mg:1233000,harrington207:1253000,oxley182:1218000,oxley195:1227000,vista118:1092000}},
+  {estate:'leppington-julius-crescent',estName:"Leppington - Julius Crescent",lot:"9",rego:"Q1 2027",size:326.5,front:9.31,len:34.445,type:"Standard",landOrig:790000,landPrice:790000,status:'available',incentive:"",pkgs:{aurora172:1242000,aurora210mg:1345000,aurora230mg:1375000}},
+  {estate:'leppington-julius-crescent',estName:"Leppington - Julius Crescent",lot:"14",rego:"Q1 2027",size:305.2,front:10.765,len:28.27,type:"Standard",landOrig:770000,landPrice:770000,status:'sold',incentive:"",pkgs:{aurora172:1222000,sienna175:1232000,sienna200:1265000,newlife182:1242000,newlife182mg:1258000,newlife193mg:1272000,harrington207:1278000,harrington240:1304000,oxley182:1243000,oxley195:1252000,oxley233:1291000,ros260:1328000,ros267h:1379000,vista118:1117000,vista137:1143000}},
+  {estate:'leppington-julius-crescent',estName:"Leppington - Julius Crescent",lot:"15",rego:"Q1 2027",size:303.6,front:10.765,len:28.12,type:"Standard",landOrig:770000,landPrice:770000,status:'available',incentive:"",pkgs:{aurora172:1222000,sienna175:1232000,sienna200:1265000,newlife182:1242000,newlife182mg:1258000,newlife193mg:1272000,harrington207:1278000,harrington240:1304000,oxley182:1243000,oxley195:1252000,oxley233:1291000,ros260:1328000,ros267h:1379000,vista118:1117000,vista137:1143000}},
+  {estate:'leppington-julius-crescent',estName:"Leppington - Julius Crescent",lot:"16",rego:"Q1 2027",size:302.0,front:10.765,len:27.975,type:"Standard",landOrig:770000,landPrice:770000,status:'available',incentive:"",pkgs:{aurora172:1222000,sienna175:1232000,sienna200:1265000,newlife182:1242000,newlife182mg:1258000,newlife193mg:1272000,harrington207:1278000,harrington240:1304000,oxley182:1243000,oxley195:1252000,oxley233:1291000,ros260:1328000,ros267h:1379000,vista118:1117000,vista137:1143000}},
+  {estate:'leppington-green-vista',estName:"Leppington - Green Vista",lot:"11",rego:"Q1 2027",size:370.0,front:10.0,len:37.0,type:"Standard",landOrig:888000,landPrice:888000,status:'available',incentive:"",pkgs:{aurora172:1340000,aurora210mg:1443000,aurora230mg:1473000,sienna175:1350000,sienna200:1383000,newlife182:1360000,newlife182mg:1376000,newlife225mg:1478000,newlife246mg:1508000,oxley182:1361000,oxley195:1370000,oxley233:1409000,oxley257:1440000,vista118:1235000,vista137:1261000,vista146:1268000,seabreeze188:1390000}},
+  {estate:'leppington-green-vista',estName:"Leppington - Green Vista",lot:"12",rego:"Q1 2027",size:300.0,front:10.0,len:30.0,type:"Standard",landOrig:750000,landPrice:750000,status:'available',incentive:"",pkgs:{aurora172:1202000,aurora210mg:1305000,sienna175:1212000,sienna200:1245000,newlife182:1222000,newlife182mg:1238000,newlife225mg:1340000,oxley182:1223000,oxley195:1232000,oxley233:1271000,oxley257:1302000,vista118:1097000,vista137:1123000,vista146:1130000}},
+  {estate:'leppington-green-vista',estName:"Leppington - Green Vista",lot:"17",rego:"Q1 2027",size:270.0,front:9.0,len:30.0,type:"Rear Loading",landOrig:702000,landPrice:702000,status:'available',incentive:"",pkgs:{brookvale195:1201000,brookvale195mg:1210000,cheriton202:1223000,cheriton205mg:1229000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"2",rego:"Q3 2026",size:371.8,front:10.0,len:37.1,type:"Standard",landOrig:765000,landPrice:759000,status:'available',incentive:"Rental Guarantee up to $1200 per week (Aurora 210MG and 230MG only), RG Commission 30k",pkgs:{aurora172:1211000,aurora210mg:1314000,aurora230mg:1344000,sienna175:1221000,sienna200:1254000,newlife182:1231000,newlife182mg:1247000,newlife225mg:1349000,newlife246mg:1379000,oxley182:1232000,oxley195:1241000,oxley233:1280000,oxley257:1311000,vista118:1106000,vista137:1132000,vista146:1139000,seabreeze188:1261000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"3",rego:"Q3 2026",size:371.7,front:10.0,len:37.1,type:"Standard",landOrig:765000,landPrice:759000,status:'available',incentive:"",pkgs:{aurora172:1211000,aurora210mg:1314000,aurora230mg:1344000,sienna175:1221000,sienna200:1254000,newlife182:1231000,newlife182mg:1247000,newlife225mg:1349000,newlife246mg:1379000,oxley182:1232000,oxley195:1241000,oxley233:1280000,oxley257:1311000,vista118:1106000,vista137:1132000,vista146:1139000,seabreeze188:1261000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"4",rego:"Q3 2026",size:371.7,front:10.0,len:37.1,type:"Standard",landOrig:765000,landPrice:759000,status:'available',incentive:"",pkgs:{aurora172:1211000,aurora210mg:1314000,aurora230mg:1344000,sienna175:1221000,sienna200:1254000,newlife182:1231000,newlife182mg:1247000,newlife225mg:1349000,newlife246mg:1379000,oxley182:1232000,oxley195:1241000,oxley233:1280000,oxley257:1311000,vista118:1106000,vista137:1132000,vista146:1139000,seabreeze188:1261000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"5",rego:"Q3 2026",size:353.2,front:9.5,len:37.1,type:"Zero",landOrig:735000,landPrice:720000,status:'available',incentive:"",pkgs:{aurora172:1172000,aurora210mg:1275000,aurora230mg:1305000,sienna175:1182000,sienna200:1215000,harrington207:1228000,harrington240:1254000,vista118:1067000,vista137:1093000,vista146:1100000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"6",rego:"Q3 2026",size:334.6,front:9.0,len:37.1,type:"Zero",landOrig:725000,landPrice:712000,status:'available',incentive:"",pkgs:{aurora172:1164000,aurora210mg:1267000,aurora230mg:1297000,sienna175:1174000,sienna200:1207000,vista118:1059000,vista137:1085000,vista146:1092000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"10",rego:"Q3 2026",size:332.8,front:9.2,len:36.18,type:"standard",landOrig:730000,landPrice:710000,status:'available',incentive:"",pkgs:{aurora172:1162000,aurora210mg:1265000,aurora230mg:1295000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"11",rego:"Q3 2026",size:332.8,front:9.2,len:36.18,type:"standard",landOrig:730000,landPrice:710000,status:'available',incentive:"",pkgs:{aurora172:1162000,aurora210mg:1265000,aurora230mg:1295000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"16",rego:"Q3 2026",size:338.6,front:9.0,len:37.6,type:"Standard",landOrig:725000,landPrice:715000,status:'available',incentive:"",pkgs:{aurora172:1167000,aurora210mg:1270000,aurora230mg:1300000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"17",rego:"Q3 2026",size:338.6,front:9.0,len:37.6,type:"Standard",landOrig:725000,landPrice:715000,status:'available',incentive:"",pkgs:{aurora172:1167000,aurora210mg:1270000,aurora230mg:1300000}},
+  {estate:'austral-bloomfield',estName:"Austral - Bloomfield",lot:"18",rego:"Q3 2026",size:338.6,front:9.0,len:37.6,type:"Standard",landOrig:725000,landPrice:715000,status:'available',incentive:"",pkgs:{aurora172:1167000,aurora210mg:1270000,aurora230mg:1300000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"105",rego:"Registered",size:340.0,front:10.0,len:34.0,type:"Zero",landOrig:780000,landPrice:765000,status:'available',incentive:"Rental Guarantee up to $1200 per week (Aurora 210MG and 230MG only), RG Commission 30k",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,newlife182:1237000,newlife182mg:1253000,newlife225mg:1355000,newlife246mg:1385000,harrington207:1273000,harrington240:1299000,oxley182:1238000,oxley195:1247000,oxley233:1286000,oxley257:1317000,ros260:1323000,ros267h:1374000,vista118:1112000,vista137:1138000,vista146:1145000,vista171:1172000,penfold139:1143000,seabreeze188:1267000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"106",rego:"Registered",size:340.0,front:10.0,len:34.0,type:"Zero",landOrig:780000,landPrice:765000,status:'available',incentive:"",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,newlife182:1237000,newlife182mg:1253000,newlife225mg:1355000,newlife246mg:1385000,harrington207:1273000,harrington240:1299000,oxley182:1238000,oxley195:1247000,oxley233:1286000,oxley257:1317000,ros260:1323000,ros267h:1374000,vista118:1112000,vista137:1138000,vista146:1145000,vista171:1172000,penfold139:1143000,seabreeze188:1267000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"110",rego:"Registered",size:340.0,front:10.0,len:34.0,type:"Zero",landOrig:780000,landPrice:765000,status:'available',incentive:"",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,newlife182:1237000,newlife182mg:1253000,newlife225mg:1355000,newlife246mg:1385000,harrington207:1273000,harrington240:1299000,oxley182:1238000,oxley195:1247000,oxley233:1286000,oxley257:1317000,ros260:1323000,ros267h:1374000,vista118:1112000,vista137:1138000,vista146:1145000,vista171:1172000,penfold139:1143000,seabreeze188:1267000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"125",rego:"Registered",size:313.1,front:10.0,len:31.3,type:"Zero",landOrig:735000,landPrice:735000,status:'available',incentive:"",pkgs:{aurora172:1187000,aurora210mg:1290000,sienna175:1197000,sienna200:1230000,newlife182:1207000,newlife182mg:1223000,newlife225mg:1325000,harrington207:1243000,harrington240:1269000,oxley182:1208000,oxley195:1217000,oxley233:1256000,oxley257:1287000,ros260:1293000,ros267h:1344000,vista118:1082000,vista137:1108000,vista146:1115000,vista171:1142000,penfold139:1113000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"132",rego:"Registered",size:319.4,front:10.0,len:31.3,type:"Zero",landOrig:741500,landPrice:741500,status:'available',incentive:"",pkgs:{aurora172:1193500,aurora210mg:1296500,sienna175:1203500,sienna200:1236500,newlife182:1213500,newlife182mg:1229500,newlife225mg:1331500,harrington207:1249500,harrington240:1275500,oxley182:1214500,oxley195:1223500,oxley233:1262500,oxley257:1293500,ros260:1299500,ros267h:1350500,vista118:1088500,vista137:1114500,vista146:1121500,vista171:1148500,penfold139:1119500}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"401",rego:"Registered",size:340.0,front:10.0,len:34.0,type:"Zero",landOrig:780000,landPrice:765000,status:'available',incentive:"",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,newlife182:1237000,newlife182mg:1253000,newlife225mg:1355000,newlife246mg:1385000,harrington207:1273000,harrington240:1299000,oxley182:1238000,oxley195:1247000,oxley233:1286000,oxley257:1317000,ros260:1323000,ros267h:1374000,vista118:1112000,vista137:1138000,vista146:1145000,vista171:1172000,penfold139:1143000,seabreeze188:1267000}},
+  {estate:'austral-ed-ave',estName:"Austral - ED Ave",lot:"402",rego:"Registered",size:369.7,front:10.8,len:34.0,type:"Zero",landOrig:789000,landPrice:775000,status:'available',incentive:"",pkgs:{aurora172:1227000,aurora210mg:1330000,aurora230mg:1360000,sienna175:1237000,sienna200:1270000,newlife182:1247000,newlife182mg:1263000,newlife193mg:1277000,newlife225mg:1365000,newlife246mg:1395000,harrington207:1283000,harrington240:1309000,oxley182:1248000,oxley195:1257000,oxley233:1296000,oxley257:1327000,ros260:1333000,ros267h:1384000,vista118:1122000,vista137:1148000,vista146:1155000,vista171:1182000,penfold139:1153000,seabreeze188:1277000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"35",rego:"Registered",size:300.0,front:10.7,len:27.8,type:"Standard",landOrig:730000,landPrice:715000,status:'available',incentive:"Rental Guarantee up to $1200 per week (Aurora 210MG and 230MG only), RG Commission 30k",pkgs:{aurora172:1167000,sienna175:1177000,sienna200:1210000,newlife182:1187000,newlife182mg:1203000,newlife193mg:1217000,harrington207:1223000,harrington240:1249000,oxley182:1188000,oxley195:1197000,oxley233:1236000,ros260:1273000,ros267h:1324000,vista118:1062000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"58",rego:"Registered",size:310.0,front:9.4,len:32.8,type:"Standard",landOrig:725000,landPrice:705000,status:'available',incentive:"",pkgs:{aurora172:1157000,aurora210mg:1260000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"63",rego:"Registered",size:300.0,front:10.0,len:30.0,type:"Standard",landOrig:730000,landPrice:715000,status:'available',incentive:"",pkgs:{aurora172:1167000,aurora210mg:1270000,sienna175:1177000,sienna200:1210000,newlife182:1187000,newlife182mg:1203000,newlife225mg:1305000,oxley182:1188000,oxley195:1197000,oxley233:1236000,oxley257:1267000,vista118:1062000,vista137:1088000,vista146:1095000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"90",rego:"Registered",size:301.0,front:10.0,len:27.6,type:"Standard",landOrig:726000,landPrice:719000,status:'available',incentive:"",pkgs:{aurora172:1171000,sienna175:1181000,sienna200:1214000,newlife182:1191000,newlife182mg:1207000,oxley182:1192000,oxley195:1201000,oxley233:1240000,vista118:1066000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"94",rego:"Registered",size:300.0,front:13.0,len:22.9,type:"Standard",landOrig:737000,landPrice:725000,status:'available',incentive:"",pkgs:{newlife182:1197000,newlife182mg:1213000,newlife193mg:1227000}},
+  {estate:'austral-central-grove',estName:"Austral - Central Grove",lot:"113",rego:"Registered",size:300.0,front:9.2,len:32.2,type:"Standard",landOrig:710000,landPrice:699000,status:'available',incentive:"",pkgs:{aurora172:1151000,aurora210mg:1254000}},
+  {estate:'austral-35-seventh-ave',estName:"Austral - 35 Seventh Ave",lot:"9",rego:"Registered",size:339.1,front:9.0,len:37.68,type:"Zero",landOrig:765000,landPrice:765000,status:'available',incentive:"",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,vista118:1112000,vista137:1138000,vista146:1145000}},
+  {estate:'austral-35-seventh-ave',estName:"Austral - 35 Seventh Ave",lot:"10",rego:"Registered",size:339.1,front:9.0,len:37.68,type:"Zero",landOrig:765000,landPrice:765000,status:'available',incentive:"",pkgs:{aurora172:1217000,aurora210mg:1320000,aurora230mg:1350000,sienna175:1227000,sienna200:1260000,vista118:1112000,vista137:1138000,vista146:1145000}},
+  {estate:'austral-35-seventh-ave',estName:"Austral - 35 Seventh Ave",lot:"11",rego:"Registered",size:376.8,front:10.0,len:37.68,type:"Zero",landOrig:847000,landPrice:847000,status:'available',incentive:"",pkgs:{aurora172:1299000,aurora210mg:1402000,aurora230mg:1432000,sienna175:1309000,sienna200:1342000,newlife182:1319000,newlife182mg:1335000,newlife225mg:1437000,newlife246mg:1467000,harrington207:1355000,harrington240:1381000,oxley182:1320000,oxley195:1329000,oxley233:1368000,oxley257:1399000,ros260:1405000,ros267h:1456000,vista118:1194000,vista137:1220000,vista146:1227000,vista171:1254000,penfold139:1225000,seabreeze188:1349000}},
+  {estate:'austral-35-seventh-ave',estName:"Austral - 35 Seventh Ave",lot:"13",rego:"Registered",size:376.8,front:10.0,len:37.68,type:"Zero",landOrig:847000,landPrice:847000,status:'available',incentive:"",pkgs:{aurora172:1299000,aurora210mg:1402000,aurora230mg:1432000,sienna175:1309000,sienna200:1342000,newlife182:1319000,newlife182mg:1335000,newlife225mg:1437000,newlife246mg:1467000,harrington207:1355000,harrington240:1381000,oxley182:1320000,oxley195:1329000,oxley233:1368000,oxley257:1399000,ros260:1405000,ros267h:1456000,vista118:1194000,vista137:1220000,vista146:1227000,vista171:1254000,penfold139:1225000,seabreeze188:1349000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"2-832",rego:"Registered",size:250.1,front:9.92,len:25.205,type:"Standard",landOrig:679000,landPrice:679000,status:'available',incentive:"",pkgs:{aurora172:1131000,sienna175:1141000,newlife182:1151000,newlife182mg:1167000,vista118:1026000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"6",rego:"Registered",size:250.1,front:10.49,len:23.845,type:"Standard",landOrig:685000,landPrice:685000,status:'sold',incentive:"",pkgs:{sienna175:1147000,newlife182:1157000,newlife182mg:1173000,newlife193mg:1187000,oxley182:1158000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"9-283",rego:"Registered",size:250.1,front:9.795,len:25.53,type:"Standard",landOrig:679000,landPrice:679000,status:'available',incentive:"",pkgs:{aurora172:1131000,sienna175:1141000,vista118:1026000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"10-283",rego:"Registered",size:250.1,front:9.795,len:25.53,type:"Standard",landOrig:679000,landPrice:679000,status:'available',incentive:"",pkgs:{aurora172:1131000,sienna175:1141000,vista118:1026000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"16-283",rego:"Registered",size:300.1,front:9.315,len:32.225,type:"Standard",landOrig:725000,landPrice:725000,status:'available',incentive:"",pkgs:{aurora172:1177000,aurora210mg:1280000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"17-283",rego:"Registered",size:300.1,front:9.315,len:32.225,type:"Standard",landOrig:725000,landPrice:725000,status:'available',incentive:"",pkgs:{aurora172:1177000,aurora210mg:1280000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"2714",rego:"Registered",size:268.0,front:8.0,len:33.465,type:"standard",landOrig:555000,landPrice:555000,status:'available',incentive:"",pkgs:{barossa205:1070000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"4162",rego:"Q1 2027",size:255.0,front:8.5,len:30.0,type:"zero",landOrig:505000,landPrice:505000,status:'available',incentive:"",pkgs:{aurora172:957000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"4726",rego:"Q1 2027",size:391.5,front:9.7,len:30.245,type:"standard",landOrig:625000,landPrice:625000,status:'available',incentive:"",pkgs:{aurora172:1077000,aurora210mg:1180000,sienna175:1087000,sienna200:1120000,vista118:972000,vista137:998000,vista146:1005000}},
+  {estate:'austral-275-twelfth-ave',estName:"Austral - 275 Twelfth Ave",lot:"4727",rego:"Q1 2027",size:378.1,front:12.58,len:30.0,type:"Standard",landOrig:595000,landPrice:595000,status:'available',incentive:"",pkgs:{aurora172:1047000,aurora210mg:1150000,sienna175:1057000,sienna200:1090000,sienna239:1113000,newlife182:1067000,newlife182mg:1083000,newlife193mg:1097000,newlife225mg:1185000,harrington207:1103000,harrington240:1129000,oxley182:1068000,oxley195:1077000,oxley233:1116000,oxley257:1147000,ros260:1153000,ros267h:1204000,brighton263:1173000,brighton263mg:1184000,opal244:1126000,opal267:1163000,carrington240:1121000,vista118:942000,vista137:968000,vista146:975000,vista171:1002000,viva163:980000,penfold139:973000}},
 ];
 
 // i18n
 const i18n = {
   en:{
     'txt-h-center':'Gold Inclusion · Price Matrix 2026',
-    'txt-overline':'Noble Home Builders · NSW · Jan 2026',
+    'txt-overline':'Noble Home Builders · NSW · Oct 2026',
     'incl-title':'✦ Gold Inclusion Package',
-    'incl-1':'Gold Inclusion (2025) — 7-star BASIX compliant',
+    'incl-1':'Gold Inclusion (2026) — 7-star BASIX compliant',
     'incl-2':'6-month price lock from contract exchange',
     'incl-3':'Standard site cost included',
     'incl-4':'Landscaping: +$31K (driveway + fence)',
     'incl-5':'0.4%/month extension after 6 months',
-    'txt-note':'Click any lot to see available house designs and package prices.',
+    'txt-note':'Click any lot to see available house designs and package prices. Struck-through land prices show the pre-discount figure.',
     'slbl-estates':'Estates','ssub-estates':'Across NSW',
     'slbl-avail':'Available','ssub-avail':'Lots',
     'slbl-from':'Land From','ssub-from':'Land Price',
@@ -477,19 +477,19 @@ const i18n = {
     'dp-hint-txt':'Select a lot to view<br>available house designs',
     'dp-lbl-size':'Land Size','dp-lbl-front':'Frontage','dp-lbl-land':'Land Price','dp-lbl-type':'Land Type',
     'dp-designs-title':'Available House Designs & Package Prices',
-    searchPh:'Lot, estate...',
+    allEstates:'All Estates', searchPh:'Lot, estate...',
     statusLabel:{available:'Available',sold:'Sold',reserved:'Reserved',dt:'Deposit Taken'},
   },
   ko:{
     'txt-h-center':'골드 인클루전 · 가격 매트릭스 2026',
     'txt-overline':'Noble Home Builders · NSW · 2026년 1월',
     'incl-title':'✦ 골드 인클루전 패키지',
-    'incl-1':'골드 인클루전 (2025) — 7스타 BASIX 기준 충족',
+    'incl-1':'골드 인클루전 (2026) — 7스타 BASIX 기준 충족',
     'incl-2':'계약 교환일로부터 6개월 가격 고정',
     'incl-3':'표준 사이트 비용 포함',
     'incl-4':'조경: +$31K (진입로 + 울타리)',
     'incl-5':'6개월 이후 연장 시 월 0.4% 추가',
-    'txt-note':'Lot을 클릭하면 가능한 하우스 디자인과 패키지 가격을 볼 수 있습니다.',
+    'txt-note':'Lot을 클릭하면 가능한 하우스 디자인과 패키지 가격을 볼 수 있습니다. 취소선 토지 가격은 할인 전 금액입니다.',
     'slbl-estates':'단지','ssub-estates':'NSW 전역',
     'slbl-avail':'분양 가능','ssub-avail':'Lot 수',
     'slbl-from':'토지 최저가','ssub-from':'토지 가격',
@@ -509,7 +509,7 @@ const i18n = {
     'dp-hint-txt':'Lot을 선택하면<br>하우스 디자인을 볼 수 있습니다',
     'dp-lbl-size':'면적','dp-lbl-front':'전면','dp-lbl-land':'토지 가격','dp-lbl-type':'토지 유형',
     'dp-designs-title':'가능한 하우스 디자인 & 패키지 가격',
-    searchPh:'Lot 번호, 단지명 검색...',
+    allEstates:'전체 단지', searchPh:'Lot 번호, 단지명 검색...',
     statusLabel:{available:'판매 가능',sold:'판매 완료',reserved:'예약됨',dt:'예약금 납부'},
   }
 };
@@ -523,14 +523,25 @@ function setLang(l){
   const t=i18n[l];
   Object.keys(t).forEach(id=>{if(typeof t[id]==='string'){const el=document.getElementById(id);if(el)el.innerHTML=t[id];}});
   document.getElementById('fSearch').placeholder=t.searchPh;
-  render(); updateStats();
+  buildTabs(); render(); updateStats();
   if(selectedLot) showDesigns(selectedLot);
+}
+
+const ESTATES = [["newpark-marsden-park", "NewPark Marsden Park"], ["the-hills-of-carmel-box-hill", "The Hills of Carmel Box Hill"], ["sapphire-310-tallawong-rd-ro", "Sapphire - 310 Tallawong Rd, Rouse Hill"], ["rouse-hill-clarke-st", "Rouse Hill - Clarke St"], ["grantham-farm-grantham-rise", "Grantham Farm - Grantham Rise"], ["leppington-48-dickson-road-s", "Leppington - 48 Dickson Road Stage 2"], ["leppington-jacaranda-estate", "Leppington - Jacaranda Estate"], ["leppington-julius-crescent", "Leppington - Julius Crescent"], ["leppington-green-vista", "Leppington - Green Vista"], ["austral-bloomfield", "Austral - Bloomfield"], ["austral-ed-ave", "Austral - ED Ave"], ["austral-central-grove", "Austral - Central Grove"], ["austral-35-seventh-ave", "Austral - 35 Seventh Ave"], ["austral-275-twelfth-ave", "Austral - 275 Twelfth Ave"]];
+
+function buildTabs(){
+  const t=i18n[lang];
+  let html=`<button class="tab-btn ${curEstate==='all'?'active':''}" onclick="setEstate('all')">${t.allEstates} <span class="tab-cnt">${lots.length}</span></button>`;
+  ESTATES.forEach(([slug,name])=>{
+    const cnt=lots.filter(l=>l.estate===slug).length;
+    html+=`<button class="tab-btn ${curEstate===slug?'active':''}" onclick="setEstate('${slug}')" title="${name}">${name} <span class="tab-cnt">${cnt}</span></button>`;
+  });
+  document.getElementById('tabRow').innerHTML=html;
 }
 
 function setEstate(e){
   curEstate=e;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+e).classList.add('active');
+  buildTabs();
   applyFilters();
 }
 
@@ -587,9 +598,6 @@ function applyFilters(){
   });
 
   // Tab counts
-  const estates=['newpark','hills','boxhill39','austral325','westwood','lepp64','lepp48','jacaranda','austral275','rousehill'];
-  estates.forEach(e=>{document.getElementById('tc-'+e).textContent=lots.filter(l=>l.estate===e).length;});
-  document.getElementById('tc-all').textContent=lots.length;
 
   render(); updateStats();
 }
@@ -614,7 +622,7 @@ function render(){
       <td style="font-size:12px;font-weight:500">${d.size}m²</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${d.front}m</td>
       <td><span class="lot-type-chip ${lotTypeCls(d.type)}">${d.type}</span></td>
-      <td><div class="land-price">${$c(d.landPrice)}</div></td>
+      <td><div class="land-price">${$c(d.landPrice)}</div>${d.landOrig&&d.landOrig>d.landPrice?`<div class="land-orig">${$c(d.landOrig)}</div>`:''}</td>
       <td><div class="pkg-from">${pf?$f(pf):'—'}</div></td>
       <td><span class="status-chip ${statusCls(d.status)}">${t.statusLabel[d.status]||d.status}</span></td>
     </tr>`;
@@ -693,7 +701,7 @@ function toggleTheme(){
 if(window.matchMedia&&true){
   document.body.dataset.theme='light';document.getElementById('themeBtn').textContent='☀️';
 }
-applyFilters();
+buildTabs(); applyFilters();
 </script>
 </body>
 </html>
