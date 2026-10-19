@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>시드니 신규 아파트 vs 하우스 | SunnyApps</title>
+<meta name="description" content="시드니 신규 아파트(유닛)와 하우스 비교 — 중위가, 임대수익률, 2026년 가격 변동, 인지세·외국인 규정·감가상각 등 제도 비교. Made by SunnyApps.">
+<link rel="preload" href="assets/fonts/Pretendard-ks.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+:root{--lx-accent:#1E8074;--color-bg:#FAF9F6;--color-panel:#FFFFFF;--color-fg:#1C1B19;--color-fg-muted:#6B6862;--color-border-line:#E6E3DC;
+--color-ok:#1E7F5C;--color-warn:#B4690E;--color-bad:#C2412D;--cds-chart-muted:#CBC6BC;--cds-chart-axis:#BDB8AE;
+--cds-radius:14px;--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:14px;--cds-gap-lg:20px;--cds-gap-xl:40px;
+--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:20px;--cds-surface-popover:var(--color-panel);--cds-border:var(--color-border-line);
+--cds-shadow-popover:0 8px 24px rgba(0,0,0,.12);--cds-text-secondary:var(--color-fg-muted);--cds-dur-slow:300ms;
+--font-anthropic-sans:system-ui,sans-serif;--cds-font-weight-medium:600;}
+[data-theme="dark"]{--lx-accent:#3FB8A8;--color-bg:#121211;--color-panel:#1C1C1B;--color-fg:#F2F0EB;--color-fg-muted:#A3A09A;--color-border-line:#2F2E2B;
+--color-ok:#4CC38A;--color-warn:#E8A54B;--color-bad:#F07A65;--cds-chart-muted:#4A4844;--cds-chart-axis:#5A5853;--cds-shadow-popover:0 8px 24px rgba(0,0,0,.5);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:"LxPretendard",system-ui,sans-serif;transition:background .2s,color .2s}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 16px;background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border-line);font-family:"LxPretendard",system-ui,sans-serif}
+.topbar .brand{font-weight:750;letter-spacing:-.02em;margin-right:auto;font-size:.95rem}
+.topbar .brand small{font-weight:500;color:var(--color-fg-muted);margin-left:6px}
+.nav-btn{font:inherit;font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--color-border-line);background:var(--color-panel);color:var(--color-fg);cursor:pointer}
+.bmac{font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;background:#FFDD00;color:#1C1B19;text-decoration:none;white-space:nowrap}
+@media(max-width:560px){.bmac .bm-t,.topbar .brand small{display:none}}
+.page{max-width:1120px;margin:0 auto;padding:32px 16px 24px}
+.dash-skeleton{color:transparent!important;background:color-mix(in srgb,var(--color-fg) 8%,transparent);border-radius:6px}
+.disclaimer{max-width:1120px;margin:0 auto;padding:0 16px 24px;font-size:.78rem;line-height:1.6;color:var(--color-fg-muted);font-family:"LxPretendard",system-ui,sans-serif;word-break:keep-all}
+footer{text-align:center;padding:24px 16px 40px;border-top:1px solid var(--color-border-line);font-size:.8rem;color:var(--color-fg-muted);font-family:"LxPretendard",system-ui,sans-serif}
+footer .f-brand{font-weight:700;color:var(--color-fg)} footer a{color:var(--lx-accent);text-decoration:none}
+
+@font-face{font-family:"LxPretendard";src:url("assets/fonts/Pretendard-ks.woff2") format("woff2");font-weight:45 920;font-style:normal;font-display:swap;}
+.lx{--lx-font:"LxPretendard",var(--font-anthropic-sans),system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-family:var(--lx-font);word-break:keep-all;overflow-wrap:break-word;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;gap:var(--cds-gap-xl);}
+.lx-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--lx-unit);margin:0 0 var(--cds-gap-sm);}
+.lx-head h1{font-family:var(--lx-font);font-weight:750;font-size:clamp(1.75rem,1.1rem + 2.2vw,2.6rem);letter-spacing:-0.035em;line-height:1.2;margin:0 0 var(--cds-gap-md);}
+.lx-head h1 span{color:var(--color-fg-muted);font-weight:500;}
+.lx-take{font-size:1.0625rem;color:var(--color-fg-muted);margin:0;line-height:1.75;max-width:46rem;}
+.lx-take b{font-weight:700;color:var(--color-fg);font-variant-numeric:tabular-nums;box-shadow:inset 0 -0.45em 0 color-mix(in srgb,var(--lx-unit) 22%,transparent);padding:0 2px;}
+.lx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:var(--cds-gap-md);}
+.lx-tile,.lx-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);}
+.lx-tile .lab{font-size:.75rem;font-weight:550;color:var(--color-fg-muted);letter-spacing:-0.005em;}
+.lx-tile .big{white-space:nowrap;font-family:var(--lx-font);font-weight:720;font-size:1.85rem;letter-spacing:-0.035em;line-height:1.15;font-variant-numeric:tabular-nums;margin:var(--cds-gap-sm) 0 var(--cds-gap-xs);min-height:1.15em;}
+.lx-tile:first-child .big{color:var(--lx-unit);}
+.lx-tile .sub{font-size:.8125rem;font-weight:500;color:var(--color-fg-muted);font-variant-numeric:tabular-nums;}
+.lx-tile .sub span{font-weight:650;}
+.lx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:var(--cds-gap-md);}
+.lx h2{font-size:1.25rem;font-weight:720;letter-spacing:-0.025em;margin:0 0 var(--cds-gap-md);}
+.lx-card h3{font-size:1.0625rem;font-weight:680;letter-spacing:-0.02em;margin:0;}
+.lx-note{font-size:.8125rem;line-height:1.55;color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-md);}
+.lx-legend{display:flex;gap:var(--cds-gap-md);font-size:.75rem;font-weight:550;color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm);}
+.lx-legend i{display:inline-block;width:.6rem;height:.6rem;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+.lx-chart{position:relative;min-height:150px;}
+.lx-chart text{font-family:var(--lx-font);font-size:.78rem;font-weight:500;fill:var(--color-fg-muted);font-variant-numeric:tabular-nums;letter-spacing:-0.01em;}
+.lx-chart text.lx-val{fill:var(--color-fg);font-weight:680;}
+.lx-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:.78rem;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;display:none;z-index:2;}
+.lx-tip .t{color:var(--cds-text-secondary);font-weight:500;}
+.lx-fhb{display:grid;grid-template-columns:1fr 1fr;gap:var(--cds-gap-sm);margin-top:var(--cds-gap-md);font-size:.75rem;font-weight:500;color:var(--color-fg-muted);}
+.lx-fhb div{border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-sm) var(--cds-pad-md);}
+.lx-fhb b{display:block;font-size:.95rem;font-weight:700;letter-spacing:-0.02em;color:var(--color-fg);margin-top:3px;}
+.lx-tablebox{overflow:auto;}
+.lx table{width:100%;border-collapse:collapse;font-size:.84rem;}
+.lx th{text-align:left;color:var(--color-fg-muted);font-size:.75rem;font-weight:620;padding:var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap;}
+.lx td{padding:var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);vertical-align:top;line-height:1.6;color:var(--color-fg);}
+.lx td.item{font-weight:680;letter-spacing:-0.02em;white-space:nowrap;}
+.lx td.lx-hide-narrow{color:var(--color-fg-muted);font-size:.78rem;}
+.lx .badge{display:inline-block;padding:2px 9px;border-radius:999px;border:1px solid currentColor;font-size:.75rem;font-weight:650;white-space:nowrap;}
+.lx .badge.unit{color:var(--color-ok);} .lx .badge.house{color:var(--color-warn);} .lx .badge.same{color:var(--color-fg-muted);}
+.lx-filters{display:flex;flex-wrap:wrap;gap:var(--cds-gap-xs);margin-bottom:var(--cds-gap-md);}
+.lx-filters button{font:inherit;font-size:.78rem;font-weight:560;padding:3px 12px;border-radius:999px;border:1px solid var(--color-border-line);background:transparent;color:var(--color-fg);cursor:pointer;}
+.lx-filters button[aria-pressed=true]{background:var(--color-fg);color:var(--color-bg);border-color:var(--color-fg);}
+.lx-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;color:var(--color-fg-muted);font-size:.78rem;}
+.lx-fail i{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad);}
+.lx .neg{color:var(--color-bad);} .lx .pos{color:var(--color-ok);}
+[data-dash-source-state=empty]{color:transparent;}
+[data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow);}
+@media (max-width:560px){.lx-hide-narrow{display:none;}.lx-tile .big{font-size:1.6rem;}}
+
+@media (max-width:560px){.lx table,.lx tbody,.lx tr,.lx td{display:block;width:100%;}.lx thead{display:none;}
+.lx tr{border-bottom:1px solid var(--color-border-line);padding:var(--cds-pad-sm) 0;position:relative;}
+.lx td{border:0;padding:2px 0;}
+.lx td.item{white-space:normal;font-size:.95rem;padding-right:70px;}
+.lx td:nth-child(3)::before{content:"신규 아파트";display:block;font-size:.7rem;font-weight:650;color:var(--lx-unit);margin-top:4px;}
+.lx td:nth-child(4)::before{content:"하우스";display:block;font-size:.7rem;font-weight:650;color:var(--color-fg-muted);margin-top:4px;}
+.lx td:nth-child(5){position:absolute;top:var(--cds-pad-sm);right:0;width:auto;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <span class="brand">Sydney Apartment vs House<small>by SunnyApps</small></span>
+  <button class="nav-btn" id="themeBtn" aria-label="Toggle theme">☀︎ / ☾</button>
+  <a class="bmac" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ <span class="bm-t">Buy me a coffee</span></a>
+</nav>
+<main class="page">
+
+
+<div class="lx">
+  <header class="lx-head" id="top">
+    <p class="lx-eyebrow">Sydney · Apartment vs House</p>
+    <h1>시드니 신규 아파트 <span>vs</span> 하우스</h1>
+    <p class="lx-take" id="takeaway">
+      아파트(유닛) 중위가는 하우스의 <b data-source="gap" data-field="value" data-where="metric=ratio" class="dash-skeleton">—</b> 수준이고,
+      임대수익률은 <b data-source="edge" data-field="value" data-where="metric=yield_pp" class="dash-skeleton">—</b>%p 높으며,
+      2026년 조정기 연간 하락폭은 하우스보다 <b data-source="edge" data-field="value" data-where="metric=annual_pp" class="dash-skeleton">—</b>%p 작습니다.
+    </p>
+  </header>
+
+  <section class="lx-tiles" id="kpis">
+    <div class="lx-tile"><div class="lab">아파트(유닛) 중위가 · 2026년 8월</div>
+      <div class="big dash-skeleton" data-source="market_aug" data-field="median" data-where="key=unit">—</div>
+      <div class="sub">연간 <span data-source="market_aug" data-field="annual" data-where="key=unit">—</span></div></div>
+    <div class="lx-tile"><div class="lab">하우스 중위가 · 2026년 8월</div>
+      <div class="big dash-skeleton" data-source="market_aug" data-field="median" data-where="key=house">—</div>
+      <div class="sub">연간 <span data-source="market_aug" data-field="annual" data-where="key=house">—</span></div></div>
+    <div class="lx-tile"><div class="lab">가격 차이</div>
+      <div class="big dash-skeleton" data-source="gap" data-field="value" data-where="metric=gap">—</div>
+      <div class="sub">아파트가 하우스의 <span data-source="gap" data-field="value" data-where="metric=ratio">—</span></div></div>
+    <div class="lx-tile"><div class="lab">임대수익률(총) · 2026년 6월</div>
+      <div class="big dash-skeleton" data-source="market_jun" data-field="yield" data-where="key=unit">—</div>
+      <div class="sub">하우스 <span data-source="market_jun" data-field="yield" data-where="key=house">—</span></div></div>
+    <div class="lx-tile"><div class="lab">연간 총수익률 · 2026년 6월</div>
+      <div class="big dash-skeleton" data-source="market_jun" data-field="total_return" data-where="key=unit">—</div>
+      <div class="sub">하우스 <span data-source="market_jun" data-field="total_return" data-where="key=house">—</span></div></div>
+    <div class="lx-tile"><div class="lab">주간 임대료 중위값 · 2026년 6월</div>
+      <div class="big dash-skeleton" data-source="market_jun" data-field="rent" data-where="key=unit">—</div>
+      <div class="sub">하우스 <span data-source="market_jun" data-field="rent" data-where="key=house">—</span></div></div>
+  </section>
+
+  <section id="numbers">
+    <h2>숫자로 보는 차이</h2>
+    <div class="lx-grid">
+      <div class="lx-card" data-source="market_jun" id="perf">
+        <h3>수익성 비교</h3>
+        <p class="lx-note">2026년 6월까지 12개월. 총수익률 = 가격 변동 + 임대수익</p>
+        <div class="lx-legend"><span><i style="background:var(--lx-unit)"></i>아파트(유닛)</span><span><i style="background:var(--cds-chart-muted)"></i>하우스</span></div>
+        <div class="lx-chart" id="chart-perf"></div>
+      </div>
+      <div class="lx-card" data-source="market_aug" id="drop">
+        <h3>2026년 조정기 가격 변동</h3>
+        <p class="lx-note">2026년 8월 기준. 막대가 짧을수록 하락폭이 작음</p>
+        <div class="lx-legend"><span><i style="background:var(--lx-unit)"></i>아파트(유닛)</span><span><i style="background:var(--cds-chart-muted)"></i>하우스</span></div>
+        <div class="lx-chart" id="chart-drop"></div>
+      </div>
+      <div class="lx-card" id="entry">
+        <h3>구매 진입 비용</h3>
+        <p class="lx-note">2026년 8월 중위가 기준으로 계산한 계약금과 외국인 추가 인지세</p>
+        <div class="lx-legend"><span><i style="background:var(--lx-unit)"></i>아파트(유닛)</span><span><i style="background:var(--cds-chart-muted)"></i>하우스</span></div>
+        <div class="lx-chart" id="chart-entry" data-source="entry"></div>
+        <div class="lx-fhb">
+          <div>첫 주택 인지세 · 아파트<b data-source="fhb" data-field="band" data-where="key=unit">—</b></div>
+          <div>첫 주택 인지세 · 하우스<b data-source="fhb" data-field="band" data-where="key=house">—</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="lx-card">
+      <h3>제도·투자·관리 항목별 비교</h3>
+      <p class="lx-note">어느 쪽에 유리한지 표시했습니다. 하우스가 유리한 항목은 고객 상담 때 같이 짚어줄 리스크입니다.</p>
+      <div class="lx-filters" id="filters"></div>
+      <div class="lx-tablebox">
+        <table data-source="policy" data-row-key="id" id="policy-table">
+          <thead><tr>
+            <th data-field="item">항목</th>
+            <th data-field="category" class="lx-hide-narrow">구분</th>
+            <th data-field="unit">신규 아파트</th>
+            <th data-field="house">하우스(기존 주택)</th>
+            <th data-field="edge">유리</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="lx-note">시장 수치의 '유닛'은 신축만이 아니라 기존 아파트까지 포함한 시드니 전체 유닛입니다. 세금·제도는 일반 정보이며, 고객 안내 전 회계사와 Revenue NSW 최신 기준을 확인하세요.</p>
+  </section>
+</div>
+
+
+</main>
+<p class="disclaimer">시장 수치 출처: Cotality 홈밸류인덱스(2026년 6월 기준), NAB Sydney Property Market Insights(2026년 8월, Cotality 자료). 제도 정보: Revenue NSW, 연방정부 외국인 기존 주택 구매 한시 금지(2025.4.1~2027.3.31). 본 페이지는 일반 정보이며 금융·법률·세무 자문이 아닙니다. 실행 전 Revenue NSW, 변호사, 회계사, 대출 기관과 반드시 확인하세요.</p>
+<footer>
+  <div class="f-brand">Made by SunnyApps. All rights reserved.</div>
+  <div style="margin-top:6px">시드니 신규 아파트 vs 하우스 · <a href="./links.html">All Projects →</a></div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(function(){
+  const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  const root=document.documentElement, saved=store.get('avh-theme');
+  if(saved) root.setAttribute('data-theme',saved);
+  document.getElementById('themeBtn').addEventListener('click',()=>{const t=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',t);store.set('avh-theme',t);});
+  const DATA={"market_jun": [{"key": "unit", "type": "아파트(유닛)", "median": 898623, "annual": 0.011, "total_return": 0.053, "yield": 0.043, "rent": 783}, {"key": "house", "type": "하우스", "median": 1556258, "annual": -0.001, "total_return": 0.025, "yield": 0.028, "rent": 883}], "market_aug": [{"key": "unit", "type": "아파트(유닛)", "median": 878176, "month": -0.004, "quarter": -0.029, "annual": -0.023}, {"key": "house", "type": "하우스", "median": 1494878, "month": -0.018, "quarter": -0.054, "annual": -0.055}], "policy": [{"id": "fhb", "category": "세금", "item": "첫 주택 구매자 인지세", "unit": "$80만 이하 면제, $80만~$100만 감면. 중위 유닛 가격이 감면 구간 안에 들어감", "house": "중위 하우스는 $100만 초과라 일반 세율 적용", "edge": "아파트"}, {"id": "otp", "category": "세금", "item": "오프더플랜 인지세 유예", "unit": "실거주 목적이면 최대 12개월 유예 (계약 후 15개월·정산·양도 중 가장 빠른 날 납부)", "house": "기존 주택은 해당 없음 (하우스앤랜드 패키지는 가능)", "edge": "아파트"}, {"id": "foreign", "category": "외국인", "item": "외국인 구매 가능 여부", "unit": "신규 주택은 FIRB 승인 후 구매 가능", "house": "기존 주택은 2025.4.1~2027.3.31 구매 금지", "edge": "아파트"}, {"id": "fsd", "category": "외국인", "item": "외국인 추가 인지세", "unit": "9% 적용 (가격이 낮아 금액 부담은 작음)", "house": "9% 적용", "edge": "동일"}, {"id": "dep", "category": "투자", "item": "감가상각", "unit": "신축이라 건물(Div 43) + 설비·가전(Div 40) 모두 공제", "house": "기존 주택은 투자자 설비 감가상각(Div 40) 불가", "edge": "아파트"}, {"id": "land", "category": "투자", "item": "랜드택스", "unit": "토지 지분이 작아 부담이 적음", "house": "토지 가치 전체에 과세", "edge": "아파트"}, {"id": "warranty", "category": "관리", "item": "하자 보호", "unit": "법정 하자보증(주요 6년·일반 2년) + 스트라타 건축보증금 2%", "house": "기존 주택은 대부분 보증 기간 경과", "edge": "아파트"}, {"id": "upkeep", "category": "관리", "item": "관리 부담", "unit": "외벽·지붕·조경은 스트라타가 관리, 공용시설 이용", "house": "유지보수를 직접 해야 함", "edge": "아파트"}, {"id": "growth", "category": "리스크", "item": "장기 자본 성장", "unit": "토지 비중이 작아 장기 상승률은 낮은 편", "house": "역사적으로 장기 상승률 우위", "edge": "하우스"}, {"id": "levy", "category": "리스크", "item": "보유 비용", "unit": "스트라타 관리비가 매년 발생", "house": "관리비 없음", "edge": "하우스"}, {"id": "valuation", "category": "리스크", "item": "오프더플랜 리스크", "unit": "완공 시 감정가 부족, 지역 공급과잉, 디벨로퍼 신뢰도 확인 필요", "house": "해당 없음", "edge": "하우스"}, {"id": "space", "category": "리스크", "item": "공간과 자율성", "unit": "공간·증축·리모델링에 제약", "house": "땅·마당·증축의 자유", "edge": "하우스"}]};
+  const calcs={}, subs=[];
+  window.dash={
+    colors:['var(--lx-accent)'],
+    data:id=>{const d=DATA[id]||calcs[id];return d?{status:'ok',data:d}:{status:'missing',data:[]};},
+    calc:(id,o)=>{calcs[id]=o.fn(...o.inputs.map(i=>DATA[i]||calcs[i]));},
+    onData:fn=>{subs.push(fn);fn();}
+  };
+  let w=window.innerWidth;
+  window.addEventListener('resize',()=>{if(window.innerWidth!==w){w=window.innerWidth;subs.forEach(f=>f());}});
+})();
+</script>
+<script>
+
+(function(){
+  const U = dash.colors[0];
+  document.querySelector('.lx').style.setProperty('--lx-unit', U);
+
+  const pick = (rows, k) => rows.find(r => r.key === k);
+  dash.calc('gap', {
+    inputs: ['market_aug'],
+    title: '아파트 대비 하우스 가격',
+    description: '2026년 8월 중위가로 계산한 아파트/하우스 가격 비율과 차이.',
+    fn: (market_aug) => {
+      const u = market_aug.find(r => r.key === 'unit'), h = market_aug.find(r => r.key === 'house');
+      return [{metric: 'ratio', value: Number(u.median) / Number(h.median)},
+              {metric: 'gap', value: Number(h.median) - Number(u.median)}];
+    }
+  });
+  dash.calc('edge', {
+    inputs: ['market_jun', 'market_aug'],
+    title: '아파트 우위 (%p)',
+    description: '임대수익률·총수익률·연간 가격변동에서 아파트가 하우스보다 앞선 폭(%p).',
+    fn: (market_jun, market_aug) => {
+      const ju = market_jun.find(r => r.key === 'unit'), jh = market_jun.find(r => r.key === 'house');
+      const au = market_aug.find(r => r.key === 'unit'), ah = market_aug.find(r => r.key === 'house');
+      return [{metric: 'yield_pp', value: (ju.yield - jh.yield) * 100},
+              {metric: 'return_pp', value: (ju.total_return - jh.total_return) * 100},
+              {metric: 'annual_pp', value: (au.annual - ah.annual) * 100}];
+    }
+  });
+  dash.calc('entry', {
+    inputs: ['market_aug'],
+    title: '중위가 기준 진입 비용',
+    description: '중위가의 20% 계약금, 10% 오프더플랜 계약금, 9% 외국인 추가 인지세.',
+    fn: (market_aug) => market_aug.map(r => ({key: r.key, type: r.type,
+      deposit20: r.median * 0.2, deposit10: r.median * 0.1, fsd: r.median * 0.09}))
+  });
+  dash.calc('fhb', {
+    inputs: ['market_aug'],
+    title: '첫 주택 인지세 구간',
+    description: '중위가가 NSW 첫 주택 구매자 면제($80만 이하)·감면($100만 이하) 구간 중 어디에 드는지.',
+    fn: (market_aug) => market_aug.map(r => ({key: r.key,
+      band: r.median <= 800000 ? '전액 면제 구간' : r.median <= 1000000 ? '감면 구간 (일부 절감)' : '일반 세율 (혜택 없음)'}))
+  });
+
+  const money = v => '$' + new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: Math.abs(v) >= 1e6 ? 2 : 0}).format(v);
+  const pct = d3.format('.1%'), spct = d3.format('+.1%'), pp = d3.format('.1f');
+  const sel = s => document.querySelectorAll(s);
+
+  function setState(el, st) {
+    el.classList.toggle('dash-skeleton', st === 'loading');
+    if (st === 'error') el.innerHTML = '<span class="lx-fail"><i></i>불러오지 못했습니다</span>';
+  }
+
+  function fill(src, fmtByField, signed) {
+    const d = dash.data(src);
+    sel('[data-source="' + src + '"][data-field]').forEach(el => {
+      if (el.tagName === 'TH') return;
+      if (d.status !== 'ok') { if (d.status === 'error') el.textContent = '—'; el.classList.toggle('dash-skeleton', d.status === 'loading'); return; }
+      el.classList.remove('dash-skeleton');
+      const w = new URLSearchParams(el.dataset.where || '');
+      const row = d.data.find(r => [...w].every(([k, v]) => String(r[k]) === v));
+      const f = el.dataset.field;
+      if (!row) { el.textContent = '—'; return; }
+      const v = row[f];
+      el.textContent = fmtByField(f, v, row);
+      el.classList.remove('neg', 'pos');
+      if (signed && signed.includes(f) && el.tagName === 'SPAN') el.classList.add(v < 0 ? 'neg' : 'pos');
+    });
+  }
+
+  function bars(el, groups, fmt) {
+    const W = Math.max(280, el.clientWidth);
+    el.innerHTML = '';
+    const tip = d3.select(el).append('div').attr('class', 'lx-tip');
+    const barH = 16, gap = 4, gg = 18;
+    const svg = d3.select(el).append('svg').attr('width', '100%');
+    const probe = svg.append('text');
+    let lw = 0;
+    groups.forEach(g => { probe.text(g.label); lw = Math.max(lw, probe.node().getComputedTextLength()); });
+    let vw = 0;
+    groups.forEach(g => g.values.forEach(v => { probe.text(fmt(v.v)); vw = Math.max(vw, probe.node().getComputedTextLength()); }));
+    probe.remove();
+    const vals = groups.flatMap(g => g.values.map(v => v.v));
+    const lo = Math.min(0, d3.min(vals)), hi = Math.max(0, d3.max(vals));
+    const left = lw + 12 + (lo < 0 ? vw + 8 : 0), right = hi > 0 ? vw + 8 : 4;
+    const x = d3.scaleLinear([lo, hi], [left, W - right]);
+    const gh = groups[0].values.length * (barH + gap);
+    const H = groups.length * gh + (groups.length - 1) * gg + 4;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    el.style.minHeight = H + 'px';
+    svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', H)
+      .style('stroke', 'var(--cds-chart-axis)').attr('stroke-width', 1);
+    groups.forEach((g, gi) => {
+      const y0 = gi * (gh + gg);
+      svg.append('text').attr('x', 0).attr('y', y0 + gh / 2).attr('dominant-baseline', 'middle').text(g.label);
+      g.values.forEach((v, i) => {
+        const y = y0 + i * (barH + gap);
+        const x1 = Math.min(x(0), x(v.v)), w = Math.max(1, Math.abs(x(v.v) - x(0)));
+        svg.append('rect').attr('x', x1).attr('y', y).attr('width', w).attr('height', barH).attr('rx', 4)
+          .style('fill', v.c)
+          .on('mousemove', (e) => {
+            const r = el.getBoundingClientRect();
+            tip.style('display', 'block').html('');
+            tip.append('div').attr('class', 't').text(g.label);
+            tip.append('div').text(v.n + ': ' + fmt(v.v));
+            const tw = tip.node().offsetWidth;
+            let lx = e.clientX - r.left + 12; if (lx + tw > r.width) lx = e.clientX - r.left - tw - 12;
+            tip.style('left', Math.max(0, lx) + 'px').style('top', (e.clientY - r.top - 10) + 'px');
+          })
+          .on('mouseleave', () => tip.style('display', 'none'));
+        const neg = v.v < 0;
+        svg.append('text').attr('class', 'lx-val')
+          .attr('x', neg ? x(v.v) - 6 : x(v.v) + 6).attr('y', y + barH / 2)
+          .attr('text-anchor', neg ? 'end' : 'start').attr('dominant-baseline', 'middle').text(fmt(v.v));
+      });
+    });
+  }
+
+  function chart(id, src, build, fmt) {
+    const el = document.getElementById(id), d = dash.data(src);
+    if (d.status !== 'ok') { el.innerHTML = ''; setState(el, d.status === 'error' ? 'error' : 'loading'); return; }
+    el.classList.remove('dash-skeleton');
+    bars(el, build(d.data), fmt);
+  }
+  const pair = (rows, f) => [
+    {n: '아파트(유닛)', c: U, v: Number(pick(rows, 'unit')[f])},
+    {n: '하우스', c: 'var(--cds-chart-muted)', v: Number(pick(rows, 'house')[f])}];
+
+  let cat = '전체';
+  function table() {
+    const d = dash.data('policy');
+    const tb = document.querySelector('#policy-table tbody');
+    const box = document.getElementById('filters');
+    if (d.status !== 'ok') {
+      tb.innerHTML = '';
+      const tr = tb.insertRow(), td = tr.insertCell(); td.colSpan = 5; td.style.minHeight = '120px';
+      if (d.status === 'error') td.innerHTML = '<span class="lx-fail"><i></i>불러오지 못했습니다</span>';
+      else td.className = 'dash-skeleton';
+      return;
+    }
+    const cats = ['전체', ...new Set(d.data.map(r => r.category))];
+    box.innerHTML = '';
+    cats.forEach(c => {
+      const b = document.createElement('button');
+      b.textContent = c; b.setAttribute('aria-pressed', c === cat);
+      b.addEventListener('click', () => { cat = c; table(); });
+      box.appendChild(b);
+    });
+    tb.innerHTML = '';
+    d.data.filter(r => cat === '전체' || r.category === cat).forEach(r => {
+      const tr = tb.insertRow(); tr.dataset.key = r.id;
+      const c1 = tr.insertCell(); c1.className = 'item'; c1.textContent = r.item;
+      const c2 = tr.insertCell(); c2.className = 'lx-hide-narrow'; c2.textContent = r.category;
+      tr.insertCell().textContent = r.unit;
+      tr.insertCell().textContent = r.house;
+      const b = document.createElement('span');
+      b.className = 'badge ' + (r.edge === '아파트' ? 'unit' : r.edge === '하우스' ? 'house' : 'same');
+      b.textContent = r.edge;
+      tr.insertCell().appendChild(b);
+    });
+  }
+
+  const draw = () => {
+    fill('market_aug', (f, v) => f === 'median' ? money(v) : spct(v), ['annual']);
+    fill('market_jun', (f, v) => f === 'rent' ? '$' + d3.format(',')(v) + '/주' : f === 'median' ? money(v) : pct(v));
+    fill('gap', (f, v, r) => r.metric === 'ratio' ? d3.format('.0%')(v) : money(v));
+    fill('edge', (f, v) => pp(v));
+    fill('fhb', (f, v) => v);
+
+    chart('chart-perf', 'market_jun', rows => [
+      {label: '임대수익률', values: pair(rows, 'yield')},
+      {label: '총수익률', values: pair(rows, 'total_return')},
+      {label: '연간 가격변동', values: pair(rows, 'annual')}], pct);
+    chart('chart-drop', 'market_aug', rows => [
+      {label: '1개월', values: pair(rows, 'month')},
+      {label: '3개월', values: pair(rows, 'quarter')},
+      {label: '12개월', values: pair(rows, 'annual')}], pct);
+    chart('chart-entry', 'entry', rows => [
+      {label: '오프더플랜 10% 계약금', values: pair(rows, 'deposit10')},
+      {label: '20% 계약금', values: pair(rows, 'deposit20')},
+      {label: '외국인 추가 인지세 9%', values: pair(rows, 'fsd')}], money);
+    table();
+  };
+  dash.onData(draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+
+</script>
+</body>
+</html>
