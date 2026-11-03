@@ -1,0 +1,30 @@
+Scene 1 (0:00 - 0:03)
+Every decade has its giants. But which companies truly dominated the last ten years?
+This is the Global Tech Giants Market Cap Race — from 2015 to 2024.
+
+Scene 2 (0:03 - 0:07)
+In 2015, Apple sat comfortably at the top with 724 billion dollars.
+Google followed at 527 billion. Microsoft, Amazon, and Meta rounded out the top five.
+NVIDIA? Just 18 billion dollars. A footnote.
+
+Scene 3 (0:07 - 0:23)
+Watch as a decade of disruption reshapes the entire ranking.
+Apple's trillion-dollar moment in 2018. Amazon's pandemic surge.
+Tesla's explosive 2020. And then — an AI revolution that nobody saw coming.
+
+Scene 4 (0:23 - 0:28)
+By 2024, NVIDIA has climbed from obscurity to the summit of global finance.
+Three-point-three-five trillion dollars. A gain of over eighteen thousand percent.
+The AI chip company that rewrote the rules of value creation.
+
+Scene 5 (0:28 - 0:30)
+Data Races — Episode One. Up next: the Global Electric Vehicle Sales Race, 2018 to 2024.
+
+---
+PRODUCTION NOTES:
+- Feed this script to ElevenLabs (narrator voice: Adam or Rachel) or OpenAI TTS (alloy/onyx)
+- Export as MP3 at 44.1kHz, stereo
+- Save to: public/voiceover.mp3
+- Duration target: ~28 seconds (leave 2s tail for outro)
+- Background music: cinematic underscore, 60–80 BPM, minimal piano + strings
+- SFX: deep whoosh/impact at each scene transition (frames 179, 419, 1379, 1679)
