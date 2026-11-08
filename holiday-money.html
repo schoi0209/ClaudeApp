@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Compare holiday currencies: today's rate, all-time high and low, history charts and a good-time-to-exchange signal.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Holiday Money Exchange</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: control strip → featured destination with full-history chart → ranked destination board */
+:root{
+  --bg:#F5F8FA; --surface:#FFFFFF; --ink:#0E1B2C; --muted:#56677A; --line:#DCE4EB;
+  --teal:#0A6B6B; --gold:#E3A019; --gold-soft:#FCF0D4;
+  --good:#16804F; --good-bg:#E2F4EA; --mid:#8A6A00; --mid-bg:#FBF1D2; --bad:#B53D12; --bad-bg:#FBE6DC;
+  --chip:#EAF0F4;
+  --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body:"Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A121D; --surface:#101B2A; --ink:#E7EEF6; --muted:#93A4B7; --line:#223249;
+  --teal:#56D3C8; --gold:#F2B94A; --gold-soft:#3A2F14;
+  --good:#5BD49A; --good-bg:#12342A; --mid:#F1C75B; --mid-bg:#3A3214; --bad:#FF8E63; --bad-bg:#3D2018;
+  --chip:#17263A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A121D; --surface:#101B2A; --ink:#E7EEF6; --muted:#93A4B7; --line:#223249;
+  --teal:#56D3C8; --gold:#F2B94A; --gold-soft:#3A2F14;
+  --good:#5BD49A; --good-bg:#12342A; --mid:#F1C75B; --mid-bg:#3A3214; --bad:#FF8E63; --bad-bg:#3D2018;
+  --chip:#17263A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.bmc{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#111;font-weight:600;text-decoration:none;padding:7px 14px;border-radius:999px;font-size:13px}
+.bmc:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.theme-btn{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font:500 13px var(--f-body);cursor:pointer}
+header.hero{padding-block:18px 8px;display:grid;gap:6px}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+h1{font:800 clamp(34px,6vw,58px)/1 var(--f-display);margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1 span{color:var(--gold)}
+.lede{color:var(--muted);max-width:62ch;margin:4px 0 0}
+.controls{margin-top:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end}
+@media (max-width:720px){.controls{grid-template-columns:1fr}}
+.label{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 10px;font:500 13px var(--f-body);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip b{font:500 13px var(--f-mono)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.amount{display:flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:12px;overflow:hidden}
+.amount input{border:0;background:transparent;color:var(--ink);font:500 20px var(--f-mono);padding:8px 12px;width:150px}
+.amount span{padding:0 12px;font:500 14px var(--f-mono);color:var(--muted);border-left:1px solid var(--line);align-self:stretch;display:flex;align-items:center}
+.asof{margin-top:10px;font:400 12px var(--f-mono);color:var(--muted)}
+
+/* Featured */
+.feature{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px}
+@media (max-width:900px){.feature{grid-template-columns:minmax(0,1fr);padding:16px}}
+.f-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.f-title{font:700 26px/1.1 var(--f-display);margin:0}
+.f-sub{color:var(--muted);font-size:14px}
+.f-rate{font:500 clamp(26px,4vw,36px)/1.1 var(--f-mono);font-variant-numeric:tabular-nums;margin-top:10px}
+.f-rate small{font-size:14px;color:var(--muted)}
+.tabs{display:flex;gap:4px;background:var(--chip);padding:3px;border-radius:10px}
+.tabs button{border:0;background:transparent;color:var(--muted);font:500 12px var(--f-mono);padding:5px 9px;border-radius:7px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.chart-box{margin-top:14px;position:relative;min-width:0}
+.chart-box svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font:500 12px var(--f-mono);padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font:400 12px var(--f-mono);color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:0;border-top:2px dashed;vertical-align:middle;margin-right:6px}
+.side{display:grid;gap:12px;align-content:start}
+.verdict{border-radius:14px;padding:16px;display:grid;gap:6px}
+.verdict.good{background:var(--good-bg);color:var(--good)}
+.verdict.mid{background:var(--mid-bg);color:var(--mid)}
+.verdict.bad{background:var(--bad-bg);color:var(--bad)}
+.verdict h3{margin:0;font:700 20px/1.15 var(--f-display)}
+.verdict p{margin:0;color:var(--ink);font-size:14px}
+.gauge{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--bad) 0%,var(--mid) 50%,var(--good) 100%);position:relative;margin:8px 0 2px;opacity:.9}
+.gauge b{position:absolute;top:-5px;width:4px;height:18px;border-radius:2px;background:var(--ink);transform:translateX(-50%)}
+.gauge-lbl{display:flex;justify-content:space-between;font:400 11px var(--f-mono);color:var(--muted)}
+dl.stats{display:grid;grid-template-columns:1fr auto;gap:8px 12px;margin:0;font-size:14px}
+dl.stats dt{color:var(--muted)}
+dl.stats dd{margin:0;font:500 14px var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+dl.stats dd small{display:block;font-size:11px;color:var(--muted)}
+.up{color:var(--good)} .down{color:var(--bad)}
+.youget{background:var(--gold-soft);border-radius:12px;padding:12px 14px;font-size:14px}
+.youget strong{font:500 18px var(--f-mono);display:block}
+
+/* Board */
+.board-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-top:34px}
+.board-head h2{font:700 24px var(--f-display);margin:0}
+.board-head p{margin:0;color:var(--muted);font-size:14px}
+.sort{display:flex;gap:6px;align-items:center}
+.sort select{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:500 13px var(--f-body)}
+.grid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:8px;cursor:pointer;text-align:left;color:var(--ink);font:inherit;transition:border-color .15s, transform .15s}
+.card:hover{border-color:var(--teal)}
+.card[aria-current="true"]{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-name{font:700 17px/1.2 var(--f-display)}
+.card-code{font:400 12px var(--f-mono);color:var(--muted)}
+.pill{font:500 11px var(--f-mono);padding:3px 8px;border-radius:99px;white-space:nowrap;letter-spacing:.02em}
+.pill.good{background:var(--good-bg);color:var(--good)} .pill.mid{background:var(--mid-bg);color:var(--mid)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.card-rate{font:500 20px var(--f-mono);font-variant-numeric:tabular-nums}
+.card-meta{display:flex;justify-content:space-between;font:400 12px var(--f-mono);color:var(--muted);gap:8px;flex-wrap:wrap}
+.spark{width:100%;height:46px;display:block}
+.notes{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;color:var(--muted);font-size:13px}
+.notes h4{margin:0 0 4px;color:var(--ink);font:600 14px var(--f-body)}
+.notes p{margin:0}
+footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
+    <button class="theme-btn" id="themeBtn" type="button">Dark mode</button>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Travel money · 16 currencies · since 2007</div>
+    <h1>Holiday <span>Money</span></h1>
+    <p class="lede">Pick the currency you hold. See how far it goes in popular holiday destinations today, how that compares with its all-time high and low, and whether now is a good time to exchange.</p>
+  </header>
+
+  <section class="controls" aria-label="Settings">
+    <div>
+      <span class="label" id="baseLbl">I'm exchanging from</span>
+      <div class="chips" id="baseChips" role="group" aria-labelledby="baseLbl"></div>
+    </div>
+    <div>
+      <label class="label" for="amt">Amount</label>
+      <div class="amount"><input id="amt" type="number" inputmode="decimal" min="0" step="any" value="1000"><span id="amtCode">AUD</span></div>
+    </div>
+  </section>
+  <div class="asof">Rates as of 6 Nov 2026 · monthly closing rates · source: Alpha Vantage</div>
+
+  <section class="feature" id="feature" aria-live="polite"></section>
+
+  <div class="board-head">
+    <div>
+      <h2>Where your <span id="boardBase">AUD</span> goes furthest</h2>
+      <p>Tap a destination to see its full history.</p>
+    </div>
+    <div class="sort">
+      <label class="label" for="sortSel" style="margin:0">Sort</label>
+      <select id="sortSel">
+        <option value="score">Best time to exchange</option>
+        <option value="y1">Biggest 1-year gain</option>
+        <option value="name">Destination A–Z</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <section class="notes">
+    <div><h4>How the signal works</h4><p>Each rate is ranked against its own history. The score blends where today sits in the last five years (60%) with where it sits across all available data (40%). 75+ is a great time to buy, below 40 is below average.</p></div>
+    <div><h4>All-time high and low</h4><p>ATH and ATL are the highest and lowest monthly closing rates in the data: from Oct 2007 for most currencies, and from Dec 2014 for KRW, THB, IDR, VND and PHP. For two non-USD currencies, history starts where both have data.</p></div>
+    <div><h4>Before you exchange</h4><p>These are mid-market rates. Banks, airports and cards add a margin of 1–10%, so compare what you are actually offered. This is general information, not financial advice.</p></div>
+  </section>
+
+  <footer>
+    <span>Made by SunnyApps. All rights reserved.</span>
+    <span>Data snapshot: Nov 2026</span>
+  </footer>
+</div>
+
+<script>
+// Monthly closes, newest first, starting Nov 2026 (month-to-date as of 6 Nov 2026). Source: Alpha Vantage FX_MONTHLY.
+// q:"USDX" = units of X per 1 USD; q:"XUSD" = USD per 1 X.
+const RAW = {
+JPY:{q:"USDX",v:[158.45,157.53,157.39,159.73,157.57,162.54,159.26,156.57,158.71,156.05,154.76,
+156.65,156.15,154.00,147.90,147.02,150.74,144.01,144.021,142.95,149.919,150.545,155.182,
+157.21,149.743,152.04,143.575,146.176,149.859,160.835,157.29,157.70,151.303,149.971,146.889,
+140.998,148.176,151.627,149.33,145.506,142.25,144.261,139.299,136.24,132.797,136.172,130.09,
+131.072,138.05,148.714,144.729,139.065,133.19,135.733,128.687,129.83,121.68,114.997,115.04,
+115.068,113.148,114.00,111.283,109.989,109.615,111.073,109.562,109.318,110.714,106.504,104.657,
+103.259,104.299,104.662,105.426,105.88,105.922,107.948,107.783,107.116,107.759,108.056,108.36,
+108.69,109.48,108.031,108.069,106.28,108.732,107.82,108.27,111.449,110.82,111.383,108.836,
+109.63,113.545,112.932,113.66,111.02,111.767,110.67,108.773,109.267,106.248,106.654,109.193,
+112.614,112.667,113.641,112.428,110.054,110.306,112.36,110.833,111.495,111.383,112.84,112.666,
+116.95,114.37,104.849,101.32,103.324,102.047,103.183,110.736,106.282,112.532,112.326,121.14,
+120.209,123.146,120.608,119.932,121.205,123.85,122.421,124.10,119.472,119.993,119.56,117.45,
+119.66,118.63,112.30,109.60,104.07,102.80,101.30,101.77,102.22,103.21,101.77,102.05,
+105.29,102.39,98.36,98.23,98.17,97.79,99.12,100.47,97.37,94.20,92.56,91.72,
+86.72,82.45,79.79,77.96,78.37,78.11,79.78,78.36,79.82,82.84,81.14,76.26,
+76.86,77.61,78.18,77.01,76.66,76.77,80.56,81.48,81.21,83.19,81.78,82.03,
+81.12,83.64,80.31,83.50,84.17,86.46,88.39,91.17,93.81,93.44,88.91,90.27,
+93.02,86.31,90.04,89.72,92.97,94.64,96.33,95.32,98.56,98.87,97.56,89.94,
+90.65,95.48,98.41,105.98,108.77,107.83,106.07,105.50,103.97,99.91,103.94,106.41,
+111.66,111.20,115.23]},
+GBP:{q:"XUSD",v:[1.3349,1.3391,1.3265,1.3547,1.348,1.326,1.3459,1.36,1.3222,1.3484,1.3688,
+1.3473,1.3236,1.3151,1.3441,1.3503,1.3205,1.3733,1.34513,1.33235,1.29156,1.25744,1.23919,
+1.25107,1.27334,1.28922,1.33721,1.3126,1.28551,1.2643,1.2741,1.24938,1.2623,1.26231,1.26863,
+1.273,1.26217,1.21482,1.2197,1.26715,1.28352,1.26928,1.24381,1.25612,1.2333,1.202,1.23199,
+1.20934,1.2054,1.14669,1.116,1.16163,1.21745,1.21731,1.25977,1.2571,1.31371,1.34161,1.34471,
+1.35177,1.32977,1.36806,1.3472,1.3756,1.38978,1.38262,1.4206,1.38134,1.37761,1.39306,1.36992,
+1.367,1.33213,1.29497,1.2919,1.33643,1.30821,1.2393,1.2348,1.25822,1.2395,1.28214,1.3201,
+1.326,1.29284,1.29322,1.22885,1.2159,1.21591,1.2696,1.26264,1.30324,1.3043,1.32616,1.31067,
+1.275,1.27512,1.27713,1.3026,1.2956,1.31159,1.32071,1.32989,1.37679,1.401,1.3756,1.41963,
+1.35009,1.35131,1.32859,1.33933,1.29409,1.32,1.30218,1.28701,1.29445,1.25429,1.2376,1.25797,
+1.2346,1.25113,1.22344,1.29763,1.31443,1.32299,1.33117,1.44923,1.46064,1.43677,1.39249,1.4245,
+1.47339,1.50627,1.5425,1.51226,1.535,1.56193,1.56829,1.52928,1.5348,1.48283,1.54329,1.50669,
+1.55749,1.5647,1.599,1.6214,1.6596,1.6884,1.7109,1.6744,1.6873,1.6663,1.674,1.6436,
+1.6558,1.6365,1.6039,1.6184,1.5502,1.5196,1.522,1.5196,1.5537,1.5211,1.5163,1.5855,
+1.6245,1.6008,1.6128,1.616,1.5863,1.5672,1.5706,1.5403,1.6237,1.6005,1.5915,1.5759,
+1.5533,1.5705,1.608,1.5583,1.6255,1.6423,1.6041,1.645,1.6708,1.6039,1.6255,1.6011,
+1.5608,1.5563,1.6037,1.571,1.5351,1.568,1.4939,1.4535,1.5272,1.5177,1.5232,1.5979,
+1.616,1.644,1.6445,1.6004,1.6282,1.6707,1.646,1.6185,1.4782,1.432,1.4316,1.454,
+1.4626,1.5364,1.6067,1.7833,1.821,1.9831,1.9933,1.9821,1.9873,1.9832,1.9877,1.9868,
+1.9848,2.0569,2.081]},
+AUD:{q:"XUSD",v:[0.6863,0.703,0.6943,0.7166,0.7021,0.6919,0.7183,0.7199,0.69,0.7113,0.6959,
+0.6672,0.6547,0.6543,0.6611,0.6539,0.6426,0.658,0.6431,0.63999,0.62451,0.62025,0.62076,
+0.61867,0.651,0.65778,0.69129,0.6764,0.65436,0.6666,0.6652,0.64751,0.6521,0.64959,0.65665,
+0.68078,0.66033,0.63365,0.6434,0.64836,0.67169,0.666,0.65011,0.66112,0.6685,0.6728,0.70542,
+0.68126,0.67876,0.63951,0.6402,0.6842,0.6984,0.69004,0.7174,0.7063,0.74839,0.72616,0.70632,
+0.72548,0.71245,0.7521,0.7227,0.7313,0.7343,0.74976,0.7735,0.77112,0.7594,0.77048,0.76403,
+0.76939,0.73398,0.70271,0.716,0.7376,0.71412,0.69,0.66669,0.64949,0.61121,0.65049,0.6691,
+0.7015,0.6762,0.68876,0.67499,0.6731,0.68487,0.7018,0.69333,0.7041,0.7094,0.70966,0.72709,
+0.7048,0.7306,0.70791,0.722,0.71901,0.74124,0.7402,0.75728,0.75286,0.7677,0.77593,0.80569,
+0.78084,0.75568,0.7652,0.78252,0.7939,0.79984,0.76855,0.74246,0.74865,0.76276,0.76516,0.7579,
+0.72009,0.73871,0.76104,0.76531,0.75206,0.75983,0.7448,0.72365,0.76031,0.76676,0.71491,0.70796,
+0.72888,0.72279,0.7135,0.70001,0.71128,0.72972,0.76914,0.76393,0.78983,0.76197,0.7806,0.7768,
+0.81647,0.85025,0.8794,0.8746,0.9339,0.9294,0.943,0.9307,0.9283,0.9266,0.8924,0.8751,
+0.8915,0.9107,0.9459,0.9319,0.8899,0.8957,0.9142,0.9571,1.0366,1.0417,1.0213,1.0424,
+1.0392,1.0423,1.0375,1.0375,1.0323,1.0491,1.0236,0.9725,1.0427,1.0342,1.0732,1.0619,
+1.0206,1.0282,1.0541,0.966,1.0686,1.1005,1.0709,1.0657,1.097,1.0329,1.0184,0.9971,
+1.0228,0.9587,0.9835,0.9655,0.8925,0.9042,0.8406,0.847,0.9241,0.9164,0.8953,0.8835,
+0.8962,0.9157,0.9001,0.8835,0.8434,0.8359,0.8052,0.8008,0.725,0.6909,0.6385,0.6375,
+0.7023,0.6544,0.6681,0.7942,0.8577,0.9413,0.9582,0.9558,0.9429,0.9136,0.932,0.8953,
+0.8749,0.8843,0.9317]},
+EUR:{q:"XUSD",v:[1.1143,1.1158,1.1328,1.1616,1.1527,1.1421,1.1659,1.173,1.1552,1.1813,1.1848,
+1.1745,1.1595,1.1534,1.1733,1.1684,1.1415,1.1786,1.1345,1.13253,1.08184,1.03747,1.03602,
+1.03522,1.05748,1.0882,1.11349,1.10465,1.08268,1.07112,1.0845,1.0669,1.079,1.08053,1.0818,
+1.10374,1.08861,1.05744,1.05709,1.08415,1.09968,1.09074,1.06856,1.1014,1.08381,1.05748,1.08626,
+1.07025,1.04041,0.98814,0.98003,1.00501,1.02248,1.04771,1.07313,1.0541,1.1066,1.12175,1.12334,
+1.13659,1.13368,1.1561,1.158,1.1808,1.18684,1.1857,1.2226,1.2019,1.17266,1.20704,1.21362,
+1.22138,1.19245,1.16459,1.17223,1.1937,1.1771,1.1235,1.11069,1.0943,1.1023,1.10289,1.10917,
+1.12129,1.10173,1.11514,1.08983,1.0989,1.1079,1.13733,1.11686,1.12109,1.1217,1.13709,1.14459,
+1.1466,1.13192,1.13168,1.16,1.1599,1.16865,1.16839,1.17048,1.20805,1.2323,1.21924,1.24121,
+1.1994,1.18895,1.16495,1.1813,1.19128,1.1831,1.1427,1.12387,1.08932,1.0663,1.05728,1.07954,
+1.0516,1.05962,1.09719,1.12403,1.11606,1.1175,1.1099,1.11315,1.14485,1.13778,1.08837,1.0827,
+1.08584,1.05714,1.1011,1.11715,1.12177,1.09804,1.11288,1.09908,1.12109,1.07393,1.11865,1.12859,
+1.20959,1.2451,1.2521,1.263,1.3133,1.3387,1.3692,1.3634,1.3863,1.3773,1.3797,1.3487,
+1.3741,1.3586,1.3586,1.3522,1.3218,1.3296,1.302,1.2993,1.3166,1.2819,1.3056,1.3576,
+1.3192,1.2985,1.2955,1.2857,1.2576,1.2297,1.266,1.2359,1.3241,1.3338,1.3323,1.308,
+1.2956,1.3445,1.3857,1.3386,1.4379,1.4398,1.4491,1.4394,1.4809,1.4169,1.3804,1.3692,
+1.3385,1.2984,1.3944,1.3627,1.2688,1.305,1.2234,1.2307,1.329,1.3506,1.3626,1.3862,
+1.4324,1.5006,1.473,1.4634,1.4331,1.4249,1.4031,1.4153,1.3223,1.3243,1.2672,1.2809,
+1.3971,1.2693,1.2731,1.4115,1.4671,1.5597,1.5754,1.5554,1.5618,1.5762,1.5189,1.4858,
+1.4584,1.4632,1.4478]},
+KRW:{q:"USDX",v:[1363.64,1333.46,1356.66,1367.08,1442.09,1547.33,1507.09,1473.57,1506.2,1439.2,1450.31,
+1440.51,1467.47,1428.91,1403.85,1388.81,1392.07,1352.45,1381.97,1423.72,1472.03,1461.26,1455.67,
+1476.76,1394.64,1372.25,1315.77,1336.54,1367.46,1380.71,1381.54,1383.82,1345.07,1334.73,1333.56,
+1294.37,1299.51,1350.98,1352.29,1323.94,1276.82,1315.83,1319.57,1337.76,1306.09,1323,1233.28,
+1261.87,1301.63,1425.57,1439.94,1341.62,1302.95,1287.51,1242.26,1262.91,1214.17,1200.12,1204.63,
+1187.96,1182.72,1174.46,1184.44,1159.33,1151.57,1130.45,1107.02,1117.15,1127.39,1123.88,1117.64,
+1084.47,1109.15,1136.49,1164.25,1187.68,1193,1198.92,1231.46,1211.99,1217.67,1199.7,1194.5,
+1153.25,1180.2,1167.98,1197.5,1209,1187.68,1154.88,1187.5,1163.66,1135.6,1123.99,1110.95,
+1111.68,1118.94,1140.33,1109.48,1114.96,1111.66,1113.41,1079.16,1068.79,1059.75,1084.57,1068.45,
+1065.87,1086.76,1116.85,1143.79,1123.1,1118.09,1143.93,1118.31,1136.37,1116.15,1136.49,1149.71,
+1205.75,1176.75,1145.05,1098.3,1115.6,1112.05,1151.6,1189.05,1145.55,1139.25,1237.45,1207,
+1177,1158.2,1140,1184.6,1182.45,1160,1119.05,1111.5,1074.65,1108,1099.2,1101.5,
+1091]},
+NZD:{q:"XUSD",v:[0.5545,0.5628,0.5631,0.5915,0.5873,0.5676,0.5988,0.5907,0.5745,0.5996,0.6018,
+0.5756,0.5734,0.5722,0.5794,0.5882,0.5891,0.6095,0.5958,0.59336,0.56778,0.55977,0.56349,
+0.55935,0.59211,0.59767,0.6344,0.6249,0.59504,0.609,0.6142,0.58882,0.5977,0.60865,0.61174,
+0.63158,0.61529,0.58014,0.5995,0.59646,0.6207,0.61338,0.6017,0.6183,0.6257,0.61841,0.64374,
+0.63468,0.62945,0.5812,0.5594,0.61144,0.6288,0.62404,0.65082,0.6455,0.6932,0.67707,0.65711,
+0.6836,0.68217,0.7164,0.6896,0.7044,0.6974,0.6988,0.7273,0.716,0.6981,0.72291,0.71799,
+0.71814,0.70145,0.66119,0.6613,0.67334,0.66269,0.64508,0.62065,0.61133,0.59253,0.62457,0.6462,
+0.672,0.64217,0.64127,0.62592,0.6306,0.65606,0.67174,0.65324,0.66412,0.6802,0.68141,0.69133,
+0.67175,0.6878,0.65234,0.6616,0.66203,0.6804,0.67642,0.70087,0.70345,0.72382,0.72045,0.7369,
+0.70931,0.68207,0.68962,0.72043,0.7173,0.75058,0.73261,0.70769,0.68624,0.70027,0.71821,0.72996,
+0.6922,0.70864,0.715,0.7283,0.72485,0.72041,0.71343,0.67887,0.69777,0.69205,0.661,0.64798,
+0.68361,0.65871,0.6773,0.63871,0.63571,0.65893,0.67809,0.7102,0.76032,0.74611,0.756,0.7259,
+0.77913,0.7839,0.7788,0.7813,0.836,0.8499,0.8759,0.8495,0.8614,0.8672,0.838,0.8079,
+0.8215,0.8116,0.8253,0.8299,0.772,0.7974,0.7736,0.7946,0.8564,0.837,0.8244,0.8387,
+0.828,0.8198,0.8222,0.8296,0.8033,0.8086,0.8009,0.7529,0.8183,0.8198,0.834,0.8256,
+0.7772,0.7803,0.8071,0.761,0.8525,0.878,0.8277,0.8229,0.8097,0.7611,0.7521,0.7722,
+0.7795,0.7422,0.766,0.7338,0.6992,0.7257,0.6848,0.681,0.7268,0.7109,0.6978,0.7006,
+0.7227,0.7152,0.717,0.723,0.6848,0.6615,0.6448,0.6396,0.5628,0.5585,0.5001,0.5091,
+0.5786,0.5488,0.5825,0.6707,0.7003,0.7331,0.7614,0.7828,0.7811,0.7851,0.7992,0.7874,
+0.7661,0.7641,0.7724]},
+THB:{q:"USDX",v:[33.56,33.75,33.52,33.14,33.40,33.20,32.44,32.45,32.56,31.00,31.53,
+31.48,32.10,32.36,32.44,32.28,32.74,32.41,32.80,33.349,33.93,34.20,33.76,
+34.27,34.26,33.76,32.40,33.944,35.52,36.76,36.685,37.135,36.36,35.88,35.52,
+34.37,35.30,36.09,36.426,34.98,34.01,35.29,34.523,34.11,34.15,35.19,32.83,
+34.60,35.091,38.01,37.853,36.537,36.29,35.24,34.271,34.368,33.228,32.68,33.21,
+33.205,33.747,33.273,33.663,32.114,32.91,31.996,31.19,31.16,31.243,30.44,29.893,
+30.005,30.28,31.14,31.60,31.044,31.24,30.88,31.79,32.45,32.634,31.50,31.18,
+29.75,30.18,30.16,30.58,30.59,30.90,30.67,31.50,31.89,31.71,31.56,31.22,
+32.27,32.93,33.09,32.31,32.74,33.18,33.01,32.04,31.53,31.16,31.47,31.30,
+32.54,32.63,33.19,33.31,33.17,33.28,33.91,34.03,34.57,34.33,34.91,35.08,
+35.83,35.68,34.98,34.63,34.58,34.79,35.09,35.75,34.90,35.10,35.63,35.68,
+35.96,35.80,35.57,36.30,35.81,35.13,33.75,33.68,32.97,32.53,32.32,32.77,
+32.87]},
+SGD:{q:"USDX",v:[1.2825,1.2776,1.2775,1.2707,1.2818,1.2933,1.2764,1.2724,1.2857,1.2645,1.2721,
+1.2855,1.2957,1.3005,1.2895,1.2834,1.298,1.2711,1.2907,1.30583,1.3425,1.3507,1.35751,
+1.36488,1.33742,1.32011,1.28406,1.3065,1.33559,1.3556,1.351,1.3651,1.348,1.34549,1.33964,
+1.31921,1.33727,1.36985,1.3652,1.3504,1.3289,1.3514,1.35138,1.33394,1.3306,1.34825,1.31365,
+1.34,1.36075,1.4155,1.43495,1.39682,1.38,1.38921,1.37024,1.3835,1.35387,1.35478,1.35113,
+1.34824,1.36477,1.3488,1.3576,1.3444,1.3536,1.34477,1.32113,1.3304,1.34412,1.33196,1.32798,
+1.32071,1.34152,1.36604,1.36425,1.36041,1.37432,1.3934,1.41112,1.41158,1.4221,1.3924,1.3648,
+1.3458,1.36668,1.36078,1.38173,1.387,1.37368,1.35214,1.37341,1.36079,1.3555,1.35181,1.34577,
+1.3627,1.3716,1.3854,1.3662,1.3711,1.36228,1.362,1.33764,1.32603,1.31111,1.32501,1.31126,
+1.33632,1.3494,1.3624,1.35683,1.35581,1.35601,1.37573,1.38368,1.396,1.39625,1.40465,1.40937,
+1.44668,1.43298,1.39116,1.36183,1.36159,1.33875,1.34765,1.37733,1.34185,1.34781,1.40468,1.42315,
+1.41615,1.41073,1.40,1.42336,1.41046,1.3711,1.34717,1.3467,1.32395,1.37269,1.36225,1.3525,
+1.32475,1.30275,1.2855,1.2757,1.2483,1.2473,1.2469,1.254,1.2532,1.2576,1.2673,1.2763,
+1.2616,1.2543,1.2407,1.2555,1.274,1.2706,1.2662,1.264,1.2318,1.2406,1.2384,1.2372,
+1.221,1.2199,1.2197,1.227,1.247,1.2449,1.2675,1.2886,1.237,1.2571,1.2514,1.2575,
+1.296,1.2812,1.2539,1.3069,1.2036,1.2034,1.2278,1.2331,1.2239,1.2601,1.2714,1.2789,
+1.2826,1.3201,1.2939,1.3155,1.3539,1.3595,1.3987,1.3995,1.37,1.3985,1.4059,1.4065,
+1.4039,1.3835,1.4012,1.4086,1.4408,1.4386,1.4473,1.4443,1.4816,1.5225,1.547,1.5097,
+1.43,1.5125,1.4835,1.4348,1.4158,1.3685,1.3588,1.362,1.356,1.3771,1.3945,1.4164,
+1.4409,1.4478,1.448]},
+IDR:{q:"USDX",v:[18080,18120,17870,17710,17990,17875,17865,17305,16990,16760,16780,
+16670,16650,16625,16660,16485,16450,16230,16295,16594,16554,16574,16294,
+16089,15839,15689,15134,15449,16254,16369,16244,16255,15850,15709,15774,
+15394,15504,15879,15485,15232,15074,14989,14984,14664,14989,15236,14984,
+15565,15729,15595,15225,14850,14955,14880,14575,14495,14352,14366,14390,
+14275,14315,14168,14265,14302,14460,14540,14290,14450,14443,14225,14080,
+14279,14125,14685,14912,14550,14648,14365,14732,15156,16365,14229,13659,
+13880,14100,14003,14190,14180,14012,14125,14270,14212,14235,14060,13970,
+14479,14300,15200,14925,14725,14413,14325,13890,13910,13760,13738,13385,
+13565,13524,13560,13470,13321,13322,13325,13319,13320,13323,13320,13345,
+13470,13550,13047,13045,13260,13097,13210,13600,13180,13255,13367,13770,
+13780,13830,13675,14645,14045,13525,13330,13223,12960,13070,12864,12665,
+12380]},
+VND:{q:"USDX",v:[25580,25802,25959,26070,26291,26255,26255,26355,26323,26040,25880,
+26295,26330,26310,26425,26340,26197,26118,26030,25980,25565,25530,25060,
+25480,25343,25270,24370,24860,25235,25444,25440,25329,24810,24640,24415,
+24260,24250,24558,24278,24060,23680,23574,23485,23450,23450,23740,23445,
+23610,24630,24840,23855,23450,23335,23255,23185,22940,22838,22805,22644,
+22825,22687,22755,22750,22774,23004,23012,23040,23065,23171,23176,23018,
+23176,23176,23176,23176,23172,23170,23204,23270,23420,23610,23238,23170,
+23170,23175,23222,23200,23240,23245,23315,23320,23150,23195,23190,23190,
+23180,23310,23340,23312,23302,23280,22955,22803,22762,22792,22755,22699,
+22699,22704,22699,22719,22714,22725,22699,22709,22739,22749,22749,22589,
+22769,22640,22322,22303,22300,22295,22280,22388,22250,22300,22290,22198,
+22450,22490,22313,22475,22480,21813,21808,21785,21550,21520,21320,21274,
+21380]},
+CNY:{q:"USDX",v:[6.676,6.6558,6.705,6.7197,6.7589,6.788,6.7663,6.831,6.8881,6.863,6.9566,
+6.9879,7.074,7.12,7.121,7.1304,7.1998,7.1636,7.1961,7.2633,7.257,7.2798,7.2507,
+7.2994,7.248,7.1176,7.0215,7.092,7.2265,7.2672,7.2421,7.2422,7.2215,7.1878,7.1695,
+7.0978,7.135,7.3166,7.302,7.2595,7.1435,7.251,7.109,6.9179,6.8745,6.9335,6.7531,
+6.8972,7.0879,7.3015,7.114,6.8887,6.7442,6.6986,6.672,6.6085,6.3398,6.3089,6.3614,
+6.3561,6.3645,6.4056,6.4448,6.4605,6.4614,6.4572,6.3701,6.4756,6.5528,6.4737,6.4283,
+6.5272,6.5789,6.6915,6.791,6.8485,6.9752,7.0641,7.1356,7.0628,7.0822,6.9921,6.9119,
+6.9632,7.0325,7.0391,7.1483,7.156,6.8844,6.8668,6.905,6.7348,6.7121,6.6941,6.70,
+6.8785,6.9605,6.9757,6.8688,6.8315,6.8167,6.617,6.4095,6.3324,6.2728,6.3279,6.284,
+6.5062,6.6089,6.6327,6.6532,6.5888,6.7239,6.7792,6.8155,6.8899,6.8831,6.8664,6.8767,
+6.9429,6.8913,6.7735,6.6685,6.6775,6.637,6.6459,6.5775,6.4738,6.4538,6.551,6.575,
+6.4895,6.398,6.3181,6.3571,6.3764,6.2097,6.201,6.1983,6.2028,6.1995,6.2584,6.2495,
+6.2015,6.1432,6.1127,6.138,6.143,6.1737,6.2035,6.247,6.2596,6.2172,6.145,6.061,
+6.054,6.0932,6.0945,6.1215,6.1195,6.1289,6.1376,6.1348,6.165,6.2108,6.2214,6.2205,
+6.2303,6.2267,6.2372,6.2845,6.3487,6.362,6.3537,6.3688,6.3099,6.298,6.2938,6.3082,
+6.2947,6.3769,6.3557,6.378,6.378,6.437,6.4645,6.4796,6.49,6.5493,6.5723,6.6027,
+6.591,6.666,6.6717,6.6915,6.8079,6.7745,6.7825,6.8288,6.8245,6.8268,6.8268,6.8278,
+6.827,6.8275,6.8274,6.827,6.8309,6.8329,6.8312,6.8288,6.818,6.8339,6.8395,6.8355,
+6.8235,6.8264,6.84,6.8441,6.8352,6.8388,6.8544,6.9425,6.9885,7.0124,7.104,7.1822,
+7.3041,7.398,7.462,7.506,7.545,7.5725,7.6135,7.6475,7.7055]},
+PHP:{q:"USDX",v:[63.009,63.643,62.612,62.362,61.213,61.32,61.513,61.263,60.557,57.642,58.845,
+58.8,58.573,58.695,58.279,57.11,58.221,56.275,55.776,55.771,57.251,57.952,58.411,
+58.076,58.62,58.334,55.98,56.221,58.32,58.48,58.575,57.71,56.16,56.2,56.29,
+55.388,55.46,56.865,56.69,56.64,54.91,55.264,56.353,55.47,54.266,55.32,54.71,
+55.67,56.47,58.08,58.75,56.24,55.34,54.97,52.44,52.31,51.71,51.17,51.07,
+50.99,50.41,50.521,51.08,49.63,49.97,48.82,47.67,48.23,48.52,48.73,48.06,
+48.01,48.12,48.53,48.47,48.48,49.14,49.82,50.46,50.39,50.85,50.96,51.00,
+50.65,50.84,50.73,51.82,52.12,50.99,51.22,52.11,51.75,52.67,51.83,52.10,
+52.47,52.36,53.37,53.97,53.47,52.99,53.31,52.60,51.64,52.12,52.09,51.34,
+49.98,50.24,51.59,50.88,51.12,50.42,50.45,49.78,50.21,50.17,50.24,49.76,
+49.56,49.92,48.44,48.30,46.63,47.09,47.11,46.70,46.93,45.92,47.40,47.68,
+46.90,47.13,46.73,46.69,46.75,45.55,45.09,44.55,44.62,44.67,44.08,44.19,
+44.77]},
+MYR:{q:"USDX",v:[4.056,4.054,4.074,4.022,4.083,4.082,3.963,3.967,4.046,3.888,3.939,4.056,4.13,4.184,4.206,4.222,4.26,4.21,4.253,4.312,4.435,4.46,4.45,4.468,4.44,4.375,4.121,4.318,4.592,4.715,4.704,4.77,4.722,4.742,4.7268,4.5848,4.657,4.762,4.6935,4.637,4.507,4.665,4.613,4.458,4.41,4.485,4.263,4.40,4.443,4.726,4.635,4.474,4.448,4.406,4.377,4.352,4.203,4.196,4.184,4.164,4.20,4.139,4.185,4.155,4.218,4.15,4.122,4.093,4.145,4.052,4.04,4.02,4.073,4.151,4.153,4.163,4.237,4.282,4.345,4.293,4.313,4.211,4.095,4.089,4.175,4.1775,4.185,4.203,4.125,4.13,4.189,4.132,4.08,4.065,4.094,4.13,4.182,4.183,4.137,4.108,4.0565,4.038,3.978,3.92,3.862,3.915,3.8995,4.044,4.0875,4.2315,4.219,4.269,4.28,4.291,4.279,4.339,4.424,4.445,4.428,4.4845,4.47,4.19,4.135,4.07,4.0275,3.9825,4.123,3.91,3.89,4.20,4.14,4.295,4.256,4.292,4.394,4.1915,3.815,3.772,3.664,3.56,3.702,3.61,3.63,3.496,3.381,3.2895,3.279,3.15,3.196,3.2095,3.215,3.261,3.263,3.276,3.345,3.277,3.223,3.155,3.256,3.285,3.245,3.158,3.0975,3.0415,3.092,3.091,3.105,3.057,3.039,3.0445,3.055,3.123,3.123,3.168,3.17,3.0232,3.062,2.994,3.04,3.169,3.177,3.067,3.187,2.981,2.964,3.018,3.008,2.96,3.025,3.049,3.06,3.082,3.163,3.112,3.086,3.1458,3.1825,3.236,3.259,3.1841,3.259,3.401,3.413,3.422,3.393,3.41,3.459,3.52,3.52,3.513,3.488,3.558,3.643,3.705,3.605,3.45,3.621,3.547,3.44,3.392,3.2545,3.265,3.2385,3.158,3.197,3.19,3.234,3.305,3.362,3.333,3.405,3.50,3.452,3.4485,3.40]},
+HKD:{q:"USDX",v:[7.8396,7.8446,7.8464,7.8385,7.842,7.8427,7.8362,7.8319,7.8387,7.8225,7.8129,7.7822,7.7858,7.7704,7.7827,7.797,7.8497,7.8498,7.8401,7.7552,7.7797,7.7783,7.7919,7.7675,7.7818,7.77328,7.7725,7.7973,7.8121,7.808,7.8187,7.8239,7.8255,7.8288,7.81788,7.81079,7.8104,7.82389,7.8307,7.84143,7.7982,7.83618,7.82944,7.8493,7.8493,7.8489,7.8399,7.80877,7.80926,7.84917,7.8498,7.84812,7.8497,7.8462,7.8465,7.8466,7.832,7.81361,7.7974,7.7958,7.797,7.7787,7.7856,7.77699,7.772,7.7654,7.7607,7.7674,7.7739,7.7561,7.75251,7.7523,7.75101,7.75218,7.74974,7.75003,7.7502,7.75004,7.7513,7.75129,7.75131,7.7937,7.7636,7.79,7.8279,7.83695,7.83725,7.8423,7.82793,7.8114,7.8369,7.84407,7.8495,7.8498,7.8463,7.83,7.8226,7.8415,7.8267,7.8477,7.8475,7.845,7.84476,7.84806,7.8473,7.82523,7.8227,7.8114,7.8095,7.7989,7.8099,7.82534,7.81047,7.8056,7.7921,7.7778,7.769,7.76187,7.7586,7.7529,7.75602,7.7548,7.7532,7.7576,7.7565,7.75845,7.7701,7.758,7.7554,7.77689,7.7852,7.75,7.75213,7.7505,7.75005,7.75006,7.7525,7.75112,7.7526,7.7505,7.7525,7.7548,7.7518,7.7578,7.7535,7.7544,7.7647,7.75,7.7496,7.7503,7.7526,7.7523,7.7564,7.7601,7.7632,7.7538,7.7525,7.7529,7.7556,7.755,7.7553,7.7566,7.7626,7.76,7.7633,7.755,7.7551,7.7503,7.7499,7.7495,7.754,7.7552,7.7538,7.7575,7.7621,7.7581,7.7655,7.7561,7.7547,7.7671,7.7674,7.7686,7.7843,7.7852,7.7928,7.7821,7.7773,7.7656,7.7792,7.7875,7.7967,7.7725,7.7656,7.7512,7.7595,7.7794,7.7667,7.788,7.786,7.7635,7.764,7.7615,7.7648,7.7548,7.7495,7.75,7.7498,7.7506,7.7497,7.7499,7.752,7.7494,7.7499,7.7548,7.754,7.7498,7.7505,7.7504,7.7663,7.8042,7.8014,7.7971,7.804,7.7931,7.7825,7.78,7.796,7.799,7.7862,7.7502]},
+TWD:{q:"USDX",v:[32.766,32.605,31.867,31.69,32.296,31.778,31.412,31.566,31.938,31.375,31.606,31.333,31.378,30.776,30.448,30.557,29.905,29.181,29.899,32.029,33.249,32.902,32.966,32.782,32.439,31.878,31.743,31.993,32.629,32.501,32.461,32.602,31.939,31.628,31.246,30.679,31.358,32.455,32.227,31.841,31.397,31.142,30.666,30.735,30.532,30.712,30.028,30.574,30.801,32.249,31.803,30.34,29.995,29.666,29.0,29.446,28.615,27.996,27.766,27.711,27.628,27.826,27.801,27.585,27.93,27.866,27.574,27.846,28.397,27.865,28.011,28.075,28.576,28.584,28.923,29.314,29.33,29.395,29.96,29.776,30.241,30.12,30.34,29.91,30.526,30.47,31.03,31.31,31.12,30.96,31.52,30.897,30.84,30.809,30.683,30.562,30.84,30.941,30.444,30.671,30.567,30.462,29.967,29.623,28.971,29.341,29.126,29.66,29.984,30.162,30.311,30.18,30.208,30.415,30.079,30.155,30.313,30.639,31.16,32.437,31.88,31.55,31.28,31.724,31.88,32.2,32.589,32.245,32.095,33.198,33.505,32.925,32.652,32.43,32.935,32.505,31.555,30.885,30.795,30.63,31.235,31.335,31.682,31.69,30.98,30.477,30.428,29.882,30.08,29.865,30.052,30.203,30.415,30.33,30.35,29.825,29.592,29.48,29.6,29.925,29.985,29.937,29.935,29.474,29.806,29.652,29.518,29.035,29.07,29.202,29.287,29.882,29.977,29.872,29.847,29.132,29.51,29.403,29.57,30.275,30.305,29.905,30.45,28.97,28.872,28.712,28.642,28.595,29.402,29.72,29.025,29.099,30.475,30.625,31.192,32.035,31.975,32.265,32.052,31.305,31.725,32.065,31.947,31.952,32.225,32.582,31.975,32.91,32.762,32.842,32.572,33.055,33.865,34.916,33.7,32.774,33.28,32.965,32.132,31.52,30.59,30.352,30.391,30.445,30.37,30.95,32.198,32.443,32.265,32.39,32.666]}
+};
+
+const META={
+  AUD:{name:"Australia",flag:"🇦🇺"},USD:{name:"United States",flag:"🇺🇸"},EUR:{name:"Europe",flag:"🇪🇺"},
+  GBP:{name:"United Kingdom",flag:"🇬🇧"},JPY:{name:"Japan",flag:"🇯🇵"},KRW:{name:"South Korea",flag:"🇰🇷"},
+  NZD:{name:"New Zealand",flag:"🇳🇿"},THB:{name:"Thailand",flag:"🇹🇭"},SGD:{name:"Singapore",flag:"🇸🇬"},
+  IDR:{name:"Bali, Indonesia",flag:"🇮🇩"},VND:{name:"Vietnam",flag:"🇻🇳"},CNY:{name:"China",flag:"🇨🇳"},
+  PHP:{name:"Philippines",flag:"🇵🇭"},MYR:{name:"Malaysia",flag:"🇲🇾"},HKD:{name:"Hong Kong",flag:"🇭🇰"},TWD:{name:"Taiwan",flag:"🇹🇼"}
+};
+const ORDER=["AUD","USD","EUR","GBP","JPY","KRW","NZD","SGD","THB","IDR","VND","CNY","PHP","MYR","HKD","TWD"];
+// Units of X per 1 USD, newest first
+const PER_USD={USD:null};
+for(const k in RAW){const r=RAW[k];PER_USD[k]=r.q==="USDX"?r.v.slice():r.v.map(x=>1/x);}
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function monthOf(i){let t=2026*12+10-i;return MONTHS[t%12]+" "+Math.floor(t/12);}
+function series(base,dest){
+  const b=PER_USD[base],d=PER_USD[dest];
+  const n=Math.min(b?b.length:1e9,d?d.length:1e9);
+  const out=[];for(let i=0;i<n;i++){out.push((d?d[i]:1)/(b?b[i]:1));}
+  return out; // dest units per 1 base, newest first
+}
+function pct(arr,v){let below=0;for(const x of arr)if(x<v)below++;return Math.round(100*below/Math.max(1,arr.length-1));}
+function stats(s){
+  const cur=s[0];let ath=-Infinity,atl=Infinity,ai=0,li=0;
+  s.forEach((x,i)=>{if(x>ath){ath=x;ai=i}if(x<atl){atl=x;li=i}});
+  const y5=s.slice(0,60),y1=s.slice(0,12);
+  const avg=a=>a.reduce((p,c)=>p+c,0)/a.length;
+  const p5=Math.min(100,pct(y5,cur)),pAll=Math.min(100,pct(s,cur));
+  const score=Math.round(.6*p5+.4*pAll);
+  return{cur,ath,atl,ai,li,p5,pAll,score,avg1:avg(y1),avg5:avg(y5),
+    m1:s.length>1?cur/s[1]-1:0,y1:s.length>12?cur/s[12]-1:0,y5:s.length>60?cur/s[60]-1:null,n:s.length,
+    offAth:cur/ath-1,overAtl:cur/atl-1};
+}
+function verdict(score){
+  if(score>=75)return{cls:"good",tag:"Great time",title:"Great time to exchange",tip:"Your money buys more than it usually does. Locking in some or all of your travel money now makes sense."};
+  if(score>=55)return{cls:"good",tag:"Good time",title:"Good time to exchange",tip:"The rate is better than most of the last few years. A sensible time to buy, perhaps in two or three lots."};
+  if(score>=40)return{cls:"mid",tag:"Average",title:"Average rate",tip:"Nothing special either way. If you travel soon, buy what you need; if not, there is no rush."};
+  if(score>=20)return{cls:"bad",tag:"Below avg",title:"Below-average rate",tip:"Your money buys less than usual. Buy only what you need now and watch for a better rate."};
+  return{cls:"bad",tag:"Weak",title:"Weak rate: wait if you can",tip:"This is near the bottom of its range. If your trip is flexible, holding off or choosing another destination could save money."};
+}
+function fmt(x){const a=Math.abs(x);const d=a>=1000?0:a>=100?1:a>=10?2:a>=1?3:a>=.01?4:6;return x.toLocaleString("en-AU",{minimumFractionDigits:d,maximumFractionDigits:d});}
+function fmtMoney(x){const a=Math.abs(x);const d=a>=1000?0:2;return x.toLocaleString("en-AU",{minimumFractionDigits:d,maximumFractionDigits:d});}
+function sp(x,dig=1){if(x==null)return"–";const v=(x*100).toFixed(dig);return(x>=0?"+":"")+v+"%";}
+function cls(x){return x==null?"":x>=0?"up":"down";}
+
+let state={base:"AUD",dest:null,range:"all",amount:1000,sort:"score"};
+try{const s=JSON.parse(localStorage.getItem("hm-state")||"{}");if(META[s.base])state.base=s.base;if(s.amount>0)state.amount=s.amount;if(s.range)state.range=s.range;}catch(e){}
+function save(){try{localStorage.setItem("hm-state",JSON.stringify({base:state.base,amount:state.amount,range:state.range}))}catch(e){}}
+
+const $=id=>document.getElementById(id);
+function renderChips(){
+  $("baseChips").innerHTML=ORDER.map(c=>`<button class="chip" type="button" data-c="${c}" aria-pressed="${c===state.base}"><span aria-hidden="true">${META[c].flag}</span><b>${c}</b></button>`).join("");
+}
+$("baseChips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.base=b.dataset.c;if(state.dest===state.base)state.dest=null;save();renderAll();});
+$("amt").value=state.amount;
+$("amt").addEventListener("input",e=>{const v=parseFloat(e.target.value);state.amount=v>0?v:0;save();renderFeature();renderGrid();});
+$("sortSel").addEventListener("change",e=>{state.sort=e.target.value;renderGrid();});
+
+function rows(){
+  return ORDER.filter(c=>c!==state.base).map(c=>{const s=series(state.base,c);return{c,s,st:stats(s)}});
+}
+function sparkSVG(s,clsName){
+  const pts=s.slice(0,60).reverse();const W=240,H=46,p=3;
+  const mn=Math.min(...pts),mx=Math.max(...pts),r=mx-mn||1;
+  const xy=pts.map((v,i)=>[p+i*(W-2*p)/(pts.length-1),H-p-(v-mn)/r*(H-2*p)]);
+  const d=xy.map((q,i)=>(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join("");
+  const last=xy[xy.length-1];
+  const col=clsName==="good"?"var(--good)":clsName==="mid"?"var(--mid)":"var(--bad)";
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><path d="${d} L${W-p} ${H} L${p} ${H}Z" fill="${col}" opacity=".1"/><path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" vector-effect="non-scaling-stroke"/><circle cx="${last[0]}" cy="${last[1]}" r="2.6" fill="${col}"/></svg>`;
+}
+function renderGrid(){
+  let r=rows();
+  if(state.sort==="score")r.sort((a,b)=>b.st.score-a.st.score);
+  else if(state.sort==="y1")r.sort((a,b)=>b.st.y1-a.st.y1);
+  else r.sort((a,b)=>META[a.c].name.localeCompare(META[b.c].name));
+  $("boardBase").textContent=state.base;
+  $("grid").innerHTML=r.map(({c,st})=>{const v=verdict(st.score);return `<button class="card" type="button" data-c="${c}" aria-current="${c===state.dest}">
+    <div class="card-top"><div><div class="card-name"><span aria-hidden="true">${META[c].flag}</span> ${META[c].name}</div><div class="card-code">1 ${state.base} = ${fmt(st.cur)} ${c}</div></div><span class="pill ${v.cls}">${v.tag} · ${st.score}</span></div>
+    ${sparkSVG(series(state.base,c),v.cls)}
+    <div class="card-rate">${fmtMoney(st.cur*state.amount)} <span class="card-code">${c}</span></div>
+    <div class="card-meta"><span>1Y <span class="${cls(st.y1)}">${sp(st.y1)}</span></span><span>${Math.round(st.offAth*-100)}% below ATH</span></div>
+  </button>`}).join("");
+}
+$("grid").addEventListener("click",e=>{const b=e.target.closest(".card");if(!b)return;state.dest=b.dataset.c;renderFeature();renderGrid();$("feature").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});});
+
+const RANGES=[["1y",12],["3y",36],["5y",60],["10y",120],["all",1e9]];
+function renderFeature(){
+  const r=rows();
+  if(!state.dest||state.dest===state.base){state.dest=r.slice().sort((a,b)=>b.st.score-a.st.score)[0].c;}
+  const c=state.dest,s=series(state.base,c),st=stats(s),v=verdict(st.score);
+  const first=monthOf(s.length-1);
+  $("amtCode").textContent=state.base;
+  $("feature").innerHTML=`
+  <div style="min-width:0">
+    <div class="f-head">
+      <div><h2 class="f-title"><span aria-hidden="true">${META[c].flag}</span> ${META[c].name}</h2>
+      <div class="f-sub">${state.base} → ${c} · history from ${first}</div>
+      <div class="f-rate">${fmt(st.cur)} <small>${c} per ${state.base}</small></div></div>
+      <div class="tabs" role="group" aria-label="Chart range">${RANGES.filter(([k,n])=>k==="all"||n<s.length).map(([k])=>`<button type="button" data-r="${k}" aria-pressed="${state.range===k}">${k.toUpperCase()}</button>`).join("")}</div>
+    </div>
+    <div class="chart-box" id="chartBox"></div>
+    <div class="legend"><span><i style="border-color:var(--good)"></i>All-time high</span><span><i style="border-color:var(--bad)"></i>All-time low</span><span><i style="border-color:var(--muted)"></i>5-year average</span></div>
+  </div>
+  <aside class="side">
+    <div class="verdict ${v.cls}">
+      <h3>${v.title}</h3>
+      <div class="gauge" role="img" aria-label="Score ${st.score} out of 100"><b style="left:${st.score}%"></b></div>
+      <div class="gauge-lbl"><span>Weak</span><span>Score ${st.score}/100</span><span>Great</span></div>
+      <p>${v.tip}</p>
+    </div>
+    <div class="youget">${fmtMoney(state.amount)} ${state.base} gets you<strong>${fmtMoney(st.cur*state.amount)} ${c}</strong>
+      <span style="color:var(--muted)">${st.cur>=st.avg5?"That's "+fmtMoney((st.cur-st.avg5)*state.amount)+" "+c+" more than at the 5-year average rate.":"That's "+fmtMoney((st.avg5-st.cur)*state.amount)+" "+c+" less than at the 5-year average rate."}</span></div>
+    <dl class="stats">
+      <dt>All-time high</dt><dd>${fmt(st.ath)}<small>${monthOf(st.ai)}</small></dd>
+      <dt>All-time low</dt><dd>${fmt(st.atl)}<small>${monthOf(st.li)}</small></dd>
+      <dt>From ATH</dt><dd class="${cls(st.offAth)}">${sp(st.offAth)}</dd>
+      <dt>Above ATL</dt><dd class="up">${sp(st.overAtl)}</dd>
+      <dt>1-month change</dt><dd class="${cls(st.m1)}">${sp(st.m1)}</dd>
+      <dt>1-year change</dt><dd class="${cls(st.y1)}">${sp(st.y1)}</dd>
+      <dt>5-year change</dt><dd class="${cls(st.y5)}">${sp(st.y5)}</dd>
+      <dt>Rank vs last 5 yrs</dt><dd>${st.p5}th pct</dd>
+    </dl>
+  </aside>`;
+  $("feature").querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.range=b.dataset.r;save();renderFeature();});
+  drawChart(s,st,c);
+}
+function niceTicks(mn,mx,count){const span=mx-mn||1;const step0=span/count;const mag=Math.pow(10,Math.floor(Math.log10(step0)));const norm=step0/mag;const step=(norm<1.5?1:norm<3?2:norm<7?5:10)*mag;const t=[];for(let v=Math.ceil(mn/step)*step;v<=mx+1e-9;v+=step)t.push(v);return t;}
+function drawChart(sAll,st,c){
+  const n=Math.min(sAll.length,(RANGES.find(r=>r[0]===state.range)||RANGES[4])[1]);
+  const pts=sAll.slice(0,n).reverse(); // oldest → newest
+  const off=sAll.length-n; // index offset in full newest-first
+  const box=$("chartBox");const W=760,H=330,L=58,R=16,T=18,B=34;
+  let mn=Math.min(...pts),mx=Math.max(...pts);
+  const showAth=state.range==="all"||st.ath<=mx*1.04, showAtl=state.range==="all"||st.atl>=mn*0.96;
+  if(showAth)mx=Math.max(mx,st.ath);if(showAtl)mn=Math.min(mn,st.atl);
+  const pad=(mx-mn)*.08||mx*.02;mn-=pad;mx+=pad;
+  const X=i=>L+i*(W-L-R)/Math.max(1,pts.length-1),Y=v=>T+(1-(v-mn)/(mx-mn))*(H-T-B);
+  const ticks=niceTicks(mn,mx,5);
+  const d=pts.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1)).join("");
+  // x labels: ~6 evenly spaced
+  const xl=[];const k=Math.max(1,Math.round((pts.length-1)/5));for(let i=0;i<pts.length;i+=k)xl.push(i);if(xl[xl.length-1]!==pts.length-1&&pts.length-1-xl[xl.length-1]<k/2)xl.pop();xl.push(pts.length-1);
+  const idxFull=i=>sAll.length-1-i-0; // map pts index -> full newest-first index
+  const toFull=i=>n-1-i; // within window newest-first index
+  // high / low within window
+  let hi=0,lo=0;pts.forEach((v,i)=>{if(v>pts[hi])hi=i;if(v<pts[lo])lo=i;});
+  const avg5=st.avg5;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${state.base} to ${c} rate chart">
+  <defs><linearGradient id="fillG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--teal)" stop-opacity=".22"/><stop offset="1" stop-color="var(--teal)" stop-opacity="0"/></linearGradient></defs>`;
+  ticks.forEach(t=>{svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--line)" stroke-width="1"/><text x="${L-8}" y="${Y(t)+4}" text-anchor="end" font-size="11" font-family="var(--f-mono)" fill="var(--muted)">${fmt(t)}</text>`});
+  xl.forEach(i=>{svg+=`<text x="${X(i)}" y="${H-10}" text-anchor="${i===0?"start":i===pts.length-1?"end":"middle"}" font-size="11" font-family="var(--f-mono)" fill="var(--muted)">${monthOf(toFull(i))}</text>`});
+  if(avg5>=mn&&avg5<=mx)svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(avg5)}" y2="${Y(avg5)}" stroke="var(--muted)" stroke-dasharray="3 4" stroke-width="1.2"/>`;
+  if(showAth)svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(st.ath)}" y2="${Y(st.ath)}" stroke="var(--good)" stroke-dasharray="6 4" stroke-width="1.4"/><text x="${W-R}" y="${Y(st.ath)-6}" text-anchor="end" font-size="11" font-family="var(--f-mono)" fill="var(--good)">ATH ${fmt(st.ath)} · ${monthOf(st.ai)}</text>`;
+  if(showAtl)svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(st.atl)}" y2="${Y(st.atl)}" stroke="var(--bad)" stroke-dasharray="6 4" stroke-width="1.4"/><text x="${W-R}" y="${Y(st.atl)+15}" text-anchor="end" font-size="11" font-family="var(--f-mono)" fill="var(--bad)">ATL ${fmt(st.atl)} · ${monthOf(st.li)}</text>`;
+  svg+=`<path d="${d} L${X(pts.length-1)} ${H-B} L${X(0)} ${H-B}Z" fill="url(#fillG)"/><path d="${d}" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>`;
+  [[hi,"var(--good)"],[lo,"var(--bad)"]].forEach(([i,col])=>{svg+=`<circle cx="${X(i)}" cy="${Y(pts[i])}" r="4" fill="var(--surface)" stroke="${col}" stroke-width="2"/>`});
+  const li=pts.length-1;
+  svg+=`<circle cx="${X(li)}" cy="${Y(pts[li])}" r="5" fill="var(--gold)" stroke="var(--surface)" stroke-width="2"/>`;
+  svg+=`<line id="hoverLine" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--ink)" stroke-opacity=".3" visibility="hidden"/><circle id="hoverDot" r="4" fill="var(--teal)" visibility="hidden"/><rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" id="hit"/></svg><div class="tip" id="tip" hidden></div>`;
+  box.innerHTML=svg;
+  const svgEl=box.querySelector("svg"),tip=$("tip"),hl=box.querySelector("#hoverLine"),hd=box.querySelector("#hoverDot");
+  function move(ev){const rect=svgEl.getBoundingClientRect();const x=(ev.clientX-rect.left)/rect.width*W;let i=Math.round((x-L)/(W-L-R)*(pts.length-1));i=Math.max(0,Math.min(pts.length-1,i));
+    hl.setAttribute("x1",X(i));hl.setAttribute("x2",X(i));hl.setAttribute("visibility","visible");hd.setAttribute("cx",X(i));hd.setAttribute("cy",Y(pts[i]));hd.setAttribute("visibility","visible");
+    tip.hidden=false;tip.textContent=`${monthOf(toFull(i))} · ${fmt(pts[i])} ${c}`;tip.style.left=(X(i)/W*rect.width)+"px";tip.style.top=(Y(pts[i])/H*rect.height)+"px";}
+  function leave(){tip.hidden=true;hl.setAttribute("visibility","hidden");hd.setAttribute("visibility","hidden");}
+  svgEl.addEventListener("pointermove",move);svgEl.addEventListener("pointerleave",leave);
+}
+function renderAll(){renderChips();renderFeature();renderGrid();}
+
+// Theme toggle: light by default, remembers a manual choice
+(function(){const root=document.documentElement;let t=null;try{t=localStorage.getItem("hm-theme")}catch(e){}
+  root.setAttribute("data-theme",t==="dark"?"dark":"light");
+  const btn=$("themeBtn");const lbl=()=>btn.textContent=root.getAttribute("data-theme")==="dark"?"Light mode":"Dark mode";lbl();
+  btn.addEventListener("click",()=>{const n=root.getAttribute("data-theme")==="dark"?"light":"dark";root.setAttribute("data-theme",n);try{localStorage.setItem("hm-theme",n)}catch(e){}lbl();});
+})();
+renderAll();
+</script>
+
+</body>
+</html>
