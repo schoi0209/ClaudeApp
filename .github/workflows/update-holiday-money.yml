@@ -1,0 +1,41 @@
+name: 💱 Daily Holiday Money Rates
+
+on:
+  schedule:
+    # Tue–Sat 06:23 UTC (5:23 PM Sydney, after each Asian/European trading day)
+    - cron: '23 6 * * 2-6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-rates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 🔄 Fetch latest monthly FX closes
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: python .github/scripts/update_holiday_money.py
+
+      - name: 📝 Commit & push if rates changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add holiday-money-data.json
+          if git diff --staged --quiet; then
+            echo "✅ Rates unchanged."
+          else
+            ASOF=$(python -c "import json;print(json.load(open('holiday-money-data.json'))['asof'])")
+            git commit -m "💱 Auto-update Holiday Money rates (as of ${ASOF})"
+            git pull --rebase
+            git push
+          fi
