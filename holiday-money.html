@@ -72,6 +72,22 @@ button{font-family:inherit}
 .hero .wrap{position:relative}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;flex-wrap:wrap}
 .bmc{display:inline-flex;align-items:center;gap:8px;background:#FFDD00;color:#111;font-weight:700;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:13px;box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
+.top-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* Wise referral buttons: fixed brand-green look in both themes */
+.wise{display:inline-flex;align-items:center;gap:8px;background:#9FE870;color:#163300;font-weight:700;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:13px;box-shadow:0 6px 16px -8px rgba(0,0,0,.5);transition:transform .15s,background .15s}
+.wise:hover{background:#B4F28C;transform:translateY(-1px)}
+.wise .wise-arrow{transition:transform .15s}
+.wise:hover .wise-arrow{transform:translateX(3px)}
+.wise-cta{display:flex;align-items:center;gap:14px;background:#9FE870;color:#163300;text-decoration:none;border-radius:18px;padding:14px 18px;box-shadow:0 10px 24px -14px rgba(22,51,0,.55);transition:transform .15s,background .15s}
+.wise-cta:hover{background:#B4F28C;transform:translateY(-2px)}
+.wise-cta .wc-ico{width:42px;height:42px;flex:none;border-radius:13px;background:#163300;color:#9FE870;display:grid;place-items:center;font:800 18px var(--f-display)}
+.wise-cta .wc-txt{flex:1;min-width:0}
+.wise-cta b{display:block;font:800 16px/1.2 var(--f-display);letter-spacing:-.01em}
+.wise-cta small{display:block;font-size:13px;font-weight:600;margin-top:3px;opacity:.85}
+.wise-cta .wc-go{font:800 15px var(--f-body);white-space:nowrap;background:#163300;color:#9FE870;border-radius:999px;padding:8px 14px}
+.wise-mini{display:flex;justify-content:center;align-items:center;gap:8px;background:#9FE870;color:#163300;text-decoration:none;font-weight:700;font-size:14px;border-radius:14px;padding:11px 14px;transition:background .15s}
+.wise-mini:hover{background:#B4F28C}
+.disclose{margin:0;font-size:11.5px;color:var(--muted);line-height:1.45}
 .theme-btn{background:var(--glass);color:var(--hero-ink);border:1px solid var(--glass-line);border-radius:999px;padding:7px 16px;font-weight:600;font-size:13px;cursor:pointer}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:26px 8px}
 .eyebrow{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
@@ -296,7 +312,10 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
   <canvas id="guilloche" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="topbar">
-      <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
+      <div class="top-links">
+        <a class="bmc" href="https://buymeacoffee.com/schoi0209" target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
+        <a class="wise" id="wiseTop" href="#" target="_blank" rel="noopener sponsored">💸 Exchange with Wise <span class="wise-arrow" aria-hidden="true">→</span></a>
+      </div>
       <button class="theme-btn" id="themeBtn" type="button">Dark mode</button>
     </div>
     <div class="hero-grid">
@@ -376,7 +395,7 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
   <section class="notes">
     <div class="note"><h4>How the score works</h4><p>Each rate is ranked against its own history. The score blends where today sits in the last five years (60%) with where it sits across all available data (40%). 75+ is a great time to buy, below 40 is below average.</p></div>
     <div class="note"><h4>All-time high and low</h4><p>ATH and ATL are the highest and lowest monthly closing rates in the data: from 2007 for most currencies, and from Dec 2014 for KRW, THB, IDR, VND and PHP. For two non-USD currencies, history starts where both have data.</p></div>
-    <div class="note"><h4>Before you exchange</h4><p>These are mid-market rates. Banks, airports and cards add a margin of 1–10%, so compare what you are actually offered. The fee margins and split-plan ranges are estimates from past data, not quotes or predictions. This is general information, not financial advice.</p></div>
+    <div class="note"><h4>Before you exchange</h4><p>These are mid-market rates. Banks, airports and cards add a margin of 1–10%, so compare what you are actually offered. The fee margins and split-plan ranges are estimates from past data, not quotes or predictions. This is general information, not financial advice.</p><p style="margin-top:8px">Wise buttons on this page are a referral link: Sunghoon Choi (Sunny) may receive a reward if you sign up.</p></div>
   </section>
 
   <footer>
@@ -750,6 +769,7 @@ function renderFeature(){
     <h3 class="v-title ${v.cls}">${v.title}</h3>
     <p class="v-tip">${v.tip}</p>
     <div class="youget">${fmtMoney(state.amount)} ${b} gets you<strong>${fmtMoney(st.cur*state.amount)} ${c}</strong><span>${fmtMoney(Math.abs(diff))} ${c} ${diff>=0?"more":"less"}</span> than at the 5-year average rate.</div>
+    <a class="wise-mini" href="${WISE_URL}" target="_blank" rel="noopener sponsored">${st.score>=55?"Lock in this rate with Wise":"Exchange with Wise when you're ready"} <span aria-hidden="true">→</span></a>
     ${rangeBar(st)}
     <dl class="tiles">
       <div class="tile"><dt>All-time high</dt><dd>${fmt(st.ath)}<small>${monthOf(st.ai)}</small></dd></div>
@@ -807,6 +827,10 @@ function drawChart(){
   svgEl.addEventListener("pointermove",move);svgEl.addEventListener("pointerdown",move);svgEl.addEventListener("pointerleave",leave);
 }
 /* ── What you actually get ── */
+/* Wise link: change this one line to swap in an affiliate link later. */
+const WISE_URL="https://wise.com/invite/dic/sunghoonc";
+const WISE_NOTE="Wise buttons are a referral link: Sunghoon Choi (Sunny) may receive a reward if you sign up. Margins shown are estimates, not Wise's quote. General information only, not financial advice.";
+$("wiseTop").href=WISE_URL;
 const FEE_DEF=[
   {id:"online",name:"Online money service",note:"Multi-currency account or money transfer app",m:0.5},
   {id:"card",name:"Bank card overseas",note:"Foreign transaction fee on a debit or credit card",m:3},
@@ -823,7 +847,9 @@ function renderFees(){
   <div class="mid-row"><span>Mid-market rate: <b id="midAmt"></b></span><span>for ${fmtMoney(state.amount)} ${b}</span></div>
   <div class="fees">${FEE_DEF.map(f=>`<div class="fee" data-id="${f.id}"><div class="fee-name">${f.name}<span class="badge" hidden>Best value</span><small>${f.note}</small></div>
     <label class="fee-in"><input type="number" inputmode="decimal" min="0" max="50" step="0.1" id="fee-${f.id}" value="${feeM(f.id)}" aria-label="${f.name} margin in percent"><span>%</span></label>
-    <div class="fee-out"><b></b><span></span></div><div class="fee-bar" aria-hidden="true"><i></i></div></div>`).join("")}</div>`;
+    <div class="fee-out"><b></b><span></span></div><div class="fee-bar" aria-hidden="true"><i></i></div></div>`).join("")}</div>
+  <a class="wise-cta" href="${WISE_URL}" target="_blank" rel="noopener sponsored"><span class="wc-ico" aria-hidden="true">W</span><span class="wc-txt"><b>Exchange closer to the real rate</b><small id="wiseSave"></small></span><span class="wc-go">Open Wise →</span></a>
+  <p class="disclose">${WISE_NOTE}</p>`;
   updateFees();
 }
 function updateFees(){
@@ -836,6 +862,8 @@ function updateFees(){
     const t=row.querySelector(".fee-out span");t.className=m>0?"":"zero";
     t.textContent=m>0?`you lose ${fmtMoney(lost)} ${b} (${fmtMoney(mid-got)} ${c})`:"no margin";
     row.querySelector(".fee-bar i").style.width=(m/worst*100).toFixed(1)+"%";});
+  const gain=mid*(feeM("airport")-feeM("online"))/100;
+  $("wiseSave").textContent=gain>0?`About ${fmtMoney(gain)} ${c} more than airport exchange, using the margins above`:"Compare the rate you're offered with the mid-market rate";
 }
 $("feesPanel").addEventListener("input",e=>{const t=e.target;if(!t.id||!t.id.startsWith("fee-"))return;const v=parseFloat(t.value);
   state.fees=state.fees||{};if(v>=0&&v<100)state.fees[t.id.slice(4)]=v;else delete state.fees[t.id.slice(4)];save();updateFees();});
