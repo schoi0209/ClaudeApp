@@ -36,7 +36,6 @@ import argparse
 import datetime as dt
 import html as _html
 import http.client
-import json
 import re
 import socket
 import sys
@@ -50,23 +49,6 @@ SOURCES = [
     ("powerball.net", "https://www.powerball.net/australia/results"),
     ("national-lottery", "https://australia.national-lottery.com/powerball/results"),
 ]
-
-# The results data behind thelott.com, the official operator's site. A different
-# company from the two sites above, so an outage there is unlikely to hit it too.
-# Asked for a window around the page's latest draw, so it can be checked against
-# draws the page already has. The second request is a fallback endpoint.
-LOTT_API = "https://data.api.thelott.com/sales/vmax/web/data/lotto"
-
-
-def lott_requests(cur_max):
-    return [
-        (f"{LOTT_API}/results/search/drawrange",
-         {"CompanyId": "GoldenCasket", "ProductFilter": ["Powerball"], "MaxDrawCount": 20,
-          "MinDrawNumber": cur_max - 6, "MaxDrawNumber": cur_max + 10}),
-        (f"{LOTT_API}/latestresults",
-         {"CompanyId": "GoldenCasket", "MaxDrawCountPerProduct": 10,
-          "OptionalProductFilter": ["Powerball"]}),
-    ]
 
 # A normal browser identity. No Accept-Encoding header on purpose: the server
 # then answers with plain text. Advertising brotli ("br") without a decoder
@@ -112,14 +94,8 @@ TIMEOUT = 45            # seconds per attempt
 BACKOFF = (15, 30)      # seconds to wait before attempts 2 and 3
 
 
-def fetch_once(url, ipv4_only=False, payload=None):
-    if payload is None:
-        req = urllib.request.Request(url, headers=HEADERS)
-    else:   # JSON POST
-        req = urllib.request.Request(
-            url, data=json.dumps(payload).encode(), method="POST",
-            headers={"User-Agent": HEADERS["User-Agent"], "Accept": "application/json",
-                     "Content-Type": "application/json"})
+def fetch_once(url, ipv4_only=False):
+    req = urllib.request.Request(url, headers=HEADERS)
     orig = socket.getaddrinfo
     if ipv4_only:   # some runners have IPv6 routes that hang; IPv4 sidesteps them
         socket.getaddrinfo = (lambda host, port, family=0, *a, **k:
@@ -131,7 +107,7 @@ def fetch_once(url, ipv4_only=False, payload=None):
         socket.getaddrinfo = orig
 
 
-def fetch_source(name, url, payload=None):
+def fetch_source(name, url):
     """
     Returns ('ok', (status, body)), ('broken', why) for an answer that won't fix
     itself (HTTP 4xx), or ('unreachable', why) after every attempt hit network
@@ -143,7 +119,7 @@ def fetch_source(name, url, payload=None):
             time.sleep(BACKOFF[attempt - 2])
         ipv4 = attempt > 1
         try:
-            status, body = fetch_once(url, ipv4_only=ipv4, payload=payload)
+            status, body = fetch_once(url, ipv4_only=ipv4)
             if attempt > 1:
                 log(f"{name}: succeeded on attempt {attempt} (IPv4)")
             return "ok", (status, body)
@@ -156,47 +132,6 @@ def fetch_source(name, url, payload=None):
             why = f"{e.__class__.__name__}: {getattr(e, 'reason', e)}"
         log(f"{name}: attempt {attempt}/{ATTEMPTS} failed ({why})")
     return "unreachable", why
-
-
-def parse_lott_json(body):
-    """
-    {draw_no: (date, [7 sorted mains], pb)} from The Lott's results JSON.
-    Looks for any object, at any depth, carrying DrawNumber, DrawDate,
-    PrimaryNumbers and SecondaryNumbers (any letter case), so a change in how
-    the response is wrapped doesn't matter.
-    """
-    try:
-        data = json.loads(body)
-    except ValueError:
-        return {}
-    draws = {}
-
-    def walk(o):
-        if isinstance(o, list):
-            for v in o:
-                walk(v)
-        elif isinstance(o, dict):
-            k = {str(key).lower(): v for key, v in o.items()}
-            if {"drawnumber", "drawdate", "primarynumbers", "secondarynumbers"} <= k.keys():
-                try:
-                    dn = int(k["drawnumber"])
-                    date = dt.date.fromisoformat(str(k["drawdate"])[:10])
-                    mains = [int(x) for x in k["primarynumbers"]]
-                    second = [int(x) for x in k["secondarynumbers"]]
-                except (TypeError, ValueError):
-                    pass
-                else:
-                    product = str(k.get("productid") or "Powerball").lower()
-                    if ("powerball" in product and len(mains) == N_MAIN
-                            and len(set(mains)) == N_MAIN and len(second) == 1
-                            and all(MAIN_MIN <= x <= MAIN_MAX for x in mains)
-                            and PB_MIN <= second[0] <= PB_MAX):
-                        draws.setdefault(dn, (date, sorted(mains), second[0]))
-            for v in o.values():
-                walk(v)
-
-    walk(data)
-    return draws
 
 
 def to_text(raw):
@@ -381,23 +316,6 @@ def main():
                 per_source.append((path, parse_draws(to_text(f.read()), today)))
     unreachable = []
     if not args.from_html:
-        lott, kinds = {}, []
-        for url, payload in lott_requests(cur_max):
-            kind, info = fetch_source("thelott", url, payload)
-            kinds.append(kind)
-            if kind == "ok":
-                status, body = info
-                lott = parse_lott_json(body)
-                log(f"thelott ({url.rsplit('/', 1)[-1]}): HTTP {status}, "
-                    f"{len(body):,} chars, {len(lott)} draws parsed")
-                if lott:
-                    break
-            elif kind == "unreachable":
-                break           # same host; the fallback endpoint won't fare better
-        if all(k == "unreachable" for k in kinds):
-            unreachable.append("thelott")
-        per_source.append(("thelott", lott))
-
         for name, url in SOURCES:
             kind, info = fetch_source(name, url)
             parsed = {}
