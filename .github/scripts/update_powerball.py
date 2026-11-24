@@ -15,9 +15,14 @@ How it stays honest:
   * New draws must continue the page without gaps, one week apart, and not be
     dated in the future.
   * It never fails silently. Exit code 1 turns the Actions run red, so GitHub
-    emails the repo owner, whenever: no source can be read, trusted sources
-    disagree, there is a gap or an implausible date, or the page is more than
-    STALE_DAYS old with nothing newer anywhere.
+    emails the repo owner, whenever: a site answers but can't be read (layout
+    changed, or a block page / HTTP 4xx), trusted sources disagree, there is a
+    gap or an implausible date, or the page is more than STALE_DAYS old with
+    nothing newer anywhere.
+  * Network trouble is retried (3 attempts per site, the later ones over IPv4).
+    If no site can be reached at all, that run only warns and changes nothing:
+    the next week's run backfills the missed draw. If it is still unreachable
+    by then, the page has gone stale and the run fails as above.
   Exit code 0 means the page was updated, or there is legitimately nothing new.
 
 Uses only the Python standard library.
@@ -30,8 +35,11 @@ Usage:
 import argparse
 import datetime as dt
 import html as _html
+import http.client
 import re
+import socket
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -81,10 +89,49 @@ def warn(msg):
 
 # ── fetching and parsing ───────────────────────────────────────────────
 
-def fetch(url):
+ATTEMPTS = 3
+TIMEOUT = 45            # seconds per attempt
+BACKOFF = (15, 30)      # seconds to wait before attempts 2 and 3
+
+
+def fetch_once(url, ipv4_only=False):
     req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.status, r.read().decode("utf-8", "ignore")
+    orig = socket.getaddrinfo
+    if ipv4_only:   # some runners have IPv6 routes that hang; IPv4 sidesteps them
+        socket.getaddrinfo = (lambda host, port, family=0, *a, **k:
+                              orig(host, port, socket.AF_INET, *a, **k))
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            return r.status, r.read().decode("utf-8", "ignore")
+    finally:
+        socket.getaddrinfo = orig
+
+
+def fetch_source(name, url):
+    """
+    Returns ('ok', (status, body)), ('broken', why) for an answer that won't fix
+    itself (HTTP 4xx), or ('unreachable', why) after every attempt hit network
+    trouble or HTTP 5xx.
+    """
+    why = ""
+    for attempt in range(1, ATTEMPTS + 1):
+        if attempt > 1:
+            time.sleep(BACKOFF[attempt - 2])
+        ipv4 = attempt > 1
+        try:
+            status, body = fetch_once(url, ipv4_only=ipv4)
+            if attempt > 1:
+                log(f"{name}: succeeded on attempt {attempt} (IPv4)")
+            return "ok", (status, body)
+        except urllib.error.HTTPError as e:
+            if not 500 <= e.code < 600:
+                log(f"{name}: HTTP {e.code} (blocked or gone)")
+                return "broken", f"HTTP {e.code}"
+            why = f"HTTP {e.code}"
+        except (OSError, http.client.HTTPException) as e:   # timeouts, resets, DNS, TLS
+            why = f"{e.__class__.__name__}: {getattr(e, 'reason', e)}"
+        log(f"{name}: attempt {attempt}/{ATTEMPTS} failed ({why})")
+    return "unreachable", why
 
 
 def to_text(raw):
@@ -267,21 +314,27 @@ def main():
         for path in args.from_html:
             with open(path, encoding="utf-8") as f:
                 per_source.append((path, parse_draws(to_text(f.read()), today)))
-    else:
+    unreachable = []
+    if not args.from_html:
         for name, url in SOURCES:
-            try:
-                status, body = fetch(url)
+            kind, info = fetch_source(name, url)
+            parsed = {}
+            if kind == "ok":
+                status, body = info
                 parsed = parse_draws(to_text(body), today)
                 log(f"{name}: HTTP {status}, {len(body):,} chars, {len(parsed)} draws parsed")
-            except urllib.error.HTTPError as e:
-                log(f"{name}: HTTP {e.code} (blocked or unavailable)")
-                parsed = {}
-            except Exception as e:  # network errors, timeouts
-                log(f"{name}: failed to fetch ({e.__class__.__name__}: {e})")
-                parsed = {}
+            elif kind == "unreachable":
+                unreachable.append(name)
             per_source.append((name, parsed))
 
     if not any(p for _, p in per_source):
+        if per_source and len(unreachable) == len(per_source):
+            age = (today - cur_date).days
+            if age > STALE_DAYS:
+                fail(f"no source could be reached, and the page latest #{cur_max} is {age} days old")
+            warn("no source could be reached this run (network trouble); nothing changed, "
+                 "and next week's run will catch up")
+            return
         fail("no source returned any readable draws; the sites may have changed or be blocking")
 
     # 2) Trust a source only if it reproduces draws the page already has.
