@@ -1,347 +1,311 @@
 #!/usr/bin/env python3
 """
-Australian Powerball Auto-Updater
-Fetches latest draw results and patches powerball-au.html.
-Runs weekly via GitHub Actions (Thursdays after draw).
+Weekly auto-updater for powerball-au.html (SunnyApps).
 
-Sources tried in order:
-  1. australia.national-lottery.com (archive page)
-  2. powerball.net JSON/HTML
-  3. lotto.net
-  4. ozlotteries.com
+Run by .github/workflows/update-powerball.yml every Thursday after the draw.
+Fetches the latest Australian Powerball results, checks them hard, and patches
+powerball-au.html: the draw data plus the header badge, the data-info line,
+the footer line and the insight reference.
+
+How it stays honest:
+  * A source is only trusted if the draws it shows that are already on the page
+    match the page exactly (numbers, Powerball and date). A source whose layout
+    changed, or that serves a block page, is ignored instead of believed.
+  * When two trusted sources both show a new draw, they must agree.
+  * New draws must continue the page without gaps, one week apart, and not be
+    dated in the future.
+  * It never fails silently. Exit code 1 turns the Actions run red, so GitHub
+    emails the repo owner, whenever: no source can be read, trusted sources
+    disagree, there is a gap or an implausible date, or the page is more than
+    STALE_DAYS old with nothing newer anywhere.
+  Exit code 0 means the page was updated, or there is legitimately nothing new.
+
+Uses only the Python standard library.
+
+Usage:
+    python .github/scripts/update_powerball.py              # fetch live, patch
+    python .github/scripts/update_powerball.py --dry-run    # fetch live, no write
+    python .github/scripts/update_powerball.py --from-html a.html [b.html]   # test
 """
-
-import re, sys, time, json
-from datetime import datetime
-import requests
-from bs4 import BeautifulSoup
+import argparse
+import datetime as dt
+import html as _html
+import re
+import sys
+import urllib.error
+import urllib.request
 
 HTML_FILE = "powerball-au.html"
 
-MONTH_MAP = {
-    "jan":"01","feb":"02","mar":"03","apr":"04","may":"05","jun":"06",
-    "jul":"07","aug":"08","sep":"09","oct":"10","nov":"11","dec":"12",
-    "january":"01","february":"02","march":"03","april":"04","june":"06",
-    "july":"07","august":"08","september":"09","october":"10",
-    "november":"11","december":"12"
+SOURCES = [
+    ("powerball.net", "https://www.powerball.net/australia/results"),
+    ("national-lottery", "https://australia.national-lottery.com/powerball/results"),
+]
+
+# A normal browser identity. No Accept-Encoding header on purpose: the server
+# then answers with plain text. Advertising brotli ("br") without a decoder
+# installed leaves the page as unreadable bytes.
+HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"),
+    "Accept": "text/html,application/xhtml+xml",
+    "Accept-Language": "en-AU,en;q=0.9",
 }
 
-MONTH_ABB = {
-    "01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun",
-    "07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"
-}
+STALE_DAYS = 8          # draws are weekly; older than this with nothing new = broken
+MAIN_MIN, MAIN_MAX, N_MAIN = 1, 35, 7
+PB_MIN, PB_MAX = 1, 20
 
-def std_date(day, month_word, year):
-    """Return 'DD Mon YYYY' string."""
-    m = MONTH_MAP.get(month_word.lower(), "01")
-    return f"{int(day):02d} {MONTH_ABB[m]} {year}"
+MONTHS = {m: i for i, m in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun",
+     "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+MON_ABBR = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+WEEKDAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
-def get_session():
-    s = requests.Session()
-    s.headers.update({
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/124.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-AU,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
-    })
-    return s
 
-def parse_number_sequence(text, min_main=7, main_max=35, pb_max=20):
+def log(msg):
+    print(f"[powerball] {msg}", flush=True)
+
+
+def fail(msg):
+    print(f"::error::{msg}", flush=True)
+    log(f"ERROR: {msg}")
+    sys.exit(1)
+
+
+def warn(msg):
+    print(f"::warning::{msg}", flush=True)
+    log(f"WARNING: {msg}")
+
+
+# ── fetching and parsing ───────────────────────────────────────────────
+
+def fetch(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.status, r.read().decode("utf-8", "ignore")
+
+
+def to_text(raw):
+    """Strip HTML to one collapsed line of visible text."""
+    raw = re.sub(r"<script.*?</script>", " ", raw, flags=re.S | re.I)
+    raw = re.sub(r"<style.*?</style>", " ", raw, flags=re.S | re.I)
+    raw = re.sub(r"<[^>]+>", " ", raw)
+    raw = _html.unescape(raw)
+    return re.sub(r"\s+", " ", raw)
+
+
+def parse_draws(text):
     """
-    From a text blob, extract the most likely (7 main + 1 PB) combination.
-    Returns (sorted_main_list, pb) or None.
+    Return {draw_no: (date, [7 sorted mains], pb)} found in page text.
+
+    Markup independent: find each 'Draw <N>', take the date next to it (before
+    it on powerball.net, after it on national-lottery), then read the run of
+    1-2 digit numbers that follows: 7 main balls, then the Powerball. Winner
+    counts and prize amounts end the run. Rows without a 4-digit year are
+    skipped; the newest draws always carry one.
     """
-    nums = [int(n) for n in re.findall(r'\b(\d{1,2})\b', text)
-            if 1 <= int(n) <= 35]
-    if len(nums) < 8:
-        return None
-    # Last number <= 20 is likely PB
-    for i in range(len(nums)-1, -1, -1):
-        if nums[i] <= pb_max:
-            pb = nums[i]
-            main = sorted(set(nums[:i]))
-            if len(main) == 7:
-                return main, pb
-    return None
+    draws = {}
+    date_re = re.compile(r"(\d{1,2})\s+([A-Za-z]{3,9})\s+(20\d{2})")
+    for m in re.finditer(r"Draw\s+(\d{3,5})", text):
+        draw_no = int(m.group(1))
+        head = text[max(0, m.start() - 48):m.start()]
+        after = text[m.end():m.end() + 180]
 
-# ── SOURCE 1: national-lottery.com ──────────────────────────
-def source_national_lottery():
-    draws = []
-    year = datetime.now().year
-    s = get_session()
-    for y in [year, year-1]:
-        url = f"https://australia.national-lottery.com/powerball/results-archive-{y}"
+        dm = None
+        for cand in date_re.finditer(head):
+            dm = cand                       # the last date before the marker
+        date_in_after = dm is None
+        if date_in_after:
+            dm = date_re.search(after)
+        if dm is None:
+            continue
+        mon = MONTHS.get(dm.group(2)[:3].lower())
+        if not mon:
+            continue
         try:
-            r = s.get(url, timeout=15)
-            if r.status_code != 200:
-                continue
-            soup = BeautifulSoup(r.text, "lxml")
-            # Each row: draw number, date, winning numbers
-            rows = soup.select("table tr, .result-row, [class*='result']")
-            for row in rows:
-                txt = row.get_text(" ")
-                draw_m = re.search(r'Draw\s+(\d{4})', txt)
-                date_m = re.search(
-                    r'(\d{1,2})\s+(January|February|March|April|May|June|July|'
-                    r'August|September|October|November|December)\s+(\d{4})', txt, re.I)
-                if draw_m and date_m:
-                    parsed = parse_number_sequence(txt[date_m.end():date_m.end()+100])
-                    if parsed:
-                        main, pb = parsed
-                        draws.append({
-                            "draw": int(draw_m.group(1)),
-                            "date_str": std_date(*date_m.groups()),
-                            "nums": main, "pb": pb
-                        })
-        except Exception as e:
-            print(f"  national-lottery {y}: {e}")
-        time.sleep(0.5)
+            date = dt.date(int(dm.group(3)), mon, int(dm.group(1)))
+        except ValueError:
+            continue
+
+        # If the date sat after the marker, start past it so the day of the
+        # month isn't read as a ball.
+        region = after[dm.end():] if date_in_after else after
+        nums = []
+        for tok in re.finditer(r"\d{1,3}", region):
+            v = int(tok.group())
+            if v > 99:
+                break
+            nums.append(v)
+            if len(nums) >= 12:
+                break
+        if len(nums) < N_MAIN + 1:
+            continue
+        mains, pb = nums[:N_MAIN], nums[N_MAIN]
+        if any(not (MAIN_MIN <= x <= MAIN_MAX) for x in mains):
+            continue
+        if len(set(mains)) != N_MAIN or not (PB_MIN <= pb <= PB_MAX):
+            continue
+        draws.setdefault(draw_no, (date, sorted(mains), pb))
     return draws
 
-# ── SOURCE 2: powerball.net/australia ───────────────────────
-def source_powerball_net():
-    draws = []
-    s = get_session()
-    # Try the archive pages
-    year = datetime.now().year
-    for y in [year, year-1]:
-        url = f"https://www.powerball.net/australia/archive/{y}"
-        try:
-            r = s.get(url, timeout=15)
-            if r.status_code != 200:
-                url2 = "https://www.powerball.net/australia/results"
-                r = s.get(url2, timeout=15)
-                if r.status_code != 200:
-                    continue
-            soup = BeautifulSoup(r.text, "lxml")
-            text = soup.get_text(" ")
-            # Pattern from powerball.net: "Thursday, 9 April 2026 Draw 1560 3 15 17..."
-            block_re = re.compile(
-                r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+'
-                r'(\d{1,2})\s+'
-                r'(January|February|March|April|May|June|July|'
-                r'August|September|October|November|December)\s+'
-                r'(\d{4})\s+'
-                r'(?:·?\s*)?Draw\s+(\d{4})'
-                r'((?:\s*·?\s*\d{1,2}){8})', re.I
-            )
-            for m in block_re.finditer(text):
-                day, mon, yr, draw_num, num_block = m.groups()
-                parsed = parse_number_sequence(num_block)
-                if parsed:
-                    main, pb = parsed
-                    draws.append({
-                        "draw": int(draw_num),
-                        "date_str": std_date(day, mon, yr),
-                        "nums": main, "pb": pb
-                    })
-        except Exception as e:
-            print(f"  powerball.net {y}: {e}")
-        time.sleep(0.5)
-    return draws
 
-# ── SOURCE 3: lottolyzer.com ─────────────────────────────────
-def source_lottolyzer():
-    draws = []
-    s = get_session()
-    url = "https://lottolyzer.com/app/australia/powerball/results-page"
-    try:
-        r = s.get(url, timeout=15)
-        if r.status_code == 200:
-            soup = BeautifulSoup(r.text, "lxml")
-            text = soup.get_text(" ")
-            draw_re = re.compile(
-                r'(\d{4})\s+'
-                r'(\d{1,2})\s+'
-                r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+'
-                r'(\d{4})\s+'
-                r'((?:\d{1,2}\s+){7})'
-                r'(\d{1,2})', re.I
-            )
-            for m in draw_re.finditer(text):
-                draw_num, day, mon, yr, main_str, pb_str = m.groups()
-                main = sorted(int(n) for n in main_str.split())
-                pb = int(pb_str)
-                if len(main) == 7 and 1 <= pb <= 20:
-                    draws.append({
-                        "draw": int(draw_num),
-                        "date_str": std_date(day, mon, yr),
-                        "nums": main, "pb": pb
-                    })
-    except Exception as e:
-        print(f"  lottolyzer: {e}")
-    return draws
+# ── the page ───────────────────────────────────────────────────────────
 
-# ── SOURCE 4: Wikipedia (most reliable, rarely blocked) ──────
-def source_wikipedia():
-    draws = []
-    s = get_session()
-    # Wikipedia API for Powerball (Australia) article
-    url = (
-        "https://en.wikipedia.org/w/api.php"
-        "?action=parse&page=Powerball_(Australia)&prop=wikitext&format=json"
-    )
-    try:
-        r = s.get(url, timeout=15)
-        if r.status_code == 200:
-            data = r.json()
-            wikitext = data.get("parse", {}).get("wikitext", {}).get("*", "")
-            # Look for recent draw tables
-            draw_re = re.compile(
-                r'\|\|\s*(\d{4})\s*\|\|\s*'  # draw number
-                r'(\d{1,2})\s+(January|February|March|April|May|June|July|'
-                r'August|September|October|November|December)\s+(\d{4})\s*\|\|\s*'
-                r'((?:\d{1,2}[,\s]+){6}\d{1,2})\s*\|\|\s*(\d{1,2})', re.I
-            )
-            for m in draw_re.finditer(wikitext):
-                draw_num, day, mon, yr, main_str, pb_str = m.groups()
-                main = sorted(int(n) for n in re.findall(r'\d+', main_str))
-                pb = int(pb_str)
-                if len(main) == 7 and 1 <= pb <= 20:
-                    draws.append({
-                        "draw": int(draw_num),
-                        "date_str": std_date(day, mon, yr),
-                        "nums": main, "pb": pb
-                    })
-    except Exception as e:
-        print(f"  wikipedia: {e}")
-    return draws
+ROW_RE = re.compile(
+    r'\{draw:(\d+),date:"(\d{1,2}) ([A-Za-z]{3,9}) (\d{4})",nums:\[([\d,]+)\],pb:(\d+)\}')
 
-# ── MERGE & DEDUPLICATE ──────────────────────────────────────
-def collect_all_draws():
-    all_draws = []
-    sources = [
-        ("national-lottery.com", source_national_lottery),
-        ("powerball.net",        source_powerball_net),
-        ("lottolyzer.com",       source_lottolyzer),
-        ("wikipedia.org",        source_wikipedia),
+
+def page_draws(page):
+    out = {}
+    for dn, d, mon, y, nums, pb in ROW_RE.findall(page):
+        out[int(dn)] = (dt.date(int(y), MONTHS[mon[:3].lower()], int(d)),
+                        sorted(int(x) for x in nums.split(",")), int(pb))
+    if not out:
+        fail("could not read any existing draws from the page")
+    return out
+
+
+def build_rows(new):
+    lines = []
+    for dn in sorted(new, reverse=True):
+        date, mains, pb = new[dn]
+        lines.append(
+            f'  {{draw:{dn},date:"{date.day:02d} {MON_ABBR[date.month]} {date.year}",'
+            f'nums:[{",".join(map(str, mains))}],pb:{pb}}},')
+    return "\n".join(lines)
+
+
+def patch(page, new):
+    latest = max(new)
+    date, mains, pb = new[latest]
+    d = f"{date.day:02d} {MON_ABBR[date.month]} {date.year}"
+    nums = ", ".join(map(str, mains))
+    subs = [
+        (r"(const DRAWS_RAW=\[\n)", lambda mm: mm.group(1) + build_rows(new) + "\n"),
+        (r"DRAW #\d+ · \d{2} [A-Z]{3} 20\d{2}",
+         f"DRAW #{latest} · {d.upper()}"),
+        (r"Latest: [\d, ]+ \+ PB \d+", f"Latest: {nums} + PB {pb}"),
+        (r"Draw #\d+ · [A-Za-z]{3} \d{2} [A-Za-z]{3} 20\d{2}</strong> · [\d, ]+ \+ Powerball \d+",
+         f"Draw #{latest} · {WEEKDAY[date.weekday()]} {d}</strong> · {nums} + Powerball {pb}"),
+        (r"through Draw #\d+", f"through Draw #{latest}"),
     ]
-    for name, fn in sources:
-        print(f"  → {name}...", end=" ", flush=True)
-        try:
-            found = fn()
-            print(f"{len(found)} draws")
-            all_draws.extend(found)
-        except Exception as e:
-            print(f"failed ({e})")
+    for pattern, repl in subs:
+        page, n = re.subn(pattern, repl, page, count=1)
+        if n != 1:
+            fail(f"page layout changed; could not find the spot for: {pattern[:45]}")
+    return page
 
-    # Deduplicate — keep first occurrence (prefer earlier sources)
-    seen = {}
-    for d in all_draws:
-        if d["draw"] not in seen:
-            seen[d["draw"]] = d
-    return sorted(seen.values(), key=lambda x: x["draw"], reverse=True)
 
-# ── HTML PATCH ───────────────────────────────────────────────
-def get_current_draws(html):
-    pat = re.compile(r'\{draw:(\d+),date:"([^"]+)",nums:\[([^\]]+)\],pb:(\d+)\}')
-    draws = []
-    for m in pat.finditer(html):
-        nums = [int(n.strip()) for n in m.group(3).split(",")]
-        draws.append({
-            "draw": int(m.group(1)),
-            "date_str": m.group(2),
-            "nums": nums,
-            "pb": int(m.group(4))
-        })
-    return draws
+# ── main ───────────────────────────────────────────────────────────────
 
-def fmt(d):
-    nums = ",".join(str(n) for n in sorted(d["nums"]))
-    return f'  {{draw:{d["draw"]},date:"{d["date_str"]}",nums:[{nums}],pb:{d["pb"]}}},'
+def show(v):
+    date, mains, pb = v
+    return f"{date:%d %b %Y} {mains} + PB{pb}"
 
-def patch_html(html, new_draws):
-    existing = get_current_draws(html)
-    have = {d["draw"] for d in existing}
-    to_add = sorted(
-        [d for d in new_draws if d["draw"] not in have],
-        key=lambda x: x["draw"], reverse=True
-    )
-    if not to_add:
-        return html, False
 
-    print(f"  ✚ Inserting draws: {[d['draw'] for d in to_add]}")
-
-    # Insert before first existing draw line
-    first = re.search(r'(\s*\{draw:\d+,date:"[^"]+",nums:\[[^\]]+\],pb:\d+\},)', html)
-    if not first:
-        print("  ✗ Insertion point not found!")
-        return html, False
-
-    insert_text = "\n".join(fmt(d) for d in to_add) + "\n"
-    html = html[:first.start()] + "\n" + insert_text + html[first.start():]
-
-    top = to_add[0]
-    nums_str  = ", ".join(str(n) for n in top["nums"])
-    date_str  = top["date_str"]
-    draw_num  = top["draw"]
-    pb_str    = str(top["pb"])
-
-    # Badge: "DRAW #1560 · 9 APR 2026"
-    html = re.sub(
-        r'DRAW #\d+\s*·\s*[\d\w ]+\d{4}',
-        f'DRAW #{draw_num} · {date_str.upper()}',
-        html
-    )
-    # data-info latest line
-    html = re.sub(
-        r'Latest:[\d,\s]+ \+ PB \d+',
-        f'Latest: {nums_str} + PB {pb_str}',
-        html
-    )
-    # Footer
-    html = re.sub(
-        r'Draw #\d+ · Thu [\d\w ]+ \d{4}</strong> · [\d,\s]+ \+ Powerball \d+',
-        f'Draw #{draw_num} · Thu {date_str}</strong> · {nums_str} + Powerball {pb_str}',
-        html
-    )
-    return html, True
-
-# ── MAIN ─────────────────────────────────────────────────────
 def main():
-    now = datetime.now()
-    print(f"\n{'='*56}")
-    print(f"  🎱 Powerball Auto-Updater — {now.strftime('%Y-%m-%d %H:%M')}")
-    print(f"{'='*56}\n")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--file", default=HTML_FILE)
+    ap.add_argument("--from-html", nargs="+", help="parse local files instead of fetching")
+    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--today", help="YYYY-MM-DD, for testing")
+    args = ap.parse_args()
 
-    with open(HTML_FILE, "r", encoding="utf-8") as f:
-        html = f.read()
+    today = dt.date.fromisoformat(args.today) if args.today else dt.date.today()
+    with open(args.file, encoding="utf-8") as f:
+        page = f.read()
+    known = page_draws(page)
+    cur_max = max(known)
+    cur_date = known[cur_max][0]
+    log(f"page latest: #{cur_max} ({cur_date:%d %b %Y}); today {today}")
 
-    current = get_current_draws(html)
-    top_cur = current[0]["draw"] if current else 0
-    print(f"  Current top draw in file : #{top_cur}")
+    # 1) Read every source and log exactly what happened.
+    per_source = []
+    if args.from_html:
+        for path in args.from_html:
+            with open(path, encoding="utf-8") as f:
+                per_source.append((path, parse_draws(to_text(f.read()))))
+    else:
+        for name, url in SOURCES:
+            try:
+                status, body = fetch(url)
+                parsed = parse_draws(to_text(body))
+                log(f"{name}: HTTP {status}, {len(body):,} chars, {len(parsed)} draws parsed")
+            except urllib.error.HTTPError as e:
+                log(f"{name}: HTTP {e.code} (blocked or unavailable)")
+                parsed = {}
+            except Exception as e:  # network errors, timeouts
+                log(f"{name}: failed to fetch ({e.__class__.__name__}: {e})")
+                parsed = {}
+            per_source.append((name, parsed))
 
-    print("\n📡 Scraping sources...")
-    draws = collect_all_draws()
+    if not any(p for _, p in per_source):
+        fail("no source returned any readable draws; the sites may have changed or be blocking")
 
-    if not draws:
-        print("\n❌ No draws retrieved from any source. Exiting.")
-        sys.exit(0)
+    # 2) Trust a source only if it reproduces draws the page already has.
+    trusted = []
+    for name, parsed in per_source:
+        parsed = {dn: v for dn, v in parsed.items() if v[0] <= today + dt.timedelta(days=1)}
+        if not parsed:
+            continue
+        overlap = [dn for dn in parsed if dn in known]
+        if not overlap:
+            warn(f"{name}: shows nothing that is already on the page, so it cannot be checked; ignored")
+            continue
+        bad = [dn for dn in overlap if parsed[dn] != known[dn]]
+        if bad:
+            dn = bad[0]
+            warn(f"{name}: disagrees with the page on #{dn} "
+                 f"({show(parsed[dn])} vs page {show(known[dn])}); ignored")
+            continue
+        log(f"{name}: trusted (matches the page on {len(overlap)} known draws, "
+            f"latest it shows #{max(parsed)})")
+        trusted.append((name, parsed))
 
-    top_new = draws[0]["draw"]
-    print(f"\n  Latest available draw    : #{top_new}")
+    if not trusted:
+        fail("no source could be verified against the page, so nothing was written")
 
-    if top_new <= top_cur:
-        print(f"  ✅ Already up-to-date (Draw #{top_cur}). Nothing to do.")
-        sys.exit(0)
+    # 3) Merge new draws; trusted sources that both show a draw must agree.
+    new, confirmed_by = {}, {}
+    for name, parsed in trusted:
+        for dn, v in parsed.items():
+            if dn <= cur_max:
+                continue
+            if dn in new and new[dn] != v:
+                fail(f"sources disagree on #{dn}: {show(new[dn])} vs {name} {show(v)}")
+            new.setdefault(dn, v)
+            confirmed_by.setdefault(dn, []).append(name)
 
-    print(f"\n✏️  Patching HTML...")
-    updated, changed = patch_html(html, draws)
+    if not new:
+        age = (today - cur_date).days
+        if age > STALE_DAYS:
+            fail(f"page latest #{cur_max} is {age} days old and no source has anything newer")
+        log("nothing new yet; page unchanged.")
+        return
 
-    if not changed:
-        print("  No changes were made.")
-        sys.exit(0)
+    # 4) Continuity: no gaps, exactly one week apart.
+    missing = [dn for dn in range(cur_max + 1, max(new) + 1) if dn not in new]
+    if missing:
+        fail(f"missing draws {missing} between #{cur_max} and #{max(new)}; not writing a gap")
+    prev = cur_date
+    for dn in sorted(new):
+        if (new[dn][0] - prev).days != 7:
+            fail(f"#{dn} is dated {new[dn][0]:%d %b %Y}, expected {prev + dt.timedelta(days=7):%d %b %Y}")
+        prev = new[dn][0]
 
-    with open(HTML_FILE, "w", encoding="utf-8") as f:
-        f.write(updated)
+    for dn in sorted(new):
+        log(f"new #{dn} {show(new[dn])}  [{', '.join(confirmed_by[dn])}]")
 
-    top = draws[0]
-    print(f"\n✅ Done! New top draw: #{top['draw']} · {top['date_str']}")
-    print(f"   Numbers : {top['nums']} + PB {top['pb']}\n")
+    patched = patch(page, new)
+    if args.dry_run:
+        log("dry run: not writing.")
+        return
+    with open(args.file, "w", encoding="utf-8") as f:
+        f.write(patched)
+    log(f"updated {args.file}: now through #{max(new)} ({len(new)} new).")
+
 
 if __name__ == "__main__":
     main()
