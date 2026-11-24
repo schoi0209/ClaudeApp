@@ -96,52 +96,88 @@ def to_text(raw):
     return re.sub(r"\s+", " ", raw)
 
 
-def parse_draws(text):
+MONTH_RE = (r"(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|"
+            r"Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)")
+DATE_RE = re.compile(r"\b(\d{1,2})\s+" + MONTH_RE + r"\b(?:\s+(20\d{2}))?", re.I)
+MARK_RE = re.compile(r"\s*Draw\s+(\d{3,5})\b", re.I)
+BEFORE_RE = re.compile(
+    r"Draw\s+(\d{3,5})\s*[-–]?\s*(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\s*,?\s*$", re.I)
+TOKEN_RE = re.compile(r"\s*(\$?\d[\d,.]*|[^\s\d]+)")
+
+
+def _read_run(text, pos):
+    """Consecutive 1-2 digit numbers starting at pos; any other token ends it."""
+    nums = []
+    while len(nums) < 12:
+        m = TOKEN_RE.match(text, pos)
+        if not m or not (m.group(1).isdigit() and len(m.group(1)) <= 2):
+            break
+        nums.append(int(m.group(1)))
+        pos = m.end()
+    return nums, pos
+
+
+def _guess_year(month, day, today):
+    """For dates printed without a year: the year that puts it nearest today."""
+    best = None
+    for y in (today.year - 1, today.year, today.year + 1):
+        try:
+            d = dt.date(y, month, day)
+        except ValueError:
+            continue
+        if best is None or abs((d - today).days) < abs((best - today).days):
+            best = d
+    return best
+
+
+def parse_draws(text, today):
     """
     Return {draw_no: (date, [7 sorted mains], pb)} found in page text.
 
-    Markup independent: find each 'Draw <N>', take the date next to it (before
-    it on powerball.net, after it on national-lottery), then read the run of
-    1-2 digit numbers that follows: 7 main balls, then the Powerball. Winner
-    counts and prize amounts end the run. Rows without a 4-digit year are
-    skipped; the newest draws always carry one.
+    Anchored on dates, because on every layout seen so far the 8 numbers
+    (7 main balls, then the Powerball) come right after a draw's date. The
+    'Draw N' label may sit before the date, between the date and the balls,
+    or just after the balls; all three are accepted:
+        national-lottery: "Draw 1591 Thursday 12 November 2 7 11 13 25 27 31 2 View"
+        powerball.net top: "Thursday, 19 November 2026 Draw 1592 3 4 9 16 21 32 35 16"
+        powerball.net list: "Thursday, 12 November 2026 2 7 11 13 25 27 31 2 Draw 1591"
+    Exactly 8 numbers are required; anything else after the date is ignored.
+    A date printed without a year gets the year that puts it nearest today.
     """
+    text = re.sub(r"[·•|]", " ", text)   # middots, bullets, bars as separators
     draws = {}
-    date_re = re.compile(r"(\d{1,2})\s+([A-Za-z]{3,9})\s+(20\d{2})")
-    for m in re.finditer(r"Draw\s+(\d{3,5})", text):
-        draw_no = int(m.group(1))
-        head = text[max(0, m.start() - 48):m.start()]
-        after = text[m.end():m.end() + 180]
+    for dm in DATE_RE.finditer(text):
+        month = MONTHS[dm.group(2)[:3].lower()]
+        day = int(dm.group(1))
+        pos, draw_no = dm.end(), None
 
-        dm = None
-        for cand in date_re.finditer(head):
-            dm = cand                       # the last date before the marker
-        date_in_after = dm is None
-        if date_in_after:
-            dm = date_re.search(after)
-        if dm is None:
+        between = MARK_RE.match(text, pos)
+        if between:
+            draw_no, pos = int(between.group(1)), between.end()
+        nums, end = _read_run(text, pos)
+        if len(nums) != N_MAIN + 1:
             continue
-        mon = MONTHS.get(dm.group(2)[:3].lower())
-        if not mon:
-            continue
-        try:
-            date = dt.date(int(dm.group(3)), mon, int(dm.group(1)))
-        except ValueError:
+        if draw_no is None:
+            before = BEFORE_RE.search(text[max(0, dm.start() - 40):dm.start()])
+            if before:
+                draw_no = int(before.group(1))
+        if draw_no is None:
+            after = MARK_RE.match(text, end)
+            if after:
+                draw_no = int(after.group(1))
+        if draw_no is None:
             continue
 
-        # If the date sat after the marker, start past it so the day of the
-        # month isn't read as a ball.
-        region = after[dm.end():] if date_in_after else after
-        nums = []
-        for tok in re.finditer(r"\d{1,3}", region):
-            v = int(tok.group())
-            if v > 99:
-                break
-            nums.append(v)
-            if len(nums) >= 12:
-                break
-        if len(nums) < N_MAIN + 1:
-            continue
+        if dm.group(3):
+            try:
+                date = dt.date(int(dm.group(3)), month, day)
+            except ValueError:
+                continue
+        else:
+            date = _guess_year(month, day, today)
+            if date is None:
+                continue
+
         mains, pb = nums[:N_MAIN], nums[N_MAIN]
         if any(not (MAIN_MIN <= x <= MAIN_MAX) for x in mains):
             continue
@@ -195,6 +231,10 @@ def patch(page, new):
         page, n = re.subn(pattern, repl, page, count=1)
         if n != 1:
             fail(f"page layout changed; could not find the spot for: {pattern[:45]}")
+    # Cosmetic: stretch the "2024–2026 · Latest:" range when a new year starts.
+    page = re.sub(r"(\d{4})–(\d{4})( · Latest:)",
+                  lambda m: f"{m.group(1)}–{max(int(m.group(2)), date.year)}{m.group(3)}",
+                  page, count=1)
     return page
 
 
@@ -226,12 +266,12 @@ def main():
     if args.from_html:
         for path in args.from_html:
             with open(path, encoding="utf-8") as f:
-                per_source.append((path, parse_draws(to_text(f.read()))))
+                per_source.append((path, parse_draws(to_text(f.read()), today)))
     else:
         for name, url in SOURCES:
             try:
                 status, body = fetch(url)
-                parsed = parse_draws(to_text(body))
+                parsed = parse_draws(to_text(body), today)
                 log(f"{name}: HTTP {status}, {len(body):,} chars, {len(parsed)} draws parsed")
             except urllib.error.HTTPError as e:
                 log(f"{name}: HTTP {e.code} (blocked or unavailable)")
