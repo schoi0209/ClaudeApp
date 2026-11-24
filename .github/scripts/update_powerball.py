@@ -150,6 +150,12 @@ MARK_RE = re.compile(r"\s*Draw\s+(\d{3,5})\b", re.I)
 BEFORE_RE = re.compile(
     r"Draw\s+(\d{3,5})\s*[-–]?\s*(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\s*,?\s*$", re.I)
 TOKEN_RE = re.compile(r"\s*(\$?\d[\d,.]*|[^\s\d]+)")
+# After the balls: optional "Draw N", optional winner count, optional "Jackpot:",
+# then the dollar amount. powerball.net: "... 2 Draw 1591 1,123,930 $40,000,000";
+# national-lottery's top draw: "... 16 Jackpot: $60,000,000".
+JP_RE = re.compile(r"\s*(?:Draw\s+\d{3,5}\s+)?(?:\d[\d,]*\s+)?(?:Jackpot\s*:?\s*)?"
+                   r"\$\s?(\d[\d,]*(?:\.\d+)?)", re.I)
+JP_MIN, JP_MAX = 1_000_000, 2_000_000_000
 
 
 def _read_run(text, pos):
@@ -177,7 +183,7 @@ def _guess_year(month, day, today):
     return best
 
 
-def parse_draws(text, today):
+def parse_draws(text, today, jackpots=None):
     """
     Return {draw_no: (date, [7 sorted mains], pb)} found in page text.
 
@@ -190,6 +196,8 @@ def parse_draws(text, today):
         powerball.net list: "Thursday, 12 November 2026 2 7 11 13 25 27 31 2 Draw 1591"
     Exactly 8 numbers are required; anything else after the date is ignored.
     A date printed without a year gets the year that puts it nearest today.
+    If a jackpots dict is passed, {draw_no: dollars} is filled in for draws whose
+    jackpot is printed right after the balls.
     """
     text = re.sub(r"[·•|]", " ", text)   # middots, bullets, bars as separators
     draws = {}
@@ -231,18 +239,25 @@ def parse_draws(text, today):
         if len(set(mains)) != N_MAIN or not (PB_MIN <= pb <= PB_MAX):
             continue
         draws.setdefault(draw_no, (date, sorted(mains), pb))
+        if jackpots is not None:
+            jm = JP_RE.match(text, end)
+            if jm:
+                amount = int(float(jm.group(1).replace(",", "")))
+                if JP_MIN <= amount <= JP_MAX:
+                    jackpots.setdefault(draw_no, amount)
     return draws
 
 
 # ── the page ───────────────────────────────────────────────────────────
 
 ROW_RE = re.compile(
-    r'\{draw:(\d+),date:"(\d{1,2}) ([A-Za-z]{3,9}) (\d{4})",nums:\[([\d,]+)\],pb:(\d+)\}')
+    r'\{draw:(\d+),date:"(\d{1,2}) ([A-Za-z]{3,9}) (\d{4})",nums:\[([\d,]+)\],pb:(\d+)'
+    r'(?:,jp:(\d+))?\}')
 
 
 def page_draws(page):
     out = {}
-    for dn, d, mon, y, nums, pb in ROW_RE.findall(page):
+    for dn, d, mon, y, nums, pb, _jp in ROW_RE.findall(page):
         out[int(dn)] = (dt.date(int(y), MONTHS[mon[:3].lower()], int(d)),
                         sorted(int(x) for x in nums.split(",")), int(pb))
     if not out:
@@ -250,23 +265,28 @@ def page_draws(page):
     return out
 
 
-def build_rows(new):
+def page_jackpots(page):
+    return {int(m[0]): int(m[6]) for m in ROW_RE.findall(page) if m[6]}
+
+
+def build_rows(new, jps):
     lines = []
     for dn in sorted(new, reverse=True):
         date, mains, pb = new[dn]
+        jp = f",jp:{jps[dn]}" if dn in jps else ""
         lines.append(
             f'  {{draw:{dn},date:"{date.day:02d} {MON_ABBR[date.month]} {date.year}",'
-            f'nums:[{",".join(map(str, mains))}],pb:{pb}}},')
+            f'nums:[{",".join(map(str, mains))}],pb:{pb}{jp}}},')
     return "\n".join(lines)
 
 
-def patch(page, new):
+def patch(page, new, jps):
     latest = max(new)
     date, mains, pb = new[latest]
     d = f"{date.day:02d} {MON_ABBR[date.month]} {date.year}"
     nums = ", ".join(map(str, mains))
     subs = [
-        (r"(const DRAWS_RAW=\[\n)", lambda mm: mm.group(1) + build_rows(new) + "\n"),
+        (r"(const DRAWS_RAW=\[\n)", lambda mm: mm.group(1) + build_rows(new, jps) + "\n"),
         (r"DRAW #\d+ · \d{2} [A-Z]{3} 20\d{2}",
          f"DRAW #{latest} · {d.upper()}"),
         (r"Latest: [\d, ]+ \+ PB \d+", f"Latest: {nums} + PB {pb}"),
@@ -283,6 +303,20 @@ def patch(page, new):
                   lambda m: f"{m.group(1)}–{max(int(m.group(2)), date.year)}{m.group(3)}",
                   page, count=1)
     return page
+
+
+def fill_jackpots(page, fill):
+    """Add jp to existing rows that don't have one yet."""
+    for dn, jp in fill.items():
+        page, n = re.subn(r'(\{draw:%d,date:"[^"]+",nums:\[[\d,]+\],pb:\d+)\}' % dn,
+                          lambda m: f"{m.group(1)},jp:{jp}}}", page, count=1)
+        if n != 1:
+            fail(f"could not find row #{dn} to add its jackpot")
+    return page
+
+
+def money(n):
+    return f"${n / 1e6:.1f}M".replace(".0M", "M")
 
 
 # ── main ───────────────────────────────────────────────────────────────
@@ -313,21 +347,23 @@ def main():
     if args.from_html:
         for path in args.from_html:
             with open(path, encoding="utf-8") as f:
-                per_source.append((path, parse_draws(to_text(f.read()), today)))
+                jps = {}
+                per_source.append((path, parse_draws(to_text(f.read()), today, jps), jps))
     unreachable = []
     if not args.from_html:
         for name, url in SOURCES:
             kind, info = fetch_source(name, url)
-            parsed = {}
+            parsed, jps = {}, {}
             if kind == "ok":
                 status, body = info
-                parsed = parse_draws(to_text(body), today)
-                log(f"{name}: HTTP {status}, {len(body):,} chars, {len(parsed)} draws parsed")
+                parsed = parse_draws(to_text(body), today, jps)
+                log(f"{name}: HTTP {status}, {len(body):,} chars, {len(parsed)} draws parsed, "
+                    f"{len(jps)} jackpots")
             elif kind == "unreachable":
                 unreachable.append(name)
-            per_source.append((name, parsed))
+            per_source.append((name, parsed, jps))
 
-    if not any(p for _, p in per_source):
+    if not any(p for _, p, _j in per_source):
         if per_source and len(unreachable) == len(per_source):
             age = (today - cur_date).days
             if age > STALE_DAYS:
@@ -339,7 +375,7 @@ def main():
 
     # 2) Trust a source only if it reproduces draws the page already has.
     trusted = []
-    for name, parsed in per_source:
+    for name, parsed, jps in per_source:
         parsed = {dn: v for dn, v in parsed.items() if v[0] <= today + dt.timedelta(days=1)}
         if not parsed:
             continue
@@ -355,14 +391,14 @@ def main():
             continue
         log(f"{name}: trusted (matches the page on {len(overlap)} known draws, "
             f"latest it shows #{max(parsed)})")
-        trusted.append((name, parsed))
+        trusted.append((name, parsed, jps))
 
     if not trusted:
         fail("no source could be verified against the page, so nothing was written")
 
     # 3) Merge new draws; trusted sources that both show a draw must agree.
     new, confirmed_by = {}, {}
-    for name, parsed in trusted:
+    for name, parsed, _jps in trusted:
         for dn, v in parsed.items():
             if dn <= cur_max:
                 continue
@@ -371,11 +407,32 @@ def main():
             new.setdefault(dn, v)
             confirmed_by.setdefault(dn, []).append(name)
 
+    # Jackpots from trusted sources (first one wins; a mismatch is only a warning).
+    jp_all = {}
+    for name, _parsed, jps in trusted:
+        for dn, amount in jps.items():
+            if dn in jp_all and jp_all[dn] != amount:
+                warn(f"{name}: jackpot for #{dn} is {money(amount)}, another source says "
+                     f"{money(jp_all[dn])}; keeping the first")
+            jp_all.setdefault(dn, amount)
+    have_jp = page_jackpots(page)
+    fill = {dn: a for dn, a in jp_all.items() if dn in known and dn not in have_jp}
+
     if not new:
         age = (today - cur_date).days
         if age > STALE_DAYS:
             fail(f"page latest #{cur_max} is {age} days old and no source has anything newer")
-        log("nothing new yet; page unchanged.")
+        if not fill:
+            log("nothing new yet; page unchanged.")
+            return
+        log("no new draws; adding missing jackpots: "
+            + ", ".join(f"#{dn} {money(a)}" for dn, a in sorted(fill.items())))
+        if args.dry_run:
+            log("dry run: not writing.")
+            return
+        with open(args.file, "w", encoding="utf-8") as f:
+            f.write(fill_jackpots(page, fill))
+        log(f"updated {args.file}: {len(fill)} jackpots added.")
         return
 
     # 4) Continuity: no gaps, exactly one week apart.
@@ -389,9 +446,10 @@ def main():
         prev = new[dn][0]
 
     for dn in sorted(new):
-        log(f"new #{dn} {show(new[dn])}  [{', '.join(confirmed_by[dn])}]")
+        jp = f" | jackpot {money(jp_all[dn])}" if dn in jp_all else " | jackpot unknown"
+        log(f"new #{dn} {show(new[dn])}{jp}  [{', '.join(confirmed_by[dn])}]")
 
-    patched = patch(page, new)
+    patched = fill_jackpots(patch(page, new, jp_all), fill)
     if args.dry_run:
         log("dry run: not writing.")
         return
