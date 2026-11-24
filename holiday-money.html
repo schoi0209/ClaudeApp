@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Compare holiday currencies: today's rate, all-time high and low, fees, split-exchange planner and a good-time-to-exchange signal.">
+<meta name="description" content="Compare holiday currencies: today's rate, all-time high and low, trip budget, best months to exchange, fees, split-exchange planner and a good-time-to-exchange signal.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -260,6 +260,49 @@ dl.tiles{margin:0}
 .rbar span{position:absolute;top:50%;height:12px;transform:translateY(-50%);border-radius:99px;min-width:6px}
 .rbar span.now{background:var(--ink)} .rbar span.split{background:var(--brand)} .rbar span.wait{background:var(--mid-strong)}
 .r-axis{display:flex;justify-content:space-between;font:400 11px var(--f-mono);color:var(--muted);margin-left:130px}
+/* Trip budget */
+.bud-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bud-f{display:grid;gap:6px;min-width:0;font-size:12.5px;font-weight:600;color:var(--muted);align-content:end}
+.bud-in{display:flex;align-items:center;background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .15s}
+.bud-in:focus-within{border-color:var(--brand)}
+.bud-in input{flex:1;min-width:0;width:100%;border:0;background:transparent;color:var(--ink);font:500 17px var(--f-mono);padding:9px 4px 9px 12px;outline:none}
+.bud-in em{font:500 12px var(--f-mono);font-style:normal;color:var(--muted);padding-right:12px;white-space:nowrap}
+.bud-opts{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.bud-chk{display:inline-flex;gap:8px;align-items:center;font-weight:600;color:var(--ink);cursor:pointer}
+.bud-chk input{width:17px;height:17px;accent-color:var(--brand-fill)}
+.bud-sel{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bud-sel select{background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 9px;font:600 13px var(--f-body);max-width:100%}
+.bud-out{background:var(--sun-soft);border-radius:18px;padding:16px 18px;display:grid;gap:12px}
+.bud-total span{font-size:13px;color:var(--muted);font-weight:600}
+.bud-total strong{display:block;font:500 clamp(26px,4vw,32px)/1.15 var(--f-mono);letter-spacing:-.02em;color:var(--ink);margin:2px 0;overflow-wrap:anywhere}
+.bud-total small{font:400 12.5px var(--f-mono);color:var(--muted)}
+.bud-break{margin:0;display:grid;gap:5px;border-top:1px dashed var(--line);padding-top:10px}
+.bud-break div{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.bud-break dt{color:var(--muted)}
+.bud-break dd{margin:0;font:500 13px var(--f-mono);text-align:right}
+.bud-go{border:0;background:var(--brand-fill);color:#fff;font:700 14px var(--f-body);border-radius:12px;padding:12px 14px;cursor:pointer;transition:filter .15s,transform .15s}
+.bud-go:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+.bud-go:disabled{background:var(--good-bg);color:var(--good);cursor:default}
+/* Monthly pattern */
+.season{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;padding-top:4px}
+.sb{display:grid;gap:6px;justify-items:center;border-radius:10px;padding:6px 0 4px;cursor:default}
+.sb.trip{background:var(--sun-soft);box-shadow:0 0 0 1.5px var(--mid-strong) inset}
+.sb-plot{position:relative;width:100%;height:150px}
+.sb-plot::before{content:"";position:absolute;left:2px;right:2px;top:50%;height:1.5px;background:var(--line)}
+.sb-plot i{position:absolute;left:22%;right:22%;border-radius:5px;min-height:2px}
+.sb-plot i.pos{bottom:50%;background:var(--good-strong)}
+.sb-plot i.neg{top:50%;background:var(--bad-strong);opacity:.85}
+.sb.best .sb-plot i.pos{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--good-strong)}
+.sb-m{font:500 11.5px var(--f-mono);color:var(--muted)}
+.sb-m b{font-weight:500}
+.sb.best .sb-m,.sb.worst .sb-m,.sb.trip .sb-m{color:var(--ink);font-weight:600}
+.s-legend{display:flex;gap:14px;flex-wrap:wrap;font:400 12px var(--f-mono);color:var(--muted)}
+.s-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.s-legend i.pos{background:var(--good-strong)} .s-legend i.neg{background:var(--bad-strong)}
+.s-legend i.trip-k{background:var(--sun-soft);box-shadow:0 0 0 1.5px var(--mid-strong) inset}
+.s-sum{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--muted)}
+.s-sum b{color:var(--ink)}
+@media (max-width:520px){.sb-m b{display:none}.sb-plot{height:120px}.bud-grid{grid-template-columns:1fr 1fr}}
 
 /* ── Compare ── */
 .cmp{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px 22px}
@@ -347,10 +390,12 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
   <div class="sec-head">
     <div>
       <h2>Plan your <em id="planCode">IDR</em> exchange</h2>
-      <p>See what each way of exchanging really costs you, and how to spread your exchange before you fly.</p>
+      <p>Work out how much you need, see which months have usually been better, what each way of exchanging costs, and how to spread it before you fly.</p>
     </div>
   </div>
   <section class="plan">
+    <div class="panel" id="budgetPanel"></div>
+    <div class="panel" id="seasonPanel"></div>
     <div class="panel" id="feesPanel"></div>
     <div class="panel" id="splitPanel"></div>
   </section>
@@ -675,8 +720,11 @@ let state={base:"AUD",dest:null,range:"all",amount:1000,sort:"score"};
 state.view="all";state.cmpRange="3y";state.favs=[];state.cmp=null;state.months=3;state.lots=3;state.fees=null;
 try{const s=JSON.parse(localStorage.getItem("hm-state")||"{}");if(META[s.base])state.base=s.base;if(s.amount>0)state.amount=s.amount;if(s.range)state.range=s.range;
   if(Array.isArray(s.favs))state.favs=s.favs.filter(c=>META[c]);if(Array.isArray(s.cmp))state.cmp=s.cmp.filter(c=>META[c]).slice(0,4);
-  if(s.cmpRange)state.cmpRange=s.cmpRange;if(s.months>0)state.months=s.months;if(s.lots>0)state.lots=s.lots;if(s.fees&&typeof s.fees==="object")state.fees=s.fees;}catch(e){}
-function save(){try{localStorage.setItem("hm-state",JSON.stringify({base:state.base,amount:state.amount,range:state.range,favs:state.favs,cmp:state.cmp,cmpRange:state.cmpRange,months:state.months,lots:state.lots,fees:state.fees}))}catch(e){}}
+  if(s.cmpRange)state.cmpRange=s.cmpRange;if(s.months>0)state.months=s.months;if(s.lots>0)state.lots=s.lots;if(s.fees&&typeof s.fees==="object")state.fees=s.fees;
+  if(s.bud&&typeof s.bud==="object")state.bud=s.bud;}catch(e){}
+// Trip budget: travellers and nights are shared; daily spend and hotel are kept per destination currency.
+state.bud=Object.assign({trav:2,nights:7,buffer:true,method:"online",daily:{},hotel:{}},state.bud||{});
+function save(){try{localStorage.setItem("hm-state",JSON.stringify({base:state.base,amount:state.amount,range:state.range,favs:state.favs,cmp:state.cmp,cmpRange:state.cmpRange,months:state.months,lots:state.lots,fees:state.fees,bud:state.bud}))}catch(e){}}
 const isFav=c=>state.favs.includes(c);
 function toggleFav(c){state.favs=isFav(c)?state.favs.filter(x=>x!==c):[...state.favs,c];save();renderGrid(false);renderFeature(false);}
 const $=id=>document.getElementById(id);
@@ -839,7 +887,91 @@ const FEE_DEF=[
   {id:"airport",name:"Airport exchange",note:"Kiosk at the terminal",m:10}];
 function feeM(id){const f=state.fees&&state.fees[id];return typeof f==="number"&&f>=0&&f<100?f:FEE_DEF.find(x=>x.id===id).m;}
 let planCtx=null;
-function renderPlan(s,st,c){planCtx={s,st,c};$("planCode").textContent=c;renderFees();renderSplit();}
+function renderPlan(s,st,c){planCtx={s,st,c};$("planCode").textContent=c;renderBudget();renderSeason();renderFees();renderSplit();}
+
+/* ── Trip budget ── */
+function niceRound(x){if(!(x>0))return 0;const p=Math.pow(10,Math.floor(Math.log10(x))-1);return Math.round(x/p)*p;}
+function budDefault(c){const aud=c==="AUD"?1:series("AUD",c)[0];return niceRound(150*aud);} // about 150 AUD a person a day
+function budDaily(c){const v=state.bud.daily[c];return v>=0?v:budDefault(c);}
+function budHotel(c){const v=state.bud.hotel[c];return v>=0?v:0;}
+function renderBudget(){
+  const {c}=planCtx,b=state.base,B=state.bud;
+  const num=(id,lbl,val,step,unit)=>`<label class="bud-f"><span>${lbl}</span><span class="bud-in"><input type="number" inputmode="decimal" min="0" step="${step}" id="${id}" value="${val}"><em>${unit}</em></span></label>`;
+  $("budgetPanel").innerHTML=`<h3><span class="ico" aria-hidden="true">🧳</span>How much do you need?</h3>
+  <div class="bud-grid">
+    ${num("budTrav","Travellers",B.trav,1,"people")}
+    ${num("budNights","Nights",B.nights,1,"nights")}
+    ${num("budDaily","Spending per person a day",budDaily(c),"any",c)}
+    ${num("budHotel","Hotel per night (if paying locally)",budHotel(c),"any",c)}
+  </div>
+  <div class="bud-opts">
+    <label class="bud-chk"><input type="checkbox" id="budBuffer"${B.buffer?" checked":""}> Add 10% buffer</label>
+    <label class="bud-sel">Exchange with <select id="budMethod">${FEE_DEF.map(f=>`<option value="${f.id}"${f.id===B.method?" selected":""}>${f.name} (${feeM(f.id)}%)</option>`).join("")}</select></label>
+  </div>
+  <p class="hint">Spending starts at about 150 AUD a person a day. Change it to your own budget.</p>
+  <div class="bud-out" aria-live="polite">
+    <div class="bud-total"><span>You need about</span><strong id="budBase"></strong><small id="budLocal"></small></div>
+    <dl class="bud-break" id="budBreak"></dl>
+    <button class="bud-go" type="button" id="budGo"></button>
+  </div>`;
+  updateBudget();
+}
+function budCalc(){
+  const {st,c}=planCtx,B=state.bud;
+  const spend=B.trav*B.nights*budDaily(c),hotel=B.nights*budHotel(c),buf=B.buffer?(spend+hotel)*.1:0,local=spend+hotel+buf;
+  const mid=local/st.cur,m=feeM(B.method),total=m<100?mid/(1-m/100):mid;
+  return{spend,hotel,buf,local,mid,total,fee:total-mid,m};
+}
+function updateBudget(){
+  const {c}=planCtx,b=state.base,r=budCalc(),B=state.bud;
+  $("budBase").textContent=`${fmtMoney(Math.ceil(r.total))} ${b}`;
+  $("budLocal").textContent=`= ${fmtMoney(r.local)} ${c} for ${B.trav} ${B.trav===1?"person":"people"}, ${B.nights} ${B.nights===1?"night":"nights"}`;
+  const row=(k,v)=>`<div><dt>${k}</dt><dd>${v}</dd></div>`;
+  $("budBreak").innerHTML=row("Spending",`${fmtMoney(r.spend)} ${c}`)+(r.hotel?row("Hotel",`${fmtMoney(r.hotel)} ${c}`):"")+(r.buf?row("10% buffer",`${fmtMoney(r.buf)} ${c}`):"")
+    +row("At the mid-market rate",`${fmtMoney(r.mid)} ${b}`)+row(`Exchange cost (${r.m}%)`,`${fmtMoney(r.fee)} ${b}`);
+  const go=$("budGo"),same=Math.ceil(r.total)===Math.round(state.amount);
+  go.disabled=!(r.total>0)||same;
+  go.textContent=same?"✓ Used in the planner below":`Plan exchanging ${fmtMoney(Math.ceil(r.total))} ${b} →`;
+}
+$("budgetPanel").addEventListener("input",e=>{const t=e.target,c=planCtx.c,v=parseFloat(t.value),B=state.bud;
+  if(t.id==="budTrav"){if(v>=1)B.trav=Math.min(50,Math.round(v));}
+  else if(t.id==="budNights"){if(v>=1)B.nights=Math.min(365,Math.round(v));}
+  else if(t.id==="budDaily"){if(v>=0)B.daily[c]=v;else delete B.daily[c];}
+  else if(t.id==="budHotel"){if(v>=0)B.hotel[c]=v;else delete B.hotel[c];}
+  else if(t.id==="budBuffer")B.buffer=t.checked;
+  else return;save();updateBudget();});
+$("budgetPanel").addEventListener("change",e=>{if(e.target.id==="budMethod"){state.bud.method=e.target.value;save();updateBudget();}});
+$("budgetPanel").addEventListener("click",e=>{if(e.target.id!=="budGo")return;const amt=Math.ceil(budCalc().total);if(!(amt>0))return;
+  state.amount=amt;$("amt").value=amt;save();renderFeature();renderGrid(false);renderCompareList();
+  $("splitPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});});
+
+/* ── Monthly pattern ── */
+// For every complete calendar year, compare each month's close with that year's average; then average per month.
+function seasonality(s){
+  const years={};
+  s.forEach((v,i)=>{const t=ANCHOR-i,y=Math.floor(t/12),m=((t%12)+12)%12;(years[y]=years[y]||[])[m]=v;});
+  const dev=Array.from({length:12},()=>[]);let n=0;
+  Object.values(years).forEach(row=>{if(row.filter(x=>x>0).length!==12)return;n++;const mean=row.reduce((a,x)=>a+x,0)/12;row.forEach((v,m)=>dev[m].push(v/mean-1));});
+  return{n,avg:dev.map(d=>d.length?d.reduce((a,x)=>a+x,0)/d.length:0),up:dev.map(d=>d.length?d.filter(x=>x>0).length/d.length:0),first:Math.min(...Object.keys(years).map(Number).filter(y=>years[y].filter(x=>x>0).length===12))};
+}
+function renderSeason(){
+  const {s,c}=planCtx,b=state.base,se=seasonality(s);
+  const trip=((ANCHOR+state.months)%12+12)%12;
+  if(se.n<3){$("seasonPanel").innerHTML=`<h3><span class="ico" aria-hidden="true">📅</span>Best months to exchange</h3><p class="hint">Not enough full years of data for ${b} → ${c} yet.</p>`;return;}
+  const mx=Math.max(...se.avg.map(Math.abs),1e-9),best=se.avg.indexOf(Math.max(...se.avg)),worst=se.avg.indexOf(Math.min(...se.avg));
+  const flat=mx<.002;
+  const bars=se.avg.map((v,m)=>{const h=Math.abs(v)/mx*100,k=v>=0?"pos":"neg";
+    return `<div class="sb${m===trip?" trip":""}${m===best?" best":""}${m===worst?" worst":""}" title="${MONTHS[m]}: ${sp(v,2)} vs the year's average · better than average in ${Math.round(se.up[m]*100)}% of ${se.n} years">
+      <div class="sb-plot"><i class="${k}" style="height:${(h/2).toFixed(1)}%"></i></div><span class="sb-m">${MONTHS[m][0]}<b>${MONTHS[m].slice(1)}</b></span></div>`;}).join("");
+  const tv=se.avg[trip],tripTxt=`Your trip month (${MONTHS[trip]}, from the split planner) has averaged ${sp(tv,1)}${Math.abs(tv)<mx*.33?", close to average":tv>0?", one of the better months":", one of the weaker months"}.`;
+  $("seasonPanel").innerHTML=`<h3><span class="ico" aria-hidden="true">📅</span>Best months to exchange</h3>
+  <p class="hint">How much more or less ${c} your ${b} bought in each month, compared with that year's average. ${se.n} full years from ${se.first}.</p>
+  <div class="season" role="img" aria-label="Average monthly pattern for ${b} to ${c}">${bars}</div>
+  <div class="s-legend"><span><i class="pos"></i>Money went further</span><span><i class="neg"></i>Money went less far</span><span><i class="trip-k"></i>Your trip month</span></div>
+  ${flat?`<div class="s-sum"><b>No real pattern.</b> ${b} → ${c} barely moves by month (under 0.2%), so timing by season makes little difference.</div>`:
+  `<div class="s-sum"><b>Usually best: ${MONTHS[best]}</b> (${sp(se.avg[best],1)}, better than average in ${Math.round(se.up[best]*100)}% of years). <b>Usually weakest: ${MONTHS[worst]}</b> (${sp(se.avg[worst],1)}).</div>
+  <p class="hint">${tripTxt} Patterns like this are small next to normal swings and often break, so treat them as a tie-breaker, not a forecast.</p>`}`;
+}
 function renderFees(){
   const b=state.base;
   $("feesPanel").innerHTML=`<h3><span class="ico" aria-hidden="true">🧾</span>What you actually get</h3>
@@ -912,7 +1044,7 @@ function renderSplit(){
   <div class="strategy ${k}"><b>${strat[0]} · score ${st.score}</b>${strat[1]}</div>
   <ol class="lots">${lots}</ol>${risk}`;
 }
-$("splitPanel").addEventListener("change",e=>{const t=e.target;if(t.id==="planMonths")state.months=+t.value;else if(t.id==="planLots")state.lots=+t.value;else return;save();renderSplit();});
+$("splitPanel").addEventListener("change",e=>{const t=e.target;if(t.id==="planMonths")state.months=+t.value;else if(t.id==="planLots")state.lots=+t.value;else return;save();renderSplit();if(t.id==="planMonths")renderSeason();});
 
 /* ── Compare ── */
 const CMP_COL=["var(--c1)","var(--c2)","var(--c3)","var(--c4)"];
