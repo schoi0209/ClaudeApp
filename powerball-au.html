@@ -6,8 +6,8 @@
 <title>Powerball AU — Number Oracle</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root,[data-theme="dark"]{--bg:#08090F;--bg2:#0E1018;--bg3:#151823;--card:#12141E;--card2:#1A1D2C;--border:rgba(255,215,0,0.15);--border2:rgba(255,255,255,0.07);--text:#E8EAF0;--text2:#B0B5C0;--muted:#6B7280;--gold:#FFD700;--hot-c:#FF6B35;--hot-bg:rgba(255,80,40,0.12);--warm-c:#FFB347;--warm-bg:rgba(255,140,50,0.10);--cold-c:#5599FF;--cold-bg:rgba(80,120,255,0.12);--pb-red:#FF2D4E;--pb-bg:rgba(255,45,78,0.15);--shadow:0 4px 24px rgba(0,0,0,0.4);--toggle-bg:#1A1D2C;--header-sep:rgba(255,215,0,0.12);--score-bar:rgba(255,215,0,0.07);--mini-bg:#1A1D2C;--mini-br:rgba(255,255,255,0.10);}
-[data-theme="light"]{--bg:#F5F3EE;--bg2:#EDEBE4;--bg3:#E5E2D8;--card:#FFFFFF;--card2:#F9F8F5;--border:rgba(180,130,0,0.18);--border2:rgba(0,0,0,0.08);--text:#1A1A2E;--text2:#3D3D5C;--muted:#7A7A9A;--gold:#B8860B;--hot-c:#C0330A;--hot-bg:rgba(192,51,10,0.10);--warm-c:#A05000;--warm-bg:rgba(160,80,0,0.09);--cold-c:#1A5FBB;--cold-bg:rgba(26,95,187,0.10);--pb-red:#C8002A;--pb-bg:rgba(200,0,42,0.10);--shadow:0 2px 16px rgba(0,0,0,0.10);--toggle-bg:#E5E2D8;--header-sep:rgba(180,130,0,0.14);--score-bar:rgba(180,130,0,0.06);--mini-bg:#EDEBE4;--mini-br:rgba(0,0,0,0.12);}
+:root,[data-theme="dark"]{--bg:#08090F;--bg2:#0E1018;--bg3:#151823;--card:#12141E;--card2:#1A1D2C;--border:rgba(255,215,0,0.15);--border2:rgba(255,255,255,0.07);--text:#E8EAF0;--text2:#B0B5C0;--muted:#6B7280;--gold:#FFD700;--hot-c:#FF6B35;--hot-bg:rgba(255,80,40,0.12);--warm-c:#FFB347;--warm-bg:rgba(255,140,50,0.10);--cold-c:#5599FF;--cold-bg:rgba(80,120,255,0.12);--pb-red:#FF2D4E;--pb-bg:rgba(255,45,78,0.15);--shadow:0 4px 24px rgba(0,0,0,0.4);--toggle-bg:#1A1D2C;--header-sep:rgba(255,215,0,0.12);--score-bar:rgba(255,215,0,0.07);--mini-bg:#1A1D2C;--mini-br:rgba(255,255,255,0.10);--jp-row:rgba(255,215,0,0.075);--jp-edge:#FFD700;--jp-text:#F2CC4D;--jp-pill-bg:linear-gradient(135deg,#FFE066,#FFB300);--jp-pill-text:#1F1600;--jp-glow:rgba(255,200,0,0.38);}
+[data-theme="light"]{--bg:#F5F3EE;--bg2:#EDEBE4;--bg3:#E5E2D8;--card:#FFFFFF;--card2:#F9F8F5;--border:rgba(180,130,0,0.18);--border2:rgba(0,0,0,0.08);--text:#1A1A2E;--text2:#3D3D5C;--muted:#7A7A9A;--gold:#B8860B;--hot-c:#C0330A;--hot-bg:rgba(192,51,10,0.10);--warm-c:#A05000;--warm-bg:rgba(160,80,0,0.09);--cold-c:#1A5FBB;--cold-bg:rgba(26,95,187,0.10);--pb-red:#C8002A;--pb-bg:rgba(200,0,42,0.10);--shadow:0 2px 16px rgba(0,0,0,0.10);--toggle-bg:#E5E2D8;--header-sep:rgba(180,130,0,0.14);--score-bar:rgba(180,130,0,0.06);--mini-bg:#EDEBE4;--mini-br:rgba(0,0,0,0.12);--jp-row:rgba(214,160,10,0.12);--jp-edge:#C48A00;--jp-text:#7A5600;--jp-pill-bg:linear-gradient(135deg,#FFE27A,#F2B705);--jp-pill-text:#2E2000;--jp-glow:rgba(196,138,0,0.28);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s;}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(1.5px 1.5px at 8% 12%,rgba(255,215,0,0.35) 0%,transparent 100%),radial-gradient(1px 1px at 28% 68%,rgba(255,255,255,0.15) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 52% 33%,rgba(255,215,0,0.28) 0%,transparent 100%),radial-gradient(1px 1px at 72% 78%,rgba(255,255,255,0.12) 0%,transparent 100%),radial-gradient(600px 600px at 50% 0%,rgba(255,45,78,0.06) 0%,transparent 70%),radial-gradient(800px 800px at 20% 80%,rgba(68,136,255,0.04) 0%,transparent 70%);transition:background-image .35s;}
@@ -138,6 +138,17 @@ h1{font-family:'Bebas Neue',cursive;font-size:clamp(54px,8vw,92px);letter-spacin
 .mini-balls{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
 .mini-ball{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;background:var(--mini-bg);border:1px solid var(--mini-br);color:var(--text2);}
 .mini-pb{background:var(--pb-bg);border-color:rgba(200,0,42,0.35);color:var(--pb-red);}
+/* JACKPOT */
+.draw-table th.jp-h,.jp-cell{text-align:right;white-space:nowrap;}
+.jp{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--text2);}
+.jp-none{color:var(--muted);font-weight:400;}
+.jp-big{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;background:var(--jp-pill-bg);color:var(--jp-pill-text);box-shadow:0 0 14px var(--jp-glow);}
+.draw-table tr.jp-week td{background:var(--jp-row);}
+.draw-table tr.jp-week td:first-child{box-shadow:inset 3px 0 0 var(--jp-edge);}
+.draw-table tr.jp-week .draw-num-cell,.draw-table tr.jp-week .draw-date{color:var(--jp-text);font-weight:700;}
+.jp-legend{font-size:11px;color:var(--muted);margin:-6px 0 4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.jp-legend .jp-big{font-size:10px;padding:2px 8px;}
+@media(max-width:560px){.draw-table th,.draw-table td{padding:8px 4px;}.draw-table .mini-balls{gap:3px;}.draw-table .mini-ball{width:24px;height:24px;font-size:9px;}.jp{font-size:11px;}.jp-big{padding:3px 7px;}}
 
 /* OVERDUE */
 .overdue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:9px;margin-top:8px;}
@@ -244,8 +255,9 @@ footer strong{color:var(--text2);}
           <div class="tab" onclick="switchTab('freq',this)">Full Frequency</div>
         </div>
         <div id="tab-recent" class="tab-content active">
+          <p class="jp-legend">Jackpot = Division 1 prize for that draw · <span class="jp jp-big">💰 $50M+</span> weeks highlighted</p>
           <table class="draw-table">
-            <thead><tr><th>Draw</th><th>Date</th><th>Winning Numbers</th><th>PB</th></tr></thead>
+            <thead><tr><th>Draw</th><th>Date</th><th>Winning Numbers</th><th>PB</th><th class="jp-h">Jackpot</th></tr></thead>
             <tbody id="recentDrawsBody"></tbody>
           </table>
         </div>
@@ -273,26 +285,26 @@ footer strong{color:var(--text2);}
 document.getElementById('themeToggle').addEventListener('click',()=>{const h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeIcon').textContent=n==='dark'?'☀️':'🌙';localStorage.setItem('pb-theme',n);});
 
 const DRAWS_RAW=[
-  {draw:1592,date:"19 Nov 2026",nums:[3,4,9,16,21,32,35],pb:16},
-  {draw:1591,date:"12 Nov 2026",nums:[2,7,11,13,25,27,31],pb:2},
-  {draw:1590,date:"05 Nov 2026",nums:[9,17,22,24,30,33,35],pb:13},
-  {draw:1589,date:"29 Oct 2026",nums:[3,5,7,14,27,31,34],pb:1},
-  {draw:1588,date:"22 Oct 2026",nums:[4,13,20,22,26,33,34],pb:13},
-  {draw:1587,date:"15 Oct 2026",nums:[3,14,15,24,27,30,32],pb:16},
-  {draw:1586,date:"08 Oct 2026",nums:[7,8,10,12,15,19,20],pb:7},
-  {draw:1585,date:"01 Oct 2026",nums:[2,3,6,10,11,16,24],pb:14},
-  {draw:1584,date:"24 Sep 2026",nums:[1,2,3,7,18,22,32],pb:12},
-  {draw:1583,date:"17 Sep 2026",nums:[1,8,15,17,19,22,34],pb:2},
-  {draw:1582,date:"10 Sep 2026",nums:[2,11,24,28,29,32,34],pb:13},
-  {draw:1581,date:"03 Sep 2026",nums:[1,10,11,14,16,19,32],pb:11},
-  {draw:1580,date:"27 Aug 2026",nums:[3,13,17,21,23,28,34],pb:11},
-  {draw:1579,date:"20 Aug 2026",nums:[3,9,11,13,14,22,29],pb:20},
-  {draw:1578,date:"13 Aug 2026",nums:[6,11,15,17,26,27,35],pb:11},
-  {draw:1577,date:"06 Aug 2026",nums:[9,13,15,16,26,30,35],pb:7},
-  {draw:1576,date:"30 Jul 2026",nums:[18,20,22,26,31,34,35],pb:18},
-  {draw:1575,date:"23 Jul 2026",nums:[7,11,12,18,27,30,34],pb:16},
-  {draw:1574,date:"16 Jul 2026",nums:[4,5,13,14,15,22,28],pb:13},
-  {draw:1573,date:"09 Jul 2026",nums:[1,4,5,14,15,22,27],pb:18},
+  {draw:1592,date:"19 Nov 2026",nums:[3,4,9,16,21,32,35],pb:16,jp:60000000},
+  {draw:1591,date:"12 Nov 2026",nums:[2,7,11,13,25,27,31],pb:2,jp:40000000},
+  {draw:1590,date:"05 Nov 2026",nums:[9,17,22,24,30,33,35],pb:13,jp:30000000},
+  {draw:1589,date:"29 Oct 2026",nums:[3,5,7,14,27,31,34],pb:1,jp:20000000},
+  {draw:1588,date:"22 Oct 2026",nums:[4,13,20,22,26,33,34],pb:13,jp:10000000},
+  {draw:1587,date:"15 Oct 2026",nums:[3,14,15,24,27,30,32],pb:16,jp:100000000},
+  {draw:1586,date:"08 Oct 2026",nums:[7,8,10,12,15,19,20],pb:7,jp:60000000},
+  {draw:1585,date:"01 Oct 2026",nums:[2,3,6,10,11,16,24],pb:14,jp:40000000},
+  {draw:1584,date:"24 Sep 2026",nums:[1,2,3,7,18,22,32],pb:12,jp:20000000},
+  {draw:1583,date:"17 Sep 2026",nums:[1,8,15,17,19,22,34],pb:2,jp:12000000},
+  {draw:1582,date:"10 Sep 2026",nums:[2,11,24,28,29,32,34],pb:13,jp:5000000},
+  {draw:1581,date:"03 Sep 2026",nums:[1,10,11,14,16,19,32],pb:11,jp:20800028},
+  {draw:1580,date:"27 Aug 2026",nums:[3,13,17,21,23,28,34],pb:11,jp:12000000},
+  {draw:1579,date:"20 Aug 2026",nums:[3,9,11,13,14,22,29],pb:20,jp:5000000},
+  {draw:1578,date:"13 Aug 2026",nums:[6,11,15,17,26,27,35],pb:11,jp:20000000},
+  {draw:1577,date:"06 Aug 2026",nums:[9,13,15,16,26,30,35],pb:7,jp:12000000},
+  {draw:1576,date:"30 Jul 2026",nums:[18,20,22,26,31,34,35],pb:18,jp:5000000},
+  {draw:1575,date:"23 Jul 2026",nums:[7,11,12,18,27,30,34],pb:16,jp:40000000},
+  {draw:1574,date:"16 Jul 2026",nums:[4,5,13,14,15,22,28],pb:13,jp:20000000},
+  {draw:1573,date:"09 Jul 2026",nums:[1,4,5,14,15,22,27],pb:18,jp:12000000},
   {draw:1572,date:"02 Jul 2026",nums:[6,12,17,22,24,30,32],pb:2},
   {draw:1571,date:"25 Jun 2026",nums:[7,17,18,23,25,26,29],pb:16},
   {draw:1570,date:"18 Jun 2026",nums:[1,6,20,21,26,28,29],pb:19},
@@ -446,7 +458,10 @@ function generateTickets(){const btn=document.getElementById('genBtn');btn.disab
 function renderHotBalls(){document.getElementById('hotBalls').innerHTML=S.sorted.slice(0,10).map(([n,c])=>`<div class="freq-ball"><div class="freq-num ball-hot">${n}</div><div class="freq-count">${c}×</div></div>`).join('');}
 function renderColdBalls(){document.getElementById('coldBalls').innerHTML=[...S.sorted].slice(-10).reverse().map(([n,c])=>`<div class="freq-ball"><div class="freq-num ball-cold">${n}</div><div class="freq-count">${c}×</div></div>`).join('');}
 function renderPBFreq(){const s=Object.entries(S.pbFreq).sort((a,b)=>b[1]-a[1]).slice(0,10),mx=s[0][1];document.getElementById('pbFreqChart').innerHTML=s.map(([n,c],i)=>{const p=i/s.length,r=Math.round(220*(1-p*.4)),g=Math.round(40+60*p);return`<div class="bar-row"><div class="bar-label">${n}</div><div class="bar-track"><div class="bar-fill" style="width:${(c/mx)*100}%;background:rgb(${r},${g},70)"></div><div class="bar-val">${c}</div></div></div>`;}).join('');}
-function renderRecentDraws(){document.getElementById('recentDrawsBody').innerHTML=DRAWS_RAW.slice(0,20).map(d=>`<tr><td class="draw-num-cell">#${d.draw}</td><td class="draw-date">${d.date}</td><td><div class="mini-balls">${d.nums.map(n=>`<div class="mini-ball">${n}</div>`).join('')}</div></td><td><div class="mini-ball mini-pb">${d.pb}</div></td></tr>`).join('');}
+const JP_BIG=50e6;
+function fmtJP(v){return '$'+(v/1e6).toFixed(1).replace(/\.0$/,'')+'M';}
+function jpCell(d){if(!d.jp)return '<span class="jp jp-none" title="Jackpot not recorded">—</span>';const big=d.jp>=JP_BIG;return `<span class="jp${big?' jp-big':''}" title="$${d.jp.toLocaleString('en-AU')}">${big?'💰 ':''}${fmtJP(d.jp)}</span>`;}
+function renderRecentDraws(){document.getElementById('recentDrawsBody').innerHTML=DRAWS_RAW.slice(0,20).map(d=>`<tr${d.jp>=JP_BIG?' class="jp-week"':''}><td class="draw-num-cell">#${d.draw}</td><td class="draw-date">${d.date}</td><td><div class="mini-balls">${d.nums.map(n=>`<div class="mini-ball">${n}</div>`).join('')}</div></td><td><div class="mini-ball mini-pb">${d.pb}</div></td><td class="jp-cell">${jpCell(d)}</td></tr>`).join('');}
 function renderOverdue(){document.getElementById('overdueGrid').innerHTML=S.overdueList.map(x=>`<div class="overdue-item"><div class="overdue-num">${x.num}</div><div class="overdue-draws">${x.drawsAgo} ago</div></div>`).join('');}
 function renderFullFreq(){const mx=S.sorted[0][1],hs=new Set(S.hotNums),cs=new Set(S.coldNums);document.getElementById('fullFreqChart').innerHTML=S.sorted.map(([n,c])=>{const col=hs.has(n)?'var(--hot-c)':cs.has(n)?'var(--cold-c)':c/mx>.75?'var(--warm-c)':'var(--muted)';return`<div class="bar-row"><div class="bar-label">${n}</div><div class="bar-track"><div class="bar-fill" style="width:${(c/mx)*100}%;background:${col}"></div><div class="bar-val">${c}</div></div></div>`;}).join('');}
 function switchTab(name,el){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('tab-'+name).classList.add('active');}
