@@ -33,6 +33,7 @@ Usage:
     python .github/scripts/update_powerball.py --from-html a.html [b.html]   # test
 """
 import argparse
+import os
 import datetime as dt
 import html as _html
 import http.client
@@ -44,6 +45,8 @@ import urllib.error
 import urllib.request
 
 HTML_FILE = "powerball-au.html"
+# Other pages that embed the same DRAWS_RAW data and are kept in step with it.
+ALSO_FILES = ["powerball-au-classic.html"]
 
 SOURCES = [
     ("powerball.net", "https://www.powerball.net/australia/results"),
@@ -294,9 +297,12 @@ def patch(page, new, jps):
          f"Draw #{latest} · {WEEKDAY[date.weekday()]} {d}</strong> · {nums} + Powerball {pb}"),
         (r"through Draw #\d+", f"through Draw #{latest}"),
     ]
-    for pattern, repl in subs:
+    # The data array is required. The text spots only exist on the classic
+    # layout (the current page works them out from the data), so they're
+    # updated where present.
+    for i, (pattern, repl) in enumerate(subs):
         page, n = re.subn(pattern, repl, page, count=1)
-        if n != 1:
+        if n != 1 and i == 0:
             fail(f"page layout changed; could not find the spot for: {pattern[:45]}")
     # Cosmetic: stretch the "2024–2026 · Latest:" range when a new year starts.
     page = re.sub(r"(\d{4})–(\d{4})( · Latest:)",
@@ -315,6 +321,31 @@ def fill_jackpots(page, fill):
     return page
 
 
+def update_files(paths, primary_page, cur_max, new, jp_all):
+    """{path: new text} for every page that changes. Pages not at cur_max are skipped."""
+    out = {}
+    for i, path in enumerate(paths):
+        if i == 0:
+            text = primary_page
+        else:
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+        rows = page_draws(text)
+        if max(rows) != cur_max:
+            warn(f"{path} ends at #{max(rows)}, not #{cur_max}; left unchanged")
+            continue
+        have = page_jackpots(text)
+        fill = {dn: a for dn, a in jp_all.items() if dn in rows and dn not in have}
+        result = patch(text, new, jp_all) if new else text
+        if fill:
+            log(f"{path}: adding missing jackpots "
+                + ", ".join(f"#{dn} {money(a)}" for dn, a in sorted(fill.items())))
+            result = fill_jackpots(result, fill)
+        if result != text:
+            out[path] = result
+    return out
+
+
 def money(n):
     return f"${n / 1e6:.1f}M".replace(".0M", "M")
 
@@ -329,6 +360,8 @@ def show(v):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", default=HTML_FILE)
+    ap.add_argument("--also", nargs="*", default=ALSO_FILES,
+                    help="other pages with the same data to update (skipped if missing)")
     ap.add_argument("--from-html", nargs="+", help="parse local files instead of fetching")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--today", help="YYYY-MM-DD, for testing")
@@ -415,24 +448,17 @@ def main():
                 warn(f"{name}: jackpot for #{dn} is {money(amount)}, another source says "
                      f"{money(jp_all[dn])}; keeping the first")
             jp_all.setdefault(dn, amount)
-    have_jp = page_jackpots(page)
-    fill = {dn: a for dn, a in jp_all.items() if dn in known and dn not in have_jp}
+    paths = [args.file] + [p for p in args.also if p != args.file and os.path.exists(p)]
 
     if not new:
         age = (today - cur_date).days
         if age > STALE_DAYS:
             fail(f"page latest #{cur_max} is {age} days old and no source has anything newer")
-        if not fill:
+        changes = update_files(paths, page, cur_max, {}, jp_all)
+        if not changes:
             log("nothing new yet; page unchanged.")
             return
-        log("no new draws; adding missing jackpots: "
-            + ", ".join(f"#{dn} {money(a)}" for dn, a in sorted(fill.items())))
-        if args.dry_run:
-            log("dry run: not writing.")
-            return
-        with open(args.file, "w", encoding="utf-8") as f:
-            f.write(fill_jackpots(page, fill))
-        log(f"updated {args.file}: {len(fill)} jackpots added.")
+        write_changes(changes, args.dry_run)
         return
 
     # 4) Continuity: no gaps, exactly one week apart.
@@ -449,13 +475,18 @@ def main():
         jp = f" | jackpot {money(jp_all[dn])}" if dn in jp_all else " | jackpot unknown"
         log(f"new #{dn} {show(new[dn])}{jp}  [{', '.join(confirmed_by[dn])}]")
 
-    patched = fill_jackpots(patch(page, new, jp_all), fill)
-    if args.dry_run:
-        log("dry run: not writing.")
+    write_changes(update_files(paths, page, cur_max, new, jp_all), args.dry_run)
+    log(f"now through #{max(new)} ({len(new)} new).")
+
+
+def write_changes(changes, dry_run):
+    if dry_run:
+        log("dry run: not writing " + ", ".join(changes))
         return
-    with open(args.file, "w", encoding="utf-8") as f:
-        f.write(patched)
-    log(f"updated {args.file}: now through #{max(new)} ({len(new)} new).")
+    for path, text in changes.items():
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+        log(f"updated {path}")
 
 
 if __name__ == "__main__":
