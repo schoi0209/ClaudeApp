@@ -20,6 +20,7 @@
   --mid:#8A5B00; --mid-bg:#FFF2CF; --mid-strong:#F0A800;
   --bad:#C22F2F; --bad-bg:#FDE6E3; --bad-strong:#E5484D;
   --c1:#0C7C8C; --c2:#E5533A; --c3:#6D4FD8; --c4:#B57F00;
+  --nav-bg:rgba(7,33,63,.93); --nav-h:58px;
   --hero-a:#07213F; --hero-b:#0B5F70; --hero-glow:rgba(255,138,76,.40); --hero-ink:#F4F8FC; --hero-muted:#B9CBDA;
   --glass:rgba(255,255,255,.10); --glass-line:rgba(255,255,255,.22);
   --h-good:#5EE6A0; --h-mid:#FFD166; --h-bad:#FF9384;
@@ -36,6 +37,7 @@
   --mid:#F5C451; --mid-bg:#3A2F10; --mid-strong:#F5C451;
   --bad:#FF8A80; --bad-bg:#3D1A1A; --bad-strong:#FF7B72;
   --c1:#4FD1DC; --c2:#FF8468; --c3:#A78BFA; --c4:#FFCF6B;
+  --nav-bg:rgba(3,12,24,.93);
   --hero-a:#030C18; --hero-b:#07404D; --hero-glow:rgba(255,138,76,.22); --hero-ink:#F4F8FC; --hero-muted:#A9BDCD;
   --glass:rgba(255,255,255,.07); --glass-line:rgba(255,255,255,.16);
   --h-good:#5EE6A0; --h-mid:#FFD166; --h-bad:#FF9384;
@@ -49,6 +51,7 @@
   --mid:#F5C451; --mid-bg:#3A2F10; --mid-strong:#F5C451;
   --bad:#FF8A80; --bad-bg:#3D1A1A; --bad-strong:#FF7B72;
   --c1:#4FD1DC; --c2:#FF8468; --c3:#A78BFA; --c4:#FFCF6B;
+  --nav-bg:rgba(3,12,24,.93);
   --hero-a:#030C18; --hero-b:#07404D; --hero-glow:rgba(255,138,76,.22); --hero-ink:#F4F8FC; --hero-muted:#A9BDCD;
   --glass:rgba(255,255,255,.07); --glass-line:rgba(255,255,255,.16);
   --h-good:#5EE6A0; --h-mid:#FFD166; --h-bad:#FF9384;
@@ -57,6 +60,20 @@
   color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--hero-a)}
+/* ── Section menu (sticky) ── */
+.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--glass-line)}
+.jump-in{display:flex;align-items:center;gap:16px;height:var(--nav-h)}
+.jump-logo{flex:none;border:0;background:transparent;color:var(--hero-ink);font:800 15px var(--f-display);letter-spacing:-.02em;cursor:pointer;padding:6px 2px;display:inline-flex;align-items:center;gap:8px}
+.jump-logo em{font-style:normal;color:var(--sun)}
+.jump-logo i{width:26px;height:26px;border-radius:8px;background:var(--sun);color:#0B1B33;display:grid;place-items:center;font:800 13px var(--f-display);font-style:normal}
+.jump-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding-block:4px}
+.jump-links::-webkit-scrollbar{display:none}
+.jump-links button{flex:none;border:0;background:transparent;color:var(--hero-muted);font:600 13.5px var(--f-body);padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s;display:inline-flex;gap:6px;align-items:center}
+.jump-links button:hover{color:var(--hero-ink);background:var(--glass)}
+.jump-links button[aria-current="true"]{background:var(--sun);color:#0B1B33}
+.jump-links .jl-top{display:none}
+.jump-target{scroll-margin-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 16px)}
 .wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 button{font-family:inherit}
 :focus-visible{outline:2px solid var(--coral);outline-offset:2px}
@@ -340,6 +357,9 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
   .t-stub::after{left:auto;right:-13px;top:-13px;bottom:auto}
 }
 @media (max-width:720px){
+  .jump-logo{display:none}
+  .jump-links .jl-top{display:inline-flex}
+  .jump-links{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
   .counter{grid-template-columns:minmax(0,1fr);gap:16px;padding:16px;margin-top:-80px}
   .amount input{width:100%;flex:1}
   .t-main,.t-stub{padding:16px}
@@ -350,6 +370,22 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+
+<nav class="jump" id="jumpNav" aria-label="Jump to section">
+  <div class="wrap jump-in">
+    <button class="jump-logo" type="button" data-go="top" aria-label="Back to top"><i aria-hidden="true">H</i>Holiday <em>Money</em></button>
+    <div class="jump-links" id="jumpLinks">
+      <button type="button" class="jl-top" data-go="top" aria-label="Back to top">↑</button>
+      <button type="button" data-go="rates">💱 Rates</button>
+      <button type="button" data-go="budget">🧳 Budget</button>
+      <button type="button" data-go="months">📅 Best months</button>
+      <button type="button" data-go="fees">🧾 Fees</button>
+      <button type="button" data-go="split">🗓️ Split plan</button>
+      <button type="button" data-go="compare">📈 Compare</button>
+      <button type="button" data-go="destinations">🌏 Destinations</button>
+    </div>
+  </div>
+</nav>
 
 <div class="hero">
   <canvas id="guilloche" aria-hidden="true"></canvas>
@@ -373,7 +409,7 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
 </div>
 
 <div class="wrap">
-  <section class="counter" aria-label="Settings">
+  <section class="counter" id="counterSec" aria-label="Settings">
     <div>
       <label class="label" for="amt">I have</label>
       <div class="amount"><span class="coin flag" id="amtFlag" aria-hidden="true">🇦🇺</span><input id="amt" type="number" inputmode="decimal" min="0" step="any" value="1000"><b id="amtCode">AUD</b></div>
@@ -400,7 +436,7 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
     <div class="panel" id="splitPanel"></div>
   </section>
 
-  <div class="sec-head">
+  <div class="sec-head" id="compareHead">
     <div>
       <h2>Compare destinations</h2>
       <p>Pick up to four. Each line shows the % change in what your <span id="cmpBase">AUD</span> buys, so different currencies share one scale. Higher means your money goes further.</p>
@@ -418,7 +454,7 @@ footer{margin-top:28px;padding-block:18px 36px;border-top:1px solid var(--line);
     <div class="cmp-list" id="cmpList"></div>
   </section>
 
-  <div class="board-head">
+  <div class="board-head" id="destHead">
     <div>
       <h2>Where your <em id="boardBase">AUD</em> goes furthest</h2>
       <p>Tap a destination to see its full history. Tap ☆ to save it.</p>
@@ -1119,6 +1155,27 @@ let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>
   btn.addEventListener("click",()=>{const n=root.getAttribute("data-theme")==="dark"?"light":"dark";root.setAttribute("data-theme",n);try{localStorage.setItem("hm-theme",n)}catch(e){}lbl();});
 })();
 renderAll(true);drawGuilloche();
+
+/* Section menu: jump on click, highlight the section in view. */
+const JUMP={rates:"counterSec",budget:"budgetPanel",months:"seasonPanel",fees:"feesPanel",split:"splitPanel",compare:"compareHead",destinations:"destHead"};
+Object.values(JUMP).forEach(id=>{const el=$(id);if(el)el.classList.add("jump-target");});
+let jumped=null;
+$("jumpNav").addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(!b)return;const k=b.dataset.go;
+  if(k==="top"){jumped=null;window.scrollTo({top:0,behavior:reduced?"auto":"smooth"});return;}
+  jumped=k;$(JUMP[k]).scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});markJump(k);});
+function markJump(cur){const L=$("jumpLinks");
+  L.querySelectorAll("[data-go]").forEach(b=>{const on=b.dataset.go===cur;if((b.getAttribute("aria-current")==="true")===on)return;
+    b.setAttribute("aria-current",on);if(on&&L.scrollWidth>L.clientWidth)L.scrollTo({left:b.offsetLeft-L.clientWidth/2+b.offsetWidth/2,behavior:reduced?"auto":"smooth"});});}
+function spy(){
+  const line=$("jumpNav").getBoundingClientRect().bottom+48;let cur=null,lastTop=null;
+  for(const k of Object.keys(JUMP)){const el=$(JUMP[k]);if(!el)continue;const t=el.getBoundingClientRect().top;
+    if(lastTop!==null&&Math.abs(t-lastTop)<4){lastTop=t;continue;} // side-by-side panels: keep the first one
+    lastTop=t;if(t<=line)cur=k;}
+  // After a menu click, keep the clicked item lit until the reader scrolls by hand.
+  if(jumped)cur=jumped;
+  markJump(cur);}
+["wheel","touchstart","keydown"].forEach(ev=>addEventListener(ev,()=>{jumped=null;},{passive:true}));
+let spyRaf=0;addEventListener("scroll",()=>{cancelAnimationFrame(spyRaf);spyRaf=requestAnimationFrame(spy);},{passive:true});spy();
 // Newer rates, refreshed daily by GitHub Actions, override the built-in snapshot when available.
 fetch("holiday-money-data.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null)
   .then(j=>{if(j&&j.asof>ASOF&&loadData(j.series,j.asof))renderAll(false);}).catch(()=>{});
