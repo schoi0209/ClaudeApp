@@ -219,6 +219,8 @@ footer{margin-top:72px;border-top:1px solid var(--line);padding:32px 0 48px;colo
   .draws thead th:nth-child(2)::after{content:"Numbers";font-size:13px;}
   .draws .jp-col{display:none;}
   .jp-inline{display:block;margin-top:6px;}
+  .t-score{display:none;}
+  .t-line{padding:3px 0;}
   .row-balls{gap:3px;flex-wrap:nowrap;}
   .row-balls .ball.xs{--s:25px;font-size:10px;}
   .row-balls .ball.pb{margin-left:3px;}
@@ -284,6 +286,7 @@ footer{margin-top:72px;border-top:1px solid var(--line);padding:32px 0 48px;colo
           <label><input type="radio" name="count" value="1" checked><span>1</span></label>
           <label><input type="radio" name="count" value="3"><span>3</span></label>
           <label><input type="radio" name="count" value="5"><span>5</span></label>
+          <label><input type="radio" name="count" value="10"><span>10</span></label>
         </div>
       </fieldset>
       <button class="print-btn" id="printBtn" type="button">Print my picks</button>
@@ -573,7 +576,7 @@ function printPicks(){
   const strategy=document.querySelector('input[name="strategy"]:checked').value;
   const count=+document.querySelector('input[name="count"]:checked').value;
   const games=Array.from({length:count},()=>genGame(strategy));
-  const lines=games.map((g,i)=>`<div class="t-line"><span class="t-game">${'ABCDE'[i]}</span><span class="t-nums">${g.nums.map(n=>`<span class="chip ${heat(n)}">${pad(n)}</span>`).join('')}</span><span class="t-pb">PB <b>${pad(g.pb)}</b></span><span class="t-score" title="How closely this game follows past draw frequency. It doesn't change the odds.">score ${g.score}</span></div>`).join('');
+  const lines=games.map((g,i)=>`<div class="t-line"><span class="t-game">${'ABCDEFGHIJ'[i]}</span><span class="t-nums">${g.nums.map(n=>`<span class="chip ${heat(n)}">${pad(n)}</span>`).join('')}</span><span class="t-pb">PB <b>${pad(g.pb)}</b></span><span class="t-score" title="How closely this game follows past draw frequency. It doesn't change the odds.">score ${g.score}</span></div>`).join('');
   $('ticket').innerHTML=`<div class="t-head">Powerball <span>Number Oracle picks</span></div>
     <div class="t-meta">For draw ${LATEST.draw+1}, ${DAYS[NEXT.getDay()]} ${shortDate(NEXT)}</div>
     <div class="t-rule"></div>${lines}<div class="t-rule"></div>
