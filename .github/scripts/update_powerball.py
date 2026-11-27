@@ -364,6 +364,8 @@ def main():
                     help="other pages with the same data to update (skipped if missing)")
     ap.add_argument("--from-html", nargs="+", help="parse local files instead of fetching")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--stale-days", type=int, default=STALE_DAYS,
+                    help="fail if the page is older than this with nothing new (default %(default)s)")
     ap.add_argument("--today", help="YYYY-MM-DD, for testing")
     args = ap.parse_args()
 
@@ -399,7 +401,7 @@ def main():
     if not any(p for _, p, _j in per_source):
         if per_source and len(unreachable) == len(per_source):
             age = (today - cur_date).days
-            if age > STALE_DAYS:
+            if age > args.stale_days:
                 fail(f"no source could be reached, and the page latest #{cur_max} is {age} days old")
             warn("no source could be reached this run (network trouble); nothing changed, "
                  "and next week's run will catch up")
@@ -452,7 +454,7 @@ def main():
 
     if not new:
         age = (today - cur_date).days
-        if age > STALE_DAYS:
+        if age > args.stale_days:
             fail(f"page latest #{cur_max} is {age} days old and no source has anything newer")
         changes = update_files(paths, page, cur_max, {}, jp_all)
         if not changes:
