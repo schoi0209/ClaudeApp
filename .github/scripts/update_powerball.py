@@ -147,6 +147,8 @@ def fetch_source(name, url, attempts=ATTEMPTS):
 DIV1_RE = re.compile(r"Div(?:ision)?\.?\s*1\b(.{0,200}?)Div(?:ision)?\.?\s*2\b", re.I | re.S)
 MATCH_SPEC_RE = re.compile(r"(?:Match\s*)?\d\s*\+\s*(?:\d|PB|Powerball)\b|Match\s*\d\b", re.I)
 AMOUNT_RE = re.compile(r"\$\s?(\d[\d,]*(?:\.\d+)?)")
+NO_DIV1_RE = re.compile(r"\bno\s+Div(?:ision)?\.?\s*1\s+winners?\b", re.I)
+PBNET_ROW_RE = re.compile(r"\b1\s+Match\s*7\s*(?:plus|\+)\s*(?:Powerball|PB)\s+\$\s?(\d[\d,]*(?:\.\d+)?)\s+(\d[\d,]*)\b", re.I)
 
 
 def parse_div1_winners(text, jackpot):
@@ -159,6 +161,18 @@ def parse_div1_winners(text, jackpot):
     winners x prize per winner must come within 2% of the draw's jackpot.
     A lone 0 means nobody won.
     """
+    # powerball.net says so in words when nobody won.
+    if NO_DIV1_RE.search(text):
+        return 0
+    # powerball.net table row: "1  Match 7 plus Powerball  $5,200,007  4  $20,800,029"
+    r = PBNET_ROW_RE.search(text)
+    if r:
+        prize, n = float(r.group(1).replace(",", "")), int(r.group(2).replace(",", ""))
+        if n == 0:
+            return 0
+        if jackpot and 0 < n <= 100 and abs(n * prize - jackpot) <= 0.02 * jackpot:
+            return n
+        return None
     m = DIV1_RE.search(text)
     if not m:
         return None

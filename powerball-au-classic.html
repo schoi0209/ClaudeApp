@@ -286,13 +286,13 @@ footer strong{color:var(--text2);}
 document.getElementById('themeToggle').addEventListener('click',()=>{const h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeIcon').textContent=n==='dark'?'☀️':'🌙';localStorage.setItem('pb-theme',n);});
 
 const DRAWS_RAW=[
-  {draw:1593,date:"26 Nov 2026",nums:[18,19,24,25,31,32,34],pb:8,jp:100000000},
-  {draw:1592,date:"19 Nov 2026",nums:[3,4,9,16,21,32,35],pb:16,jp:60000000},
+  {draw:1593,date:"26 Nov 2026",nums:[18,19,24,25,31,32,34],pb:8,jp:100000000,w:0},
+  {draw:1592,date:"19 Nov 2026",nums:[3,4,9,16,21,32,35],pb:16,jp:60000000,w:0},
   {draw:1591,date:"12 Nov 2026",nums:[2,7,11,13,25,27,31],pb:2,jp:40000000,w:0},
   {draw:1590,date:"05 Nov 2026",nums:[9,17,22,24,30,33,35],pb:13,jp:30000000,w:0},
   {draw:1589,date:"29 Oct 2026",nums:[3,5,7,14,27,31,34],pb:1,jp:20000000,w:0},
   {draw:1588,date:"22 Oct 2026",nums:[4,13,20,22,26,33,34],pb:13,jp:10000000,w:0},
-  {draw:1587,date:"15 Oct 2026",nums:[3,14,15,24,27,30,32],pb:16,jp:100000000},
+  {draw:1587,date:"15 Oct 2026",nums:[3,14,15,24,27,30,32],pb:16,jp:100000000,w:1},
   {draw:1586,date:"08 Oct 2026",nums:[7,8,10,12,15,19,20],pb:7,jp:60000000,w:0},
   {draw:1585,date:"01 Oct 2026",nums:[2,3,6,10,11,16,24],pb:14,jp:40000000,w:0},
   {draw:1584,date:"24 Sep 2026",nums:[1,2,3,7,18,22,32],pb:12,jp:20000000,w:0},
