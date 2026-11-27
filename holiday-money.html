@@ -1163,7 +1163,8 @@ $("cmpRange").addEventListener("click",e=>{const b=e.target.closest("button");if
 $("cmpList").addEventListener("click",e=>{const b=e.target.closest(".cmp-row");if(b)pickDest(b.dataset.c);});
 
 function renderAll(animate){const r=rows();renderChips();renderPicks(r);renderFeature();renderCompare();renderGrid(animate);
-  $("asofTxt").textContent=`Rates as of ${asofLabel()} · monthly closing rates · source: Alpha Vantage`;}
+  $("asofTxt").textContent=`Rates as of ${asofLabel()} · ${SRC}`;}
+let SRC="monthly closing rates · source: Alpha Vantage";
 
 // Banknote-style guilloche rosettes behind the hero
 function drawGuilloche(){
@@ -1205,7 +1206,8 @@ function spy(){
 let spyRaf=0;addEventListener("scroll",()=>{cancelAnimationFrame(spyRaf);spyRaf=requestAnimationFrame(spy);},{passive:true});spy();
 // Newer rates, refreshed daily by GitHub Actions, override the built-in snapshot when available.
 fetch("holiday-money-data.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null)
-  .then(j=>{if(j&&j.asof>ASOF&&loadData(j.series,j.asof))renderAll(false);}).catch(()=>{});
+  .then(j=>{if(j&&j.asof>ASOF&&loadData(j.series,j.asof)){
+    if(j.latest_source)SRC=`history: Alpha Vantage monthly closes · latest: ${j.latest_source}`;renderAll(false);}}).catch(()=>{});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{drawGuilloche();});
 </script>
 
