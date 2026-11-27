@@ -13,7 +13,7 @@
 :root,[data-theme="light"]{
   --paper:#F3F2F8;--surface:#FFFFFF;--surface-2:#F7F6FB;--ink:#1A1733;--ink-2:#46435F;--muted:#6E6A88;--line:#E2E0EC;
   --violet:#4C33E0;--violet-hover:#3B24C4;--violet-ink:#FFFFFF;--violet-soft:#ECE8FF;
-  --pb:#E3264A;--gold:#F4BC0C;--gold-ink:#2B1F00;--gold-row:#FFF6D6;--gold-edge:#D99E00;
+  --pb:#E3264A;--gold:#F4BC0C;--gold-ink:#2B1F00;--gold-row:#FFF6D6;--gold-edge:#D99E00;--won:#0B7A4B;--won-bg:#DDF4E8;
   --hl-hot:rgba(255,146,84,.55);--hl-warm:rgba(255,214,64,.6);--hl-cold:rgba(110,178,255,.5);
   --hero:radial-gradient(120% 150% at 12% 0%,#6E52FF 0%,#4127D6 42%,#1F1272 100%);
   --slot:#24203F;--focus:#4C33E0;
@@ -21,7 +21,7 @@
 [data-theme="dark"]{
   --paper:#100E22;--surface:#19162F;--surface-2:#1F1C3A;--ink:#EDEAFB;--ink-2:#C2BEDD;--muted:#9591B3;--line:#2C2850;
   --violet:#9583FF;--violet-hover:#AA9CFF;--violet-ink:#120F2A;--violet-soft:#27215C;
-  --pb:#FF4D68;--gold:#FFC83D;--gold-ink:#241A00;--gold-row:rgba(255,200,61,.09);--gold-edge:#FFC83D;
+  --pb:#FF4D68;--gold:#FFC83D;--gold-ink:#241A00;--gold-row:rgba(255,200,61,.09);--gold-edge:#FFC83D;--won:#6EE7A8;--won-bg:rgba(110,231,168,.13);
   --hl-hot:rgba(255,146,84,.42);--hl-warm:rgba(255,214,64,.36);--hl-cold:rgba(110,178,255,.38);
   --hero:radial-gradient(120% 150% at 12% 0%,#3A2AB4 0%,#23167A 45%,#120A40 100%);
   --slot:#07061A;--focus:#B3A6FF;
@@ -168,6 +168,12 @@ legend{font-weight:700;font-size:15px;margin-bottom:10px;}
 .jp{font-weight:700;font-size:15px;}
 .jp.none{color:var(--muted);font-weight:400;}
 .jp-inline{display:none;}
+.won{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px 3px 7px;border-radius:999px;background:var(--won-bg);color:var(--won);font-size:12.5px;font-weight:700;white-space:nowrap;}
+.won svg{width:12px;height:12px;flex-shrink:0;}
+.jp-col .won{display:flex;width:max-content;margin-left:auto;}
+.hero-won{display:flex;align-items:flex-start;gap:9px;line-height:1.4;font-size:15px;font-weight:600;color:#fff;}
+.hero-won i{flex-shrink:0;margin-top:6px;width:10px;height:10px;border-radius:50%;background:#6EE7A8;box-shadow:0 0 0 4px rgba(110,231,168,.25);}
+.hero-won.rolled i{background:rgba(255,255,255,.55);box-shadow:none;}
 .jp.big{display:inline-block;background:var(--gold);color:var(--gold-ink);padding:5px 12px;border-radius:999px;font:800 14px/1 'Unbounded',sans-serif;box-shadow:0 4px 14px rgba(217,158,0,.3);}
 .draws tr.big-week th,.draws tr.big-week td{background:var(--gold-row);}
 .draws tr.big-week th{box-shadow:inset 4px 0 0 var(--gold-edge);padding-left:16px;}
@@ -260,6 +266,7 @@ footer{margin-top:72px;border-top:1px solid var(--line);padding:32px 0 48px;colo
   </div>
   <div class="hero-side">
     <div class="jp-sign"><span id="heroJpLabel">Jackpot</span><strong id="heroJp">—</strong></div>
+    <p class="hero-won" id="heroWon" hidden></p>
     <p class="hero-next" id="heroNext"></p>
   </div>
 </section>
@@ -328,7 +335,7 @@ footer{margin-top:72px;border-top:1px solid var(--line);padding:32px 0 48px;colo
       <button class="tab" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="false" tabindex="-1">All 35 numbers</button>
     </div>
     <div class="tabpanel" role="tabpanel" id="panel-recent" aria-labelledby="tab-recent">
-      <p class="panel-note">Jackpot is the Division 1 prize for that draw. Weeks of $50M or more are marked in <span class="gold-key" aria-hidden="true"></span> gold.</p>
+      <p class="panel-note">Jackpot is the Division 1 prize for that draw. Weeks of $50M or more are marked in <span class="gold-key" aria-hidden="true"></span> gold, and draws where Division 1 was won show how many entries won it.</p>
       <table class="draws">
         <thead><tr><th scope="col">Draw</th><th scope="col">Winning numbers and Powerball</th><th scope="col" class="jp-col">Jackpot</th></tr></thead>
         <tbody id="drawRows"></tbody>
@@ -366,25 +373,25 @@ footer{margin-top:72px;border-top:1px solid var(--line);padding:32px 0 48px;colo
 const DRAWS_RAW=[
   {draw:1593,date:"26 Nov 2026",nums:[18,19,24,25,31,32,34],pb:8,jp:100000000},
   {draw:1592,date:"19 Nov 2026",nums:[3,4,9,16,21,32,35],pb:16,jp:60000000},
-  {draw:1591,date:"12 Nov 2026",nums:[2,7,11,13,25,27,31],pb:2,jp:40000000},
-  {draw:1590,date:"05 Nov 2026",nums:[9,17,22,24,30,33,35],pb:13,jp:30000000},
-  {draw:1589,date:"29 Oct 2026",nums:[3,5,7,14,27,31,34],pb:1,jp:20000000},
-  {draw:1588,date:"22 Oct 2026",nums:[4,13,20,22,26,33,34],pb:13,jp:10000000},
+  {draw:1591,date:"12 Nov 2026",nums:[2,7,11,13,25,27,31],pb:2,jp:40000000,w:0},
+  {draw:1590,date:"05 Nov 2026",nums:[9,17,22,24,30,33,35],pb:13,jp:30000000,w:0},
+  {draw:1589,date:"29 Oct 2026",nums:[3,5,7,14,27,31,34],pb:1,jp:20000000,w:0},
+  {draw:1588,date:"22 Oct 2026",nums:[4,13,20,22,26,33,34],pb:13,jp:10000000,w:0},
   {draw:1587,date:"15 Oct 2026",nums:[3,14,15,24,27,30,32],pb:16,jp:100000000},
-  {draw:1586,date:"08 Oct 2026",nums:[7,8,10,12,15,19,20],pb:7,jp:60000000},
-  {draw:1585,date:"01 Oct 2026",nums:[2,3,6,10,11,16,24],pb:14,jp:40000000},
-  {draw:1584,date:"24 Sep 2026",nums:[1,2,3,7,18,22,32],pb:12,jp:20000000},
-  {draw:1583,date:"17 Sep 2026",nums:[1,8,15,17,19,22,34],pb:2,jp:12000000},
-  {draw:1582,date:"10 Sep 2026",nums:[2,11,24,28,29,32,34],pb:13,jp:5000000},
-  {draw:1581,date:"03 Sep 2026",nums:[1,10,11,14,16,19,32],pb:11,jp:20800028},
-  {draw:1580,date:"27 Aug 2026",nums:[3,13,17,21,23,28,34],pb:11,jp:12000000},
-  {draw:1579,date:"20 Aug 2026",nums:[3,9,11,13,14,22,29],pb:20,jp:5000000},
-  {draw:1578,date:"13 Aug 2026",nums:[6,11,15,17,26,27,35],pb:11,jp:20000000},
-  {draw:1577,date:"06 Aug 2026",nums:[9,13,15,16,26,30,35],pb:7,jp:12000000},
-  {draw:1576,date:"30 Jul 2026",nums:[18,20,22,26,31,34,35],pb:18,jp:5000000},
-  {draw:1575,date:"23 Jul 2026",nums:[7,11,12,18,27,30,34],pb:16,jp:40000000},
-  {draw:1574,date:"16 Jul 2026",nums:[4,5,13,14,15,22,28],pb:13,jp:20000000},
-  {draw:1573,date:"09 Jul 2026",nums:[1,4,5,14,15,22,27],pb:18,jp:12000000},
+  {draw:1586,date:"08 Oct 2026",nums:[7,8,10,12,15,19,20],pb:7,jp:60000000,w:0},
+  {draw:1585,date:"01 Oct 2026",nums:[2,3,6,10,11,16,24],pb:14,jp:40000000,w:0},
+  {draw:1584,date:"24 Sep 2026",nums:[1,2,3,7,18,22,32],pb:12,jp:20000000,w:0},
+  {draw:1583,date:"17 Sep 2026",nums:[1,8,15,17,19,22,34],pb:2,jp:12000000,w:0},
+  {draw:1582,date:"10 Sep 2026",nums:[2,11,24,28,29,32,34],pb:13,jp:5000000,w:0},
+  {draw:1581,date:"03 Sep 2026",nums:[1,10,11,14,16,19,32],pb:11,jp:20800028,w:4},
+  {draw:1580,date:"27 Aug 2026",nums:[3,13,17,21,23,28,34],pb:11,jp:12000000,w:0},
+  {draw:1579,date:"20 Aug 2026",nums:[3,9,11,13,14,22,29],pb:20,jp:5000000,w:0},
+  {draw:1578,date:"13 Aug 2026",nums:[6,11,15,17,26,27,35],pb:11,jp:20000000,w:1},
+  {draw:1577,date:"06 Aug 2026",nums:[9,13,15,16,26,30,35],pb:7,jp:12000000,w:0},
+  {draw:1576,date:"30 Jul 2026",nums:[18,20,22,26,31,34,35],pb:18,jp:5000000,w:0},
+  {draw:1575,date:"23 Jul 2026",nums:[7,11,12,18,27,30,34],pb:16,jp:40000000,w:1},
+  {draw:1574,date:"16 Jul 2026",nums:[4,5,13,14,15,22,28],pb:13,jp:20000000,w:0},
+  {draw:1573,date:"09 Jul 2026",nums:[1,4,5,14,15,22,27],pb:18,jp:12000000,w:0},
   {draw:1572,date:"02 Jul 2026",nums:[6,12,17,22,24,30,32],pb:2},
   {draw:1571,date:"25 Jun 2026",nums:[7,17,18,23,25,26,29],pb:16},
   {draw:1570,date:"18 Jun 2026",nums:[1,6,20,21,26,28,29],pb:19},
@@ -595,6 +602,9 @@ function renderHero(){
   $('heroBalls').setAttribute('aria-label',`Winning numbers ${LATEST.nums.join(', ')}, Powerball ${LATEST.pb}`);
   $('heroJpLabel').textContent=`Draw ${LATEST.draw} jackpot`;
   $('heroJp').textContent=LATEST.jp?fmtJP(LATEST.jp):'—';
+  if(LATEST.w!==undefined){const h=$('heroWon');h.hidden=false;
+    if(LATEST.w>0){h.innerHTML=`<i aria-hidden="true"></i>Division 1 won by ${LATEST.w} ${LATEST.w===1?'entry':'entries'}`;}
+    else{h.classList.add('rolled');h.innerHTML='<i aria-hidden="true"></i>No Division 1 winner, jackpot rolls over';}}
   $('heroNext').textContent=`Next draw ${DAYS[NEXT.getDay()]} ${NEXT.getDate()} ${MONTHS[NEXT.getMonth()]}`;
   $('heroBasis').textContent=`Stats on this page use ${DRAWS_RAW.length} draws since ${FIRST_YEAR}.`;
 }
@@ -608,7 +618,8 @@ function renderHeat(){
 function renderHistory(){
   $('drawRows').innerHTML=DRAWS_RAW.slice(0,20).map(d=>{
     const big=d.jp>=JP_BIG;
-    const jp=d.jp?`<span class="jp${big?' big':''}" title="$${d.jp.toLocaleString('en-AU')}">${fmtJP(d.jp)}</span>`:'<span class="jp none" title="Jackpot not recorded">—</span>';
+    const won=d.w>0?`<span class="won" title="Division 1 won by ${d.w} ${d.w===1?'entry':'entries'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>${d.w} winner${d.w===1?'':'s'}</span>`:'';
+    const jp=(d.jp?`<span class="jp${big?' big':''}" title="$${d.jp.toLocaleString('en-AU')}">${fmtJP(d.jp)}</span>`:'<span class="jp none" title="Jackpot not recorded">—</span>')+won;
     return `<tr${big?' class="big-week"':''}><th scope="row"><span class="num">${d.draw}</span><span class="date">${shortDate(parseDate(d.date))}</span><span class="jp-inline">${jp}</span></th><td><div class="row-balls" role="img" aria-label="${d.nums.join(', ')}, Powerball ${d.pb}">${d.nums.map(n=>ball(n,'xs')).join('')}${ball(d.pb,'pb xs')}</div></td><td class="jp-col">${jp}</td></tr>`;
   }).join('');
   $('overdueList').innerHTML=S.overdue.map(x=>`<li>${ball(x.num,'sm')}${x.ago} draw${x.ago===1?'':'s'} ago</li>`).join('');

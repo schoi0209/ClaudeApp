@@ -63,6 +63,13 @@ HEADERS = {
     "Accept-Language": "en-AU,en;q=0.9",
 }
 
+# Per-draw prize pages, used to read how many Division 1 (7 + Powerball) entries won.
+DIVIDEND_SOURCES = [
+    ("powerball.net", "https://www.powerball.net/australia/results/{d:%Y-%m-%d}"),
+    ("lotteryextreme", "https://www.lotteryextreme.com/australia/powerball-dividends({d:%Y-%m-%d})"),
+]
+WINNERS_WINDOW = 20      # only draws shown in the Recent Draws table
+WINNERS_PER_RUN = 3      # at most this many draws are looked up per run
 STALE_DAYS = 8          # draws are weekly; older than this with nothing new = broken
 MAIN_MIN, MAIN_MAX, N_MAIN = 1, 35, 7
 PB_MIN, PB_MAX = 1, 20
@@ -110,14 +117,14 @@ def fetch_once(url, ipv4_only=False):
         socket.getaddrinfo = orig
 
 
-def fetch_source(name, url):
+def fetch_source(name, url, attempts=ATTEMPTS):
     """
     Returns ('ok', (status, body)), ('broken', why) for an answer that won't fix
     itself (HTTP 4xx), or ('unreachable', why) after every attempt hit network
     trouble or HTTP 5xx.
     """
     why = ""
-    for attempt in range(1, ATTEMPTS + 1):
+    for attempt in range(1, attempts + 1):
         if attempt > 1:
             time.sleep(BACKOFF[attempt - 2])
         ipv4 = attempt > 1
@@ -133,8 +140,39 @@ def fetch_source(name, url):
             why = f"HTTP {e.code}"
         except (OSError, http.client.HTTPException) as e:   # timeouts, resets, DNS, TLS
             why = f"{e.__class__.__name__}: {getattr(e, 'reason', e)}"
-        log(f"{name}: attempt {attempt}/{ATTEMPTS} failed ({why})")
+        log(f"{name}: attempt {attempt}/{attempts} failed ({why})")
     return "unreachable", why
+
+
+DIV1_RE = re.compile(r"Div(?:ision)?\.?\s*1\b(.{0,200}?)Div(?:ision)?\.?\s*2\b", re.I | re.S)
+MATCH_SPEC_RE = re.compile(r"(?:Match\s*)?\d\s*\+\s*(?:\d|PB|Powerball)\b|Match\s*\d\b", re.I)
+AMOUNT_RE = re.compile(r"\$\s?(\d[\d,]*(?:\.\d+)?)")
+
+
+def parse_div1_winners(text, jackpot):
+    """
+    Number of Division 1 winning entries from a prize-breakdown page, or None.
+
+    Reads the stretch between "Division 1" and "Division 2", drops the match
+    description ("Match 7+1", "7 + PB") and the dollar amounts, and looks at the
+    whole numbers left. A count is only believed when it explains the jackpot:
+    winners x prize per winner must come within 2% of the draw's jackpot.
+    A lone 0 means nobody won.
+    """
+    m = DIV1_RE.search(text)
+    if not m:
+        return None
+    seg = MATCH_SPEC_RE.sub(" ", m.group(1))
+    prizes = [float(a.replace(",", "")) for a in AMOUNT_RE.findall(seg)]
+    seg = AMOUNT_RE.sub(" ", seg)
+    counts = [int(x.replace(",", "")) for x in re.findall(r"(?<![\d.])\d[\d,]*(?![\d.])", seg)]
+    counts = [n for n in counts if 0 <= n <= 100]
+    if counts == [0]:
+        return 0
+    if not jackpot:
+        return None
+    fits = {n for n in counts if n > 0 for p in prizes if p > 0 and abs(n * p - jackpot) <= 0.02 * jackpot}
+    return fits.pop() if len(fits) == 1 else None
 
 
 def to_text(raw):
@@ -255,12 +293,12 @@ def parse_draws(text, today, jackpots=None):
 
 ROW_RE = re.compile(
     r'\{draw:(\d+),date:"(\d{1,2}) ([A-Za-z]{3,9}) (\d{4})",nums:\[([\d,]+)\],pb:(\d+)'
-    r'(?:,jp:(\d+))?\}')
+    r'(?:,jp:(\d+))?(?:,w:(\d+))?\}')
 
 
 def page_draws(page):
     out = {}
-    for dn, d, mon, y, nums, pb, _jp in ROW_RE.findall(page):
+    for dn, d, mon, y, nums, pb, _jp, _w in ROW_RE.findall(page):
         out[int(dn)] = (dt.date(int(y), MONTHS[mon[:3].lower()], int(d)),
                         sorted(int(x) for x in nums.split(",")), int(pb))
     if not out:
@@ -272,24 +310,29 @@ def page_jackpots(page):
     return {int(m[0]): int(m[6]) for m in ROW_RE.findall(page) if m[6]}
 
 
-def build_rows(new, jps):
+def page_winners(page):
+    return {int(m[0]): int(m[7]) for m in ROW_RE.findall(page) if m[7]}
+
+
+def build_rows(new, jps, wins):
     lines = []
     for dn in sorted(new, reverse=True):
         date, mains, pb = new[dn]
         jp = f",jp:{jps[dn]}" if dn in jps else ""
+        jp += f",w:{wins[dn]}" if dn in wins else ""
         lines.append(
             f'  {{draw:{dn},date:"{date.day:02d} {MON_ABBR[date.month]} {date.year}",'
             f'nums:[{",".join(map(str, mains))}],pb:{pb}{jp}}},')
     return "\n".join(lines)
 
 
-def patch(page, new, jps):
+def patch(page, new, jps, wins):
     latest = max(new)
     date, mains, pb = new[latest]
     d = f"{date.day:02d} {MON_ABBR[date.month]} {date.year}"
     nums = ", ".join(map(str, mains))
     subs = [
-        (r"(const DRAWS_RAW=\[\n)", lambda mm: mm.group(1) + build_rows(new, jps) + "\n"),
+        (r"(const DRAWS_RAW=\[\n)", lambda mm: mm.group(1) + build_rows(new, jps, wins) + "\n"),
         (r"DRAW #\d+ · \d{2} [A-Z]{3} 20\d{2}",
          f"DRAW #{latest} · {d.upper()}"),
         (r"Latest: [\d, ]+ \+ PB \d+", f"Latest: {nums} + PB {pb}"),
@@ -314,14 +357,58 @@ def patch(page, new, jps):
 def fill_jackpots(page, fill):
     """Add jp to existing rows that don't have one yet."""
     for dn, jp in fill.items():
-        page, n = re.subn(r'(\{draw:%d,date:"[^"]+",nums:\[[\d,]+\],pb:\d+)\}' % dn,
-                          lambda m: f"{m.group(1)},jp:{jp}}}", page, count=1)
+        page, n = re.subn(r'(\{draw:%d,date:"[^"]+",nums:\[[\d,]+\],pb:\d+)((?:,w:\d+)?)\}' % dn,
+                          lambda m: f"{m.group(1)},jp:{jp}{m.group(2)}}}", page, count=1)
         if n != 1:
             fail(f"could not find row #{dn} to add its jackpot")
     return page
 
 
-def update_files(paths, primary_page, cur_max, new, jp_all):
+def fill_winners(page, fill):
+    """Add w (Division 1 winning entries) to existing rows that don't have one yet."""
+    for dn, w in fill.items():
+        page, n = re.subn(r'(\{draw:%d,date:"[^"]+",nums:\[[\d,]+\],pb:\d+(?:,jp:\d+)?)\}' % dn,
+                          lambda m: f"{m.group(1)},w:{w}}}", page, count=1)
+        if n != 1:
+            fail(f"could not find row #{dn} to add its winners")
+    return page
+
+
+def lookup_winners(cands, div_html):
+    """
+    {draw_no: Division 1 winners} for cands = {draw_no: (date, jackpot, next_jackpot)}.
+    Each draw's prize pages are read (one attempt each). Sources that can be read
+    must agree, and the count must fit the jackpot rolling over or resetting.
+    """
+    out = {}
+    for dn in sorted(cands, reverse=True):
+        date, jp, next_jp = cands[dn]
+        found = []
+        if div_html is not None:
+            for path in div_html.get(dn, []):
+                with open(path, encoding="utf-8") as f:
+                    found.append((path, parse_div1_winners(to_text(f.read()), jp)))
+        else:
+            for name, pattern in DIVIDEND_SOURCES:
+                kind, info = fetch_source(f"{name} #{dn} prizes", pattern.format(d=date), attempts=1)
+                if kind == "ok":
+                    found.append((name, parse_div1_winners(to_text(info[1]), jp)))
+        got = {n for _, n in found if n is not None}
+        detail = ", ".join(f"{name} {'?' if n is None else n}" for name, n in found) or "no page read"
+        if len(got) != 1:
+            log(f"#{dn} Division 1 winners: unknown ({detail})")
+            continue
+        n = got.pop()
+        if next_jp is not None and ((n > 0 and next_jp > jp) or (n == 0 and next_jp < jp)):
+            warn(f"#{dn}: {n} Division 1 winners doesn't fit the next jackpot "
+                 f"({money(jp)} then {money(next_jp)}); not recorded")
+            continue
+        log(f"#{dn} Division 1 winners: {n} ({detail})")
+        out[dn] = n
+    return out
+
+
+def update_files(paths, primary_page, cur_max, new, jp_all, wins):
     """{path: new text} for every page that changes. Pages not at cur_max are skipped."""
     out = {}
     for i, path in enumerate(paths):
@@ -336,7 +423,11 @@ def update_files(paths, primary_page, cur_max, new, jp_all):
             continue
         have = page_jackpots(text)
         fill = {dn: a for dn, a in jp_all.items() if dn in rows and dn not in have}
-        result = patch(text, new, jp_all) if new else text
+        result = patch(text, new, jp_all, wins) if new else text
+        have_w = page_winners(text)
+        fill_w = {dn: w for dn, w in wins.items() if dn in rows and dn not in have_w}
+        if fill_w:
+            result = fill_winners(result, fill_w)
         if fill:
             log(f"{path}: adding missing jackpots "
                 + ", ".join(f"#{dn} {money(a)}" for dn, a in sorted(fill.items())))
@@ -367,6 +458,8 @@ def main():
     ap.add_argument("--stale-days", type=int, default=STALE_DAYS,
                     help="fail if the page is older than this with nothing new (default %(default)s)")
     ap.add_argument("--today", help="YYYY-MM-DD, for testing")
+    ap.add_argument("--div-html", nargs="*", default=[],
+                    help="DRAW=FILE prize pages to read instead of fetching (testing)")
     args = ap.parse_args()
 
     today = dt.date.fromisoformat(args.today) if args.today else dt.date.today()
@@ -452,11 +545,27 @@ def main():
             jp_all.setdefault(dn, amount)
     paths = [args.file] + [p for p in args.also if p != args.file and os.path.exists(p)]
 
+    # Division 1 winners for recent draws that don't have them yet.
+    all_dates = {dn: v[0] for dn, v in {**known, **new}.items()}
+    all_jp = {**page_jackpots(page), **jp_all}
+    have_w = page_winners(page)
+    recent = sorted(all_dates, reverse=True)[:WINNERS_WINDOW]
+    want = [dn for dn in recent if dn not in have_w and dn in all_jp][:WINNERS_PER_RUN]
+    div_html = None
+    if args.from_html:
+        div_html = {}
+        for spec in args.div_html:
+            dn, path = spec.split("=", 1)
+            div_html.setdefault(int(dn), []).append(path)
+    wins = {}
+    if want and (div_html is None or div_html):
+        wins = lookup_winners({dn: (all_dates[dn], all_jp[dn], all_jp.get(dn + 1)) for dn in want}, div_html)
+
     if not new:
         age = (today - cur_date).days
         if age > args.stale_days:
             fail(f"page latest #{cur_max} is {age} days old and no source has anything newer")
-        changes = update_files(paths, page, cur_max, {}, jp_all)
+        changes = update_files(paths, page, cur_max, {}, jp_all, wins)
         if not changes:
             log("nothing new yet; page unchanged.")
             return
@@ -477,7 +586,7 @@ def main():
         jp = f" | jackpot {money(jp_all[dn])}" if dn in jp_all else " | jackpot unknown"
         log(f"new #{dn} {show(new[dn])}{jp}  [{', '.join(confirmed_by[dn])}]")
 
-    write_changes(update_files(paths, page, cur_max, new, jp_all), args.dry_run)
+    write_changes(update_files(paths, page, cur_max, new, jp_all, wins), args.dry_run)
     log(f"now through #{max(new)} ({len(new)} new).")
 
 
